@@ -72,6 +72,7 @@ namespace UHSampleGame
             //Setup some basic input
             inputManager = new InputManager();
             inputManager.AddKey(InputAction.Selection, Keys.Enter);
+            inputManager.AddKey(InputAction.Rotation, Keys.Space);
             this.Services.AddService(typeof(InputManager), inputManager);
 
             //Setup Screen Manager

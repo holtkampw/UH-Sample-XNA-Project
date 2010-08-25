@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace UHSampleGame.InputManagement
 {
-    public enum InputAction { Left, Right, Up, Down, Selection, Back };
+    public enum InputAction { Left, Right, Up, Down, Selection, Back, Rotation };
 
     public class InputManager
     {

@@ -26,6 +26,10 @@ namespace UHSampleGame.Screens
         SpriteFont font;
         string text;
         Vector2 textPosition;
+        bool startAnimation = false;
+        Matrix translation;
+        Vector3 offsetTranslation = Vector3.Zero;
+        int direction = 1;
         #endregion
 
         #region Initialization
@@ -74,6 +78,46 @@ namespace UHSampleGame.Screens
                 ScreenManager.Game.Exit();
             }
 
+            #region Animation
+
+            //Check if rotation key is pressed
+            if (inputManager.CheckKeyboardAction(InputAction.Rotation))
+            {
+                //toggle rotation
+                if (startAnimation == true)
+                    startAnimation = false;
+                else 
+                    startAnimation = true;
+            }
+            
+            //if rotating, let's move the object
+            if (startAnimation == true)
+            {
+                if (direction == 1)
+                {
+                    //start moving down if moving off the screen
+                    if (offsetTranslation.Y > 2.0f)
+                        direction = -1;
+                }
+                else
+                {
+                    //start moving up if moving off the screen
+                    if (offsetTranslation.Y < -2.0f)
+                        direction = 1;
+                }
+
+                //move object
+                offsetTranslation += new Vector3(0, direction * 0.05f, 0);
+                
+            }
+
+            //set object to center of the screen (provides us with a starting point
+            translation = Matrix.CreateTranslation(Vector3.Zero);
+
+            //move object to the animated location
+            translation *= Matrix.CreateTranslation(offsetTranslation);
+            #endregion
+
             base.Update(gameTime);
         }
 
@@ -113,7 +157,7 @@ namespace UHSampleGame.Screens
                     effect.World = transforms[mesh.ParentBone.Index]
                         * Matrix.CreateRotationY(modelRotation)
                         * Matrix.CreateRotationZ(modelRotation)
-                        * Matrix.CreateTranslation(modelPosition)
+                        * translation
                         * Matrix.CreateScale(400.0f);
 
                     //How are we viewing it?
