@@ -6,3 +6,6 @@ C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\obj\x86\Debug\UHSamp
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\obj\x86\Debug\UHSampleGame.pdb
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\DummyText\Font.xnb
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\DummyText\background.xnb
+C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\background.xnb
+C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\box.xnb
+C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb

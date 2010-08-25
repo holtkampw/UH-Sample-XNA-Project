@@ -15,7 +15,7 @@ namespace UHSampleGame.ScreenManagement
         public static Game Game;
         public static SpriteBatch SpriteBatch;
         public static GraphicsDeviceManager GraphicsDeviceManager;
-        List<Screen> screens;
+        static List<Screen> screens;
         #endregion
 
         #region Initialization
@@ -40,7 +40,7 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="screen">Screen to add</param>
         /// <returns>If operation was successful</returns>
-        public bool AddScreen(Screen screen)
+        public static bool AddScreen(Screen screen)
         {
             if (screen == null)
                 return false;
@@ -53,7 +53,7 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="screen">Screen object to remove</param>
         /// <returns>If operation was successful</returns>
-        public bool RemoveScreen(Screen screen)
+        public static bool RemoveScreen(Screen screen)
         {
             if (screen != null && screens.Remove(screen))
                 return true;
@@ -65,7 +65,7 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="screenName">The Unique Screen Identifier</param>
         /// <returns>If operation was successful</returns>
-        public bool RemoveScreen(string screenName)
+        public static bool RemoveScreen(string screenName)
         {
             for (int i = 0; i < screens.Count; i++)
                 if (screens[i].Name == screenName)
@@ -79,7 +79,7 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="screen">Screen to show</param>
         /// <returns>If operation was successful</returns>
-        public bool ShowScreen(Screen screen)
+        public static bool ShowScreen(Screen screen)
         {
             //Find if screen exists.  If not, add it
             if (!screens.Contains(screen))
@@ -117,6 +117,7 @@ namespace UHSampleGame.ScreenManagement
         }
         #endregion
 
+        #region Update and Draw
         public void Update(GameTime gameTime)
         {
             //Update current screen that is available for interaction
@@ -130,5 +131,6 @@ namespace UHSampleGame.ScreenManagement
                 if (screens[i].Status != ScreenStatus.Disabled)
                     screens[i].Draw(gameTime);
         }
+        #endregion
     }
 }

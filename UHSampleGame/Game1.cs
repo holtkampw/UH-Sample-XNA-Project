@@ -13,10 +13,13 @@ using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.Screens;
+using UHSampleGame.InputManagement;
 #endregion
 
 namespace UHSampleGame
 {
+
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -24,8 +27,8 @@ namespace UHSampleGame
     {
         #region Class Variables
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
         ScreenManager screenManager;
+        InputManager inputManager;
         #endregion
 
         #region Initialization
@@ -66,11 +69,18 @@ namespace UHSampleGame
         /// </summary>
         protected override void LoadContent()
         {
+            //Setup some basic input
+            inputManager = new InputManager();
+            inputManager.AddKey(InputAction.Selection, Keys.Enter);
+            this.Services.AddService(typeof(InputManager), inputManager);
+
             //Setup Screen Manager
             screenManager = new ScreenManager(this);
 
             //Set Starting Screen
-            screenManager.ShowScreen(new DummyTextScreen());
+            ScreenManager.ShowScreen(new DummyTextScreen());
+
+            
         }
 
         /// <summary>
@@ -94,6 +104,9 @@ namespace UHSampleGame
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            //Update Input
+            inputManager.Update();
 
             //Update our screens
             screenManager.Update(gameTime);

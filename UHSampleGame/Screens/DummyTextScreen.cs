@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using UHSampleGame.ScreenManagement;
+using UHSampleGame.InputManagement;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -22,6 +23,8 @@ namespace UHSampleGame.Screens
         SpriteFont font;
         string text;
         Vector2 textPosition;
+        InputManager inputManager;
+        ScreenManager screenManager;
         #endregion
 
         #region Initialization
@@ -42,6 +45,8 @@ namespace UHSampleGame.Screens
             Vector2 textLength = font.MeasureString(text);
 
             textPosition = new Vector2(center.X - (textLength.X / 2), center.Y - (textLength.Y / 2));
+            inputManager = (InputManager)ScreenManager.Game.Services.GetService(typeof(InputManager));
+            screenManager = (ScreenManager)ScreenManager.Game.Services.GetService(typeof(ScreenManager));
         }
         #endregion
 
@@ -74,6 +79,11 @@ namespace UHSampleGame.Screens
 
                 //reset timer
                 currentColorChangeTime = 0;
+            }
+
+            if (inputManager.CheckKeyboardAction(InputAction.Selection))
+            {
+                ScreenManager.ShowScreen(new ModelScreen());
             }
 
             base.Update(gameTime);
