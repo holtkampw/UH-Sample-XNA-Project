@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.InputManagement;
+using UHSampleGame.CoreObjects;
+using UHSampleGame.CameraManagement;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -16,11 +18,10 @@ namespace UHSampleGame.Screens
         #region Class Variables
         Texture2D background;
         InputManager inputManager;
-        Model myModel;
-        float aspectRatio;
-        Vector3 modelPosition;
+
+        StaticModel model;
         float modelRotation;
-        Vector3 cameraPosition;
+        CameraManager cameraManager;
         #endregion
 
         #region Initialization
@@ -29,14 +30,13 @@ namespace UHSampleGame.Screens
         {
             background = ScreenManager.Game.Content.Load<Texture2D>("Model\\background");
             inputManager = (InputManager)ScreenManager.Game.Services.GetService(typeof(InputManager));
-            myModel = ScreenManager.Game.Content.Load<Model>("Model\\box");
-
-            aspectRatio = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.AspectRatio;
-            modelPosition = Vector3.Zero;
+            model = new StaticModel(ScreenManager.Game.Content.Load<Model>("Model\\box"));
+            model.Scale = 200.0f;
             modelRotation = 0.0f;
             
             // Set the position of the camera in world space, for our view matrix.
-            cameraPosition = new Vector3(0.0f, 50.0f, 5000.0f);
+            cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
+            cameraManager.SetPosition(new Vector3(0.0f, 50.0f, 5000.0f));
         }
         #endregion
 
@@ -45,14 +45,52 @@ namespace UHSampleGame.Screens
         {
             base.Update(gameTime);
 
-            //rotate model
-            modelRotation += (float)gameTime.ElapsedGameTime.TotalMilliseconds *
-                                MathHelper.ToRadians(0.1f);
-
             if (inputManager.CheckKeyboardAction(InputAction.Selection))
             {
                 ScreenManager.ShowScreen(new ModelAndText());
             }
+            else if (inputManager.CheckKeyboardActionPressed(InputAction.RotateLeft))
+            {
+                cameraManager.RotateX(-0.03f);
+            }
+            else if (inputManager.CheckKeyboardActionPressed(InputAction.RotateRight))
+            {
+                cameraManager.RotateX(0.03f);
+            }
+            else if (inputManager.CheckKeyboardActionPressed(InputAction.RotateUp))
+            {
+                cameraManager.RotateY(0.01f);
+            }
+            else if (inputManager.CheckKeyboardActionPressed(InputAction.RotateDown))
+            {
+                cameraManager.RotateY(-0.01f);
+            }
+            else if (inputManager.CheckKeyboardActionPressed(InputAction.StrafeLeft))
+            {
+                cameraManager.StrafeX(-10.0f);
+            }
+            else if (inputManager.CheckKeyboardActionPressed(InputAction.StrafeRight))
+            {
+                cameraManager.StrafeX(10.0f);
+            }
+            else if (inputManager.CheckKeyboardActionPressed(InputAction.StrafeUp))
+            {
+                cameraManager.StrafeY(10.0f);
+            }
+            else if (inputManager.CheckKeyboardActionPressed(InputAction.StrafeDown))
+            {
+                cameraManager.StrafeY(-10.0f);
+            }
+
+            cameraManager.Update();
+
+            //rotate model
+            modelRotation += (float)gameTime.ElapsedGameTime.TotalMilliseconds *
+                                MathHelper.ToRadians(0.1f);
+            model.RotateX(modelRotation);
+            model.RotateZ(modelRotation);
+
+            model.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -60,43 +98,9 @@ namespace UHSampleGame.Screens
             ScreenManager.SpriteBatch.Begin();
             ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
             ScreenManager.SpriteBatch.End();
-            DrawModel();
+
+            model.Draw(gameTime);
             base.Draw(gameTime);
-        }
-
-        public void DrawModel()
-        {
-            // Copy any parent transforms.
-            Matrix[] transforms = new Matrix[myModel.Bones.Count];
-            myModel.CopyAbsoluteBoneTransformsTo(transforms);
-
-            // Draw all of the meshes for a model
-            foreach (ModelMesh mesh in myModel.Meshes)
-            {
-                //each mesh has an effect
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.EnableDefaultLighting();
-
-                    //Where will the model be in the world?
-                    effect.World = transforms[mesh.ParentBone.Index]
-                        * Matrix.CreateRotationY(modelRotation)
-                        * Matrix.CreateRotationZ(modelRotation)
-                        * Matrix.CreateTranslation(modelPosition)
-                        * Matrix.CreateScale(200.0f);
-
-                    //How are we viewing it?
-                    effect.View = Matrix.CreateLookAt(cameraPosition,
-                        Vector3.Zero, Vector3.Up);
-
-                    //Projection information
-                    effect.Projection = Matrix.CreatePerspectiveFieldOfView(
-                        MathHelper.ToRadians(45.0f), aspectRatio,
-                        1.0f, 10000.0f);
-                }
-                // Draw the mesh, using the effects set above.
-                mesh.Draw();
-            }
         }
         #endregion
     }

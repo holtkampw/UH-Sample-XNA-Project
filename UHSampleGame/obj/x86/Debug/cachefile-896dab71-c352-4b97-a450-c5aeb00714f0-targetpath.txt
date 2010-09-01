@@ -9,3 +9,5 @@ Content\AnimatedModel\pants_0.xnb
 Content\AnimatedModel\upBodyC_0.xnb
 Content\SkinnedModel.xnb
 Content\AnimatedModel\dude.xnb
+Content\Model\pyramids.xnb
+Content\Model\plane_0.xnb

@@ -17,3 +17,5 @@ C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Conten
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\SkinnedModel.xnb
+C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\pyramids.xnb
+C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb

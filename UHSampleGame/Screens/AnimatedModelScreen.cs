@@ -18,8 +18,14 @@ namespace UHSampleGame.Screens
         #region Class Variables
         Texture2D background;
         AnimatedModel myModel;
+        StaticModel ground;
         InputManager inputManager;
         CameraManager cameraManager;
+        
+        Vector2 center;
+        SpriteFont font;
+        string text;
+        Vector2 textPosition;
         #endregion
 
         #region Initialization
@@ -28,11 +34,29 @@ namespace UHSampleGame.Screens
         {
             background = ScreenManager.Game.Content.Load<Texture2D>("Model\\background");
             myModel = new AnimatedModel(ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
-            myModel.Scale = 30.0f;
+            myModel.Scale = 20.0f;
             myModel.PlayClip("Take 001");
             inputManager = (InputManager)ScreenManager.Game.Services.GetService(typeof(InputManager));
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
             cameraManager.SetPosition(new Vector3(0.0f, 50.0f, 5000.0f));
+
+            ground = new StaticModel(ScreenManager.Game.Content.Load<Model>("Model\\pyramids"));
+            ground.Scale = 1000.0f;
+            ground.SetPosition(new Vector3(0.0f, -0.1f, 0.0f));
+
+            #region Setup Text
+            font = ScreenManager.Game.Content.Load<SpriteFont>("DummyText\\Font");
+
+            center = new Vector2((ScreenManager.GraphicsDeviceManager.PreferredBackBufferWidth / 2),
+                                 (ScreenManager.GraphicsDeviceManager.PreferredBackBufferHeight / 2));
+            //Setup Text
+            text = "Hello World! Hello World! Hellllllooooo World!";
+
+            //Find out how long the text is using this font
+            Vector2 textLength = font.MeasureString(text);
+
+            textPosition = new Vector2(center.X - (textLength.X / 2), center.Y - (textLength.Y / 2));
+            #endregion
         }
         #endregion
 
@@ -80,6 +104,7 @@ namespace UHSampleGame.Screens
 
             cameraManager.Update();
             myModel.Update(gameTime);
+            ground.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -87,10 +112,18 @@ namespace UHSampleGame.Screens
             base.Draw(gameTime);
             ScreenManager.SpriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
             ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
+            ScreenManager.SpriteBatch.DrawString(font, text, textPosition - new Vector2(0.0f, 50.0f), Color.White);
             ScreenManager.SpriteBatch.End();
 
             ResetRenderStates();
+
+            ResetRenderStates();
+            ground.Draw(gameTime);
             myModel.Draw(gameTime);
+
+            ScreenManager.SpriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
+            ScreenManager.SpriteBatch.DrawString(font, text, textPosition + new Vector2(0.0f, 50.0f), Color.White);
+            ScreenManager.SpriteBatch.End();
 
         }
         #endregion

@@ -158,6 +158,42 @@
       <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Request>
       <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Request>
     </Item>
+    <Item>
+      <Source>Model\pyramids.fbx</Source>
+      <Name>Model\pyramids</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\pyramids.xnb</Output>
+      <Time>2010-09-01T11:44:14.8597363-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Model\pyramids_0.xml</Key>
+        <Value>2010-09-01T11:44:17.5317823-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Model\pyramids.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Model\pyramids_0.xml</Output>
+      <Time>2010-09-01T11:44:14.8597363-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\plane.png</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Output>
+      <Time>2010-09-01T11:41:32.2939323-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

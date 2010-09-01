@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="CameraManagement\CameraManager.cs" />
     <Compile Include="CoreObjects\GameObject.cs" />
+    <Compile Include="CoreObjects\StaticModel.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

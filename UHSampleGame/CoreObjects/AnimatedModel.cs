@@ -90,16 +90,21 @@ namespace UHSampleGame.CoreObjects
             scale = 1.0f;
         }
 
+        /// <summary>
+        /// Sets up default camera information
+        /// </summary>
         protected void SetupCamera()
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-            view = Matrix.CreateTranslation(0, 0, 0) * Matrix.CreateScale(scale) * cameraManager.ViewMatrix;
+            view = Matrix.CreateTranslation(position) * Matrix.CreateScale(scale) * cameraManager.ViewMatrix;
         }
         #endregion
 
- 
-
         #region Animation
+        /// <summary>
+        /// Play a particular animation
+        /// </summary>
+        /// <param name="take">Animation to play</param>
         public void PlayClip(string take)
         {
             AnimationClip clip = skinningData.AnimationClips[take];
@@ -108,9 +113,8 @@ namespace UHSampleGame.CoreObjects
         #endregion
 
         #region Update and Draw
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-
             //update view matrix
             UpdateView();
 
@@ -125,7 +129,7 @@ namespace UHSampleGame.CoreObjects
 
         public void UpdateView()
         {
-            view = Matrix.CreateTranslation(0, 0, 0) *
+            view = Matrix.CreateTranslation(position) *
                     Matrix.CreateScale(scale) *
                     cameraManager.ViewMatrix;
         }
@@ -140,7 +144,6 @@ namespace UHSampleGame.CoreObjects
                     effect.Parameters["View"].SetValue(view);
                     effect.Parameters["Projection"].SetValue(cameraManager.ProjectionMatrix);
                 }
-
                 mesh.Draw();
             }
 
