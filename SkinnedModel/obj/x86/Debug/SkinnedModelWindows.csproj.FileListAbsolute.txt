@@ -1,0 +1,12 @@
+C:\Users\William Holtkamp\Desktop\SkinningSample\SkinnedModel\bin\x86\Debug\SkinnedModel.dll
+C:\Users\William Holtkamp\Desktop\SkinningSample\SkinnedModel\bin\x86\Debug\SkinnedModel.pdb
+C:\Users\William Holtkamp\Desktop\SkinningSample\SkinnedModel\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\William Holtkamp\Desktop\SkinningSample\SkinnedModel\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\William Holtkamp\Desktop\SkinningSample\SkinnedModel\obj\x86\Debug\SkinnedModel.dll
+C:\Users\William Holtkamp\Desktop\SkinningSample\SkinnedModel\obj\x86\Debug\SkinnedModel.pdb
+C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\bin\x86\Debug\SkinnedModel.dll
+C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\bin\x86\Debug\SkinnedModel.pdb
+C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\obj\x86\Debug\SkinnedModel.dll
+C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\obj\x86\Debug\SkinnedModel.pdb

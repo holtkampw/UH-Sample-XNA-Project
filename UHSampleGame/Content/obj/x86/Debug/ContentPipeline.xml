@@ -30,6 +30,20 @@
     </Item>
     <Item>
       <Source>Model\box.fbx</Source>
+      <Name>Model\box</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\box.xnb</Output>
+      <Time>2010-08-25T14:39:09.6630607-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Model\box_0.xml</Key>
+        <Value>2010-08-31T16:18:27.3479104-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Model\box.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Model\box_0.xml</Output>
@@ -51,18 +65,98 @@
       <Time>2010-08-25T14:16:23.6759119-05:00</Time>
     </Item>
     <Item>
-      <Source>Model\box.fbx</Source>
-      <Name>Model\box</Name>
+      <Source>AnimatedModel\dude.fbx</Source>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\AnimatedModel\dude_0.xml</Output>
+      <Time>2010-08-31T16:47:14.8916426-05:00</Time>
+    </Item>
+    <Item>
+      <Source>AnimatedModel\head.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\box.xnb</Output>
-      <Time>2010-08-25T14:39:09.6630607-05:00</Time>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Output>
+      <Time>2010-08-31T16:47:14.9385182-05:00</Time>
+    </Item>
+    <Item>
+      <Source>AnimatedModel\jacket.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Output>
+      <Time>2010-08-31T16:47:14.9853938-05:00</Time>
+    </Item>
+    <Item>
+      <Source>AnimatedModel\pants.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Output>
+      <Time>2010-08-31T16:47:15.0322694-05:00</Time>
+    </Item>
+    <Item>
+      <Source>AnimatedModel\upBodyC.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Output>
+      <Time>2010-08-31T16:47:15.1260206-05:00</Time>
+    </Item>
+    <Item>
+      <Source>SkinnedModel.fx</Source>
+      <Name>SkinnedModel</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\SkinnedModel.xnb</Output>
+      <Time>2010-08-31T16:59:55.6461138-05:00</Time>
+    </Item>
+    <Item>
+      <Source>AnimatedModel\dude.fbx</Source>
+      <Name>AnimatedModel\dude</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>SkinnedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\dude.xnb</Output>
+      <Time>2010-08-31T16:47:14.8916426-05:00</Time>
       <Dependency>
-        <Key>obj\x86\Debug\Model\box_0.xml</Key>
-        <Value>2010-08-25T14:39:13.2255607-05:00</Value>
+        <Key>obj\x86\Debug\AnimatedModel\dude_0.xml</Key>
+        <Value>2010-08-31T16:53:12.5518543-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\SkinnedModel.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Request>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -75,6 +169,10 @@
       <OutputDirectory>C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
+      <Assembly>
+        <Key>C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModelPipeline\bin\x86\Debug\SkinnedModelPipeline.dll</Key>
+        <Value>2010-08-31T15:55:57.7718969-05:00</Value>
+      </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
         <Value>2009-05-28T00:16:14-05:00</Value>

@@ -1,5 +1,11 @@
 Content\DummyText\Font.xnb
 Content\DummyText\background.xnb
 Content\Model\background.xnb
-Content\Model\box_texture_0.xnb
 Content\Model\box.xnb
+Content\Model\box_texture_0.xnb
+Content\AnimatedModel\head_0.xnb
+Content\AnimatedModel\jacket_0.xnb
+Content\AnimatedModel\pants_0.xnb
+Content\AnimatedModel\upBodyC_0.xnb
+Content\SkinnedModel.xnb
+Content\AnimatedModel\dude.xnb

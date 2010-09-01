@@ -75,7 +75,7 @@ namespace UHSampleGame.Screens
 
             if (inputManager.CheckKeyboardAction(InputAction.Selection))
             {
-                ScreenManager.Game.Exit();
+                ScreenManager.ShowScreen(new AnimatedModelScreen());
             }
 
             #region Animation
@@ -172,32 +172,6 @@ namespace UHSampleGame.Screens
                 // Draw the mesh, using the effects set above.
                 mesh.Draw();
             }
-        }
-
-        public void ResetRenderStates()
-        {
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.CullMode = CullMode.CullCounterClockwiseFace;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.DepthBufferEnable = false;
-
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.AlphaBlendEnable = true;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.AlphaBlendOperation = BlendFunction.Add;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.SourceBlend = Blend.SourceAlpha;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.DestinationBlend = Blend.InverseSourceAlpha;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.SeparateAlphaBlendEnabled = false;
-
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.AlphaTestEnable = true;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.AlphaFunction = CompareFunction.Greater;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RenderState.ReferenceAlpha = 0;
-
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Clamp;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Clamp;
-
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Linear;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Linear;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0].MipFilter = TextureFilter.Linear;
-
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0].MipMapLevelOfDetailBias = 0.0f;
-            ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0].MaxMipLevel = 0;
         }
         #endregion
     }

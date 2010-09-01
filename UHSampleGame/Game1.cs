@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Storage;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.Screens;
 using UHSampleGame.InputManagement;
+using UHSampleGame.CameraManagement;
 #endregion
 
 namespace UHSampleGame
@@ -29,6 +30,7 @@ namespace UHSampleGame
         GraphicsDeviceManager graphics;
         ScreenManager screenManager;
         InputManager inputManager;
+        CameraManager cameraManager;
         #endregion
 
         #region Initialization
@@ -73,15 +75,25 @@ namespace UHSampleGame
             inputManager = new InputManager();
             inputManager.AddKey(InputAction.Selection, Keys.Enter);
             inputManager.AddKey(InputAction.Rotation, Keys.Space);
+            inputManager.AddKey(InputAction.RotateUp, Keys.Up);
+            inputManager.AddKey(InputAction.RotateDown, Keys.Down);
+            inputManager.AddKey(InputAction.RotateLeft, Keys.Left);
+            inputManager.AddKey(InputAction.RotateRight, Keys.Right);
+            inputManager.AddKey(InputAction.StrafeUp, Keys.W);
+            inputManager.AddKey(InputAction.StrafeDown, Keys.S);
+            inputManager.AddKey(InputAction.StrafeLeft, Keys.A);
+            inputManager.AddKey(InputAction.StrafeRight, Keys.D);
             this.Services.AddService(typeof(InputManager), inputManager);
 
             //Setup Screen Manager
             screenManager = new ScreenManager(this);
 
+            //Setup Camera
+            cameraManager = new CameraManager();
+            this.Services.AddService(typeof(CameraManager), cameraManager);
+
             //Set Starting Screen
             ScreenManager.ShowScreen(new DummyTextScreen());
-
-            
         }
 
         /// <summary>

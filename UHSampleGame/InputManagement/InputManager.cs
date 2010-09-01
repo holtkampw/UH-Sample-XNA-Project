@@ -9,7 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace UHSampleGame.InputManagement
 {
-    public enum InputAction { Left, Right, Up, Down, Selection, Back, Rotation };
+    public enum InputAction { RotateLeft, RotateRight, RotateUp, RotateDown, 
+                              StrafeLeft, StrafeRight, StrafeUp, StrafeDown,
+                              Selection, Back, Rotation };
 
     public class InputManager
     {
@@ -50,8 +52,12 @@ namespace UHSampleGame.InputManagement
 
         public bool CheckKeyboardAction(InputAction action)
         {
-
             return currentKeyboardState.IsKeyDown(items[action]) && previousKeyboardState.IsKeyUp(items[action]);
+        }
+
+        public bool CheckKeyboardActionPressed(InputAction action)
+        {
+            return currentKeyboardState.IsKeyDown(items[action]);
         }
         #endregion
     }
