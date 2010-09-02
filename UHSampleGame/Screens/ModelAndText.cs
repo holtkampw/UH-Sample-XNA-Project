@@ -73,7 +73,7 @@ namespace UHSampleGame.Screens
             modelRotation += (float)gameTime.ElapsedGameTime.TotalMilliseconds *
                                 MathHelper.ToRadians(0.1f);
 
-            if (inputManager.CheckKeyboardAction(InputAction.Selection))
+            if (inputManager.CheckAction(InputAction.Selection))
             {
                 ScreenManager.ShowScreen(new AnimatedModelScreen());
             }
@@ -81,7 +81,7 @@ namespace UHSampleGame.Screens
             #region Animation
 
             //Check if rotation key is pressed
-            if (inputManager.CheckKeyboardAction(InputAction.Rotation))
+            if (inputManager.CheckAction(InputAction.Rotation))
             {
                 //toggle rotation
                 if (startAnimation == true)

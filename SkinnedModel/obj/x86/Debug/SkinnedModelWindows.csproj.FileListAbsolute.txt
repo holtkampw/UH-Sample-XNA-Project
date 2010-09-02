@@ -10,3 +10,9 @@ C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\obj\x86\Debug\Resolv
 C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\obj\x86\Debug\SkinnedModel.dll
 C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModel\obj\x86\Debug\SkinnedModel.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModel\bin\x86\Debug\SkinnedModel.dll
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModel\bin\x86\Debug\SkinnedModel.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModel\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModel\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModel\obj\x86\Debug\SkinnedModel.dll
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModel\obj\x86\Debug\SkinnedModel.pdb

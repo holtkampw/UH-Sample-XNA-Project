@@ -19,3 +19,24 @@ C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Conten
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\SkinnedModel.xnb
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\pyramids.xnb
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\DummyText\Font.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\DummyText\background.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\background.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\box.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\dude.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\pyramids.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\SkinnedModel.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\UHSampleGame.exe
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\UHSampleGame.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\SkinnedModel.dll
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\SkinnedModel.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\obj\x86\Debug\UHSampleGame.exe
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\obj\x86\Debug\UHSampleGame.pdb

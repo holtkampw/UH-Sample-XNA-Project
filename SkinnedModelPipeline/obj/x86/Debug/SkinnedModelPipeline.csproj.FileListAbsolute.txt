@@ -12,3 +12,10 @@ C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModelPipeline\bin\x86\Debu
 C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModelPipeline\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModelPipeline\obj\x86\Debug\SkinnedModelPipeline.dll
 C:\Users\William Holtkamp\Desktop\UHSampleGame\SkinnedModelPipeline\obj\x86\Debug\SkinnedModelPipeline.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\bin\x86\Debug\SkinnedModelPipeline.dll
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\bin\x86\Debug\SkinnedModelPipeline.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\bin\x86\Debug\SkinnedModel.dll
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\bin\x86\Debug\SkinnedModel.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\obj\x86\Debug\SkinnedModelPipeline.dll
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\obj\x86\Debug\SkinnedModelPipeline.pdb

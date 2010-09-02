@@ -45,39 +45,39 @@ namespace UHSampleGame.Screens
         {
             base.Update(gameTime);
 
-            if (inputManager.CheckKeyboardAction(InputAction.Selection))
+            if (inputManager.CheckAction(InputAction.Selection))
             {
                 ScreenManager.ShowScreen(new ModelAndText());
             }
-            else if (inputManager.CheckKeyboardActionPressed(InputAction.RotateLeft))
+            if (inputManager.CheckAction(InputAction.RotateLeft))
             {
                 cameraManager.RotateX(-0.03f);
             }
-            else if (inputManager.CheckKeyboardActionPressed(InputAction.RotateRight))
+            if (inputManager.CheckAction(InputAction.RotateRight))
             {
                 cameraManager.RotateX(0.03f);
             }
-            else if (inputManager.CheckKeyboardActionPressed(InputAction.RotateUp))
+            if (inputManager.CheckAction(InputAction.RotateUp))
             {
                 cameraManager.RotateY(0.01f);
             }
-            else if (inputManager.CheckKeyboardActionPressed(InputAction.RotateDown))
+            if (inputManager.CheckAction(InputAction.RotateDown))
             {
                 cameraManager.RotateY(-0.01f);
             }
-            else if (inputManager.CheckKeyboardActionPressed(InputAction.StrafeLeft))
+            if (inputManager.CheckAction(InputAction.StrafeLeft))
             {
                 cameraManager.StrafeX(-10.0f);
             }
-            else if (inputManager.CheckKeyboardActionPressed(InputAction.StrafeRight))
+            if (inputManager.CheckAction(InputAction.StrafeRight))
             {
                 cameraManager.StrafeX(10.0f);
             }
-            else if (inputManager.CheckKeyboardActionPressed(InputAction.StrafeUp))
+            if (inputManager.CheckAction(InputAction.StrafeUp))
             {
                 cameraManager.StrafeY(10.0f);
             }
-            else if (inputManager.CheckKeyboardActionPressed(InputAction.StrafeDown))
+            if (inputManager.CheckAction(InputAction.StrafeDown))
             {
                 cameraManager.StrafeY(-10.0f);
             }

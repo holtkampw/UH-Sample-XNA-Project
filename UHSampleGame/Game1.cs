@@ -73,16 +73,17 @@ namespace UHSampleGame
         {
             //Setup some basic input
             inputManager = new InputManager();
-            inputManager.AddKey(InputAction.Selection, Keys.Enter);
-            inputManager.AddKey(InputAction.Rotation, Keys.Space);
-            inputManager.AddKey(InputAction.RotateUp, Keys.Up);
-            inputManager.AddKey(InputAction.RotateDown, Keys.Down);
-            inputManager.AddKey(InputAction.RotateLeft, Keys.Left);
-            inputManager.AddKey(InputAction.RotateRight, Keys.Right);
-            inputManager.AddKey(InputAction.StrafeUp, Keys.W);
-            inputManager.AddKey(InputAction.StrafeDown, Keys.S);
-            inputManager.AddKey(InputAction.StrafeLeft, Keys.A);
-            inputManager.AddKey(InputAction.StrafeRight, Keys.D);
+            inputManager.AddInput(InputAction.Selection, Keys.Enter);
+            inputManager.AddInput(InputAction.Rotation, Keys.Space);
+            inputManager.AddInput(InputAction.RotateUp, Keys.Up);
+            inputManager.AddInput(InputAction.RotateUp, Keys.I);
+            inputManager.AddInput(InputAction.RotateDown, Keys.Down);
+            inputManager.AddInput(InputAction.RotateLeft, Keys.Left);
+            inputManager.AddInput(InputAction.RotateRight, Keys.Right);
+            inputManager.AddInput(InputAction.StrafeUp, Keys.W);
+            inputManager.AddInput(InputAction.StrafeDown, Keys.S);
+            inputManager.AddInput(InputAction.StrafeLeft, Keys.A);
+            inputManager.AddInput(InputAction.StrafeRight, Keys.D);
             this.Services.AddService(typeof(InputManager), inputManager);
 
             //Setup Screen Manager

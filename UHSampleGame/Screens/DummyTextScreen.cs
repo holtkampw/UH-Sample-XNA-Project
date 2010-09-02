@@ -81,7 +81,7 @@ namespace UHSampleGame.Screens
                 currentColorChangeTime = 0;
             }
 
-            if (inputManager.CheckKeyboardAction(InputAction.Selection))
+            if (inputManager.CheckAction(InputAction.Selection))
             {
                 ScreenManager.ShowScreen(new ModelScreen());
             }
