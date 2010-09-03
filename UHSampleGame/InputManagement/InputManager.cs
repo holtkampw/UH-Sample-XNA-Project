@@ -14,7 +14,8 @@ namespace UHSampleGame.InputManagement
     {
         RotateLeft, RotateRight, RotateUp, RotateDown,
         StrafeLeft, StrafeRight, StrafeUp, StrafeDown,
-        Selection, Back, Rotation
+        Selection, Back, Rotation, MenuUp, MenuDown, 
+        MenuSelect, MenuCancel
     };
 
     public class InputManager

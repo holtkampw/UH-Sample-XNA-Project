@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using UHSampleGame.InputManagement;
 #endregion
 
 namespace UHSampleGame.ScreenManagement
@@ -14,8 +15,36 @@ namespace UHSampleGame.ScreenManagement
     public class Screen
     {
         #region Class Variables
-        string name;
-        ScreenStatus status;
+        protected string name;
+        protected ScreenStatus status;
+        protected ScreenManager screenManager;
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Returns the name of the screen
+        /// GET only
+        /// </summary>
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public ScreenStatus Status
+        {
+            get { return status; }
+        }
+
+        public ScreenManager ScreenManager
+        {
+            get { return screenManager; }
+            set { screenManager = value; }
+        }
+
+        public bool IsVisible
+        {
+            get { return status == ScreenStatus.Visible; }
+        }
         #endregion
 
         #region Initialization
@@ -39,38 +68,37 @@ namespace UHSampleGame.ScreenManagement
         }
         #endregion
 
-        #region Properties
-        /// <summary>
-        /// Returns the name of the screen
-        /// GET only
-        /// </summary>
-        public string Name
-        {
-            get { return name; }
-        }
-
-        public ScreenStatus Status
-        {
-            get { return status; }
-        }
-        #endregion
-
+        #region Load and Unload Content
+        public virtual void LoadContent() { }
+        public virtual void UnloadContent() { }
+        #endregion Load and Unload Content
 
         #region Update and Draw
         /// <summary>
         /// Function that contains code that will update the screen
         /// </summary>
         /// <param name="gameTime">Contains timer information</param>
-        public virtual void Update(GameTime gameTime) {}
+        public virtual void Update(GameTime gameTime) { }
+
+        /// <summary>
+        /// Handles input logic
+        /// </summary>
+        /// <param name="input">The input manager for the game</param>
+        public virtual void HandleInput(InputManager input) { }
 
         /// <summary>
         /// Function that contains code to draw the current screen state
         /// </summary>
         /// <param name="gameTime">Contains timer information</param>
-        public virtual void Draw(GameTime gameTime) {}
+        public virtual void Draw(GameTime gameTime) { }
         #endregion
 
         #region Helpers
+        public void ExitScreen()
+        {
+            ScreenManager.RemoveScreen(this);
+        }
+
         /// <summary>
         /// Reset the render states so spritebatch and models render correctly
         /// </summary>

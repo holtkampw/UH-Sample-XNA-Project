@@ -194,6 +194,16 @@
       <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Output>
       <Time>2010-09-02T13:59:52.838543-05:00</Time>
     </Item>
+    <Item>
+      <Source>Video\intro.wmv</Source>
+      <Name>Video\intro</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Video\intro.xnb</Output>
+      <Extra>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Video\intro.wmv</Extra>
+      <Time>2010-09-03T01:48:36.1751329-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

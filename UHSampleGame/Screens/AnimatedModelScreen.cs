@@ -19,7 +19,6 @@ namespace UHSampleGame.Screens
         Texture2D background;
         AnimatedModel myModel;
         StaticModel ground;
-        InputManager inputManager;
         CameraManager cameraManager;
         
         Vector2 center;
@@ -36,7 +35,6 @@ namespace UHSampleGame.Screens
             myModel = new AnimatedModel(ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
             myModel.Scale = 20.0f;
             myModel.PlayClip("Take 001");
-            inputManager = (InputManager)ScreenManager.Game.Services.GetService(typeof(InputManager));
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
             cameraManager.SetPosition(new Vector3(0.0f, 50.0f, 5000.0f));
 
@@ -65,46 +63,50 @@ namespace UHSampleGame.Screens
         {
             base.Update(gameTime);
 
-            if (inputManager.CheckNewAction(InputAction.Selection))
-            {
-                ScreenManager.Game.Exit();
-            }
-            if (inputManager.CheckAction(InputAction.RotateLeft))
-            {
-                cameraManager.RotateX(-0.03f);
-            }
-            if (inputManager.CheckAction(InputAction.RotateRight))
-            {
-                cameraManager.RotateX(0.03f);
-            }
-            if (inputManager.CheckAction(InputAction.RotateUp))
-            {
-                cameraManager.RotateY(0.01f);
-            }
-            if (inputManager.CheckAction(InputAction.RotateDown))
-            {
-                cameraManager.RotateY(-0.01f);
-            }
-            if (inputManager.CheckAction(InputAction.StrafeLeft))
-            {
-                cameraManager.StrafeX(-10.0f);
-            }
-            if (inputManager.CheckAction(InputAction.StrafeRight))
-            {
-                cameraManager.StrafeX(10.0f);
-            }
-            if (inputManager.CheckAction(InputAction.StrafeUp))
-            {
-                cameraManager.StrafeY(10.0f);
-            }
-            if (inputManager.CheckAction(InputAction.StrafeDown))
-            {
-                cameraManager.StrafeY(-10.0f);
-            }
-
             cameraManager.Update();
             myModel.Update(gameTime);
             ground.Update(gameTime);
+        }
+
+        public override void HandleInput(InputManager input)
+        {
+            base.HandleInput(input);
+            if (input.CheckNewAction(InputAction.Selection))
+            {
+                ScreenManager.Game.Exit();
+            }
+            if (input.CheckAction(InputAction.RotateLeft))
+            {
+                cameraManager.RotateX(-0.03f);
+            }
+            if (input.CheckAction(InputAction.RotateRight))
+            {
+                cameraManager.RotateX(0.03f);
+            }
+            if (input.CheckAction(InputAction.RotateUp))
+            {
+                cameraManager.RotateY(0.01f);
+            }
+            if (input.CheckAction(InputAction.RotateDown))
+            {
+                cameraManager.RotateY(-0.01f);
+            }
+            if (input.CheckAction(InputAction.StrafeLeft))
+            {
+                cameraManager.StrafeX(-10.0f);
+            }
+            if (input.CheckAction(InputAction.StrafeRight))
+            {
+                cameraManager.StrafeX(10.0f);
+            }
+            if (input.CheckAction(InputAction.StrafeUp))
+            {
+                cameraManager.StrafeY(10.0f);
+            }
+            if (input.CheckAction(InputAction.StrafeDown))
+            {
+                cameraManager.StrafeY(-10.0f);
+            }
         }
 
         public override void Draw(GameTime gameTime)

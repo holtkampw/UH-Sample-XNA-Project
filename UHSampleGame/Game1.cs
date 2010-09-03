@@ -84,6 +84,12 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.StrafeDown, Keys.S);
             inputManager.AddInput(InputAction.StrafeLeft, Keys.A);
             inputManager.AddInput(InputAction.StrafeRight, Keys.D);
+            
+            //Menu Actions
+            inputManager.AddInput(InputAction.MenuUp, Keys.Up);
+            inputManager.AddInput(InputAction.MenuDown, Keys.Down);
+            inputManager.AddInput(InputAction.MenuSelect, Keys.Enter);
+            inputManager.AddInput(InputAction.MenuCancel, Keys.Back);
             this.Services.AddService(typeof(InputManager), inputManager);
 
             //Setup Screen Manager
@@ -94,7 +100,7 @@ namespace UHSampleGame
             this.Services.AddService(typeof(CameraManager), cameraManager);
 
             //Set Starting Screen
-            ScreenManager.ShowScreen(new DummyTextScreen());
+            screenManager.ShowScreen(new MenuScreenTest());
         }
 
         /// <summary>

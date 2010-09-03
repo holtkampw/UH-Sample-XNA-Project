@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using UHSampleGame.InputManagement;
 #endregion
 
 namespace UHSampleGame.ScreenManagement
@@ -15,6 +16,7 @@ namespace UHSampleGame.ScreenManagement
         public static Game Game;
         public static SpriteBatch SpriteBatch;
         public static GraphicsDeviceManager GraphicsDeviceManager;
+        public static InputManager InputManager;
         static List<Screen> screens;
         #endregion
 
@@ -30,6 +32,8 @@ namespace UHSampleGame.ScreenManagement
             //Create a sprite for use in all other screens
             ScreenManager.SpriteBatch = new SpriteBatch(game.GraphicsDevice);
 
+            ScreenManager.InputManager = (InputManager)game.Services.GetService(typeof(InputManager));
+
             screens = new List<Screen>();
         }
         #endregion
@@ -40,10 +44,12 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="screen">Screen to add</param>
         /// <returns>If operation was successful</returns>
-        public static bool AddScreen(Screen screen)
+        public bool AddScreen(Screen screen)
         {
             if (screen == null)
                 return false;
+            screen.ScreenManager = this;
+            screen.LoadContent();
             screens.Add(screen);
             return true;
         }
@@ -53,10 +59,13 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="screen">Screen object to remove</param>
         /// <returns>If operation was successful</returns>
-        public static bool RemoveScreen(Screen screen)
+        public bool RemoveScreen(Screen screen)
         {
-            if (screen != null && screens.Remove(screen))
-                return true;
+            if (screen != null && screens.Count > 1)
+            {
+                screen.UnloadContent();
+                return screens.Remove(screen);
+            }
             return false;
         }
 
@@ -65,12 +74,11 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="screenName">The Unique Screen Identifier</param>
         /// <returns>If operation was successful</returns>
-        public static bool RemoveScreen(string screenName)
+        public bool RemoveScreen(string screenName)
         {
             for (int i = 0; i < screens.Count; i++)
                 if (screens[i].Name == screenName)
-                    if (screens.Remove(screens[i]))
-                        return true;
+                    return RemoveScreen(screens[i]);
             return false;
         }
 
@@ -79,11 +87,11 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="screen">Screen to show</param>
         /// <returns>If operation was successful</returns>
-        public static bool ShowScreen(Screen screen)
+        public bool ShowScreen(Screen screen)
         {
             //Find if screen exists.  If not, add it
             if (!screens.Contains(screen))
-                screens.Add(screen);
+                AddScreen(screen);
 
             //Find out where the screen exists in the array
             int foundAtIndex = -1;
@@ -109,7 +117,7 @@ namespace UHSampleGame.ScreenManagement
                 else
                     screens[i].SetStatus(ScreenStatus.Disabled);
             }
-            
+
             if (screens[foundAtIndex].Status != ScreenStatus.Overlay)
                 screens[foundAtIndex].SetStatus(ScreenStatus.Visible);
 
@@ -121,7 +129,13 @@ namespace UHSampleGame.ScreenManagement
         public void Update(GameTime gameTime)
         {
             //Update current screen that is available for interaction
-            screens[screens.Count - 1].Update(gameTime);
+            //TEMPORARY FIX
+            for (int i = 0; i < screens.Count; i++)
+                screens[i].Update(gameTime);
+            //screens[screens.Count - 1].Update(gameTime);
+            screens[screens.Count - 1].HandleInput(InputManager);
+            //Yes this order is on purpose... if we add a screen in HandleInput then update the
+            //inputManager is not updated... Perhaps move inputManager.Update into here as well?
         }
 
         public void Draw(GameTime gameTime)

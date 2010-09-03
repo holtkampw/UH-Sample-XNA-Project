@@ -23,8 +23,7 @@ namespace UHSampleGame.Screens
         SpriteFont font;
         string text;
         Vector2 textPosition;
-        InputManager inputManager;
-        ScreenManager screenManager;
+        //InputManager inputManager;
         #endregion
 
         #region Initialization
@@ -45,14 +44,14 @@ namespace UHSampleGame.Screens
             Vector2 textLength = font.MeasureString(text);
 
             textPosition = new Vector2(center.X - (textLength.X / 2), center.Y - (textLength.Y / 2));
-            inputManager = (InputManager)ScreenManager.Game.Services.GetService(typeof(InputManager));
-            screenManager = (ScreenManager)ScreenManager.Game.Services.GetService(typeof(ScreenManager));
+            //inputManager = (InputManager)ScreenManager.Game.Services.GetService(typeof(InputManager));
         }
         #endregion
 
         #region Update and Draw
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             currentColorChangeTime += gameTime.ElapsedGameTime.Milliseconds;
             if (currentColorChangeTime > maxColorChangeTime)
             {
@@ -81,12 +80,17 @@ namespace UHSampleGame.Screens
                 currentColorChangeTime = 0;
             }
 
-            if (inputManager.CheckAction(InputAction.Selection))
-            {
-                ScreenManager.ShowScreen(new ModelScreen());
-            }
+            
 
-            base.Update(gameTime);
+            
+        }
+
+        public override void HandleInput(InputManager input)
+        {
+            if (input.CheckNewAction(InputAction.Selection))
+            {
+                screenManager.ShowScreen(new ModelScreen());
+            }
         }
 
         public override void Draw(GameTime gameTime)

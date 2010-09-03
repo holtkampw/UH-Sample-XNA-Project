@@ -45,43 +45,6 @@ namespace UHSampleGame.Screens
         {
             base.Update(gameTime);
 
-            if (inputManager.CheckAction(InputAction.Selection))
-            {
-                ScreenManager.ShowScreen(new ModelAndText());
-            }
-            if (inputManager.CheckAction(InputAction.RotateLeft))
-            {
-                cameraManager.RotateX(-0.03f);
-            }
-            if (inputManager.CheckAction(InputAction.RotateRight))
-            {
-                cameraManager.RotateX(0.03f);
-            }
-            if (inputManager.CheckAction(InputAction.RotateUp))
-            {
-                cameraManager.RotateY(0.01f);
-            }
-            if (inputManager.CheckAction(InputAction.RotateDown))
-            {
-                cameraManager.RotateY(-0.01f);
-            }
-            if (inputManager.CheckAction(InputAction.StrafeLeft))
-            {
-                cameraManager.StrafeX(-10.0f);
-            }
-            if (inputManager.CheckAction(InputAction.StrafeRight))
-            {
-                cameraManager.StrafeX(10.0f);
-            }
-            if (inputManager.CheckAction(InputAction.StrafeUp))
-            {
-                cameraManager.StrafeY(10.0f);
-            }
-            if (inputManager.CheckAction(InputAction.StrafeDown))
-            {
-                cameraManager.StrafeY(-10.0f);
-            }
-
             cameraManager.Update();
 
             //rotate model
@@ -91,6 +54,47 @@ namespace UHSampleGame.Screens
             model.RotateZ(modelRotation);
 
             model.Update(gameTime);
+        }
+
+        public override void HandleInput(InputManager input)
+        {
+            base.HandleInput(input);
+            if (input.CheckAction(InputAction.Selection))
+            {
+                screenManager.ShowScreen(new ModelAndText());
+            }
+            if (input.CheckAction(InputAction.RotateLeft))
+            {
+                cameraManager.RotateX(-0.03f);
+            }
+            if (input.CheckAction(InputAction.RotateRight))
+            {
+                cameraManager.RotateX(0.03f);
+            }
+            if (input.CheckAction(InputAction.RotateUp))
+            {
+                cameraManager.RotateY(0.01f);
+            }
+            if (input.CheckAction(InputAction.RotateDown))
+            {
+                cameraManager.RotateY(-0.01f);
+            }
+            if (input.CheckAction(InputAction.StrafeLeft))
+            {
+                cameraManager.StrafeX(-10.0f);
+            }
+            if (input.CheckAction(InputAction.StrafeRight))
+            {
+                cameraManager.StrafeX(10.0f);
+            }
+            if (input.CheckAction(InputAction.StrafeUp))
+            {
+                cameraManager.StrafeY(10.0f);
+            }
+            if (input.CheckAction(InputAction.StrafeDown))
+            {
+                cameraManager.StrafeY(-10.0f);
+            }
         }
 
         public override void Draw(GameTime gameTime)

@@ -40,3 +40,5 @@ C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\obj\x86\Debug\Resolve
 C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\obj\x86\Debug\UHSampleGame.exe
 C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\obj\x86\Debug\UHSampleGame.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Video\intro.xnb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Video\intro.wmv

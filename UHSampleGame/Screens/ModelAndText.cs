@@ -15,7 +15,6 @@ namespace UHSampleGame.Screens
     {
         #region Class Variables
         Texture2D background;
-        InputManager inputManager;
         Model myModel;
         float aspectRatio;
         Vector3 modelPosition;
@@ -37,7 +36,6 @@ namespace UHSampleGame.Screens
             : base("ModelAndText")
         {
             background = ScreenManager.Game.Content.Load<Texture2D>("Model\\background");
-            inputManager = (InputManager)ScreenManager.Game.Services.GetService(typeof(InputManager));
 
             #region Setup Model
             myModel = ScreenManager.Game.Content.Load<Model>("Model\\box");
@@ -73,22 +71,7 @@ namespace UHSampleGame.Screens
             modelRotation += (float)gameTime.ElapsedGameTime.TotalMilliseconds *
                                 MathHelper.ToRadians(0.1f);
 
-            if (inputManager.CheckAction(InputAction.Selection))
-            {
-                ScreenManager.ShowScreen(new AnimatedModelScreen());
-            }
-
             #region Animation
-
-            //Check if rotation key is pressed
-            if (inputManager.CheckAction(InputAction.Rotation))
-            {
-                //toggle rotation
-                if (startAnimation == true)
-                    startAnimation = false;
-                else 
-                    startAnimation = true;
-            }
             
             //if rotating, let's move the object
             if (startAnimation == true)
@@ -119,6 +102,26 @@ namespace UHSampleGame.Screens
             #endregion
 
             base.Update(gameTime);
+        }
+
+        public override void HandleInput(InputManager input)
+        {
+            base.HandleInput(input);
+
+            if (input.CheckAction(InputAction.Selection))
+            {
+                ScreenManager.ShowScreen(new AnimatedModelScreen());
+            }
+
+            //Check if rotation key is pressed
+            if (input.CheckAction(InputAction.Rotation))
+            {
+                //toggle rotation
+                if (startAnimation == true)
+                    startAnimation = false;
+                else
+                    startAnimation = true;
+            }
         }
 
         public override void Draw(GameTime gameTime)
