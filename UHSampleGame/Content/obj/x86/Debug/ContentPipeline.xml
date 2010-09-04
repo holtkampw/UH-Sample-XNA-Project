@@ -38,7 +38,7 @@
       <Time>2010-09-03T03:31:11.8592179-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\box_0.xml</Key>
-        <Value>2010-09-03T19:02:03.3516495-05:00</Value>
+        <Value>2010-09-03T19:11:18.5724064-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
     </Item>
@@ -52,7 +52,7 @@
       <Time>2010-09-03T03:31:11.4901968-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\AnimatedModel\dude_0.xml</Key>
-        <Value>2010-09-03T19:02:15.1313233-05:00</Value>
+        <Value>2010-09-03T19:11:30.5830933-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\SkinnedModel.xnb</Request>
@@ -70,7 +70,7 @@
       <Time>2010-09-03T03:31:12.0262274-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\pyramids_0.xml</Key>
-        <Value>2010-09-03T19:02:20.2216145-05:00</Value>
+        <Value>2010-09-03T19:11:35.5533776-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
     </Item>
@@ -217,7 +217,7 @@
     <Assemblies>
       <Assembly>
         <Key>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\bin\x86\Debug\SkinnedModelPipeline.dll</Key>
-        <Value>2010-09-03T19:01:59.9884572-05:00</Value>
+        <Value>2010-09-03T19:11:15.83825-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
