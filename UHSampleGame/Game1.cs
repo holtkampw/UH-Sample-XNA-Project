@@ -92,6 +92,12 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.MenuCancel, Keys.Back);
             this.Services.AddService(typeof(InputManager), inputManager);
 
+            //Movement Actions
+            inputManager.AddInput(InputAction.TileMoveUp, Keys.T);
+            inputManager.AddInput(InputAction.TileMoveDown, Keys.G);
+            inputManager.AddInput(InputAction.TileMoveLeft, Keys.F);
+            inputManager.AddInput(InputAction.TileMoveRight, Keys.H);
+
             //Setup Screen Manager
             screenManager = new ScreenManager(this);
 

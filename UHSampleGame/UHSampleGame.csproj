@@ -42,6 +42,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>false</XnaCompressContent>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -71,6 +73,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -87,6 +91,7 @@
     <Compile Include="CameraManagement\CameraManager.cs" />
     <Compile Include="CoreObjects\GameObject.cs" />
     <Compile Include="CoreObjects\StaticModel.cs" />
+    <Compile Include="CoreObjects\Towers\Tower.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />
     <Compile Include="MenuSystem\MenuEntry.cs" />
@@ -101,6 +106,9 @@
     <Compile Include="Screens\MenuScreenTest.cs" />
     <Compile Include="Screens\ModelAndText.cs" />
     <Compile Include="Screens\ModelScreen.cs" />
+    <Compile Include="Screens\TileTestScreen.cs" />
+    <Compile Include="TileSystem\Tile.cs" />
+    <Compile Include="TileSystem\TileMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

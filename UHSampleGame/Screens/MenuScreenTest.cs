@@ -18,7 +18,7 @@ namespace UHSampleGame.Screens
         public MenuScreenTest()
             :base("MenuScreenTest")
         {
-            MenuEntry one = new MenuEntry("DummyText");
+            MenuEntry one = new MenuEntry("TileTestScreen");
             MenuEntry two = new MenuEntry("ModelAndText");
             MenuEntry three = new MenuEntry("ModelScreen");
 
@@ -31,9 +31,10 @@ namespace UHSampleGame.Screens
             AddMenuEntry(three);
         }
 
-        void three_Selected(object sender, EventArgs e)
+        
+        void one_Selected(object sender, EventArgs e)
         {
-            screenManager.ShowScreen(new ModelScreen());
+            screenManager.ShowScreen(new TileTestScreen());
         }
 
         void two_Selected(object sender, EventArgs e)
@@ -41,10 +42,12 @@ namespace UHSampleGame.Screens
             screenManager.ShowScreen(new ModelAndText());
         }
 
-        void one_Selected(object sender, EventArgs e)
+        void three_Selected(object sender, EventArgs e)
         {
-            screenManager.ShowScreen(new DummyTextScreen());
+            screenManager.ShowScreen(new ModelScreen());
         }
+
+        
 
         public override void LoadContent()
         {
