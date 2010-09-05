@@ -1,0 +1,18 @@
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\obj\x86\Debug\AStartTest.Form1.resources
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\obj\x86\Debug\AStartTest.Properties.Resources.resources
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\bin\Debug\AStartTest.exe
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\bin\Debug\AStartTest.pdb
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\obj\x86\Debug\AStartTest.exe
+c:\users\philip\documents\visual studio 2010\Projects\AStartTest\AStartTest\obj\x86\Debug\AStartTest.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\obj\x86\Debug\AStartTest.exe
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\obj\x86\Debug\AStartTest.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\bin\Debug\AStartTest.exe
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\bin\Debug\AStartTest.pdb
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\obj\x86\Debug\AStartTest.Form1.resources
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\obj\x86\Debug\AStartTest.Properties.Resources.resources
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\obj\x86\Debug\GenerateResource.write.1.tlog

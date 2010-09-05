@@ -7,7 +7,7 @@ using UHSampleGame.CoreObjects.Towers;
 
 namespace UHSampleGame.TileSystem
 {
-    class Tile
+    public class Tile
     {
         Vector3 position;
         Vector2 size;
