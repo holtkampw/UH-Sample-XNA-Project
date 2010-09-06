@@ -35,6 +35,7 @@ namespace AStartTest
 
         List<Node> openNodes;
         List<Node> closedNodes;
+        
         TileMap tileMap;
 
         Tile startTile;
@@ -147,20 +148,7 @@ namespace AStartTest
 
         private List<Tile> GetWalkableNeighborsNotOnClosedList(Node currentNode)
         {
-            List<Tile> neighborTiles;
-
-
-            // for (int i = 0; i < closedNodes.Count; i++)
-            // {
-            // closedDict.Add(closedNodes[i].tile.ID, closedNodes[i].tile);
-            //}
-
-            neighborTiles = tileMap.GetWalkableNeighbors(currentNode.tile, closedDict);
-            //for (int i = 0; i < closedNodes.Count; i++)
-            //{
-            //    neighborTiles.Remove(closedNodes[i].tile);
-            // }
-            return neighborTiles;
+            return tileMap.GetWalkableNeighbors(currentNode.tile, closedDict);
         }
 
         private void AddNeighborNodesToOpenList(Node currentNode, List<Tile> neighborTiles)
