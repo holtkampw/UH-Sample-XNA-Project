@@ -16,10 +16,14 @@ namespace AStartTest.TileSystem
     public class TileMap
     {
         List<Tile> tiles;
+        List<int> mins;
+        List<int> maxs;
         Vector2 position;
         Vector2 upperLeftPos;
         Vector2 numTiles;
         Vector2 tileSize;
+        int numTilesX;
+        int numTilesY;
         List<NeighborTile> allNeighbors;
 
         public IList<Tile> Tiles
@@ -32,6 +36,12 @@ namespace AStartTest.TileSystem
             this.position = position;
             this.numTiles = numTiles;
             this.tileSize = tileSize;
+
+            mins = new List<int>();
+            maxs = new List<int>();
+
+            numTilesX = (int)numTiles.X;
+            numTilesY = (int)numTiles.Y;
 
             upperLeftPos = new Vector2();
 
@@ -52,7 +62,8 @@ namespace AStartTest.TileSystem
         {
             Vector2 upperLeftLoc = new Vector2();
             Vector2 currentCenterPos = new Vector2();
-
+            int min, max, tileId;
+            
             upperLeftLoc.X = position.X - (tileSize.X * numTiles.X / 2.0f);
             upperLeftLoc.Y = position.Y - (tileSize.Y * numTiles.Y / 2.0f);
 
@@ -68,7 +79,14 @@ namespace AStartTest.TileSystem
                 currentCenterPos.X = upperLeftPos.X;
                 for (int x = 0; x < numTiles.X; x++)
                 {
-                    tiles.Add(new Tile(tiles.Count, Vector2.Copy(currentCenterPos), Vector2.Copy(tileSize), panels[(int)(y*numTiles.X) + x]));
+                    tileId = (y * numTilesX) + x;
+                    min = (tileId / numTilesX) * numTilesX;
+                    max = min + numTilesX - 1;
+
+                    mins.Add(min);
+                    maxs.Add(max);
+
+                    tiles.Add(new Tile(tiles.Count, Vector2.Copy(currentCenterPos), Vector2.Copy(tileSize), panels[(y*numTilesX) + x]));
                     currentCenterPos.X += tileSize.X;
                 }
                 currentCenterPos.Y += tileSize.Y;
@@ -93,47 +111,48 @@ namespace AStartTest.TileSystem
         /// <returns></returns>
         public Tile GetTileNeighbor(Tile tile, NeighborTile neighborTile)
         {
-            int newIndex = tile.ID;
-            int min, max;
-            min = (tile.ID / (int)numTiles.X) * (int)numTiles.X;
-            max = min + (int)numTiles.X - 1;
+            int newIndex = 0;// tile.ID;
+            int min, max, tileId;
+            tileId = tile.ID;
+            min = mins[tileId];// (tile.ID / numTilesX) * numTilesX;
+            max = maxs[tileId];// min + numTilesX - 1;
             switch (neighborTile)
             {
-                case NeighborTile.Up: newIndex = tile.ID - (int)numTiles.X;
+                case NeighborTile.Up: newIndex = tileId - (int)numTiles.X;
                     break;
-                case NeighborTile.Down: newIndex = tile.ID + (int)numTiles.X;
+                case NeighborTile.Down: newIndex = tileId + (int)numTiles.X;
                     break;
-                case NeighborTile.Left: newIndex = tile.ID - 1;
+                case NeighborTile.Left: newIndex = tileId - 1;
                     if (newIndex < min)
-                        newIndex = tile.ID;
+                        newIndex = tileId;
                     break;
-                case NeighborTile.Right: newIndex = tile.ID + 1;
+                case NeighborTile.Right: newIndex = tileId + 1;
                     if (newIndex > max)
-                        newIndex = tile.ID;
+                        newIndex = tileId;
                     break;
-                case NeighborTile.UpLeft: newIndex = tile.ID - (int)numTiles.X - 1;
+                case NeighborTile.UpLeft: newIndex = tileId - numTilesX - 1;
                     if (newIndex < min - (int)numTiles.X)
-                        newIndex = tile.ID;
+                        newIndex = tileId;
                     break;
-                case NeighborTile.UpRight: newIndex = tile.ID - (int)numTiles.X + 1;
+                case NeighborTile.UpRight: newIndex = tileId - numTilesX + 1;
                     if (newIndex > max - (int)numTiles.X)
-                        newIndex = tile.ID;
+                        newIndex = tileId;
                     break;
-                case NeighborTile.DownLeft: newIndex = tile.ID + (int)numTiles.X - 1;
+                case NeighborTile.DownLeft: newIndex = tileId + numTilesX - 1;
                     if (newIndex < min + (int)numTiles.X)
-                        newIndex = tile.ID;
+                        newIndex = tileId;
                     break;
-                case NeighborTile.DownRight: newIndex = tile.ID + (int)numTiles.X + 1;
+                case NeighborTile.DownRight: newIndex = tileId + numTilesX + 1;
                     if (newIndex > max + (int)numTiles.X)
-                        newIndex = tile.ID;
+                        newIndex = tileId;
                     break;
             }
 
-            if (newIndex < 0 || newIndex >= (numTiles.X * numTiles.Y))
+            if (newIndex < 0 || newIndex >= (numTilesX * numTilesY))
             {
-                newIndex = tile.ID;
+                newIndex = tileId;
             }
-            if (newIndex == tile.ID)
+            if (newIndex == tileId)
             {
                 return new Tile();
             }
@@ -183,15 +202,21 @@ namespace AStartTest.TileSystem
             }
             return null;
         }
-
         public List<Tile> GetWalkableNeighbors(Tile tile)
+        {
+            return GetWalkableNeighbors(tile, new Dictionary<int, Tile>());
+        }
+
+        public List<Tile> GetWalkableNeighbors(Tile tile, Dictionary<int, Tile> exclude)
         {
             List<Tile> neighbors = new List<Tile>();
             Tile currentNeighbor;
             for (int i = 0; i < allNeighbors.Count; i++)
             {
                 currentNeighbor = GetTileNeighbor(tile, allNeighbors[i]);
-                if (currentNeighbor.TileType != TileType.Null && currentNeighbor.IsWalkable())
+                if(exclude.ContainsKey(currentNeighbor.ID))
+                    continue;
+                if (currentNeighbor.IsWalkable())
                 {
                     if (allNeighbors[i] == NeighborTile.DownLeft)
                     {

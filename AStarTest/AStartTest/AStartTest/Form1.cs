@@ -18,15 +18,20 @@ namespace AStartTest
         TileMap tileMap;
         List<TileType> tileTypes;
         AStar aStar = null;
+        Random r = new Random();
 
         List<Tile> open = new List<Tile>();
         List<Tile> closed = new List<Tile>();
+        List<Tile> blocked = new List<Tile>();
         Tile current = null;
+
+        double avgTime;// =new TimeSpan();
+        int iters = 0;
 
         public Form1()
         {
             InitializeComponent();
-            Vector2 numTiles = new Vector2(16, 16);
+            Vector2 numTiles = new Vector2(24, 24);
             Vector2 tileSize = new Vector2(20, 20);
             nodes = new List<Panel>();
             tileTypes = new List<TileType>();
@@ -47,7 +52,7 @@ namespace AStartTest
                     nodes.Add(panel);
                 }
             }
-            tileMap = new TileMap(new Vector2(160, 160), numTiles, tileSize, nodes);
+            tileMap = new TileMap(new Vector2(250, 250), numTiles, tileSize, nodes);
 
             findPathBtn.Enabled = false;
         }
@@ -65,21 +70,31 @@ namespace AStartTest
         private void ExecuteAStar()
         {
             tileMap.ClearPath();
-            DateTime time1 = DateTime.Now;
+            DateTime time1;
             DateTime time2;
 
+            TimeSpan tSpan = new TimeSpan();
             aStar = new AStar(tileMap);
 
+            time1 = DateTime.Now;
             List<Tile> path = aStar.FindPath();
+            time2 = DateTime.Now;
 
+            tSpan = time2.Subtract(time1);
             for (int i = 0; i < path.Count; i++)
             {
                 if (path[i].TileType != TileType.Start &&
                     path[i].TileType != TileType.Goal)
                     path[i].SetTileType(TileType.Path);
             }
-            time2 = DateTime.Now;
-            timelbl.Text = "Time: " + time2.Subtract(time1).ToString();
+
+            avgTime = ((avgTime * iters) + tSpan.TotalMilliseconds) / (iters + 1);
+            iters++;
+            StringBuilder s = new StringBuilder();
+            s.AppendLine("Time: " + tSpan.ToString());
+            s.AppendLine("Avg: " + avgTime);
+            s.AppendLine("Iters: " + iters);
+            timelbl.Text = s.ToString();
         }
 
         private void panel33_MouseDown(object sender, MouseEventArgs e)
@@ -122,7 +137,7 @@ namespace AStartTest
                 else
                 {
                     tile.SetTileType(TileType.Start);
-                    startTile  = true;
+                    startTile = true;
                 }
             }
             else if (tile.TileType == TileType.Start)
@@ -147,17 +162,17 @@ namespace AStartTest
             else
                 tile.SetTileType(TileType.Blocked);
 
-            
+
             findPathBtn.Enabled = (startTile && goalTile);
             if (findPathBtn.Enabled)
             {
-                ExecuteAStar();
+                //ExecuteAStar();
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             tileMap.ClearPath();
             DateTime time1 = DateTime.Now;
             DateTime time2;
@@ -183,6 +198,53 @@ namespace AStartTest
             }
             time2 = DateTime.Now;
             timelbl.Text = "Time: " + time2.Subtract(time1).ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = !timer1.Enabled;
+            timer1.Interval = 20;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            aStar = new AStar(tileMap);
+            List<Tile> path = aStar.FindPath();
+
+            int index = r.Next(path.Count);
+
+            if (path.Count > 0)
+            {
+                while (path[index].TileType == TileType.Goal || path[index].TileType == TileType.Start ||
+                    index == path.Count - 2 || index == 1)
+                {
+                    index = r.Next(path.Count);
+                }
+                blocked.Add(path[index]);
+                panel33_MouseDown(path[index].Panel, null);
+                ExecuteAStar();
+            }
+            else
+            {
+                int count = 0;
+                int index2;
+                int minRemove = blocked.Count / 3;
+                while (path.Count == 0 || count < minRemove)
+                {
+                    index2 = r.Next(blocked.Count);
+                    panel33_MouseDown(blocked[index2].Panel, null);
+                    blocked.RemoveAt(index2);
+
+                    ExecuteAStar();
+                    aStar = new AStar(tileMap);
+                    path = aStar.FindPath();
+
+                    count++;
+
+                }
+
+            }
+
         }
     }
 }

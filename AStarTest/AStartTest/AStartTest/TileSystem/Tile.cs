@@ -92,7 +92,7 @@ namespace AStartTest.TileSystem
 
         public bool IsWalkable()
         {
-            return tileType  != TileType.Blocked && tileType != TileType.Null;
+            return tileType != TileType.Blocked && tileType != TileType.Null;
         }
 
         public bool IsStart()
@@ -119,6 +119,11 @@ namespace AStartTest.TileSystem
         public override string ToString()
         {
             return tileType.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return id == ((Tile)obj).id;
         }
 
     }
