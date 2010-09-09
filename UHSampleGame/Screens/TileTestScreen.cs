@@ -80,26 +80,30 @@ namespace UHSampleGame.Screens
         {
             base.HandleInput(input);
             bool moveModel = false;
+            Tile newTile = new Tile();
             if(input.CheckNewAction(InputAction.TileMoveUp))
             {
                 moveModel = true;
-                currentTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Up);
+                newTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Up);
             }
             if (input.CheckNewAction(InputAction.TileMoveDown))
             {
                 moveModel = true;
-                currentTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Down);
+                newTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Down);
             }
             if (input.CheckNewAction(InputAction.TileMoveLeft))
             {
                 moveModel = true;
-                currentTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Left);
+                newTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Left);
             }
             if (input.CheckNewAction(InputAction.TileMoveRight))
             {
                 moveModel = true;
-                currentTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Right);
+                newTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Right);
             }
+            if (!newTile.IsNull())
+                currentTile = newTile;
+
             if (input.CheckNewAction(InputAction.Selection))
             {
                 ScreenManager.Game.Exit();

@@ -7,14 +7,21 @@ using UHSampleGame.CoreObjects.Towers;
 
 namespace UHSampleGame.TileSystem
 {
+    public enum TileType { Walkable, Blocked, Start, Goal, Path, Current, Open, Closed, Null }
+
     public class Tile
     {
         Vector3 position;
         Vector2 size;
-        Tower tower;
+        TileType tileType;
 
         int id;
-        
+
+        public TileType TileType
+        {
+            get { return tileType; }
+        }
+
         /// <summary>
         /// The 3D coordinate of the CENTER of the tile
         /// </summary>
@@ -31,14 +38,10 @@ namespace UHSampleGame.TileSystem
             get { return size; }
         }
 
-        /// <summary>
-        /// The tower on the tile
-        /// </summary>
-        public Tower Tower
-        {
-            get { return tower; }
-        }
 
+        /// <summary>
+        /// The unique id of the tile
+        /// </summary>
         public int ID
         {
             get { return id; }
@@ -50,33 +53,62 @@ namespace UHSampleGame.TileSystem
         /// <param name="position">The center position of the tile</param>
         /// <param name="size">The width and length of the tile</param>
         public Tile(int id, Vector3 position, Vector2 size)
+            : this(id, position, size, TileType.Walkable) { }
+
+        public Tile()
+        {
+            this.tileType = TileType.Null;
+        }
+
+        public Tile(int id, Vector3 position, Vector2 size, TileType tileType)
         {
             this.id = id;
             this.position = position;
             this.size = size;
+            this.tileType = tileType;
+
+            SetTileType(tileType);
+
         }
 
-        /// <summary>
-        /// Returns whether or not the tile has a tower on it
-        /// </summary>
-        /// <returns>Returns true if there is a tower on the tile</returns>
-        public bool HasTower()
+        public bool IsWalkable()
         {
-            return tower != null;
+            return tileType != TileType.Blocked && !IsNull();
         }
 
-        /// <summary>
-        /// Sets a tower on the tile
-        /// </summary>
-        /// <param name="tower">The tower to put on the tile</param>
-        /// <returns></returns>
-        public bool SetTower(Tower tower)
+        public bool IsStart()
         {
-            if (HasTower())
-                return false;
-
-            this.tower = tower;
-            return true;
+            return tileType == TileType.Start;
         }
+
+        public bool IsGoal()
+        {
+            return tileType == TileType.Goal;
+        }
+
+        public bool IsNull()
+        {
+            return tileType == TileType.Null;
+        }
+
+        public TileType GetTileType()
+        {
+            return tileType;
+        }
+
+        public void SetTileType(TileType tileType)
+        {
+            this.tileType = tileType;
+        }
+
+        public override string ToString()
+        {
+            return tileType.ToString();
+        }
+
+        //public override bool Equals(object obj)
+        //{
+        //    return id == ((Tile)obj).id;
+        //}
     }
 }

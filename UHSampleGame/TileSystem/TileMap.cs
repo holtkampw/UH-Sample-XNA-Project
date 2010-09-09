@@ -12,13 +12,23 @@ namespace UHSampleGame.TileSystem
         UpRight, DownLeft, DownRight
     }
 
-    class TileMap
+    public class TileMap
     {
         List<Tile> tiles;
+        List<int> mins;
+        List<int> maxs;
         Vector3 position;
         Vector3 upperLeftPos;
         Vector2 numTiles;
         Vector2 tileSize;
+        int numTilesX;
+        int numTilesY;
+        List<NeighborTile> allNeighbors;
+
+        public IList<Tile> Tiles
+        {
+            get { return tiles; }
+        }
 
         public TileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
         {
@@ -26,31 +36,56 @@ namespace UHSampleGame.TileSystem
             this.numTiles = numTiles;
             this.tileSize = tileSize;
 
+            mins = new List<int>();
+            maxs = new List<int>();
+
+            numTilesX = (int)numTiles.X;
+            numTilesY = (int)numTiles.Y;
+
+            upperLeftPos = new Vector3();
+
             tiles = new List<Tile>();
             InitializeTiles();
+            allNeighbors = new List<NeighborTile>();
+            allNeighbors.Add(NeighborTile.Down);
+            allNeighbors.Add(NeighborTile.DownLeft);
+            allNeighbors.Add(NeighborTile.DownRight);
+            allNeighbors.Add(NeighborTile.Left);
+            allNeighbors.Add(NeighborTile.Right);
+            allNeighbors.Add(NeighborTile.Up);
+            allNeighbors.Add(NeighborTile.UpLeft);
+            allNeighbors.Add(NeighborTile.UpRight);
         }
 
         protected void InitializeTiles()
         {
-            Vector2 upperLeftLoc = new Vector2();
+            Vector3 upperLeftLoc = new Vector3();
             Vector3 currentCenterPos = new Vector3();
+            int min, max, tileId;
 
             upperLeftLoc.X = position.X - (tileSize.X * numTiles.X / 2.0f);
-            upperLeftLoc.Y = position.Z - (tileSize.Y * numTiles.Y / 2.0f);
+            upperLeftLoc.Z = position.Z - (tileSize.Y * numTiles.Y / 2.0f);
 
             upperLeftPos.X = upperLeftLoc.X + tileSize.X / 2.0f;
-            upperLeftPos.Y = upperLeftLoc.Y + tileSize.Y / 2.0f;
+            upperLeftPos.Y = upperLeftLoc.Z + tileSize.Y / 2.0f;
 
             currentCenterPos.X = upperLeftPos.X;
             currentCenterPos.Y = 0;
-            currentCenterPos.Z = upperLeftPos.Y;
+            currentCenterPos.Z = upperLeftPos.Z;
 
             for (int y = 0; y < numTiles.Y; y++)
             {
                 currentCenterPos.X = upperLeftPos.X;
                 for (int x = 0; x < numTiles.X; x++)
                 {
-                    tiles.Add(new Tile(tiles.Count, currentCenterPos, tileSize));
+                    tileId = (y * numTilesX) + x;
+                    min = (tileId / numTilesX) * numTilesX;
+                    max = min + numTilesX - 1;
+
+                    mins.Add(min);
+                    maxs.Add(max);
+                    tiles.Add(new Tile(tiles.Count, new Vector3(currentCenterPos.X, currentCenterPos.Y, currentCenterPos.Z),
+                        new Vector2(tileSize.X, tileSize.Y)));
                     currentCenterPos.X += tileSize.X;
                 }
                 currentCenterPos.Z += tileSize.Y;
@@ -62,41 +97,55 @@ namespace UHSampleGame.TileSystem
         /// </summary>
         /// <param name="tile">The start tile</param>
         /// <param name="neighborTile">The neighbor to examine</param>
-        /// <returns></returns>
+        /// <returns>Returns the tile neighbor or a null tile if neighbor is not found</returns>
         public Tile GetTileNeighbor(Tile tile, NeighborTile neighborTile)
         {
-            int newIndex = tile.ID;
-            int min, max;
-            min = (tile.ID / (int)numTiles.X) * (int)numTiles.X;
-            max = min + (int)numTiles.X-1;
+            int newIndex = 0;// tile.ID;
+            int min, max, tileId;
+            tileId = tile.ID;
+            min = mins[tileId];// (tile.ID / numTilesX) * numTilesX;
+            max = maxs[tileId];// min + numTilesX - 1;
             switch (neighborTile)
             {
-                case NeighborTile.Up: newIndex = tile.ID - (int)numTiles.X;
+                case NeighborTile.Up: newIndex = tileId - (int)numTiles.X;
                     break;
-                case NeighborTile.Down: newIndex = tile.ID + (int)numTiles.X;
+                case NeighborTile.Down: newIndex = tileId + (int)numTiles.X;
                     break;
-                case NeighborTile.Left: newIndex = tile.ID - 1;
+                case NeighborTile.Left: newIndex = tileId - 1;
                     if (newIndex < min)
-                        newIndex = tile.ID;
+                        newIndex = tileId;
                     break;
-                case NeighborTile.Right: newIndex = tile.ID + 1;
+                case NeighborTile.Right: newIndex = tileId + 1;
                     if (newIndex > max)
-                        newIndex = tile.ID;
+                        newIndex = tileId;
                     break;
-                case NeighborTile.UpLeft: newIndex = tile.ID - (int)numTiles.X - 1;
+                case NeighborTile.UpLeft: newIndex = tileId - numTilesX - 1;
+                    if (newIndex < min - (int)numTiles.X)
+                        newIndex = tileId;
                     break;
-                case NeighborTile.UpRight: newIndex = tile.ID - (int)numTiles.X + 1;
+                case NeighborTile.UpRight: newIndex = tileId - numTilesX + 1;
+                    if (newIndex > max - (int)numTiles.X)
+                        newIndex = tileId;
                     break;
-                case NeighborTile.DownLeft: newIndex = tile.ID + (int)numTiles.X - 1;
+                case NeighborTile.DownLeft: newIndex = tileId + numTilesX - 1;
+                    if (newIndex < min + (int)numTiles.X)
+                        newIndex = tileId;
                     break;
-                case NeighborTile.DownRight: newIndex = tile.ID + (int)numTiles.X + 1;
+                case NeighborTile.DownRight: newIndex = tileId + numTilesX + 1;
+                    if (newIndex > max + (int)numTiles.X)
+                        newIndex = tileId;
                     break;
             }
 
-            if (newIndex < 0 || newIndex >= (numTiles.X * numTiles.Y))
+            if (newIndex < 0 || newIndex >= (numTilesX * numTilesY))
             {
-                newIndex = tile.ID;
+                newIndex = tileId;
             }
+            if (newIndex == tileId)
+            {
+                return new Tile();
+            }
+
             return tiles[newIndex];
         }
 
@@ -120,6 +169,74 @@ namespace UHSampleGame.TileSystem
                 return tiles[index];
 
             return null;
+        }
+
+        public void ClearPath()
+        {
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (tiles[i].TileType == TileType.Path ||
+                    tiles[i].TileType == TileType.Open ||
+                    tiles[i].TileType == TileType.Closed)
+                    tiles[i].SetTileType(TileType.Walkable);
+            }
+        }
+
+        public Tile GetTileFromType(TileType tileType)
+        {
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (tiles[i].TileType == tileType)
+                    return tiles[i];
+            }
+            return null;
+        }
+        public List<Tile> GetWalkableNeighbors(Tile tile)
+        {
+            return GetWalkableNeighbors(tile, new Dictionary<int, Tile>());
+        }
+
+        public List<Tile> GetWalkableNeighbors(Tile tile, Dictionary<int, Tile> exclude)
+        {
+            List<Tile> neighbors = new List<Tile>();
+            Tile currentNeighbor;
+            for (int i = 0; i < allNeighbors.Count; i++)
+            {
+                currentNeighbor = GetTileNeighbor(tile, allNeighbors[i]);
+                if (exclude.ContainsKey(currentNeighbor.ID))
+                    continue;
+                if (currentNeighbor.IsWalkable())
+                {
+                    if (allNeighbors[i] == NeighborTile.DownLeft)
+                    {
+                        if (GetTileNeighbor(tile, NeighborTile.Down).IsWalkable() &&
+                            GetTileNeighbor(tile, NeighborTile.Left).IsWalkable())
+                            neighbors.Add(currentNeighbor);
+                    }
+                    else if (allNeighbors[i] == NeighborTile.DownRight)
+                    {
+                        if (GetTileNeighbor(tile, NeighborTile.Down).IsWalkable() &&
+                            GetTileNeighbor(tile, NeighborTile.Right).IsWalkable())
+                            neighbors.Add(currentNeighbor);
+                    }
+                    else if (allNeighbors[i] == NeighborTile.UpLeft)
+                    {
+                        if (GetTileNeighbor(tile, NeighborTile.Up).IsWalkable() &&
+                            GetTileNeighbor(tile, NeighborTile.Left).IsWalkable())
+                            neighbors.Add(currentNeighbor);
+                    }
+                    else if (allNeighbors[i] == NeighborTile.UpRight)
+                    {
+                        if (GetTileNeighbor(tile, NeighborTile.Up).IsWalkable() &&
+                            GetTileNeighbor(tile, NeighborTile.Right).IsWalkable())
+                            neighbors.Add(currentNeighbor);
+                    }
+                    else
+                        neighbors.Add(currentNeighbor);
+                }
+
+            }
+            return neighbors;
         }
     }
 }

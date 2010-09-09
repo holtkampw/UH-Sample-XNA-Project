@@ -96,6 +96,7 @@
     <Compile Include="CoreObjects\AnimatedModel.cs" />
     <Compile Include="MenuSystem\MenuEntry.cs" />
     <Compile Include="MenuSystem\MenuScreen.cs" />
+    <Compile Include="PathFinding\AStar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

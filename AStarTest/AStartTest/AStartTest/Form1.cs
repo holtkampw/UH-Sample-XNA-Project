@@ -31,8 +31,8 @@ namespace AStartTest
         public Form1()
         {
             InitializeComponent();
-            Vector2 numTiles = new Vector2(24, 24);
-            Vector2 tileSize = new Vector2(20, 20);
+            Vector2 numTiles = new Vector2(80, 80);
+            Vector2 tileSize = new Vector2(5, 5);
             nodes = new List<Panel>();
             tileTypes = new List<TileType>();
             tileTypes.Add(TileType.Walkable);
@@ -244,6 +244,16 @@ namespace AStartTest
                 }
 
             }
+
+        }
+
+        private void panel1_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_MouseHover(object sender, EventArgs e)
+        {
 
         }
     }
