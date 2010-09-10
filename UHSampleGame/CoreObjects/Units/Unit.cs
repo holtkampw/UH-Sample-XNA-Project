@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
+
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+
 using UHSampleGame.TileSystem;
 
-namespace UHSampleGame.CoreObjects.Towers
+namespace UHSampleGame.CoreObjects.Units
 {
-    public abstract class Tower : AnimatedModel, ITileableObject
+    public abstract class Unit : AnimatedTileObject, IPathableObject
     {
-        public Tower(Model model)
+        public Unit(Model model)
             : base(model) { }
 
-        public Tile GetTile()
+        public List<Tile> GetPath()
         {
             throw new NotImplementedException();
         }

@@ -14,7 +14,7 @@ namespace UHSampleGame.TileSystem
 
     public class TileMap
     {
-        List<Tile> tiles;
+        static List<Tile> tiles;
         List<int> mins;
         List<int> maxs;
         Vector3 position;
@@ -25,7 +25,7 @@ namespace UHSampleGame.TileSystem
         int numTilesY;
         List<NeighborTile> allNeighbors;
 
-        public IList<Tile> Tiles
+        public static IList<Tile> Tiles
         {
             get { return tiles; }
         }
@@ -67,7 +67,7 @@ namespace UHSampleGame.TileSystem
             upperLeftLoc.Z = position.Z - (tileSize.Y * numTiles.Y / 2.0f);
 
             upperLeftPos.X = upperLeftLoc.X + tileSize.X / 2.0f;
-            upperLeftPos.Y = upperLeftLoc.Z + tileSize.Y / 2.0f;
+            upperLeftPos.Z = upperLeftLoc.Z + tileSize.Y / 2.0f;
 
             currentCenterPos.X = upperLeftPos.X;
             currentCenterPos.Y = 0;
@@ -168,7 +168,7 @@ namespace UHSampleGame.TileSystem
             if (index >= 0 && index < numTiles.X * numTiles.Y)
                 return tiles[index];
 
-            return null;
+            return new Tile();
         }
 
         public void ClearPath()
