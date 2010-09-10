@@ -1,4 +1,8 @@
-
+*.user           #User specific solution and project settings
+*.sln.cache
+[bB]in/         #Build output
+[oO]bj/
+*.xap
 /UHSampleGame/bin/x86/Debug/Content/Video/intro.wmv
 /UHSampleGame/bin/x86/Debug/Content/Video/intro.xnb
 /UHSampleGame/obj/x86/Debug/ResolveAssemblyReference.cache
@@ -39,5 +43,4 @@
 /UHSampleGame/obj/x86/Debug/UHSampleGame.exe
 /UHSampleGame/obj/x86/Debug/UHSampleGame.pdb
 /UHSampleGame/obj/x86/Debug/cachefile-896dab71-c352-4b97-a450-c5aeb00714f0-targetpath.txt
-*.sln
 *.suo
