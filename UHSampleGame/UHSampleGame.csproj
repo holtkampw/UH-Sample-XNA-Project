@@ -95,6 +95,7 @@
     <Compile Include="CoreObjects\ITileableObject.cs" />
     <Compile Include="CoreObjects\StaticModel.cs" />
     <Compile Include="CoreObjects\Towers\Tower.cs" />
+    <Compile Include="CoreObjects\Units\TestUnit.cs" />
     <Compile Include="CoreObjects\Units\Unit.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />

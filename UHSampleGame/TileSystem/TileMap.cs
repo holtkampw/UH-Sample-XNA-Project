@@ -15,26 +15,26 @@ namespace UHSampleGame.TileSystem
     public class TileMap
     {
         static List<Tile> tiles;
-        List<int> mins;
-        List<int> maxs;
-        Vector3 position;
-        Vector3 upperLeftPos;
-        Vector2 numTiles;
-        Vector2 tileSize;
-        int numTilesX;
-        int numTilesY;
-        List<NeighborTile> allNeighbors;
+        static List<int> mins;
+        static List<int> maxs;
+        static Vector3 position;
+        static Vector3 upperLeftPos;
+        static Vector2 numTiles;
+        static Vector2 tileSize;
+        static int numTilesX;
+        static int numTilesY;
+        static List<NeighborTile> allNeighbors;
 
         public static IList<Tile> Tiles
         {
             get { return tiles; }
         }
 
-        public TileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
+        public static void InitializeTileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
         {
-            this.position = position;
-            this.numTiles = numTiles;
-            this.tileSize = tileSize;
+            TileMap.position = position;
+            TileMap.numTiles = numTiles;
+            TileMap.tileSize = tileSize;
 
             mins = new List<int>();
             maxs = new List<int>();
@@ -57,7 +57,7 @@ namespace UHSampleGame.TileSystem
             allNeighbors.Add(NeighborTile.UpRight);
         }
 
-        protected void InitializeTiles()
+        protected static void InitializeTiles()
         {
             Vector3 upperLeftLoc = new Vector3();
             Vector3 currentCenterPos = new Vector3();
@@ -98,7 +98,7 @@ namespace UHSampleGame.TileSystem
         /// <param name="tile">The start tile</param>
         /// <param name="neighborTile">The neighbor to examine</param>
         /// <returns>Returns the tile neighbor or a null tile if neighbor is not found</returns>
-        public Tile GetTileNeighbor(Tile tile, NeighborTile neighborTile)
+        public static Tile GetTileNeighbor(Tile tile, NeighborTile neighborTile)
         {
             int newIndex = 0;// tile.ID;
             int min, max, tileId;
@@ -155,7 +155,7 @@ namespace UHSampleGame.TileSystem
         /// <param name="position">The position to investigate</param>
         /// <returns>Returns the tile that encompasses the position or a 
         /// null tile if no tile exists</returns>
-        public Tile GetTileFromPos(Vector3 position)
+        public static Tile GetTileFromPos(Vector3 position)
         {
             int xNum, yNum, index;
             xNum = yNum = index = 0;

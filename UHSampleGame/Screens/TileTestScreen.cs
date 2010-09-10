@@ -10,6 +10,7 @@ using UHSampleGame.CoreObjects;
 using UHSampleGame.InputManagement;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.TileSystem;
+using UHSampleGame.CoreObjects.Units;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -27,7 +28,8 @@ namespace UHSampleGame.Screens
         string text;
         Vector2 textPosition;
 
-        TileMap tileMap;
+        List<TestUnit> units;
+        Random rand;
         Tile currentTile;
         #endregion
 
@@ -35,13 +37,25 @@ namespace UHSampleGame.Screens
         public TileTestScreen()
             : base("TileTestScreen")
         {
-            tileMap = new TileMap(Vector3.Zero, new Vector2(10, 10), new Vector2(20, 20));
+            units = new List<TestUnit>();
+            rand = new Random();
+            
+            TileMap.InitializeTileMap(Vector3.Zero, new Vector2(10, 10), new Vector2(20, 20));
 
             background = ScreenManager.Game.Content.Load<Texture2D>("Model\\background");
             myModel = new AnimatedModel(ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
-            myModel.Scale = 20.0f;
+            myModel.Scale = 15.0f;
             myModel.PlayClip("Take 001");
-            currentTile = tileMap.GetTileFromPos(Vector3.Zero);
+
+            for (int i = 0; i < 500; i++)
+            {
+                units.Add(new TestUnit(ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude")));
+                units[i].Scale = 2.0f;
+                units[i].PlayClip("Take 001");
+                units[i].SetPosition(new Vector3(rand.Next(-99, 99), 0, rand.Next(-99, 99)));
+            }
+
+            currentTile = TileMap.GetTileFromPos(Vector3.Zero);
             myModel.SetPosition(currentTile.Position);
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
             cameraManager.SetPosition(new Vector3(0.0f, 50.0f, 5000.0f));
@@ -71,6 +85,10 @@ namespace UHSampleGame.Screens
         {
             base.Update(gameTime);
 
+            for (int i = 0; i < units.Count; i++)
+                units[i].Update(gameTime);
+            
+
             cameraManager.Update();
             myModel.Update(gameTime);
             ground.Update(gameTime);
@@ -84,29 +102,34 @@ namespace UHSampleGame.Screens
             if(input.CheckNewAction(InputAction.TileMoveUp))
             {
                 moveModel = true;
-                newTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Up);
+                newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Up);
             }
             if (input.CheckNewAction(InputAction.TileMoveDown))
             {
                 moveModel = true;
-                newTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Down);
+                newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Down);
             }
             if (input.CheckNewAction(InputAction.TileMoveLeft))
             {
                 moveModel = true;
-                newTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Left);
+                newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Left);
             }
             if (input.CheckNewAction(InputAction.TileMoveRight))
             {
                 moveModel = true;
-                newTile = tileMap.GetTileNeighbor(currentTile, NeighborTile.Right);
+                newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Right);
             }
             if (!newTile.IsNull())
                 currentTile = newTile;
 
             if (input.CheckNewAction(InputAction.Selection))
             {
-                ScreenManager.Game.Exit();
+                for (int i = 0; i < units.Count; i++)
+                {
+                    units[i].SetPosition(new Vector3(rand.Next(-99, 99), 0, rand.Next(-99, 99)));
+                    units[i].GetTile();
+                }
+                //ScreenManager.Game.Exit();
             }
             if (input.CheckAction(InputAction.RotateLeft))
             {
@@ -159,11 +182,12 @@ namespace UHSampleGame.Screens
             ground.Draw(gameTime);
             myModel.Draw(gameTime);
 
+            for (int i = 0; i < units.Count; i++)
+                units[i].Draw(gameTime);
+
             ScreenManager.SpriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
             ScreenManager.SpriteBatch.DrawString(font, myModel.Position.ToString(), textPosition + new Vector2(0.0f, 50.0f), Color.White);
             ScreenManager.SpriteBatch.End();
-
-            
 
         }
         #endregion
