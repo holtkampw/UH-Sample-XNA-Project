@@ -8,7 +8,7 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public abstract class Tower : AnimatedModel, ITileableObject
+    public abstract class Tower : StaticModel, ITileableObject//AnimatedModel, ITileableObject
     {
         public Tower(Model model)
             : base(model) { }

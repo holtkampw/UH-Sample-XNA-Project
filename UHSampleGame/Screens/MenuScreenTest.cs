@@ -21,14 +21,17 @@ namespace UHSampleGame.Screens
             MenuEntry one = new MenuEntry("TileTestScreen");
             MenuEntry two = new MenuEntry("ModelAndText");
             MenuEntry three = new MenuEntry("ModelScreen");
+            MenuEntry four = new MenuEntry("PlayScreen");
 
             one.Selected += new EventHandler<EventArgs>(one_Selected);
             two.Selected += new EventHandler<EventArgs>(two_Selected);
             three.Selected += new EventHandler<EventArgs>(three_Selected);
+            four.Selected += new EventHandler<EventArgs>(four_Selected);
 
             AddMenuEntry(one);
             AddMenuEntry(two);
             AddMenuEntry(three);
+            AddMenuEntry(four);
         }
 
         
@@ -45,6 +48,11 @@ namespace UHSampleGame.Screens
         void three_Selected(object sender, EventArgs e)
         {
             screenManager.ShowScreen(new ModelScreen());
+        }
+
+        void four_Selected(object sender, EventArgs e)
+        {
+            screenManager.ShowScreen(new PlayScreen());
         }
 
         

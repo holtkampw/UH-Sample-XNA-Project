@@ -81,7 +81,7 @@ namespace UHSampleGame.CoreObjects
         protected void SetupCamera()
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-            view = Matrix.CreateTranslation(0, 0, 0) * Matrix.CreateScale(scale) * cameraManager.ViewMatrix;
+            view = Matrix.CreateTranslation(0,0,0) * Matrix.CreateScale(scale) * cameraManager.ViewMatrix;
         }
         #endregion
 
@@ -125,11 +125,11 @@ namespace UHSampleGame.CoreObjects
 
         public void UpdateView()
         {
-            view = Matrix.CreateTranslation(position) *
-                    rotationMatrixX *
-                    rotationMatrixY *
-                    rotationMatrixZ *
-                    Matrix.CreateScale(scale) *
+            view =  Matrix.CreateScale(scale) *
+                    Matrix.CreateTranslation(position) *
+                    //rotationMatrixX *
+                    //rotationMatrixY *
+                    //rotationMatrixZ *
                     cameraManager.ViewMatrix;
         }
 

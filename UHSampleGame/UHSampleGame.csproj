@@ -95,6 +95,7 @@
     <Compile Include="CoreObjects\ITileableObject.cs" />
     <Compile Include="CoreObjects\StaticModel.cs" />
     <Compile Include="CoreObjects\Towers\Tower.cs" />
+    <Compile Include="CoreObjects\Towers\TowerAGood.cs" />
     <Compile Include="CoreObjects\Units\TestUnit.cs" />
     <Compile Include="CoreObjects\Units\Unit.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Screens\MenuScreenTest.cs" />
     <Compile Include="Screens\ModelAndText.cs" />
     <Compile Include="Screens\ModelScreen.cs" />
+    <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="Screens\TileTestScreen.cs" />
     <Compile Include="TileSystem\Tile.cs" />
     <Compile Include="TileSystem\TileMap.cs" />

@@ -30,6 +30,11 @@ namespace UHSampleGame.TileSystem
             get { return tiles; }
         }
 
+        public static Vector2 TileSize
+        {
+            get { return tileSize; }
+        }
+
         public static void InitializeTileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
         {
             TileMap.position = position;
@@ -237,6 +242,31 @@ namespace UHSampleGame.TileSystem
 
             }
             return neighbors;
+        }
+
+        public static void Draw()
+        {
+            Microsoft.Xna.Framework.Graphics.Texture2D first = ScreenManagement.ScreenManager.Game.Content.Load<Microsoft.Xna.Framework.Graphics.Texture2D>("Tiles\\1");
+            Microsoft.Xna.Framework.Graphics.Texture2D second = ScreenManagement.ScreenManager.Game.Content.Load<Microsoft.Xna.Framework.Graphics.Texture2D>("Tiles\\2");
+            Microsoft.Xna.Framework.Graphics.Texture2D third = ScreenManagement.ScreenManager.Game.Content.Load<Microsoft.Xna.Framework.Graphics.Texture2D>("Tiles\\3");
+
+            List<Microsoft.Xna.Framework.Graphics.Texture2D> graphics = new List<Microsoft.Xna.Framework.Graphics.Texture2D>();
+            graphics.Add(first);
+            graphics.Add(second);
+            graphics.Add(third);
+
+            Vector2 left_position = new Vector2(position.X - ((tileSize.X * numTiles.X) / 2.0f), 
+                position.Z - ((tileSize.Y * numTiles.Y) / 2.0f));
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                ScreenManagement.ScreenManager.SpriteBatch.Begin();
+                ScreenManagement.ScreenManager.SpriteBatch.Draw(graphics[i % 3], 
+                    new Vector2(-left_position.X + (tiles[i].Position.X - (first.Width / 2)), 
+                        -left_position.Y + (tiles[i].Position.Z - (first.Height / 2))), 
+                        Microsoft.Xna.Framework.Graphics.Color.White);
+                ScreenManagement.ScreenManager.SpriteBatch.End();
+            }
         }
     }
 }
