@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
+
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+
 using UHSampleGame.TileSystem;
 
-namespace UHSampleGame.CoreObjects.Towers
+namespace UHSampleGame.CoreObjects.Base
 {
-    public abstract class Tower : StaticModel, ITileableObject
+    public abstract class Base : StaticModel, ITileableObject
     {
-        public Tower(Model model)
+        public Base(Model model)
             : base(model) { }
 
         public Tile GetTile()
         {
             return TileMap.GetTileFromPos(position);
         }
+
     }
 }

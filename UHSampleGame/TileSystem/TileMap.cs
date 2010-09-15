@@ -160,8 +160,8 @@ namespace UHSampleGame.TileSystem
             int xNum, yNum, index;
             xNum = yNum = index = 0;
 
-            xNum = (int)(upperLeftPos.X - position.X) / (int)tileSize.X;
-            yNum = (int)(((int)(upperLeftPos.X - position.X) / (int)tileSize.Y) * numTiles.X);
+            xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
+            yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
 
             index = Math.Abs(xNum) + Math.Abs(yNum);
 
@@ -171,18 +171,7 @@ namespace UHSampleGame.TileSystem
             return new Tile();
         }
 
-        public void ClearPath()
-        {
-            for (int i = 0; i < tiles.Count; i++)
-            {
-                if (tiles[i].TileType == TileType.Path ||
-                    tiles[i].TileType == TileType.Open ||
-                    tiles[i].TileType == TileType.Closed)
-                    tiles[i].SetTileType(TileType.Walkable);
-            }
-        }
-
-        public Tile GetTileFromType(TileType tileType)
+        public static Tile GetTileFromType(TileType tileType)
         {
             for (int i = 0; i < tiles.Count; i++)
             {
@@ -191,12 +180,12 @@ namespace UHSampleGame.TileSystem
             }
             return null;
         }
-        public List<Tile> GetWalkableNeighbors(Tile tile)
+        public static List<Tile> GetWalkableNeighbors(Tile tile)
         {
             return GetWalkableNeighbors(tile, new Dictionary<int, Tile>());
         }
 
-        public List<Tile> GetWalkableNeighbors(Tile tile, Dictionary<int, Tile> exclude)
+        public static List<Tile> GetWalkableNeighbors(Tile tile, Dictionary<int, Tile> exclude)
         {
             List<Tile> neighbors = new List<Tile>();
             Tile currentNeighbor;

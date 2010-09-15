@@ -4,16 +4,20 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.CoreObjects;
+using UHSampleGame.PathFinding;
 
 namespace UHSampleGame.TileSystem
 {
-    public enum TileType { Walkable, Blocked, Start, Goal, Path, Current, Open, Closed, Null }
+    public enum TileType { Walkable, Blocked, Path, Null }
 
     public class Tile
     {
         Vector3 position;
         Vector2 size;
         TileType tileType;
+        GameObject gameObject;
+        List<Tile> path;
 
         int id;
 
@@ -38,6 +42,11 @@ namespace UHSampleGame.TileSystem
             get { return size; }
         }
 
+        public List<Tile> Path
+        {
+            get { return path; }
+        }
+
 
         /// <summary>
         /// The unique id of the tile
@@ -58,6 +67,7 @@ namespace UHSampleGame.TileSystem
         public Tile()
         {
             this.tileType = TileType.Null;
+            this.id = -1;
         }
 
         public Tile(int id, Vector3 position, Vector2 size, TileType tileType)
@@ -76,15 +86,6 @@ namespace UHSampleGame.TileSystem
             return tileType != TileType.Blocked && !IsNull();
         }
 
-        public bool IsStart()
-        {
-            return tileType == TileType.Start;
-        }
-
-        public bool IsGoal()
-        {
-            return tileType == TileType.Goal;
-        }
 
         public bool IsNull()
         {
@@ -104,6 +105,31 @@ namespace UHSampleGame.TileSystem
         public override string ToString()
         {
             return tileType.ToString();
+        }
+
+        public void SetTower(Tower tower)
+        {
+            gameObject = tower;
+            SetTileType(TileType.Blocked);
+        }
+
+        public void RemoveTower(Tower tower)
+        {
+            gameObject = null;
+            SetTileType(TileType.Walkable);
+        }
+
+        public List<Tile> GetPathTo(Tile tile)
+        {
+            AStar aStar = new AStar(this, tile);
+            this.path = new List<Tile>(aStar.FindPath());
+            return path;
+        }
+
+        public void UpdatePathTo(Tile tile)
+        {
+            AStar aStar = new AStar(this, tile);
+            this.path = new List<Tile>(aStar.FindPath());
         }
 
         //public override bool Equals(object obj)

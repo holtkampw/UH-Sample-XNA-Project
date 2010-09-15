@@ -90,11 +90,13 @@
   <ItemGroup>
     <Compile Include="CameraManagement\CameraManager.cs" />
     <Compile Include="CoreObjects\AnimatedTileObject.cs" />
+    <Compile Include="CoreObjects\Base\Base.cs" />
+    <Compile Include="CoreObjects\Base\TestBase.cs" />
     <Compile Include="CoreObjects\GameObject.cs" />
-    <Compile Include="CoreObjects\IPathableObject.cs" />
     <Compile Include="CoreObjects\ITileableObject.cs" />
     <Compile Include="CoreObjects\StaticModel.cs" />
     <Compile Include="CoreObjects\Towers\Tower.cs" />
+    <Compile Include="CoreObjects\Towers\TowerTest.cs" />
     <Compile Include="CoreObjects\Units\TestUnit.cs" />
     <Compile Include="CoreObjects\Units\Unit.cs" />
     <Compile Include="InputManagement\InputManager.cs" />

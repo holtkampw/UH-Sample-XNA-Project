@@ -36,71 +36,29 @@ namespace UHSampleGame.PathFinding
         List<Node> openNodes;
         List<Node> closedNodes;
 
-        TileMap tileMap;
-
         Tile startTile;
         Tile goalTile;
 
         Dictionary<int, Tile> closedDict;
         Dictionary<int, Tile> openDict;
 
-        public AStar(TileMap tileMap)
+        public AStar(Tile startTile, Tile goalTile)
         {
-            this.tileMap = tileMap;
             openNodes = new List<Node>();
             closedNodes = new List<Node>();
             openDict = new Dictionary<int, Tile>();
             closedDict = new Dictionary<int, Tile>();
-            startTile = tileMap.GetTileFromType(TileType.Start);
-            goalTile = tileMap.GetTileFromType(TileType.Goal);
-        }
-
-        public void Iterate(ref Tile currentTile, ref List<Tile> open, ref List<Tile> closed)
-        {
-            Node startNode = new Node(tileMap.GetTileFromType(TileType.Start));
-            Node currentNode;
-            List<Tile> neighborTiles;
-            List<Tile> path = new List<Tile>();
-            if (currentTile == null)
-            {
-                openNodes.Add(startNode);
-                openDict.Add(startNode.tile.ID, startNode.tile);
-            }
-
-            //Switch the lowest cost node to the closed list
-            currentNode = GetLowestCostNodeFromOpenNodes();
-
-            closedNodes.Add(currentNode);
-            openNodes.Remove(currentNode);
-
-            //Find walkable neighbor tiles not on the closed list
-
-            neighborTiles = GetWalkableNeighborsNotOnClosedList(currentNode);
-
-            //Handle if neighbor node is on the open list already
-            //and add to open list
-            AddNeighborNodesToOpenList(currentNode, neighborTiles);
-
-            currentTile = currentNode.tile;
-            List<Tile> newOpen = new List<Tile>();
-            List<Tile> newClosed = new List<Tile>();
-
-            for (int i = 0; i < openNodes.Count; i++)
-            {
-                newOpen.Add(openNodes[i].tile);
-            }
-
-            for (int i = 0; i < closedNodes.Count; i++)
-            {
-                newClosed.Add(closedNodes[i].tile);
-            }
-            open = newOpen;
-            closed = newClosed;
+            this.startTile = startTile;
+            this.goalTile = goalTile;
         }
 
         public List<Tile> FindPath()
         {
-            Node startNode = new Node(tileMap.GetTileFromType(TileType.Start));
+            if (startTile == goalTile)
+            {
+                return new List<Tile>();
+            }
+            Node startNode = new Node(startTile/*TileMap.GetTileFromType(TileType.Start)*/);
             Node currentNode = startNode;
             List<Tile> neighborTiles;
             List<Tile> path = new List<Tile>();
@@ -142,13 +100,15 @@ namespace UHSampleGame.PathFinding
 
             } while (currentNode.parentTile != null);
 
+            path.Reverse();
+
             return path;
 
         }
 
         private List<Tile> GetWalkableNeighborsNotOnClosedList(Node currentNode)
         {
-            return tileMap.GetWalkableNeighbors(currentNode.tile, closedDict);
+            return TileMap.GetWalkableNeighbors(currentNode.tile, closedDict);
         }
 
         private void AddNeighborNodesToOpenList(Node currentNode, List<Tile> neighborTiles)
