@@ -16,7 +16,7 @@ namespace UHSampleGame.InputManagement
         StrafeLeft, StrafeRight, StrafeUp, StrafeDown,
         Selection, Back, Rotation, MenuUp, MenuDown, 
         MenuSelect, MenuCancel, TileMoveUp, TileMoveDown,
-        TileMoveLeft, TileMoveRight
+        TileMoveLeft, TileMoveRight, TowerBuild
     };
 
     public class InputManager

@@ -11,6 +11,8 @@ using UHSampleGame.InputManagement;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.TileSystem;
 using UHSampleGame.CoreObjects.Units;
+using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.CoreObjects.Base;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -23,14 +25,23 @@ namespace UHSampleGame.Screens
         StaticModel ground;
         CameraManager cameraManager;
 
+        bool updateTilePaths = true;
+
         Vector2 center;
         SpriteFont font;
         string text;
         Vector2 textPosition;
 
         List<TestUnit> units;
+        List<Tower> towers;
+
+        TestBase startBase;
+        TestBase goalBase;
+
         Random rand;
         Tile currentTile;
+
+        int currentINterval = 0;
         #endregion
 
         #region Initialization
@@ -38,27 +49,28 @@ namespace UHSampleGame.Screens
             : base("TileTestScreen")
         {
             units = new List<TestUnit>();
+            towers = new List<Tower>();
             rand = new Random();
-            
-            TileMap.InitializeTileMap(Vector3.Zero, new Vector2(10, 10), new Vector2(20, 20));
+
+            TileMap.InitializeTileMap(Vector3.Zero, new Vector2(10, 10), new Vector2(50, 50));
+
+            startBase = new TestBase(TileMap.Tiles[0].Position);
+            goalBase = new TestBase(TileMap.Tiles[TileMap.Tiles.Count - 1].Position);
+
+            for (int i = 0; i < TileMap.Tiles.Count; i++)
+            {
+                TileMap.Tiles[i].UpdatePathTo(goalBase.GetTile());
+            }
 
             background = ScreenManager.Game.Content.Load<Texture2D>("Model\\background");
             myModel = new AnimatedModel(ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
-            myModel.Scale = 15.0f;
+            myModel.Scale = 5.0f;
             myModel.PlayClip("Take 001");
-
-            for (int i = 0; i < 500; i++)
-            {
-                units.Add(new TestUnit(ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude")));
-                units[i].Scale = 2.0f;
-                units[i].PlayClip("Take 001");
-                units[i].SetPosition(new Vector3(rand.Next(-99, 99), 0, rand.Next(-99, 99)));
-            }
 
             currentTile = TileMap.GetTileFromPos(Vector3.Zero);
             myModel.SetPosition(currentTile.Position);
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-            cameraManager.SetPosition(new Vector3(0.0f, 50.0f, 5000.0f));
+            cameraManager.SetPosition(new Vector3(0.0f, 500.0f, 5000.0f));
 
             ground = new StaticModel(ScreenManager.Game.Content.Load<Model>("Model\\pyramids"));
             ground.Scale = 1000.0f;
@@ -84,14 +96,28 @@ namespace UHSampleGame.Screens
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            currentINterval++;
 
             for (int i = 0; i < units.Count; i++)
                 units[i].Update(gameTime);
-            
+
+            if (currentINterval > 200)
+            {
+                //units.Add(new TestUnit(startBase.GetTile().Position));
+                currentINterval = 0;
+            }
+
+
+            for (int i = 0; i < towers.Count; i++)
+                towers[i].Update(gameTime);
+
+
 
             cameraManager.Update();
             myModel.Update(gameTime);
             ground.Update(gameTime);
+            startBase.Update(gameTime);
+            goalBase.Update(gameTime);
         }
 
         public override void HandleInput(InputManager input)
@@ -99,7 +125,7 @@ namespace UHSampleGame.Screens
             base.HandleInput(input);
             bool moveModel = false;
             Tile newTile = new Tile();
-            if(input.CheckNewAction(InputAction.TileMoveUp))
+            if (input.CheckNewAction(InputAction.TileMoveUp))
             {
                 moveModel = true;
                 newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Up);
@@ -122,15 +148,20 @@ namespace UHSampleGame.Screens
             if (!newTile.IsNull())
                 currentTile = newTile;
 
-            if (input.CheckNewAction(InputAction.Selection))
+            if(input.CheckNewAction(InputAction.Selection))
             {
-                for (int i = 0; i < units.Count; i++)
-                {
-                    units[i].SetPosition(new Vector3(rand.Next(-99, 99), 0, rand.Next(-99, 99)));
-                    units[i].GetTile();
-                }
-                //ScreenManager.Game.Exit();
+                units.Add(new TestUnit(startBase.GetTile().Position));
             }
+
+            //if (input.CheckNewAction(InputAction.Selection))
+            //{
+            //    for (int i = 0; i < units.Count; i++)
+            //    {
+            //        units[i].SetPosition(new Vector3(rand.Next(-99, 99), 0, rand.Next(-99, 99)));
+            //        units[i].GetTile();
+            //    }
+            //    //ScreenManager.Game.Exit();
+            //}
             if (input.CheckAction(InputAction.RotateLeft))
             {
                 cameraManager.RotateX(-0.03f);
@@ -166,6 +197,39 @@ namespace UHSampleGame.Screens
 
             if (moveModel)
                 myModel.SetPosition(currentTile.Position);
+
+            if (input.CheckNewAction(InputAction.TowerBuild))
+            {
+                BuildTower(currentTile);
+            }
+
+
+        }
+
+        public void BuildTower(Tile tile)
+        {
+            List<Tile> path;
+            Tower tower = new TowerTest(tile.Position);
+            tile.SetTower(tower);
+            bool canBuildTower = true;
+            for (int i = 0; i < TileMap.Tiles.Count; i++)
+            {
+                path = TileMap.Tiles[i].GetPathTo(goalBase.GetTile());
+                if (path.Count == 0 && TileMap.Tiles[i] != goalBase.GetTile())
+                {
+                    canBuildTower = false;
+                }
+            }
+            if (canBuildTower)
+            {
+                towers.Add(tower);
+            }
+            else
+            {
+                tile.RemoveTower(tower);
+                throw new NotImplementedException("Cannot block path");
+            }
+
         }
 
         public override void Draw(GameTime gameTime)
@@ -181,6 +245,12 @@ namespace UHSampleGame.Screens
             ResetRenderStates();
             ground.Draw(gameTime);
             myModel.Draw(gameTime);
+
+            startBase.Draw(gameTime);
+            goalBase.Draw(gameTime);
+
+            for (int i = 0; i < towers.Count; i++)
+                towers[i].Draw(gameTime);
 
             for (int i = 0; i < units.Count; i++)
                 units[i].Draw(gameTime);
