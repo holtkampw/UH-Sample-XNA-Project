@@ -129,8 +129,8 @@ namespace UHSampleGame.CoreObjects
 
         public void UpdateView()
         {
-            view = Matrix.CreateTranslation(position) *
-                    Matrix.CreateScale(scale) *
+            view = Matrix.CreateScale(scale) * Matrix.CreateTranslation(position) *
+                    
                     cameraManager.ViewMatrix;
         }
 

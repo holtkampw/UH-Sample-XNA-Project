@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
+using UHSampleGame.CoreObjects.Base;
+
 namespace UHSampleGame.TileSystem
 {
     public enum NeighborTile
@@ -15,6 +17,7 @@ namespace UHSampleGame.TileSystem
     public class TileMap
     {
         static List<Tile> tiles;
+        static List<Base> bases;
         static List<int> mins;
         static List<int> maxs;
         static Vector3 position;
@@ -41,6 +44,8 @@ namespace UHSampleGame.TileSystem
             TileMap.numTiles = numTiles;
             TileMap.tileSize = tileSize;
 
+            bases = new List<Base>();
+
             mins = new List<int>();
             maxs = new List<int>();
 
@@ -60,6 +65,11 @@ namespace UHSampleGame.TileSystem
             allNeighbors.Add(NeighborTile.Up);
             allNeighbors.Add(NeighborTile.UpLeft);
             allNeighbors.Add(NeighborTile.UpRight);
+        }
+
+        public static void SetBase(Base setBase)
+        {
+            bases.Add(setBase);
         }
 
         protected static void InitializeTiles()
@@ -165,6 +175,9 @@ namespace UHSampleGame.TileSystem
             int xNum, yNum, index;
             xNum = yNum = index = 0;
 
+            //xNum = (int)((upperLeftPos.X - position.X) / (int)tileSize.X);
+            //yNum = (int)(((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+
             xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
             yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
 
@@ -231,6 +244,17 @@ namespace UHSampleGame.TileSystem
 
             }
             return neighbors;
+        }
+
+        public static void UpdateTilePaths()
+        {
+            for (int j = 0; j < bases.Count; j++)
+            {
+                for (int i = 0; i < tiles.Count; i++)
+                {
+                    tiles[i].UpdatePathTo(bases[j].Tile);
+                }
+            }
         }
 
         public static void Draw()

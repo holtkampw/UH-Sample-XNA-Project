@@ -7,32 +7,38 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
 using UHSampleGame.TileSystem;
+using UHSampleGame.CoreObjects.Base;
 
 namespace UHSampleGame.CoreObjects.Units
 {
-    public abstract class Unit : StaticModel, ITileableObject //Change back to animated model?
+    public abstract class Unit : StaticTileObject
     {
         public Vector3 velocity;
         private Tile previousTile;
         private Tile currentTile;
+        private Tile goalTile;
+        private Vector3 focalPoint;
 
-        public Unit(Model model)
+        public Unit(Model model, Base.Base goalBase)
             : base(model)
         {
             previousTile = new Tile();
             currentTile = new Tile();
+            focalPoint = new Vector3();
+            goalTile = goalBase.Tile;
         }
 
         public override void Update(GameTime gameTime)
         {
             previousTile = currentTile;
             currentTile = GetTile();
-            if (currentTile.Path.Count < 1)
+
+            if (currentTile.Paths[goalTile.ID].Count < 1)
                 return;
 
             if (currentTile.GetTileType() == TileType.Blocked)
             {
-                if(previousTile.IsWalkable())
+                if (previousTile.IsWalkable())
                 {
                     currentTile = previousTile;
                 }
@@ -44,20 +50,31 @@ namespace UHSampleGame.CoreObjects.Units
                     else
                         throw new NotImplementedException("NO walkable neighbors... handle this!");
                 }
-                position = currentTile.Position;
+                position = currentTile.GetRandPoint();
+                SetFocalPointAndVelocity();
             }
 
-            Tile nextTile = currentTile.Path[1];
-            
-            velocity = new Vector3(nextTile.Position.X-currentTile.Position.X, 0, nextTile.Position.Z - currentTile.Position.Z);
-            velocity.Normalize();
+            if (IsNewTile())
+            {
+                SetFocalPointAndVelocity();
+            }
+
             this.position += velocity;
             base.Update(gameTime);
         }
 
-        public Tile GetTile()
+        private void SetFocalPointAndVelocity()
         {
-            return TileMap.GetTileFromPos(position);
+            focalPoint = currentTile.Paths[goalTile.ID][1].GetRandPoint();
+            velocity = new Vector3(focalPoint.X - position.X, focalPoint.Y-position.Y, focalPoint.Z - position.Z);
+            this.RotateY(velocity.Y);
+            velocity.Normalize();
+            Vector3.Multiply(velocity, 3);
+        }
+
+        private bool IsNewTile()
+        {
+            return currentTile != previousTile;
         }
     }
 }

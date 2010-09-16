@@ -10,15 +10,32 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Base
 {
-    public abstract class Base : StaticModel, ITileableObject
+    public abstract class Base : StaticTileObject
     {
-        public Base(Model model)
-            : base(model) { }
+        protected Base goalBase;
+        protected Tile tile;
 
-        public Tile GetTile()
+        public Base GoalBase
         {
-            return TileMap.GetTileFromPos(position);
+            get { return goalBase; }
         }
+
+        public Tile Tile
+        {
+            get { return tile; }
+        }
+
+        public Base(Model model)
+            : base(model) 
+        {
+            this.tile = GetTile();
+        }
+
+        public void SetGoalBase(Base goalBase)
+        {
+            this.goalBase = goalBase;
+        }
+
 
     }
 }

@@ -8,14 +8,9 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public abstract class Tower : StaticModel, ITileableObject//AnimatedModel, ITileableObject
+    public abstract class Tower : StaticTileObject
     {
         public Tower(Model model)
             : base(model) { }
-
-        public Tile GetTile()
-        {
-            return TileMap.GetTileFromPos(position);
-        }
     }
 }

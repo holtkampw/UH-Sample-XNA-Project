@@ -10,9 +10,9 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects
 {
-    public class AnimatedTileObject : AnimatedModel 
+    public class StaticTileObject : StaticModel
     {
-        public AnimatedTileObject(Model model)
+        public StaticTileObject(Model model)
             : base(model) { }
 
         public Tile GetTile()

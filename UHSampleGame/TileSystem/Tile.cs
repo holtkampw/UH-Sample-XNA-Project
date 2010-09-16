@@ -17,7 +17,9 @@ namespace UHSampleGame.TileSystem
         Vector2 size;
         TileType tileType;
         GameObject gameObject;
-        List<Tile> path;
+        Dictionary<int, List<Tile>> paths;
+
+        Random rand;
 
         int id;
 
@@ -42,9 +44,9 @@ namespace UHSampleGame.TileSystem
             get { return size; }
         }
 
-        public List<Tile> Path
+        public Dictionary<int, List<Tile>> Paths
         {
-            get { return path; }
+            get { return paths; }
         }
 
 
@@ -72,10 +74,12 @@ namespace UHSampleGame.TileSystem
 
         public Tile(int id, Vector3 position, Vector2 size, TileType tileType)
         {
+            this.rand = new Random(DateTime.Now.Millisecond);
             this.id = id;
             this.position = position;
             this.size = size;
             this.tileType = tileType;
+            this.paths = new Dictionary<int, List<Tile>>();
 
             SetTileType(tileType);
 
@@ -104,7 +108,7 @@ namespace UHSampleGame.TileSystem
 
         public override string ToString()
         {
-            return tileType.ToString();
+            return this.ID.ToString() + " " + tileType.ToString();
         }
 
         public void SetTower(Tower tower)
@@ -119,17 +123,24 @@ namespace UHSampleGame.TileSystem
             SetTileType(TileType.Walkable);
         }
 
-        public List<Tile> GetPathTo(Tile tile)
+        public List<Tile> GetPathTo(Tile baseTile)
         {
-            AStar aStar = new AStar(this, tile);
-            this.path = new List<Tile>(aStar.FindPath());
-            return path;
+            UpdatePathTo(baseTile);
+            return paths[baseTile.ID];
         }
 
-        public void UpdatePathTo(Tile tile)
+        public void UpdatePathTo(Tile baseTile)
         {
-            AStar aStar = new AStar(this, tile);
-            this.path = new List<Tile>(aStar.FindPath());
+            AStar aStar = new AStar(this, baseTile);
+            paths[baseTile.ID] = new List<Tile>(aStar.FindPath());
+        }
+
+        public Vector3 GetRandPoint()
+        {
+            rand = new Random(DateTime.Now.Millisecond);
+            int sizeX = (int)(size.X/3);
+            int sizeY = (int)(size.Y / 3);
+            return new Vector3(position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, position.Z + rand.Next(-sizeY, sizeY));
         }
 
         //public override bool Equals(object obj)

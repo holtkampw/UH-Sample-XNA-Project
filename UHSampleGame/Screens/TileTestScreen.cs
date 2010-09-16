@@ -25,14 +25,12 @@ namespace UHSampleGame.Screens
         StaticModel ground;
         CameraManager cameraManager;
 
-        bool updateTilePaths = true;
-
         Vector2 center;
         SpriteFont font;
         string text;
         Vector2 textPosition;
 
-        List<TestUnit> units;
+        List<Unit> units;
         List<Tower> towers;
 
         TestBase startBase;
@@ -48,14 +46,14 @@ namespace UHSampleGame.Screens
         public TileTestScreen()
             : base("TileTestScreen")
         {
-            units = new List<TestUnit>();
+            units = new List<Unit>();
             towers = new List<Tower>();
             rand = new Random();
 
             TileMap.InitializeTileMap(Vector3.Zero, new Vector2(10, 10), new Vector2(50, 50));
 
-            startBase = new TestBase(TileMap.Tiles[0].Position);
-            goalBase = new TestBase(TileMap.Tiles[TileMap.Tiles.Count - 1].Position);
+            startBase = new TestBase(TileMap.Tiles[0]);
+            goalBase = new TestBase(TileMap.Tiles[TileMap.Tiles.Count - 1]);
 
             for (int i = 0; i < TileMap.Tiles.Count; i++)
             {
@@ -150,7 +148,7 @@ namespace UHSampleGame.Screens
 
             if(input.CheckNewAction(InputAction.Selection))
             {
-                units.Add(new TestUnit(startBase.GetTile().Position));
+                //units.Add(new TestUnit(startBase.GetTile().Position));
             }
 
             //if (input.CheckNewAction(InputAction.Selection))
@@ -227,7 +225,7 @@ namespace UHSampleGame.Screens
             else
             {
                 tile.RemoveTower(tower);
-                throw new NotImplementedException("Cannot block path");
+                //throw new NotImplementedException("Cannot block path");
             }
 
         }

@@ -14,8 +14,9 @@ namespace UHSampleGame.CoreObjects.Towers
         public TowerTest(Vector3 position)
             : base(ScreenManager.Game.Content.Load<Model>("Model\\pyramids")) 
         {
-            this.scale = 5;
+            
             this.position = position;
+            this.Scale = 5;
         }
     }
 }
