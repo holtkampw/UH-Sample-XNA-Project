@@ -127,6 +127,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Images\deepSea.png">
+      <Name>deepSea</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="water_tiled.png">
       <Name>water_tiled</Name>
       <Importer>TextureImporter</Importer>

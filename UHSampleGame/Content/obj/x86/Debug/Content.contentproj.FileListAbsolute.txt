@@ -1,3 +1,4 @@
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\William Holtkamp\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
