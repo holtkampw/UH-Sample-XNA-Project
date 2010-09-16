@@ -10,11 +10,11 @@ FBXHeaderExtension:  {
         Version: 1000
         Year: 2010
         Month: 9
-        Day: 9
-        Hour: 23
-        Minute: 56
-        Second: 59
-        Millisecond: 91
+        Day: 16
+        Hour: 18
+        Minute: 23
+        Second: 12
+        Millisecond: 615
     }
     Creator: "FBX SDK/FBX Plugins version 2011.2"
     SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -30,19 +30,19 @@ FBXHeaderExtension:  {
             Comment: ""
         }
         Properties70:  {
-            P: "DocumentUrl", "KString", "Url", "", "C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\Animations\Files\towerA_red.fbx"
-            P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\Animations\Files\towerA_red.fbx"
+            P: "DocumentUrl", "KString", "Url", "", "C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\Animations Stuff\Autodesk Maya\towerA_red.fbx"
+            P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\Animations Stuff\Autodesk Maya\towerA_red.fbx"
             P: "Original", "Compound", "", ""
             P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
             P: "Original|ApplicationName", "KString", "", "", "Maya"
             P: "Original|ApplicationVersion", "KString", "", "", "2011.2"
-            P: "Original|DateTime_GMT", "DateTime", "", "", "10/09/2010 04:56:59.019"
-            P: "Original|FileName", "KString", "", "", "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/Animations/Files/towerA_red.fbx"
+            P: "Original|DateTime_GMT", "DateTime", "", "", "16/09/2010 23:23:12.600"
+            P: "Original|FileName", "KString", "", "", "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/towerA_red.fbx"
             P: "LastSaved", "Compound", "", ""
             P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
             P: "LastSaved|ApplicationName", "KString", "", "", "Maya"
             P: "LastSaved|ApplicationVersion", "KString", "", "", "2011.2"
-            P: "LastSaved|DateTime_GMT", "DateTime", "", "", "10/09/2010 04:56:59.019"
+            P: "LastSaved|DateTime_GMT", "DateTime", "", "", "16/09/2010 23:23:12.600"
         }
     }
 }
@@ -72,7 +72,7 @@ GlobalSettings:  {
 
 Documents:  {
     Count: 1
-    Document: 402759840, "", "Scene" {
+    Document: 191147056, "", "Scene" {
         Properties70:  {
             P: "SourceObject", "object", "", ""
             P: "ActiveAnimStackName", "KString", "", "", "Take 001"
@@ -286,7 +286,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-    Geometry: 395855472, "Geometry::", "Mesh" {
+    Geometry: 595250256, "Geometry::", "Mesh" {
         Vertices: *936 {
 a: 7.88282632827759,-0.37073689699173,-1.24851512908936,7.59046506881714,-0.37073689699173,-2.46628975868225,7.11120080947876,-0.37073689699173,-3.62333583831787,6.45683574676514,-0.37073689699173,-4.69116353988647,5.64348220825195,-0.37073689699173,-5.643479347229,4.69116687774658,-0.37073689699173,-6.45683336257935,3.62333941459656,-0.37073689699173,-7.11119890213013,2.46629309654236,-0.37073689699173,-7.59046363830566,1.24851882457733,-0.37073689699173,-7.88282537460327,1.78391076133266e-006,-0.37073689699173,-7.98108625411987,-1.24851512908936,-0.37073689699173,-7.88282537460327,-2.46628952026367,-0.37073689699173,-7.59046411514282,-3.62333536148071,-0.37073689699173,-7.11119985580444,-4.69116306304932,-0.37073689699173,-6.45683479309082,-5.64347839355469,-0.37073689699173,-5.64348125457764,-6.45683240890503,-0.37073689699173,-4.69116592407227,-7.11119794845581,-0.37073689699173,-3.62333822250366,-7.59046268463135,-0.37073689699173,-2.46629214286804,-7.8828239440918,-0.37073689699173,-1.24851810932159,-7.98108434677124,-0.37073689699173,-1.30820114918606e-006,-7.8828239440918,-0.37073689699173,1.24851536750793,-7.59046268463135,-0.37073689699173,2.46628952026367,-7.11119842529297,-0.37073689699173,3.62333512306213,-6.45683336257935,-0.37073689699173,4.69116258621216,-5.64347982406616,-0.37073689699173,5.64347743988037,-4.69116449356079,-0.37073689699173,6.45683145523071,-3.62333726882935,-0.37073689699173,7.11119699478149,-2.4662914276123,-0.37073689699173,7.59046173095703,-1.24851751327515,-0.37073689699173,7.88282299041748,-8.32491650726297e-007,-0.37073689699173,7.98108339309692,1.2485157251358,-0.37073689699173,7.88282299041748,2.46628975868225,-0.37073689699173,7.59046173095703,3.62333536148071,-0.37073689699173,7.11119747161865,4.69116258621216,-0.37073689699173,6.45683240890503,5.64347743988037,-0.37073689699173,5.64347839355469,6.45683097839355,-0.37073689699173,4.69116306304932,7.11119604110718,-0.37073689699173,3.62333583831787,7.5904598236084,-0.37073689699173,2.46628999710083,7.88282108306885,-0.37073689699173,1.24851632118225,
 7.98108148574829,-0.37073689699173,0,7.88282632827759,0.37073689699173,-1.24851512908936,7.59046506881714,0.37073689699173,-2.46628975868225,7.11120080947876,0.37073689699173,-3.62333583831787,6.45683574676514,0.37073689699173,-4.69116353988647,5.64348220825195,0.37073689699173,-5.643479347229,4.69116687774658,0.37073689699173,-6.45683336257935,3.62333941459656,0.37073689699173,-7.11119890213013,2.46629309654236,0.37073689699173,-7.59046363830566,1.24851882457733,0.37073689699173,-7.88282537460327,1.78391076133266e-006,0.37073689699173,-7.98108625411987,-1.24851512908936,0.37073689699173,-7.88282537460327,-2.46628952026367,0.37073689699173,-7.59046411514282,-3.62333536148071,0.37073689699173,-7.11119985580444,-4.69116306304932,0.37073689699173,-6.45683479309082,-5.64347839355469,0.37073689699173,-5.64348125457764,-6.45683240890503,0.37073689699173,-4.69116592407227,-7.11119794845581,0.37073689699173,-3.62333822250366,-7.59046268463135,0.37073689699173,-2.46629214286804,-7.8828239440918,0.37073689699173,-1.24851810932159,-7.98108434677124,0.37073689699173,-1.30820114918606e-006,-7.8828239440918,0.37073689699173,1.24851536750793,-7.59046268463135,0.37073689699173,2.46628952026367,-7.11119842529297,0.37073689699173,3.62333512306213,-6.45683336257935,0.37073689699173,4.69116258621216,-5.64347982406616,0.37073689699173,5.64347743988037,-4.69116449356079,0.37073689699173,6.45683145523071,-3.62333726882935,0.37073689699173,7.11119699478149,-2.4662914276123,0.37073689699173,7.59046173095703,-1.24851751327515,0.37073689699173,7.88282299041748,-8.32491650726297e-007,0.37073689699173,7.98108339309692,1.2485157251358,0.37073689699173,7.88282299041748,2.46628975868225,0.37073689699173,7.59046173095703,3.62333536148071,0.37073689699173,7.11119747161865,4.69116258621216,0.37073689699173,6.45683240890503,5.64347743988037,0.37073689699173,5.64347839355469,6.45683097839355,0.37073689699173,4.69116306304932,7.11119604110718,0.37073689699173,3.62333583831787,7.5904598236084,0.37073689699173,2.46628999710083,7.88282108306885,0.37073689699173,1.24851632118225,
@@ -384,7 +384,7 @@ a: 0
             }
         }
     }
-    Model: 396469552, "Model::polySurface1", "Mesh" {
+    Model: 710188048, "Model::polySurface1", "Mesh" {
         Version: 232
         Properties70:  {
             P: "RotationActive", "bool", "", "",1
@@ -397,7 +397,7 @@ a: 0
         Shading: T
         Culling: "CullingOff"
     }
-    Material: 1045720192, "Material::texture", "" {
+    Material: 191239584, "Material::texture", "" {
         Version: 102
         ShadingModel: "phong"
         MultiLayer: 0
@@ -418,16 +418,16 @@ a: 0
             P: "Reflectivity", "double", "Number", "",0
         }
     }
-    Video: 402045632, "Video::file1", "Clip" {
+    Video: 889924656, "Video::file1", "Clip" {
         Type: "Clip"
         Properties70:  {
-            P: "Path", "KString", "XRefUrl", "", "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/Animations/Photoshop/towerAColor.tga"
+            P: "Path", "KString", "XRefUrl", "", "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/towerAColor.tga"
         }
         UseMipMap: 0
-        Filename: "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/Animations/Photoshop/towerAColor.tga"
-        RelativeFilename: "..\Photoshop\towerAColor.tga"
+        Filename: "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/towerAColor.tga"
+        RelativeFilename: "Photoshop Layer\towerAColor.tga"
     }
-    Texture: 391112736, "Texture::file1", "" {
+    Texture: 595251792, "Texture::file1", "" {
         Type: "TextureVideoClip"
         Version: 202
         TextureName: "Texture::file1"
@@ -437,14 +437,14 @@ a: 0
             P: "UVSet", "KString", "", "", "map1"
         }
         Media: "Video::file1"
-        FileName: "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/Animations/Photoshop/towerAColor.tga"
-        RelativeFilename: "..\Photoshop\towerAColor.tga"
+        FileName: "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/towerAColor.tga"
+        RelativeFilename: "Photoshop Layer\towerAColor.tga"
         ModelUVTranslation: 0,0
         ModelUVScaling: 1,1
         Texture_Alpha_Source: "None"
         Cropping: 0,0,0,0
     }
-    AnimationStack: 404027200, "AnimStack::Take 001", "" {
+    AnimationStack: 892071120, "AnimStack::Take 001", "" {
         Properties70:  {
             P: "LocalStart", "KTime", "Time", "",1924423250
             P: "LocalStop", "KTime", "Time", "",46186158000
@@ -452,7 +452,7 @@ a: 0
             P: "ReferenceStop", "KTime", "Time", "",46186158000
         }
     }
-    AnimationLayer: 402758720, "AnimLayer::BaseLayer", "" {
+    AnimationLayer: 191145936, "AnimLayer::BaseLayer", "" {
     }
 }
 
@@ -460,12 +460,12 @@ a: 0
 ;------------------------------------------------------------------
 
 Connections:  {
-    C: "OO",396469552,0
-    C: "OO",402758720,404027200
-    C: "OP",391112736,1045720192, "DiffuseColor"
-    C: "OO",402045632,391112736
-    C: "OO",395855472,396469552
-    C: "OO",1045720192,396469552
+    C: "OO",710188048,0
+    C: "OO",191145936,892071120
+    C: "OP",595251792,191239584, "DiffuseColor"
+    C: "OO",889924656,595251792
+    C: "OO",595250256,710188048
+    C: "OO",191239584,710188048
 }
 ;Takes section
 ;----------------------------------------------------
