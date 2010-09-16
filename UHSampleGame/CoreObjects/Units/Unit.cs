@@ -14,10 +14,11 @@ namespace UHSampleGame.CoreObjects.Units
     public abstract class Unit : StaticTileObject
     {
         public Vector3 velocity;
-        private Tile previousTile;
-        private Tile currentTile;
-        private Tile goalTile;
-        private Vector3 focalPoint;
+        protected Tile previousTile;
+        protected Tile currentTile;
+        protected Tile goalTile;
+        protected Vector3 focalPoint;
+        protected bool isStuck;
 
         public Unit(Model model, Base.Base goalBase)
             : base(model)
@@ -26,16 +27,19 @@ namespace UHSampleGame.CoreObjects.Units
             currentTile = new Tile();
             focalPoint = new Vector3();
             goalTile = goalBase.Tile;
+            isStuck = false;
         }
 
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+
             previousTile = currentTile;
             currentTile = GetTile();
 
-            if (currentTile.Paths[goalTile.ID].Count < 1)
+            if (CheckIfStuck())
                 return;
-
+           
             if (currentTile.GetTileType() == TileType.Blocked)
             {
                 if (previousTile.IsWalkable())
@@ -51,21 +55,47 @@ namespace UHSampleGame.CoreObjects.Units
                         throw new NotImplementedException("NO walkable neighbors... handle this!");
                 }
                 position = currentTile.GetRandPoint();
-                SetFocalPointAndVelocity();
+                if (CheckIfStuck())
+                    return;
+                SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1].GetRandPoint());
             }
 
             if (IsNewTile())
             {
-                SetFocalPointAndVelocity();
+                SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1].GetRandPoint());
             }
 
             this.position += velocity;
-            base.Update(gameTime);
+           
         }
 
-        private void SetFocalPointAndVelocity()
+        private bool  CheckIfStuck()
         {
-            focalPoint = currentTile.Paths[goalTile.ID][1].GetRandPoint();
+            if (currentTile.Paths[goalTile.ID].Count < 1)
+            {
+                if ((Math.Abs(position.X - focalPoint.X) < 30 && Math.Abs(position.Z - focalPoint.Z) < 30) 
+                    || !TileMap.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
+                {
+                    List<Tile> stuckTiles = new List<Tile>(TileMap.GetWalkableNeighbors(currentTile));
+                    stuckTiles.Add(currentTile);
+                    Random rand = new Random(DateTime.Now.Millisecond);
+
+                    SetFocalPointAndVelocity(stuckTiles[rand.Next(stuckTiles.Count)].GetRandPoint());
+                }
+
+
+                this.position += velocity;
+                isStuck = true;
+                //base.Update(gameTime);
+                return true;
+            }
+            isStuck = false;
+            return false;
+        }
+
+        private void SetFocalPointAndVelocity(Vector3 newPoint)
+        {
+            focalPoint = newPoint;
             velocity = new Vector3(focalPoint.X - position.X, focalPoint.Y-position.Y, focalPoint.Z - position.Z);
             this.RotateY(velocity.Y);
             velocity.Normalize();

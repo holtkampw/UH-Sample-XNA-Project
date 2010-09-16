@@ -139,10 +139,9 @@ namespace UHSampleGame.Screens
 
             if (input.CheckNewAction(InputAction.Selection))
             {
-                units.Add(new TestUnit(startBase.Position, bases[1]));
-                units.Add(new TestUnit(goalBase.Position, bases[0]));
+                //units.Add(new TestUnit(startBase.Position, goalBase));
+                units.Add(new TestUnit(goalBase.Position, startBase));
             }
-
 
             if (moveModel)
                 myModel.SetPosition(currentTile.Position);
@@ -159,17 +158,8 @@ namespace UHSampleGame.Screens
             Tower tower = new TowerAGood(tile.Position);
             tile.SetTower(tower);
             bool canBuildTower = true;
-            //Change this
-            for (int i = 0; i < TileMap.Tiles.Count; i++)
-            {
-                path = TileMap.Tiles[i].GetPathTo(goalBase.GetTile());
-                if (path.Count == 0 && TileMap.Tiles[i] != goalBase.GetTile())
-                {
-                    canBuildTower = false;
-                }
-            }
-            //-end change this
-            if (canBuildTower)
+
+            if (TileMap.UpdateTilePaths())
             {
                 towers.Add(tower);
             }

@@ -246,15 +246,29 @@ namespace UHSampleGame.TileSystem
             return neighbors;
         }
 
-        public static void UpdateTilePaths()
+        public static bool UpdateTilePaths()
         {
+            //MAKE THIS FUNCTION 2 FUNCTIONS!!
             for (int j = 0; j < bases.Count; j++)
             {
                 for (int i = 0; i < tiles.Count; i++)
                 {
-                    tiles[i].UpdatePathTo(bases[j].Tile);
+                    if(tiles[i].IsWalkable())
+                        tiles[i].UpdatePathTo(bases[j].Tile);
+                }
+                
+            }
+            for (int j = 0; j < bases.Count; j++)
+            {
+                for (int i = 0; i < bases.Count; i++)
+                {
+                    if (bases[j].Tile.Paths[bases[i].Tile.ID].Count == 0 && i != j)
+                    {
+                        return false;
+                    }
                 }
             }
+            return true;
         }
 
         public static void Draw()
