@@ -246,9 +246,8 @@ namespace UHSampleGame.TileSystem
             return neighbors;
         }
 
-        public static bool UpdateTilePaths()
+        public static void UpdateTilePaths()
         {
-            //MAKE THIS FUNCTION 2 FUNCTIONS!!
             for (int j = 0; j < bases.Count; j++)
             {
                 for (int i = 0; i < tiles.Count; i++)
@@ -256,16 +255,23 @@ namespace UHSampleGame.TileSystem
                     if(tiles[i].IsWalkable())
                         tiles[i].UpdatePathTo(bases[j].Tile);
                 }
-                
             }
+        }
+
+        public static bool IsTilePathsValid()
+        {
             for (int j = 0; j < bases.Count; j++)
             {
                 for (int i = 0; i < bases.Count; i++)
                 {
-                    if (bases[j].Tile.Paths[bases[i].Tile.ID].Count == 0 && i != j)
+                    if (i != j)
                     {
-                        return false;
-                    }
+                        bases[i].Tile.UpdatePathTo(bases[j].Tile);
+                        if (bases[j].Tile.Paths[bases[i].Tile.ID].Count == 0)
+                        {
+                            return false;
+                        }
+                    } 
                 }
             }
             return true;

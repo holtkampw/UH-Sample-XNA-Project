@@ -87,7 +87,7 @@ namespace UHSampleGame.TileSystem
 
         public bool IsWalkable()
         {
-            return tileType != TileType.Blocked && !IsNull();
+            return tileType == TileType.Walkable;
         }
 
 

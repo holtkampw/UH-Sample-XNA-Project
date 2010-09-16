@@ -139,7 +139,7 @@ namespace UHSampleGame.Screens
 
             if (input.CheckNewAction(InputAction.Selection))
             {
-                //units.Add(new TestUnit(startBase.Position, goalBase));
+                units.Add(new TestUnit(startBase.Position, goalBase));
                 units.Add(new TestUnit(goalBase.Position, startBase));
             }
 
@@ -154,20 +154,19 @@ namespace UHSampleGame.Screens
 
         public void BuildTower(Tile tile)
         {
-            List<Tile> path;
             Tower tower = new TowerAGood(tile.Position);
             tile.SetTower(tower);
-            bool canBuildTower = true;
 
-            if (TileMap.UpdateTilePaths())
+            if (TileMap.IsTilePathsValid())
             {
                 towers.Add(tower);
+                TileMap.UpdateTilePaths();
+                
             }
             else
             {
                 tile.RemoveTower(tower);
                 TileMap.UpdateTilePaths();
-                //throw new NotImplementedException("Cannot block path");
             }
 
         }
