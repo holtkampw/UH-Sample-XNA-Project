@@ -100,6 +100,7 @@
     <Compile Include="CoreObjects\Towers\TowerTest.cs" />
     <Compile Include="CoreObjects\Units\TestUnit.cs" />
     <Compile Include="CoreObjects\Units\Unit.cs" />
+    <Compile Include="Events\GameEventArgs.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />
     <Compile Include="MenuSystem\MenuEntry.cs" />

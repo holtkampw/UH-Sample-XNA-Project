@@ -224,7 +224,7 @@ namespace UHSampleGame.Screens
             }
             else
             {
-                tile.RemoveTower(tower);
+                tile.RemoveTower();
                 //throw new NotImplementedException("Cannot block path");
             }
 

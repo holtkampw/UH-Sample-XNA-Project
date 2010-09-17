@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 using UHSampleGame.TileSystem;
 using UHSampleGame.CoreObjects.Base;
+using UHSampleGame.Events;
 
 namespace UHSampleGame.CoreObjects.Units
 {
@@ -20,6 +21,14 @@ namespace UHSampleGame.CoreObjects.Units
         protected Tile focalTile;
         protected Vector3 focalPoint;
         protected bool isStuck;
+        protected int health;
+
+        public int Health
+        {
+            get { return health; }
+        }
+
+        public event UnitDied Died;
 
         public Unit(Model model, Base.Base goalBase)
             : base(model)
@@ -30,14 +39,20 @@ namespace UHSampleGame.CoreObjects.Units
             focalTile = new Tile();
             goalTile = goalBase.Tile;
             isStuck = false;
+            health = 100;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
+            UpdatePath();
+        }
+
+        public void UpdatePath()
+        {
             previousTile = currentTile;
-            currentTile = GetTile();
+            SetCurrentTile(GetTile());
 
             if (CheckIfStuck())
                 return;
@@ -49,24 +64,21 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (currentTile.GetTileType() == TileType.Blocked)
             {
-                if (previousTile.IsWalkable())
+                if (previousTile.Paths[goalTile.ID].Count > 1)
                 {
-                    currentTile = previousTile;
+                    SetFocalPointAndVelocity(previousTile.Paths[goalTile.ID][1]);
                 }
                 else
                 {
                     List<Tile> goodNieghbors = TileMap.GetWalkableNeighbors(currentTile);
                     if (goodNieghbors.Count > 0)
-                        currentTile = goodNieghbors[0];
+                        SetFocalPointAndVelocity(goodNieghbors[0].Paths[goalTile.ID][1]);
                     else
                         throw new NotImplementedException("NO walkable neighbors... handle this!");
                 }
-                position = currentTile.GetRandPoint();
 
                 if (CheckIfStuck())
                     return;
-
-                SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1]);
             }
 
             if (IsNewTile())
@@ -99,7 +111,6 @@ namespace UHSampleGame.CoreObjects.Units
 
                 this.position += velocity;
                 isStuck = true;
-                //base.Update(gameTime);
                 return true;
             }
             isStuck = false;
@@ -120,6 +131,38 @@ namespace UHSampleGame.CoreObjects.Units
         private bool IsNewTile()
         {
             return currentTile != previousTile;
+        }
+
+        private void SetCurrentTile(Tile tile)
+        {
+            tile.RemoveUnit(this);
+            currentTile = tile;
+            tile.AddUnit(this);
+        }
+
+        public int GetPathLength()
+        {
+            return currentTile.Paths[goalTile.ID].Count;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                OnDied();
+            }
+        }
+
+        private void OnDied()
+        {
+            if (Died != null)
+                Died(this);
+        }
+
+        public override string ToString()
+        {
+            return this.position.ToString();
         }
     }
 }

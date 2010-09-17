@@ -65,7 +65,7 @@ namespace UHSampleGame.Screens
 
             //towers = new Dictionary<int, Tower>();
             //for (int i = 0; i < numTiles.X * numTiles.Y; i++)
-             //   towers.Add(i, new TowerAGood(TileMap.Tiles[i].Position));
+            //   towers.Add(i, new TowerAGood(TileMap.Tiles[i].Position));
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
 
@@ -139,8 +139,8 @@ namespace UHSampleGame.Screens
 
             if (input.CheckNewAction(InputAction.Selection))
             {
-                units.Add(new TestUnit(startBase.Position, goalBase));
-                units.Add(new TestUnit(goalBase.Position, startBase));
+                AddUnit(new TestUnit(startBase.Position, goalBase));
+                AddUnit(new TestUnit(goalBase.Position, startBase));
             }
 
             if (moveModel)
@@ -155,20 +155,20 @@ namespace UHSampleGame.Screens
         public void BuildTower(Tile tile)
         {
             Tower tower = new TowerAGood(tile.Position);
-            tile.SetTower(tower);
-
-            if (TileMap.IsTilePathsValid())
-            {
+            if (TileMap.SetTower(tower, tile))
                 towers.Add(tower);
-                TileMap.UpdateTilePaths();
-                
-            }
-            else
-            {
-                tile.RemoveTower(tower);
-                TileMap.UpdateTilePaths();
-            }
+        }
 
+        public void AddUnit(Unit unit)
+        {
+            unit.Died += RemoveUnit;
+            units.Add(unit);
+            TileMap.TowerCreated += unit.UpdatePath;
+        }
+
+        public void RemoveUnit(Unit unit)
+        {
+            units.Remove(unit);
         }
 
         public override void Draw(GameTime gameTime)
@@ -190,7 +190,7 @@ namespace UHSampleGame.Screens
 
             for (int i = 0; i < units.Count; i++)
                 units[i].Draw(gameTime);
-            
+
             ResetRenderStates();
 
             //foreach (var pair in towers)

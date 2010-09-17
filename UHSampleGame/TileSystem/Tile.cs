@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CoreObjects;
+using UHSampleGame.Events;
 using UHSampleGame.PathFinding;
 
 namespace UHSampleGame.TileSystem
@@ -16,12 +18,13 @@ namespace UHSampleGame.TileSystem
         Vector3 position;
         Vector2 size;
         TileType tileType;
-        GameObject gameObject;
+        Tower tower;
+        List<Unit> units;
         Dictionary<int, List<Tile>> paths;
-
         Random rand;
-
         int id;
+
+        public event RegisterUnitWithTile UnitEnter;
 
         public TileType TileType
         {
@@ -48,7 +51,6 @@ namespace UHSampleGame.TileSystem
         {
             get { return paths; }
         }
-
 
         /// <summary>
         /// The unique id of the tile
@@ -80,6 +82,7 @@ namespace UHSampleGame.TileSystem
             this.size = size;
             this.tileType = tileType;
             this.paths = new Dictionary<int, List<Tile>>();
+            this.units = new List<Unit>();
 
             SetTileType(tileType);
 
@@ -113,13 +116,13 @@ namespace UHSampleGame.TileSystem
 
         public void SetTower(Tower tower)
         {
-            gameObject = tower;
+            this.tower = tower;
             SetTileType(TileType.Blocked);
         }
 
-        public void RemoveTower(Tower tower)
+        public void RemoveTower()
         {
-            gameObject = null;
+            this.tower = null;
             SetTileType(TileType.Walkable);
         }
 
@@ -141,6 +144,37 @@ namespace UHSampleGame.TileSystem
             int sizeX = (int)(size.X/3);
             int sizeY = (int)(size.Y / 3);
             return new Vector3(position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, position.Z + rand.Next(-sizeY, sizeY));
+        }
+
+        public void RegisterTowerListener(Tower tower)
+        {
+            UnitEnter += new RegisterUnitWithTile(tower.RegisterAttackUnit);
+        }
+
+        public void UnregisterTowerListener(Tower tower)
+        {
+            UnitEnter -= tower.RegisterAttackUnit;
+        }
+
+        public void AddUnit(Unit unit)
+        {
+            units.Add(unit);
+            OnUnitEnter(new GameEventArgs(unit));
+        }
+
+        public void RemoveUnit(Unit unit)
+        {
+            units.Remove(unit);
+            if(units.Count >0)
+                OnUnitEnter(new GameEventArgs(units[0]));
+        }
+
+        private void OnUnitEnter(GameEventArgs args)
+        {
+            if (UnitEnter != null)
+            {
+                UnitEnter(args);
+            }
         }
 
         //public override bool Equals(object obj)

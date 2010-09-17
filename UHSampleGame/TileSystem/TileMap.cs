@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 
 using UHSampleGame.CoreObjects.Base;
+using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.Events;
 
 namespace UHSampleGame.TileSystem
 {
@@ -27,6 +29,8 @@ namespace UHSampleGame.TileSystem
         static int numTilesX;
         static int numTilesY;
         static List<NeighborTile> allNeighbors;
+
+        public static event TowerCreated TowerCreated;
 
         public static IList<Tile> Tiles
         {
@@ -252,7 +256,7 @@ namespace UHSampleGame.TileSystem
             {
                 for (int i = 0; i < tiles.Count; i++)
                 {
-                    if(tiles[i].IsWalkable())
+                   // if (tiles[i].IsWalkable())
                         tiles[i].UpdatePathTo(bases[j].Tile);
                 }
             }
@@ -271,10 +275,44 @@ namespace UHSampleGame.TileSystem
                         {
                             return false;
                         }
-                    } 
+                    }
                 }
             }
             return true;
+        }
+
+        public static bool SetTower(Tower tower, Tile tile)
+        {
+            tile.SetTower(tower);
+            if (IsTilePathsValid())
+            {
+                UpdateTilePaths();
+
+                List<Tile> walkableNeighbors = GetWalkableNeighbors(tile);
+
+                for (int i = 0; i < walkableNeighbors.Count; i++)
+                {
+                   walkableNeighbors[i].RegisterTowerListener(tower);
+                }
+                OnTowerCreated();
+                return true;
+            }
+
+            RemoveTower(tile);
+            return false;
+
+        }
+
+        private static void OnTowerCreated()
+        {
+            if (TowerCreated != null)
+                TowerCreated();
+        }
+
+        public static void RemoveTower(Tile tile)
+        {
+            tile.RemoveTower();
+            UpdateTilePaths();
         }
 
         public static void Draw()
@@ -288,18 +326,19 @@ namespace UHSampleGame.TileSystem
             graphics.Add(second);
             graphics.Add(third);
 
-            Vector2 left_position = new Vector2(position.X - ((tileSize.X * numTiles.X) / 2.0f), 
+            Vector2 left_position = new Vector2(position.X - ((tileSize.X * numTiles.X) / 2.0f),
                 position.Z - ((tileSize.Y * numTiles.Y) / 2.0f));
 
             for (int i = 0; i < tiles.Count; i++)
             {
                 ScreenManagement.ScreenManager.SpriteBatch.Begin();
-                ScreenManagement.ScreenManager.SpriteBatch.Draw(graphics[i % 3], 
-                    new Vector2(-left_position.X + (tiles[i].Position.X - (first.Width / 2)), 
-                        -left_position.Y + (tiles[i].Position.Z - (first.Height / 2))), 
+                ScreenManagement.ScreenManager.SpriteBatch.Draw(graphics[i % 3],
+                    new Vector2(-left_position.X + (tiles[i].Position.X - (first.Width / 2)),
+                        -left_position.Y + (tiles[i].Position.Z - (first.Height / 2))),
                         Microsoft.Xna.Framework.Graphics.Color.White);
                 ScreenManagement.ScreenManager.SpriteBatch.End();
             }
         }
+
     }
 }

@@ -58,7 +58,7 @@ namespace UHSampleGame.PathFinding
             {
                 return new List<Tile>();
             }
-            Node startNode = new Node(startTile/*TileMap.GetTileFromType(TileType.Start)*/);
+            Node startNode = new Node(startTile);
             Node currentNode = startNode;
             List<Tile> neighborTiles;
             List<Tile> path = new List<Tile>();
@@ -189,7 +189,7 @@ namespace UHSampleGame.PathFinding
         private float GetDistanceBetweenTiles(Tile tile1, Tile tile2)
         {
             double first = (double)(tile1.Position.X - tile2.Position.X);
-            double second = (double)(tile1.Position.Y - tile2.Position.Y);
+            double second = (double)(tile1.Position.Z - tile2.Position.Z);
             // return Math.Abs(tile1.Position.X - tile1.Position.Y) + Math.Abs(tile2.Position.X - tile2.Position.Y);
             return (float)Math.Sqrt((first * first) + (second * second));
         }
