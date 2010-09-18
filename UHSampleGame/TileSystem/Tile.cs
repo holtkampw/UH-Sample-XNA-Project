@@ -69,10 +69,7 @@ namespace UHSampleGame.TileSystem
             : this(id, position, size, TileType.Walkable) { }
 
         public Tile()
-        {
-            this.tileType = TileType.Null;
-            this.id = -1;
-        }
+            : this(-1, Vector3.Zero, Vector2.Zero, TileType.Null) { }
 
         public Tile(int id, Vector3 position, Vector2 size, TileType tileType)
         {
@@ -148,7 +145,7 @@ namespace UHSampleGame.TileSystem
 
         public void RegisterTowerListener(Tower tower)
         {
-            UnitEnter += new RegisterUnitWithTile(tower.RegisterAttackUnit);
+            UnitEnter += tower.RegisterAttackUnit;
         }
 
         public void UnregisterTowerListener(Tower tower)
@@ -159,6 +156,7 @@ namespace UHSampleGame.TileSystem
         public void AddUnit(Unit unit)
         {
             units.Add(unit);
+            unit.Died += RemoveUnit;
             OnUnitEnter(new GameEventArgs(unit));
         }
 

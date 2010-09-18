@@ -15,24 +15,32 @@ namespace UHSampleGame.CoreObjects.Towers
         TimeSpan attackTime;
         TimeSpan elapsedTime;
         Unit unitToAttack;
+        Tile tile;
         int attackPower;
 
-        public Tower(Model model)
+        public Tower(Model model, Tile tile)
             : base(model) 
         {
             attackTime = new TimeSpan(0, 0, 0,0,500);
             elapsedTime = new TimeSpan(0,0,1);
             unitToAttack = null;
             attackPower = 10;
+            this.tile = tile;
+            this.position = tile.Position;
         }
 
         public void RegisterAttackUnit(GameEventArgs args)
         {
-            //TODO: check for unit closer to goal
-            unitToAttack = args.Unit;
-            //Register Unit Died event here
-            //Check for neighbor tile units and remove dead unit
-            //Might need to create another event and register a listener in tile
+            if (unitToAttack == null || args.Unit.GetPathLength() < unitToAttack.GetPathLength())
+            {
+                unitToAttack = args.Unit;
+                unitToAttack.Died += GetNewAttackUnit;
+            }
+        }
+
+        private void GetNewAttackUnit(Unit unit)
+        {
+            unitToAttack = null;
         }
 
         public override void Update(GameTime gameTime)

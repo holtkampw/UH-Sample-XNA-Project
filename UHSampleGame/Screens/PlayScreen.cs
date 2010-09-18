@@ -137,7 +137,7 @@ namespace UHSampleGame.Screens
             if (!newTile.IsNull())
                 currentTile = newTile;
 
-            if (input.CheckNewAction(InputAction.Selection))
+            if (input.CheckAction(InputAction.Selection))
             {
                 AddUnit(new TestUnit(startBase.Position, goalBase));
                 AddUnit(new TestUnit(goalBase.Position, startBase));
@@ -154,7 +154,7 @@ namespace UHSampleGame.Screens
 
         public void BuildTower(Tile tile)
         {
-            Tower tower = new TowerAGood(tile.Position);
+            Tower tower = new TowerAGood(tile);
             if (TileMap.SetTower(tower, tile))
                 towers.Add(tower);
         }
@@ -169,6 +169,7 @@ namespace UHSampleGame.Screens
         public void RemoveUnit(Unit unit)
         {
             units.Remove(unit);
+            TileMap.TowerCreated -= unit.UpdatePath;
         }
 
         public override void Draw(GameTime gameTime)

@@ -256,7 +256,7 @@ namespace UHSampleGame.TileSystem
             {
                 for (int i = 0; i < tiles.Count; i++)
                 {
-                   // if (tiles[i].IsWalkable())
+                    if (tiles[i].IsWalkable())
                         tiles[i].UpdatePathTo(bases[j].Tile);
                 }
             }

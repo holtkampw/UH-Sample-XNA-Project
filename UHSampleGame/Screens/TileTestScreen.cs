@@ -200,14 +200,12 @@ namespace UHSampleGame.Screens
             {
                 BuildTower(currentTile);
             }
-
-
         }
 
         public void BuildTower(Tile tile)
         {
             List<Tile> path;
-            Tower tower = new TowerTest(tile.Position);
+            Tower tower = new TowerTest(tile);
             tile.SetTower(tower);
             bool canBuildTower = true;
             for (int i = 0; i < TileMap.Tiles.Count; i++)
@@ -225,7 +223,6 @@ namespace UHSampleGame.Screens
             else
             {
                 tile.RemoveTower();
-                //throw new NotImplementedException("Cannot block path");
             }
 
         }

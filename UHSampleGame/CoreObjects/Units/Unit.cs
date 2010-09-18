@@ -135,9 +135,9 @@ namespace UHSampleGame.CoreObjects.Units
 
         private void SetCurrentTile(Tile tile)
         {
-            tile.RemoveUnit(this);
+            currentTile.RemoveUnit(this);
             currentTile = tile;
-            tile.AddUnit(this);
+            currentTile.AddUnit(this);
         }
 
         public int GetPathLength()
@@ -149,7 +149,7 @@ namespace UHSampleGame.CoreObjects.Units
         {
             health -= damage;
             if (health <= 0)
-            {
+            {    
                 OnDied();
             }
         }
@@ -163,6 +163,11 @@ namespace UHSampleGame.CoreObjects.Units
         public override string ToString()
         {
             return this.position.ToString();
+        }
+
+        public List<Tile> PathToGoal()
+        {
+            return currentTile.Paths[goalTile.ID];
         }
     }
 }
