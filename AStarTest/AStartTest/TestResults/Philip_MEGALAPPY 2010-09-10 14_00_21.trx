@@ -1,0 +1,616 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="d1ae84ab-7c85-4806-a59e-5e992c7ea705" name="Philip@MEGALAPPY 2010-09-10 14:00:21" runUser="MegaLappy\Philip" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="74ad3156-c66a-4d51-8b99-8bc71381b2b7">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="Philip_MEGALAPPY 2010-09-10 14_00_21">
+      <DeploymentItem filename="C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\bin\Debug\AStartTest.exe" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2010-09-10T14:00:21.6718961-05:00" queuing="2010-09-10T14:00:23.1109784-05:00" start="2010-09-10T14:00:23.2109841-05:00" finish="2010-09-10T14:01:47.8598258-05:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="65" executed="9" error="0" failed="3" timeout="0" aborted="1" inconclusive="5" passedButRunAborted="0" notRunnable="0" notExecuted="56" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="GetTileTypeTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="361008cc-522f-6ae3-5167-2fe49270a075">
+      <Execution id="e154f340-517b-46b6-8deb-7d94b248da0c" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetTileTypeTest" />
+    </UnitTest>
+    <UnitTest name="SettingsConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="d20a6002-7d61-15b1-251e-f95d8ab926e3">
+      <Execution id="29d98099-af77-4a74-bf3f-b25799f1d8f9" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.SettingsTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SettingsConstructorTest" />
+    </UnitTest>
+    <UnitTest name="GetDistanceBetweenTilesTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="bd7392b3-e1f1-5679-0640-b54b41a536e8">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="6c5b2b99-7458-4835-af75-b92924b49192" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetDistanceBetweenTilesTest" />
+    </UnitTest>
+    <UnitTest name="TileConstructorTest1" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="b2c2af9c-b520-c273-9d4d-33d7dd023f0e">
+      <Execution id="7c72410b-8e76-44a6-97a0-b6d9d27da383" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TileConstructorTest1" />
+    </UnitTest>
+    <UnitTest name="SetTileTypeTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="82a19962-058b-7ee3-4cb9-6154f83a7473">
+      <Execution id="41951dc7-ffe6-4aa6-8f61-c2c00bc6fb3d" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SetTileTypeTest" />
+    </UnitTest>
+    <UnitTest name="XTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="3552466e-2f99-e2b7-dc96-92c38ae340bd">
+      <Execution id="f6b1b416-eb35-41d4-9b23-b944259ee1e0" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector2Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="XTest" />
+    </UnitTest>
+    <UnitTest name="GetTileFromPosTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="cf5c3b72-ae1f-bf10-9f5e-c4824f5246ea">
+      <Execution id="4c74595a-0620-4a64-b204-67ac402580e0" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetTileFromPosTest" />
+    </UnitTest>
+    <UnitTest name="Vector3ConstructorTest1" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="e625de3b-2b37-6709-23a4-7f819a9f32bb">
+      <Execution id="789415c2-25a9-4cae-adaf-297c17bfe1d5" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector3Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Vector3ConstructorTest1" />
+    </UnitTest>
+    <UnitTest name="EqualsTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="2ab38d63-c430-384d-1f76-5a1ec1b9193d">
+      <Execution id="d15cf1fe-746d-436d-977d-18013b118857" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EqualsTest" />
+    </UnitTest>
+    <UnitTest name="TileMapConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="165e1017-4f6e-35df-995b-6fa0c295e85f">
+      <Execution id="db4fd0d1-a758-4961-a08d-7ca07e1c0c00" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TileMapConstructorTest" />
+    </UnitTest>
+    <UnitTest name="ResourceManagerTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="2549262e-f221-4140-c219-d1f9d4bc9965">
+      <Execution id="3b2c0408-912f-4415-8371-72b0b0b217e9" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.ResourcesTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ResourceManagerTest" />
+    </UnitTest>
+    <UnitTest name="IsWalkableTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="a33b7f94-58c7-6840-1894-8f5af94f323e">
+      <Execution id="c67da198-28ce-4b33-87e7-388fb3356dc1" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="IsWalkableTest" />
+    </UnitTest>
+    <UnitTest name="IDTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="d84620cb-43fd-5be9-a41d-2c337009162d">
+      <Execution id="4fab725e-6028-491b-886e-8c821afc022e" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="IDTest" />
+    </UnitTest>
+    <UnitTest name="AStarConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="bbbeda56-8e09-a76c-1c67-787685a3f8b8">
+      <Execution id="e463edcc-6cf5-4810-937e-953a3070a3f1" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="AStarConstructorTest" />
+    </UnitTest>
+    <UnitTest name="TileTypeTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="3f353d35-435e-0d46-e9ba-ca3be1089050">
+      <Execution id="e13f02f3-72fb-4bff-a2bd-0467a71afd73" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TileTypeTest" />
+    </UnitTest>
+    <UnitTest name="DefaultTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="d7fad077-e0f3-3f44-c686-b22908c89485">
+      <Execution id="53bdcb14-5892-4399-92f7-761cbdf622d3" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.SettingsTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="DefaultTest" />
+    </UnitTest>
+    <UnitTest name="panel1_MouseHoverTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="21bc8d14-896c-4172-9604-f70b2ddbb012">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="13f6b077-d174-444e-979d-b07eb7dd70bb" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="panel1_MouseHoverTest" />
+    </UnitTest>
+    <UnitTest name="TilesTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="344b74ca-bef4-1367-9ecd-f10587a40553">
+      <Execution id="9e9858ab-fd22-4683-a9c3-d4343319ed3f" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TilesTest" />
+    </UnitTest>
+    <UnitTest name="TileConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="f0d44162-ca2c-547d-d894-e80df79a7c7d">
+      <Execution id="0d406688-ca97-4880-93fb-983045268d45" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TileConstructorTest" />
+    </UnitTest>
+    <UnitTest name="TransformToNodeTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="db6f64ac-3da0-8cf5-29b3-634892ae62c6">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="47a65fd4-027d-4c15-bd0d-6c8ccddb9750" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TransformToNodeTest" />
+    </UnitTest>
+    <UnitTest name="InitializeTilesTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="fd9acd52-8236-d68b-40e8-4c5bad5ffece">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="654cabff-d8a0-4b58-b6d0-fd3031eba2b5" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="InitializeTilesTest" />
+    </UnitTest>
+    <UnitTest name="Vector2ConstructorTest1" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="cb6fb6bd-9e80-2ab4-da2e-611cb8140f0f">
+      <Execution id="3c7908b4-1868-48fb-aadb-a593d77a22a4" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector2Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Vector2ConstructorTest1" />
+    </UnitTest>
+    <UnitTest name="findPathBtn_ClickTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="4c67a2cf-5001-4517-e9f4-2753090192a2">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="5256950b-0640-42df-ac70-6fac57ea393c" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="findPathBtn_ClickTest" />
+    </UnitTest>
+    <UnitTest name="ChangePanelColorToBlackTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="917db647-978d-e69d-4907-5f0e41a076ff">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="c81db622-75e8-4e61-a57e-c8a580a411ee" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ChangePanelColorToBlackTest" />
+    </UnitTest>
+    <UnitTest name="GetLowestCostNodeFromOpenNodesTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="073e634f-e0b2-cdf6-9e45-1cf3989da7b7">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="ea9055b7-ac02-4930-97c3-55e277c456db" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetLowestCostNodeFromOpenNodesTest" />
+    </UnitTest>
+    <UnitTest name="ClearPathTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="11489ae3-3df7-e36c-eacd-aea96cdb3bbd">
+      <Execution id="c57b8d1e-30c5-4da1-b140-a0efe53b3aa6" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ClearPathTest" />
+    </UnitTest>
+    <UnitTest name="XTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="0bff9c84-81e8-3fa8-2f69-e074d71ef5b2">
+      <Execution id="ff592e7e-8456-42d9-b2d7-89d48bf8a796" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector3Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="XTest" />
+    </UnitTest>
+    <UnitTest name="timer1_TickTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="4261ff2f-118c-bb98-925a-64527124935e">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="9804da50-5ebe-431e-b082-770a04ae18c4" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="timer1_TickTest" />
+    </UnitTest>
+    <UnitTest name="ToStringTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="8689d331-14f3-cb55-f74d-49de8ff122b1">
+      <Execution id="a0ab949b-181a-4ee7-985a-90d2ebe2d561" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ToStringTest" />
+    </UnitTest>
+    <UnitTest name="TileConstructorTest2" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="d235c3c4-ea68-8347-1c4a-f5f3c64aa042">
+      <Execution id="5039a9ae-1cdd-4ac0-ab7a-cfcd43b193b0" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TileConstructorTest2" />
+    </UnitTest>
+    <UnitTest name="GetWalkableNeighborsNotOnClosedListTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="c273b161-9cca-be38-5d33-2d0fe6d9ffd6">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="efba5f0e-c7c9-48a9-b058-7b477f28e6d8" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetWalkableNeighborsNotOnClosedListTest" />
+    </UnitTest>
+    <UnitTest name="CultureTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="72ee8754-df45-ed5a-888f-69a6956e85bf">
+      <Execution id="cb77ff6f-0828-4580-8005-a38adfa04eaf" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.ResourcesTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CultureTest" />
+    </UnitTest>
+    <UnitTest name="GetTileNeighborTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="5575dcdf-87ae-6874-70eb-df0dc5bd1105">
+      <Execution id="c8becc7d-9c92-4e3d-9e4d-1d0e23acb4ef" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetTileNeighborTest" />
+    </UnitTest>
+    <UnitTest name="GetDistanceToGoalTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="dbc94579-c4c9-662a-9284-5e26fe144312">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="547ae156-4f04-4f82-8c06-c2432453cb86" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetDistanceToGoalTest" />
+    </UnitTest>
+    <UnitTest name="InitializeComponentTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="50ab9e01-40a9-efc9-ff4c-6e11e0604b12">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="4fc29f74-c195-4185-8540-30c039107dd5" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="InitializeComponentTest" />
+    </UnitTest>
+    <UnitTest name="AStar_NodeConstructorTest2" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="0022474f-ff74-6c87-d230-0d1bd2e9d8eb">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="6fb6befa-f408-4e64-91a2-75f409fc4618" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStar_NodeTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="AStar_NodeConstructorTest2" />
+    </UnitTest>
+    <UnitTest name="GetWalkableNeighborsTest1" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="c93fab06-112d-1d71-aa9a-bb8abe1fe763">
+      <Execution id="33fe0ce7-195b-4be6-88f0-f168e554ee32" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetWalkableNeighborsTest1" />
+    </UnitTest>
+    <UnitTest name="Vector3ConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="34749fb4-8091-140d-e644-0a1eec775e84">
+      <Execution id="ca7937ee-27ad-4cb3-8f10-8b21ddb3818f" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector3Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Vector3ConstructorTest" />
+    </UnitTest>
+    <UnitTest name="MainTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="9a46fa9b-9a2e-3eff-02e4-ce3ff885083d">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="3f599444-81f4-49f4-b0d5-8b50e7c657fb" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.ProgramTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="MainTest" />
+    </UnitTest>
+    <UnitTest name="panel1_MouseEnterTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="1088df11-0dc3-4bd9-027e-b5e34de89522">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="f23ba270-2ef9-4e04-8494-09913c1317d9" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="panel1_MouseEnterTest" />
+    </UnitTest>
+    <UnitTest name="GetWalkableNeighborsTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="aeedd088-d076-cf3b-1495-24aca3731485">
+      <Execution id="9cc34c30-c82d-471c-9513-cd1df3aa63cb" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetWalkableNeighborsTest" />
+    </UnitTest>
+    <UnitTest name="SizeTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="45d031d6-3ce7-cd88-65c3-9ef3b2870502">
+      <Execution id="f93c873d-4c93-485c-aa87-f0fb5b2da26b" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SizeTest" />
+    </UnitTest>
+    <UnitTest name="ZTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="d5c9dd9e-3c6f-9866-9bee-457024c32232">
+      <Execution id="9f086bb7-f834-4156-8d93-3f6010e6e533" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector3Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ZTest" />
+    </UnitTest>
+    <UnitTest name="CopyTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="22a9b0f7-43c4-4d17-ec79-268aeec07876">
+      <Execution id="64e36f6c-2226-45d6-b9c0-1ccc1ff74c77" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector2Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CopyTest" />
+    </UnitTest>
+    <UnitTest name="Vector2ConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="95f923b8-1d40-d61c-c519-c7195f1b6015">
+      <Execution id="58eba127-ce20-43de-b1d1-0228cc4cce85" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector2Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Vector2ConstructorTest" />
+    </UnitTest>
+    <UnitTest name="AddNeighborNodesToOpenListTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="5ccfd084-e78d-60c4-fbc9-9ea26319eac6">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="5c4611a5-2ac9-4d74-80c3-7ac3d4a5cf24" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="AddNeighborNodesToOpenListTest" />
+    </UnitTest>
+    <UnitTest name="FindPathTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="b99832ad-9573-44a0-663d-64ca7bd88214">
+      <Execution id="e9ed7773-05aa-489c-b98a-aba4ad2201ac" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="FindPathTest" />
+    </UnitTest>
+    <UnitTest name="PanelTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="19360b48-292e-4baa-6fdb-71fe958869ac">
+      <Execution id="c072a881-10f2-4ae9-9197-f6b9608fee62" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="PanelTest" />
+    </UnitTest>
+    <UnitTest name="AStar_NodeConstructorTest1" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="8ae7b8eb-e820-43c5-459b-a697023dbb46">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="362a14bd-7209-42d9-a2a6-1c39ade8053c" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStar_NodeTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="AStar_NodeConstructorTest1" />
+    </UnitTest>
+    <UnitTest name="GetTileFromPanelTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="48858e69-9361-9188-bb20-3e8194051fac">
+      <Execution id="91eff3e4-9472-418d-8df3-d970ac4d4ac3" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetTileFromPanelTest" />
+    </UnitTest>
+    <UnitTest name="YTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="c1335d1a-6fad-ae71-d591-ccc1426db225">
+      <Execution id="d0a1c8db-85c4-44f3-ab40-093a329a6416" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector3Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="YTest" />
+    </UnitTest>
+    <UnitTest name="panel33_MouseDownTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="8b92a1c0-15e2-8256-555e-c7bcfdae0f69">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="d009abfb-a5f7-40b7-a8ed-e8dad8a73599" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="panel33_MouseDownTest" />
+    </UnitTest>
+    <UnitTest name="ResourcesConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="898b9b91-a8c4-9e60-ce73-46110c176d42">
+      <Execution id="ded87c31-3153-4c20-9769-56563a814dd1" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.ResourcesTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ResourcesConstructorTest" />
+    </UnitTest>
+    <UnitTest name="IsGoalTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="0c93d162-7edd-8a32-ec0e-3823710dffaa">
+      <Execution id="2cbbf329-00e1-4a84-88fe-95ee59b2afee" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="IsGoalTest" />
+    </UnitTest>
+    <UnitTest name="Form1ConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="80885377-4785-fd1c-0190-f53c94d605e4">
+      <Execution id="6e2c5972-7f4d-4b4a-835c-913d9111145e" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Form1ConstructorTest" />
+    </UnitTest>
+    <UnitTest name="IsStartTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="fed6f45c-7e4f-4150-ce84-f375955beeef">
+      <Execution id="d5169ebe-dcef-4482-af68-c3cf956f6fd5" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="IsStartTest" />
+    </UnitTest>
+    <UnitTest name="button1_ClickTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="fb06de94-41bc-3a70-538b-46fe9dccbf01">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="5984476f-9e49-4b9f-8028-f24ed7524183" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="button1_ClickTest" />
+    </UnitTest>
+    <UnitTest name="YTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="533a543b-6daa-e500-91aa-352f520089a0">
+      <Execution id="166a8d1b-b67b-4e20-91db-5084ce09d2c2" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Vector2Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="YTest" />
+    </UnitTest>
+    <UnitTest name="AStar_NodeConstructorTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="41ccd479-12c0-a4b4-0360-69d1ee6af2b0">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="86aa5f3a-1309-4af5-8cd1-3e82a1a6afda" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStar_NodeTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="AStar_NodeConstructorTest" />
+    </UnitTest>
+    <UnitTest name="button2_ClickTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="e45976f3-e7aa-93af-0594-afae03a0b771">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="12527573-c980-4019-b7a5-99dea691350b" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="button2_ClickTest" />
+    </UnitTest>
+    <UnitTest name="GetTileFromTypeTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="fcfadeed-aa63-4804-441f-45c6b466d534">
+      <Execution id="43af52e2-6643-4d39-9ddd-c68d88e8527b" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileMapTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetTileFromTypeTest" />
+    </UnitTest>
+    <UnitTest name="DisposeTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="f4e406a6-bcd3-598e-540d-06aaa90dadc2">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="ef7a1ff5-98a0-4619-b9a2-75ca792f92b9" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="DisposeTest" />
+    </UnitTest>
+    <UnitTest name="IterateTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="3c6a2a3e-963a-a8a7-810d-749ebd7838d6">
+      <Execution id="f6693514-da14-4510-a3f0-b1ce84b5987d" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.AStarTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="IterateTest" />
+    </UnitTest>
+    <UnitTest name="PositionTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="96c23a90-f6cb-e469-6528-d77df69085d1">
+      <Execution id="b6e2a3a4-eb42-4329-a9c9-95f85d9bdd6d" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.TileTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="PositionTest" />
+    </UnitTest>
+    <UnitTest name="ExecuteAStarTest" storage="c:\users\philip\desktop\uh-sample-xna-project\astartest\astarttest\testproject1\bin\debug\testproject1.dll" id="cde5383f-5ecd-9027-d5e5-45246d7c1f17">
+      <DeploymentItems>
+        <DeploymentItem filename="AStartTest.exe" />
+      </DeploymentItems>
+      <Execution id="2c3028e8-157b-4651-a6f6-b0e469a2591b" />
+      <TestMethod codeBase="C:/Users/Philip/Desktop/UH-Sample-XNA-Project/AStarTest/AStartTest/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.Form1Test, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ExecuteAStarTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="0022474f-ff74-6c87-d230-0d1bd2e9d8eb" executionId="6fb6befa-f408-4e64-91a2-75f409fc4618" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="073e634f-e0b2-cdf6-9e45-1cf3989da7b7" executionId="ea9055b7-ac02-4930-97c3-55e277c456db" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0bff9c84-81e8-3fa8-2f69-e074d71ef5b2" executionId="ff592e7e-8456-42d9-b2d7-89d48bf8a796" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c93d162-7edd-8a32-ec0e-3823710dffaa" executionId="2cbbf329-00e1-4a84-88fe-95ee59b2afee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1088df11-0dc3-4bd9-027e-b5e34de89522" executionId="f23ba270-2ef9-4e04-8494-09913c1317d9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11489ae3-3df7-e36c-eacd-aea96cdb3bbd" executionId="c57b8d1e-30c5-4da1-b140-a0efe53b3aa6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="165e1017-4f6e-35df-995b-6fa0c295e85f" executionId="db4fd0d1-a758-4961-a08d-7ca07e1c0c00" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19360b48-292e-4baa-6fdb-71fe958869ac" executionId="c072a881-10f2-4ae9-9197-f6b9608fee62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="21bc8d14-896c-4172-9604-f70b2ddbb012" executionId="13f6b077-d174-444e-979d-b07eb7dd70bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="22a9b0f7-43c4-4d17-ec79-268aeec07876" executionId="64e36f6c-2226-45d6-b9c0-1ccc1ff74c77" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2549262e-f221-4140-c219-d1f9d4bc9965" executionId="3b2c0408-912f-4415-8371-72b0b0b217e9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2ab38d63-c430-384d-1f76-5a1ec1b9193d" executionId="d15cf1fe-746d-436d-977d-18013b118857" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="344b74ca-bef4-1367-9ecd-f10587a40553" executionId="9e9858ab-fd22-4683-a9c3-d4343319ed3f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="34749fb4-8091-140d-e644-0a1eec775e84" executionId="ca7937ee-27ad-4cb3-8f10-8b21ddb3818f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3552466e-2f99-e2b7-dc96-92c38ae340bd" executionId="f6b1b416-eb35-41d4-9b23-b944259ee1e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="361008cc-522f-6ae3-5167-2fe49270a075" executionId="e154f340-517b-46b6-8deb-7d94b248da0c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3c6a2a3e-963a-a8a7-810d-749ebd7838d6" executionId="f6693514-da14-4510-a3f0-b1ce84b5987d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3f353d35-435e-0d46-e9ba-ca3be1089050" executionId="e13f02f3-72fb-4bff-a2bd-0467a71afd73" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="41ccd479-12c0-a4b4-0360-69d1ee6af2b0" executionId="86aa5f3a-1309-4af5-8cd1-3e82a1a6afda" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4261ff2f-118c-bb98-925a-64527124935e" executionId="9804da50-5ebe-431e-b082-770a04ae18c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="45d031d6-3ce7-cd88-65c3-9ef3b2870502" executionId="f93c873d-4c93-485c-aa87-f0fb5b2da26b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="48858e69-9361-9188-bb20-3e8194051fac" executionId="91eff3e4-9472-418d-8df3-d970ac4d4ac3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4c67a2cf-5001-4517-e9f4-2753090192a2" executionId="5256950b-0640-42df-ac70-6fac57ea393c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="50ab9e01-40a9-efc9-ff4c-6e11e0604b12" executionId="4fc29f74-c195-4185-8540-30c039107dd5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="533a543b-6daa-e500-91aa-352f520089a0" executionId="166a8d1b-b67b-4e20-91db-5084ce09d2c2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5575dcdf-87ae-6874-70eb-df0dc5bd1105" executionId="c8becc7d-9c92-4e3d-9e4d-1d0e23acb4ef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5ccfd084-e78d-60c4-fbc9-9ea26319eac6" executionId="5c4611a5-2ac9-4d74-80c3-7ac3d4a5cf24" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="72ee8754-df45-ed5a-888f-69a6956e85bf" executionId="cb77ff6f-0828-4580-8005-a38adfa04eaf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="80885377-4785-fd1c-0190-f53c94d605e4" executionId="6e2c5972-7f4d-4b4a-835c-913d9111145e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="82a19962-058b-7ee3-4cb9-6154f83a7473" executionId="41951dc7-ffe6-4aa6-8f61-c2c00bc6fb3d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8689d331-14f3-cb55-f74d-49de8ff122b1" executionId="a0ab949b-181a-4ee7-985a-90d2ebe2d561" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="898b9b91-a8c4-9e60-ce73-46110c176d42" executionId="ded87c31-3153-4c20-9769-56563a814dd1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8ae7b8eb-e820-43c5-459b-a697023dbb46" executionId="362a14bd-7209-42d9-a2a6-1c39ade8053c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b92a1c0-15e2-8256-555e-c7bcfdae0f69" executionId="d009abfb-a5f7-40b7-a8ed-e8dad8a73599" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="917db647-978d-e69d-4907-5f0e41a076ff" executionId="c81db622-75e8-4e61-a57e-c8a580a411ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="95f923b8-1d40-d61c-c519-c7195f1b6015" executionId="58eba127-ce20-43de-b1d1-0228cc4cce85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="96c23a90-f6cb-e469-6528-d77df69085d1" executionId="b6e2a3a4-eb42-4329-a9c9-95f85d9bdd6d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a46fa9b-9a2e-3eff-02e4-ce3ff885083d" executionId="3f599444-81f4-49f4-b0d5-8b50e7c657fb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a33b7f94-58c7-6840-1894-8f5af94f323e" executionId="c67da198-28ce-4b33-87e7-388fb3356dc1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aeedd088-d076-cf3b-1495-24aca3731485" executionId="9cc34c30-c82d-471c-9513-cd1df3aa63cb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b2c2af9c-b520-c273-9d4d-33d7dd023f0e" executionId="7c72410b-8e76-44a6-97a0-b6d9d27da383" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b99832ad-9573-44a0-663d-64ca7bd88214" executionId="e9ed7773-05aa-489c-b98a-aba4ad2201ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bbbeda56-8e09-a76c-1c67-787685a3f8b8" executionId="e463edcc-6cf5-4810-937e-953a3070a3f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bd7392b3-e1f1-5679-0640-b54b41a536e8" executionId="6c5b2b99-7458-4835-af75-b92924b49192" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c1335d1a-6fad-ae71-d591-ccc1426db225" executionId="d0a1c8db-85c4-44f3-ab40-093a329a6416" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c273b161-9cca-be38-5d33-2d0fe6d9ffd6" executionId="efba5f0e-c7c9-48a9-b058-7b477f28e6d8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c93fab06-112d-1d71-aa9a-bb8abe1fe763" executionId="33fe0ce7-195b-4be6-88f0-f168e554ee32" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cb6fb6bd-9e80-2ab4-da2e-611cb8140f0f" executionId="3c7908b4-1868-48fb-aadb-a593d77a22a4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cde5383f-5ecd-9027-d5e5-45246d7c1f17" executionId="2c3028e8-157b-4651-a6f6-b0e469a2591b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cf5c3b72-ae1f-bf10-9f5e-c4824f5246ea" executionId="4c74595a-0620-4a64-b204-67ac402580e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d20a6002-7d61-15b1-251e-f95d8ab926e3" executionId="29d98099-af77-4a74-bf3f-b25799f1d8f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d235c3c4-ea68-8347-1c4a-f5f3c64aa042" executionId="5039a9ae-1cdd-4ac0-ab7a-cfcd43b193b0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d5c9dd9e-3c6f-9866-9bee-457024c32232" executionId="9f086bb7-f834-4156-8d93-3f6010e6e533" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d7fad077-e0f3-3f44-c686-b22908c89485" executionId="53bdcb14-5892-4399-92f7-761cbdf622d3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d84620cb-43fd-5be9-a41d-2c337009162d" executionId="4fab725e-6028-491b-886e-8c821afc022e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="db6f64ac-3da0-8cf5-29b3-634892ae62c6" executionId="47a65fd4-027d-4c15-bd0d-6c8ccddb9750" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dbc94579-c4c9-662a-9284-5e26fe144312" executionId="547ae156-4f04-4f82-8c06-c2432453cb86" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e45976f3-e7aa-93af-0594-afae03a0b771" executionId="12527573-c980-4019-b7a5-99dea691350b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e625de3b-2b37-6709-23a4-7f819a9f32bb" executionId="789415c2-25a9-4cae-adaf-297c17bfe1d5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f0d44162-ca2c-547d-d894-e80df79a7c7d" executionId="0d406688-ca97-4880-93fb-983045268d45" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f4e406a6-bcd3-598e-540d-06aaa90dadc2" executionId="ef7a1ff5-98a0-4619-b9a2-75ca792f92b9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fb06de94-41bc-3a70-538b-46fe9dccbf01" executionId="5984476f-9e49-4b9f-8028-f24ed7524183" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fcfadeed-aa63-4804-441f-45c6b466d534" executionId="43af52e2-6643-4d39-9ddd-c68d88e8527b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fd9acd52-8236-d68b-40e8-4c5bad5ffece" executionId="654cabff-d8a0-4b58-b6d0-fd3031eba2b5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fed6f45c-7e4f-4150-ce84-f375955beeef" executionId="d5169ebe-dcef-4482-af68-c3cf956f6fd5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="6fb6befa-f408-4e64-91a2-75f409fc4618" testId="0022474f-ff74-6c87-d230-0d1bd2e9d8eb" testName="AStar_NodeConstructorTest2" computerName="MEGALAPPY" duration="00:00:00.0321157" startTime="2010-09-10T14:00:23.2319853-05:00" endTime="2010-09-10T14:00:23.6460090-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Inconclusive" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6fb6befa-f408-4e64-91a2-75f409fc4618">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive failed. TODO: Implement code to verify target</Message>
+          <StackTrace>   at TestProject1.AStar_NodeTest.AStar_NodeConstructorTest2() in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\TestProject1\AStar_NodeTest.cs:line 104
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ea9055b7-ac02-4930-97c3-55e277c456db" testId="073e634f-e0b2-cdf6-9e45-1cf3989da7b7" testName="GetLowestCostNodeFromOpenNodesTest" computerName="MEGALAPPY" duration="00:00:00.0668795" startTime="2010-09-10T14:00:23.6490092-05:00" endTime="2010-09-10T14:00:23.7300138-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ea9055b7-ac02-4930-97c3-55e277c456db">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method TestProject1.AStarTest.GetLowestCostNodeFromOpenNodesTest threw exception: 
+System.NullReferenceException: Object reference not set to an instance of an object.</Message>
+          <StackTrace>   at AStartTest.AStar_Accessor.GetLowestCostNodeFromOpenNodes()
+   at TestProject1.AStarTest.GetLowestCostNodeFromOpenNodesTest() in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\TestProject1\AStarTest.cs:line 156
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ff592e7e-8456-42d9-b2d7-89d48bf8a796" testId="0bff9c84-81e8-3fa8-2f69-e074d71ef5b2" testName="XTest" computerName="MEGALAPPY" duration="00:00:00.0021364" startTime="2010-09-10T14:00:23.7390143-05:00" endTime="2010-09-10T14:00:23.7930174-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Inconclusive" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff592e7e-8456-42d9-b2d7-89d48bf8a796">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive failed. Verify the correctness of this test method.</Message>
+          <StackTrace>   at TestProject1.Vector3Test.XTest() in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\TestProject1\Vector3Test.cs:line 102
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2cbbf329-00e1-4a84-88fe-95ee59b2afee" testId="0c93d162-7edd-8a32-ec0e-3823710dffaa" testName="IsGoalTest" computerName="MEGALAPPY" duration="00:00:00.0081511" startTime="2010-09-10T14:00:23.7960176-05:00" endTime="2010-09-10T14:00:23.8380200-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Inconclusive" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2cbbf329-00e1-4a84-88fe-95ee59b2afee">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive failed. Verify the correctness of this test method.</Message>
+          <StackTrace>   at TestProject1.TileTest.IsGoalTest() in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\TestProject1\TileTest.cs:line 148
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f23ba270-2ef9-4e04-8494-09913c1317d9" testId="1088df11-0dc3-4bd9-027e-b5e34de89522" testName="panel1_MouseEnterTest" computerName="MEGALAPPY" duration="00:00:41.8629627" startTime="2010-09-10T14:00:23.8820225-05:00" endTime="2010-09-10T14:01:05.7474171-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Inconclusive" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f23ba270-2ef9-4e04-8494-09913c1317d9">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive failed. A method that does not return a value cannot be verified.</Message>
+          <StackTrace>   at TestProject1.Form1Test.panel1_MouseEnterTest() in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\TestProject1\Form1Test.cs:line 181
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c57b8d1e-30c5-4da1-b140-a0efe53b3aa6" testId="11489ae3-3df7-e36c-eacd-aea96cdb3bbd" testName="ClearPathTest" computerName="MEGALAPPY" duration="00:00:00.0033863" startTime="2010-09-10T14:01:05.7584177-05:00" endTime="2010-09-10T14:01:05.7684183-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c57b8d1e-30c5-4da1-b140-a0efe53b3aa6">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method TestProject1.TileMapTest.ClearPathTest threw exception: 
+System.NullReferenceException: Object reference not set to an instance of an object.</Message>
+          <StackTrace>    at AStartTest.TileSystem.TileMap..ctor(Vector2 position, Vector2 numTiles, Vector2 tileSize, IList`1 panels) in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\TileSystem\TileMap.cs:line 43
+   at TestProject1.TileMapTest.ClearPathTest() in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\TestProject1\TileMapTest.cs:line 94
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="db4fd0d1-a758-4961-a08d-7ca07e1c0c00" testId="165e1017-4f6e-35df-995b-6fa0c295e85f" testName="TileMapConstructorTest" computerName="MEGALAPPY" duration="00:00:00.0027126" startTime="2010-09-10T14:01:05.7704184-05:00" endTime="2010-09-10T14:01:05.7844192-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db4fd0d1-a758-4961-a08d-7ca07e1c0c00">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method TestProject1.TileMapTest.TileMapConstructorTest threw exception: 
+System.NullReferenceException: Object reference not set to an instance of an object.</Message>
+          <StackTrace>    at AStartTest.TileSystem.TileMap..ctor(Vector2 position, Vector2 numTiles, Vector2 tileSize, IList`1 panels) in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\AStartTest\TileSystem\TileMap.cs:line 43
+   at TestProject1.TileMapTest.TileMapConstructorTest() in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\TestProject1\TileMapTest.cs:line 80
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c072a881-10f2-4ae9-9197-f6b9608fee62" testId="19360b48-292e-4baa-6fdb-71fe958869ac" testName="PanelTest" computerName="MEGALAPPY" duration="00:00:00.0007797" startTime="2010-09-10T14:01:05.7894195-05:00" endTime="2010-09-10T14:01:05.8004201-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Inconclusive" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c072a881-10f2-4ae9-9197-f6b9608fee62">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive failed. Verify the correctness of this test method.</Message>
+          <StackTrace>   at TestProject1.TileTest.PanelTest() in C:\Users\Philip\Desktop\UH-Sample-XNA-Project\AStarTest\AStartTest\TestProject1\TileTest.cs:line 226
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="13f6b077-d174-444e-979d-b07eb7dd70bb" testId="21bc8d14-896c-4172-9604-f70b2ddbb012" testName="panel1_MouseHoverTest" computerName="MEGALAPPY" duration="00:00:40.9163403" startTime="2010-09-10T14:01:05.8094206-05:00" endTime="2010-09-10T14:01:46.7257609-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="13f6b077-d174-444e-979d-b07eb7dd70bb">
+      <Output>
+        <ErrorInfo>
+          <Message>User aborted test run.</Message>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="64e36f6c-2226-45d6-b9c0-1ccc1ff74c77" testId="22a9b0f7-43c4-4d17-ec79-268aeec07876" testName="CopyTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="64e36f6c-2226-45d6-b9c0-1ccc1ff74c77">
+    </UnitTestResult>
+    <UnitTestResult executionId="3b2c0408-912f-4415-8371-72b0b0b217e9" testId="2549262e-f221-4140-c219-d1f9d4bc9965" testName="ResourceManagerTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3b2c0408-912f-4415-8371-72b0b0b217e9">
+    </UnitTestResult>
+    <UnitTestResult executionId="d15cf1fe-746d-436d-977d-18013b118857" testId="2ab38d63-c430-384d-1f76-5a1ec1b9193d" testName="EqualsTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d15cf1fe-746d-436d-977d-18013b118857">
+    </UnitTestResult>
+    <UnitTestResult executionId="9e9858ab-fd22-4683-a9c3-d4343319ed3f" testId="344b74ca-bef4-1367-9ecd-f10587a40553" testName="TilesTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e9858ab-fd22-4683-a9c3-d4343319ed3f">
+    </UnitTestResult>
+    <UnitTestResult executionId="ca7937ee-27ad-4cb3-8f10-8b21ddb3818f" testId="34749fb4-8091-140d-e644-0a1eec775e84" testName="Vector3ConstructorTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ca7937ee-27ad-4cb3-8f10-8b21ddb3818f">
+    </UnitTestResult>
+    <UnitTestResult executionId="f6b1b416-eb35-41d4-9b23-b944259ee1e0" testId="3552466e-2f99-e2b7-dc96-92c38ae340bd" testName="XTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6b1b416-eb35-41d4-9b23-b944259ee1e0">
+    </UnitTestResult>
+    <UnitTestResult executionId="e154f340-517b-46b6-8deb-7d94b248da0c" testId="361008cc-522f-6ae3-5167-2fe49270a075" testName="GetTileTypeTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e154f340-517b-46b6-8deb-7d94b248da0c">
+    </UnitTestResult>
+    <UnitTestResult executionId="f6693514-da14-4510-a3f0-b1ce84b5987d" testId="3c6a2a3e-963a-a8a7-810d-749ebd7838d6" testName="IterateTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6693514-da14-4510-a3f0-b1ce84b5987d">
+    </UnitTestResult>
+    <UnitTestResult executionId="e13f02f3-72fb-4bff-a2bd-0467a71afd73" testId="3f353d35-435e-0d46-e9ba-ca3be1089050" testName="TileTypeTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e13f02f3-72fb-4bff-a2bd-0467a71afd73">
+    </UnitTestResult>
+    <UnitTestResult executionId="86aa5f3a-1309-4af5-8cd1-3e82a1a6afda" testId="41ccd479-12c0-a4b4-0360-69d1ee6af2b0" testName="AStar_NodeConstructorTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="86aa5f3a-1309-4af5-8cd1-3e82a1a6afda">
+    </UnitTestResult>
+    <UnitTestResult executionId="9804da50-5ebe-431e-b082-770a04ae18c4" testId="4261ff2f-118c-bb98-925a-64527124935e" testName="timer1_TickTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9804da50-5ebe-431e-b082-770a04ae18c4">
+    </UnitTestResult>
+    <UnitTestResult executionId="f93c873d-4c93-485c-aa87-f0fb5b2da26b" testId="45d031d6-3ce7-cd88-65c3-9ef3b2870502" testName="SizeTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f93c873d-4c93-485c-aa87-f0fb5b2da26b">
+    </UnitTestResult>
+    <UnitTestResult executionId="91eff3e4-9472-418d-8df3-d970ac4d4ac3" testId="48858e69-9361-9188-bb20-3e8194051fac" testName="GetTileFromPanelTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="91eff3e4-9472-418d-8df3-d970ac4d4ac3">
+    </UnitTestResult>
+    <UnitTestResult executionId="5256950b-0640-42df-ac70-6fac57ea393c" testId="4c67a2cf-5001-4517-e9f4-2753090192a2" testName="findPathBtn_ClickTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5256950b-0640-42df-ac70-6fac57ea393c">
+    </UnitTestResult>
+    <UnitTestResult executionId="4fc29f74-c195-4185-8540-30c039107dd5" testId="50ab9e01-40a9-efc9-ff4c-6e11e0604b12" testName="InitializeComponentTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4fc29f74-c195-4185-8540-30c039107dd5">
+    </UnitTestResult>
+    <UnitTestResult executionId="166a8d1b-b67b-4e20-91db-5084ce09d2c2" testId="533a543b-6daa-e500-91aa-352f520089a0" testName="YTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="166a8d1b-b67b-4e20-91db-5084ce09d2c2">
+    </UnitTestResult>
+    <UnitTestResult executionId="c8becc7d-9c92-4e3d-9e4d-1d0e23acb4ef" testId="5575dcdf-87ae-6874-70eb-df0dc5bd1105" testName="GetTileNeighborTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c8becc7d-9c92-4e3d-9e4d-1d0e23acb4ef">
+    </UnitTestResult>
+    <UnitTestResult executionId="5c4611a5-2ac9-4d74-80c3-7ac3d4a5cf24" testId="5ccfd084-e78d-60c4-fbc9-9ea26319eac6" testName="AddNeighborNodesToOpenListTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5c4611a5-2ac9-4d74-80c3-7ac3d4a5cf24">
+    </UnitTestResult>
+    <UnitTestResult executionId="cb77ff6f-0828-4580-8005-a38adfa04eaf" testId="72ee8754-df45-ed5a-888f-69a6956e85bf" testName="CultureTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cb77ff6f-0828-4580-8005-a38adfa04eaf">
+    </UnitTestResult>
+    <UnitTestResult executionId="6e2c5972-7f4d-4b4a-835c-913d9111145e" testId="80885377-4785-fd1c-0190-f53c94d605e4" testName="Form1ConstructorTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6e2c5972-7f4d-4b4a-835c-913d9111145e">
+    </UnitTestResult>
+    <UnitTestResult executionId="41951dc7-ffe6-4aa6-8f61-c2c00bc6fb3d" testId="82a19962-058b-7ee3-4cb9-6154f83a7473" testName="SetTileTypeTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="41951dc7-ffe6-4aa6-8f61-c2c00bc6fb3d">
+    </UnitTestResult>
+    <UnitTestResult executionId="a0ab949b-181a-4ee7-985a-90d2ebe2d561" testId="8689d331-14f3-cb55-f74d-49de8ff122b1" testName="ToStringTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a0ab949b-181a-4ee7-985a-90d2ebe2d561">
+    </UnitTestResult>
+    <UnitTestResult executionId="ded87c31-3153-4c20-9769-56563a814dd1" testId="898b9b91-a8c4-9e60-ce73-46110c176d42" testName="ResourcesConstructorTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ded87c31-3153-4c20-9769-56563a814dd1">
+    </UnitTestResult>
+    <UnitTestResult executionId="362a14bd-7209-42d9-a2a6-1c39ade8053c" testId="8ae7b8eb-e820-43c5-459b-a697023dbb46" testName="AStar_NodeConstructorTest1" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="362a14bd-7209-42d9-a2a6-1c39ade8053c">
+    </UnitTestResult>
+    <UnitTestResult executionId="d009abfb-a5f7-40b7-a8ed-e8dad8a73599" testId="8b92a1c0-15e2-8256-555e-c7bcfdae0f69" testName="panel33_MouseDownTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d009abfb-a5f7-40b7-a8ed-e8dad8a73599">
+    </UnitTestResult>
+    <UnitTestResult executionId="c81db622-75e8-4e61-a57e-c8a580a411ee" testId="917db647-978d-e69d-4907-5f0e41a076ff" testName="ChangePanelColorToBlackTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c81db622-75e8-4e61-a57e-c8a580a411ee">
+    </UnitTestResult>
+    <UnitTestResult executionId="58eba127-ce20-43de-b1d1-0228cc4cce85" testId="95f923b8-1d40-d61c-c519-c7195f1b6015" testName="Vector2ConstructorTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="58eba127-ce20-43de-b1d1-0228cc4cce85">
+    </UnitTestResult>
+    <UnitTestResult executionId="b6e2a3a4-eb42-4329-a9c9-95f85d9bdd6d" testId="96c23a90-f6cb-e469-6528-d77df69085d1" testName="PositionTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b6e2a3a4-eb42-4329-a9c9-95f85d9bdd6d">
+    </UnitTestResult>
+    <UnitTestResult executionId="3f599444-81f4-49f4-b0d5-8b50e7c657fb" testId="9a46fa9b-9a2e-3eff-02e4-ce3ff885083d" testName="MainTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3f599444-81f4-49f4-b0d5-8b50e7c657fb">
+    </UnitTestResult>
+    <UnitTestResult executionId="c67da198-28ce-4b33-87e7-388fb3356dc1" testId="a33b7f94-58c7-6840-1894-8f5af94f323e" testName="IsWalkableTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c67da198-28ce-4b33-87e7-388fb3356dc1">
+    </UnitTestResult>
+    <UnitTestResult executionId="9cc34c30-c82d-471c-9513-cd1df3aa63cb" testId="aeedd088-d076-cf3b-1495-24aca3731485" testName="GetWalkableNeighborsTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9cc34c30-c82d-471c-9513-cd1df3aa63cb">
+    </UnitTestResult>
+    <UnitTestResult executionId="7c72410b-8e76-44a6-97a0-b6d9d27da383" testId="b2c2af9c-b520-c273-9d4d-33d7dd023f0e" testName="TileConstructorTest1" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7c72410b-8e76-44a6-97a0-b6d9d27da383">
+    </UnitTestResult>
+    <UnitTestResult executionId="e9ed7773-05aa-489c-b98a-aba4ad2201ac" testId="b99832ad-9573-44a0-663d-64ca7bd88214" testName="FindPathTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e9ed7773-05aa-489c-b98a-aba4ad2201ac">
+    </UnitTestResult>
+    <UnitTestResult executionId="e463edcc-6cf5-4810-937e-953a3070a3f1" testId="bbbeda56-8e09-a76c-1c67-787685a3f8b8" testName="AStarConstructorTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e463edcc-6cf5-4810-937e-953a3070a3f1">
+    </UnitTestResult>
+    <UnitTestResult executionId="6c5b2b99-7458-4835-af75-b92924b49192" testId="bd7392b3-e1f1-5679-0640-b54b41a536e8" testName="GetDistanceBetweenTilesTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6c5b2b99-7458-4835-af75-b92924b49192">
+    </UnitTestResult>
+    <UnitTestResult executionId="d0a1c8db-85c4-44f3-ab40-093a329a6416" testId="c1335d1a-6fad-ae71-d591-ccc1426db225" testName="YTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d0a1c8db-85c4-44f3-ab40-093a329a6416">
+    </UnitTestResult>
+    <UnitTestResult executionId="efba5f0e-c7c9-48a9-b058-7b477f28e6d8" testId="c273b161-9cca-be38-5d33-2d0fe6d9ffd6" testName="GetWalkableNeighborsNotOnClosedListTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="efba5f0e-c7c9-48a9-b058-7b477f28e6d8">
+    </UnitTestResult>
+    <UnitTestResult executionId="33fe0ce7-195b-4be6-88f0-f168e554ee32" testId="c93fab06-112d-1d71-aa9a-bb8abe1fe763" testName="GetWalkableNeighborsTest1" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="33fe0ce7-195b-4be6-88f0-f168e554ee32">
+    </UnitTestResult>
+    <UnitTestResult executionId="3c7908b4-1868-48fb-aadb-a593d77a22a4" testId="cb6fb6bd-9e80-2ab4-da2e-611cb8140f0f" testName="Vector2ConstructorTest1" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3c7908b4-1868-48fb-aadb-a593d77a22a4">
+    </UnitTestResult>
+    <UnitTestResult executionId="2c3028e8-157b-4651-a6f6-b0e469a2591b" testId="cde5383f-5ecd-9027-d5e5-45246d7c1f17" testName="ExecuteAStarTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2c3028e8-157b-4651-a6f6-b0e469a2591b">
+    </UnitTestResult>
+    <UnitTestResult executionId="4c74595a-0620-4a64-b204-67ac402580e0" testId="cf5c3b72-ae1f-bf10-9f5e-c4824f5246ea" testName="GetTileFromPosTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4c74595a-0620-4a64-b204-67ac402580e0">
+    </UnitTestResult>
+    <UnitTestResult executionId="29d98099-af77-4a74-bf3f-b25799f1d8f9" testId="d20a6002-7d61-15b1-251e-f95d8ab926e3" testName="SettingsConstructorTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="29d98099-af77-4a74-bf3f-b25799f1d8f9">
+    </UnitTestResult>
+    <UnitTestResult executionId="5039a9ae-1cdd-4ac0-ab7a-cfcd43b193b0" testId="d235c3c4-ea68-8347-1c4a-f5f3c64aa042" testName="TileConstructorTest2" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5039a9ae-1cdd-4ac0-ab7a-cfcd43b193b0">
+    </UnitTestResult>
+    <UnitTestResult executionId="9f086bb7-f834-4156-8d93-3f6010e6e533" testId="d5c9dd9e-3c6f-9866-9bee-457024c32232" testName="ZTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9f086bb7-f834-4156-8d93-3f6010e6e533">
+    </UnitTestResult>
+    <UnitTestResult executionId="53bdcb14-5892-4399-92f7-761cbdf622d3" testId="d7fad077-e0f3-3f44-c686-b22908c89485" testName="DefaultTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="53bdcb14-5892-4399-92f7-761cbdf622d3">
+    </UnitTestResult>
+    <UnitTestResult executionId="4fab725e-6028-491b-886e-8c821afc022e" testId="d84620cb-43fd-5be9-a41d-2c337009162d" testName="IDTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4fab725e-6028-491b-886e-8c821afc022e">
+    </UnitTestResult>
+    <UnitTestResult executionId="47a65fd4-027d-4c15-bd0d-6c8ccddb9750" testId="db6f64ac-3da0-8cf5-29b3-634892ae62c6" testName="TransformToNodeTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="47a65fd4-027d-4c15-bd0d-6c8ccddb9750">
+    </UnitTestResult>
+    <UnitTestResult executionId="547ae156-4f04-4f82-8c06-c2432453cb86" testId="dbc94579-c4c9-662a-9284-5e26fe144312" testName="GetDistanceToGoalTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="547ae156-4f04-4f82-8c06-c2432453cb86">
+    </UnitTestResult>
+    <UnitTestResult executionId="12527573-c980-4019-b7a5-99dea691350b" testId="e45976f3-e7aa-93af-0594-afae03a0b771" testName="button2_ClickTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="12527573-c980-4019-b7a5-99dea691350b">
+    </UnitTestResult>
+    <UnitTestResult executionId="789415c2-25a9-4cae-adaf-297c17bfe1d5" testId="e625de3b-2b37-6709-23a4-7f819a9f32bb" testName="Vector3ConstructorTest1" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="789415c2-25a9-4cae-adaf-297c17bfe1d5">
+    </UnitTestResult>
+    <UnitTestResult executionId="0d406688-ca97-4880-93fb-983045268d45" testId="f0d44162-ca2c-547d-d894-e80df79a7c7d" testName="TileConstructorTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0d406688-ca97-4880-93fb-983045268d45">
+    </UnitTestResult>
+    <UnitTestResult executionId="ef7a1ff5-98a0-4619-b9a2-75ca792f92b9" testId="f4e406a6-bcd3-598e-540d-06aaa90dadc2" testName="DisposeTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef7a1ff5-98a0-4619-b9a2-75ca792f92b9">
+    </UnitTestResult>
+    <UnitTestResult executionId="5984476f-9e49-4b9f-8028-f24ed7524183" testId="fb06de94-41bc-3a70-538b-46fe9dccbf01" testName="button1_ClickTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5984476f-9e49-4b9f-8028-f24ed7524183">
+    </UnitTestResult>
+    <UnitTestResult executionId="43af52e2-6643-4d39-9ddd-c68d88e8527b" testId="fcfadeed-aa63-4804-441f-45c6b466d534" testName="GetTileFromTypeTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="43af52e2-6643-4d39-9ddd-c68d88e8527b">
+    </UnitTestResult>
+    <UnitTestResult executionId="654cabff-d8a0-4b58-b6d0-fd3031eba2b5" testId="fd9acd52-8236-d68b-40e8-4c5bad5ffece" testName="InitializeTilesTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="654cabff-d8a0-4b58-b6d0-fd3031eba2b5">
+    </UnitTestResult>
+    <UnitTestResult executionId="d5169ebe-dcef-4482-af68-c3cf956f6fd5" testId="fed6f45c-7e4f-4150-ce84-f375955beeef" testName="IsStartTest" computerName="MEGALAPPY" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d5169ebe-dcef-4482-af68-c3cf956f6fd5">
+    </UnitTestResult>
+  </Results>
+</TestRun>

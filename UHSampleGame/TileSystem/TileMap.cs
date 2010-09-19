@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.CoreObjects.Towers;
@@ -335,7 +336,7 @@ namespace UHSampleGame.TileSystem
                 ScreenManagement.ScreenManager.SpriteBatch.Draw(graphics[i % 3],
                     new Vector2(-left_position.X + (tiles[i].Position.X - (first.Width / 2)),
                         -left_position.Y + (tiles[i].Position.Z - (first.Height / 2))),
-                        Microsoft.Xna.Framework.Graphics.Color.White);
+                        Color.White);
                 ScreenManagement.ScreenManager.SpriteBatch.End();
             }
         }

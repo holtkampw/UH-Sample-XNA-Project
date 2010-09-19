@@ -61,7 +61,7 @@ namespace UHSampleGame.Screens
             base.HandleInput(input);
             if (input.CheckAction(InputAction.Selection))
             {
-                screenManager.ShowScreen(new ModelAndText());
+                //screenManager.ShowScreen(new ModelAndText());
             }
             if (input.CheckAction(InputAction.RotateLeft))
             {

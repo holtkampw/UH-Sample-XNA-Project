@@ -175,12 +175,12 @@ namespace UHSampleGame.Screens
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            ScreenManager.SpriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
+            ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
             ScreenManager.SpriteBatch.End();
 
             //TileMap.Draw();
-
+            ResetRenderStates();
             myModel.Draw(gameTime);
 
             startBase.Draw(gameTime);
@@ -192,7 +192,7 @@ namespace UHSampleGame.Screens
             for (int i = 0; i < units.Count; i++)
                 units[i].Draw(gameTime);
 
-            ResetRenderStates();
+           // ResetRenderStates();
 
             //foreach (var pair in towers)
             //{

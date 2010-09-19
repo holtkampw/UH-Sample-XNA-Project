@@ -230,7 +230,7 @@ namespace UHSampleGame.Screens
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            ScreenManager.SpriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
+            ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
             ScreenManager.SpriteBatch.DrawString(font, text, textPosition - new Vector2(0.0f, 50.0f), Color.White);
             ScreenManager.SpriteBatch.End();
@@ -250,7 +250,7 @@ namespace UHSampleGame.Screens
             for (int i = 0; i < units.Count; i++)
                 units[i].Draw(gameTime);
 
-            ScreenManager.SpriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
+            ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             ScreenManager.SpriteBatch.DrawString(font, myModel.Position.ToString(), textPosition + new Vector2(0.0f, 50.0f), Color.White);
             ScreenManager.SpriteBatch.End();
 

@@ -22,6 +22,7 @@ namespace UHSampleGame.CoreObjects.Units
         protected Vector3 focalPoint;
         protected bool isStuck;
         protected int health;
+        protected int pathLength;
 
         public int Health
         {
@@ -40,6 +41,8 @@ namespace UHSampleGame.CoreObjects.Units
             goalTile = goalBase.Tile;
             isStuck = false;
             health = 100;
+
+            pathLength = 0;
         }
 
         public override void Update(GameTime gameTime)
@@ -137,12 +140,13 @@ namespace UHSampleGame.CoreObjects.Units
         {
             currentTile.RemoveUnit(this);
             currentTile = tile;
+            pathLength = currentTile.Paths[goalTile.ID].Count;
             currentTile.AddUnit(this);
         }
 
         public int GetPathLength()
         {
-            return currentTile.Paths[goalTile.ID].Count;
+            return pathLength; // currentTile.Paths[goalTile.ID].Count;
         }
 
         public void TakeDamage(int damage)

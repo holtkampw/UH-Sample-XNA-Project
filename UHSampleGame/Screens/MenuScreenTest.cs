@@ -42,7 +42,7 @@ namespace UHSampleGame.Screens
 
         void two_Selected(object sender, EventArgs e)
         {
-            screenManager.ShowScreen(new ModelAndText());
+            //screenManager.ShowScreen(new ModelAndText());
         }
 
         void three_Selected(object sender, EventArgs e)

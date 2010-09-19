@@ -73,7 +73,7 @@ namespace UHSampleGame.TileSystem
 
         public Tile(int id, Vector3 position, Vector2 size, TileType tileType)
         {
-            this.rand = new Random(DateTime.Now.Millisecond);
+            //this.rand = new Random(DateTime.Now.Millisecond);
             this.id = id;
             this.position = position;
             this.size = size;
