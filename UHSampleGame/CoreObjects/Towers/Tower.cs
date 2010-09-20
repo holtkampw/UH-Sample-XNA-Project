@@ -10,7 +10,7 @@ using UHSampleGame.CoreObjects.Units;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public abstract class Tower : StaticTileObject
+    public abstract class Tower : TeamableObject
     {
         TimeSpan attackTime;
         TimeSpan elapsedTime;
@@ -18,8 +18,8 @@ namespace UHSampleGame.CoreObjects.Towers
         Tile tile;
         int attackPower;
 
-        public Tower(Model model, Tile tile)
-            : base(model) 
+        public Tower(int playerNum, int teamNum, Model model, Tile tile)
+            : base(playerNum, teamNum, model) 
         {
             attackTime = new TimeSpan(0, 0, 0,0,500);
             elapsedTime = new TimeSpan(0,0,1);
@@ -31,11 +31,15 @@ namespace UHSampleGame.CoreObjects.Towers
 
         public void RegisterAttackUnit(GameEventArgs args)
         {
-            if (unitToAttack == null || args.Unit.GetPathLength() < unitToAttack.GetPathLength())
+            if (args.Unit.TeamNum != teamNum)
             {
-                unitToAttack = args.Unit;
-                unitToAttack.Died += GetNewAttackUnit;
+                if (unitToAttack == null || args.Unit.GetPathLength() < unitToAttack.GetPathLength())
+                {
+                    unitToAttack = args.Unit;
+                    unitToAttack.Died += GetNewAttackUnit;
+                }
             }
+            
         }
 
         private void GetNewAttackUnit(Unit unit)

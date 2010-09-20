@@ -25,6 +25,7 @@ namespace UHSampleGame.TileSystem
         static List<int> maxs;
         static Vector3 position;
         static Vector3 upperLeftPos;
+        static Vector3 lowerRightPos;
         static Vector2 numTiles;
         static Vector2 tileSize;
         static int numTilesX;
@@ -43,6 +44,23 @@ namespace UHSampleGame.TileSystem
             get { return tileSize; }
         }
 
+        public static float Top
+        {
+            get { return tiles[0].Position.Z; }
+        }
+        public static float Left
+        {
+            get { return tiles[0].Position.X; }
+        }
+        public static float Right
+        {
+            get { return tiles[tiles.Count-1].Position.X; }
+        }
+        public static float Bottom
+        {
+            get { return tiles[tiles.Count-1].Position.Z; }
+        }
+
         public static void InitializeTileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
         {
             TileMap.position = position;
@@ -58,6 +76,7 @@ namespace UHSampleGame.TileSystem
             numTilesY = (int)numTiles.Y;
 
             upperLeftPos = new Vector3();
+            lowerRightPos = new Vector3();
 
             tiles = new List<Tile>();
             InitializeTiles();
@@ -110,6 +129,9 @@ namespace UHSampleGame.TileSystem
                 }
                 currentCenterPos.Z += tileSize.Y;
             }
+
+            lowerRightPos = new Vector3(tiles[tiles.Count - 1].Position.X + (tileSize.X / 2), 0,
+                tiles[tiles.Count - 1].Position.Z + (tileSize.Y / 2));
         }
 
         /// <summary>

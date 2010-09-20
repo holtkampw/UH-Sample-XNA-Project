@@ -48,8 +48,8 @@ namespace UHSampleGame.Screens
 
             TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
 
-            startBase = new TestBase(TileMap.Tiles[0]);
-            goalBase = new TestBase(TileMap.Tiles[TileMap.Tiles.Count - 1]);
+            startBase = new TestBase(1,1,TileMap.Tiles[0]);
+            goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
 
             startBase.SetGoalBase(goalBase);
             goalBase.SetGoalBase(startBase);
@@ -112,49 +112,51 @@ namespace UHSampleGame.Screens
         public override void HandleInput(InputManager input)
         {
             base.HandleInput(input);
-            bool moveModel = false;
             Tile newTile = new Tile();
-            if (input.CheckNewAction(InputAction.TileMoveUp))
+            if (input.CheckAction(InputAction.TileMoveUp))
             {
-                moveModel = true;
-                newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Up);
+                myModel.SetPosition(myModel.Position + new Vector3(0,0,-3));
             }
-            if (input.CheckNewAction(InputAction.TileMoveDown))
+            if (input.CheckAction(InputAction.TileMoveDown))
             {
-                moveModel = true;
-                newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Down);
+                 myModel.SetPosition(myModel.Position + new Vector3(0,0,3));
             }
-            if (input.CheckNewAction(InputAction.TileMoveLeft))
+            if (input.CheckAction(InputAction.TileMoveLeft))
             {
-                moveModel = true;
-                newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Left);
+                myModel.SetPosition(myModel.Position + new Vector3(-3,0,0));
             }
-            if (input.CheckNewAction(InputAction.TileMoveRight))
+            if (input.CheckAction(InputAction.TileMoveRight))
             {
-                moveModel = true;
-                newTile = TileMap.GetTileNeighbor(currentTile, NeighborTile.Right);
+                 myModel.SetPosition(myModel.Position + new Vector3(3,0,0));
             }
-            if (!newTile.IsNull())
-                currentTile = newTile;
 
             if (input.CheckAction(InputAction.Selection))
             {
-                AddUnit(new TestUnit(startBase.Position, goalBase));
-                AddUnit(new TestUnit(goalBase.Position, startBase));
+                AddUnit(new TestUnit(1,1,startBase.Position, goalBase));
+                AddUnit(new TestUnit(2,2,goalBase.Position, startBase));
             }
 
-            if (moveModel)
-                myModel.SetPosition(currentTile.Position);
+            if (myModel.Position.X < TileMap.Left)
+                myModel.SetPosition(new Vector3(TileMap.Left, myModel.Position.Y, myModel.Position.Z));
+
+            if (myModel.Position.Z < TileMap.Top)
+                myModel.SetPosition(new Vector3(myModel.Position.X, myModel.Position.Y, TileMap.Top));
+
+            if (myModel.Position.X > TileMap.Right)
+                myModel.SetPosition(new Vector3(TileMap.Right, myModel.Position.Y, myModel.Position.Z));
+
+            if (myModel.Position.Z > TileMap.Bottom)
+                myModel.SetPosition(new Vector3(myModel.Position.X, myModel.Position.Y, TileMap.Bottom));
 
             if (input.CheckNewAction(InputAction.TowerBuild))
             {
-                BuildTower(currentTile);
+                BuildTower(TileMap.GetTileFromPos(myModel.Position));
             }
         }
 
         public void BuildTower(Tile tile)
         {
-            Tower tower = new TowerAGood(tile);
+            Tower tower = new TowerAGood(1,1,tile);
             if (TileMap.SetTower(tower, tile))
                 towers.Add(tower);
         }

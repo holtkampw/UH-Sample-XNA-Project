@@ -18,7 +18,7 @@ namespace UHSampleGame.Screens
         public MenuScreenTest()
             :base("MenuScreenTest")
         {
-            MenuEntry one = new MenuEntry("TileTestScreen");
+            MenuEntry one = new MenuEntry("PlayScreen");
             MenuEntry two = new MenuEntry("ModelAndText");
             MenuEntry three = new MenuEntry("ModelScreen");
             MenuEntry four = new MenuEntry("PlayScreen");
@@ -37,7 +37,7 @@ namespace UHSampleGame.Screens
         
         void one_Selected(object sender, EventArgs e)
         {
-            screenManager.ShowScreen(new TileTestScreen());
+            screenManager.ShowScreen(new PlayScreen());
         }
 
         void two_Selected(object sender, EventArgs e)

@@ -18,8 +18,8 @@ namespace UHSampleGame.CoreObjects.Towers
         #endregion
 
         #region Initialization
-        public TowerAGood(Tile tile)
-            : base(ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\tower1_player"), tile)
+        public TowerAGood(int playerNum, int teamNum, Tile tile)
+            : base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\tower1_player"), tile)
         {
             this.Scale = 4.0f;
         }

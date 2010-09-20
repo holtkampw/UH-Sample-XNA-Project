@@ -10,7 +10,7 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Base
 {
-    public abstract class Base : StaticTileObject
+    public abstract class Base : TeamableObject
     {
         protected Base goalBase;
         protected Tile tile;
@@ -25,8 +25,8 @@ namespace UHSampleGame.CoreObjects.Base
             get { return tile; }
         }
 
-        public Base(Model model)
-            : base(model) 
+        public Base(int playerNum, int teamNum, Model model)
+            : base(playerNum, teamNum, model) 
         {
             this.tile = GetTile();
         }

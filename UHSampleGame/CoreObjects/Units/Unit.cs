@@ -12,7 +12,7 @@ using UHSampleGame.Events;
 
 namespace UHSampleGame.CoreObjects.Units
 {
-    public abstract class Unit : StaticTileObject
+    public abstract class Unit : TeamableObject
     {
         public Vector3 velocity;
         protected Tile previousTile;
@@ -31,8 +31,8 @@ namespace UHSampleGame.CoreObjects.Units
 
         public event UnitDied Died;
 
-        public Unit(Model model, Base.Base goalBase)
-            : base(model)
+        public Unit(int playerNum, int teamNum, Model model, Base.Base goalBase)
+            : base(playerNum, teamNum, model)
         {
             previousTile = new Tile();
             currentTile = new Tile();
