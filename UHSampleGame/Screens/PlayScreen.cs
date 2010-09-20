@@ -23,13 +23,10 @@ namespace UHSampleGame.Screens
         #region Class Variables
         Texture2D background;
         CameraManager cameraManager;
-        AnimatedModel myModel;
         
         Tile currentTile;
 
         TestBase goalBase;
-
-        List<Base> bases;
 
         HumanPlayer player;
 
@@ -39,7 +36,6 @@ namespace UHSampleGame.Screens
         public PlayScreen()
             : base("PlayScreen")
         {
-
             Vector2 numTiles = new Vector2(20, 10);
 
             TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
@@ -50,27 +46,15 @@ namespace UHSampleGame.Screens
             player.SetTargetBase(goalBase);
             goalBase.SetGoalBase(player.Base);
 
-            bases = new List<Base>();
-            bases.Add(goalBase);
-
             TileMap.SetBase(goalBase);
 
             TileMap.UpdateTilePaths();
-
-            //towers = new Dictionary<int, Tower>();
-            //for (int i = 0; i < numTiles.X * numTiles.Y; i++)
-            //   towers.Add(i, new TowerAGood(TileMap.Tiles[i].Position));
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
 
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
-            myModel = new AnimatedModel(ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
-            myModel.Scale = 2.0f;
-            myModel.PlayClip("Take 001");
-
             currentTile = TileMap.GetTileFromPos(Vector3.Zero);
-            myModel.SetPosition(currentTile.Position);
 
             if (numTiles.X == 10 && numTiles.Y == 10)
             {
@@ -101,8 +85,6 @@ namespace UHSampleGame.Screens
             player.HandleInput(input);
         }
 
-       
-
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
@@ -110,20 +92,10 @@ namespace UHSampleGame.Screens
             ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
             ScreenManager.SpriteBatch.End();
 
-            //TileMap.Draw();
             ResetRenderStates();
-            //myModel.Draw(gameTime);
 
             player.Draw(gameTime);
             goalBase.Draw(gameTime);
-
-           // ResetRenderStates();
-
-            //foreach (var pair in towers)
-            //{
-            //    pair.Value.Draw(gameTime);
-            //}
-
 
         }
         #endregion

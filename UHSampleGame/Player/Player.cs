@@ -18,13 +18,13 @@ namespace UHSampleGame.Player
 {
     public abstract class Player
     {
-        Base playerBase;
-        TeamableAnimatedObject avatar;
-        List<Tower> towers;
-        List<Unit> units;
-        int money;
-        int playerNum;
-        int teamNum;
+        protected Base playerBase;
+
+        protected List<Tower> towers;
+        protected List<Unit> units;
+        protected int money;
+        protected int playerNum;
+        protected int teamNum;
 
         public int PlayerNum
         {
@@ -50,12 +50,9 @@ namespace UHSampleGame.Player
             this.towers = new List<Tower>();
             this.units = new List<Unit>();
             this.money = 0;
-            this.avatar = new TeamableAnimatedObject(playerNum, teamNum,
-                ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+            
 
-            avatar.Scale = 2.0f;
-            avatar.PlayClip("Take 001");
-            avatar.SetPosition(playerBase.Position);
+            
         }
 
         public void SetTargetBase(Base target)
@@ -63,46 +60,9 @@ namespace UHSampleGame.Player
             playerBase.SetGoalBase(target);
         }
 
-        public void HandleInput(InputManager input)
+        public virtual void HandleInput(InputManager input)
         {
-            if (input.CheckAction(InputAction.TileMoveUp))
-            {
-                avatar.SetPosition(avatar.Position + new Vector3(0, 0, -3));
-            }
-            if (input.CheckAction(InputAction.TileMoveDown))
-            {
-                avatar.SetPosition(avatar.Position + new Vector3(0, 0, 3));
-            }
-            if (input.CheckAction(InputAction.TileMoveLeft))
-            {
-                avatar.SetPosition(avatar.Position + new Vector3(-3, 0, 0));
-            }
-            if (input.CheckAction(InputAction.TileMoveRight))
-            {
-                avatar.SetPosition(avatar.Position + new Vector3(3, 0, 0));
-            }
-
-            if (input.CheckAction(InputAction.Selection))
-            {
-                AddUnit(new TestUnit(1, 1, playerBase.Position, playerBase.GoalBase));
-            }
-
-            if (avatar.Position.X < TileMap.Left)
-                avatar.SetPosition(new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z));
-
-            if (avatar.Position.Z < TileMap.Top)
-                avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Top));
-
-            if (avatar.Position.X > TileMap.Right)
-                avatar.SetPosition(new Vector3(TileMap.Right, avatar.Position.Y, avatar.Position.Z));
-
-            if (avatar.Position.Z > TileMap.Bottom)
-                avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
-
-            if (input.CheckNewAction(InputAction.TowerBuild))
-            {
-                BuildTower(TileMap.GetTileFromPos(avatar.Position));
-            }
+           
         }
 
         protected void BuildTower(Tile tile)
@@ -125,7 +85,7 @@ namespace UHSampleGame.Player
             TileMap.TowerCreated -= unit.UpdatePath;
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             playerBase.Update(gameTime);
 
@@ -134,12 +94,9 @@ namespace UHSampleGame.Player
 
             for (int i = 0; i < units.Count; i++)
                 units[i].Update(gameTime);
-
-            avatar.Update(gameTime);
-
         }
 
-        public void Draw(GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
             playerBase.Draw(gameTime);
 
@@ -148,8 +105,6 @@ namespace UHSampleGame.Player
 
             for (int i = 0; i < units.Count; i++)
                 units[i].Draw(gameTime);
-
-            avatar.Draw(gameTime);
         }
     }
 }
