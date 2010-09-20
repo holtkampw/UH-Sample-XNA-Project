@@ -10,7 +10,7 @@ using UHSampleGame.CoreObjects.Units;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public abstract class Tower : TeamableObject
+    public abstract class Tower : TeamableStaticObject
     {
         TimeSpan attackTime;
         TimeSpan elapsedTime;

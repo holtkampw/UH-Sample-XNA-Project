@@ -10,7 +10,7 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Base
 {
-    public abstract class Base : TeamableObject
+    public abstract class Base : TeamableStaticObject
     {
         protected Base goalBase;
         protected Tile tile;

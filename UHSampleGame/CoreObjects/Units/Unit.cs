@@ -12,7 +12,7 @@ using UHSampleGame.Events;
 
 namespace UHSampleGame.CoreObjects.Units
 {
-    public abstract class Unit : TeamableObject
+    public abstract class Unit : TeamableStaticObject
     {
         public Vector3 velocity;
         protected Tile previousTile;

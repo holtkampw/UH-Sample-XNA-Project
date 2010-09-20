@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace UHSampleGame.CoreObjects
 {
-    public abstract class TeamableObject : StaticTileObject
+    public class TeamableAnimatedObject : AnimatedTileObject
     {
         protected int playerNum;
         protected int teamNum;
@@ -23,7 +23,7 @@ namespace UHSampleGame.CoreObjects
             get { return teamNum; }
         }
 
-        public TeamableObject(int playerNum, int teamNum, Model model )
+        public TeamableAnimatedObject(int playerNum, int teamNum, Model model )
             :base(model)
         {
             this.playerNum = playerNum;
