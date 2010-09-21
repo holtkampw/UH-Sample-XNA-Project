@@ -41,6 +41,16 @@ namespace UHSampleGame.Player
             get { return playerBase; }
         }
 
+        public int TowerCount
+        {
+            get { return towers.Count; }
+        }
+
+        public int UnitCount
+        {
+            get { return units.Count; }
+        }
+
         public Player(int playerNum, int teamNum, Tile startTile)
         {
             this.playerNum = playerNum;

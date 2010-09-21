@@ -15,7 +15,8 @@ namespace UHSampleGame.CoreObjects.Units
     public class TestUnit : Unit
     {
         public TestUnit(int playerNum, int teamNum, Vector3 position, Base.Base goalBase)
-            : base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Model\\pyramids"), goalBase) 
+            : base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Model\\pyramids"), goalBase,
+            position) 
         {
             this.position = position;
             this.Scale = 1;

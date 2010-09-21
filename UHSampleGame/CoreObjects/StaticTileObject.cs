@@ -12,8 +12,8 @@ namespace UHSampleGame.CoreObjects
 {
     public class StaticTileObject : StaticModel
     {
-        public StaticTileObject(Model model)
-            : base(model) { }
+        public StaticTileObject(Model model, Vector3 position)
+            : base(model, position) { }
 
         public Tile GetTile()
         {

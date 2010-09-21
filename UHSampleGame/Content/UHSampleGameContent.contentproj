@@ -98,7 +98,7 @@
     <Compile Include="Model\pyramids.fbx">
       <Name>pyramids</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>InstancedModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +175,13 @@
       <Processor>EffectProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Model\InstancedModel.fx">
+      <Name>InstancedModel</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\Towers\towerA_red.fbx">
       <Name>towerA_red</Name>
@@ -191,6 +197,13 @@
       <Name>towerC_red</Name>
       <Importer>FbxImporter</Importer>
       <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="font.spritefont">
+      <Name>font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

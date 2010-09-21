@@ -19,7 +19,7 @@ namespace UHSampleGame.CoreObjects.Towers
         int attackPower;
 
         public Tower(int playerNum, int teamNum, Model model, Tile tile)
-            : base(playerNum, teamNum, model) 
+            : base(playerNum, teamNum, model, tile.Position) 
         {
             attackTime = new TimeSpan(0, 0, 0,0,500);
             elapsedTime = new TimeSpan(0,0,1);

@@ -33,7 +33,7 @@ namespace UHSampleGame.CoreObjects
 
         //Instancing Stuff
         DynamicVertexBuffer vertexBuffer;
-        public static InstancingTechnique instancingTechnique = InstancingTechnique.HardwareInstancing;
+        public static InstancingTechnique instancingTechnique = InstancingTechnique.NoInstancing;
 
         // To store instance transform matrices in a vertex buffer, we use this custom
         // vertex type which encodes 4x4 matrices as a set of four Vector4 values.
@@ -67,11 +67,11 @@ namespace UHSampleGame.CoreObjects
         /// Constructor consisting of a given model
         /// </summary>
         /// <param name="model">Model for use</param>
-        public StaticModel(Model newModel)
+        public StaticModel(Model newModel, Vector3 position)
         {
             if(model == null)
                 model = newModel;
-            SetupModel();
+            SetupModel(position);
             SetupCamera();
         }
 
@@ -79,15 +79,15 @@ namespace UHSampleGame.CoreObjects
         /// Adds a model to the Static Model and performs setup
         /// </summary>
         /// <param name="model">Model for this instance</param>
-        public void SetupModel(Model newModel)
+        public void SetupModel(Model newModel, Vector3 position)
         {
             if(model == null)
                 model = newModel;
-            SetupModel();
+            SetupModel(position);
             SetupCamera();
         }
 
-        protected void SetupModel()
+        protected void SetupModel(Vector3 position)
         {
             //set scale
             scale = 1.0f;
@@ -106,7 +106,7 @@ namespace UHSampleGame.CoreObjects
             rotationMatrixZ = Matrix.CreateRotationZ(0.0f);
 
             //give default position
-            position = Vector3.Zero;
+            this.position = position;
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace UHSampleGame.CoreObjects
         protected void SetupCamera()
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-            view = Matrix.CreateTranslation(0,0,0) * Matrix.CreateScale(scale) * cameraManager.ViewMatrix;
+            view = cameraManager.ViewMatrix;
         }
         #endregion
 

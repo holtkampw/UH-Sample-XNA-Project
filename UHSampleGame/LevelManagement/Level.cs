@@ -87,6 +87,8 @@ namespace UHSampleGame.LevelManagement
                     //Handle Multiple towers here
                     gameObject = new TowerAGood(playerNum, teamNum, tile);
                 }
+
+                //Tilemap.Set......
             }
         }
 

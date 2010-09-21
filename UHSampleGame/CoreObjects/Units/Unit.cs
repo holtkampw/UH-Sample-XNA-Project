@@ -31,8 +31,8 @@ namespace UHSampleGame.CoreObjects.Units
 
         public event UnitDied Died;
 
-        public Unit(int playerNum, int teamNum, Model model, Base.Base goalBase)
-            : base(playerNum, teamNum, model)
+        public Unit(int playerNum, int teamNum, Model model, Base.Base goalBase, Vector3 position)
+            : base(playerNum, teamNum, model, position)
         {
             previousTile = new Tile();
             currentTile = new Tile();
