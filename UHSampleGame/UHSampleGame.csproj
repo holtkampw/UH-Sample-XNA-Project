@@ -150,7 +150,6 @@
     <Compile Include="ScreenManagement\ScreenManager.cs" />
     <Compile Include="Screens\DummyTextScreen.cs" />
     <Compile Include="Screens\MenuScreenTest.cs" />
-    <Compile Include="Screens\ModelScreen.cs" />
     <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="TileSystem\Tile.cs" />
     <Compile Include="TileSystem\TileMap.cs" />
