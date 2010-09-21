@@ -19,7 +19,7 @@
     <XnaUpgrade>
     </XnaUpgrade>
     <XnaOutputType>Game</XnaOutputType>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -152,7 +152,6 @@
     <Compile Include="ScreenManagement\ScreenManager.cs" />
     <Compile Include="Screens\DummyTextScreen.cs" />
     <Compile Include="Screens\MenuScreenTest.cs" />
-    <Compile Include="Screens\ModelScreen.cs" />
     <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="TileSystem\Tile.cs" />
     <Compile Include="TileSystem\TileMap.cs" />
@@ -219,6 +218,9 @@
       <Name>UHSampleGameContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoreObjects\Towers\InstancedModel.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

@@ -20,20 +20,20 @@ namespace UHSampleGame.CoreObjects
     {
         HardwareInstancing,
         NoInstancing,
+        ShaderInstancing,
         NoInstancingOrStateBatching
     }
 
     public class StaticModel : GameObject
     {
         #region Class Variables
-        //Model model;
         protected float scale;
         CameraManager cameraManager;
-        protected static Model model;
+        public static Model model;
 
         //Instancing Stuff
         DynamicVertexBuffer vertexBuffer;
-        public static InstancingTechnique instancingTechnique = InstancingTechnique.HardwareInstancing;
+        public static InstancingTechnique instancingTechnique = InstancingTechnique.ShaderInstancing;
 
         // To store instance transform matrices in a vertex buffer, we use this custom
         // vertex type which encodes 4x4 matrices as a set of four Vector4 values.
@@ -205,6 +205,11 @@ namespace UHSampleGame.CoreObjects
                                                 transforms, view, cameraManager.ProjectionMatrix);
                     break;
 
+                case InstancingTechnique.ShaderInstancing:
+                    DrawModelShaderInstancing(model, boneTransforms,
+                                                transforms, view, cameraManager.ProjectionMatrix);
+                    break;
+
                 case InstancingTechnique.NoInstancing:
                     DrawModelNoInstancing(model, boneTransforms,
                                           transforms, view, cameraManager.ProjectionMatrix);
@@ -237,7 +242,7 @@ namespace UHSampleGame.CoreObjects
                     vertexBuffer.Dispose();
 
                 vertexBuffer = new DynamicVertexBuffer(ScreenManager.Game.GraphicsDevice, instanceVertexDeclaration,
-                                                               /*instances.Length*/1, BufferUsage.WriteOnly);
+                                                               instances.Length, BufferUsage.WriteOnly);
             }
 
             // Transfer the latest instance transform matrices into the instanceVertexBuffer.
@@ -370,6 +375,56 @@ namespace UHSampleGame.CoreObjects
                     }
 
                     mesh.Draw();
+                }
+            }
+        }
+
+        void DrawModelShaderInstancing(Model model, Matrix[] modelBones,
+                                         Matrix[] instances, Matrix view, Matrix projection)
+        {
+            if ((vertexBuffer == null) ||
+               (instances.Length > vertexBuffer.VertexCount))
+            {
+                if (vertexBuffer != null)
+                    vertexBuffer.Dispose();
+
+                vertexBuffer = new DynamicVertexBuffer(ScreenManager.Game.GraphicsDevice, instanceVertexDeclaration,
+                                                               instances.Length, BufferUsage.WriteOnly);
+            }
+
+            // Transfer the latest instance transform matrices into the instanceVertexBuffer.
+            vertexBuffer.SetData(instances, 0, instances.Length, SetDataOptions.Discard);
+
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                foreach (ModelMeshPart meshPart in mesh.MeshParts)
+                {
+                    // Tell the GPU to read from both the model vertex buffer plus our instanceVertexBuffer.
+                    ScreenManager.Game.GraphicsDevice.SetVertexBuffers(
+                        new VertexBufferBinding(meshPart.VertexBuffer, meshPart.VertexOffset, 0),
+                        new VertexBufferBinding(vertexBuffer, 0, 1)
+                    );
+
+                    ScreenManager.Game.GraphicsDevice.Indices = meshPart.IndexBuffer;
+
+                    // Set up the instance rendering effect.
+                    Effect effect = meshPart.Effect;
+
+                    effect.CurrentTechnique = effect.Techniques["ShaderInstancing"];
+
+                    effect.Parameters["World"].SetValue(modelBones[mesh.ParentBone.Index]);
+                    effect.Parameters["View"].SetValue(view);
+                    effect.Parameters["Projection"].SetValue(projection);
+
+                    // Draw all the instance copies in a single call.
+                    foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+                    {
+                        pass.Apply();
+
+                        ScreenManager.Game.GraphicsDevice.DrawInstancedPrimitives(PrimitiveType.TriangleList, 0, 0,
+                                                               meshPart.NumVertices, meshPart.StartIndex,
+                                                               meshPart.PrimitiveCount, instances.Length);
+                    }
                 }
             }
         }

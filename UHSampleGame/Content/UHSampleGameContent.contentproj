@@ -98,7 +98,7 @@
     <Compile Include="Model\pyramids.fbx">
       <Name>pyramids</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>InstancedModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -155,13 +155,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SkinnedModel.fx">
-      <Name>SkinnedModel</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="AnimatedModel\dude.fbx">
       <Name>dude</Name>
       <Importer>FbxImporter</Importer>
@@ -169,28 +162,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Objects\Towers\InstancedModel.fx">
-      <Name>InstancedModel</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
     <Compile Include="Objects\Towers\towerA_red.fbx">
       <Name>towerA_red</Name>
       <Importer>FbxImporter</Importer>
       <Processor>InstancedModelProcessor</Processor>
     </Compile>
-    <Compile Include="Objects\Towers\towerB_red.fbx">
-      <Name>towerB_red</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>InstancedModelProcessor</Processor>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\InstancedModel.fx">
+      <Name>InstancedModel</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
     </Compile>
-    <Compile Include="Objects\Towers\towerC_red.fbx">
-      <Name>towerC_red</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>InstancedModelProcessor</Processor>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Objects\Towers\InstancedModel.fx">
+      <Name>InstancedModel</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

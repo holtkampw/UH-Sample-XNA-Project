@@ -90,6 +90,8 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 }
 
 
+#if XBOX360
+
 // Hardware instancing technique.
 technique HardwareInstancing
 {
@@ -99,6 +101,21 @@ technique HardwareInstancing
         PixelShader = compile ps_3_0 PixelShaderFunction();
     }
 }
+
+#else
+
+// Hardware instancing technique.
+//technique HardwareInstancing
+//{
+//    pass Pass1
+//    {
+//        VertexShader = compile vs_2_0 HardwareInstancingVertexShader();
+//        PixelShader = compile ps_2_0 PixelShaderFunction();
+//    }
+//}
+
+
+#endif
 
 
 // For rendering without instancing.
@@ -110,3 +127,39 @@ technique NoInstancing
         PixelShader = compile ps_2_0 PixelShaderFunction();
     }
 }
+
+
+//NEW STUFF
+
+#define MAX_SHADER_MATRICES 60
+
+// Array of instance transforms used by the VFetch and ShaderInstancing techniques.
+float4x4 InstanceTransforms[MAX_SHADER_MATRICES];
+
+// Single instance transform used by the NoInstancing technique.
+float4x4 NoInstancingTransform;
+
+#if !XBOX360
+
+// On Windows, we can use an array of shader constants to implement
+// instancing. The instance index is passed in as part of the vertex
+// buffer data, and we use that to decide which world transform should apply.
+VertexShaderOutput ShaderInstancingVertexShader(VertexShaderInput input,
+                                                float instanceIndex : TEXCOORD1)
+{
+    return VertexShaderCommon(input, InstanceTransforms[instanceIndex]);
+}
+
+// Windows instancing technique for shader 2.0 cards.
+technique ShaderInstancing
+{
+    pass Pass1
+    {
+        VertexShader = compile vs_2_0 NoInstancingVertexShader();
+        PixelShader = compile ps_2_0 PixelShaderFunction();
+    }
+}
+
+#endif
+
+
