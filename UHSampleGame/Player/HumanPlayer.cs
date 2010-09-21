@@ -33,21 +33,16 @@ namespace UHSampleGame.Player
         {
             base.HandleInput(input);
             if (input.CheckAction(InputAction.TileMoveUp))
-            {
                 avatar.SetPosition(avatar.Position + new Vector3(0, 0, -3));
-            }
+
             if (input.CheckAction(InputAction.TileMoveDown))
-            {
                 avatar.SetPosition(avatar.Position + new Vector3(0, 0, 3));
-            }
+
             if (input.CheckAction(InputAction.TileMoveLeft))
-            {
                 avatar.SetPosition(avatar.Position + new Vector3(-3, 0, 0));
-            }
+
             if (input.CheckAction(InputAction.TileMoveRight))
-            {
                 avatar.SetPosition(avatar.Position + new Vector3(3, 0, 0));
-            }
 
             if (avatar.Position.X < TileMap.Left)
                 avatar.SetPosition(new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z));
@@ -60,7 +55,6 @@ namespace UHSampleGame.Player
 
             if (avatar.Position.Z > TileMap.Bottom)
                 avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
-
 
             if (input.CheckAction(InputAction.Selection))
                 AddUnit(new TestUnit(1, 1, playerBase.Position, playerBase.GoalBase));

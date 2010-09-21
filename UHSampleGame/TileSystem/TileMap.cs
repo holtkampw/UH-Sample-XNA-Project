@@ -306,7 +306,7 @@ namespace UHSampleGame.TileSystem
 
         public static bool SetTower(Tower tower, Tile tile)
         {
-            tile.SetTower(tower);
+            tile.SetBlockableObject(tower);
             if (IsTilePathsValid())
             {
                 UpdateTilePaths();
@@ -334,7 +334,7 @@ namespace UHSampleGame.TileSystem
 
         public static void RemoveTower(Tile tile)
         {
-            tile.RemoveTower();
+            tile.RemoveBlockableObject();
             UpdateTilePaths();
         }
 
