@@ -18,7 +18,7 @@ namespace UHSampleGame.TileSystem
         Vector3 position;
         Vector2 size;
         TileType tileType;
-        Tower tower;
+        GameObject gameObject;
         List<Unit> units;
         Dictionary<int, List<Tile>> paths;
         Random rand;
@@ -111,15 +111,15 @@ namespace UHSampleGame.TileSystem
             return this.ID.ToString() + " " + tileType.ToString();
         }
 
-        public void SetTower(Tower tower)
+        public void SetBlockableObject(GameObject gameObject)
         {
-            this.tower = tower;
+            this.gameObject = gameObject;
             SetTileType(TileType.Blocked);
         }
 
-        public void RemoveTower()
+        public void RemoveBlockableObject()
         {
-            this.tower = null;
+            this.gameObject = null;
             SetTileType(TileType.Walkable);
         }
 

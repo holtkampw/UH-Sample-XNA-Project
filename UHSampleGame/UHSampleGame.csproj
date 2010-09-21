@@ -137,6 +137,8 @@
     <Compile Include="Events\GameEventArgs.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />
+    <Compile Include="LevelManagement\Level.cs" />
+    <Compile Include="LevelManagement\LevelManager.cs" />
     <Compile Include="MenuSystem\MenuEntry.cs" />
     <Compile Include="MenuSystem\MenuScreen.cs" />
     <Compile Include="PathFinding\AStar.cs" />
