@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+using UHSampleGame.CoreObjects.Base;
+using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.Events;
 
 namespace UHSampleGame.TileSystem
 {
@@ -15,15 +20,19 @@ namespace UHSampleGame.TileSystem
     public class TileMap
     {
         static List<Tile> tiles;
+        static List<Base> bases;
         static List<int> mins;
         static List<int> maxs;
         static Vector3 position;
         static Vector3 upperLeftPos;
+        static Vector3 lowerRightPos;
         static Vector2 numTiles;
         static Vector2 tileSize;
         static int numTilesX;
         static int numTilesY;
         static List<NeighborTile> allNeighbors;
+
+        public static event TowerCreated TowerCreated;
 
         public static IList<Tile> Tiles
         {
@@ -35,11 +44,30 @@ namespace UHSampleGame.TileSystem
             get { return tileSize; }
         }
 
+        public static float Top
+        {
+            get { return tiles[0].Position.Z; }
+        }
+        public static float Left
+        {
+            get { return tiles[0].Position.X; }
+        }
+        public static float Right
+        {
+            get { return tiles[tiles.Count-1].Position.X; }
+        }
+        public static float Bottom
+        {
+            get { return tiles[tiles.Count-1].Position.Z; }
+        }
+
         public static void InitializeTileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
         {
             TileMap.position = position;
             TileMap.numTiles = numTiles;
             TileMap.tileSize = tileSize;
+
+            bases = new List<Base>();
 
             mins = new List<int>();
             maxs = new List<int>();
@@ -48,6 +76,7 @@ namespace UHSampleGame.TileSystem
             numTilesY = (int)numTiles.Y;
 
             upperLeftPos = new Vector3();
+            lowerRightPos = new Vector3();
 
             tiles = new List<Tile>();
             InitializeTiles();
@@ -60,6 +89,11 @@ namespace UHSampleGame.TileSystem
             allNeighbors.Add(NeighborTile.Up);
             allNeighbors.Add(NeighborTile.UpLeft);
             allNeighbors.Add(NeighborTile.UpRight);
+        }
+
+        public static void SetBase(Base setBase)
+        {
+            bases.Add(setBase);
         }
 
         protected static void InitializeTiles()
@@ -95,6 +129,9 @@ namespace UHSampleGame.TileSystem
                 }
                 currentCenterPos.Z += tileSize.Y;
             }
+
+            lowerRightPos = new Vector3(tiles[tiles.Count - 1].Position.X + (tileSize.X / 2), 0,
+                tiles[tiles.Count - 1].Position.Z + (tileSize.Y / 2));
         }
 
         /// <summary>
@@ -165,6 +202,9 @@ namespace UHSampleGame.TileSystem
             int xNum, yNum, index;
             xNum = yNum = index = 0;
 
+            //xNum = (int)((upperLeftPos.X - position.X) / (int)tileSize.X);
+            //yNum = (int)(((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+
             xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
             yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
 
@@ -233,6 +273,71 @@ namespace UHSampleGame.TileSystem
             return neighbors;
         }
 
+        public static void UpdateTilePaths()
+        {
+            for (int j = 0; j < bases.Count; j++)
+            {
+                for (int i = 0; i < tiles.Count; i++)
+                {
+                    if (tiles[i].IsWalkable())
+                        tiles[i].UpdatePathTo(bases[j].Tile);
+                }
+            }
+        }
+
+        public static bool IsTilePathsValid()
+        {
+            for (int j = 0; j < bases.Count; j++)
+            {
+                for (int i = 0; i < bases.Count; i++)
+                {
+                    if (i != j)
+                    {
+                        bases[i].Tile.UpdatePathTo(bases[j].Tile);
+                        if (bases[j].Tile.Paths[bases[i].Tile.ID].Count == 0)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        public static bool SetTower(Tower tower, Tile tile)
+        {
+            tile.SetBlockableObject(tower);
+            if (IsTilePathsValid())
+            {
+                UpdateTilePaths();
+
+                List<Tile> walkableNeighbors = GetWalkableNeighbors(tile);
+
+                for (int i = 0; i < walkableNeighbors.Count; i++)
+                {
+                   walkableNeighbors[i].RegisterTowerListener(tower);
+                }
+                OnTowerCreated();
+                return true;
+            }
+
+            RemoveTower(tile);
+            return false;
+
+        }
+
+        private static void OnTowerCreated()
+        {
+            if (TowerCreated != null)
+                TowerCreated();
+        }
+
+        public static void RemoveTower(Tile tile)
+        {
+            tile.RemoveBlockableObject();
+            UpdateTilePaths();
+        }
+
         public static void Draw()
         {
             Microsoft.Xna.Framework.Graphics.Texture2D first = ScreenManagement.ScreenManager.Game.Content.Load<Microsoft.Xna.Framework.Graphics.Texture2D>("Tiles\\1");
@@ -244,18 +349,19 @@ namespace UHSampleGame.TileSystem
             graphics.Add(second);
             graphics.Add(third);
 
-            Vector2 left_position = new Vector2(position.X - ((tileSize.X * numTiles.X) / 2.0f), 
+            Vector2 left_position = new Vector2(position.X - ((tileSize.X * numTiles.X) / 2.0f),
                 position.Z - ((tileSize.Y * numTiles.Y) / 2.0f));
 
             for (int i = 0; i < tiles.Count; i++)
             {
                 ScreenManagement.ScreenManager.SpriteBatch.Begin();
-                ScreenManagement.ScreenManager.SpriteBatch.Draw(graphics[i % 3], 
-                    new Vector2(-left_position.X + (tiles[i].Position.X - (first.Width / 2)), 
-                        -left_position.Y + (tiles[i].Position.Z - (first.Height / 2))), 
-                        Microsoft.Xna.Framework.Graphics.Color.White);
+                ScreenManagement.ScreenManager.SpriteBatch.Draw(graphics[i % 3],
+                    new Vector2(-left_position.X + (tiles[i].Position.X - (first.Width / 2)),
+                        -left_position.Y + (tiles[i].Position.Z - (first.Height / 2))),
+                        Color.White);
                 ScreenManagement.ScreenManager.SpriteBatch.End();
             }
         }
+
     }
 }

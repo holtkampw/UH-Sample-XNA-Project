@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="UHSampleGame">
+</Property><Property Name="Solution File" Value="C:\Users\Philip\Desktop\UHsample2\UHSampleGame.sln">
+</Property><Property Name="User Options File" Value="C:\Users\Philip\Desktop\UHsample2\UHSampleGame.suo">
+</Property><Property Name="Date" Value="Saturday, September 18, 2010">
+</Property><Property Name="Time" Value="2:30 AM">
+</Property><Property Name="Solution" Value="UHSampleGame">
+</Property><Property Name="Solution File" Value="C:\Users\Philip\Desktop\UHsample2\UHSampleGame.sln">
+</Property><Property Name="Date" Value="Saturday, September 18, 2010">
+</Property><Property Name="Time" Value="2:30:40 AM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="UHSampleGame.sln" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame.sln">
+</Event><Event ErrorLevel="0" Project="" Source="UHSampleGame.suo" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame.suo">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\UHSampleGame.csproj" Description="Upgraded XNA Game Studio project to XNA Framework 4.0.">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\UHSampleGame.csproj" Description="Project file successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\UHSampleGame.csproj">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\UHSampleGame.csproj.user" Description="Project user file successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\UHSampleGame.csproj.user">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CameraManagement\CameraManager.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CameraManagement\CameraManager.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\AnimatedTileObject.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\AnimatedTileObject.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\Base\Base.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\Base\Base.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\Base\TestBase.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\Base\TestBase.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\GameObject.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\GameObject.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\StaticModel.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\StaticModel.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\StaticTileObject.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\StaticTileObject.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\Towers\Tower.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\Towers\Tower.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\Towers\TowerAGood.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\Towers\TowerAGood.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\Towers\TowerTest.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\Towers\TowerTest.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\Units\TestUnit.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\Units\TestUnit.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\Units\Unit.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\Units\Unit.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Events\GameEventArgs.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Events\GameEventArgs.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\InputManagement\InputManager.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\InputManagement\InputManager.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\CoreObjects\AnimatedModel.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\CoreObjects\AnimatedModel.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\MenuSystem\MenuEntry.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\MenuSystem\MenuEntry.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\MenuSystem\MenuScreen.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\MenuSystem\MenuScreen.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\PathFinding\AStar.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\PathFinding\AStar.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Program.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Program.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Game1.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Game1.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\ScreenManagement\Screen.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\ScreenManagement\Screen.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\ScreenManagement\ScreenManager.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\ScreenManagement\ScreenManager.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Screens\AnimatedModelScreen.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Screens\AnimatedModelScreen.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Screens\DummyTextScreen.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Screens\DummyTextScreen.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Screens\MenuScreenTest.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Screens\MenuScreenTest.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Screens\ModelAndText.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Screens\ModelAndText.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Screens\ModelScreen.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Screens\ModelScreen.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Screens\PlayScreen.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Screens\PlayScreen.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Screens\TileTestScreen.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Screens\TileTestScreen.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\TileSystem\Tile.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\TileSystem\Tile.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\TileSystem\TileMap.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\TileSystem\TileMap.cs">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\Game.ico" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\Game.ico">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\GameThumbnail.png" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\UHSampleGame\GameThumbnail.png">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\UHSampleGame.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="UHSampleGame" Source="UHSampleGame\UHSampleGame.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\SkinnedModelWindows.csproj" Description="Upgraded XNA Game Studio project to XNA Framework 4.0.">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\SkinnedModelWindows.csproj" Description="Project file successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModel\SkinnedModelWindows.csproj">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\AnimationClip.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModel\AnimationClip.cs">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\AnimationPlayer.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModel\AnimationPlayer.cs">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\Keyframe.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModel\Keyframe.cs">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModel\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\SkinningData.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModel\SkinningData.cs">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\SkinnedModelWindows.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SkinnedModelWindows" Source="SkinnedModel\SkinnedModelWindows.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\SkinnedModelPipeline.csproj" Description="Project file successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModelPipeline\SkinnedModelPipeline.csproj">
+</Event><Event ErrorLevel="0" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModelPipeline\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\SkinnedModelProcessor.cs" Description="File successfully backed up as C:\Users\Philip\Desktop\UHsample2\Backup\SkinnedModelPipeline\SkinnedModelProcessor.cs">
+</Event><Event ErrorLevel="1" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\SkinnedModelPipeline.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\SkinnedModelPipeline.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\SkinnedModelPipeline.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="UHSampleGame.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="UHSampleGame.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\UHSampleGame.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="UHSampleGame" Source="UHSampleGame\UHSampleGame.csproj" Description="Upgraded XNA Framework references to XNA Framework 4.0.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="dude.fbx" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="head.tga" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="jacket.tga" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="pants.tga" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="upBodyC.tga" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="background.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="Font.spritefont" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="background.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="box.fbx" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="box_texture.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="plane.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="pyramids.fbx" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="tower1_enemy.fbx" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="tower1_player.fbx" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="towerAColor.tga" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="1.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="2.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="3.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="intro.wmv" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="Content.contentproj" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="SkinnedModel.fx" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="water_tiled.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="UHSampleGameContent" Source="UHSampleGame\Content\UHSampleGameContent.contentproj" Description="Upgraded XNA Game Studio nested content projects to XNA Framework 4.0 and promoted to sibling project.">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\SkinnedModelWindows.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="SkinnedModelWindows" Source="SkinnedModel\SkinnedModelWindows.csproj" Description="Upgraded XNA Framework references to XNA Framework 4.0.">
+</Event><Event ErrorLevel="0" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\SkinnedModelPipeline.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\SkinnedModelPipeline.csproj" Description="Upgraded XNA Framework Content Pipeline References.">
+</Event><Event ErrorLevel="0" Project="SkinnedModelPipeline" Source="SkinnedModelPipeline\SkinnedModelPipeline.csproj" Description="Upgraded XNA Framework references to XNA Framework 4.0.">
+</Event></UpgradeLog>

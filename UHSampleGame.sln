@@ -1,11 +1,23 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UHSampleGame", "UHSampleGame\UHSampleGame.csproj", "{A06FBD7B-DC01-4507-8229-B23BDFAC269E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedModelWindows", "SkinnedModel\SkinnedModelWindows.csproj", "{0D41E29B-829F-4255-BCA5-64DC2677DA6D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedModelPipeline", "SkinnedModelPipeline\SkinnedModelPipeline.csproj", "{007DFB20-8DAF-4088-BB0A-C5EB0282E679}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UHSampleGameContent", "UHSampleGame\Content\UHSampleGameContent.contentproj", "{896DAB71-C352-4B97-A450-C5AEB00714F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{879FF824-4268-4202-BDAB-3E7F8B1946D3}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+		Performance2.psess = Performance2.psess
+		Performance3.psess = Performance3.psess
+		Performance4.psess = Performance4.psess
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstancedModelPipeline", "InstancedModelPipeline\InstancedModelPipeline.csproj", "{FF69FD90-8834-4F60-ADA5-36387F112437}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +33,6 @@ Global
 		{A06FBD7B-DC01-4507-8229-B23BDFAC269E}.Release|x86.ActiveCfg = Release|x86
 		{A06FBD7B-DC01-4507-8229-B23BDFAC269E}.Release|x86.Build.0 = Release|x86
 		{A06FBD7B-DC01-4507-8229-B23BDFAC269E}.Release|Xbox 360.ActiveCfg = Release|x86
-		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Debug|x86.ActiveCfg = Debug|x86
-		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Debug|Xbox 360.ActiveCfg = Debug|x86
-		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Release|x86.ActiveCfg = Release|x86
-		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Release|Xbox 360.ActiveCfg = Release|x86
 		{0D41E29B-829F-4255-BCA5-64DC2677DA6D}.Debug|x86.ActiveCfg = Debug|x86
 		{0D41E29B-829F-4255-BCA5-64DC2677DA6D}.Debug|x86.Build.0 = Debug|x86
 		{0D41E29B-829F-4255-BCA5-64DC2677DA6D}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
@@ -41,6 +49,18 @@ Global
 		{007DFB20-8DAF-4088-BB0A-C5EB0282E679}.Release|x86.Build.0 = Release|x86
 		{007DFB20-8DAF-4088-BB0A-C5EB0282E679}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
 		{007DFB20-8DAF-4088-BB0A-C5EB0282E679}.Release|Xbox 360.Build.0 = Release|Xbox 360
+		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Debug|x86.ActiveCfg = Debug|x86
+		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Debug|Xbox 360.ActiveCfg = Debug|x86
+		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Release|x86.ActiveCfg = Release|x86
+		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Release|Xbox 360.ActiveCfg = Release|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Debug|x86.ActiveCfg = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Debug|x86.Build.0 = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Debug|Xbox 360.ActiveCfg = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Debug|Xbox 360.Build.0 = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Release|x86.ActiveCfg = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Release|x86.Build.0 = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Release|Xbox 360.ActiveCfg = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Release|Xbox 360.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

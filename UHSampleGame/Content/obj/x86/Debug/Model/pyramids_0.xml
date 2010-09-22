@@ -3,7 +3,11 @@
   <Asset Type="Graphics:NodeContent">
     <Name>RootNode</Name>
     <Identity>
+<<<<<<< HEAD
       <SourceFilename>C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+=======
+      <SourceFilename>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+>>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c
       <SourceTool>FbxImporter</SourceTool>
     </Identity>
     <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
@@ -86,7 +90,11 @@
     <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
       <Name>ground_tex</Name>
       <Identity>
+<<<<<<< HEAD
         <SourceFilename>C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+=======
+        <SourceFilename>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+>>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
@@ -108,7 +116,11 @@
     <Resource ID="#Resource2" Type="Graphics:BasicMaterialContent">
       <Name>pyramid</Name>
       <Identity>
+<<<<<<< HEAD
         <SourceFilename>C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+=======
+        <SourceFilename>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+>>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>

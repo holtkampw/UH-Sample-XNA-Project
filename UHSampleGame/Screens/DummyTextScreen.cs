@@ -89,7 +89,7 @@ namespace UHSampleGame.Screens
         {
             if (input.CheckNewAction(InputAction.Selection))
             {
-                screenManager.ShowScreen(new ModelScreen());
+               // screenManager.ShowScreen(new ModelScreen());
             }
         }
 

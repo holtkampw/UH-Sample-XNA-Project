@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CoreObjects;
+using UHSampleGame.Events;
 using UHSampleGame.PathFinding;
 
 namespace UHSampleGame.TileSystem
@@ -17,9 +19,12 @@ namespace UHSampleGame.TileSystem
         Vector2 size;
         TileType tileType;
         GameObject gameObject;
-        List<Tile> path;
-
+        List<Unit> units;
+        Dictionary<int, List<Tile>> paths;
+        Random rand;
         int id;
+
+        public event RegisterUnitWithTile UnitEnter;
 
         public TileType TileType
         {
@@ -42,11 +47,10 @@ namespace UHSampleGame.TileSystem
             get { return size; }
         }
 
-        public List<Tile> Path
+        public Dictionary<int, List<Tile>> Paths
         {
-            get { return path; }
+            get { return paths; }
         }
-
 
         /// <summary>
         /// The unique id of the tile
@@ -65,17 +69,17 @@ namespace UHSampleGame.TileSystem
             : this(id, position, size, TileType.Walkable) { }
 
         public Tile()
-        {
-            this.tileType = TileType.Null;
-            this.id = -1;
-        }
+            : this(-1, Vector3.Zero, Vector2.Zero, TileType.Null) { }
 
         public Tile(int id, Vector3 position, Vector2 size, TileType tileType)
         {
+            //this.rand = new Random(DateTime.Now.Millisecond);
             this.id = id;
             this.position = position;
             this.size = size;
             this.tileType = tileType;
+            this.paths = new Dictionary<int, List<Tile>>();
+            this.units = new List<Unit>();
 
             SetTileType(tileType);
 
@@ -83,7 +87,7 @@ namespace UHSampleGame.TileSystem
 
         public bool IsWalkable()
         {
-            return tileType != TileType.Blocked && !IsNull();
+            return tileType == TileType.Walkable;
         }
 
 
@@ -104,32 +108,71 @@ namespace UHSampleGame.TileSystem
 
         public override string ToString()
         {
-            return tileType.ToString();
+            return this.ID.ToString() + " " + tileType.ToString();
         }
 
-        public void SetTower(Tower tower)
+        public void SetBlockableObject(GameObject gameObject)
         {
-            gameObject = tower;
+            this.gameObject = gameObject;
             SetTileType(TileType.Blocked);
         }
 
-        public void RemoveTower(Tower tower)
+        public void RemoveBlockableObject()
         {
-            gameObject = null;
+            this.gameObject = null;
             SetTileType(TileType.Walkable);
         }
 
-        public List<Tile> GetPathTo(Tile tile)
+        public List<Tile> GetPathTo(Tile baseTile)
         {
-            AStar aStar = new AStar(this, tile);
-            this.path = new List<Tile>(aStar.FindPath());
-            return path;
+            UpdatePathTo(baseTile);
+            return paths[baseTile.ID];
         }
 
-        public void UpdatePathTo(Tile tile)
+        public void UpdatePathTo(Tile baseTile)
         {
-            AStar aStar = new AStar(this, tile);
-            this.path = new List<Tile>(aStar.FindPath());
+            AStar aStar = new AStar(this, baseTile);
+            paths[baseTile.ID] = new List<Tile>(aStar.FindPath());
+        }
+
+        public Vector3 GetRandPoint()
+        {
+            rand = new Random(DateTime.Now.Millisecond);
+            int sizeX = (int)(size.X/3);
+            int sizeY = (int)(size.Y / 3);
+            return new Vector3(position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, position.Z + rand.Next(-sizeY, sizeY));
+        }
+
+        public void RegisterTowerListener(Tower tower)
+        {
+            UnitEnter += tower.RegisterAttackUnit;
+        }
+
+        public void UnregisterTowerListener(Tower tower)
+        {
+            UnitEnter -= tower.RegisterAttackUnit;
+        }
+
+        public void AddUnit(Unit unit)
+        {
+            units.Add(unit);
+            unit.Died += RemoveUnit;
+            OnUnitEnter(new GameEventArgs(unit));
+        }
+
+        public void RemoveUnit(Unit unit)
+        {
+            units.Remove(unit);
+            if(units.Count >0)
+                OnUnitEnter(new GameEventArgs(units[0]));
+        }
+
+        private void OnUnitEnter(GameEventArgs args)
+        {
+            if (UnitEnter != null)
+            {
+                UnitEnter(args);
+            }
         }
 
         //public override bool Equals(object obj)

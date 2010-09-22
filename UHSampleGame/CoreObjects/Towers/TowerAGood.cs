@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using UHSampleGame.ScreenManagement;
+using UHSampleGame.TileSystem;
 #endregion
 
 namespace UHSampleGame.CoreObjects.Towers
@@ -17,10 +18,10 @@ namespace UHSampleGame.CoreObjects.Towers
         #endregion
 
         #region Initialization
-        public TowerAGood(Vector3 position)
-            : base(ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\tower1_player"))
+        public TowerAGood(int playerNum, int teamNum, Tile tile)
+            : base(playerNum, teamNum, 
+            ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red"), tile)
         {
-            this.position = position;
             this.Scale = 4.0f;
         }
         #endregion

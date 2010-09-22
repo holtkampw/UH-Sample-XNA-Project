@@ -6,17 +6,19 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using UHSampleGame.ScreenManagement;
-
+using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Base
 {
     public class TestBase : Base
     {
-        public TestBase(Vector3 position)
-            :base(ScreenManager.Game.Content.Load<Model>("Model\\pyramids"))
+        public TestBase(int playerNum, int teamNum, Tile tile)
+            :base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Model\\pyramids"),
+            tile)
         {
-            this.scale = 5;
-            this.position = position;
+            this.Scale = 5;
+            
+            this.tile = tile;
         }
     }
 }
