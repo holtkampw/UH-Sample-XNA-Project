@@ -15,6 +15,8 @@ namespace UHSampleGame.Screens
         Video video;
         VideoPlayer videoPlayer;
 
+        Texture2D titleTexture;
+
         public MenuScreenTest()
             :base("MenuScreenTest")
         {
@@ -63,6 +65,8 @@ namespace UHSampleGame.Screens
             video = ScreenManager.Game.Content.Load<Video>("Video\\intro");
             videoPlayer = new VideoPlayer();
             videoPlayer.IsLooped = true;
+
+            titleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images\\deepSea");
         }
 
         public override void UnloadContent()
@@ -91,11 +95,15 @@ namespace UHSampleGame.Screens
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
             Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
             spriteBatch.Begin();
+
             if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
             {
                 //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
                 spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, viewport.Width , viewport.Height), Color.White);
             }
+
+            spriteBatch.Draw(titleTexture, new Vector2(0, 0), Color.White);
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

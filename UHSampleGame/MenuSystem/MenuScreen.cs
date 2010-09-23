@@ -27,7 +27,7 @@ namespace UHSampleGame.MenuSystem
             this.menuTitle = menuTitle;
             this.selectedEntry = 0;
             this.menuEntries = new List<MenuEntry>();
-            this.menuEntryStartPosition = new Vector2(50, 75);
+            this.menuEntryStartPosition = new Vector2(90, 220);
         }
 
         public override void HandleInput(InputManager input)
@@ -123,13 +123,13 @@ namespace UHSampleGame.MenuSystem
             }
 
             // Draw the menu title.
-            Vector2 titlePosition = new Vector2(ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width / 2, 50);
-            Vector2 titleOrigin = font.MeasureString(menuTitle) / 2;
-            Color titleColor = Color.White;
-            float titleScale = 1.25f;
+            //Vector2 titlePosition = new Vector2(ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width / 2, 50);
+            //Vector2 titleOrigin = font.MeasureString(menuTitle) / 2;
+            //Color titleColor = Color.White;
+            //float titleScale = 1.25f;
 
-            spriteBatch.DrawString(font, menuTitle, titlePosition, titleColor, 0,
-                                   titleOrigin, titleScale, SpriteEffects.None, 0);
+            //spriteBatch.DrawString(font, menuTitle, titlePosition, titleColor, 0,
+            //                       titleOrigin, titleScale, SpriteEffects.None, 0);
 
             spriteBatch.End();
         }

@@ -3,7 +3,11 @@
   <Asset Type="Graphics:MeshContent">
     <Name>pCube1</Name>
     <Identity>
+<<<<<<< HEAD
+      <SourceFilename>C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\Model\box.fbx</SourceFilename>
+=======
       <SourceFilename>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\Content\Model\box.fbx</SourceFilename>
+>>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c
       <SourceTool>FbxImporter</SourceTool>
     </Identity>
     <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
@@ -27,7 +31,11 @@
     <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
       <Name>phong1</Name>
       <Identity>
+<<<<<<< HEAD
+        <SourceFilename>C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\Model\box.fbx</SourceFilename>
+=======
         <SourceFilename>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\Content\Model\box.fbx</SourceFilename>
+>>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
