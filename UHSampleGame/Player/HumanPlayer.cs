@@ -57,7 +57,7 @@ namespace UHSampleGame.Player
                 avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
 
             if (input.CheckAction(InputAction.Selection))
-                AddUnit(new TestUnit(1, 1, playerBase.Position, playerBase.GoalBase));
+                AddUnit(UnitType.TestUnit, new TestUnit(1, 1, playerBase.Position, playerBase.GoalBase));
 
             if (input.CheckNewAction(InputAction.TowerBuild))
                 BuildTower(TileMap.GetTileFromPos(avatar.Position));

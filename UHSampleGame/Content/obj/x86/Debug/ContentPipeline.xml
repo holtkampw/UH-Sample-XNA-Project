@@ -11,6 +11,15 @@
       <Time>2010-09-21T00:07:36.523508-05:00</Time>
     </Item>
     <Item>
+      <Source>font.spritefont</Source>
+      <Name>font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\font.xnb</Output>
+      <Time>2010-09-21T17:01:32.0561514-05:00</Time>
+    </Item>
+    <Item>
       <Source>DummyText\background.png</Source>
       <Name>DummyText\background</Name>
       <Importer>TextureImporter</Importer>
@@ -74,9 +83,23 @@
       <Time>2010-09-21T00:07:36.6172616-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\box_0.xml</Key>
-        <Value>2010-09-21T15:31:08.0936091-05:00</Value>
+        <Value>2010-09-22T11:29:17.6426714-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Model\pyramids.fbx</Source>
+      <Name>Model\pyramids</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Model\pyramids.xnb</Output>
+      <Time>2010-09-22T00:29:55.8438148-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Model\pyramids_0.xml</Key>
+        <Value>2010-09-22T11:29:22.4554794-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
     </Item>
     <Item>
       <Source>AnimatedModel\dude.fbx</Source>
@@ -88,10 +111,10 @@
       <Time>2010-09-21T00:07:36.132868-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\AnimatedModel\dude_0.xml</Key>
-        <Value>2010-09-21T15:31:22.6883865-05:00</Value>
+        <Value>2010-09-22T11:29:33.3936794-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\SkinnedModel.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\SkinnedModel_0.xnb</Request>
       <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Request>
       <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Request>
       <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Request>
@@ -105,15 +128,6 @@
       <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Video\intro.xnb</Output>
       <Extra>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Video\intro.wmv</Extra>
       <Time>2010-09-21T00:07:39.0704808-05:00</Time>
-    </Item>
-    <Item>
-      <Source>SkinnedModel.fx</Source>
-      <Name>SkinnedModel</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\SkinnedModel.xnb</Output>
-      <Time>2010-09-21T00:07:38.9298504-05:00</Time>
     </Item>
     <Item>
       <Source>Model\box.fbx</Source>
@@ -143,7 +157,7 @@
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Model\pyramids_0.xml</Output>
-      <Time>2010-09-21T00:07:36.8985224-05:00</Time>
+      <Time>2010-09-22T00:29:55.8438148-05:00</Time>
     </Item>
     <Item>
       <Source>Model\plane.png</Source>
@@ -183,6 +197,14 @@
       <Options>None</Options>
       <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Output>
       <Time>2010-09-21T00:07:36.2266216-05:00</Time>
+    </Item>
+    <Item>
+      <Source>SkinnedModel.fx</Source>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\SkinnedModel_0.xnb</Output>
+      <Time>2010-09-21T00:07:38.9298504-05:00</Time>
     </Item>
     <Item>
       <Source>AnimatedModel\jacket.tga</Source>
@@ -237,7 +259,21 @@
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Output>
-      <Time>2010-09-21T12:05:41.5580565-05:00</Time>
+      <Time>2010-09-21T16:49:35.2879097-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Towers\towerA_red.fbx</Source>
+      <Name>Objects\Towers\towerA_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerA_red.xnb</Output>
+      <Time>2010-09-21T16:49:35.2879097-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
+        <Value>2010-09-22T11:29:38.4721294-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Towers\towerAColor.tga</Source>
@@ -256,52 +292,41 @@
       <Time>2010-09-21T15:35:03-05:00</Time>
     </Item>
     <Item>
-      <Source>Objects\Towers\towerA_red.fbx</Source>
-      <Name>Objects\Towers\towerA_red</Name>
+      <Source>Objects\Towers\Cats.fbx</Source>
+      <Name>Objects\Towers\Cats</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>InstancedModelProcessor</Processor>
+      <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerA_red.xnb</Output>
-      <Time>2010-09-21T12:05:41.5580565-05:00</Time>
+      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\Cats.xnb</Output>
+      <Time>2010-09-22T13:23:19.9479208-05:00</Time>
       <Dependency>
-        <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
-        <Value>2010-09-21T15:31:27.2824599-05:00</Value>
+        <Key>obj\x86\Debug\Objects\Towers\Cats_0.xml</Key>
+        <Value>2010-09-22T13:23:48.9130629-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\cat_0.xnb</Request>
     </Item>
     <Item>
-      <Source>Objects\Towers\InstancedModel.fx</Source>
-      <Name>Objects\Towers\InstancedModel</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Output>
-      <Time>2010-09-21T16:45:44.2785343-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Model\pyramids.fbx</Source>
-      <Name>Model\pyramids</Name>
+      <Source>Objects\Towers\Cats.fbx</Source>
       <Importer>FbxImporter</Importer>
-      <Processor>InstancedModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Model\pyramids.xnb</Output>
-      <Time>2010-09-21T00:07:36.8985224-05:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Model\pyramids_0.xml</Key>
-        <Value>2010-09-21T15:31:12.2345256-05:00</Value>
-      </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Model\InstancedModel.xnb</Request>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Towers\Cats_0.xml</Output>
+      <Time>2010-09-22T13:23:19.9479208-05:00</Time>
     </Item>
     <Item>
-      <Source>Model\InstancedModel.fx</Source>
-      <Name>Model\InstancedModel</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
+      <Source>Objects\Towers\cat.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Model\InstancedModel.xnb</Output>
-      <Time>2010-09-21T16:44:53.8660926-05:00</Time>
+      <Output>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\cat_0.xnb</Output>
+      <Time>2010-09-22T13:23:19.8541702-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -342,10 +367,6 @@
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
         <Value>2010-08-23T12:41:18-05:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Users\William Holtkamp\Desktop\ImagineCup\InstancedModelPipeline\bin\x86\Debug\InstancedModelPipeline.dll</Key>
-        <Value>2010-09-21T11:39:55.2137786-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>

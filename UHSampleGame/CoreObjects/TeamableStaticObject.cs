@@ -23,8 +23,8 @@ namespace UHSampleGame.CoreObjects
             get { return teamNum; }
         }
 
-        public TeamableStaticObject(int playerNum, int teamNum, Model model )
-            :base(model)
+        public TeamableStaticObject(int playerNum, int teamNum, Model model, Vector3 position )
+            :base(model, position)
         {
             this.playerNum = playerNum;
             this.teamNum = teamNum;

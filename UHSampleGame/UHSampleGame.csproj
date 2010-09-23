@@ -126,6 +126,7 @@
     <Compile Include="CoreObjects\Base\Base.cs" />
     <Compile Include="CoreObjects\Base\TestBase.cs" />
     <Compile Include="CoreObjects\GameObject.cs" />
+    <Compile Include="CoreObjects\InstancedModel.cs" />
     <Compile Include="CoreObjects\StaticModel.cs" />
     <Compile Include="CoreObjects\StaticTileObject.cs" />
     <Compile Include="CoreObjects\TeamableAnimatedObject.cs" />
@@ -218,9 +219,6 @@
       <Name>UHSampleGameContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CoreObjects\Towers\InstancedModel.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

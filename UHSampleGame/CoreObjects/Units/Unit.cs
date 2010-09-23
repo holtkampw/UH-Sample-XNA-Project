@@ -12,6 +12,8 @@ using UHSampleGame.Events;
 
 namespace UHSampleGame.CoreObjects.Units
 {
+    public enum UnitType { TestUnit };
+
     public abstract class Unit : TeamableStaticObject
     {
         public Vector3 velocity;
@@ -23,16 +25,22 @@ namespace UHSampleGame.CoreObjects.Units
         protected bool isStuck;
         protected int health;
         protected int pathLength;
+        protected UnitType type;
 
         public int Health
         {
             get { return health; }
         }
 
+        public UnitType Type
+        {
+            get { return type; }
+        }
+
         public event UnitDied Died;
 
-        public Unit(int playerNum, int teamNum, Model model, Base.Base goalBase)
-            : base(playerNum, teamNum, model)
+        public Unit(int playerNum, int teamNum, Model model, Base.Base goalBase, Vector3 position)
+            : base(playerNum, teamNum, model, position)
         {
             previousTile = new Tile();
             currentTile = new Tile();
@@ -138,10 +146,10 @@ namespace UHSampleGame.CoreObjects.Units
 
         private void SetCurrentTile(Tile tile)
         {
-            currentTile.RemoveUnit(this);
+            currentTile.RemoveUnit(this.type, this);
             currentTile = tile;
             pathLength = currentTile.Paths[goalTile.ID].Count;
-            currentTile.AddUnit(this);
+            currentTile.AddUnit(this.type, this);
         }
 
         public int GetPathLength()
@@ -161,7 +169,7 @@ namespace UHSampleGame.CoreObjects.Units
         private void OnDied()
         {
             if (Died != null)
-                Died(this);
+                Died(this.type, this);
         }
 
         public override string ToString()

@@ -30,6 +30,11 @@ namespace UHSampleGame.Screens
 
         HumanPlayer player;
 
+        int frames;
+        int frameRate;
+        SpriteFont font;
+        private TimeSpan elapsedTime;
+
         #endregion
 
         #region Initialization
@@ -66,6 +71,10 @@ namespace UHSampleGame.Screens
                 cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
+
+            font = ScreenManager.Game.Content.Load<SpriteFont>("font");
+            frames = 0;
+            frameRate = 0;
         }
         #endregion
 
@@ -77,6 +86,15 @@ namespace UHSampleGame.Screens
 
             goalBase.Update(gameTime);
             player.Update(gameTime);
+
+            elapsedTime += gameTime.ElapsedGameTime;
+
+            if (elapsedTime > TimeSpan.FromSeconds(1))
+            {
+                elapsedTime -= TimeSpan.FromSeconds(1);
+                frameRate = frames;
+                frames = 0;
+            }
         }
 
         public override void HandleInput(InputManager input)
@@ -97,6 +115,13 @@ namespace UHSampleGame.Screens
             player.Draw(gameTime);
             goalBase.Draw(gameTime);
 
+            ScreenManager.SpriteBatch.Begin();
+            string text = "FPS: " + frameRate + "\nTowers: " + player.TowerCount + "\nUnits: " + player.UnitCount;
+            ScreenManager.SpriteBatch.DrawString(font, text, new Vector2(11.0f, 11.0f), Color.Black);
+            ScreenManager.SpriteBatch.DrawString(font, text, new Vector2(10.0f, 10.0f), Color.White);
+            ScreenManager.SpriteBatch.End();
+
+            frames++;
         }
         #endregion
     }
