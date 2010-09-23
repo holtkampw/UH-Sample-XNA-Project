@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\William Holtkamp\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
@@ -7,4 +8,14 @@ C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample
 C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\William Holtkamp\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+=======
+C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\William Holtkamp\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+=======
+C:\Users\William Holtkamp\Desktop\UHSampleGame\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\William Holtkamp\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+>>>>>>> 2dba87b60dd76a2f48c64416ed7a8122b5876b5c
 >>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c

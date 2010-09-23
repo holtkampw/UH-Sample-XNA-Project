@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:Graphics="Microsoft.Xna.Framework.Content.Pipeline.Graphics" xmlns:Framework="Microsoft.Xna.Framework">
   <Asset Type="Graphics:NodeContent">
@@ -123,4 +124,143 @@
   <ExternalReferences>
     <ExternalReference ID="#External1" TargetType="Graphics:TextureContent">..\..\..\..\Model\plane.png</ExternalReference>
   </ExternalReferences>
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Graphics="Microsoft.Xna.Framework.Content.Pipeline.Graphics" xmlns:Framework="Microsoft.Xna.Framework">
+  <Asset Type="Graphics:NodeContent">
+    <Name>RootNode</Name>
+    <Identity>
+<<<<<<< HEAD
+      <SourceFilename>C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+=======
+      <SourceFilename>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+>>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c
+      <SourceTool>FbxImporter</SourceTool>
+    </Identity>
+    <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
+    <Children>
+      <Child Type="Graphics:MeshContent">
+        <Name>pPlane1</Name>
+        <Transform>1 0 0 0 0 1 0 0 0 0 1 0 -3.62702227 0.107255295 0.277747482 1</Transform>
+        <Positions>-21.14201 -4.694469E-15 21.14201 21.14201 -4.694469E-15 21.14201 -21.14201 4.694469E-15 -21.14201 21.14201 4.694469E-15 -21.14201</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource1</Material>
+            <Indices>2 1 0 0 3 2</Indices>
+            <Vertices>
+              <PositionIndices>0 1 3 2</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 0.99999994 2.22044592E-16 0 0.99999994 2.22044592E-16 0 0.99999994 2.22044592E-16 0 0.99999994 2.22044592E-16</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.001992032 0.998008 0.998007953 0.998008 0.998007953 0.00199204683 0.001992032 0.00199204683</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+      <Child Type="Graphics:MeshContent">
+        <Name>pPyramid1</Name>
+        <Transform>1 0 0 0 0 1 0 0 0 0 1 0 1.22206914 2.26777649 -4.89887 1</Transform>
+        <Positions>5.666531E-07 -2.1605854 -4.321171 -4.321171 -2.1605854 -3.77768743E-07 -1.88884371E-07 -2.1605854 4.321171 4.321171 -2.1605854 0 0 2.1605854 0</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource2</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 9 8 7 12 11 10 15 14 13</Indices>
+            <Vertices>
+              <PositionIndices>0 3 2 1 0 1 4 1 2 4 2 3 4 3 0 4</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 -0.99999994 0 0 -0.99999994 0 0 -0.99999994 0 0 -0.99999994 0 -0.57735014 0.5773502 -0.577350259 -0.57735014 0.5773502 -0.577350259 -0.57735014 0.5773502 -0.577350259 -0.577350259 0.577350259 0.577350259 -0.577350259 0.577350259 0.577350259 -0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 -0.5773502 0.577350259 0.577350259 -0.5773502 0.577350259 0.577350259 -0.5773502</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.50000006 1 0.75 0.75 0.5 0.5 0.25 0.75 0.25 0.5 0.375 0.5 0.5 0 0.375 0.5 0.5 0.5 0.5 0 0.5 0.5 0.625 0.5 0.5 0 0.625 0.5 0.75 0.5 0.5 0</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+      <Child Type="Graphics:MeshContent">
+        <Name>pPyramid2</Name>
+        <Transform>1 0 0 0 0 1 0 0 0 0 1 0 -14.6088829 4.75413656 -11.1815557 1</Transform>
+        <Positions>1.208393E-06 -4.60746861 -9.214937 -9.214937 -4.60746861 -8.055954E-07 -4.027977E-07 -4.60746861 9.214937 9.214937 -4.60746861 0 0 4.60746861 0</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource2</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 9 8 7 12 11 10 15 14 13</Indices>
+            <Vertices>
+              <PositionIndices>0 3 2 1 0 1 4 1 2 4 2 3 4 3 0 4</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 -0.99999994 0 0 -0.99999994 0 0 -0.99999994 0 0 -0.99999994 0 -0.5773502 0.5773502 -0.5773503 -0.5773502 0.5773502 -0.5773503 -0.5773502 0.5773502 -0.5773503 -0.577350259 0.5773502 0.5773502 -0.577350259 0.5773502 0.5773502 -0.577350259 0.5773502 0.5773502 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 0.577350259 -0.5773502 0.577350259 0.577350259 -0.5773502 0.577350259 0.577350259 -0.5773502</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.50000006 1 0.75 0.75 0.5 0.5 0.25 0.75 0.25 0.5 0.375 0.5 0.5 0 0.375 0.5 0.5 0.5 0.5 0 0.5 0.5 0.625 0.5 0.5 0 0.625 0.5 0.75 0.5 0.5 0</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+      <Child Type="Graphics:MeshContent">
+        <Name>pPyramid3</Name>
+        <Transform>1 0 0 0 0 1 0 0 0 0 1 0 11.7639952 1.9545455 -12.7217169 1</Transform>
+        <Positions>4.67035619E-07 -1.780755 -3.56151 -3.56151 -1.780755 -3.113571E-07 -1.55678549E-07 -1.780755 3.56151 3.56151 -1.780755 0 0 1.780755 0</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource2</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 9 8 7 12 11 10 15 14 13</Indices>
+            <Vertices>
+              <PositionIndices>0 3 2 1 0 1 4 1 2 4 2 3 4 3 0 4</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 -0.99999994 0 0 -0.99999994 0 0 -0.99999994 0 0 -0.99999994 0 -0.57735014 0.577350259 -0.577350259 -0.57735014 0.577350259 -0.577350259 -0.57735014 0.577350259 -0.577350259 -0.577350259 0.5773502 0.57735014 -0.577350259 0.5773502 0.57735014 -0.577350259 0.5773502 0.57735014 0.5773502 0.5773502 0.577350259 0.5773502 0.5773502 0.577350259 0.5773502 0.5773502 0.577350259 0.577350259 0.577350259 -0.57735014 0.577350259 0.577350259 -0.57735014 0.577350259 0.577350259 -0.57735014</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.50000006 1 0.75 0.75 0.5 0.5 0.25 0.75 0.25 0.5 0.375 0.5 0.5 0 0.375 0.5 0.5 0.5 0.5 0 0.5 0.5 0.625 0.5 0.5 0 0.625 0.5 0.75 0.5 0.5 0</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+    </Children>
+  </Asset>
+  <Resources>
+    <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
+      <Name>ground_tex</Name>
+      <Identity>
+<<<<<<< HEAD
+        <SourceFilename>C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+=======
+        <SourceFilename>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+>>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c
+        <SourceTool>FbxImporter</SourceTool>
+      </Identity>
+      <OpaqueData>
+        <Data Key="DiffuseColor" Type="Framework:Vector3">0.8 0.8 0.8</Data>
+        <Data Key="EmissiveColor" Type="Framework:Vector3">0 0 0</Data>
+        <Data Key="Alpha" Type="float">1</Data>
+        <Data Key="SpecularColor" Type="Framework:Vector3">0.5040665 0.5040665 0.5040665</Data>
+        <Data Key="SpecularPower" Type="float">20</Data>
+      </OpaqueData>
+      <Textures>
+        <Texture Key="Texture">
+          <OpaqueData>
+            <Data Key="TextureCoordinate">TextureCoordinate0</Data>
+          </OpaqueData>
+          <Reference>#External1</Reference>
+        </Texture>
+      </Textures>
+    </Resource>
+    <Resource ID="#Resource2" Type="Graphics:BasicMaterialContent">
+      <Name>pyramid</Name>
+      <Identity>
+<<<<<<< HEAD
+        <SourceFilename>C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+=======
+        <SourceFilename>C:\Users\William Holtkamp\Desktop\ImagineCup\UHSampleGame\Content\Model\pyramids.fbx</SourceFilename>
+>>>>>>> c5b3867a418114ac1fae6e968593a3f01479046c
+        <SourceTool>FbxImporter</SourceTool>
+      </Identity>
+      <OpaqueData>
+        <Data Key="DiffuseColor" Type="Framework:Vector3">0.298039228 0.219026 0.105190314</Data>
+        <Data Key="EmissiveColor" Type="Framework:Vector3">0 0 0</Data>
+        <Data Key="Alpha" Type="float">1</Data>
+        <Data Key="SpecularColor" Type="Framework:Vector3">0.5 0.5 0.5</Data>
+        <Data Key="SpecularPower" Type="float">20</Data>
+      </OpaqueData>
+    </Resource>
+  </Resources>
+  <ExternalReferences>
+    <ExternalReference ID="#External1" TargetType="Graphics:TextureContent">..\..\..\..\Model\plane.png</ExternalReference>
+  </ExternalReferences>
+>>>>>>> 2dba87b60dd76a2f48c64416ed7a8122b5876b5c
 </XnaContent>
