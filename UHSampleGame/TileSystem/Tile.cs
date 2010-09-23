@@ -153,14 +153,14 @@ namespace UHSampleGame.TileSystem
             UnitEnter -= tower.RegisterAttackUnit;
         }
 
-        public void AddUnit(Unit unit)
+        public void AddUnit(UnitType type, Unit unit)
         {
             units.Add(unit);
             unit.Died += RemoveUnit;
             OnUnitEnter(new GameEventArgs(unit));
         }
 
-        public void RemoveUnit(Unit unit)
+        public void RemoveUnit(UnitType type, Unit unit)
         {
             units.Remove(unit);
             if(units.Count >0)

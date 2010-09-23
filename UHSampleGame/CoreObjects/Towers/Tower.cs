@@ -42,7 +42,7 @@ namespace UHSampleGame.CoreObjects.Towers
             
         }
 
-        private void GetNewAttackUnit(Unit unit)
+        private void GetNewAttackUnit(UnitType type, Unit unit)
         {
             unitToAttack = null;
         }

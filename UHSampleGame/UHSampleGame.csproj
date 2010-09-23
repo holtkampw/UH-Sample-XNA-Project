@@ -19,7 +19,7 @@
     <XnaUpgrade>
     </XnaUpgrade>
     <XnaOutputType>Game</XnaOutputType>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -126,6 +126,7 @@
     <Compile Include="CoreObjects\Base\Base.cs" />
     <Compile Include="CoreObjects\Base\TestBase.cs" />
     <Compile Include="CoreObjects\GameObject.cs" />
+    <Compile Include="CoreObjects\InstancedModel.cs" />
     <Compile Include="CoreObjects\StaticModel.cs" />
     <Compile Include="CoreObjects\StaticTileObject.cs" />
     <Compile Include="CoreObjects\TeamableAnimatedObject.cs" />

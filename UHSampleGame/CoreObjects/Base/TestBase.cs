@@ -13,7 +13,7 @@ namespace UHSampleGame.CoreObjects.Base
     public class TestBase : Base
     {
         public TestBase(int playerNum, int teamNum, Tile tile)
-            :base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Model\\pyramids"),
+            :base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red"),
             tile)
         {
             this.Scale = 5;
