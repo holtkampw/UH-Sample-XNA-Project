@@ -27,7 +27,6 @@ namespace UHSampleGame.LevelManagement
         {
             currentLevel = levels[level - 1];
             currentLevel.Load();
-
         }
 
         private void InitLevel1()

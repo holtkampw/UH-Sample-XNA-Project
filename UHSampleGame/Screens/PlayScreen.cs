@@ -43,21 +43,21 @@ namespace UHSampleGame.Screens
         public PlayScreen()
             : base("PlayScreen")
         {
-            levelManager = new LevelManager();
-            levelManager.LoadLevel(1);
-            //Vector2 numTiles = new Vector2(20, 10);
+           //levelManager = new LevelManager();
+           // levelManager.LoadLevel(1);
+           Vector2 numTiles = new Vector2(20, 10);
 
-            //TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
+           TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
 
-           // goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
+            goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
 
             player = new HumanPlayer(1, 1, TileMap.Tiles[0]);
-            //player.SetTargetBase(goalBase);
-            //goalBase.SetGoalBase(player.Base);
+            player.SetTargetBase(goalBase);
+            goalBase.SetGoalBase(player.Base);
 
-            //TileMap.SetBase(goalBase);
+            TileMap.SetBase(goalBase);
 
-            //TileMap.UpdateTilePaths();
+            TileMap.UpdateTilePaths();
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
 
@@ -65,12 +65,23 @@ namespace UHSampleGame.Screens
 
             currentTile = TileMap.GetTileFromPos(Vector3.Zero);
 
-            if (levelManager.CurrentLevel.NumTiles.X == 10 && levelManager.CurrentLevel.NumTiles.Y == 10)
+            //if (levelManager.CurrentLevel.NumTiles.X == 10 && levelManager.CurrentLevel.NumTiles.Y == 10)
+            //{
+            //    cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
+            //    cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
+            //}
+            //else if (levelManager.CurrentLevel.NumTiles.X == 20 && levelManager.CurrentLevel.NumTiles.Y == 10)
+            //{
+            //    cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
+            //    cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
+            //}
+
+            if (numTiles.X == 10 && numTiles.Y == 10)
             {
                 cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
             }
-            else if (levelManager.CurrentLevel.NumTiles.X == 20 && levelManager.CurrentLevel.NumTiles.Y == 10)
+            else if (numTiles.X == 20 && numTiles.Y == 10)
             {
                 cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
@@ -88,7 +99,7 @@ namespace UHSampleGame.Screens
             base.Update(gameTime);
             cameraManager.Update();
 
-           // goalBase.Update(gameTime);
+            goalBase.Update(gameTime);
             player.Update(gameTime);
 
             elapsedTime += gameTime.ElapsedGameTime;
@@ -117,7 +128,7 @@ namespace UHSampleGame.Screens
             ResetRenderStates();
 
             player.Draw(gameTime);
-           // goalBase.Draw(gameTime);
+            goalBase.Draw(gameTime);
 
             ScreenManager.SpriteBatch.Begin();
             string text = "FPS: " + frameRate + "\nTowers: " + player.TowerCount + "\nUnits: " + player.UnitCount;
