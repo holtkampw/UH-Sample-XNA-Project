@@ -180,7 +180,9 @@ namespace UHSampleGame.Player
                             instancedModel.Setup(TestUnit.Model);
                             break;
                     }
-                    instancedModel.Draw(unitTransforms[key].ToArray(), genericEffect);
+
+                    Matrix[] tempTransforms = unitTransforms[key].ToArray();
+                    instancedModel.Draw(ref tempTransforms, ref genericEffect);
                 }
             }
         }
