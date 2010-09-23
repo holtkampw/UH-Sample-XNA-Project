@@ -150,10 +150,10 @@ namespace UHSampleGame.CoreObjects
         public void UpdateTransforms()
         {
             transforms = Matrix.CreateScale(scale) *
-                    Matrix.CreateTranslation(position) *
-                    rotationMatrixX *
-                    rotationMatrixY *
-                    rotationMatrixZ;
+                    Matrix.CreateTranslation(position);// *
+                    //rotationMatrixX *
+                    //rotationMatrixY *
+                    //rotationMatrixZ;
         }
 
         public override void Draw(GameTime gameTime)
