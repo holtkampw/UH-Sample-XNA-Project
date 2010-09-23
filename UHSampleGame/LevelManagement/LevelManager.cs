@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 
 using UHSampleGame.TileSystem;
+using UHSampleGame.Player;
 
 namespace UHSampleGame.LevelManagement
 {
     public class LevelManager
     {
+        List<HumanPlayer> humanPlayers;
+        List<AIPlayer> aiPlayers;
         List<Level> levels;
         Level currentLevel;
 
@@ -17,8 +20,17 @@ namespace UHSampleGame.LevelManagement
             get { return currentLevel; }
         }
 
-        public LevelManager()
+        public LevelManager(List<HumanPlayer> humanPlayers, List<AIPlayer> aiPlayers)
         {
+            this.humanPlayers = humanPlayers;
+            this.aiPlayers = aiPlayers;
+
+            for (int i = 0; i < humanPlayers.Count; i++)
+                humanPlayers[i].SetTargetBase(aiPlayers[0].Base);
+
+            for (int i = 0; i < aiPlayers.Count; i++)
+                aiPlayers[i].SetTargetBase(humanPlayers[0].Base);
+
             levels = new List<Level>();
             InitLevel1();
         }
@@ -27,6 +39,11 @@ namespace UHSampleGame.LevelManagement
         {
             currentLevel = levels[level - 1];
             currentLevel.Load();
+            for (int i = 0; i < humanPlayers.Count; i++)
+                humanPlayers[i].SetTargetBase(aiPlayers[0].Base);
+
+            for (int i = 0; i < aiPlayers.Count; i++)
+                aiPlayers[i].SetTargetBase(humanPlayers[0].Base);
         }
 
         private void InitLevel1()
@@ -41,8 +58,8 @@ namespace UHSampleGame.LevelManagement
             map.Add(new List<int> { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 });
             map.Add(new List<int> { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 });
             map.Add(new List<int> { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 });
-            map.Add(new List<int> { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 9000 });
-            levels.Add(new Level(1, map));
+            map.Add(new List<int> { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 5510, 5000 });
+            levels.Add(new Level(1, map, humanPlayers, aiPlayers));
         }
     }
 }

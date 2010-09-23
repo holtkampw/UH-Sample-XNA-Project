@@ -12,7 +12,7 @@ namespace UHSampleGame.InstancedModels
     public class InstancedModel
     {
 
-        const int maxShaderMatrices = 20;
+        const int maxShaderMatrices = 32;
         VertexBuffer instancedVertexBuffer;
         IndexBuffer instancedIndexBuffer;
         VertexDeclaration instancedVertexDeclaration;
@@ -118,7 +118,8 @@ namespace UHSampleGame.InstancedModels
             instancedVertexDeclaration = new VertexDeclaration(elements);
 
             // Create a new vertex buffer, and set the replicated data into it.
-            instancedVertexBuffer = new VertexBuffer(graphicsDevice, instancedVertexDeclaration, newVertexData.Length, BufferUsage.None); ///ERROR!
+            instancedVertexBuffer = new VertexBuffer(graphicsDevice, instancedVertexDeclaration, newVertexData.Length, BufferUsage.None); 
+            ///ERROR ABOVE??? LOWER maxShaderMatrices
             instancedVertexBuffer.SetData(newVertexData);
 
             //handle vertex indices
@@ -142,8 +143,6 @@ namespace UHSampleGame.InstancedModels
                     outputPosition++;
                 }
             }
-
-
 
             // Create a new index buffer, and set the replicated data into it.
             instancedIndexBuffer = new IndexBuffer(graphicsDevice, IndexElementSize.SixteenBits, newIndices.Length, BufferUsage.None);

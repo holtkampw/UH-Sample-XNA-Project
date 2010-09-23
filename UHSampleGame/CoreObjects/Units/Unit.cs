@@ -46,6 +46,7 @@ namespace UHSampleGame.CoreObjects.Units
             currentTile = new Tile();
             focalPoint = new Vector3();
             focalTile = new Tile();
+            
             goalTile = goalBase.Tile;
             isStuck = false;
             health = 100;
@@ -161,9 +162,7 @@ namespace UHSampleGame.CoreObjects.Units
         {
             health -= damage;
             if (health <= 0)
-            {    
                 OnDied();
-            }
         }
 
         private void OnDied()

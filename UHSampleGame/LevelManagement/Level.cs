@@ -10,6 +10,7 @@ using UHSampleGame.CoreObjects;
 using UHSampleGame.CoreObjects.Towers;
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.TileSystem;
+using UHSampleGame.Player;
 
 namespace UHSampleGame.LevelManagement
 {
@@ -18,16 +19,20 @@ namespace UHSampleGame.LevelManagement
         int id;
         List<List<int>> map;
         Vector2 numTiles;
+        List<HumanPlayer> humanPlayers;
+        List<AIPlayer> aiPlayers;
 
         public int ID
         {
             get { return id; }
         }
 
-        public Level(int id, List<List<int>>map)
+        public Level(int id, List<List<int>> map, List<HumanPlayer> humanPlayers, List<AIPlayer> aiPlayers)
         {
             this.id = id;
             this.map = map;
+            this.humanPlayers = humanPlayers;
+            this.aiPlayers = aiPlayers;
         }
 
         public void Load()
@@ -56,6 +61,12 @@ namespace UHSampleGame.LevelManagement
                 }
             }
 
+            for (int i = 0; i < humanPlayers.Count; i++)
+                humanPlayers[i].SetTargetBase(aiPlayers[0].Base);
+
+            for (int i = 0; i < aiPlayers.Count; i++)
+                aiPlayers[i].SetTargetBase(humanPlayers[0].Base);
+
             TileMap.UpdateTilePaths();
 
         }
@@ -63,7 +74,7 @@ namespace UHSampleGame.LevelManagement
         /// <summary>
         /// Sets the appropriate GameObject on the tile given the object key
         /// 
-        /// The objectKey is coded as follows:  The first digit represents the player with 9 being 
+        /// The objectKey is coded as follows:  The first digit represents the player with 5+ being 
         /// the AI.  The second digit represents the type of team that player belongs to.
         /// The third digit represents the type of tower or base to build with 0 being
         /// a base.  The fourth digit represents the number of upgrades the tower has.
@@ -72,7 +83,7 @@ namespace UHSampleGame.LevelManagement
         /// to AI or players
         /// 
         /// Example: 1112 - Player one, team one, tower one, two upgrades on the tower
-        /// Example: 9000 - AI base
+        /// Example: 5000 - AI base
         /// </summary>
         /// <param name="objectKey">Refers to the object to place on the tile</param>
         /// <param name="tile">The tile to receive the object</param>
@@ -86,22 +97,37 @@ namespace UHSampleGame.LevelManagement
             {
                 int playerNum, teamNum, towerNum, upgradeNum;
 
-                ExtractObjectKeyInfo(objectKey, out playerNum, 
+                ExtractObjectKeyInfo(objectKey, out playerNum,
                     out teamNum, out towerNum, out upgradeNum);
 
                 GameObject gameObject;
+                Player.Player currentPlayer = GetPlayer(playerNum);
 
                 if (towerNum == 0)
                 {
                     gameObject = new TestBase(playerNum, teamNum, tile);
+                    currentPlayer.SetBase((TestBase)gameObject);
                 }
                 else
                 {
                     //Handle Multiple towers here
                     gameObject = new TowerAGood(playerNum, teamNum, tile);
+                    currentPlayer.SetTowerForLevelMap((TowerAGood)gameObject);
                 }
 
                 TileMap.SetObject(gameObject, tile);
+            }
+        }
+
+        protected Player.Player GetPlayer(int playerNum)
+        {
+            if (playerNum < 5)
+            {
+                return humanPlayers[playerNum - 1];
+            }
+            else
+            {
+                return aiPlayers[playerNum - 5];
             }
         }
 

@@ -24,16 +24,15 @@ namespace UHSampleGame.Player
         protected Base playerBase;
 
         protected List<Tower> towers;
-        //protected List<Unit> units;
         protected Dictionary<UnitType, List<Unit>> units;
         protected Dictionary<UnitType, int> previousCount;
+        protected Dictionary<UnitType, InstancedModel> instancedModels;
         protected int money;
         protected int playerNum;
         protected int teamNum;
 
         protected SkinnedEffect genericEffect;
         protected CameraManager cameraManager;
-        protected InstancedModel instancedModel;
 
         //Transforms
         Dictionary<UnitType, List<Matrix>> unitTransforms;
@@ -62,33 +61,51 @@ namespace UHSampleGame.Player
 
         public int UnitCount
         {
-            get { return units.Count; }
+            get {
+                int count = 0;
+                foreach (UnitType key in Enum.GetValues(typeof(UnitType)))
+                {
+                    count += units[key].Count;
+                }
+                return count; 
+            }
         }
 
         public Player(int playerNum, int teamNum, Tile startTile)
         {
             this.playerNum = playerNum;
             this.teamNum = teamNum;
-            this.playerBase = new TestBase(playerNum, teamNum, startTile);
-            TileMap.SetBase(playerBase);
+            SetBase(new TestBase(playerNum, teamNum, startTile));
             this.towers = new List<Tower>();
-            //this.units = new List<Unit>();
             this.units = new Dictionary<UnitType, List<Unit>>();
             previousCount = new Dictionary<UnitType, int>();
             unitTransforms = new Dictionary<UnitType, List<Matrix>>();
+            instancedModels = new Dictionary<UnitType, InstancedModel>();
             foreach(UnitType key in Enum.GetValues(typeof(UnitType)))
             {
                 units[key] = new List<Unit>();
                 previousCount[key] = 0;
                 unitTransforms[key] = new List<Matrix>();
+                instancedModels[key] = new InstancedModel(ScreenManager.Game.GraphicsDevice);
+                switch(key)
+                {
+                    case UnitType.TestUnit:
+                        instancedModels[key].Setup(TestUnit.Model);
+                        break;
+                }
             }
             this.money = 0;
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
             this.genericEffect = new SkinnedEffect(ScreenManager.Game.GraphicsDevice);
-            instancedModel = new InstancedModel(ScreenManager.Game.GraphicsDevice);
-            //this.testUnitTransforms = new List<Matrix>();
-            
+            genericEffect.View = cameraManager.ViewMatrix;
+            genericEffect.Projection = cameraManager.ProjectionMatrix;
+        }
+
+        public void SetBase(Base playerBase)
+        {
+            this.playerBase = playerBase;
+           // TileMap.SetBase(playerBase);
         }
 
         public void SetTargetBase(Base target)
@@ -108,9 +125,15 @@ namespace UHSampleGame.Player
            
         }
 
+        public void SetTowerForLevelMap(Tower tower)
+        {
+            TileMap.SetTowerForLevelMap(tower, tower.Tile);
+            towers.Add(tower);
+        }
+
         protected void BuildTower(Tile tile)
         {
-            Tower tower = new TowerAGood(1, 1, tile);
+            Tower tower = new TowerAGood(playerNum, teamNum, tile);
             if (TileMap.SetTower(tower, tile))
                 towers.Add(tower);
         }
@@ -184,15 +207,8 @@ namespace UHSampleGame.Player
             {
                 if (unitTransforms[key].Count > 0)
                 {
-                    switch (key)
-                    {
-                        case UnitType.TestUnit:
-                            instancedModel.Setup(TestUnit.Model);
-                            break;
-                    }
-
                     Matrix[] tempTransforms = unitTransforms[key].ToArray();
-                    instancedModel.Draw(ref tempTransforms, ref genericEffect);
+                    instancedModels[key].Draw(ref tempTransforms, ref genericEffect);
                 }
             }
         }

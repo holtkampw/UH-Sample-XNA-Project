@@ -18,6 +18,11 @@ namespace UHSampleGame.CoreObjects.Towers
         Tile tile;
         int attackPower;
 
+        public Tile Tile
+        {
+            get { return tile; }
+        }
+
         public Tower(int playerNum, int teamNum, Model model, Tile tile)
             : base(playerNum, teamNum, model, tile.Position) 
         {
