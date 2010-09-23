@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.CoreObjects;
 using UHSampleGame.Events;
 
 namespace UHSampleGame.TileSystem
@@ -302,6 +303,15 @@ namespace UHSampleGame.TileSystem
                 }
             }
             return true;
+        }
+
+        public static void SetObject(GameObject gameObject, Tile tile)
+        {
+            if (gameObject is Tower)
+                SetTower((Tower)gameObject, tile);
+            else if (gameObject is Base)
+                SetBase((Base)gameObject);
+
         }
 
         public static bool SetTower(Tower tower, Tile tile)

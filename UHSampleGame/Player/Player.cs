@@ -13,6 +13,7 @@ using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.TileSystem;
 using UHSampleGame.InputManagement;
 using UHSampleGame.ScreenManagement;
+using UHSampleGame.Events;
 
 namespace UHSampleGame.Player
 {
@@ -25,6 +26,8 @@ namespace UHSampleGame.Player
         protected int money;
         protected int playerNum;
         protected int teamNum;
+
+        public event GetNewGoalBase GetNewGoalBase;
 
         public int PlayerNum
         {
@@ -60,14 +63,18 @@ namespace UHSampleGame.Player
             this.towers = new List<Tower>();
             this.units = new List<Unit>();
             this.money = 0;
-            
-
-            
         }
 
         public void SetTargetBase(Base target)
         {
             playerBase.SetGoalBase(target);
+            target.baseDestroyed += GetNewTargetBase;
+        }
+
+        protected void GetNewTargetBase(Base destroyedBase)
+        {
+            if (GetNewGoalBase != null)
+                GetNewGoalBase();
         }
 
         public virtual void HandleInput(InputManager input)

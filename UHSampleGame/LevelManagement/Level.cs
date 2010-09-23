@@ -17,6 +17,7 @@ namespace UHSampleGame.LevelManagement
     {
         int id;
         List<List<int>> map;
+        Vector2 numTiles;
 
         public int ID
         {
@@ -29,9 +30,19 @@ namespace UHSampleGame.LevelManagement
             this.map = map;
         }
 
+        public void Load()
+        {
+            SetTileMap();
+        }
+
+        public Vector2 NumTiles
+        {
+            get { return numTiles; }
+        }
+
         protected void SetTileMap()
         {
-            Vector2 numTiles = new Vector2(map[0].Count, map.Count);
+            this.numTiles = new Vector2(map[0].Count, map.Count);
             TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
 
             for (int row = 0; row < map.Count; row++)
@@ -44,6 +55,8 @@ namespace UHSampleGame.LevelManagement
                     }
                 }
             }
+
+            TileMap.UpdateTilePaths();
 
         }
 
@@ -88,7 +101,7 @@ namespace UHSampleGame.LevelManagement
                     gameObject = new TowerAGood(playerNum, teamNum, tile);
                 }
 
-                //Tilemap.Set......
+                TileMap.SetObject(gameObject, tile);
             }
         }
 
