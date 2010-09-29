@@ -99,6 +99,7 @@ namespace UHSampleGame.Player
             previousCount = new Dictionary<UnitType, int>();
             unitTransforms = new Dictionary<UnitType, List<Matrix>>();
             instancedModels = new Dictionary<UnitType, Model>();
+            instancedModelBones = new Dictionary<UnitType, Matrix[]>();
             foreach(UnitType key in Enum.GetValues(typeof(UnitType)))
             {
                 units[key] = new List<Unit>();
@@ -109,6 +110,7 @@ namespace UHSampleGame.Player
                 {
                     case UnitType.TestUnit:
                         instancedModels[key] = TestUnit.Model;
+                        instancedModelBones[key] = new Matrix[instancedModels[key].Bones.Count];
                         instancedModels[key].CopyAbsoluteBoneTransformsTo(instancedModelBones[key]);
                         break;
                 }

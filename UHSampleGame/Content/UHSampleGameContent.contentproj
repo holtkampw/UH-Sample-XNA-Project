@@ -162,24 +162,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Objects\Towers\towerA_red.fbx">
-      <Name>towerA_red</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>InstancedModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="font.spritefont">
       <Name>font</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Objects\Towers\Cats.fbx">
-      <Name>Cats</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +177,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\Towers\InstancedModel.fx">
+      <Name>InstancedModel</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Video\oceanView.wmv">
+      <Name>oceanView</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Objects\Units\enemyShip01.fbx">
+      <Name>enemyShip01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Units\enemyShip02.fbx">
+      <Name>enemyShip02</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Base\oilRig.fbx">
+      <Name>oilRig</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerA_red.fbx">
+      <Name>towerA_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerB_red.fbx">
+      <Name>towerB_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerC_red.fbx">
+      <Name>towerC_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Objects\Units\InstancedModel.fx">
       <Name>InstancedModel</Name>
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>

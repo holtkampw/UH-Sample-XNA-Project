@@ -62,7 +62,7 @@ namespace UHSampleGame.Screens
         public override void LoadContent()
         {
             base.LoadContent();
-            video = ScreenManager.Game.Content.Load<Video>("Video\\intro");
+            video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
             videoPlayer = new VideoPlayer();
             videoPlayer.IsLooped = true;
 

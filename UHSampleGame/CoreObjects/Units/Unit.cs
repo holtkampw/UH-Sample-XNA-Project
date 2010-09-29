@@ -26,6 +26,8 @@ namespace UHSampleGame.CoreObjects.Units
         protected int health;
         protected int pathLength;
         protected UnitType type;
+        protected float rotation;
+        protected float currentRotation = 0;
 
         public int Health
         {
@@ -98,7 +100,7 @@ namespace UHSampleGame.CoreObjects.Units
                 SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1]);
             }
 
-            this.position += velocity;
+            UpdatePositionAndRotation();
         }
 
         private bool  CheckIfStuck()
@@ -121,7 +123,7 @@ namespace UHSampleGame.CoreObjects.Units
                     SetFocalPointAndVelocity(stuckTiles[rand.Next(stuckTiles.Count)]);
                 }
 
-                this.position += velocity;
+                UpdatePositionAndRotation();
                 isStuck = true;
                 return true;
             }
@@ -134,10 +136,24 @@ namespace UHSampleGame.CoreObjects.Units
             focalTile = newTile;
             focalPoint = focalTile.GetRandPoint();
 
-            velocity = new Vector3(focalPoint.X - position.X, focalPoint.Y-position.Y, focalPoint.Z - position.Z);
-            this.RotateY(velocity.Y);
+            velocity = focalPoint - position;// new Vector3(focalPoint.X - position.X, focalPoint.Y - position.Y, focalPoint.Z - position.Z);
+            Vector3 normVel = new Vector3(velocity.X, velocity.Y, velocity.Z);
+            normVel.Normalize();
+
+            //currentRotation = 0;
+            //rotation = (float)Math.Atan2(velocity.X, velocity.Z);
+            
+            this.RotateY((float)Math.Atan2(velocity.X, velocity.Z));
             velocity.Normalize();
-            Vector3.Multiply(velocity, 3);
+            
+        }
+
+        private void UpdatePositionAndRotation()
+        {
+            this.position += velocity;
+            //currentRotation += rotation;
+           
+            //this.RotateY( MathHelper.Lerp(currentRotation, rotation, 0.6f));
         }
 
         private bool IsNewTile()
@@ -149,8 +165,16 @@ namespace UHSampleGame.CoreObjects.Units
         {
             currentTile.RemoveUnit(this.type, this);
             currentTile = tile;
-            pathLength = currentTile.Paths[goalTile.ID].Count;
-            currentTile.AddUnit(this.type, this);
+            if (currentTile == goalTile)
+            {
+                //Register Hit
+                OnDied();
+            }
+            else
+            {
+                pathLength = currentTile.Paths[goalTile.ID].Count;
+                currentTile.AddUnit(this.type, this);
+            }
         }
 
         public int GetPathLength()

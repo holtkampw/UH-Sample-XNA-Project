@@ -15,23 +15,24 @@ namespace UHSampleGame.CoreObjects.Units
     public class TestUnit : Unit
     {
         public static Model model;
+        private const string MODEL_PATH = "Objects\\Units\\enemyShip01";
 
         public static Model Model
         {
             get { 
                 if(model == null)
-                    model = ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red");
+                    model = ScreenManager.Game.Content.Load<Model>(MODEL_PATH);
                 return model; 
             }
         }
         public TestUnit(int playerNum, int teamNum, Vector3 position, Base.Base goalBase)
-            : base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red"), goalBase,
+            : base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>(MODEL_PATH), goalBase,
             position) 
         {
             this.position = position;
-            this.Scale = 0.5f;
+            this.Scale = 2.0f;
             if(model == null)
-                model = ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red");
+                model = ScreenManager.Game.Content.Load<Model>(MODEL_PATH);
         }
 
     }

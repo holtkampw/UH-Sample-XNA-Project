@@ -15,6 +15,8 @@ using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.Player;
 using UHSampleGame.LevelManagement;
+
+using Microsoft.Xna.Framework.Media;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -24,6 +26,9 @@ namespace UHSampleGame.Screens
         #region Class Variables
         Texture2D background;
         CameraManager cameraManager;
+
+        Video video;
+        VideoPlayer videoPlayer;
         
         Tile currentTile;
 
@@ -48,6 +53,12 @@ namespace UHSampleGame.Screens
            Vector2 numTiles = new Vector2(20, 10);
 
            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
+
+           video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
+           videoPlayer = new VideoPlayer();
+           videoPlayer.IsLooped = true;
+           if (videoPlayer.State != MediaState.Playing)
+               videoPlayer.Play(video);
 
             //goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
 
@@ -104,6 +115,15 @@ namespace UHSampleGame.Screens
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            if (!IsVisible)
+            {
+                videoPlayer.Stop();
+                return;
+            }
+
+            if (videoPlayer.State != MediaState.Playing)
+                videoPlayer.Play(video);
+
             cameraManager.Update();
 
             //goalBase.Update(gameTime);
@@ -135,7 +155,14 @@ namespace UHSampleGame.Screens
         {
             base.Draw(gameTime);
             ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
+            Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
+            if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+            {
+                //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
+                ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, 
+                    viewport.Width, viewport.Height), Color.White);
+            }
+
             ScreenManager.SpriteBatch.End();
 
             ResetRenderStates();
