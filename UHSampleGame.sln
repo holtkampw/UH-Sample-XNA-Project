@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Performance4.psess = Performance4.psess
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstancedModelPipeline", "InstancedModelPipeline\InstancedModelPipeline.csproj", "{FF69FD90-8834-4F60-ADA5-36387F112437}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -51,6 +53,14 @@ Global
 		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Debug|Xbox 360.ActiveCfg = Debug|x86
 		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Release|x86.ActiveCfg = Release|x86
 		{896DAB71-C352-4B97-A450-C5AEB00714F0}.Release|Xbox 360.ActiveCfg = Release|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Debug|x86.ActiveCfg = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Debug|x86.Build.0 = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Debug|Xbox 360.ActiveCfg = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Debug|Xbox 360.Build.0 = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Release|x86.ActiveCfg = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Release|x86.Build.0 = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Release|Xbox 360.ActiveCfg = Debug|x86
+		{FF69FD90-8834-4F60-ADA5-36387F112437}.Release|Xbox 360.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
