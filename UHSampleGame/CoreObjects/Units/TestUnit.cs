@@ -29,7 +29,7 @@ namespace UHSampleGame.CoreObjects.Units
             position) 
         {
             this.position = position;
-            this.Scale = 1;
+            this.Scale = 0.5f;
             if(model == null)
                 model = ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red");
         }

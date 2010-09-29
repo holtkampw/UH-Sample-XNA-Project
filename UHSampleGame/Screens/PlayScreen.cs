@@ -14,6 +14,7 @@ using UHSampleGame.CoreObjects.Towers;
 using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.Player;
+using UHSampleGame.LevelManagement;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -28,7 +29,9 @@ namespace UHSampleGame.Screens
 
         TestBase goalBase;
 
-        HumanPlayer player;
+        List<HumanPlayer> humanPlayers;
+        List<AIPlayer> aiPlayers;
+        LevelManager levelManager;
 
         int frames;
         int frameRate;
@@ -41,19 +44,27 @@ namespace UHSampleGame.Screens
         public PlayScreen()
             : base("PlayScreen")
         {
-            Vector2 numTiles = new Vector2(20, 10);
+          
+           Vector2 numTiles = new Vector2(20, 10);
 
-            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
+           TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
 
-            goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
+            //goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
 
-            player = new HumanPlayer(1, 1, TileMap.Tiles[0]);
-            player.SetTargetBase(goalBase);
-            goalBase.SetGoalBase(player.Base);
+            humanPlayers =  new List<HumanPlayer>();
+            aiPlayers = new List<AIPlayer>();
 
-            TileMap.SetBase(goalBase);
+            humanPlayers.Add(new HumanPlayer(1, 1, TileMap.Tiles[0]));
+            aiPlayers.Add(new AIPlayer(5, 5, TileMap.Tiles[0]));
 
-            TileMap.UpdateTilePaths();
+            levelManager = new LevelManager(humanPlayers, aiPlayers);
+            levelManager.LoadLevel(1);
+           // player.SetTargetBase(goalBase);
+           // goalBase.SetGoalBase(player.Base);
+
+            //TileMap.SetBase(goalBase);
+
+            //TileMap.UpdateTilePaths();
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
 
@@ -61,16 +72,27 @@ namespace UHSampleGame.Screens
 
             currentTile = TileMap.GetTileFromPos(Vector3.Zero);
 
-            if (numTiles.X == 10 && numTiles.Y == 10)
+            if (levelManager.CurrentLevel.NumTiles.X == 10 && levelManager.CurrentLevel.NumTiles.Y == 10)
             {
                 cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
             }
-            else if (numTiles.X == 20 && numTiles.Y == 10)
+            else if (levelManager.CurrentLevel.NumTiles.X == 20 && levelManager.CurrentLevel.NumTiles.Y == 10)
             {
                 cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
+
+            //if (numTiles.X == 10 && numTiles.Y == 10)
+            //{
+            //    cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
+            //    cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
+            //}
+            //else if (numTiles.X == 20 && numTiles.Y == 10)
+            //{
+            //    cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
+            //    cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
+            //}
 
             font = ScreenManager.Game.Content.Load<SpriteFont>("font");
             frames = 0;
@@ -84,8 +106,13 @@ namespace UHSampleGame.Screens
             base.Update(gameTime);
             cameraManager.Update();
 
-            goalBase.Update(gameTime);
-            player.Update(gameTime);
+            //goalBase.Update(gameTime);
+            for (int i = 0; i < humanPlayers.Count; i++)
+                humanPlayers[i].Update(gameTime);
+
+            for (int i = 0; i < aiPlayers.Count; i++)
+                aiPlayers[i].Update(gameTime);
+
 
             elapsedTime += gameTime.ElapsedGameTime;
 
@@ -100,7 +127,8 @@ namespace UHSampleGame.Screens
         public override void HandleInput(InputManager input)
         {
             base.HandleInput(input);
-            player.HandleInput(input);
+            for (int i = 0; i < humanPlayers.Count; i++)
+                humanPlayers[i].HandleInput(input);
         }
 
         public override void Draw(GameTime gameTime)
@@ -112,11 +140,15 @@ namespace UHSampleGame.Screens
 
             ResetRenderStates();
 
-            player.Draw(gameTime);
-            goalBase.Draw(gameTime);
+            for (int i = 0; i < humanPlayers.Count; i++)
+                humanPlayers[i].Draw(gameTime);
+
+            for (int i = 0; i < aiPlayers.Count; i++)
+                aiPlayers[i].Draw(gameTime);
+            //goalBase.Draw(gameTime);
 
             ScreenManager.SpriteBatch.Begin();
-            string text = "FPS: " + frameRate + "\nTowers: " + player.TowerCount + "\nUnits: " + player.UnitCount;
+            string text = "FPS: " + frameRate + "\nTowers: " + humanPlayers[0].TowerCount + "\nUnits: " + humanPlayers[0].UnitCount;
             ScreenManager.SpriteBatch.DrawString(font, text, new Vector2(11.0f, 11.0f), Color.Black);
             ScreenManager.SpriteBatch.DrawString(font, text, new Vector2(10.0f, 10.0f), Color.White);
             ScreenManager.SpriteBatch.End();

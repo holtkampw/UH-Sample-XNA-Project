@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +14,7 @@ using UHSampleGame.TileSystem;
 using UHSampleGame.InputManagement;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
+using UHSampleGame.Events;
 
 namespace UHSampleGame.Player
 {
@@ -35,12 +36,12 @@ namespace UHSampleGame.Player
         );
 
         protected Base playerBase;
-
         protected List<Tower> towers;
         protected Dictionary<UnitType, List<Unit>> units;
         protected Dictionary<UnitType, int> previousCount;
         protected Dictionary<UnitType, Model> instancedModels;
         protected Dictionary<UnitType, Matrix[]> instancedModelBones;
+
         protected int money;
         protected int playerNum;
         protected int teamNum;
@@ -52,6 +53,8 @@ namespace UHSampleGame.Player
 
         //Transforms
         Dictionary<UnitType, List<Matrix>> unitTransforms;
+
+        public event GetNewGoalBase GetNewGoalBase;
 
         public int PlayerNum
         {
@@ -90,7 +93,7 @@ namespace UHSampleGame.Player
             this.playerNum = playerNum;
             this.teamNum = teamNum;
             this.playerBase = new TestBase(playerNum, teamNum, startTile);
-            TileMap.SetBase(playerBase);
+            SetBase(new TestBase(playerNum, teamNum, startTile));
             this.towers = new List<Tower>();
             this.units = new Dictionary<UnitType, List<Unit>>();
             previousCount = new Dictionary<UnitType, int>();
@@ -115,9 +118,22 @@ namespace UHSampleGame.Player
             this.genericEffect = new SkinnedEffect(ScreenManager.Game.GraphicsDevice);         
         }
 
+        public void SetBase(Base playerBase)
+        {
+            this.playerBase = playerBase;
+           // TileMap.SetBase(playerBase);
+        }
+
         public void SetTargetBase(Base target)
         {
             playerBase.SetGoalBase(target);
+            target.baseDestroyed += GetNewTargetBase;
+        }
+
+        protected void GetNewTargetBase(Base destroyedBase)
+        {
+            if (GetNewGoalBase != null)
+                GetNewGoalBase();
         }
 
         public virtual void HandleInput(InputManager input)
@@ -125,9 +141,15 @@ namespace UHSampleGame.Player
            
         }
 
+        public void SetTowerForLevelMap(Tower tower)
+        {
+            TileMap.SetTowerForLevelMap(tower, tower.Tile);
+            towers.Add(tower);
+        }
+
         protected void BuildTower(Tile tile)
         {
-            Tower tower = new TowerAGood(1, 1, tile);
+            Tower tower = new TowerAGood(playerNum, teamNum, tile);
             if (TileMap.SetTower(tower, tile))
                 towers.Add(tower);
         }

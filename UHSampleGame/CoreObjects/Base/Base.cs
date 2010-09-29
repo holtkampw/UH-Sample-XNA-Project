@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
 using UHSampleGame.TileSystem;
+using UHSampleGame.Events;
 
 namespace UHSampleGame.CoreObjects.Base
 {
@@ -15,6 +16,8 @@ namespace UHSampleGame.CoreObjects.Base
         protected Base goalBase;
         protected Tile tile;
         protected int health;
+
+        public event BaseDestroyed baseDestroyed;
 
         public Base GoalBase
         {
@@ -32,7 +35,7 @@ namespace UHSampleGame.CoreObjects.Base
         }
 
         public Base(int playerNum, int teamNum, Model model, Tile tile)
-            : base(playerNum, teamNum, model, tile.Position) 
+            : base(playerNum, teamNum, model, tile.Position)
         {
             this.tile = tile;
             this.position = tile.Position;
@@ -46,6 +49,15 @@ namespace UHSampleGame.CoreObjects.Base
         public void HitBase(int damage)
         {
             health -= damage;
+
+            if (health <= 0)
+                OnBaseDestroyed();
+        }
+
+        protected void OnBaseDestroyed()
+        {
+            if (baseDestroyed != null)
+                baseDestroyed(this);
         }
 
 

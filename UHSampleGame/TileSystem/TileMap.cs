@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.CoreObjects;
 using UHSampleGame.Events;
 
 namespace UHSampleGame.TileSystem
@@ -54,11 +55,11 @@ namespace UHSampleGame.TileSystem
         }
         public static float Right
         {
-            get { return tiles[tiles.Count-1].Position.X; }
+            get { return tiles[tiles.Count - 1].Position.X; }
         }
         public static float Bottom
         {
-            get { return tiles[tiles.Count-1].Position.Z; }
+            get { return tiles[tiles.Count - 1].Position.Z; }
         }
 
         public static void InitializeTileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
@@ -304,6 +305,15 @@ namespace UHSampleGame.TileSystem
             return true;
         }
 
+        public static void SetObject(GameObject gameObject, Tile tile)
+        {
+            if (gameObject is Tower)
+                SetTower((Tower)gameObject, tile);
+            else if (gameObject is Base)
+                SetBase((Base)gameObject);
+
+        }
+
         public static bool SetTower(Tower tower, Tile tile)
         {
             tile.SetBlockableObject(tower);
@@ -315,7 +325,7 @@ namespace UHSampleGame.TileSystem
 
                 for (int i = 0; i < walkableNeighbors.Count; i++)
                 {
-                   walkableNeighbors[i].RegisterTowerListener(tower);
+                    walkableNeighbors[i].RegisterTowerListener(tower);
                 }
                 OnTowerCreated();
                 return true;
@@ -323,6 +333,23 @@ namespace UHSampleGame.TileSystem
 
             RemoveTower(tile);
             return false;
+
+        }
+
+        public static void SetTowerForLevelMap(Tower tower, Tile tile)
+        {
+            tile.SetBlockableObject(tower);
+
+            //UpdateTilePaths();
+
+            List<Tile> walkableNeighbors = GetWalkableNeighbors(tile);
+
+            for (int i = 0; i < walkableNeighbors.Count; i++)
+            {
+                walkableNeighbors[i].RegisterTowerListener(tower);
+            }
+            //OnTowerCreated();
+
 
         }
 
