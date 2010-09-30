@@ -155,6 +155,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SkinnedModel\SkinnedModelXbox.csproj">
+      <Project>{33670229-CE14-4705-A4C2-CAE8FEF5F520}</Project>
+      <Name>SkinnedModelXbox</Name>
+    </ProjectReference>
     <ProjectReference Include="Content\UHSampleGameContent.contentproj">
       <Project>{896DAB71-C352-4B97-A450-C5AEB00714F0}</Project>
       <Name>UHSampleGameContent %28Content%29</Name>

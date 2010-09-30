@@ -16,6 +16,7 @@ Content\Objects\Base\oilRig.xnb
 Content\Objects\Towers\towerA_red.xnb
 Content\Objects\Towers\towerB_red.xnb
 Content\Objects\Towers\towerC_red.xnb
+Content\Objects\Units\boat.xnb
 Content\Video\intro.xnb
 Content\Video\oceanView.xnb
 Content\Objects\Towers\InstancedModel.xnb
@@ -32,7 +33,6 @@ Content\Objects\Base\oilRigColor_0.xnb
 Content\Objects\Towers\towerAColor_0.xnb
 Content\Objects\Towers\towerBColor_0.xnb
 Content\Objects\Towers\towerCColor_0.xnb
-Content\Objects\Units\boat.xnb
 Content\Objects\Units\boatTexture_0.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
