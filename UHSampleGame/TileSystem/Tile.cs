@@ -163,6 +163,7 @@ namespace UHSampleGame.TileSystem
         public void RemoveUnit(UnitType type, Unit unit)
         {
             units.Remove(unit);
+            //Set new unit to attack
             if(units.Count >0)
                 OnUnitEnter(new GameEventArgs(units[0]));
         }
@@ -171,7 +172,7 @@ namespace UHSampleGame.TileSystem
         {
             if (UnitEnter != null)
             {
-                UnitEnter(args);
+                //UnitEnter(args);
             }
         }
 

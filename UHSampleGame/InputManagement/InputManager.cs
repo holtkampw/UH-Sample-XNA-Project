@@ -29,7 +29,7 @@ namespace UHSampleGame.InputManagement
         Dictionary<PlayerIndex, GamePadState> currentGamePadStates;
         Dictionary<PlayerIndex, GamePadState> previousGamePadStates;
         Dictionary<InputAction, Keys> items;
-        Dictionary<InputAction, ArrayList> actionDictionary;
+        Dictionary<InputAction, List<object>> actionDictionary;
         PlayerIndex[] playerIndexes;
         #endregion
 
@@ -43,7 +43,7 @@ namespace UHSampleGame.InputManagement
             currentGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
             previousGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
             items = new Dictionary<InputAction, Keys>();
-            actionDictionary = new Dictionary<InputAction, ArrayList>();
+            actionDictionary = new Dictionary<InputAction, List<object>>();
             playerIndexes = new PlayerIndex[4];
             playerIndexes[0] = PlayerIndex.One;
             playerIndexes[1] = PlayerIndex.Two;
@@ -92,7 +92,7 @@ namespace UHSampleGame.InputManagement
             }
             else
             {
-                ArrayList newList = new ArrayList();
+                List<object> newList = new List<object>();
                 newList.Add(key);
                 actionDictionary.Add(action, newList);
             }
@@ -112,7 +112,7 @@ namespace UHSampleGame.InputManagement
             }
             else
             {
-                ArrayList newList = new ArrayList();
+                List<object> newList = new List<object>();
                 newList.Add(button);
                 actionDictionary.Add(action, newList);
             }

@@ -138,15 +138,21 @@ namespace UHSampleGame.CoreObjects
         {
             foreach (ModelMesh mesh in model.Meshes)
             {
-                foreach (Effect effect in mesh.Effects)
+                foreach (SkinnedEffect effect in mesh.Effects)
                 {
-                    effect.Parameters["Bones"].SetValue(bones);
-                    effect.Parameters["View"].SetValue(view);
-                    effect.Parameters["Projection"].SetValue(cameraManager.ProjectionMatrix);
+                    effect.SetBoneTransforms(bones);
+
+                    effect.View = view;
+                    effect.Projection = cameraManager.ProjectionMatrix;
+
+                    effect.EnableDefaultLighting();
+
+                    effect.SpecularColor = new Vector3(0.25f);
+                    effect.SpecularPower = 16;
                 }
+
                 mesh.Draw();
             }
-
             base.Draw(gameTime);
         }
         #endregion

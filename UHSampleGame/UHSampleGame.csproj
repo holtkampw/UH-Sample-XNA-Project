@@ -131,6 +131,7 @@
     <Compile Include="CoreObjects\Towers\TowerAGood.cs" />
     <Compile Include="CoreObjects\Units\TestUnit.cs" />
     <Compile Include="CoreObjects\Units\Unit.cs" />
+    <Compile Include="EnumHelper\EnumHelper.cs" />
     <Compile Include="Events\GameEventArgs.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />

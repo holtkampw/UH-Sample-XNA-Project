@@ -11,7 +11,9 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 using Microsoft.Xna.Framework.Content.Pipeline.Processors;
@@ -27,11 +29,6 @@ namespace SkinnedModelPipeline
     [ContentProcessor]
     public class SkinnedModelProcessor : ModelProcessor
     {
-        // Maximum number of bone matrices we can render using shader 2.0
-        // in a single pass. If you change this, update SkinnedModelfx to match.
-        const int MaxBones = 59;
-
-    
         /// <summary>
         /// The main Process method converts an intermediate format content pipeline
         /// NodeContent tree to a ModelContent object with embedded animation data.
@@ -54,11 +51,11 @@ namespace SkinnedModelPipeline
             // Read the bind pose and skeleton hierarchy data.
             IList<BoneContent> bones = MeshHelper.FlattenSkeleton(skeleton);
 
-            if (bones.Count > MaxBones)
+            if (bones.Count > SkinnedEffect.MaxBones)
             {
                 throw new InvalidContentException(string.Format(
                     "Skeleton has {0} bones, but the maximum supported is {1}.",
-                    bones.Count, MaxBones));
+                    bones.Count, SkinnedEffect.MaxBones));
             }
 
             List<Matrix> bindPose = new List<Matrix>();
@@ -262,34 +259,13 @@ namespace SkinnedModelPipeline
 
 
         /// <summary>
-        /// Changes all the materials to use our skinned model effect.
+        /// Force all the materials to use our skinned model effect.
         /// </summary>
-        protected override MaterialContent ConvertMaterial(MaterialContent material,
-                                                        ContentProcessorContext context)
+        [DefaultValue(MaterialProcessorDefaultEffect.SkinnedEffect)]
+        public override MaterialProcessorDefaultEffect DefaultEffect
         {
-            BasicMaterialContent basicMaterial = material as BasicMaterialContent;
-
-            if (basicMaterial == null)
-            {
-                throw new InvalidContentException(string.Format(
-                    "SkinnedModelProcessor only supports BasicMaterialContent, " +
-                    "but input mesh uses {0}.", material.GetType()));
-            }
-
-            EffectMaterialContent effectMaterial = new EffectMaterialContent();
-
-            // Store a reference to our skinned mesh effect.
-            string effectPath = Path.GetFullPath("SkinnedModel.fx");
-
-            effectMaterial.Effect = new ExternalReference<EffectContent>(effectPath);
-
-            // Copy texture settings from the input
-            // BasicMaterialContent over to our new material.
-            if (basicMaterial.Texture != null)
-                effectMaterial.Textures.Add("Texture", basicMaterial.Texture);
-
-            // Chain to the base ModelProcessor converter.
-            return base.ConvertMaterial(effectMaterial, context);
+            get { return MaterialProcessorDefaultEffect.SkinnedEffect; }
+            set { }
         }
     }
 }

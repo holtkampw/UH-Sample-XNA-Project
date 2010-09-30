@@ -54,11 +54,11 @@ namespace UHSampleGame.Screens
 
            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
 
-           video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
-           videoPlayer = new VideoPlayer();
-           videoPlayer.IsLooped = true;
-           if (videoPlayer.State != MediaState.Playing)
-               videoPlayer.Play(video);
+           //video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
+           //videoPlayer = new VideoPlayer();
+           //videoPlayer.IsLooped = true;
+           //if (videoPlayer.State != MediaState.Playing)
+           //    videoPlayer.Play(video);
 
             //goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
 
@@ -115,14 +115,14 @@ namespace UHSampleGame.Screens
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (!IsVisible)
-            {
-                videoPlayer.Stop();
-                return;
-            }
+            //if (!IsVisible)
+            //{
+            //    videoPlayer.Stop();
+            //    return;
+            //}
 
-            if (videoPlayer.State != MediaState.Playing)
-                videoPlayer.Play(video);
+            //if (videoPlayer.State != MediaState.Playing)
+            //    videoPlayer.Play(video);
 
             cameraManager.Update();
 
@@ -156,12 +156,12 @@ namespace UHSampleGame.Screens
             base.Draw(gameTime);
             ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
-            if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
-            {
-                //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
-                ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, 
-                    viewport.Width, viewport.Height), Color.White);
-            }
+            //if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+            //{
+            //    //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
+            //    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, 
+            //        viewport.Width, viewport.Height), Color.White);
+            //}
 
             ScreenManager.SpriteBatch.End();
 

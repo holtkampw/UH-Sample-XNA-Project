@@ -74,6 +74,9 @@ namespace UHSampleGame
             //Setup some basic input
             inputManager = new InputManager();
             inputManager.AddInput(InputAction.Selection, Keys.Enter);
+            inputManager.AddInput(InputAction.Selection, Buttons.A);
+            inputManager.AddInput(InputAction.Selection, Buttons.Start);
+
             inputManager.AddInput(InputAction.Rotation, Keys.Space);
             inputManager.AddInput(InputAction.RotateUp, Keys.Up);
             inputManager.AddInput(InputAction.RotateUp, Keys.I);
@@ -90,6 +93,13 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.MenuDown, Keys.Down);
             inputManager.AddInput(InputAction.MenuSelect, Keys.Enter);
             inputManager.AddInput(InputAction.MenuCancel, Keys.Back);
+
+            inputManager.AddInput(InputAction.MenuUp, Buttons.LeftThumbstickUp);
+            inputManager.AddInput(InputAction.MenuDown, Buttons.LeftThumbstickDown);
+            inputManager.AddInput(InputAction.MenuSelect, Buttons.A);
+            inputManager.AddInput(InputAction.MenuCancel, Buttons.B);
+
+
             this.Services.AddService(typeof(InputManager), inputManager);
 
             //Movement Actions
@@ -98,8 +108,14 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.TileMoveLeft, Keys.F);
             inputManager.AddInput(InputAction.TileMoveRight, Keys.H);
 
+            inputManager.AddInput(InputAction.TileMoveUp, Buttons.LeftThumbstickUp);
+            inputManager.AddInput(InputAction.TileMoveDown, Buttons.LeftThumbstickDown);
+            inputManager.AddInput(InputAction.TileMoveLeft, Buttons.LeftThumbstickLeft);
+            inputManager.AddInput(InputAction.TileMoveRight, Buttons.LeftThumbstickRight);
+
             //Tower Action
             inputManager.AddInput(InputAction.TowerBuild, Keys.Space);
+            inputManager.AddInput(InputAction.TowerBuild, Buttons.RightTrigger);
 
             //Setup Screen Manager
             screenManager = new ScreenManager(this);

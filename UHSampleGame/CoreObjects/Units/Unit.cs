@@ -16,6 +16,7 @@ namespace UHSampleGame.CoreObjects.Units
 
     public abstract class Unit : TeamableStaticObject
     {
+        public UnitType[] UnitTypes = {UnitType.TestUnit };
         public Vector3 velocity;
         protected Tile previousTile;
         protected Tile currentTile;
@@ -191,8 +192,8 @@ namespace UHSampleGame.CoreObjects.Units
 
         private void OnDied()
         {
-            if (Died != null)
-                Died(this.type, this);
+            //if (Died != null)
+            //    Died(this.type, this);
         }
 
         public override string ToString()

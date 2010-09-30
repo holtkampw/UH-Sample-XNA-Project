@@ -92,7 +92,7 @@
       <Time>2010-09-03T03:31:11.8592179-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\box_0.xml</Key>
-        <Value>2010-09-29T17:18:13.9781071-05:00</Value>
+        <Value>2010-09-29T17:54:40.1461488-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
     </Item>
@@ -106,7 +106,7 @@
       <Time>2010-09-03T03:31:12.0262274-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\pyramids_0.xml</Key>
-        <Value>2010-09-29T17:18:16.721264-05:00</Value>
+        <Value>2010-09-29T17:54:42.895306-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
     </Item>
@@ -120,10 +120,9 @@
       <Time>2010-09-18T02:46:21.2835473-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\AnimatedModel\dude_0.xml</Key>
-        <Value>2010-09-29T17:18:24.0326822-05:00</Value>
+        <Value>2010-09-29T17:54:50.1837229-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Request>
-      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\SkinnedModel_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Request>
@@ -138,7 +137,7 @@
       <Time>2010-09-29T15:22:00.7549549-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\enemyShip01_0.xml</Key>
-        <Value>2010-09-29T17:18:29.5249964-05:00</Value>
+        <Value>2010-09-29T17:54:55.1540072-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01Color_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
@@ -153,7 +152,7 @@
       <Time>2010-09-29T15:22:16.4028499-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\enemyShip02_0.xml</Key>
-        <Value>2010-09-29T17:18:30.4640501-05:00</Value>
+        <Value>2010-09-29T17:54:56.2240684-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02Color_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
@@ -168,7 +167,7 @@
       <Time>2010-09-29T15:20:18.3830995-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Base\oilRig_0.xml</Key>
-        <Value>2010-09-29T17:18:32.3621587-05:00</Value>
+        <Value>2010-09-29T17:54:58.3211884-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRigColor_0.xnb</Request>
     </Item>
@@ -182,7 +181,7 @@
       <Time>2010-09-29T15:25:14.9930647-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
-        <Value>2010-09-29T17:18:33.3522153-05:00</Value>
+        <Value>2010-09-29T17:54:59.3442469-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
     </Item>
@@ -196,7 +195,7 @@
       <Time>2010-09-29T15:25:57.6195028-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerB_red_0.xml</Key>
-        <Value>2010-09-29T17:18:34.4042755-05:00</Value>
+        <Value>2010-09-29T17:55:00.4053076-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Request>
     </Item>
@@ -210,7 +209,7 @@
       <Time>2010-09-29T15:26:17.3916337-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerC_red_0.xml</Key>
-        <Value>2010-09-29T17:18:35.4703364-05:00</Value>
+        <Value>2010-09-29T17:55:01.4773689-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Request>
     </Item>
@@ -320,14 +319,6 @@
       <Options>None</Options>
       <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Output>
       <Time>2010-09-03T03:31:11.5361994-05:00</Time>
-    </Item>
-    <Item>
-      <Source>SkinnedModel.fx</Source>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\SkinnedModel_0.xnb</Output>
-      <Time>2010-09-18T03:04:11.3854316-05:00</Time>
     </Item>
     <Item>
       <Source>AnimatedModel\jacket.tga</Source>
@@ -515,6 +506,44 @@
       <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Output>
       <Time>2010-09-29T15:18:14.6330214-05:00</Time>
     </Item>
+    <Item>
+      <Source>Objects\Units\boat.fbx</Source>
+      <Name>Objects\Units\boat</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boat.xnb</Output>
+      <Time>2010-09-29T18:49:05.3939103-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\boat_0.xml</Key>
+        <Value>2010-09-29T18:49:33.7545324-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\boat.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\boat_0.xml</Output>
+      <Time>2010-09-29T18:49:05.3939103-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\boatTexture.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Output>
+      <Time>2010-09-29T18:48:31.2839593-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
@@ -528,8 +557,8 @@
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\bin\Xbox 360\Debug\SkinnedModelPipeline.dll</Key>
-        <Value>2010-09-29T17:15:31.7888304-05:00</Value>
+        <Key>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\bin\x86\Debug\SkinnedModelPipeline.dll</Key>
+        <Value>2010-09-29T17:47:48.6706137-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>

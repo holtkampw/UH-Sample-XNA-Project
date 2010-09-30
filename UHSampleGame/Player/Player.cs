@@ -41,6 +41,7 @@ namespace UHSampleGame.Player
         protected Dictionary<UnitType, int> previousCount;
         protected Dictionary<UnitType, Model> instancedModels;
         protected Dictionary<UnitType, Matrix[]> instancedModelBones;
+        protected Enum[] unitTypes;
 
         protected int money;
         protected int playerNum;
@@ -80,7 +81,7 @@ namespace UHSampleGame.Player
         {
             get {
                 int count = 0;
-                foreach (UnitType key in Enum.GetValues(typeof(UnitType)))
+                foreach (UnitType key in unitTypes)
                 {
                     count += units[key].Count;
                 }
@@ -90,6 +91,7 @@ namespace UHSampleGame.Player
 
         public Player(int playerNum, int teamNum, Tile startTile)
         {
+            this.unitTypes = EnumHelper.EnumToArray(new UnitType());
             this.playerNum = playerNum;
             this.teamNum = teamNum;
             this.playerBase = new TestBase(playerNum, teamNum, startTile);
@@ -100,7 +102,7 @@ namespace UHSampleGame.Player
             unitTransforms = new Dictionary<UnitType, List<Matrix>>();
             instancedModels = new Dictionary<UnitType, Model>();
             instancedModelBones = new Dictionary<UnitType, Matrix[]>();
-            foreach(UnitType key in Enum.GetValues(typeof(UnitType)))
+            foreach (UnitType key in unitTypes)
             {
                 units[key] = new List<Unit>();
                 previousCount[key] = 0;
@@ -176,7 +178,7 @@ namespace UHSampleGame.Player
             for (int i = 0; i < towers.Count; i++)
                 towers[i].Update(gameTime);
 
-            foreach (UnitType key in Enum.GetValues(typeof(UnitType)))
+            foreach (UnitType key in unitTypes)
                 for (int i = 0; i < units[key].Count; i++)
                     units[key][i].Update(gameTime);
         }
@@ -188,7 +190,7 @@ namespace UHSampleGame.Player
             for (int i = 0; i < towers.Count; i++)
                 towers[i].Draw(gameTime);
 
-            foreach (UnitType key in Enum.GetValues(typeof(UnitType)))
+            foreach (UnitType key in unitTypes)
             {
                 bool clear = false;
                 if (units[key].Count != previousCount[key])
@@ -219,7 +221,7 @@ namespace UHSampleGame.Player
         private void DrawUnits(GameTime gameTime)
         {
             // Draw all the instances, using the currently selected rendering technique.
-            foreach (UnitType key in Enum.GetValues(typeof(UnitType)))
+            foreach (UnitType key in unitTypes)
             {
                 Matrix[] transforms = new Matrix[units[key].Count];
                 for(int i =0 ; i < units[key].Count; i++) {

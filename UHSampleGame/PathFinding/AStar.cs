@@ -92,10 +92,18 @@ namespace UHSampleGame.PathFinding
             path.Add(currentNode.tile);
             do
             {
-                currentNode = closedNodes.Find(new Predicate<Node>(delegate(Node node)
+                for (int i = 0; i < closedNodes.Count; i++)
                 {
-                    return node.tile == currentNode.parentTile;
-                }));
+                    if (closedNodes[i].tile == currentNode.parentTile)
+                    {
+                        currentNode = closedNodes[i];
+                        break;
+                    }
+                }
+                //currentNode = closedNodes.Find(new Predicate<Node>(delegate(Node node)
+                //{
+                //    return node.tile == currentNode.parentTile;
+               // }));
                 path.Add(currentNode.tile);
 
             } while (currentNode.parentTile != null);

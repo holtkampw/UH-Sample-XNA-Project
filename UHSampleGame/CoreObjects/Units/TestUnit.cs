@@ -15,7 +15,7 @@ namespace UHSampleGame.CoreObjects.Units
     public class TestUnit : Unit
     {
         public static Model model;
-        private const string MODEL_PATH = "Objects\\Units\\enemyShip01";
+        private const string MODEL_PATH = "Objects\\Units\\boat";
 
         public static Model Model
         {
@@ -30,7 +30,7 @@ namespace UHSampleGame.CoreObjects.Units
             position) 
         {
             this.position = position;
-            this.Scale = 2.0f;
+            this.Scale = 5.0f;
             if(model == null)
                 model = ScreenManager.Game.Content.Load<Model>(MODEL_PATH);
         }
