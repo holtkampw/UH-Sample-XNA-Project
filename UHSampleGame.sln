@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstancedModelPipeline", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UHSampleGame XBOX", "UHSampleGame\UHSampleGame XBOX.csproj", "{570004C8-513E-487C-A5A8-B9E7EE41708D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedModelXbox", "..\..\Downloads\Skinning_4_0\SkinnedModel\SkinnedModelXbox.csproj", "{33670229-CE14-4705-A4C2-CAE8FEF5F520}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedModelXbox", "SkinnedModel\SkinnedModelXbox.csproj", "{33670229-CE14-4705-A4C2-CAE8FEF5F520}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

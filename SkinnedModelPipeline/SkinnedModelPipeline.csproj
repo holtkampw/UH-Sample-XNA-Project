@@ -53,13 +53,13 @@
     <Compile Include="SkinnedModelProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Downloads\Skinning_4_0\SkinnedModel\SkinnedModelXbox.csproj">
-      <Project>{33670229-CE14-4705-A4C2-CAE8FEF5F520}</Project>
-      <Name>SkinnedModelXbox</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SkinnedModel\SkinnedModelWindows.csproj">
       <Project>{0D41E29B-829F-4255-BCA5-64DC2677DA6D}</Project>
       <Name>SkinnedModelWindows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkinnedModel\SkinnedModelXbox.csproj">
+      <Project>{33670229-CE14-4705-A4C2-CAE8FEF5F520}</Project>
+      <Name>SkinnedModelXbox</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
