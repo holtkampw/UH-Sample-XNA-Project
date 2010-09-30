@@ -10,7 +10,7 @@ using UHSampleGame.CoreObjects;
 using UHSampleGame.CoreObjects.Towers;
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.TileSystem;
-using UHSampleGame.Player;
+using UHSampleGame.Players;
 
 namespace UHSampleGame.LevelManagement
 {
@@ -19,15 +19,15 @@ namespace UHSampleGame.LevelManagement
         int id;
         List<List<int>> map;
         Vector2 numTiles;
-        List<HumanPlayer> humanPlayers;
-        List<AIPlayer> aiPlayers;
+        List<Player> humanPlayers;
+        List<Player> aiPlayers;
 
         public int ID
         {
             get { return id; }
         }
 
-        public Level(int id, List<List<int>> map, List<HumanPlayer> humanPlayers, List<AIPlayer> aiPlayers)
+        public Level(int id, List<List<int>> map, List<Player> humanPlayers, List<Player> aiPlayers)
         {
             this.id = id;
             this.map = map;
@@ -62,10 +62,10 @@ namespace UHSampleGame.LevelManagement
             }
 
             for (int i = 0; i < humanPlayers.Count; i++)
-                humanPlayers[i].SetTargetBase(aiPlayers[0].Base);
+                humanPlayers[i].SetTargetBase(aiPlayers[0].PlayerBase);
 
             for (int i = 0; i < aiPlayers.Count; i++)
-                aiPlayers[i].SetTargetBase(humanPlayers[0].Base);
+                aiPlayers[i].SetTargetBase(humanPlayers[0].PlayerBase);
 
             TileMap.UpdateTilePaths();
 
@@ -100,26 +100,27 @@ namespace UHSampleGame.LevelManagement
                 ExtractObjectKeyInfo(objectKey, out playerNum,
                     out teamNum, out towerNum, out upgradeNum);
 
-                GameObject gameObject;
-                Player.Player currentPlayer = GetPlayer(playerNum);
+                Player currentPlayer = GetPlayer(playerNum);
 
                 if (towerNum == 0)
                 {
-                    gameObject = new TestBase(playerNum, teamNum, tile);
+                    Base gameObject = new TestBase(playerNum, teamNum, tile);
                     currentPlayer.SetBase((TestBase)gameObject);
+                    TileMap.SetObject(gameObject, tile);
                 }
                 else
                 {
                     //Handle Multiple towers here
-                    gameObject = new TowerAGood(playerNum, teamNum, tile);
-                    currentPlayer.SetTowerForLevelMap((TowerAGood)gameObject);
+                    Tower gameObject = new Tower(TowerType.TowerA, playerNum, teamNum, tile);
+                    currentPlayer.SetTowerForLevelMap((Tower)gameObject);
+                    TileMap.SetObject(gameObject, tile);
                 }
 
-                TileMap.SetObject(gameObject, tile);
+               
             }
         }
 
-        protected Player.Player GetPlayer(int playerNum)
+        protected Player GetPlayer(int playerNum)
         {
             if (playerNum < 5)
             {

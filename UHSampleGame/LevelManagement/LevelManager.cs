@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 
 using UHSampleGame.TileSystem;
-using UHSampleGame.Player;
+using UHSampleGame.Players;
 
 namespace UHSampleGame.LevelManagement
 {
     public class LevelManager
     {
-        List<HumanPlayer> humanPlayers;
-        List<AIPlayer> aiPlayers;
+        List<Player> humanPlayers;
+        List<Player> aiPlayers;
         List<Level> levels;
         Level currentLevel;
 
@@ -20,16 +20,16 @@ namespace UHSampleGame.LevelManagement
             get { return currentLevel; }
         }
 
-        public LevelManager(List<HumanPlayer> humanPlayers, List<AIPlayer> aiPlayers)
+        public LevelManager(List<Player> humanPlayers, List<Player> aiPlayers)
         {
             this.humanPlayers = humanPlayers;
             this.aiPlayers = aiPlayers;
 
             for (int i = 0; i < humanPlayers.Count; i++)
-                humanPlayers[i].SetTargetBase(aiPlayers[0].Base);
+                humanPlayers[i].SetTargetBase(aiPlayers[0].PlayerBase);
 
             for (int i = 0; i < aiPlayers.Count; i++)
-                aiPlayers[i].SetTargetBase(humanPlayers[0].Base);
+                aiPlayers[i].SetTargetBase(humanPlayers[0].PlayerBase);
 
             levels = new List<Level>();
             InitLevel1();
@@ -40,10 +40,10 @@ namespace UHSampleGame.LevelManagement
             currentLevel = levels[level - 1];
             currentLevel.Load();
             for (int i = 0; i < humanPlayers.Count; i++)
-                humanPlayers[i].SetTargetBase(aiPlayers[0].Base);
+                humanPlayers[i].SetTargetBase(aiPlayers[0].PlayerBase);
 
             for (int i = 0; i < aiPlayers.Count; i++)
-                aiPlayers[i].SetTargetBase(humanPlayers[0].Base);
+                aiPlayers[i].SetTargetBase(humanPlayers[0].PlayerBase);
         }
 
         private void InitLevel1()

@@ -13,8 +13,8 @@ namespace UHSampleGame.CameraManagement
     {
         #region Class Variables
         float aspectRatio;
-        Matrix viewMatrix;
-        Matrix projectionMatrix;
+        public Matrix ViewMatrix;
+        public Matrix ProjectionMatrix;
         Matrix rotationMatrix;
         Vector3 position;
         Vector3 lookAtPoint;
@@ -23,15 +23,15 @@ namespace UHSampleGame.CameraManagement
         #endregion
 
         #region Properties
-        public Matrix ViewMatrix
-        {
-            get { return viewMatrix; }
-        }
+        //public Matrix ViewMatrix
+        //{
+        //    get { return viewMatrix; }
+        //}
 
-        public Matrix ProjectionMatrix
-        {
-            get { return projectionMatrix; }
-        }
+        //public Matrix ProjectionMatrix
+        //{
+        //    get { return projectionMatrix; }
+        //}
 
         public Vector3 Position
         {
@@ -58,13 +58,13 @@ namespace UHSampleGame.CameraManagement
                           (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height;
 
             //setup projection
-            projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
+            ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView(
                             MathHelper.ToRadians(40.0f),
                             this.aspectRatio,
                             1.0f,
                             10000.0f);
 
-            viewMatrix = Matrix.CreateLookAt(position, lookAtPoint, Vector3.Up);
+            ViewMatrix = Matrix.CreateLookAt(position, lookAtPoint, Vector3.Up);
             rotationLeftRight = 0.0f;
             rotationUpDown = 0.0f;
         }
@@ -126,7 +126,7 @@ namespace UHSampleGame.CameraManagement
             //For rotating camera position around look at point
             Vector3 cameraRotatedPosition = Vector3.Transform(position, rotationMatrix);
             Vector3 cameraRotatedUpVector = Vector3.Transform(Vector3.Up, rotationMatrix);
-            viewMatrix = Matrix.CreateLookAt(cameraRotatedPosition, lookAtPoint, cameraRotatedUpVector);
+            ViewMatrix = Matrix.CreateLookAt(cameraRotatedPosition, lookAtPoint, cameraRotatedUpVector);
 
             //standard without rotation
             //viewMatrix = Matrix.CreateLookAt(position, lookAtPoint, Vector3.Up);

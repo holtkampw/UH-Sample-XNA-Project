@@ -10,7 +10,7 @@ using UHSampleGame.ScreenManagement;
 
 namespace UHSampleGame.CoreObjects
 {
-    public class GameObject
+    public abstract class GameObject
     {
         #region Class Variables
         /// <summary>
@@ -57,13 +57,13 @@ namespace UHSampleGame.CoreObjects
         /// Updates various components in the game
         /// </summary>
         /// <param name="gameTime">Current game time</param>
-        public virtual void Update(GameTime gameTime) { }
+        public abstract void Update(GameTime gameTime);
 
         /// <summary>
         /// Draws various components in the game
         /// </summary>
         /// <param name="gameTime">Current game time</param>
-        public virtual void Draw(GameTime gameTime) { }
+        public abstract void Draw(GameTime gameTime);
         #endregion
     }
 }

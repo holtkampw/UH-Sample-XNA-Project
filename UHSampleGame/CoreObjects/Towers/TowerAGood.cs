@@ -11,19 +11,19 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public class TowerAGood : Tower
-    {
-        #region Class Variables
+    //public class TowerAGood : Tower
+    //{
+    //    #region Class Variables
 
-        #endregion
+    //    #endregion
 
-        #region Initialization
-        public TowerAGood(int playerNum, int teamNum, Tile tile)
-            : base(playerNum, teamNum, 
-            ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red"), tile)
-        {
-            this.Scale = 4.0f;
-        }
-        #endregion
-    }
+    //    #region Initialization
+    //    public TowerAGood(int playerNum, int teamNum, Tile tile)
+    //        : base(playerNum, teamNum, 
+    //        ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red"), tile)
+    //    {
+    //        this.Scale = 4.0f;
+    //    }
+    //    #endregion
+    //}
 }

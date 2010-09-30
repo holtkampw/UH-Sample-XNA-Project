@@ -16,7 +16,7 @@ using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.Events;
 
-namespace UHSampleGame.Player
+namespace UHSampleGame.Players
 {
     public enum InstancingTechnique
     {
@@ -25,8 +25,12 @@ namespace UHSampleGame.Player
         NoInstancingOrStateBatching
     }
 
-    public abstract class Player
+    public enum PlayerType { Human, AI };
+
+    public class Player
     {
+
+        static int MAX_UNITS = 5000;
         static VertexDeclaration instanceVertexDeclaration = new VertexDeclaration
         (
             new VertexElement(0, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 0),
@@ -35,43 +39,36 @@ namespace UHSampleGame.Player
             new VertexElement(48, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 3)
         );
 
-        protected Base playerBase;
+        public Base PlayerBase;
         protected List<Tower> towers;
-        protected Dictionary<UnitType, List<Unit>> units;
-        protected Dictionary<UnitType, int> previousCount;
-        protected Dictionary<UnitType, Model> instancedModels;
-        protected Dictionary<UnitType, Matrix[]> instancedModelBones;
-        protected Enum[] unitTypes;
+        protected Dictionary<int, List<Unit>> units;
+        protected Dictionary<int, int> unitCount;
+        protected Dictionary<int, Model> instancedModels;
+        protected Dictionary<int, Matrix[]> instancedModelBones;
+        public static Enum[] unitEnumType = EnumHelper.EnumToArray(new UnitType());
 
         protected int money;
-        protected int playerNum;
-        protected int teamNum;
+        protected int PlayerNum;
+        protected int TeamNum;
 
         protected SkinnedEffect genericEffect;
         protected CameraManager cameraManager;
+        DynamicVertexBuffer instanceVertexBuffer = null;
 
         InstancingTechnique instancingTechnique = InstancingTechnique.HardwareInstancing;
 
-        //Transforms
-        Dictionary<UnitType, List<Matrix>> unitTransforms;
-
         public event GetNewGoalBase GetNewGoalBase;
 
-        public int PlayerNum
-        {
-            get { return playerNum; }
-        }
+        Matrix[] universalTransforms = new Matrix[5000];
 
-        public int TeamNum
-        {
-            get { return teamNum; }
-        }
+        public PlayerType Type;
+        public static Enum[] playerEnumType = EnumHelper.EnumToArray(new PlayerType());
 
-        public Base Base
-        {
-            get { return playerBase; }
-        }
+        //HumanPlayer
+        TeamableAnimatedObject avatar;
 
+        int updateCount = 0;
+        #region Properties
         public int TowerCount
         {
             get { return towers.Count; }
@@ -79,58 +76,74 @@ namespace UHSampleGame.Player
 
         public int UnitCount
         {
-            get {
+            get
+            {
                 int count = 0;
-                foreach (UnitType key in unitTypes)
+                for (int i = 0; i < unitEnumType.Length; i++ )
                 {
-                    count += units[key].Count;
+                    
+                    count += unitCount[i];
                 }
-                return count; 
+                return count;
             }
         }
+        #endregion
 
-        public Player(int playerNum, int teamNum, Tile startTile)
+        public Player(int playerNum, int teamNum, Tile startTile, PlayerType type)
         {
-            this.unitTypes = EnumHelper.EnumToArray(new UnitType());
-            this.playerNum = playerNum;
-            this.teamNum = teamNum;
-            this.playerBase = new TestBase(playerNum, teamNum, startTile);
+            this.PlayerNum = playerNum;
+            this.TeamNum = teamNum;
+            this.PlayerBase = new TestBase(playerNum, teamNum, startTile);
             SetBase(new TestBase(playerNum, teamNum, startTile));
             this.towers = new List<Tower>();
-            this.units = new Dictionary<UnitType, List<Unit>>();
-            previousCount = new Dictionary<UnitType, int>();
-            unitTransforms = new Dictionary<UnitType, List<Matrix>>();
-            instancedModels = new Dictionary<UnitType, Model>();
-            instancedModelBones = new Dictionary<UnitType, Matrix[]>();
-            foreach (UnitType key in unitTypes)
+            this.units = new Dictionary<int, List<Unit>>();
+            instancedModels = new Dictionary<int, Model>();
+            instancedModelBones = new Dictionary<int, Matrix[]>();
+            unitCount = new Dictionary<int, int>();
+            for (int i = 0; i < unitEnumType.Length; i++)
             {
-                units[key] = new List<Unit>();
-                previousCount[key] = 0;
-                unitTransforms[key] = new List<Matrix>();
+                units[i] = new List<Unit>();
+                for (int j = 0; j < MAX_UNITS; j++)
+                {
+                    units[i].Add(new Unit());
+                }
 
-                switch (key)
+                unitCount[i] = 0;
+
+                switch ((UnitType)unitEnumType[i])
                 {
                     case UnitType.TestUnit:
-                        instancedModels[key] = TestUnit.Model;
-                        instancedModelBones[key] = new Matrix[instancedModels[key].Bones.Count];
-                        instancedModels[key].CopyAbsoluteBoneTransformsTo(instancedModelBones[key]);
+                        instancedModels[i] = Unit.Models[i];
+                        instancedModelBones[i] = new Matrix[instancedModels[i].Bones.Count];
+                        instancedModels[i].CopyAbsoluteBoneTransformsTo(instancedModelBones[i]);
                         break;
                 }
             }
+
             this.money = 0;
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-            this.genericEffect = new SkinnedEffect(ScreenManager.Game.GraphicsDevice);         
+
+            //HumanPlayer
+            if (Type == PlayerType.Human)
+            {
+                avatar = new TeamableAnimatedObject(playerNum, teamNum,
+                    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+
+                avatar.Scale = 2.0f;
+                avatar.PlayClip("Take 001");
+                avatar.SetPosition(PlayerBase.Position);
+            }
         }
 
         public void SetBase(Base playerBase)
         {
-            this.playerBase = playerBase;
+            this.PlayerBase = playerBase;
            // TileMap.SetBase(playerBase);
         }
 
         public void SetTargetBase(Base target)
         {
-            playerBase.SetGoalBase(target);
+            PlayerBase.SetGoalBase(target);
             target.baseDestroyed += GetNewTargetBase;
         }
 
@@ -140,9 +153,41 @@ namespace UHSampleGame.Player
                 GetNewGoalBase();
         }
 
-        public virtual void HandleInput(InputManager input)
+        public void HandleInput(InputManager input)
         {
-           
+            //Human Player
+            if (Type == PlayerType.Human)
+            {
+                if (input.CheckAction(InputAction.TileMoveUp))
+                    avatar.SetPosition(avatar.Position + new Vector3(0, 0, -3));
+
+                if (input.CheckAction(InputAction.TileMoveDown))
+                    avatar.SetPosition(avatar.Position + new Vector3(0, 0, 3));
+
+                if (input.CheckAction(InputAction.TileMoveLeft))
+                    avatar.SetPosition(avatar.Position + new Vector3(-3, 0, 0));
+
+                if (input.CheckAction(InputAction.TileMoveRight))
+                    avatar.SetPosition(avatar.Position + new Vector3(3, 0, 0));
+
+                if (avatar.Position.X < TileMap.Left)
+                    avatar.SetPosition(new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z));
+
+                if (avatar.Position.Z < TileMap.Top)
+                    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Top));
+
+                if (avatar.Position.X > TileMap.Right)
+                    avatar.SetPosition(new Vector3(TileMap.Right, avatar.Position.Y, avatar.Position.Z));
+
+                if (avatar.Position.Z > TileMap.Bottom)
+                    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
+
+                if (input.CheckAction(InputAction.Selection))
+                    AddUnit(UnitType.TestUnit, 1, 1, PlayerBase.Position, PlayerBase.GoalBase);
+
+                if (input.CheckNewAction(InputAction.TowerBuild))
+                    BuildTower(TileMap.GetTileFromPos(avatar.Position));
+            }
         }
 
         public void SetTowerForLevelMap(Tower tower)
@@ -153,98 +198,116 @@ namespace UHSampleGame.Player
 
         protected void BuildTower(Tile tile)
         {
-            Tower tower = new TowerAGood(playerNum, teamNum, tile);
+            Tower tower = new Tower(TowerType.TowerA, PlayerNum, TeamNum, tile);
             if (TileMap.SetTower(tower, tile))
                 towers.Add(tower);
         }
 
-        protected void AddUnit(UnitType type, Unit unit)
+        protected void AddUnit(UnitType type, int playerNum, int teamNum, Vector3 position, Base goalBase)
         {
-            unit.Died += RemoveUnit;
-            units[type].Add(unit);
-            TileMap.TowerCreated += unit.UpdatePath;
+            if (unitCount[(int)type] >= MAX_UNITS - 1)
+                return;
+
+            for(int i = 0; i < units[(int)type].Count; i++)
+            {
+                if(!units[(int)type][i].Alive)
+                {
+                    units[(int)type][i].Setup(type, i, playerNum, teamNum, position, goalBase);
+                    units[(int)type][i].Died += RemoveUnit;
+                    TileMap.TowerCreated += units[(int)type][i].UpdatePath;
+                    unitCount[(int)type] += 1;
+                    return;
+                }
+            }
+            //unit.Died += RemoveUnit;
+            //units[(int)type].Add(unit);
+            //TileMap.TowerCreated += unit.UpdatePath;
         }
 
         protected void RemoveUnit(UnitType type, Unit unit)
         {
-            units[type].Remove(unit);
+            //units[(int)type].Remove(unit);
+            units[(int)type][unit.Index].Alive = false;
+            unitCount[(int)type] -= 1;
             TileMap.TowerCreated -= unit.UpdatePath;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            playerBase.Update(gameTime);
+            PlayerBase.Update(gameTime);
 
             for (int i = 0; i < towers.Count; i++)
                 towers[i].Update(gameTime);
 
-            foreach (UnitType key in unitTypes)
+
+            for (int key = 0; key < unitEnumType.Length; key++)
+            {
+                updateCount = 0;
                 for (int i = 0; i < units[key].Count; i++)
-                    units[key][i].Update(gameTime);
+                {
+                    if (units[key][i].Alive)
+                    {
+                        units[key][i].Update(gameTime);
+                        updateCount++;
+                    }
+
+                    if (updateCount == unitCount[key])
+                    {
+                        break;
+                    }
+                }
+            }
+
+            //HumanPlayer
+            if (Type == PlayerType.Human)
+            {
+                avatar.Update(gameTime);
+            }
         }
 
-        public virtual void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
-            playerBase.Draw(gameTime);
+            PlayerBase.Draw(gameTime);
 
             for (int i = 0; i < towers.Count; i++)
                 towers[i].Draw(gameTime);
 
-            foreach (UnitType key in unitTypes)
-            {
-                bool clear = false;
-                if (units[key].Count != previousCount[key])
-                {
-                    ClearTransforms(key);
-                    clear = true;
-                }
-                previousCount[key] = units[key].Count;
-
-                for (int i = 0; i < units[key].Count; i++)
-                {
-                    if(clear)
-                        unitTransforms[key].Add(units[key][i].Transforms);
-                    else
-                        unitTransforms[key][i] = units[key][i].Transforms;
-                } 
-
-            }
-
             DrawUnits(gameTime);
-        }
 
-        private void ClearTransforms(UnitType type)
-        {
-           unitTransforms[type].Clear();
+            //HumanPlayer
+            if (Type == PlayerType.Human)
+            {
+                avatar.Draw(gameTime);
+            }
         }
 
         private void DrawUnits(GameTime gameTime)
         {
             // Draw all the instances, using the currently selected rendering technique.
-            foreach (UnitType key in unitTypes)
+            for (int key = 0; key < unitEnumType.Length; key++)
             {
-                Matrix[] transforms = new Matrix[units[key].Count];
-                for(int i =0 ; i < units[key].Count; i++) {
-                    transforms[i] = units[key][i].Transforms;
-                }
-
-                switch (instancingTechnique)
+                for (int i = 0; i < units[key].Count; i++)
                 {
-                    case InstancingTechnique.HardwareInstancing:
-                        DrawModelHardwareInstancing(instancedModels[key], instancedModelBones[key],
-                                                    transforms, cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
-                        break;
-
-                    case InstancingTechnique.NoInstancing:
-                        DrawModelNoInstancing(instancedModels[key], instancedModelBones[key],
-                                              transforms, cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
-                        break;
-
-                    case InstancingTechnique.NoInstancingOrStateBatching:
-                        DrawModelNoInstancingOrStateBatching(instancedModels[key], instancedModelBones[key],
-                                              transforms, cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
-                        break;
+                    if(units[key][i].Alive)
+                        universalTransforms[i] = units[key][i].Transforms;
                 }
+                DrawModelHardwareInstancing(key);
+                //switch (instancingTechnique)
+                //{
+                //    case InstancingTechnique.HardwareInstancing:
+                //        DrawModelHardwareInstancing(int key);
+                //        break;
+
+                //    //case InstancingTechnique.NoInstancing:
+                //    //    DrawModelNoInstancing(instancedModels[key], instancedModelBones[key],
+                //    //                          transforms, cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
+                //    //    break;
+
+                //    //case InstancingTechnique.NoInstancingOrStateBatching:
+                //    //    DrawModelNoInstancingOrStateBatching(instancedModels[key], instancedModelBones[key],
+                //    //                          transforms, cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
+                //    //    break;
+                //}
             }
         }
 
@@ -252,28 +315,28 @@ namespace UHSampleGame.Player
         /// <summary>
         /// Efficiently draws several copies of a piece of geometry using hardware instancing.
         /// </summary>
-        void DrawModelHardwareInstancing(Model model, Matrix[] modelBones,
-                                         Matrix[] instances, Matrix view, Matrix projection)
+        void DrawModelHardwareInstancing(int key)
         {
-            DynamicVertexBuffer instanceVertexBuffer = null;
-            if (instances.Length == 0)
+            int amount = units[key].Count;
+            
+            if (amount == 0)
                 return;
 
             // If we have more instances than room in our vertex buffer, grow it to the neccessary size.
             if ((instanceVertexBuffer == null) ||
-                (instances.Length > instanceVertexBuffer.VertexCount))
+                (amount > instanceVertexBuffer.VertexCount))
             {
                 if (instanceVertexBuffer != null)
                     instanceVertexBuffer.Dispose();
 
                 instanceVertexBuffer = new DynamicVertexBuffer(ScreenManager.Game.GraphicsDevice, instanceVertexDeclaration,
-                                                               instances.Length, BufferUsage.WriteOnly);
+                                                               amount, BufferUsage.WriteOnly);
             }
 
             // Transfer the latest instance transform matrices into the instanceVertexBuffer.
-            instanceVertexBuffer.SetData(instances, 0, instances.Length, SetDataOptions.Discard);
+            instanceVertexBuffer.SetData(universalTransforms, 0, amount, SetDataOptions.Discard);
 
-            foreach (ModelMesh mesh in model.Meshes)
+            foreach (ModelMesh mesh in instancedModels[key].Meshes)
             {
                 foreach (ModelMeshPart meshPart in mesh.MeshParts)
                 {
@@ -290,9 +353,9 @@ namespace UHSampleGame.Player
 
                     effect.CurrentTechnique = effect.Techniques["HardwareInstancing"];
 
-                    effect.Parameters["World"].SetValue(modelBones[mesh.ParentBone.Index]);
-                    effect.Parameters["View"].SetValue(view);
-                    effect.Parameters["Projection"].SetValue(projection);
+                    effect.Parameters["World"].SetValue(instancedModelBones[key][mesh.ParentBone.Index]);
+                    effect.Parameters["View"].SetValue(cameraManager.ViewMatrix);
+                    effect.Parameters["Projection"].SetValue(cameraManager.ProjectionMatrix);
 
                     // Draw all the instance copies in a single call.
                     foreach (EffectPass pass in effect.CurrentTechnique.Passes)
@@ -301,7 +364,7 @@ namespace UHSampleGame.Player
 
                         ScreenManager.Game.GraphicsDevice.DrawInstancedPrimitives(PrimitiveType.TriangleList, 0, 0,
                                                                meshPart.NumVertices, meshPart.StartIndex,
-                                                               meshPart.PrimitiveCount, instances.Length);
+                                                               meshPart.PrimitiveCount, amount);
                     }
                 }
             }

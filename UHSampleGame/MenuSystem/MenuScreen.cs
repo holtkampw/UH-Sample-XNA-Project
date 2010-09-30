@@ -30,6 +30,11 @@ namespace UHSampleGame.MenuSystem
             this.menuEntryStartPosition = new Vector2(90, 220);
         }
 
+        public override void LoadContent()
+        {
+           
+        }
+
         public override void HandleInput(InputManager input)
         {
             // Move to the previous menu entry
@@ -88,7 +93,6 @@ namespace UHSampleGame.MenuSystem
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
 
             for (int i = 0; i < menuEntries.Count; i++)
             {
@@ -132,6 +136,11 @@ namespace UHSampleGame.MenuSystem
             //                       titleOrigin, titleScale, SpriteEffects.None, 0);
 
             spriteBatch.End();
+        }
+
+        public override void UnloadContent()
+        {
+           
         }
 
         

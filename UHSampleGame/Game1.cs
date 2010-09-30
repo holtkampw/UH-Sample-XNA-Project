@@ -99,6 +99,8 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.MenuSelect, Buttons.A);
             inputManager.AddInput(InputAction.MenuCancel, Buttons.B);
 
+            inputManager.AddInput(InputAction.ExitGame, Buttons.Back);
+
 
             this.Services.AddService(typeof(InputManager), inputManager);
 
@@ -146,12 +148,20 @@ namespace UHSampleGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
 
             //Update Input
             inputManager.Update();
+
+
+            // Allows the game to exit
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                this.Exit();
+            else if (inputManager.CheckNewAction(InputAction.ExitGame))
+            {
+                this.Exit();
+            }
+
+            
 
             //Update our screens
             screenManager.Update(gameTime);

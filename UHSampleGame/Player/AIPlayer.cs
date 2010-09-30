@@ -5,11 +5,11 @@ using System.Text;
 
 using UHSampleGame.TileSystem;
 
-namespace UHSampleGame.Player
+namespace UHSampleGame.Players
 {
-    public class AIPlayer : Player
-    {
-        public AIPlayer(int playerNum, int teamNum, Tile baseTile)
-            : base(playerNum, teamNum, baseTile) { }
-    }
+    //public class AIPlayer : Player
+    //{
+    //    public AIPlayer(int playerNum, int teamNum, Tile baseTile)
+    //        : base(playerNum, teamNum, baseTile) { }
+    //}
 }

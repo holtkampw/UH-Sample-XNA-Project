@@ -305,13 +305,14 @@ namespace UHSampleGame.TileSystem
             return true;
         }
 
-        public static void SetObject(GameObject gameObject, Tile tile)
+        public static void SetObject(Tower gameObject, Tile tile)
         {
-            if (gameObject is Tower)
-                SetTower((Tower)gameObject, tile);
-            else if (gameObject is Base)
-                SetBase((Base)gameObject);
+            SetTower(gameObject, tile);
+        }
 
+        public static void SetObject(Base gameObject, Tile tile)
+        {
+            SetBase(gameObject);
         }
 
         public static bool SetTower(Tower tower, Tile tile)

@@ -138,8 +138,6 @@ namespace UHSampleGame.CoreObjects
             //update view matrix
             UpdateView();
             UpdateTransforms();
-
-            base.Update(gameTime);
         }
 
         public void UpdateView()
@@ -158,7 +156,6 @@ namespace UHSampleGame.CoreObjects
 
         public override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
             if (model != null)
             {
                 // Draw the model. A model can have multiple meshes, so loop.

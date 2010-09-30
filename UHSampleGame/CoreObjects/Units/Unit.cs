@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region Using Statements
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,13 +12,45 @@ using UHSampleGame.TileSystem;
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.Events;
 
+using UHSampleGame.CameraManagement;
+using UHSampleGame.ScreenManagement;
+#endregion
+
 namespace UHSampleGame.CoreObjects.Units
 {
     public enum UnitType { TestUnit };
 
-    public abstract class Unit : TeamableStaticObject
+    public class Unit
     {
-        public UnitType[] UnitTypes = {UnitType.TestUnit };
+        //Type Information
+        public static Dictionary<int, Model> Models = new Dictionary<int, Model>()
+        {
+            {(int)UnitType.TestUnit, ScreenManager.Game.Content.Load<Model>("Objects\\Units\\boat")}
+        };
+
+        public static Enum[] unitEnumType = EnumHelper.EnumToArray(new UnitType());
+
+        //TeamableStaticObject
+        public int PlayerNum;
+        public int TeamNum;
+
+        //StaticModel
+        protected float scale;
+        CameraManager cameraManager;
+
+        //StaticModel
+        Matrix view;
+        public Matrix Transforms;
+        Matrix[] boneTransforms;
+        Matrix rotationMatrixX;
+        Matrix rotationMatrixY;
+        Matrix rotationMatrixZ;
+
+        //GameObject
+        protected Vector3 Position;
+
+        //Unit
+        public UnitType[] UnitTypes = { UnitType.TestUnit };
         public Vector3 velocity;
         protected Tile previousTile;
         protected Tile currentTile;
@@ -24,26 +58,35 @@ namespace UHSampleGame.CoreObjects.Units
         protected Tile focalTile;
         protected Vector3 focalPoint;
         protected bool isStuck;
-        protected int health;
+        public int Health;
         protected int pathLength;
-        protected UnitType type;
+        public UnitType Type;
         protected float rotation;
         protected float currentRotation = 0;
-
-        public int Health
-        {
-            get { return health; }
-        }
-
-        public UnitType Type
-        {
-            get { return type; }
-        }
-
+        public bool Alive;
+        public int Index;
         public event UnitDied Died;
 
-        public Unit(int playerNum, int teamNum, Model model, Base.Base goalBase, Vector3 position)
-            : base(playerNum, teamNum, model, position)
+        public Unit()
+        {
+            this.Alive = false;
+
+            previousTile = new Tile();
+            currentTile = new Tile();
+            focalPoint = new Vector3();
+            focalTile = new Tile();
+
+            goalTile = null;
+            isStuck = false;
+            Health = 100;
+
+            pathLength = 0;
+
+            this.PlayerNum = 0;
+            this.TeamNum = 0;
+        }
+
+        public Unit(UnitType newType, int playerNum, int teamNum, Vector3 position, Base.Base goalBase)
         {
             previousTile = new Tile();
             currentTile = new Tile();
@@ -52,16 +95,67 @@ namespace UHSampleGame.CoreObjects.Units
             
             goalTile = goalBase.Tile;
             isStuck = false;
-            health = 100;
+            Health = 100;
 
             pathLength = 0;
+
+            this.PlayerNum = playerNum;
+            this.TeamNum = teamNum;
+
+            this.Type = newType;
+                
+            foreach(UnitType type in unitEnumType)
+            {
+                switch(type)
+                {
+                    case UnitType.TestUnit:
+                        this.Position = position;
+                        this.scale = 5.0f;
+                        break;
+                }
+            }
+
+            SetupModel(position);
+            SetupCamera();
+            Alive = true;
         }
 
-        public override void Update(GameTime gameTime)
+        public void Setup(UnitType newType, int index, int playerNum, int teamNum, Vector3 position, Base.Base goalBase)
         {
-            base.Update(gameTime);
+            goalTile = goalBase.Tile;
+            isStuck = false;
+            Health = 100;
+            this.Index = index;
 
+            pathLength = 0;
+
+            this.PlayerNum = playerNum;
+            this.TeamNum = teamNum;
+
+            this.Type = newType;
+
+            foreach (UnitType type in unitEnumType)
+            {
+                switch (type)
+                {
+                    case UnitType.TestUnit:
+                        this.Position = position;
+                        this.scale = 5.0f;
+                        break;
+                }
+            }
+
+            SetupModel(position);
+            SetupCamera();
+            Alive = true;
+
+        }
+
+        public void Update(GameTime gameTime)
+        {
             UpdatePath();
+            UpdateView();
+            UpdateTransforms();
         }
 
         public void UpdatePath()
@@ -108,7 +202,7 @@ namespace UHSampleGame.CoreObjects.Units
         {
             if (currentTile.Paths[goalTile.ID].Count < 1)
             {
-                if ((Math.Abs(position.X - focalPoint.X) < 30 && Math.Abs(position.Z - focalPoint.Z) < 30) 
+                if ((Math.Abs(Position.X - focalPoint.X) < 30 && Math.Abs(Position.Z - focalPoint.Z) < 30) 
                     || !TileMap.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
                 {
                     List<Tile> stuckTiles = new List<Tile>(TileMap.GetWalkableNeighbors(currentTile));
@@ -137,7 +231,7 @@ namespace UHSampleGame.CoreObjects.Units
             focalTile = newTile;
             focalPoint = focalTile.GetRandPoint();
 
-            velocity = focalPoint - position;// new Vector3(focalPoint.X - position.X, focalPoint.Y - position.Y, focalPoint.Z - position.Z);
+            velocity = focalPoint - Position;// new Vector3(focalPoint.X - position.X, focalPoint.Y - position.Y, focalPoint.Z - position.Z);
             Vector3 normVel = new Vector3(velocity.X, velocity.Y, velocity.Z);
             normVel.Normalize();
 
@@ -151,7 +245,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         private void UpdatePositionAndRotation()
         {
-            this.position += velocity;
+            this.Position += velocity;
             //currentRotation += rotation;
            
             //this.RotateY( MathHelper.Lerp(currentRotation, rotation, 0.6f));
@@ -164,7 +258,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         private void SetCurrentTile(Tile tile)
         {
-            currentTile.RemoveUnit(this.type, this);
+            currentTile.RemoveUnit(this.Type, this);
             currentTile = tile;
             if (currentTile == goalTile)
             {
@@ -174,7 +268,7 @@ namespace UHSampleGame.CoreObjects.Units
             else
             {
                 pathLength = currentTile.Paths[goalTile.ID].Count;
-                currentTile.AddUnit(this.type, this);
+                currentTile.AddUnit(this.Type, this);
             }
         }
 
@@ -185,25 +279,138 @@ namespace UHSampleGame.CoreObjects.Units
 
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            if (health <= 0)
+            Health -= damage;
+            if (Health <= 0)
                 OnDied();
         }
 
         private void OnDied()
         {
-            //if (Died != null)
-            //    Died(this.type, this);
+            if (Died != null)
+                Died(this.Type, this);
         }
 
         public override string ToString()
         {
-            return this.position.ToString();
+            return this.Position.ToString();
         }
 
         public List<Tile> PathToGoal()
         {
             return currentTile.Paths[goalTile.ID];
         }
+
+        #region TeamableStaticObject
+        public void SetPlayerNum(int newPlayerNum)
+        {
+            PlayerNum = newPlayerNum;
+        }
+
+        public void SetTeamNum(int newTeamNum)
+        {
+            TeamNum = newTeamNum;
+        }
+        #endregion
+
+        #region StaticTileObject
+        public Tile GetTile()
+        {
+            return TileMap.GetTileFromPos(Position);
+        }
+        #endregion
+
+        #region StaticModel
+        protected void SetupModel(Vector3 position)
+        {
+            //save bones
+            switch(Type)
+            {
+                case UnitType.TestUnit:
+                 boneTransforms = new Matrix[Models[(int)Type].Bones.Count];
+                 Models[(int)Type].CopyAbsoluteBoneTransformsTo(boneTransforms);
+                 break;
+            }
+            
+            //setup transforms
+            Transforms =  Matrix.CreateScale(scale) * Matrix.CreateTranslation(position);
+
+            //give default rotation
+            rotationMatrixX = Matrix.CreateRotationX(0.0f);
+            rotationMatrixY = Matrix.CreateRotationY(0.0f);
+            rotationMatrixZ = Matrix.CreateRotationZ(0.0f);
+
+            //give default position
+            this.Position = position;
+        }
+
+        /// <summary>
+        /// Sets up default camera information
+        /// </summary>
+        protected void SetupCamera()
+        {
+            cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
+            view = cameraManager.ViewMatrix;
+        }
+
+        public void RotateX(float rotation)
+        {
+            rotationMatrixX = Matrix.CreateRotationX(rotation);
+        }
+
+        public void RotateY(float rotation)
+        {
+            rotationMatrixY = Matrix.CreateRotationY(rotation);
+        }
+
+        public void RotateZ(float rotation)
+        {
+            rotationMatrixZ = Matrix.CreateRotationZ(rotation);
+        }
+
+        public void UpdateView()
+        {
+            view = cameraManager.ViewMatrix;
+        }
+
+        public void UpdateTransforms()
+        {
+            Matrix scaleMatrix = Matrix.CreateScale(this.scale);
+            Matrix translation = Matrix.CreateTranslation(Position);
+            Transforms = scaleMatrix *
+                    rotationMatrixX *
+                    rotationMatrixY *
+                    rotationMatrixZ * 
+                    translation;
+        }
+
+        public void Draw(GameTime time)
+        {
+            // Draw the model. A model can have multiple meshes, so loop.
+            foreach (ModelMesh mesh in Models[(int)Type].Meshes)
+            {
+                // This is where the mesh orientation is set, as well 
+                // as our camera and projection.
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.EnableDefaultLighting();
+                    effect.World = boneTransforms[mesh.ParentBone.Index] * Transforms;
+                    effect.View = cameraManager.ViewMatrix;
+                    effect.Projection = cameraManager.ProjectionMatrix;
+                }
+                // Draw the mesh, using the effects set above.
+                mesh.Draw();
+            }
+
+        }
+
+
+        #endregion
+
+        #region GameObject
+        public void SetPosition(Vector3 position)
+        {
+            this.Position = position;
+        }
+        #endregion
     }
 }

@@ -148,7 +148,6 @@
     <Compile Include="Game1.cs" />
     <Compile Include="ScreenManagement\Screen.cs" />
     <Compile Include="ScreenManagement\ScreenManager.cs" />
-    <Compile Include="Screens\DummyTextScreen.cs" />
     <Compile Include="Screens\MenuScreenTest.cs" />
     <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="TileSystem\Tile.cs" />

@@ -124,7 +124,6 @@ namespace UHSampleGame.CoreObjects
             //update bones
             bones = animationPlayer.GetSkinTransforms();
 
-            base.Update(gameTime);
         }
 
         public void UpdateView()
@@ -153,7 +152,6 @@ namespace UHSampleGame.CoreObjects
 
                 mesh.Draw();
             }
-            base.Draw(gameTime);
         }
         #endregion
     }

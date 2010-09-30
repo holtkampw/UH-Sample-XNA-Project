@@ -13,7 +13,7 @@ using UHSampleGame.InputManagement;
 using UHSampleGame.CoreObjects.Towers;
 using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CoreObjects.Base;
-using UHSampleGame.Player;
+using UHSampleGame.Players;
 using UHSampleGame.LevelManagement;
 
 using Microsoft.Xna.Framework.Media;
@@ -29,13 +29,14 @@ namespace UHSampleGame.Screens
 
         Video video;
         VideoPlayer videoPlayer;
+        Vector2 dimensions;
         
         Tile currentTile;
 
         TestBase goalBase;
 
-        List<HumanPlayer> humanPlayers;
-        List<AIPlayer> aiPlayers;
+        List<Player> humanPlayers;
+        List<Player> aiPlayers;
         LevelManager levelManager;
 
         int frames;
@@ -54,19 +55,22 @@ namespace UHSampleGame.Screens
 
            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
 
-           //video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
-           //videoPlayer = new VideoPlayer();
-           //videoPlayer.IsLooped = true;
-           //if (videoPlayer.State != MediaState.Playing)
-           //    videoPlayer.Play(video);
+           Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
+           dimensions = new Vector2(viewport.Width, viewport.Height);
+
+           video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
+           videoPlayer = new VideoPlayer();
+           videoPlayer.IsLooped = true;
+           if (videoPlayer.State != MediaState.Playing)
+               videoPlayer.Play(video);
 
             //goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
 
-            humanPlayers =  new List<HumanPlayer>();
-            aiPlayers = new List<AIPlayer>();
+            humanPlayers =  new List<Player>();
+            aiPlayers = new List<Player>();
 
-            humanPlayers.Add(new HumanPlayer(1, 1, TileMap.Tiles[0]));
-            aiPlayers.Add(new AIPlayer(5, 5, TileMap.Tiles[0]));
+            humanPlayers.Add(new Player(1, 1, TileMap.Tiles[0], PlayerType.Human));
+            aiPlayers.Add(new Player(5, 5, TileMap.Tiles[0], PlayerType.AI));
 
             levelManager = new LevelManager(humanPlayers, aiPlayers);
             levelManager.LoadLevel(1);
@@ -109,20 +113,24 @@ namespace UHSampleGame.Screens
             frames = 0;
             frameRate = 0;
         }
+
+        public override void LoadContent()
+        {
+            
+        }
         #endregion
 
         #region Update/Draw
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-            //if (!IsVisible)
-            //{
-            //    videoPlayer.Stop();
-            //    return;
-            //}
+            if (!IsVisible)
+            {
+                videoPlayer.Stop();
+                return;
+            }
 
-            //if (videoPlayer.State != MediaState.Playing)
-            //    videoPlayer.Play(video);
+            if (videoPlayer.State != MediaState.Playing)
+                videoPlayer.Play(video);
 
             cameraManager.Update();
 
@@ -146,22 +154,20 @@ namespace UHSampleGame.Screens
 
         public override void HandleInput(InputManager input)
         {
-            base.HandleInput(input);
             for (int i = 0; i < humanPlayers.Count; i++)
                 humanPlayers[i].HandleInput(input);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
             ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
-            //if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
-            //{
-            //    //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
-            //    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, 
-            //        viewport.Width, viewport.Height), Color.White);
-            //}
+            
+            if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+            {
+                //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
+                ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
+                    (int)dimensions.X, (int)dimensions.Y), Color.White);
+            }
 
             ScreenManager.SpriteBatch.End();
 
@@ -181,6 +187,13 @@ namespace UHSampleGame.Screens
             ScreenManager.SpriteBatch.End();
 
             frames++;
+        }
+        #endregion
+
+        #region Unload
+        public override void UnloadContent()
+        {
+           
         }
         #endregion
     }

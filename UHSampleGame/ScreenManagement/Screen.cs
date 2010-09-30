@@ -12,7 +12,7 @@ namespace UHSampleGame.ScreenManagement
 {
     public enum ScreenStatus { Visible, Disabled, Overlay }
 
-    public class Screen
+    public abstract class Screen
     {
         #region Class Variables
         protected string name;
@@ -69,8 +69,8 @@ namespace UHSampleGame.ScreenManagement
         #endregion
 
         #region Load and Unload Content
-        public virtual void LoadContent() { }
-        public virtual void UnloadContent() { }
+        public abstract void LoadContent();
+        public abstract void UnloadContent();
         #endregion Load and Unload Content
 
         #region Update and Draw
@@ -78,19 +78,19 @@ namespace UHSampleGame.ScreenManagement
         /// Function that contains code that will update the screen
         /// </summary>
         /// <param name="gameTime">Contains timer information</param>
-        public virtual void Update(GameTime gameTime) { }
+        public abstract void Update(GameTime gameTime);
 
         /// <summary>
         /// Handles input logic
         /// </summary>
         /// <param name="input">The input manager for the game</param>
-        public virtual void HandleInput(InputManager input) { }
+        public abstract void HandleInput(InputManager input);
 
         /// <summary>
         /// Function that contains code to draw the current screen state
         /// </summary>
         /// <param name="gameTime">Contains timer information</param>
-        public virtual void Draw(GameTime gameTime) { }
+        public abstract void Draw(GameTime gameTime);
         #endregion
 
         #region Helpers
