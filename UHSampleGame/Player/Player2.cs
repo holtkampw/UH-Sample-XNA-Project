@@ -21,34 +21,17 @@ namespace UHSampleGame.Players
     public class Player2
     {
 
-        static int MAX_UNITS = 5000;
-        static VertexDeclaration instanceVertexDeclaration = new VertexDeclaration
-        (
-            new VertexElement(0, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 0),
-            new VertexElement(16, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 1),
-            new VertexElement(32, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 2),
-            new VertexElement(48, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 3)
-        );
-
+        
         public Base PlayerBase;
 
         protected Dictionary<int, Model> instancedModels;
         protected Dictionary<int, Matrix[]> instancedModelBones;
         public static Enum[] unitEnumType = EnumHelper.EnumToArray(new UnitType());
 
-        protected int money;
         protected int PlayerNum;
         protected int TeamNum;
 
-        protected SkinnedEffect genericEffect;
         protected CameraManager cameraManager;
-        DynamicVertexBuffer instanceVertexBuffer = null;
-
-        InstancingTechnique instancingTechnique = InstancingTechnique.HardwareInstancing;
-
-        public event GetNewGoalBase GetNewGoalBase;
-
-        Matrix[] universalTransforms = new Matrix[5000];
 
         public PlayerType Type;
         public static Enum[] playerEnumType = EnumHelper.EnumToArray(new PlayerType());
@@ -56,7 +39,6 @@ namespace UHSampleGame.Players
         //HumanPlayer
         TeamableAnimatedObject avatar;
 
-        int updateCount = 0;
         #region Properties
        
         #endregion
@@ -85,18 +67,6 @@ namespace UHSampleGame.Players
         {
             this.PlayerBase = playerBase;
             // TileMap.SetBase(playerBase);
-        }
-
-        public void SetTargetBase(Base target)
-        {
-            PlayerBase.SetGoalBase(target);
-            target.baseDestroyed += GetNewTargetBase;
-        }
-
-        protected void GetNewTargetBase(Base destroyedBase)
-        {
-            if (GetNewGoalBase != null)
-                GetNewGoalBase();
         }
 
         public void HandleInput(InputManager input)

@@ -45,6 +45,7 @@ namespace UHSampleGame.Screens
 
             TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
             p1 =  new Player2(1, 1, TileMap.Tiles[0], PlayerType.Human);
+
             Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
             dimensions = new Vector2(viewport.Width, viewport.Height);
 

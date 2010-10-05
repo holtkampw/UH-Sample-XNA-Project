@@ -19,6 +19,7 @@ using UHSampleGame.ScreenManagement;
 namespace UHSampleGame.CoreObjects.Units
 {
     public enum UnitType { TestUnit };
+    public enum UnitStatus { Active, Deployed, Inactive };
 
     public class Unit
     {
@@ -65,11 +66,13 @@ namespace UHSampleGame.CoreObjects.Units
         protected float currentRotation = 0;
         public bool Alive;
         public int Index;
+        public UnitStatus Status;
         public event UnitDied Died;
 
-        public Unit()
+        public Unit(int playerNum, UnitType unitType)
         {
             this.Alive = false;
+            Status = UnitStatus.Inactive;
 
             previousTile = new Tile();
             currentTile = new Tile();
@@ -88,6 +91,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         public Unit(UnitType newType, int playerNum, int teamNum, Vector3 position, Base.Base goalBase)
         {
+            Status = UnitStatus.Inactive;
             previousTile = new Tile();
             currentTile = new Tile();
             focalPoint = new Vector3();
