@@ -39,7 +39,7 @@ namespace UHSampleGame.Screens
         
         void one_Selected(object sender, EventArgs e)
         {
-            screenManager.ShowScreen(new PlayScreen());
+            screenManager.ShowScreen(new PlayScreen2());
         }
 
         void two_Selected(object sender, EventArgs e)
@@ -62,7 +62,7 @@ namespace UHSampleGame.Screens
         public override void LoadContent()
         {
             base.LoadContent();
-            video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
+            video = ScreenManager.Game.Content.Load<Video>("Video\\intro");
             videoPlayer = new VideoPlayer();
             videoPlayer.IsLooped = true;
 

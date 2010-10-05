@@ -79,6 +79,7 @@
     <Compile Include="CoreObjects\Towers\TowerAGood.cs" />
     <Compile Include="CoreObjects\Units\TestUnit.cs" />
     <Compile Include="CoreObjects\Units\Unit.cs" />
+    <Compile Include="Debug\FPSCounter.cs" />
     <Compile Include="EnumHelper\EnumHelper.cs" />
     <Compile Include="Events\GameEventArgs.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Player\AIPlayer.cs" />
     <Compile Include="Player\HumanPlayer.cs" />
     <Compile Include="Player\Player.cs" />
+    <Compile Include="Player\Player2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="ScreenManagement\ScreenManager.cs" />
     <Compile Include="Screens\MenuScreenTest.cs" />
     <Compile Include="Screens\PlayScreen.cs" />
+    <Compile Include="Screens\PlayScreen2.cs" />
     <Compile Include="TileSystem\Tile.cs" />
     <Compile Include="TileSystem\TileMap.cs" />
   </ItemGroup>
