@@ -50,6 +50,8 @@ namespace UHSampleGame.CoreObjects.Units
 
         static CameraManager cameraManager;
 
+        static int updateCount;
+        static int drawCount;
         #endregion
 
         public static void Initialize(int numPlayers)
@@ -134,9 +136,15 @@ namespace UHSampleGame.CoreObjects.Units
         {
             for (int i = 0; i < NumPlayers; i++)
                 for (int j = 0; j < unitTypes.Length; j++)
-                    for (int k = 0; k < unitsMaxIndex[i][j]; k++)
-                        if(units[i][j][k].IsActive())
+                {
+                    updateCount = 0;
+                    for (int k = 0; k < unitsMaxIndex[i][j] && updateCount < unitsCount[i][j]; k++)
+                        if (units[i][j][k].IsActive())
+                        {
                             units[i][j][k].Update(gameTime);
+                            updateCount++;
+                        }
+                }
         }
 
         public static void Draw(GameTime gameTime)
@@ -153,17 +161,17 @@ namespace UHSampleGame.CoreObjects.Units
 
         private static void DrawUnits(int i, int j)
         {
-            int index = 0;
-            for (int k = 0; k < unitsMaxIndex[i][j]; k++)
+            drawCount = 0;
+            for (int k = 0; k < unitsMaxIndex[i][j] && drawCount < unitsCount[i][j]; k++)
             {
                 if (units[i][j][k].IsActive())
                 {
-                    unitTransforms[index] = units[i][j][k].Transforms;
-                    index++;
+                    unitTransforms[drawCount] = units[i][j][k].Transforms;
+                    drawCount++;
                 }
             }
 
-            DrawInstancedUnits(i, j, index);
+            DrawInstancedUnits(i, j, drawCount);
 
         }
 
