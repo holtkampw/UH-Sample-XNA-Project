@@ -90,7 +90,7 @@ namespace UHSampleGame.CoreObjects.Units
                 switch ((UnitType)j)
                 {
                     case UnitType.TestUnit:
-                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Units\\boat"));
+                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Units\\enemyShip01"));
                         instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
                         instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
                         break;
