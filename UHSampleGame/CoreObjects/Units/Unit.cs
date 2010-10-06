@@ -18,8 +18,7 @@ using UHSampleGame.ScreenManagement;
 
 namespace UHSampleGame.CoreObjects.Units
 {
-    public enum UnitType { TestUnit };
-    public enum UnitStatus { Active, Deployed, Inactive };
+
 
     public class Unit
     {
