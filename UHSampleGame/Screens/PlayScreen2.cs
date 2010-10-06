@@ -52,7 +52,7 @@ namespace UHSampleGame.Screens
             LevelManager2.Initialize();
             LevelManager2.AddPlayer(p1);
             LevelManager2.AddPlayer(aI);
-            Levelmanager2.LoadLevel(1);
+            LevelManager2.LoadLevel(1);
 
             Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
             dimensions = new Vector2(viewport.Width, viewport.Height);

@@ -32,7 +32,7 @@ namespace UHSampleGame.TileSystem
         static int numTilesX;
         static int numTilesY;
         static List<NeighborTile> allNeighbors;
-        static List<Tile2> neighbors =  new List<Tile2>();
+        static List<Tile2> neighbors = new List<Tile2>();
 
         public static event TowerCreated TowerCreated;
 
@@ -207,8 +207,8 @@ namespace UHSampleGame.TileSystem
             //xNum = (int)((upperLeftPos.X - position.X) / (int)tileSize.X);
             //yNum = (int)(((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
 
-           // xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
-           // yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+            // xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
+            // yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
 
             index = Math.Abs(xNum) + Math.Abs(yNum);
 
@@ -358,13 +358,15 @@ namespace UHSampleGame.TileSystem
 
         }
 
-        public static void SetTowerForLevelMap(Tower2 tower, Tile2 tile2)
+        public static void SetTowerForLevelMap(Tower2 tower, Tile2 tile)
         {
-            tile2.SetBlockableObject(tower);
+            
+            tile.SetBlockableObject(tower);
+            //tile2.SetBlockableObject(tower);
 
             //UpdateTilePaths();
 
-            List<Tile2> walkableNeighbors = GetWalkableNeighbors(tile2);
+            List<Tile2> walkableNeighbors = GetWalkableNeighbors(tile);
 
             for (int i = 0; i < walkableNeighbors.Count; i++)
             {

@@ -144,6 +144,7 @@
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />
     <Compile Include="LevelManagement\Level.cs" />
+    <Compile Include="LevelManagement\Level2.cs" />
     <Compile Include="LevelManagement\LevelManager.cs" />
     <Compile Include="LevelManagement\LevelManager2.cs" />
     <Compile Include="MenuSystem\MenuEntry.cs" />

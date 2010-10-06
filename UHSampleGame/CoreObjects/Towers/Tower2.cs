@@ -38,6 +38,9 @@ namespace UHSampleGame.CoreObjects.Towers
 
         public TowerType Type;
         public TowerStatus Status;
+        public int TeamNum;
+        public int PlayerNum;
+        public Unit2 unitToAttack;
         #endregion
 
         #region Initialization
@@ -50,6 +53,7 @@ namespace UHSampleGame.CoreObjects.Towers
             this.scaleMatrix = Matrix.Identity;
             this.Type = type;
             this.Status = TowerStatus.Inactive;
+            unitToAttack = null;
         }
 
         public void Setup(Vector3 position)
@@ -74,6 +78,19 @@ namespace UHSampleGame.CoreObjects.Towers
         public bool IsActive()
         {
             return Status != TowerStatus.Inactive;
+        }
+
+        public void RegisterAttackUnit(GameEventArgs2 args)
+        {
+            if (args.Unit.TeamNum != TeamNum)
+            {
+                if (unitToAttack == null || args.Unit.PathLength < unitToAttack.PathLength)
+                {
+                    unitToAttack = args.Unit;
+                    //unitToAttack.Died += GetNewAttackUnit;
+                }
+            }
+
         }
         #endregion
 

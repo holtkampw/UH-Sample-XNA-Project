@@ -209,7 +209,7 @@
     <Compile Include="Objects\Towers\towerA_red.fbx">
       <Name>towerA_red</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>InstancedModelProcessor</Processor>
     </Compile>
     <Compile Include="Objects\Towers\towerB_red.fbx">
       <Name>towerB_red</Name>

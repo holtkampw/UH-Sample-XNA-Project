@@ -144,10 +144,10 @@ namespace UHSampleGame.Players
            // target.baseDestroyed += GetNewTargetBase;
         }
 
-        public void SetTowerForLevelMap(Tower2 tower)
+        public void SetTowerForLevelMap(Tower2 tower, Tile2 tile)
         {
-            TileMap2.SetTowerForLevelMap(tower, tower.Tile);
-            TowerCollection.Add(tower);
+            TileMap2.SetTowerForLevelMap(tower, tile);
+            TowerCollection.Add(PlayerNum, TeamNum, tower.Type, tile.Position);
         }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
+using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Units
 {
@@ -117,7 +118,7 @@ namespace UHSampleGame.CoreObjects.Units
             {
                 if (!units[playerNum][(int)unitType][i].IsActive())
                 {
-                    units[playerNum][(int)unitType][i].Activate();
+                    units[playerNum][(int)unitType][i].Deploy(TileMap2.Tiles[0], TileMap2.Tiles[TileMap2.Tiles.Count-2]);
                     unitsCount[playerNum][(int)unitType]++;
 
                     if(i == unitsMaxIndex[playerNum][(int)unitType])

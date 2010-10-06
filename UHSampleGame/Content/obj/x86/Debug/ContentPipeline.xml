@@ -172,20 +172,6 @@
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRigColor_0.xnb</Request>
     </Item>
     <Item>
-      <Source>Objects\Towers\towerA_red.fbx</Source>
-      <Name>Objects\Towers\towerA_red</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerA_red.xnb</Output>
-      <Time>2010-09-29T15:25:14.9930647-05:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
-        <Value>2010-09-30T02:42:30.1068002-05:00</Value>
-      </Dependency>
-      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
-    </Item>
-    <Item>
       <Source>Objects\Towers\towerB_red.fbx</Source>
       <Name>Objects\Towers\towerB_red</Name>
       <Importer>FbxImporter</Importer>
@@ -457,7 +443,7 @@
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Output>
-      <Time>2010-09-29T15:25:14.9930647-05:00</Time>
+      <Time>2010-10-06T14:29:14.9432924-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Towers\towerAColor.tga</Source>
@@ -543,6 +529,21 @@
       <Options>None</Options>
       <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Output>
       <Time>2010-09-29T18:48:31.2839593-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Towers\towerA_red.fbx</Source>
+      <Name>Objects\Towers\towerA_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerA_red.xnb</Output>
+      <Time>2010-10-06T14:29:14.9432924-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
+        <Value>2010-10-06T14:29:26.9569796-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

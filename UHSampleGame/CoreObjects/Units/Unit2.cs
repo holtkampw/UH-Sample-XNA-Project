@@ -186,7 +186,7 @@ namespace UHSampleGame.CoreObjects.Units
                 }
                 else
                 {
-                    //PathLength = currentTile.Paths[goalTile.ID].Count;
+                    PathLength = currentTile.Paths[goalTile.ID].Count;
                     //currentTile.AddUnit(Type, this);
                 }
             }
@@ -204,7 +204,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         bool CheckIfStuck()
         {
-            if (true)//currentTile.Paths[goalTile.ID].Count < 1)
+            if (currentTile.Paths[goalTile.ID].Count < 1)
             {
                 if ((Math.Abs(position.X - focalPoint.X) < 30 && Math.Abs(position.Z - focalPoint.Z) < 30)
                     || !TileMap2.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
