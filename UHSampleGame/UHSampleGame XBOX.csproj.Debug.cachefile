@@ -13,7 +13,6 @@ Content\AnimatedModel\dude.xnb
 Content\Objects\Units\enemyShip01.xnb
 Content\Objects\Units\enemyShip02.xnb
 Content\Objects\Base\oilRig.xnb
-Content\Objects\Towers\towerA_red.xnb
 Content\Objects\Towers\towerB_red.xnb
 Content\Objects\Towers\towerC_red.xnb
 Content\Objects\Units\boat.xnb
@@ -34,5 +33,6 @@ Content\Objects\Towers\towerAColor_0.xnb
 Content\Objects\Towers\towerBColor_0.xnb
 Content\Objects\Towers\towerCColor_0.xnb
 Content\Objects\Units\boatTexture_0.xnb
+Content\Objects\Towers\towerA_red.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
