@@ -18,15 +18,15 @@ namespace UHSampleGame.TileSystem
         Vector3 position;
         Vector2 size;
         TileType tileType;
-        Tower tower;
-        List<Unit> units;
+        Tower2 tower;
+        List<Unit2> units;
         Dictionary<int, List<Tile2>> paths;
         Random rand;
         int id;
 
         public static Tile2 NullTile = new Tile2();
 
-        public event RegisterUnitWithTile UnitEnter;
+        public event RegisterUnitWithTile2 UnitEnter;
 
         public TileType TileType
         {
@@ -81,7 +81,7 @@ namespace UHSampleGame.TileSystem
             this.size = size;
             this.tileType = tileType;
             this.paths = new Dictionary<int, List<Tile2>>();
-            this.units = new List<Unit>();
+            this.units = new List<Unit2>();
 
             SetTileType(tileType);
 
@@ -115,7 +115,7 @@ namespace UHSampleGame.TileSystem
             return this.ID.ToString() + " " + tileType.ToString();
         }
 
-        public void SetBlockableObject(Tower gameObject)
+        public void SetBlockableObject(Tower2 gameObject)
         {
             this.tower = gameObject;
             SetTileType(TileType.Blocked);
@@ -147,32 +147,32 @@ namespace UHSampleGame.TileSystem
             return new Vector3(position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, position.Z + rand.Next(-sizeY, sizeY));
         }
 
-        public void RegisterTowerListener(Tower tower)
+        public void RegisterTowerListener(Tower2 tower)
         {
             UnitEnter += tower.RegisterAttackUnit;
         }
 
-        public void UnregisterTowerListener(Tower tower)
+        public void UnregisterTowerListener(Tower2 tower)
         {
             UnitEnter -= tower.RegisterAttackUnit;
         }
 
-        public void AddUnit(UnitType type, Unit unit)
+        public void AddUnit(UnitType type, Unit2 unit)
         {
             units.Add(unit);
-            unit.Died += RemoveUnit;
-            OnUnitEnter(new GameEventArgs(unit));
+            //unit.Died += RemoveUnit;
+            //OnUnitEnter(new GameEventArgs(unit));
         }
 
-        public void RemoveUnit(UnitType type, Unit unit)
+        public void RemoveUnit(UnitType type, Unit2 unit)
         {
             units.Remove(unit);
             //Set new unit to attack
-            if (units.Count > 0)
-                OnUnitEnter(new GameEventArgs(units[0]));
+           // if (units.Count > 0)
+              //  OnUnitEnter(new GameEventArgs(units[0]));
         }
 
-        private void OnUnitEnter(GameEventArgs args)
+        private void OnUnitEnter(GameEventArgs2 args)
         {
             if (UnitEnter != null)
             {

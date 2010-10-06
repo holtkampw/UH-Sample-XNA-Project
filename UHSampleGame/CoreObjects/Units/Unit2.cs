@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
 using UHSampleGame.TileSystem;
+using UHSampleGame.Events;
 
 namespace UHSampleGame.CoreObjects.Units
 {
@@ -30,6 +31,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         bool isStuck;
         Random rand;
+        public event UnitDied2 Died;
 
         public int Health;
         public int TeamNum;

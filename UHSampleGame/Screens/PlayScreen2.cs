@@ -48,6 +48,11 @@ namespace UHSampleGame.Screens
             p1 =  new Player2(0, 1, TileMap2.Tiles[0], PlayerType.Human);
             aI = new Player2(1, 2, TileMap2.Tiles[TileMap2.Tiles.Count-1], PlayerType.AI);
 
+            LevelManager2.Initialize();
+            LevelManager2.AddPlayer(p1);
+            LevelManager2.AddPlayer(aI);
+            Levelmanager2.LoadLevel(1);
+
             Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
             dimensions = new Vector2(viewport.Width, viewport.Height);
 

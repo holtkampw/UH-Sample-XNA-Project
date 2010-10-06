@@ -307,7 +307,7 @@ namespace UHSampleGame.TileSystem
             return true;
         }
 
-        public static void SetObject(Tower gameObject, Tile2 Tile2)
+        public static void SetObject(Tower2 gameObject, Tile2 Tile2)
         {
             SetTower(gameObject, Tile2);
         }
@@ -317,7 +317,7 @@ namespace UHSampleGame.TileSystem
             SetBase(gameObject);
         }
 
-        public static bool SetTower(Tower tower, Tile2 Tile2)
+        public static bool SetTower(Tower2 tower, Tile2 Tile2)
         {
             Tile2.SetBlockableObject(tower);
             if (IsTilePathsValid())
@@ -339,13 +339,13 @@ namespace UHSampleGame.TileSystem
 
         }
 
-        public static void SetTowerForLevelMap(Tower tower, Tile2 Tile2)
+        public static void SetTowerForLevelMap(Tower2 tower, Tile2 tile2)
         {
-            Tile2.SetBlockableObject(tower);
+            tile2.SetBlockableObject(tower);
 
             //UpdateTilePaths();
 
-            List<Tile2> walkableNeighbors = GetWalkableNeighbors(Tile2);
+            List<Tile2> walkableNeighbors = GetWalkableNeighbors(tile2);
 
             for (int i = 0; i < walkableNeighbors.Count; i++)
             {
