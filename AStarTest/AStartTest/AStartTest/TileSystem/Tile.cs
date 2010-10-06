@@ -2,24 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
+using Microsoft.Xna.Framework;
+using UHSampleGame.CoreObjects.Towers;
+using UHSampleGame.CoreObjects.Units;
+using UHSampleGame.CoreObjects;
+using UHSampleGame.Events;
+using UHSampleGame.PathFinding;
 
-using AStartTest.Vectors;
-
-namespace AStartTest.TileSystem
+namespace UHSampleGame.TileSystem
 {
-    public enum TileType { Walkable, Blocked, Start, Goal, Path, Current, Open, Closed, Null }
+    public enum TileType { Walkable, Blocked, Path, Null }
 
     public class Tile
     {
-        Panel panel;
-        Vector2 position;
+        Vector3 position;
         Vector2 size;
         TileType tileType;
-        Dictionary<TileType, Color> colorDictionary;
-
+        Tower tower;
+        List<Unit> units;
+        Dictionary<int, List<Tile>> paths;
+        Random rand;
         int id;
+
+        public event RegisterUnitWithTile UnitEnter;
 
         public TileType TileType
         {
@@ -29,7 +34,7 @@ namespace AStartTest.TileSystem
         /// <summary>
         /// The 3D coordinate of the CENTER of the tile
         /// </summary>
-        public Vector2 Position
+        public Vector3 Position
         {
             get { return position; }
         }
@@ -42,14 +47,17 @@ namespace AStartTest.TileSystem
             get { return size; }
         }
 
+        public Dictionary<int, List<Tile>> Paths
+        {
+            get { return paths; }
+        }
+
+        /// <summary>
+        /// The unique id of the tile
+        /// </summary>
         public int ID
         {
             get { return id; }
-        }
-
-        public Panel Panel
-        {
-            get{return panel;}
         }
 
         /// <summary>
@@ -57,34 +65,21 @@ namespace AStartTest.TileSystem
         /// </summary>
         /// <param name="position">The center position of the tile</param>
         /// <param name="size">The width and length of the tile</param>
-        public Tile(int id, Vector2 position, Vector2 size, Panel panel)
-            : this(id, position, size, panel, TileType.Walkable) { }
+        public Tile(int id, Vector3 position, Vector2 size)
+            : this(id, position, size, TileType.Walkable) { }
 
         public Tile()
-        {
-            this.tileType = TileType.Null;
-        }
+            : this(-1, Vector3.Zero, Vector2.Zero, TileType.Null) { }
 
-        public Tile(int id, Vector2 position, Vector2 size, Panel panel, TileType tileType)
+        public Tile(int id, Vector3 position, Vector2 size, TileType tileType)
         {
+            //this.rand = new Random(DateTime.Now.Millisecond);
             this.id = id;
             this.position = position;
             this.size = size;
-            this.panel = panel;
             this.tileType = tileType;
-            this.colorDictionary = new Dictionary<TileType, Color>();
-
-            panel.Location = new System.Drawing.Point((int)position.X, (int)position.Y);
-            panel.Size = new System.Drawing.Size((int)size.X, (int)size.Y);
-
-            colorDictionary.Add(TileType.Blocked, Color.Red);
-            colorDictionary.Add(TileType.Goal, Color.Blue);
-            colorDictionary.Add(TileType.Path, Color.Yellow);
-            colorDictionary.Add(TileType.Start, Color.Green);
-            colorDictionary.Add(TileType.Walkable, Color.Black);
-            colorDictionary.Add(TileType.Current, Color.Pink);
-            colorDictionary.Add(TileType.Open, Color.Purple);
-            colorDictionary.Add(TileType.Closed, Color.Orange);
+            this.paths = new Dictionary<int, List<Tile>>();
+            this.units = new List<Unit>();
 
             SetTileType(tileType);
 
@@ -92,17 +87,13 @@ namespace AStartTest.TileSystem
 
         public bool IsWalkable()
         {
-            return tileType != TileType.Blocked && tileType != TileType.Null;
+            return tileType == TileType.Walkable;
         }
 
-        public bool IsStart()
-        {
-            return tileType == TileType.Start;
-        }
 
-        public bool IsGoal()
+        public bool IsNull()
         {
-            return tileType == TileType.Goal;
+            return tileType == TileType.Null;
         }
 
         public TileType GetTileType()
@@ -113,18 +104,81 @@ namespace AStartTest.TileSystem
         public void SetTileType(TileType tileType)
         {
             this.tileType = tileType;
-            panel.BackColor = colorDictionary[tileType];
         }
 
         public override string ToString()
         {
-            return tileType.ToString();
+            return this.ID.ToString() + " " + tileType.ToString();
         }
 
-        public override bool Equals(object obj)
+        public void SetBlockableObject(Tower gameObject)
         {
-            return id == ((Tile)obj).id;
+            this.tower = gameObject;
+            SetTileType(TileType.Blocked);
         }
 
+        public void RemoveBlockableObject()
+        {
+            this.tower = null;
+            SetTileType(TileType.Walkable);
+        }
+
+        public List<Tile> GetPathTo(Tile baseTile)
+        {
+            UpdatePathTo(baseTile);
+            return paths[baseTile.ID];
+        }
+
+        public void UpdatePathTo(Tile baseTile)
+        {
+            AStar aStar = new AStar(this, baseTile);
+            paths[baseTile.ID] = new List<Tile>(aStar.FindPath());
+        }
+
+        public Vector3 GetRandPoint()
+        {
+            rand = new Random(DateTime.Now.Millisecond);
+            int sizeX = (int)(size.X/3);
+            int sizeY = (int)(size.Y / 3);
+            return new Vector3(position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, position.Z + rand.Next(-sizeY, sizeY));
+        }
+
+        public void RegisterTowerListener(Tower tower)
+        {
+            UnitEnter += tower.RegisterAttackUnit;
+        }
+
+        public void UnregisterTowerListener(Tower tower)
+        {
+            UnitEnter -= tower.RegisterAttackUnit;
+        }
+
+        public void AddUnit(UnitType type, Unit unit)
+        {
+            units.Add(unit);
+            unit.Died += RemoveUnit;
+            OnUnitEnter(new GameEventArgs(unit));
+        }
+
+        public void RemoveUnit(UnitType type, Unit unit)
+        {
+            units.Remove(unit);
+            //Set new unit to attack
+            if(units.Count >0)
+                OnUnitEnter(new GameEventArgs(units[0]));
+        }
+
+        private void OnUnitEnter(GameEventArgs args)
+        {
+            if (UnitEnter != null)
+            {
+                UnitEnter(args);
+            }
+        }
+
+        //public override bool Equals(object obj)
+        //{
+        //    return id == ((Tile)obj).id;
+        //}
     }
 }
