@@ -148,6 +148,7 @@ namespace UHSampleGame.CoreObjects.Units
                     DrawUnits(i, j);
                 }
             }             
+
         }
 
         private static void DrawUnits(int i, int j)
@@ -158,11 +159,15 @@ namespace UHSampleGame.CoreObjects.Units
                 if (units[i][j][k].IsActive())
                 {
                     unitTransforms[index] = units[i][j][k].Transforms;
+                    index++;
                 }
             }
 
             DrawInstancedUnits(i, j, index);
+
         }
+
+       
 
         private static void DrawInstancedUnits(int playerNum, int unitType, int amount)
         {

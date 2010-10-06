@@ -22,7 +22,7 @@ namespace UHSampleGame.Players
     {
 
         
-        public Base PlayerBase;
+        public Base2 PlayerBase;
 
         protected int PlayerNum;
         protected int TeamNum;
@@ -39,12 +39,12 @@ namespace UHSampleGame.Players
        
         #endregion
 
-        public Player2(int playerNum, int teamNum, Tile startTile, PlayerType type)
+        public Player2(int playerNum, int teamNum, Tile2 startTile, PlayerType type)
         {
             this.PlayerNum = playerNum;
             this.TeamNum = teamNum;
             this.Type = type;
-            SetBase(new TestBase(playerNum, teamNum, startTile));
+            SetBase(new TestBase2(playerNum, teamNum, startTile));
             
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
@@ -60,10 +60,10 @@ namespace UHSampleGame.Players
             }
         }
 
-        public void SetBase(Base playerBase)
+        public void SetBase(Base2 playerBase)
         {
             this.PlayerBase = playerBase;
-            // TileMap.SetBase(playerBase);
+            // TileMap2.SetBase(playerBase);
         }
 
         public void HandleInput(InputManager input)
@@ -83,17 +83,17 @@ namespace UHSampleGame.Players
                 if (input.CheckAction(InputAction.TileMoveRight))
                     avatar.SetPosition(avatar.Position + new Vector3(3, 0, 0));
 
-                if (avatar.Position.X < TileMap.Left)
-                    avatar.SetPosition(new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z));
+                if (avatar.Position.X < TileMap2.Left)
+                    avatar.SetPosition(new Vector3(TileMap2.Left, avatar.Position.Y, avatar.Position.Z));
 
-                if (avatar.Position.Z < TileMap.Top)
-                    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Top));
+                if (avatar.Position.Z < TileMap2.Top)
+                    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap2.Top));
 
-                if (avatar.Position.X > TileMap.Right)
-                    avatar.SetPosition(new Vector3(TileMap.Right, avatar.Position.Y, avatar.Position.Z));
+                if (avatar.Position.X > TileMap2.Right)
+                    avatar.SetPosition(new Vector3(TileMap2.Right, avatar.Position.Y, avatar.Position.Z));
 
-                if (avatar.Position.Z > TileMap.Bottom)
-                    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
+                if (avatar.Position.Z > TileMap2.Bottom)
+                    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap2.Bottom));
 
                 if (input.CheckAction(InputAction.Selection))
                 {

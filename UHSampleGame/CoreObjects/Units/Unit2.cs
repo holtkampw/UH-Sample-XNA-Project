@@ -19,10 +19,10 @@ namespace UHSampleGame.CoreObjects.Units
         UnitStatus Status;
         UnitType Type;
 
-        Tile previousTile;
-        Tile currentTile;
-        Tile goalTile;
-        Tile focalTile;
+        Tile2 previousTile;
+        Tile2 currentTile;
+        Tile2 goalTile;
+        Tile2 focalTile;
 
         Vector3 position;
         Vector3 focalPoint;
@@ -90,7 +90,7 @@ namespace UHSampleGame.CoreObjects.Units
             Status = UnitStatus.Active; 
         }
 
-        public void Deploy(Tile baseTile, Tile goalTile)
+        public void Deploy(Tile2 baseTile, Tile2 goalTile)
         {
             this.previousTile = baseTile;
             this.currentTile = baseTile;
@@ -136,7 +136,7 @@ namespace UHSampleGame.CoreObjects.Units
                 }
                 else
                 {
-                    List<Tile> goodNieghbors = TileMap.GetWalkableNeighbors(currentTile);
+                    List<Tile2> goodNieghbors = TileMap2.GetWalkableNeighbors(currentTile);
                     if (goodNieghbors.Count > 0)
                         SetFocalPointAndVelocity(goodNieghbors[0].Paths[goalTile.ID][1]);
                     else
@@ -170,10 +170,10 @@ namespace UHSampleGame.CoreObjects.Units
                     rotationMatrixZ;
         }
 
-        void SetCurrentTile(Tile tile)
+        void SetCurrentTile(Tile2 Tile2)
         {
             previousTile = currentTile;
-            currentTile = tile;
+            currentTile = Tile2;
 
             if (IsNewTile())
             {
@@ -191,9 +191,9 @@ namespace UHSampleGame.CoreObjects.Units
             }
         }
 
-        Tile GetTile()
+        Tile2 GetTile()
         {
-            return TileMap.GetTileFromPos(position);
+            return TileMap2.GetTileFromPos(position);
         }
 
         bool IsNewTile()
@@ -206,14 +206,14 @@ namespace UHSampleGame.CoreObjects.Units
             if (true)//currentTile.Paths[goalTile.ID].Count < 1)
             {
                 if ((Math.Abs(position.X - focalPoint.X) < 30 && Math.Abs(position.Z - focalPoint.Z) < 30)
-                    || !TileMap.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
+                    || !TileMap2.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
                 {
-                    List<Tile> stuckTiles = new List<Tile>(TileMap.GetWalkableNeighbors(currentTile));
+                    List<Tile2> stuckTiles = new List<Tile2>(TileMap2.GetWalkableNeighbors(currentTile));
                     stuckTiles.Add(currentTile);
 
                     if (stuckTiles.Count == 1 && !currentTile.IsWalkable())
                     {
-                        throw new NotImplementedException("No walkable neighbors with blocked current tile... handle this!");
+                        throw new NotImplementedException("No walkable neighbors with blocked current Tile2... handle this!");
                     }
 
                     Random rand = new Random(DateTime.Now.Millisecond);
@@ -229,7 +229,7 @@ namespace UHSampleGame.CoreObjects.Units
             return false;
         }
 
-        void SetFocalPointAndVelocity(Tile newTile)
+        void SetFocalPointAndVelocity(Tile2 newTile)
         {
             focalTile = newTile;
             focalPoint = focalTile.GetRandPoint();

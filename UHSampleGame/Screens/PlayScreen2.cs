@@ -44,9 +44,9 @@ namespace UHSampleGame.Screens
             UnitCollection.Initialize(2);
             Vector2 numTiles = new Vector2(20, 10);
 
-            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
-            p1 =  new Player2(0, 1, TileMap.Tiles[0], PlayerType.Human);
-            aI = new Player2(1, 2, TileMap.Tiles[TileMap.Tiles.Count-1], PlayerType.AI);
+            TileMap2.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
+            p1 =  new Player2(0, 1, TileMap2.Tiles[0], PlayerType.Human);
+            aI = new Player2(1, 2, TileMap2.Tiles[TileMap2.Tiles.Count-1], PlayerType.AI);
 
             Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
             dimensions = new Vector2(viewport.Width, viewport.Height);

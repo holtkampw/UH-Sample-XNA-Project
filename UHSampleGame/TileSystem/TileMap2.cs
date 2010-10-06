@@ -206,8 +206,8 @@ namespace UHSampleGame.TileSystem
             //xNum = (int)((upperLeftPos.X - position.X) / (int)tileSize.X);
             //yNum = (int)(((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
 
-            xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
-            yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+           // xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
+           // yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
 
             index = Math.Abs(xNum) + Math.Abs(yNum);
 
