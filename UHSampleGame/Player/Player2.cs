@@ -96,7 +96,18 @@ namespace UHSampleGame.Players
                     avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
 
                 if (input.CheckAction(InputAction.Selection))
+                {
                     UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
+                }
             }
         }
 
