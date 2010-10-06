@@ -218,6 +218,25 @@ namespace UHSampleGame.TileSystem
             return Tile2.NullTile;
         }
 
+        public static Vector3 GetTilePosFromPos(Vector3 position)
+        {
+            int xNum, yNum, index;
+            xNum = yNum = index = 0;
+
+            //xNum = (int)((upperLeftPos.X - position.X) / (int)tileSize.X);
+            //yNum = (int)(((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+
+            xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
+            yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+
+            index = Math.Abs(xNum) + Math.Abs(yNum);
+
+            if (index >= 0 && index < numTiles.X * numTiles.Y)
+                return tiles[index].Position;
+
+            return Vector3.Zero;
+        }
+
         public static Tile2 GetTileFromType(TileType tileType)
         {
             for (int i = 0; i < tiles.Count; i++)

@@ -112,6 +112,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         public static void Add(int playerNum, UnitType unitType)
         {
+            //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
             for (int i = 0; i <= unitsMaxIndex[playerNum][(int)unitType]; i++)
             {
                 if (!units[playerNum][(int)unitType][i].IsActive())

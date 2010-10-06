@@ -42,6 +42,7 @@ namespace UHSampleGame.Screens
             : base("PlayScreen2")
         {
             UnitCollection.Initialize(2);
+            TowerCollection.Initialize(2);
             Vector2 numTiles = new Vector2(20, 10);
 
             TileMap2.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
@@ -97,6 +98,7 @@ namespace UHSampleGame.Screens
             p1.Update(gameTime);
             aI.Update(gameTime);
             UnitCollection.Update(gameTime);
+            TowerCollection.Update(gameTime);
             DebugInfo.Update(gameTime);
             
         }
@@ -124,6 +126,7 @@ namespace UHSampleGame.Screens
             p1.Draw(gameTime);
             aI.Draw(gameTime);
             UnitCollection.Draw(gameTime);
+            TowerCollection.Draw(gameTime);
            
 
             ScreenManager.SpriteBatch.Begin();

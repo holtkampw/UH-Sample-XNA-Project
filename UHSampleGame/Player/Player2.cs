@@ -108,6 +108,11 @@ namespace UHSampleGame.Players
                     UnitCollection.Add(PlayerNum, UnitType.TestUnit);
                     UnitCollection.Add(PlayerNum, UnitType.TestUnit);
                 }
+
+                if (input.CheckNewAction(InputAction.TowerBuild))
+                {
+                    TowerCollection.Add(PlayerNum, TeamNum, TowerType.TowerA, this.avatar.Position);
+                }
             }
         }
 
