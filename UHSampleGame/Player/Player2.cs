@@ -24,10 +24,6 @@ namespace UHSampleGame.Players
         
         public Base PlayerBase;
 
-        protected Dictionary<int, Model> instancedModels;
-        protected Dictionary<int, Matrix[]> instancedModelBones;
-        public static Enum[] unitEnumType = EnumHelper.EnumToArray(new UnitType());
-
         protected int PlayerNum;
         protected int TeamNum;
 
@@ -47,6 +43,7 @@ namespace UHSampleGame.Players
         {
             this.PlayerNum = playerNum;
             this.TeamNum = teamNum;
+            this.Type = type;
             SetBase(new TestBase(playerNum, teamNum, startTile));
             
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
@@ -97,7 +94,9 @@ namespace UHSampleGame.Players
 
                 if (avatar.Position.Z > TileMap.Bottom)
                     avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
- 
+
+                if (input.CheckAction(InputAction.Selection))
+                    UnitCollection.Add(PlayerNum, UnitType.TestUnit);
             }
         }
 

@@ -132,8 +132,9 @@
     <Compile Include="CoreObjects\Towers\TowerCollection.cs" />
     <Compile Include="CoreObjects\Units\TestUnit.cs" />
     <Compile Include="CoreObjects\Units\Unit.cs" />
+    <Compile Include="CoreObjects\Units\Unit2.cs" />
     <Compile Include="CoreObjects\Units\UnitCollection.cs" />
-    <Compile Include="Debug\FPSCounter.cs" />
+    <Compile Include="Debug\DebugInfo.cs" />
     <Compile Include="EnumHelper\EnumHelper.cs" />
     <Compile Include="Events\GameEventArgs.cs" />
     <Compile Include="InputManagement\InputManager.cs" />

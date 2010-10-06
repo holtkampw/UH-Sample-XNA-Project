@@ -33,6 +33,7 @@ namespace UHSampleGame.Screens
         Vector2 dimensions;
 
         Player2 p1;
+        Player2 aI;
 
         #endregion
 
@@ -40,11 +41,12 @@ namespace UHSampleGame.Screens
         public PlayScreen2()
             : base("PlayScreen2")
         {
-
+            UnitCollection.Initialize(2);
             Vector2 numTiles = new Vector2(20, 10);
 
             TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
-            p1 =  new Player2(1, 1, TileMap.Tiles[0], PlayerType.Human);
+            p1 =  new Player2(0, 1, TileMap.Tiles[0], PlayerType.Human);
+            aI = new Player2(1, 2, TileMap.Tiles[TileMap.Tiles.Count-1], PlayerType.AI);
 
             Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
             dimensions = new Vector2(viewport.Width, viewport.Height);
@@ -93,13 +95,16 @@ namespace UHSampleGame.Screens
             cameraManager.Update();
 
             p1.Update(gameTime);
-            FPSCounter.Update(gameTime);
+            aI.Update(gameTime);
+            UnitCollection.Update(gameTime);
+            DebugInfo.Update(gameTime);
             
         }
 
         public override void HandleInput(InputManager input)
         {
             p1.HandleInput(input);
+            aI.HandleInput(input);
         }
 
         public override void Draw(GameTime gameTime)
@@ -115,12 +120,14 @@ namespace UHSampleGame.Screens
 
             ScreenManager.SpriteBatch.End();
 
-            p1.Draw(gameTime);
-
             ResetRenderStates();
+            p1.Draw(gameTime);
+            aI.Draw(gameTime);
+            UnitCollection.Draw(gameTime);
+           
 
             ScreenManager.SpriteBatch.Begin();
-            FPSCounter.Draw();
+            DebugInfo.Draw();
             ScreenManager.SpriteBatch.End();
         }
         #endregion

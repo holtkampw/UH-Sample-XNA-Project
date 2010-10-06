@@ -50,7 +50,6 @@ namespace UHSampleGame.Screens
         public PlayScreen()
             : base("PlayScreen")
         {
-          
            Vector2 numTiles = new Vector2(20, 10);
 
            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));

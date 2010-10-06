@@ -7,10 +7,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using UHSampleGame.ScreenManagement;
+using UHSampleGame.CoreObjects.Units;
 
 namespace UHSampleGame.Debug
 {
-    class FPSCounter
+    class DebugInfo
     {
         static int frames = 0;
         static int frameRate = 0;
@@ -33,7 +34,8 @@ namespace UHSampleGame.Debug
 
         public static void Draw()
         {
-            ScreenManager.SpriteBatch.DrawString(font, "FPS: " + frameRate, fpsPos, Color.White); 
+            ScreenManager.SpriteBatch.DrawString(font, "FPS: " + frameRate, fpsPos, Color.White);
+            ScreenManager.SpriteBatch.DrawString(font, "Units: " + UnitCollection.AllUnitCount(), new Vector2(10, 30), Color.White);
 
             frames++;
         }

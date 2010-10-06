@@ -69,7 +69,7 @@ namespace UHSampleGame.CoreObjects.Units
         public UnitStatus Status;
         public event UnitDied Died;
 
-        public Unit(int playerNum, UnitType unitType)
+        public Unit()
         {
             this.Alive = false;
             Status = UnitStatus.Inactive;

@@ -12,6 +12,7 @@ namespace UHSampleGame.CoreObjects.Units
     {
         const int MAX_UNITS = 5000;
 
+        static int NumPlayers;
         static Enum[] unitTypes = EnumHelper.EnumToArray(new UnitType());
 
         //units[playerNum][unitType][index]
@@ -20,20 +21,26 @@ namespace UHSampleGame.CoreObjects.Units
         //unitsCount[playerNum][unitType]
         static List<List<int>> unitsCount;
 
-        static void Initialize(int numPlayers)
+        static List<List<int>> unitsMaxIndex;
+
+        public static void Initialize(int numPlayers)
         {
+            NumPlayers = numPlayers;
             units = new List<List<List<Unit2>>>();
             unitsCount = new List<List<int>>();
+            unitsMaxIndex = new List<List<int>>();
 
             for (int i = 0; i < numPlayers; i++)
             {
-                units[i] = new List<List<Unit2>>();
-                unitsCount[i] = new List<int>();
+                units.Add(new List<List<Unit2>>());
+                unitsCount.Add(new List<int>());
+                unitsMaxIndex.Add(new List<int>());
 
                 for (int j = 0; j < unitTypes.Length; j++)
                 {
-                    units[i][j] = new List<Unit2>();
-                    unitsCount[i][j] = 0;
+                    units[i].Add(new List<Unit2>());
+                    unitsCount[i].Add(0);
+                    unitsMaxIndex[i].Add(0);
 
                     for (int k = 0; k < MAX_UNITS; k++)
                     {
@@ -44,32 +51,55 @@ namespace UHSampleGame.CoreObjects.Units
 
         }
 
-        static void Add(int playerNum, UnitType unitType)
+        public static int AllUnitCount()
         {
-            for (int i = 0; i < unitsCount[playerNum][(int)unitType]; i++)
+            int sum = 0;
+
+            for (int i = 0; i < NumPlayers; i++)
+                for (int j = 0; j < unitTypes.Length; j++)
+                    sum += unitsCount[i][j];
+
+            return sum;
+        }
+
+        public static void Add(int playerNum, UnitType unitType)
+        {
+            for (int i = 0; i <= unitsMaxIndex[playerNum][(int)unitType]; i++)
             {
                 if (!units[playerNum][(int)unitType][i].IsActive())
                 {
                     units[playerNum][(int)unitType][i].Activate();
                     unitsCount[playerNum][(int)unitType]++;
+
+                    if(i == unitsMaxIndex[playerNum][(int)unitType])
+                        unitsMaxIndex[playerNum][(int)unitType]++;
+
                     break;
                 }
             } 
         }
 
-        static void Remove()
+        public static void Remove()
         {
 
         }
 
-        static void Update(GameTime gameTime)
+        public static void Update(GameTime gameTime)
         {
-
+            for (int i = 0; i < NumPlayers; i++)
+                for (int j = 0; j < unitTypes.Length; j++)
+                    for (int k = 0; k < unitsMaxIndex[i][j]; k++)
+                        if(units[i][j][k].IsActive())
+                            units[i][j][k].Update(gameTime);
         }
 
-        static void Draw(GameTime gameTime)
+        public static void Draw(GameTime gameTime)
         {
-
+            for (int i = 0; i < NumPlayers; i++)
+                for (int j = 0; j < unitTypes.Length; j++)
+                    for (int k = 0; k < unitsMaxIndex[i][j]; k++)
+                        if (units[i][j][k].IsActive())
+                            units[i][j][k].Draw(gameTime);
         }
     }
 }
