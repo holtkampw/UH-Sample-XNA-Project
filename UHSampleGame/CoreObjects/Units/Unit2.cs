@@ -42,6 +42,7 @@ namespace UHSampleGame.CoreObjects.Units
         Matrix rotationMatrixX;
         Matrix rotationMatrixY;
         Matrix rotationMatrixZ;
+        Matrix scaleRot;
         #endregion
 
         public Unit2(UnitType unitType)
@@ -50,6 +51,10 @@ namespace UHSampleGame.CoreObjects.Units
             Type = unitType;
             Scale = 10.0f;
             scaleMatrix = Matrix.CreateScale(this.Scale);
+            rotationMatrixX = Matrix.Identity;
+            rotationMatrixY = Matrix.Identity;
+            rotationMatrixZ = Matrix.Identity;
+            UpdateScaleRotations();
             Position = Vector3.Zero;
         }
 
@@ -58,21 +63,25 @@ namespace UHSampleGame.CoreObjects.Units
         {
             this.Scale = newScale;
             scaleMatrix = Matrix.CreateScale(this.Scale);
+            UpdateScaleRotations();
         }
 
         public void RotateX(float rotation)
         {
             rotationMatrixX = Matrix.CreateRotationX(rotation);
+            UpdateScaleRotations();
         }
 
         public void RotateY(float rotation)
         {
             rotationMatrixY = Matrix.CreateRotationY(rotation);
+            UpdateScaleRotations();
         }
 
         public void RotateZ(float rotation)
         {
             rotationMatrixZ = Matrix.CreateRotationZ(rotation);
+            UpdateScaleRotations();
         }
         #endregion
 
@@ -149,11 +158,16 @@ namespace UHSampleGame.CoreObjects.Units
         void UpdateTransforms()
         {
             Matrix translation = Matrix.CreateTranslation(Position);
-            Transforms = scaleMatrix *
+            Transforms = scaleRot *  
+                    translation;
+        }
+
+        void UpdateScaleRotations()
+        {
+            scaleRot = scaleMatrix *
                     rotationMatrixX *
                     rotationMatrixY *
-                    rotationMatrixZ * 
-                    translation;
+                    rotationMatrixZ;
         }
 
         void SetCurrentTile(Tile tile)
