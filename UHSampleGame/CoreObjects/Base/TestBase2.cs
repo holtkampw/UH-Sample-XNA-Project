@@ -13,7 +13,7 @@ namespace UHSampleGame.CoreObjects.Base
     public class TestBase2 : Base2
     {
         public TestBase2(int playerNum, int teamNum, Tile2 tile)
-            : base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Objects\\Base\\oilRig"),
+            : base(playerNum, teamNum, ScreenManager.Game.Content.Load<Model>("Objects\\Base\\enemyBaseShip01"),
             tile)
         {
             this.Scale = 2.75f;
