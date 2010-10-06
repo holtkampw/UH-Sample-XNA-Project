@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using AStartTest.TileSystem;
+using AStartTest.Vectors;
 
 namespace AStartTest
 {
@@ -35,6 +35,8 @@ namespace AStartTest
 
         List<Node> openNodes;
         List<Node> closedNodes;
+        
+        TileMap tileMap;
 
         Tile startTile;
         Tile goalTile;
@@ -42,23 +44,63 @@ namespace AStartTest
         Dictionary<int, Tile> closedDict;
         Dictionary<int, Tile> openDict;
 
-        public AStar(Tile startTile, Tile goalTile)
+        public AStar(TileMap tileMap)
         {
+            this.tileMap = tileMap;
             openNodes = new List<Node>();
             closedNodes = new List<Node>();
             openDict = new Dictionary<int, Tile>();
             closedDict = new Dictionary<int, Tile>();
-            this.startTile = startTile;
-            this.goalTile = goalTile;
+            startTile = tileMap.GetTileFromType(TileType.Start);
+            goalTile = tileMap.GetTileFromType(TileType.Goal);
+        }
+
+        public void Iterate(ref Tile currentTile, ref List<Tile> open, ref List<Tile> closed)
+        {
+            Node startNode = new Node(tileMap.GetTileFromType(TileType.Start));
+            Node currentNode;
+            List<Tile> neighborTiles;
+            List<Tile> path = new List<Tile>();
+            if (currentTile == null)
+            {
+                openNodes.Add(startNode);
+                openDict.Add(startNode.tile.ID, startNode.tile);
+            }
+
+            //Switch the lowest cost node to the closed list
+            currentNode = GetLowestCostNodeFromOpenNodes();
+
+            closedNodes.Add(currentNode);
+            openNodes.Remove(currentNode);
+
+            //Find walkable neighbor tiles not on the closed list
+
+            neighborTiles = GetWalkableNeighborsNotOnClosedList(currentNode);
+
+            //Handle if neighbor node is on the open list already
+            //and add to open list
+            AddNeighborNodesToOpenList(currentNode, neighborTiles);
+
+            currentTile = currentNode.tile;
+            List<Tile> newOpen = new List<Tile>();
+            List<Tile> newClosed = new List<Tile>();
+
+            for (int i = 0; i < openNodes.Count; i++)
+            {
+                newOpen.Add(openNodes[i].tile);
+            }
+
+            for (int i = 0; i < closedNodes.Count; i++)
+            {
+                newClosed.Add(closedNodes[i].tile);
+            }
+            open = newOpen;
+            closed = newClosed;
         }
 
         public List<Tile> FindPath()
         {
-            if (startTile == goalTile)
-            {
-                return new List<Tile>();
-            }
-            Node startNode = new Node(startTile);
+            Node startNode = new Node(tileMap.GetTileFromType(TileType.Start));
             Node currentNode = startNode;
             List<Tile> neighborTiles;
             List<Tile> path = new List<Tile>();
@@ -92,23 +134,13 @@ namespace AStartTest
             path.Add(currentNode.tile);
             do
             {
-                for (int i = 0; i < closedNodes.Count; i++)
+                currentNode = closedNodes.Find(new Predicate<Node>(delegate(Node node)
                 {
-                    if (closedNodes[i].tile == currentNode.parentTile)
-                    {
-                        currentNode = closedNodes[i];
-                        break;
-                    }
-                }
-                //currentNode = closedNodes.Find(new Predicate<Node>(delegate(Node node)
-                //{
-                //    return node.tile == currentNode.parentTile;
-                // }));
+                    return node.tile == currentNode.parentTile;
+                }));
                 path.Add(currentNode.tile);
 
             } while (currentNode.parentTile != null);
-
-            path.Reverse();
 
             return path;
 
@@ -116,18 +148,20 @@ namespace AStartTest
 
         private List<Tile> GetWalkableNeighborsNotOnClosedList(Node currentNode)
         {
-            return TileMap.GetWalkableNeighbors(currentNode.tile, closedDict);
+            return tileMap.GetWalkableNeighbors(currentNode.tile, closedDict);
         }
 
         private void AddNeighborNodesToOpenList(Node currentNode, List<Tile> neighborTiles)
         {
             bool openHasNeighbor = false;
+            bool openDictHasNeighbor = false;
             Node neighborNode;
             int openCount = openNodes.Count;
             int openNodeSimilarIndex = 0;
             for (int i = 0; i < neighborTiles.Count; i++)
             {
                 openHasNeighbor = false;
+                openDictHasNeighbor = false;
 
                 if (openDict.ContainsKey(neighborTiles[i].ID))
                 {
@@ -182,22 +216,22 @@ namespace AStartTest
             }
             node.tile = tile;
             node.parentTile = parentNode.tile;
-            node.currentCost = GetDistanceBetweenTiles(ref tile, ref parentNode.tile) + parentNode.currentCost;
-            node.goalCost = GetDistanceToGoal(ref tile);
+            node.currentCost = GetDistanceBetweenTiles(tile, parentNode.tile) + parentNode.currentCost;
+            node.goalCost = GetDistanceToGoal(tile);
             node.overallCost = node.currentCost + node.goalCost;
 
             return node;
         }
 
-        private float GetDistanceToGoal(ref Tile tile)
+        private float GetDistanceToGoal(Tile tile)
         {
-            return GetDistanceBetweenTiles(ref tile, ref goalTile);
+            return GetDistanceBetweenTiles(tile, goalTile);
         }
 
-        private float GetDistanceBetweenTiles(ref Tile tile1, ref Tile tile2)
+        private float GetDistanceBetweenTiles(Tile tile1, Tile tile2)
         {
-            float first = (tile1.Position.X - tile2.Position.X);
-            float second = (tile1.Position.Z - tile2.Position.Z);
+            double first = (double)(tile1.Position.X - tile2.Position.X);
+            double second = (double)(tile1.Position.Y - tile2.Position.Y);
             // return Math.Abs(tile1.Position.X - tile1.Position.Y) + Math.Abs(tile2.Position.X - tile2.Position.Y);
             return (float)Math.Sqrt((first * first) + (second * second));
         }

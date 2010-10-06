@@ -15,6 +15,7 @@ namespace UHSampleGame.CoreObjects.Units
 
     public class Unit2
     {
+        #region Class Variables
         UnitStatus Status;
         UnitType Type;
 
@@ -34,21 +35,58 @@ namespace UHSampleGame.CoreObjects.Units
         public int PlayerNum;
         public int PathLength;
 
+        public Matrix Transforms;
+        public float Scale;
+        public Vector3 Position;
+        Matrix scaleMatrix;
+        Matrix rotationMatrixX;
+        Matrix rotationMatrixY;
+        Matrix rotationMatrixZ;
+        #endregion
+
         public Unit2(UnitType unitType)
         {
             Status = UnitStatus.Inactive;
             Type = unitType;
+            Scale = 10.0f;
+            scaleMatrix = Matrix.CreateScale(this.Scale);
+            Position = Vector3.Zero;
         }
+
+        #region Matrix Setters
+        public void SetScale(float newScale)
+        {
+            this.Scale = newScale;
+            scaleMatrix = Matrix.CreateScale(this.Scale);
+        }
+
+        public void RotateX(float rotation)
+        {
+            rotationMatrixX = Matrix.CreateRotationX(rotation);
+        }
+
+        public void RotateY(float rotation)
+        {
+            rotationMatrixY = Matrix.CreateRotationY(rotation);
+        }
+
+        public void RotateZ(float rotation)
+        {
+            rotationMatrixZ = Matrix.CreateRotationZ(rotation);
+        }
+        #endregion
 
         public void Activate()
         {
             Status = UnitStatus.Active; 
         }
+
         public void Deploy(Tile baseTile, Tile goalTile)
         {
             this.previousTile = baseTile;
             this.currentTile = baseTile;
             this.goalTile = goalTile;
+            this.Position = baseTile.Position;
 
             Status = UnitStatus.Deployed;
         }
@@ -61,6 +99,7 @@ namespace UHSampleGame.CoreObjects.Units
         public void Update(GameTime gameTime)
         {
             UpdatePath();
+            UpdateTransforms();
         }
 
         public void Draw(GameTime gameTime)
@@ -105,6 +144,16 @@ namespace UHSampleGame.CoreObjects.Units
             }
 
             UpdatePositionAndRotation();
+        }
+
+        void UpdateTransforms()
+        {
+            Matrix translation = Matrix.CreateTranslation(Position);
+            Transforms = scaleMatrix *
+                    rotationMatrixX *
+                    rotationMatrixY *
+                    rotationMatrixZ * 
+                    translation;
         }
 
         void SetCurrentTile(Tile tile)

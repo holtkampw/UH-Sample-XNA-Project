@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using AStartTest.Vectors;
 
 namespace AStartTest.TileSystem
 {
@@ -13,55 +15,27 @@ namespace AStartTest.TileSystem
 
     public class TileMap
     {
-        static List<Tile> tiles;
-        static List<Base> bases;
-        static List<int> mins;
-        static List<int> maxs;
-        static Vector3 position;
-        static Vector3 upperLeftPos;
-        static Vector3 lowerRightPos;
-        static Vector2 numTiles;
-        static Vector2 tileSize;
-        static int numTilesX;
-        static int numTilesY;
-        static List<NeighborTile> allNeighbors;
+        List<Tile> tiles;
+        List<int> mins;
+        List<int> maxs;
+        Vector2 position;
+        Vector2 upperLeftPos;
+        Vector2 numTiles;
+        Vector2 tileSize;
+        int numTilesX;
+        int numTilesY;
+        List<NeighborTile> allNeighbors;
 
-        public static event TowerCreated TowerCreated;
-
-        public static IList<Tile> Tiles
+        public IList<Tile> Tiles
         {
             get { return tiles; }
         }
 
-        public static Vector2 TileSize
+        public TileMap(Vector2 position, Vector2 numTiles, Vector2 tileSize, IList<Panel> panels)
         {
-            get { return tileSize; }
-        }
-
-        public static float Top
-        {
-            get { return tiles[0].Position.Z; }
-        }
-        public static float Left
-        {
-            get { return tiles[0].Position.X; }
-        }
-        public static float Right
-        {
-            get { return tiles[tiles.Count - 1].Position.X; }
-        }
-        public static float Bottom
-        {
-            get { return tiles[tiles.Count - 1].Position.Z; }
-        }
-
-        public static void InitializeTileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
-        {
-            TileMap.position = position;
-            TileMap.numTiles = numTiles;
-            TileMap.tileSize = tileSize;
-
-            bases = new List<Base>();
+            this.position = position;
+            this.numTiles = numTiles;
+            this.tileSize = tileSize;
 
             mins = new List<int>();
             maxs = new List<int>();
@@ -69,11 +43,10 @@ namespace AStartTest.TileSystem
             numTilesX = (int)numTiles.X;
             numTilesY = (int)numTiles.Y;
 
-            upperLeftPos = new Vector3();
-            lowerRightPos = new Vector3();
+            upperLeftPos = new Vector2();
 
             tiles = new List<Tile>();
-            InitializeTiles();
+            InitializeTiles(panels);
             allNeighbors = new List<NeighborTile>();
             allNeighbors.Add(NeighborTile.Down);
             allNeighbors.Add(NeighborTile.DownLeft);
@@ -85,26 +58,21 @@ namespace AStartTest.TileSystem
             allNeighbors.Add(NeighborTile.UpRight);
         }
 
-        public static void SetBase(Base setBase)
+        protected void InitializeTiles(IList<Panel> panels)
         {
-            bases.Add(setBase);
-        }
-
-        protected static void InitializeTiles()
-        {
-            Vector3 upperLeftLoc = new Vector3();
-            Vector3 currentCenterPos = new Vector3();
+            Vector2 upperLeftLoc = new Vector2();
+            Vector2 currentCenterPos = new Vector2();
             int min, max, tileId;
-
+            
             upperLeftLoc.X = position.X - (tileSize.X * numTiles.X / 2.0f);
-            upperLeftLoc.Z = position.Z - (tileSize.Y * numTiles.Y / 2.0f);
+            upperLeftLoc.Y = position.Y - (tileSize.Y * numTiles.Y / 2.0f);
 
             upperLeftPos.X = upperLeftLoc.X + tileSize.X / 2.0f;
-            upperLeftPos.Z = upperLeftLoc.Z + tileSize.Y / 2.0f;
+            upperLeftPos.Y = upperLeftLoc.Y + tileSize.Y / 2.0f;
 
             currentCenterPos.X = upperLeftPos.X;
             currentCenterPos.Y = 0;
-            currentCenterPos.Z = upperLeftPos.Z;
+            currentCenterPos.Y = upperLeftPos.Y;
 
             for (int y = 0; y < numTiles.Y; y++)
             {
@@ -117,15 +85,22 @@ namespace AStartTest.TileSystem
 
                     mins.Add(min);
                     maxs.Add(max);
-                    tiles.Add(new Tile(tiles.Count, new Vector3(currentCenterPos.X, currentCenterPos.Y, currentCenterPos.Z),
-                        new Vector2(tileSize.X, tileSize.Y)));
+
+                    tiles.Add(new Tile(tiles.Count, Vector2.Copy(currentCenterPos), Vector2.Copy(tileSize), panels[(y*numTilesX) + x]));
                     currentCenterPos.X += tileSize.X;
                 }
-                currentCenterPos.Z += tileSize.Y;
+                currentCenterPos.Y += tileSize.Y;
             }
+        }
 
-            lowerRightPos = new Vector3(tiles[tiles.Count - 1].Position.X + (tileSize.X / 2), 0,
-                tiles[tiles.Count - 1].Position.Z + (tileSize.Y / 2));
+        public Tile GetTileFromPanel(Panel panel)
+        {
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (tiles[i].Panel == panel)
+                    return tiles[i];
+            }
+            return null;
         }
 
         /// <summary>
@@ -133,8 +108,8 @@ namespace AStartTest.TileSystem
         /// </summary>
         /// <param name="tile">The start tile</param>
         /// <param name="neighborTile">The neighbor to examine</param>
-        /// <returns>Returns the tile neighbor or a null tile if neighbor is not found</returns>
-        public static Tile GetTileNeighbor(Tile tile, NeighborTile neighborTile)
+        /// <returns></returns>
+        public Tile GetTileNeighbor(Tile tile, NeighborTile neighborTile)
         {
             int newIndex = 0;// tile.ID;
             int min, max, tileId;
@@ -191,26 +166,34 @@ namespace AStartTest.TileSystem
         /// <param name="position">The position to investigate</param>
         /// <returns>Returns the tile that encompasses the position or a 
         /// null tile if no tile exists</returns>
-        public static Tile GetTileFromPos(Vector3 position)
+        public Tile GetTileFromPos(Vector2 position)
         {
             int xNum, yNum, index;
             xNum = yNum = index = 0;
 
-            //xNum = (int)((upperLeftPos.X - position.X) / (int)tileSize.X);
-            //yNum = (int)(((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
-
-            xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
-            yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+            xNum = (int)(upperLeftPos.X - position.X) / (int)tileSize.X;
+            yNum = (int)(((int)(upperLeftPos.X - position.X) / (int)tileSize.Y) * numTiles.X);
 
             index = Math.Abs(xNum) + Math.Abs(yNum);
 
             if (index >= 0 && index < numTiles.X * numTiles.Y)
                 return tiles[index];
 
-            return new Tile();
+            return null;
         }
 
-        public static Tile GetTileFromType(TileType tileType)
+        public void ClearPath()
+        {
+            for(int i =0; i<tiles.Count; i++)
+            {
+                if(tiles[i].TileType == TileType.Path ||
+                    tiles[i].TileType == TileType.Open ||
+                    tiles[i].TileType == TileType.Closed)
+                tiles[i].SetTileType(TileType.Walkable);
+            }
+        }
+
+        public Tile GetTileFromType(TileType tileType)
         {
             for (int i = 0; i < tiles.Count; i++)
             {
@@ -219,19 +202,19 @@ namespace AStartTest.TileSystem
             }
             return null;
         }
-        public static List<Tile> GetWalkableNeighbors(Tile tile)
+        public List<Tile> GetWalkableNeighbors(Tile tile)
         {
             return GetWalkableNeighbors(tile, new Dictionary<int, Tile>());
         }
 
-        public static List<Tile> GetWalkableNeighbors(Tile tile, Dictionary<int, Tile> exclude)
+        public List<Tile> GetWalkableNeighbors(Tile tile, Dictionary<int, Tile> exclude)
         {
             List<Tile> neighbors = new List<Tile>();
             Tile currentNeighbor;
             for (int i = 0; i < allNeighbors.Count; i++)
             {
                 currentNeighbor = GetTileNeighbor(tile, allNeighbors[i]);
-                if (exclude.ContainsKey(currentNeighbor.ID))
+                if(exclude.ContainsKey(currentNeighbor.ID))
                     continue;
                 if (currentNeighbor.IsWalkable())
                 {
@@ -266,123 +249,5 @@ namespace AStartTest.TileSystem
             }
             return neighbors;
         }
-
-        public static void UpdateTilePaths()
-        {
-            for (int j = 0; j < bases.Count; j++)
-            {
-                for (int i = 0; i < tiles.Count; i++)
-                {
-                    if (tiles[i].IsWalkable())
-                        tiles[i].UpdatePathTo(bases[j].Tile);
-                }
-            }
-        }
-
-        public static bool IsTilePathsValid()
-        {
-            for (int j = 0; j < bases.Count; j++)
-            {
-                for (int i = 0; i < bases.Count; i++)
-                {
-                    if (i != j)
-                    {
-                        bases[i].Tile.UpdatePathTo(bases[j].Tile);
-                        if (bases[j].Tile.Paths[bases[i].Tile.ID].Count == 0)
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-
-        public static void SetObject(Tower gameObject, Tile tile)
-        {
-            SetTower(gameObject, tile);
-        }
-
-        public static void SetObject(Base gameObject, Tile tile)
-        {
-            SetBase(gameObject);
-        }
-
-        public static bool SetTower(Tower tower, Tile tile)
-        {
-            tile.SetBlockableObject(tower);
-            if (IsTilePathsValid())
-            {
-                UpdateTilePaths();
-
-                List<Tile> walkableNeighbors = GetWalkableNeighbors(tile);
-
-                for (int i = 0; i < walkableNeighbors.Count; i++)
-                {
-                    walkableNeighbors[i].RegisterTowerListener(tower);
-                }
-                OnTowerCreated();
-                return true;
-            }
-
-            RemoveTower(tile);
-            return false;
-
-        }
-
-        public static void SetTowerForLevelMap(Tower tower, Tile tile)
-        {
-            tile.SetBlockableObject(tower);
-
-            //UpdateTilePaths();
-
-            List<Tile> walkableNeighbors = GetWalkableNeighbors(tile);
-
-            for (int i = 0; i < walkableNeighbors.Count; i++)
-            {
-                walkableNeighbors[i].RegisterTowerListener(tower);
-            }
-            //OnTowerCreated();
-
-
-        }
-
-        private static void OnTowerCreated()
-        {
-            if (TowerCreated != null)
-                TowerCreated();
-        }
-
-        public static void RemoveTower(Tile tile)
-        {
-            tile.RemoveBlockableObject();
-            UpdateTilePaths();
-        }
-
-        public static void Draw()
-        {
-            Microsoft.Xna.Framework.Graphics.Texture2D first = ScreenManagement.ScreenManager.Game.Content.Load<Microsoft.Xna.Framework.Graphics.Texture2D>("Tiles\\1");
-            Microsoft.Xna.Framework.Graphics.Texture2D second = ScreenManagement.ScreenManager.Game.Content.Load<Microsoft.Xna.Framework.Graphics.Texture2D>("Tiles\\2");
-            Microsoft.Xna.Framework.Graphics.Texture2D third = ScreenManagement.ScreenManager.Game.Content.Load<Microsoft.Xna.Framework.Graphics.Texture2D>("Tiles\\3");
-
-            List<Microsoft.Xna.Framework.Graphics.Texture2D> graphics = new List<Microsoft.Xna.Framework.Graphics.Texture2D>();
-            graphics.Add(first);
-            graphics.Add(second);
-            graphics.Add(third);
-
-            Vector2 left_position = new Vector2(position.X - ((tileSize.X * numTiles.X) / 2.0f),
-                position.Z - ((tileSize.Y * numTiles.Y) / 2.0f));
-
-            for (int i = 0; i < tiles.Count; i++)
-            {
-                ScreenManagement.ScreenManager.SpriteBatch.Begin();
-                ScreenManagement.ScreenManager.SpriteBatch.Draw(graphics[i % 3],
-                    new Vector2(-left_position.X + (tiles[i].Position.X - (first.Width / 2)),
-                        -left_position.Y + (tiles[i].Position.Z - (first.Height / 2))),
-                        Color.White);
-                ScreenManagement.ScreenManager.SpriteBatch.End();
-            }
-        }
-
     }
 }
