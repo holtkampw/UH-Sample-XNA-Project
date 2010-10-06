@@ -158,16 +158,13 @@ namespace UHSampleGame.CoreObjects.Units
         void UpdateTransforms()
         {
             Matrix translation = Matrix.CreateTranslation(Position);
-            Transforms = scaleRot *  
-                    translation;
+            Transforms = Matrix.Multiply(scaleRot, translation); 
         }
 
         void UpdateScaleRotations()
         {
-            scaleRot = scaleMatrix *
-                    rotationMatrixX *
-                    rotationMatrixY *
-                    rotationMatrixZ;
+            scaleRot = Matrix.Multiply(scaleMatrix, 
+                    Matrix.Multiply(rotationMatrixX, Matrix.Multiply(rotationMatrixY, rotationMatrixZ)));
         }
 
         void SetCurrentTile(Tile2 Tile2)
