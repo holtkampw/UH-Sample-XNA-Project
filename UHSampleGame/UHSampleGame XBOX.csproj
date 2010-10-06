@@ -69,6 +69,7 @@
     <Compile Include="CameraManagement\CameraManager.cs" />
     <Compile Include="CoreObjects\AnimatedTileObject.cs" />
     <Compile Include="CoreObjects\Base\Base.cs" />
+    <Compile Include="CoreObjects\Base\Base2.cs" />
     <Compile Include="CoreObjects\Base\TestBase.cs" />
     <Compile Include="CoreObjects\GameObject.cs" />
     <Compile Include="CoreObjects\StaticModel.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="CoreObjects\TeamableAnimatedObject.cs" />
     <Compile Include="CoreObjects\TeamableStaticObject.cs" />
     <Compile Include="CoreObjects\Towers\Tower.cs" />
+    <Compile Include="CoreObjects\Towers\Tower2.cs" />
     <Compile Include="CoreObjects\Towers\TowerAGood.cs" />
     <Compile Include="CoreObjects\Towers\TowerCollection.cs" />
     <Compile Include="CoreObjects\Units\TestUnit.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Debug\DebugInfo.cs" />
     <Compile Include="EnumHelper\EnumHelper.cs" />
     <Compile Include="Events\GameEventArgs.cs" />
+    <Compile Include="Events\GameEventArgs2.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />
     <Compile Include="LevelManagement\Level.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="MenuSystem\MenuEntry.cs" />
     <Compile Include="MenuSystem\MenuScreen.cs" />
     <Compile Include="PathFinding\AStar.cs" />
+    <Compile Include="PathFinding\AStar2.cs" />
     <Compile Include="Player\AIPlayer.cs" />
     <Compile Include="Player\HumanPlayer.cs" />
     <Compile Include="Player\Player.cs" />
@@ -105,7 +109,9 @@
     <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="Screens\PlayScreen2.cs" />
     <Compile Include="TileSystem\Tile.cs" />
+    <Compile Include="TileSystem\Tile2.cs" />
     <Compile Include="TileSystem\TileMap.cs" />
+    <Compile Include="TileSystem\TileMap2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

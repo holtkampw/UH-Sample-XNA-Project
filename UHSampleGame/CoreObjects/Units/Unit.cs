@@ -19,7 +19,6 @@ using UHSampleGame.ScreenManagement;
 namespace UHSampleGame.CoreObjects.Units
 {
 
-
     public class Unit
     {
         //Type Information
