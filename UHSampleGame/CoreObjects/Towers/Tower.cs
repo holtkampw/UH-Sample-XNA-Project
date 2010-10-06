@@ -12,7 +12,7 @@ using UHSampleGame.ScreenManagement;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public enum TowerType { TowerA }
+    //public enum TowerType { TowerA }
 
     public class Tower
     {
