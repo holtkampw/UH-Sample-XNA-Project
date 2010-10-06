@@ -29,6 +29,7 @@ namespace UHSampleGame.CoreObjects.Units
         Vector3 velocity;
 
         bool isStuck;
+        Random rand;
 
         public int Health;
         public int TeamNum;
@@ -56,6 +57,7 @@ namespace UHSampleGame.CoreObjects.Units
             rotationMatrixZ = Matrix.Identity;
             UpdateScaleRotations();
             Position = Vector3.Zero;
+            rand = new Random(DateTime.Now.Millisecond);
         }
 
         #region Matrix Setters
@@ -205,15 +207,13 @@ namespace UHSampleGame.CoreObjects.Units
                 if ((Math.Abs(position.X - focalPoint.X) < 30 && Math.Abs(position.Z - focalPoint.Z) < 30)
                     || !TileMap2.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
                 {
-                    List<Tile2> stuckTiles = new List<Tile2>(TileMap2.GetWalkableNeighbors(currentTile));
+                    List<Tile2> stuckTiles = TileMap2.GetWalkableNeighbors(currentTile);
                     stuckTiles.Add(currentTile);
 
                     if (stuckTiles.Count == 1 && !currentTile.IsWalkable())
                     {
                         throw new NotImplementedException("No walkable neighbors with blocked current Tile2... handle this!");
                     }
-
-                    Random rand = new Random(DateTime.Now.Millisecond);
 
                     SetFocalPointAndVelocity(stuckTiles[rand.Next(stuckTiles.Count)]);
                 }

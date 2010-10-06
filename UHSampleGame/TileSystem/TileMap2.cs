@@ -32,6 +32,7 @@ namespace UHSampleGame.TileSystem
         static int numTilesX;
         static int numTilesY;
         static List<NeighborTile> allNeighbors;
+        static List<Tile2> neighbors =  new List<Tile2>();
 
         public static event TowerCreated TowerCreated;
 
@@ -186,7 +187,7 @@ namespace UHSampleGame.TileSystem
             }
             if (newIndex == tileId)
             {
-                return new Tile2();
+                return Tile2.NullTile;
             }
 
             return tiles[newIndex];
@@ -214,7 +215,7 @@ namespace UHSampleGame.TileSystem
             if (index >= 0 && index < numTiles.X * numTiles.Y)
                 return tiles[index];
 
-            return new Tile2();
+            return Tile2.NullTile;
         }
 
         public static Tile2 GetTileFromType(TileType tileType)
@@ -228,17 +229,18 @@ namespace UHSampleGame.TileSystem
         }
         public static List<Tile2> GetWalkableNeighbors(Tile2 Tile2)
         {
-            return GetWalkableNeighbors(Tile2, new Dictionary<int, Tile2>());
+            return GetWalkableNeighbors(Tile2, null);
         }
 
         public static List<Tile2> GetWalkableNeighbors(Tile2 Tile2, Dictionary<int, Tile2> exclude)
         {
-            List<Tile2> neighbors = new List<Tile2>();
+            //List<Tile2> neighbors = new List<Tile2>();
+            neighbors.Clear();
             Tile2 currentNeighbor;
             for (int i = 0; i < allNeighbors.Count; i++)
             {
                 currentNeighbor = GetTileNeighbor(Tile2, allNeighbors[i]);
-                if (exclude.ContainsKey(currentNeighbor.ID))
+                if (exclude != null && exclude.ContainsKey(currentNeighbor.ID))
                     continue;
                 if (currentNeighbor.IsWalkable())
                 {

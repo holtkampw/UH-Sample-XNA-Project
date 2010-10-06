@@ -24,6 +24,8 @@ namespace UHSampleGame.TileSystem
         Random rand;
         int id;
 
+        public static Tile2 NullTile = new Tile2();
+
         public event RegisterUnitWithTile UnitEnter;
 
         public TileType TileType
@@ -83,6 +85,8 @@ namespace UHSampleGame.TileSystem
 
             SetTileType(tileType);
 
+            rand = new Random(DateTime.Now.Millisecond);
+
         }
 
         public bool IsWalkable()
@@ -137,7 +141,7 @@ namespace UHSampleGame.TileSystem
 
         public Vector3 GetRandPoint()
         {
-            rand = new Random(DateTime.Now.Millisecond);
+            //rand = new Random(DateTime.Now.Millisecond);
             int sizeX = (int)(size.X / 3);
             int sizeY = (int)(size.Y / 3);
             return new Vector3(position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, position.Z + rand.Next(-sizeY, sizeY));
