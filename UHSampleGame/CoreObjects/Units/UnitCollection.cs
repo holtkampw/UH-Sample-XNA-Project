@@ -158,6 +158,7 @@ namespace UHSampleGame.CoreObjects.Units
                 if (units[i][j][k].IsActive())
                 {
                     unitTransforms[index] = units[i][j][k].Transforms;
+                    index++;
                 }
             }
 
