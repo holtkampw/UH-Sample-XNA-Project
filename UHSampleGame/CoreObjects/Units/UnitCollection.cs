@@ -10,6 +10,8 @@ namespace UHSampleGame.CoreObjects.Units
 {
     static class UnitCollection
     {
+
+        #region Class Variables
         const int MAX_UNITS = 5000;
 
         static int NumPlayers;
@@ -23,12 +25,33 @@ namespace UHSampleGame.CoreObjects.Units
 
         static List<List<int>> unitsMaxIndex;
 
+        //Instancing Verticies
+        static VertexDeclaration instanceVertexDeclaration = new VertexDeclaration
+        (
+            new VertexElement(0, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 0),
+            new VertexElement(16, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 1),
+            new VertexElement(32, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 2),
+            new VertexElement(48, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 3)
+        );
+
+        //instancedModels[unitType]
+        protected Dictionary<int, Model> instancedModels;
+
+        //instancedModelBones[unitType]
+        protected Dictionary<int, Matrix[]> instancedModelBones;
+
+        //unitTransforms[playerNum][unitType][index]
+        static Matrix[] unitTransforms;
+
+        #endregion
+
         public static void Initialize(int numPlayers)
         {
             NumPlayers = numPlayers;
             units = new List<List<List<Unit2>>>();
             unitsCount = new List<List<int>>();
             unitsMaxIndex = new List<List<int>>();
+            unitTransforms = new Matrix[MAX_UNITS];
 
             for (int i = 0; i < numPlayers; i++)
             {
@@ -96,10 +119,23 @@ namespace UHSampleGame.CoreObjects.Units
         public static void Draw(GameTime gameTime)
         {
             for (int i = 0; i < NumPlayers; i++)
+            {
                 for (int j = 0; j < unitTypes.Length; j++)
+                {
+                    int index = 0;
                     for (int k = 0; k < unitsMaxIndex[i][j]; k++)
+                    {
                         if (units[i][j][k].IsActive())
-                            units[i][j][k].Draw(gameTime);
+                        {
+                            unitTransforms[index] = units[i][j][k];
+                        }
+                        //        units[i][j][k].Draw(gameTime);
+
+                    }
+
+                    DrawUnits(j);
+                }
+            }             
         }
     }
 }

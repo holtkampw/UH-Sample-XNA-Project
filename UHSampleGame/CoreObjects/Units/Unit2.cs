@@ -10,7 +10,11 @@ namespace UHSampleGame.CoreObjects.Units
 {
     public class Unit2
     {
+        #region Class Variables
         UnitStatus Status;
+        public Matrix Transforms;
+        #endregion
+
         public Unit2(UnitType unitType)
         {
             Status = UnitStatus.Inactive;
