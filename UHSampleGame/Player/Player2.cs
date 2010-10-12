@@ -137,5 +137,17 @@ namespace UHSampleGame.Players
                 avatar.Draw(gameTime);
             }
         }
+
+        public void SetTargetBase(Base2 target)
+        {
+            PlayerBase.SetGoalBase(target);
+           // target.baseDestroyed += GetNewTargetBase;
+        }
+
+        public void SetTowerForLevelMap(Tower2 tower, Tile2 tile)
+        {
+            TileMap2.SetTowerForLevelMap(tower, tile);
+            TowerCollection.Add(PlayerNum, TeamNum, tower.Type, tile.Position);
+        }
     }
 }

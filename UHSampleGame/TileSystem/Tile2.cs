@@ -15,52 +15,18 @@ namespace UHSampleGame.TileSystem
 
     public class Tile2
     {
-        Vector3 position;
-        Vector2 size;
-        TileType tileType;
-        Tower tower;
-        List<Unit> units;
-        Dictionary<int, List<Tile2>> paths;
+        public Vector3 Position;
+        public Vector2 Size;
+        public TileType TileType;
+        Tower2 tower;
+        List<Unit2> units;
+        public List<List<Tile2>> Paths;
         Random rand;
-        int id;
+        public int ID;
 
         public static Tile2 NullTile = new Tile2();
 
-        public event RegisterUnitWithTile UnitEnter;
-
-        public TileType TileType
-        {
-            get { return tileType; }
-        }
-
-        /// <summary>
-        /// The 3D coordinate of the CENTER of the Tile2
-        /// </summary>
-        public Vector3 Position
-        {
-            get { return position; }
-        }
-
-        /// <summary>
-        /// The width and length of the Tile2
-        /// </summary>
-        public Vector2 Size
-        {
-            get { return size; }
-        }
-
-        public Dictionary<int, List<Tile2>> Paths
-        {
-            get { return paths; }
-        }
-
-        /// <summary>
-        /// The unique id of the Tile2
-        /// </summary>
-        public int ID
-        {
-            get { return id; }
-        }
+        public event RegisterUnitWithTile2 UnitEnter;
 
         /// <summary>
         /// Represents a Tile2 of a Tile2 map
@@ -76,12 +42,12 @@ namespace UHSampleGame.TileSystem
         public Tile2(int id, Vector3 position, Vector2 size, TileType tileType)
         {
             //this.rand = new Random(DateTime.Now.Millisecond);
-            this.id = id;
-            this.position = position;
-            this.size = size;
-            this.tileType = tileType;
-            this.paths = new Dictionary<int, List<Tile2>>();
-            this.units = new List<Unit>();
+            this.ID = id;
+            this.Position = position;
+            this.Size = size;
+            this.TileType = tileType;
+            this.Paths = new List<List<Tile2>>();
+            this.units = new List<Unit2>();
 
             SetTileType(tileType);
 
@@ -91,31 +57,31 @@ namespace UHSampleGame.TileSystem
 
         public bool IsWalkable()
         {
-            return tileType == TileType.Walkable;
+            return TileType == TileType.Walkable;
         }
 
 
         public bool IsNull()
         {
-            return tileType == TileType.Null;
+            return TileType == TileType.Null;
         }
 
         public TileType GetTileType()
         {
-            return tileType;
+            return TileType;
         }
 
         public void SetTileType(TileType tileType)
         {
-            this.tileType = tileType;
+            this.TileType = tileType;
         }
 
         public override string ToString()
         {
-            return this.ID.ToString() + " " + tileType.ToString();
+            return this.ID.ToString() + " " + TileType.ToString();
         }
 
-        public void SetBlockableObject(Tower gameObject)
+        public void SetBlockableObject(Tower2 gameObject)
         {
             this.tower = gameObject;
             SetTileType(TileType.Blocked);
@@ -130,49 +96,49 @@ namespace UHSampleGame.TileSystem
         public List<Tile2> GetPathTo(Tile2 baseTile)
         {
             UpdatePathTo(baseTile);
-            return paths[baseTile.ID];
+            return Paths[baseTile.ID];
         }
 
         public void UpdatePathTo(Tile2 baseTile)
         {
             AStar2 aStar = new AStar2(this, baseTile);
-            paths[baseTile.ID] = new List<Tile2>(aStar.FindPath());
+            Paths[baseTile.ID] = new List<Tile2>(aStar.FindPath());
         }
 
         public Vector3 GetRandPoint()
         {
             //rand = new Random(DateTime.Now.Millisecond);
-            int sizeX = (int)(size.X / 3);
-            int sizeY = (int)(size.Y / 3);
-            return new Vector3(position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, position.Z + rand.Next(-sizeY, sizeY));
+            int sizeX = (int)(Size.X / 3);
+            int sizeY = (int)(Size.Y / 3);
+            return new Vector3(Position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, Position.Z + rand.Next(-sizeY, sizeY));
         }
 
-        public void RegisterTowerListener(Tower tower)
+        public void RegisterTowerListener(ref Tower2 tower)
         {
             UnitEnter += tower.RegisterAttackUnit;
         }
 
-        public void UnregisterTowerListener(Tower tower)
+        public void UnregisterTowerListener(ref Tower2 tower)
         {
             UnitEnter -= tower.RegisterAttackUnit;
         }
 
-        public void AddUnit(UnitType type, Unit unit)
+        public void AddUnit(UnitType type, ref Unit2 unit)
         {
             units.Add(unit);
-            unit.Died += RemoveUnit;
-            OnUnitEnter(new GameEventArgs(unit));
+            //unit.Died += RemoveUnit;
+            //OnUnitEnter(new GameEventArgs(unit));
         }
 
-        public void RemoveUnit(UnitType type, Unit unit)
+        public void RemoveUnit(UnitType type, ref Unit2 unit)
         {
             units.Remove(unit);
             //Set new unit to attack
-            if (units.Count > 0)
-                OnUnitEnter(new GameEventArgs(units[0]));
+           // if (units.Count > 0)
+              //  OnUnitEnter(new GameEventArgs(units[0]));
         }
 
-        private void OnUnitEnter(GameEventArgs args)
+        private void OnUnitEnter(GameEventArgs2 args)
         {
             if (UnitEnter != null)
             {

@@ -9,8 +9,8 @@ using UHSampleGame.CoreObjects.Base;
 
 namespace UHSampleGame.Events
 {
-    public delegate void RegisterUnitWithTile2(GameEventArgs args);
-    public delegate void UnitDied2(UnitType type, Unit unit);
+    public delegate void RegisterUnitWithTile2(GameEventArgs2 args);
+    public delegate void UnitDied2(UnitType type, Unit2 unit);
     public delegate void BaseDestroyed2(Base2 destroyedBase);
     public delegate void GetNewGoalBase2();
     public delegate void TowerCreated2();

@@ -26,7 +26,6 @@ Content\AnimatedModel\head_0.xnb
 Content\AnimatedModel\jacket_0.xnb
 Content\AnimatedModel\pants_0.xnb
 Content\AnimatedModel\upBodyC_0.xnb
-Content\Objects\Units\enemyShip01Color_0.xnb
 Content\Objects\Units\enemyShip02Color_0.xnb
 Content\Objects\Base\oilRigColor_0.xnb
 Content\Objects\Towers\towerAColor_0.xnb
@@ -34,5 +33,8 @@ Content\Objects\Towers\towerBColor_0.xnb
 Content\Objects\Towers\towerCColor_0.xnb
 Content\Objects\Units\boatTexture_0.xnb
 Content\Objects\Towers\towerA_red.xnb
+Content\Objects\Units\enemyShip01AColor_0.xnb
+Content\Objects\Base\enemyBaseShip01.xnb
+Content\Objects\Base\enemyShipPlatformColor_0.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
