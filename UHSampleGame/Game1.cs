@@ -96,6 +96,8 @@ namespace UHSampleGame
 
             inputManager.AddInput(InputAction.MenuUp, Buttons.LeftThumbstickUp);
             inputManager.AddInput(InputAction.MenuDown, Buttons.LeftThumbstickDown);
+            inputManager.AddInput(InputAction.MenuLeft, Buttons.LeftThumbstickLeft);
+            inputManager.AddInput(InputAction.MenuRight, Buttons.LeftThumbstickRight);
             inputManager.AddInput(InputAction.MenuSelect, Buttons.A);
             inputManager.AddInput(InputAction.MenuCancel, Buttons.B);
 

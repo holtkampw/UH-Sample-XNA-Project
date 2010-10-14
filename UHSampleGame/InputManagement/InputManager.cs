@@ -17,7 +17,7 @@ namespace UHSampleGame.InputManagement
         Selection, Back, Rotation, MenuUp, MenuDown, 
         MenuSelect, MenuCancel, TileMoveUp, TileMoveDown,
         TileMoveLeft, TileMoveRight, TowerBuild,
-        ExitGame
+        ExitGame, MenuLeft, MenuRight
     };
 
     public class InputManager

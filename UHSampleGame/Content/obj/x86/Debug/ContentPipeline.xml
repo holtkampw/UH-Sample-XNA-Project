@@ -92,7 +92,7 @@
       <Time>2010-09-30T02:11:14.0623768-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\box_0.xml</Key>
-        <Value>2010-10-05T23:26:41.3181375-05:00</Value>
+        <Value>2010-10-06T17:49:34.515585-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
     </Item>
@@ -106,7 +106,7 @@
       <Time>2010-09-30T02:11:14.3829312-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\pyramids_0.xml</Key>
-        <Value>2010-10-05T23:26:46.6305695-05:00</Value>
+        <Value>2010-10-06T17:49:39.1872806-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
     </Item>
@@ -120,7 +120,7 @@
       <Time>2010-09-30T02:11:13.528771-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\AnimatedModel\dude_0.xml</Key>
-        <Value>2010-10-05T23:26:56.3023207-05:00</Value>
+        <Value>2010-10-06T17:49:50.7024894-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Request>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Request>
@@ -134,12 +134,12 @@
       <Processor>InstancedModelProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01.xnb</Output>
-      <Time>2010-09-30T02:11:15.6563531-05:00</Time>
+      <Time>2010-10-06T14:21:14.4761027-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\enemyShip01_0.xml</Key>
-        <Value>2010-10-05T23:27:01.9584983-05:00</Value>
+        <Value>2010-10-06T17:49:56.4366809-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01Color_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01AColor_0.xnb</Request>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
     </Item>
     <Item>
@@ -152,7 +152,7 @@
       <Time>2010-09-30T02:11:15.7726518-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\enemyShip02_0.xml</Key>
-        <Value>2010-10-05T23:27:04.6928383-05:00</Value>
+        <Value>2010-10-06T17:49:57.7022654-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02Color_0.xnb</Request>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
@@ -167,9 +167,24 @@
       <Time>2010-09-30T02:11:14.4611152-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Base\oilRig_0.xml</Key>
-        <Value>2010-10-05T23:27:06.8959351-05:00</Value>
+        <Value>2010-10-06T17:50:00.6240469-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRigColor_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Towers\towerA_red.fbx</Source>
+      <Name>Objects\Towers\towerA_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerA_red.xnb</Output>
+      <Time>2010-09-30T02:11:14.9693112-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
+        <Value>2010-10-06T17:50:02.6552319-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Towers\towerB_red.fbx</Source>
@@ -181,7 +196,7 @@
       <Time>2010-09-30T02:11:15.1149289-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerB_red_0.xml</Key>
-        <Value>2010-10-05T23:27:09.1771579-05:00</Value>
+        <Value>2010-10-06T17:50:04.1083104-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Request>
     </Item>
@@ -195,7 +210,7 @@
       <Time>2010-09-30T02:11:15.2263411-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerC_red_0.xml</Key>
-        <Value>2010-10-05T23:27:10.5677829-05:00</Value>
+        <Value>2010-10-06T17:50:05.4676419-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Request>
     </Item>
@@ -209,10 +224,24 @@
       <Time>2010-09-30T02:11:15.2419779-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\boat_0.xml</Key>
-        <Value>2010-10-05T23:27:11.7084079-05:00</Value>
+        <Value>2010-10-06T17:50:07.6238229-05:00</Value>
       </Dependency>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Request>
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Base\enemyBaseShip01.fbx</Source>
+      <Name>Objects\Base\enemyBaseShip01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyBaseShip01.xnb</Output>
+      <Time>2010-10-06T14:23:19.9985206-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Base\enemyBaseShip01_0.xml</Key>
+        <Value>2010-10-06T17:50:12.4986669-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyShipPlatformColor_0.xnb</Request>
     </Item>
     <Item>
       <Source>Video\intro.wmv</Source>
@@ -374,10 +403,10 @@
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Units\enemyShip01_0.xml</Output>
-      <Time>2010-09-30T02:11:15.6563531-05:00</Time>
+      <Time>2010-10-06T14:21:14.4761027-05:00</Time>
     </Item>
     <Item>
-      <Source>Objects\Units\enemyShip01Color.tga</Source>
+      <Source>Objects\Units\enemyShip01AColor.tga</Source>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Parameters>
@@ -389,8 +418,8 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01Color_0.xnb</Output>
-      <Time>2010-09-30T02:11:15.7589696-05:00</Time>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01AColor_0.xnb</Output>
+      <Time>2010-10-05T15:39:58-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Units\enemyShip02.fbx</Source>
@@ -531,19 +560,100 @@
       <Time>2010-09-30T02:11:15.581101-05:00</Time>
     </Item>
     <Item>
-      <Source>Objects\Towers\towerA_red.fbx</Source>
-      <Name>Objects\Towers\towerA_red</Name>
+      <Source>Objects\Base\enemyBaseShip01.fbx</Source>
       <Importer>FbxImporter</Importer>
-      <Processor>InstancedModelProcessor</Processor>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Base\enemyBaseShip01_0.xml</Output>
+      <Time>2010-10-06T14:23:19.9985206-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Base\enemyShipPlatformColor.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerA_red.xnb</Output>
-      <Time>2010-09-30T02:11:14.9693112-05:00</Time>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyShipPlatformColor_0.xnb</Output>
+      <Time>2010-10-05T16:26:44-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\left_arrow.png</Source>
+      <Name>MainMenu\left_arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\left_arrow.xnb</Output>
+      <Time>2010-10-14T13:41:41-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\right_arrow.png</Source>
+      <Name>MainMenu\right_arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\right_arrow.xnb</Output>
+      <Time>2010-10-14T13:41:59-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\oilBarrel_MainMenu.fbx</Source>
+      <Name>MainMenu\oilBarrel_MainMenu</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\oilBarrel_MainMenu.xnb</Output>
+      <Time>2010-10-14T11:19:38.3917392-05:00</Time>
       <Dependency>
-        <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
-        <Value>2010-10-05T23:27:08.1927935-05:00</Value>
+        <Key>obj\x86\Debug\MainMenu\oilBarrel_MainMenu_0.xml</Key>
+        <Value>2010-10-14T13:28:57.5161091-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\menu_tex_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>MainMenu\oilBarrel_MainMenu.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\MainMenu\oilBarrel_MainMenu_0.xml</Output>
+      <Time>2010-10-14T11:19:38.3917392-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\menu_tex.png</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\menu_tex_0.xnb</Output>
+      <Time>2010-10-14T12:16:54.8882787-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\font.spritefont</Source>
+      <Name>MainMenu\font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\font.xnb</Output>
+      <Time>2010-10-14T14:01:49.0887659-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\a_button.png</Source>
+      <Name>MainMenu\a_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\a_button.xnb</Output>
+      <Time>2010-10-14T13:53:10.472508-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

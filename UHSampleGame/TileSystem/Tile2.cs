@@ -102,6 +102,9 @@ namespace UHSampleGame.TileSystem
         public void UpdatePathTo(Tile2 baseTile)
         {
             AStar2 aStar = new AStar2(this, baseTile);
+
+            for (int i = Paths.Count; i <= baseTile.ID; i++)
+                Paths.Add(new List<Tile2>());
             Paths[baseTile.ID] = new List<Tile2>(aStar.FindPath());
         }
 
