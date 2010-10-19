@@ -33,7 +33,7 @@ namespace UHSampleGame
         /// load before the body of any Update or Draw calls is made
         /// </summary>
         private static List<Asset> assets = new List<Asset>{
-            new Asset(FirstLoad),
+            //new Asset(FirstLoad),
             new Asset(UnitCollectionLoad),
             new Asset(TowerCollectionLoad),
             new Asset(TileMapLoad),           
@@ -53,7 +53,7 @@ namespace UHSampleGame
             ////TODO Comment this out in a real game
             //new Asset(SimulateDelay),
             
-            new Asset(FinishedLoading),
+            // Asset(FinishedLoading),
          };
 
 
