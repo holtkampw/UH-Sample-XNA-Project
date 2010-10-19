@@ -655,6 +655,15 @@
       <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\a_button.xnb</Output>
       <Time>2010-10-14T13:53:10.472508-05:00</Time>
     </Item>
+    <Item>
+      <Source>Levels\loading_screen.png</Source>
+      <Name>Levels\loading_screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Levels\loading_screen.xnb</Output>
+      <Time>2010-10-14T16:02:20.7277415-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

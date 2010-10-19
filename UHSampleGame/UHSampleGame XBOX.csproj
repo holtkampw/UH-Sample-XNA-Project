@@ -66,6 +66,7 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="AssetManager\AssetHelper.cs" />
     <Compile Include="CameraManagement\CameraManager.cs" />
     <Compile Include="CoreObjects\AnimatedTileObject.cs" />
     <Compile Include="CoreObjects\Base\Base.cs" />
