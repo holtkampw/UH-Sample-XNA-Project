@@ -351,6 +351,7 @@ namespace UHSampleGame
         {
             this.Key = key;
             this.Type = type;
+            this.Params = new object[param.Length];
             this.Params = param;
         }
         #endregion
