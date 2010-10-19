@@ -608,7 +608,105 @@
       <Output>obj\x86\Debug\Objects\Base\enemyBaseShip01_0.xml</Output>
       <Time>2010-10-06T15:09:03.5149109-05:00</Time>
     </Item>
-    <BuildSuccessful>false</BuildSuccessful>
+    <Item>
+      <Source>Objects\Base\enemyShipPlatformColor.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyShipPlatformColor_0.xnb</Output>
+      <Time>2010-10-05T16:26:44-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\left_arrow.png</Source>
+      <Name>MainMenu\left_arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\left_arrow.xnb</Output>
+      <Time>2010-10-14T13:41:41-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\right_arrow.png</Source>
+      <Name>MainMenu\right_arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\right_arrow.xnb</Output>
+      <Time>2010-10-14T13:41:59-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\oilBarrel_MainMenu.fbx</Source>
+      <Name>MainMenu\oilBarrel_MainMenu</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\oilBarrel_MainMenu.xnb</Output>
+      <Time>2010-10-14T11:19:38.3917392-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\MainMenu\oilBarrel_MainMenu_0.xml</Key>
+        <Value>2010-10-14T13:28:57.5161091-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\menu_tex_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>MainMenu\oilBarrel_MainMenu.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\MainMenu\oilBarrel_MainMenu_0.xml</Output>
+      <Time>2010-10-14T11:19:38.3917392-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\menu_tex.png</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\menu_tex_0.xnb</Output>
+      <Time>2010-10-14T12:16:54.8882787-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\font.spritefont</Source>
+      <Name>MainMenu\font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\font.xnb</Output>
+      <Time>2010-10-14T14:01:49.0887659-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\a_button.png</Source>
+      <Name>MainMenu\a_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\a_button.xnb</Output>
+      <Time>2010-10-14T13:53:10.472508-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Levels\loading_screen.png</Source>
+      <Name>Levels\loading_screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Levels\loading_screen.xnb</Output>
+      <Time>2010-10-14T16:02:20.7277415-05:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>HiDef</TargetProfile>

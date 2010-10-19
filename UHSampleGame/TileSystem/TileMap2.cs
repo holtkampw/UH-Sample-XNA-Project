@@ -373,8 +373,6 @@ namespace UHSampleGame.TileSystem
                 walkableNeighbors[i].RegisterTowerListener(ref tower);
             }
             //OnTowerCreated();
-
-
         }
 
         private static void OnTowerCreated()
