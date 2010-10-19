@@ -40,6 +40,7 @@ namespace UHSampleGame.Screens
         SpriteFont font;
 
         Vector2 numTiles;
+        bool contentLoaded = false;
 
         #endregion
 
@@ -47,7 +48,7 @@ namespace UHSampleGame.Screens
         public PlayScreen2()
             : base("PlayScreen2")
         {
-            
+            AssetHelper.LoadOne(ScreenManager.Game);
         }
 
         public override void LoadContent()
@@ -115,6 +116,16 @@ namespace UHSampleGame.Screens
             //Call into the Asset helper to load your assets
             AssetHelper.LoadOne(ScreenManager.Game);
 
+            if (AssetHelper.Loaded)
+            {
+                videoPlayer = AssetHelper.Get<VideoPlayer>("videoPlayer");
+                video = AssetHelper.Get<Video>("video");
+                p1 = AssetHelper.Get<Player2>("p1");
+                aI = AssetHelper.Get<Player2>("aI");
+                dimensions = AssetHelper.Get<Vector2>("dimensions");
+                contentLoaded = true;
+
+            }
             // Show a simple example fade effect
             if (AssetHelper.Loaded)
             {
@@ -140,20 +151,26 @@ namespace UHSampleGame.Screens
 
         public override void HandleInput(InputManager input)
         {
-            p1.HandleInput(input);
-            aI.HandleInput(input);
+            if (AssetHelper.Loaded && contentLoaded)
+            {
+                p1.HandleInput(input);
+                aI.HandleInput(input);
+            }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (!AssetHelper.Loaded)
+            
+            if (!AssetHelper.Loaded && !contentLoaded)
             {
                 //Currently loading, display progress
+                ScreenManager.SpriteBatch.Begin();
                 //ScreenManager.SpriteBatch.Draw(loading_scree, Vector2.Zero, Color.White);
                 ScreenManager.SpriteBatch.Draw(AssetHelper.Get<Texture2D>("loading_screen"), Vector2.Zero, Color.White);
 
                 ScreenManager.SpriteBatch.DrawString(AssetHelper.Get<SpriteFont>("font"),
                     "Loading Progress: " + AssetHelper.PercentLoaded + "%", new Vector2(50, 50), Color.DarkRed);
+                ScreenManager.SpriteBatch.End();
             }
             else
             {

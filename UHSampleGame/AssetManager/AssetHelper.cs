@@ -33,23 +33,20 @@ namespace UHSampleGame
         /// load before the body of any Update or Draw calls is made
         /// </summary>
         private static List<Asset> assets = new List<Asset>{
-            //new Asset(FirstLoad),
+            new Asset(FirstLoad),
             new Asset(UnitCollectionLoad),
             new Asset(TowerCollectionLoad),
-            //new Asset("numTiles", typeof(Vector2), 20, 10),
-            //new Asset(TileMapLoad),  
-            //new Asset("p1", typeof(Player2), 0, 1, TileMap2.Tiles[0], PlayerType.Human),
-            //new Asset("aI", typeof(Player2), 1, 2, TileMap2.Tiles[TileMap2.Tiles.Count - 1], PlayerType.AI),
-            //new Asset(LevelLoad),
-            //new Asset("dimensions", typeof(Vector2), ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width,             
-            //                         ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height),
-            //new Asset("videoPlayer", typeof(VideoPlayer), ""),
-            //new Asset("video", "Video\\oceanView", typeof(Video)),
-            //new Asset(VideoLoad),
-            //new Asset("background", "water_tiled", typeof(Texture2D)),
-            //new Asset("font", "font", typeof(SpriteFont)),
-            new Asset("loading_screen", "Levels\\loading_screen", typeof(Texture2D)),
+            new Asset("numTiles", typeof(Vector2), 20f, 10f),
+            new Asset(TileMapLoad),       
+            new Asset(PlayerLoad),
+            new Asset(LevelLoad),
+            new Asset("videoPlayer", typeof(VideoPlayer), ""),
+            new Asset("video", "Video\\oceanView", typeof(Video)),
+            new Asset(VideoLoad),
+            new Asset("background", "water_tiled", typeof(Texture2D)),
             new Asset("font", "font", typeof(SpriteFont)),
+            new Asset("dimensions", typeof(Vector2), (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width,             
+                                     (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height),
             ////TODO Comment this out in a real game
             //new Asset(SimulateDelay),
             
@@ -114,7 +111,7 @@ namespace UHSampleGame
 
             if (nextAsset.Type == typeof(Texture2D))
             {
-                data[nextAsset.Key] = LoadTextureStream(game.GraphicsDevice, nextAsset.Loc);
+                data[nextAsset.Key] = game.Content.Load<Texture2D>(nextAsset.Loc);//LoadTextureStream(game.GraphicsDevice, nextAsset.Loc);
             }
             else if (nextAsset.Type == typeof(Model))
             {
@@ -134,7 +131,7 @@ namespace UHSampleGame
             }
             else if (nextAsset.Type == typeof(Player2))
             {
-                data[nextAsset.Key] = new Player((int)nextAsset.Params[0], (int)nextAsset.Params[1], (Tile)nextAsset.Params[2], (PlayerType)nextAsset.Params[3]);
+                data[nextAsset.Key] = new Player2((int)nextAsset.Params[0], (int)nextAsset.Params[1], (Tile2)nextAsset.Params[2], (PlayerType)nextAsset.Params[3]);
             }
             else if (nextAsset.Type == typeof(Vector2))
             {
@@ -144,6 +141,11 @@ namespace UHSampleGame
             {
                 data[nextAsset.Key] = new VideoPlayer();
             }
+            else if (nextAsset.Type == typeof(Video))
+            {
+                data[nextAsset.Key] = game.Content.Load<Video>(nextAsset.Loc);
+            }
+
 
             index++;
 
@@ -230,8 +232,11 @@ namespace UHSampleGame
         /// <param name="game"></param>
         private static void FirstLoad(Game game)
         {
-            data["Background"] = LoadTextureStream(game.GraphicsDevice, "Background");
-            data["mainFont"] = game.Content.Load<SpriteFont>("mainFont");
+            //data["Background"] = LoadTextureStream(game.GraphicsDevice, "Background");
+            //data["mainFont"] = game.Content.Load<SpriteFont>("mainFont");
+            data["loading_screen"] = game.Content.Load<Texture2D>("Levels\\loading_screen");
+            data["font"] = game.Content.Load<SpriteFont>("font");
+            data["numTiles"] = new Vector2(20f, 10f);
         }
 
         /// <summary>
@@ -273,7 +278,14 @@ namespace UHSampleGame
         private static void TileMapLoad(Game game)
         {
             Vector2 numTiles = AssetHelper.Get<Vector2>("numTiles");
-            TileMap2.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
+            TileMap2.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
+        }
+
+        private static void PlayerLoad(Game game)
+        {
+            data["p1"] = new Player2(0, 1, TileMap2.Tiles[0], PlayerType.Human);
+            data["aI"] = new Player2(1, 2, TileMap2.Tiles[TileMap2.Tiles.Count - 1], PlayerType.AI);
+           // 
         }
 
         private static void LevelLoad(Game game)
