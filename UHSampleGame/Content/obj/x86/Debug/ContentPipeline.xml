@@ -7,8 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\DummyText\Font.xnb</Output>
-      <Time>2010-09-30T02:11:13.9060088-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\DummyText\Font.xnb</Output>
+      <Time>2010-09-29T14:39:18.8925171-05:00</Time>
     </Item>
     <Item>
       <Source>font.spritefont</Source>
@@ -16,8 +16,17 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\font.xnb</Output>
-      <Time>2010-09-30T02:11:16.3414404-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\font.xnb</Output>
+      <Time>2010-09-29T14:41:59.9347281-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\font.spritefont</Source>
+      <Name>MainMenu\font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\MainMenu\font.xnb</Output>
+      <Time>2010-10-14T17:57:40.6845894-05:00</Time>
     </Item>
     <Item>
       <Source>DummyText\background.png</Source>
@@ -25,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\DummyText\background.xnb</Output>
-      <Time>2010-09-30T02:11:13.9460781-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\DummyText\background.xnb</Output>
+      <Time>2010-09-03T03:31:11.7622123-05:00</Time>
     </Item>
     <Item>
       <Source>Model\background.png</Source>
@@ -34,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\background.xnb</Output>
-      <Time>2010-09-30T02:11:13.9773517-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\background.xnb</Output>
+      <Time>2010-09-03T03:31:11.8572178-05:00</Time>
     </Item>
     <Item>
       <Source>Tiles\1.png</Source>
@@ -43,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Tiles\1.xnb</Output>
-      <Time>2010-09-30T02:11:15.9446566-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Tiles\1.xnb</Output>
+      <Time>2010-09-15T14:05:11.3535139-05:00</Time>
     </Item>
     <Item>
       <Source>Tiles\2.png</Source>
@@ -52,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Tiles\2.xnb</Output>
-      <Time>2010-09-30T02:11:15.9690891-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Tiles\2.xnb</Output>
+      <Time>2010-09-15T14:05:11.354514-05:00</Time>
     </Item>
     <Item>
       <Source>Tiles\3.png</Source>
@@ -61,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Tiles\3.xnb</Output>
-      <Time>2010-09-30T02:11:15.9739756-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Tiles\3.xnb</Output>
+      <Time>2010-09-15T14:05:11.355514-05:00</Time>
     </Item>
     <Item>
       <Source>water_tiled.png</Source>
@@ -70,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\water_tiled.xnb</Output>
-      <Time>2010-09-30T02:11:17.0001406-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\water_tiled.xnb</Output>
+      <Time>2010-09-15T14:05:11.4275182-05:00</Time>
     </Item>
     <Item>
       <Source>Images\deepSea.png</Source>
@@ -79,8 +88,35 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Images\deepSea.xnb</Output>
-      <Time>2010-09-30T02:11:13.9460781-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Images\deepSea.xnb</Output>
+      <Time>2010-09-23T01:35:42.5350743-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\left_arrow.png</Source>
+      <Name>MainMenu\left_arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\MainMenu\left_arrow.xnb</Output>
+      <Time>2010-10-14T17:57:40.6905897-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\right_arrow.png</Source>
+      <Name>MainMenu\right_arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\MainMenu\right_arrow.xnb</Output>
+      <Time>2010-10-14T17:57:40.7005903-05:00</Time>
+    </Item>
+    <Item>
+      <Source>MainMenu\a_button.png</Source>
+      <Name>MainMenu\a_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\MainMenu\a_button.xnb</Output>
+      <Time>2010-10-14T17:57:40.6835893-05:00</Time>
     </Item>
     <Item>
       <Source>Model\box.fbx</Source>
@@ -88,13 +124,13 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\box.xnb</Output>
-      <Time>2010-09-30T02:11:14.0623768-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\box.xnb</Output>
+      <Time>2010-09-03T03:31:11.8592179-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\box_0.xml</Key>
-        <Value>2010-10-06T17:49:34.515585-05:00</Value>
+        <Value>2010-10-14T17:58:38.7909129-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
     </Item>
     <Item>
       <Source>Model\pyramids.fbx</Source>
@@ -102,13 +138,13 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\pyramids.xnb</Output>
-      <Time>2010-09-30T02:11:14.3829312-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\pyramids.xnb</Output>
+      <Time>2010-09-03T03:31:12.0262274-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\pyramids_0.xml</Key>
-        <Value>2010-10-06T17:49:39.1872806-05:00</Value>
+        <Value>2010-10-14T17:58:42.2921131-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
     </Item>
     <Item>
       <Source>AnimatedModel\dude.fbx</Source>
@@ -116,16 +152,16 @@
       <Importer>FbxImporter</Importer>
       <Processor>SkinnedModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\dude.xnb</Output>
-      <Time>2010-09-30T02:11:13.528771-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\dude.xnb</Output>
+      <Time>2010-09-18T02:46:21.2835473-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\AnimatedModel\dude_0.xml</Key>
-        <Value>2010-10-06T17:49:50.7024894-05:00</Value>
+        <Value>2010-10-14T17:58:49.9005483-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Units\enemyShip01.fbx</Source>
@@ -133,14 +169,14 @@
       <Importer>FbxImporter</Importer>
       <Processor>InstancedModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01.xnb</Output>
-      <Time>2010-10-06T14:21:14.4761027-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01.xnb</Output>
+      <Time>2010-10-14T16:24:10.0646803-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\enemyShip01_0.xml</Key>
-        <Value>2010-10-06T17:49:56.4366809-05:00</Value>
+        <Value>2010-10-14T17:58:54.142791-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01AColor_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01AColor_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Units\enemyShip02.fbx</Source>
@@ -148,14 +184,14 @@
       <Importer>FbxImporter</Importer>
       <Processor>InstancedModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02.xnb</Output>
-      <Time>2010-09-30T02:11:15.7726518-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02.xnb</Output>
+      <Time>2010-09-29T15:22:16.4028499-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\enemyShip02_0.xml</Key>
-        <Value>2010-10-06T17:49:57.7022654-05:00</Value>
+        <Value>2010-10-14T17:58:55.3618607-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02Color_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02Color_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Base\oilRig.fbx</Source>
@@ -163,13 +199,13 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRig.xnb</Output>
-      <Time>2010-09-30T02:11:14.4611152-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRig.xnb</Output>
+      <Time>2010-09-29T15:20:18.3830995-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Base\oilRig_0.xml</Key>
-        <Value>2010-10-06T17:50:00.6240469-05:00</Value>
+        <Value>2010-10-14T17:58:57.692994-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRigColor_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRigColor_0.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Towers\towerA_red.fbx</Source>
@@ -177,14 +213,14 @@
       <Importer>FbxImporter</Importer>
       <Processor>InstancedModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerA_red.xnb</Output>
-      <Time>2010-09-30T02:11:14.9693112-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerA_red.xnb</Output>
+      <Time>2010-10-06T14:29:14.9432924-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
-        <Value>2010-10-06T17:50:02.6552319-05:00</Value>
+        <Value>2010-10-14T17:58:59.0180698-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Towers\towerB_red.fbx</Source>
@@ -192,13 +228,13 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerB_red.xnb</Output>
-      <Time>2010-09-30T02:11:15.1149289-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerB_red.xnb</Output>
+      <Time>2010-09-29T15:25:57.6195028-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerB_red_0.xml</Key>
-        <Value>2010-10-06T17:50:04.1083104-05:00</Value>
+        <Value>2010-10-14T17:59:00.3611466-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Towers\towerC_red.fbx</Source>
@@ -206,13 +242,13 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerC_red.xnb</Output>
-      <Time>2010-09-30T02:11:15.2263411-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerC_red.xnb</Output>
+      <Time>2010-09-29T15:26:17.3916337-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerC_red_0.xml</Key>
-        <Value>2010-10-06T17:50:05.4676419-05:00</Value>
+        <Value>2010-10-14T17:59:02.3032577-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Units\boat.fbx</Source>
@@ -220,14 +256,14 @@
       <Importer>FbxImporter</Importer>
       <Processor>InstancedModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boat.xnb</Output>
-      <Time>2010-09-30T02:11:15.2419779-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boat.xnb</Output>
+      <Time>2010-09-29T18:49:05.3939103-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\boat_0.xml</Key>
-        <Value>2010-10-06T17:50:07.6238229-05:00</Value>
+        <Value>2010-10-14T17:59:03.5083266-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Request>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Request>
+      <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
     </Item>
     <Item>
       <Source>Objects\Base\enemyBaseShip01.fbx</Source>
@@ -235,13 +271,21 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyBaseShip01.xnb</Output>
-      <Time>2010-10-06T14:23:19.9985206-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyBaseShip01.xnb</Output>
+      <Time>0001-01-01T00:00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Base\enemyBaseShip01_0.xml</Key>
-        <Value>2010-10-06T17:50:12.4986669-05:00</Value>
+        <Value>2010-10-14T17:59:06.7225105-05:00</Value>
       </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyShipPlatformColor_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>MainMenu\oilBarrel_MainMenu.fbx</Source>
+      <Name>MainMenu\oilBarrel_MainMenu</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\MainMenu\oilBarrel_MainMenu.xnb</Output>
+      <Time>0001-01-01T00:00:00</Time>
     </Item>
     <Item>
       <Source>Video\intro.wmv</Source>
@@ -249,9 +293,8 @@
       <Importer>WmvImporter</Importer>
       <Processor>VideoProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Video\intro.xnb</Output>
-      <Extra>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Video\intro.wmv</Extra>
-      <Time>2010-09-30T02:11:16.1430485-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Video\intro.xnb</Output>
+      <Time>0001-01-01T00:00:00</Time>
     </Item>
     <Item>
       <Source>Video\oceanView.wmv</Source>
@@ -259,9 +302,8 @@
       <Importer>WmvImporter</Importer>
       <Processor>VideoProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Video\oceanView.xnb</Output>
-      <Extra>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Video\oceanView.wmv</Extra>
-      <Time>2010-09-30T02:11:16.3199398-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Video\oceanView.xnb</Output>
+      <Time>0001-01-01T00:00:00</Time>
     </Item>
     <Item>
       <Source>Objects\Towers\InstancedModel.fx</Source>
@@ -269,8 +311,8 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Output>
-      <Time>2010-09-30T02:11:14.6067329-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Output>
+      <Time>0001-01-01T00:00:00</Time>
     </Item>
     <Item>
       <Source>Objects\Units\InstancedModel.fx</Source>
@@ -278,15 +320,15 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Output>
-      <Time>2010-09-30T02:11:15.239046-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Output>
+      <Time>0001-01-01T00:00:00</Time>
     </Item>
     <Item>
       <Source>Model\box.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Model\box_0.xml</Output>
-      <Time>2010-09-30T02:11:14.0623768-05:00</Time>
+      <Time>2010-09-03T03:31:11.8592179-05:00</Time>
     </Item>
     <Item>
       <Source>Model\box_texture.png</Source>
@@ -301,15 +343,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Output>
-      <Time>2010-09-30T02:11:14.0711725-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Output>
+      <Time>2010-09-03T03:31:11.8602179-05:00</Time>
     </Item>
     <Item>
       <Source>Model\pyramids.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Model\pyramids_0.xml</Output>
-      <Time>2010-09-30T02:11:14.3829312-05:00</Time>
+      <Time>2010-09-03T03:31:12.0262274-05:00</Time>
     </Item>
     <Item>
       <Source>Model\plane.png</Source>
@@ -324,15 +366,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Output>
-      <Time>2010-09-30T02:11:14.2666325-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Output>
+      <Time>2010-09-03T03:31:11.9282218-05:00</Time>
     </Item>
     <Item>
       <Source>AnimatedModel\dude.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\AnimatedModel\dude_0.xml</Output>
-      <Time>2010-09-30T02:11:13.528771-05:00</Time>
+      <Time>2010-09-18T02:46:21.2835473-05:00</Time>
     </Item>
     <Item>
       <Source>AnimatedModel\head.tga</Source>
@@ -347,8 +389,8 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Output>
-      <Time>2010-09-30T02:11:13.6235691-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Output>
+      <Time>2010-09-03T03:31:11.5361994-05:00</Time>
     </Item>
     <Item>
       <Source>AnimatedModel\jacket.tga</Source>
@@ -363,8 +405,8 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Output>
-      <Time>2010-09-30T02:11:13.6997985-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Output>
+      <Time>2010-09-03T03:31:11.5862023-05:00</Time>
     </Item>
     <Item>
       <Source>AnimatedModel\pants.tga</Source>
@@ -379,8 +421,8 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Output>
-      <Time>2010-09-30T02:11:13.7711414-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\pants_0.xnb</Output>
+      <Time>2010-09-03T03:31:11.6302048-05:00</Time>
     </Item>
     <Item>
       <Source>AnimatedModel\upBodyC.tga</Source>
@@ -395,15 +437,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Output>
-      <Time>2010-09-30T02:11:13.880599-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\upBodyC_0.xnb</Output>
+      <Time>2010-09-03T03:31:11.6742073-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Units\enemyShip01.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Units\enemyShip01_0.xml</Output>
-      <Time>2010-10-06T14:21:14.4761027-05:00</Time>
+      <Time>2010-10-14T16:24:10.0646803-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Units\enemyShip01AColor.tga</Source>
@@ -418,15 +460,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01AColor_0.xnb</Output>
-      <Time>2010-10-05T15:39:58-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01AColor_0.xnb</Output>
+      <Time>2010-10-06T15:09:03.5969156-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Units\enemyShip02.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Units\enemyShip02_0.xml</Output>
-      <Time>2010-09-30T02:11:15.7726518-05:00</Time>
+      <Time>2010-09-29T15:22:16.4028499-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Units\enemyShip02Color.tga</Source>
@@ -441,15 +483,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02Color_0.xnb</Output>
-      <Time>2010-09-30T02:11:15.90361-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02Color_0.xnb</Output>
+      <Time>2010-09-29T15:18:14.3550055-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Base\oilRig.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Base\oilRig_0.xml</Output>
-      <Time>2010-09-30T02:11:14.4611152-05:00</Time>
+      <Time>2010-09-29T15:20:18.3830995-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Base\oilRigColor.tga</Source>
@@ -464,15 +506,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRigColor_0.xnb</Output>
-      <Time>2010-09-30T02:11:14.6057556-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRigColor_0.xnb</Output>
+      <Time>2010-09-29T15:18:14.4480109-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Towers\towerA_red.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Output>
-      <Time>2010-09-30T02:11:14.9693112-05:00</Time>
+      <Time>2010-10-06T14:29:14.9432924-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Towers\towerAColor.tga</Source>
@@ -487,15 +529,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Output>
-      <Time>2010-09-30T02:11:14.9282646-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Output>
+      <Time>2010-09-29T15:18:14.5160148-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Towers\towerB_red.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Towers\towerB_red_0.xml</Output>
-      <Time>2010-09-30T02:11:15.1149289-05:00</Time>
+      <Time>2010-09-29T15:25:57.6195028-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Towers\towerBColor.tga</Source>
@@ -510,15 +552,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Output>
-      <Time>2010-09-30T02:11:15.111997-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Output>
+      <Time>2010-09-29T15:18:14.5760182-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Towers\towerC_red.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Towers\towerC_red_0.xml</Output>
-      <Time>2010-09-30T02:11:15.2263411-05:00</Time>
+      <Time>2010-09-29T15:26:17.3916337-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Towers\towerCColor.tga</Source>
@@ -533,15 +575,15 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Output>
-      <Time>2010-09-30T02:11:15.209727-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Output>
+      <Time>2010-09-29T15:18:14.6330214-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Units\boat.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Units\boat_0.xml</Output>
-      <Time>2010-09-30T02:11:15.2419779-05:00</Time>
+      <Time>2010-09-29T18:49:05.3939103-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Units\boatTexture.tga</Source>
@@ -556,120 +598,31 @@
         <Data Key="PremultiplyAlpha" Type="bool">true</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Output>
-      <Time>2010-09-30T02:11:15.581101-05:00</Time>
+      <Output>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Output>
+      <Time>2010-09-29T18:48:31.2839593-05:00</Time>
     </Item>
     <Item>
       <Source>Objects\Base\enemyBaseShip01.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Objects\Base\enemyBaseShip01_0.xml</Output>
-      <Time>2010-10-06T14:23:19.9985206-05:00</Time>
+      <Time>2010-10-06T15:09:03.5149109-05:00</Time>
     </Item>
-    <Item>
-      <Source>Objects\Base\enemyShipPlatformColor.tga</Source>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Parameters>
-        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
-        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
-        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
-        <Data Key="GenerateMipmaps" Type="bool">true</Data>
-        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
-        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
-      </Parameters>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyShipPlatformColor_0.xnb</Output>
-      <Time>2010-10-05T16:26:44-05:00</Time>
-    </Item>
-    <Item>
-      <Source>MainMenu\left_arrow.png</Source>
-      <Name>MainMenu\left_arrow</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\left_arrow.xnb</Output>
-      <Time>2010-10-14T13:41:41-05:00</Time>
-    </Item>
-    <Item>
-      <Source>MainMenu\right_arrow.png</Source>
-      <Name>MainMenu\right_arrow</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\right_arrow.xnb</Output>
-      <Time>2010-10-14T13:41:59-05:00</Time>
-    </Item>
-    <Item>
-      <Source>MainMenu\oilBarrel_MainMenu.fbx</Source>
-      <Name>MainMenu\oilBarrel_MainMenu</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\oilBarrel_MainMenu.xnb</Output>
-      <Time>2010-10-14T11:19:38.3917392-05:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\MainMenu\oilBarrel_MainMenu_0.xml</Key>
-        <Value>2010-10-14T13:28:57.5161091-05:00</Value>
-      </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\menu_tex_0.xnb</Request>
-    </Item>
-    <Item>
-      <Source>MainMenu\oilBarrel_MainMenu.fbx</Source>
-      <Importer>FbxImporter</Importer>
-      <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\MainMenu\oilBarrel_MainMenu_0.xml</Output>
-      <Time>2010-10-14T11:19:38.3917392-05:00</Time>
-    </Item>
-    <Item>
-      <Source>MainMenu\menu_tex.png</Source>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Parameters>
-        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
-        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
-        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
-        <Data Key="GenerateMipmaps" Type="bool">true</Data>
-        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
-        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
-      </Parameters>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\menu_tex_0.xnb</Output>
-      <Time>2010-10-14T12:16:54.8882787-05:00</Time>
-    </Item>
-    <Item>
-      <Source>MainMenu\font.spritefont</Source>
-      <Name>MainMenu\font</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\font.xnb</Output>
-      <Time>2010-10-14T14:01:49.0887659-05:00</Time>
-    </Item>
-    <Item>
-      <Source>MainMenu\a_button.png</Source>
-      <Name>MainMenu\a_button</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\MainMenu\a_button.xnb</Output>
-      <Time>2010-10-14T13:53:10.472508-05:00</Time>
-    </Item>
-    <BuildSuccessful>true</BuildSuccessful>
+    <BuildSuccessful>false</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Users\William Holtkamp\Desktop\Cup\SkinnedModelPipeline\bin\x86\Debug\SkinnedModelPipeline.dll</Key>
-        <Value>2010-09-30T16:53:20.2277186-05:00</Value>
+        <Key>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\SkinnedModelPipeline\bin\x86\Debug\SkinnedModelPipeline.dll</Key>
+        <Value>2010-09-30T02:40:24.5876209-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
@@ -696,12 +649,12 @@
         <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Users\William Holtkamp\Desktop\Cup\InstancedModelPipeline\bin\x86\Debug\InstancedModelPipeline.dll</Key>
-        <Value>2010-09-30T16:53:19.4992454-05:00</Value>
+        <Key>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\InstancedModelPipeline\bin\x86\Debug\InstancedModelPipeline.dll</Key>
+        <Value>2010-10-14T16:24:10.05968-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2010-09-20T17:27:43.6307769-05:00</Value>
+        <Value>2010-09-18T02:15:49.7514688-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
