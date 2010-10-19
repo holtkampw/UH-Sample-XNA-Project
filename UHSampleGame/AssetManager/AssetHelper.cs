@@ -33,23 +33,21 @@ namespace UHSampleGame
         /// load before the body of any Update or Draw calls is made
         /// </summary>
         private static List<Asset> assets = new List<Asset>{
-            //new Asset(FirstLoad),
+            new Asset(FirstLoad),
             new Asset(UnitCollectionLoad),
             new Asset(TowerCollectionLoad),
-            new Asset(TileMapLoad),           
+            new Asset(TileMapLoad),       
+            new Asset("p1", typeof(Player2), 0, 1, TileMap2.Tiles[0], PlayerType.Human),
+            new Asset("aI", typeof(Player2), 1, 2, TileMap2.Tiles[TileMap2.Tiles.Count - 1], PlayerType.AI),
             new Asset(LevelLoad),
             new Asset("videoPlayer", typeof(VideoPlayer), ""),
             new Asset("video", "Video\\oceanView", typeof(Video)),
             new Asset(VideoLoad),
             new Asset("background", "water_tiled", typeof(Texture2D)),
             new Asset("font", "font", typeof(SpriteFont)),
-            new Asset("p1", typeof(Player2), 0, 1, TileMap2.Tiles[0], PlayerType.Human),
-            new Asset("aI", typeof(Player2), 1, 2, TileMap2.Tiles[TileMap2.Tiles.Count - 1], PlayerType.AI),
             new Asset("numTiles", typeof(Vector2), 20, 10),
             new Asset("dimensions", typeof(Vector2), ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width,             
                                      ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height),
-            new Asset("loading_screen", "Levels\\loading_screen", typeof(Texture2D)),
-            new Asset("font", "font", typeof(SpriteFont)),
             ////TODO Comment this out in a real game
             //new Asset(SimulateDelay),
             
@@ -230,8 +228,10 @@ namespace UHSampleGame
         /// <param name="game"></param>
         private static void FirstLoad(Game game)
         {
-            data["Background"] = LoadTextureStream(game.GraphicsDevice, "Background");
-            data["mainFont"] = game.Content.Load<SpriteFont>("mainFont");
+            //data["Background"] = LoadTextureStream(game.GraphicsDevice, "Background");
+            //data["mainFont"] = game.Content.Load<SpriteFont>("mainFont");
+            data["loading_screen"] = game.Content.Load<Texture2D>("Levels\\loading_screen");
+            data["font"] = game.Content.Load<SpriteFont>("font");
         }
 
         /// <summary>
