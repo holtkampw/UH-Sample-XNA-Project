@@ -9,11 +9,11 @@ using UHSampleGame.CoreObjects.Base;
 
 namespace UHSampleGame.Events
 {
-    public delegate void RegisterUnitWithTile(GameEventArgs args);
-    public delegate void UnitDied(UnitType type, Unit unit);
-    public delegate void BaseDestroyed(Base destroyedBase);
-    public delegate void GetNewGoalBase();
-    public delegate void TowerCreated();
+    public delegate void RegisterUnitWithTile2(GameEventArgs args);
+    public delegate void UnitDied2(UnitType type, Unit unit);
+    public delegate void BaseDestroyed2(Base destroyedBase);
+    public delegate void GetNewGoalBase2();
+    public delegate void TowerCreated2();
 
     public class GameEventArgs
     {
@@ -23,7 +23,7 @@ namespace UHSampleGame.Events
         public GameEventArgs(Unit unit)
         {
             this.unit = unit;
-            this.tilesToGoal = unit.GetPathLength();
+            this.tilesToGoal = unit.PathLength;
         }
 
         public int TilesToGoal

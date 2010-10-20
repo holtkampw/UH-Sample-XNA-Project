@@ -8,37 +8,39 @@ using UHSampleGame.Players;
 
 namespace UHSampleGame.LevelManagement
 {
-    public class LevelManager
+    public static class LevelManager
     {
-        List<Player> humanPlayers;
-        List<Player> aiPlayers;
-        List<Level> levels;
-        Level currentLevel;
+        static List<Player> humanPlayers = new List<Player>();
+        static List<Player> aiPlayers = new List<Player>();
+        static List<Level> levels;
+        public static Level CurrentLevel;
 
-        public Level CurrentLevel
+        public static void Initialize()
         {
-            get { return currentLevel; }
-        }
-
-        public LevelManager(List<Player> humanPlayers, List<Player> aiPlayers)
-        {
-            this.humanPlayers = humanPlayers;
-            this.aiPlayers = aiPlayers;
-
-            for (int i = 0; i < humanPlayers.Count; i++)
-                humanPlayers[i].SetTargetBase(aiPlayers[0].PlayerBase);
-
-            for (int i = 0; i < aiPlayers.Count; i++)
-                aiPlayers[i].SetTargetBase(humanPlayers[0].PlayerBase);
-
             levels = new List<Level>();
             InitLevel1();
         }
 
-        public void LoadLevel(int level)
+        public static void AddPlayer(Player player)
         {
-            currentLevel = levels[level - 1];
-            currentLevel.Load();
+            if(player.Type == PlayerType.Human)
+                humanPlayers.Add(player);
+            else
+                aiPlayers.Add(player);
+
+            if(aiPlayers.Count >0)
+                for (int i = 0; i < humanPlayers.Count; i++)
+                    humanPlayers[i].SetTargetBase(aiPlayers[0].PlayerBase);
+
+            if(humanPlayers.Count >0)
+                for (int i = 0; i < aiPlayers.Count; i++)
+                    aiPlayers[i].SetTargetBase(humanPlayers[0].PlayerBase);
+        }
+
+        public static void LoadLevel(int level)
+        {
+            CurrentLevel = levels[level - 1];
+            CurrentLevel.Load();
             for (int i = 0; i < humanPlayers.Count; i++)
                 humanPlayers[i].SetTargetBase(aiPlayers[0].PlayerBase);
 
@@ -46,7 +48,7 @@ namespace UHSampleGame.LevelManagement
                 aiPlayers[i].SetTargetBase(humanPlayers[0].PlayerBase);
         }
 
-        private void InitLevel1()
+        private static void InitLevel1()
         {
             List<List<int>> map = new List<List<int>>();
             map.Add(new List<int> { 1100, 0000, 0000, 0000, 0000, 0000, 5510, 0000, 0000, 0000 });

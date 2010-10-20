@@ -21,7 +21,7 @@ namespace UHSampleGame.CoreObjects.Towers
         static Enum[] towerTypes = EnumHelper.EnumToArray(new TowerType());
 
         //units[playerNum][unitType][index]
-        static List<List<List<Tower2>>> towers;
+        static List<List<List<Tower>>> towers;
 
         //unitsCount[playerNum][unitType]
         static List<List<int>> towerCount;
@@ -57,23 +57,23 @@ namespace UHSampleGame.CoreObjects.Towers
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
             NumPlayers = numPlayers;
-            towers = new List<List<List<Tower2>>>();
+            towers = new List<List<List<Tower>>>();
             towerCount = new List<List<int>>();
             towerTransforms = new Matrix[MAX_TOWERS];
 
             for (int i = 0; i < numPlayers; i++)
             {
-                towers.Add(new List<List<Tower2>>());
+                towers.Add(new List<List<Tower>>());
                 towerCount.Add(new List<int>());
 
                 for (int j = 0; j < towerTypes.Length; j++)
                 {
-                    towers[i].Add(new List<Tower2>());
+                    towers[i].Add(new List<Tower>());
                     towerCount[i].Add(0);
 
                     for (int k = 0; k < MAX_TOWERS; k++)
                     {
-                        towers[i][j].Add(new Tower2((TowerType)j));
+                        towers[i][j].Add(new Tower((TowerType)j));
                     }
                 }
             }

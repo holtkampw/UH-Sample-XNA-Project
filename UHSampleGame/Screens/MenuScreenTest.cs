@@ -123,7 +123,7 @@ namespace UHSampleGame.Screens
         
         void one_Selected(object sender, EventArgs e)
         {
-            screenManager.ShowScreen(new PlayScreen2());
+            screenManager.ShowScreen(new PlayScreen());
         }
 
         void two_Selected(object sender, EventArgs e)

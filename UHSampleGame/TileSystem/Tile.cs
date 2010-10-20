@@ -15,56 +15,24 @@ namespace UHSampleGame.TileSystem
 
     public class Tile
     {
-        Vector3 position;
-        Vector2 size;
-        TileType tileType;
+        public Vector3 Position;
+        public Vector2 Size;
+        public TileType TileType;
         Tower tower;
         List<Unit> units;
-        Dictionary<int, List<Tile>> paths;
+        public List<List<Tile>> Paths;
         Random rand;
-        int id;
+        public int ID;
 
-        public event RegisterUnitWithTile UnitEnter;
+        public static Tile NullTile = new Tile();
 
-        public TileType TileType
-        {
-            get { return tileType; }
-        }
+        public event RegisterUnitWithTile2 UnitEnter;
 
         /// <summary>
-        /// The 3D coordinate of the CENTER of the tile
+        /// Represents a Tile2 of a Tile2 map
         /// </summary>
-        public Vector3 Position
-        {
-            get { return position; }
-        }
-
-        /// <summary>
-        /// The width and length of the tile
-        /// </summary>
-        public Vector2 Size
-        {
-            get { return size; }
-        }
-
-        public Dictionary<int, List<Tile>> Paths
-        {
-            get { return paths; }
-        }
-
-        /// <summary>
-        /// The unique id of the tile
-        /// </summary>
-        public int ID
-        {
-            get { return id; }
-        }
-
-        /// <summary>
-        /// Represents a tile of a tile map
-        /// </summary>
-        /// <param name="position">The center position of the tile</param>
-        /// <param name="size">The width and length of the tile</param>
+        /// <param name="position">The center position of the Tile2</param>
+        /// <param name="size">The width and length of the Tile2</param>
         public Tile(int id, Vector3 position, Vector2 size)
             : this(id, position, size, TileType.Walkable) { }
 
@@ -74,41 +42,45 @@ namespace UHSampleGame.TileSystem
         public Tile(int id, Vector3 position, Vector2 size, TileType tileType)
         {
             //this.rand = new Random(DateTime.Now.Millisecond);
-            this.id = id;
-            this.position = position;
-            this.size = size;
-            this.tileType = tileType;
-            this.paths = new Dictionary<int, List<Tile>>();
+            this.ID = id;
+            this.Position = position;
+            this.Size = size;
+            this.TileType = tileType;
+            this.Paths = new List<List<Tile>>();
             this.units = new List<Unit>();
 
             SetTileType(tileType);
+
+            
+
+            rand = new Random(DateTime.Now.Millisecond);
 
         }
 
         public bool IsWalkable()
         {
-            return tileType == TileType.Walkable;
+            return TileType == TileType.Walkable;
         }
 
 
         public bool IsNull()
         {
-            return tileType == TileType.Null;
+            return TileType == TileType.Null;
         }
 
         public TileType GetTileType()
         {
-            return tileType;
+            return TileType;
         }
 
         public void SetTileType(TileType tileType)
         {
-            this.tileType = tileType;
+            this.TileType = tileType;
         }
 
         public override string ToString()
         {
-            return this.ID.ToString() + " " + tileType.ToString();
+            return this.ID.ToString() + " " + TileType.ToString();
         }
 
         public void SetBlockableObject(Tower gameObject)
@@ -126,46 +98,50 @@ namespace UHSampleGame.TileSystem
         public List<Tile> GetPathTo(Tile baseTile)
         {
             UpdatePathTo(baseTile);
-            return paths[baseTile.ID];
+            return Paths[baseTile.ID];
         }
 
         public void UpdatePathTo(Tile baseTile)
         {
             AStar aStar = new AStar(this, baseTile);
-            paths[baseTile.ID] = new List<Tile>(aStar.FindPath());
+
+            for (int i = Paths.Count; i < TileMap.Tiles.Count; i++)
+                Paths.Add(new List<Tile>());
+
+            Paths[baseTile.ID] = new List<Tile>(aStar.FindPath());
         }
 
         public Vector3 GetRandPoint()
         {
-            rand = new Random(DateTime.Now.Millisecond);
-            int sizeX = (int)(size.X/3);
-            int sizeY = (int)(size.Y / 3);
-            return new Vector3(position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, position.Z + rand.Next(-sizeY, sizeY));
+            //rand = new Random(DateTime.Now.Millisecond);
+            int sizeX = (int)(Size.X / 3);
+            int sizeY = (int)(Size.Y / 3);
+            return new Vector3(Position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, Position.Z + rand.Next(-sizeY, sizeY));
         }
 
-        public void RegisterTowerListener(Tower tower)
+        public void RegisterTowerListener(ref Tower tower)
         {
             UnitEnter += tower.RegisterAttackUnit;
         }
 
-        public void UnregisterTowerListener(Tower tower)
+        public void UnregisterTowerListener(ref Tower tower)
         {
             UnitEnter -= tower.RegisterAttackUnit;
         }
 
-        public void AddUnit(UnitType type, Unit unit)
+        public void AddUnit(UnitType type, ref Unit unit)
         {
             units.Add(unit);
-            unit.Died += RemoveUnit;
-            OnUnitEnter(new GameEventArgs(unit));
+            //unit.Died += RemoveUnit;
+            //OnUnitEnter(new GameEventArgs(unit));
         }
 
-        public void RemoveUnit(UnitType type, Unit unit)
+        public void RemoveUnit(UnitType type, ref Unit unit)
         {
             units.Remove(unit);
             //Set new unit to attack
-            if(units.Count >0)
-                OnUnitEnter(new GameEventArgs(units[0]));
+           // if (units.Count > 0)
+              //  OnUnitEnter(new GameEventArgs(units[0]));
         }
 
         private void OnUnitEnter(GameEventArgs args)
@@ -178,7 +154,7 @@ namespace UHSampleGame.TileSystem
 
         //public override bool Equals(object obj)
         //{
-        //    return id == ((Tile)obj).id;
+        //    return id == ((Tile2)obj).id;
         //}
     }
 }

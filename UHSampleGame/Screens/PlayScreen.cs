@@ -15,12 +15,15 @@ using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.Players;
 using UHSampleGame.LevelManagement;
+using UHSampleGame.Debug;
+using UHSampleGame;
 
 using Microsoft.Xna.Framework.Media;
 #endregion
 
 namespace UHSampleGame.Screens
 {
+
     public class PlayScreen : Screen
     {
         #region Class Variables
@@ -30,72 +33,67 @@ namespace UHSampleGame.Screens
         Video video;
         VideoPlayer videoPlayer;
         Vector2 dimensions;
-        
-        Tile currentTile;
 
-        TestBase goalBase;
+        Player p1;
+        Player aI;
 
-        List<Player> humanPlayers;
-        List<Player> aiPlayers;
-        LevelManager levelManager;
-
-        int frames;
-        int frameRate;
         SpriteFont font;
-        private TimeSpan elapsedTime;
+
+        Vector2 numTiles;
+        bool contentLoaded = false;
 
         #endregion
 
         #region Initialization
         public PlayScreen()
-            : base("PlayScreen")
+            : base("PlayScreen2")
         {
-           Vector2 numTiles = new Vector2(20, 10);
+            AssetHelper.LoadOne(ScreenManager.Game);
+        }
 
-           TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
-
-           Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
-           dimensions = new Vector2(viewport.Width, viewport.Height);
-
-           video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
-           videoPlayer = new VideoPlayer();
-           videoPlayer.IsLooped = true;
-           if (videoPlayer.State != MediaState.Playing)
-               videoPlayer.Play(video);
-
-            //goalBase = new TestBase(2,2,TileMap.Tiles[TileMap.Tiles.Count - 1]);
-
-            humanPlayers =  new List<Player>();
-            aiPlayers = new List<Player>();
-
-            humanPlayers.Add(new Player(1, 1, TileMap.Tiles[0], PlayerType.Human));
-            aiPlayers.Add(new Player(5, 5, TileMap.Tiles[0], PlayerType.AI));
-
-            levelManager = new LevelManager(humanPlayers, aiPlayers);
-            levelManager.LoadLevel(1);
-           // player.SetTargetBase(goalBase);
-           // goalBase.SetGoalBase(player.Base);
-
-            //TileMap.SetBase(goalBase);
-
-            //TileMap.UpdateTilePaths();
-
-            background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
-
+        public override void LoadContent()
+        {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
-            currentTile = TileMap.GetTileFromPos(Vector3.Zero);
+            numTiles = new Vector2(20, 10);
 
-            if (levelManager.CurrentLevel.NumTiles.X == 10 && levelManager.CurrentLevel.NumTiles.Y == 10)
+            if (numTiles.X == 10 && numTiles.Y == 10)
             {
                 cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
             }
-            else if (levelManager.CurrentLevel.NumTiles.X == 20 && levelManager.CurrentLevel.NumTiles.Y == 10)
+            else if (numTiles.X == 20 && numTiles.Y == 10)
             {
                 cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
+
+            //UnitCollection.Initialize(2);
+            //TowerCollection.Initialize(2);
+            //Vector2 numTiles = new Vector2(20, 10);
+
+            //TileMap2.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
+            //p1 = new Player2(0, 1, TileMap2.Tiles[0], PlayerType.Human);
+            //aI = new Player2(1, 2, TileMap2.Tiles[TileMap2.Tiles.Count - 1], PlayerType.AI);
+
+            //LevelManager2.Initialize();
+            //LevelManager2.AddPlayer(p1);
+            //LevelManager2.AddPlayer(aI);
+            //LevelManager2.LoadLevel(1);
+
+            //Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
+            //dimensions = new Vector2(viewport.Width, viewport.Height);
+
+            //video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
+            //videoPlayer = new VideoPlayer();
+            //videoPlayer.IsLooped = true;
+
+            //if (videoPlayer.State != MediaState.Playing)
+            //    videoPlayer.Play(video);
+
+            //background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
+
+            //cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
             //if (numTiles.X == 10 && numTiles.Y == 10)
             //{
@@ -108,91 +106,103 @@ namespace UHSampleGame.Screens
             //    cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             //}
 
-            font = ScreenManager.Game.Content.Load<SpriteFont>("font");
-            frames = 0;
-            frameRate = 0;
-        }
-
-        public override void LoadContent()
-        {
-            
+            //font = ScreenManager.Game.Content.Load<SpriteFont>("font");
         }
         #endregion
 
         #region Update/Draw
         public override void Update(GameTime gameTime)
         {
-            if (!IsVisible)
+            //Call into the Asset helper to load your assets
+            AssetHelper.LoadOne(ScreenManager.Game);
+
+            if (AssetHelper.Loaded)
             {
-                videoPlayer.Stop();
-                return;
+                videoPlayer = AssetHelper.Get<VideoPlayer>("videoPlayer");
+                video = AssetHelper.Get<Video>("video");
+                p1 = AssetHelper.Get<Player>("p1");
+                aI = AssetHelper.Get<Player>("aI");
+                dimensions = AssetHelper.Get<Vector2>("dimensions");
+                contentLoaded = true;
+
             }
-
-            if (videoPlayer.State != MediaState.Playing)
-                videoPlayer.Play(video);
-
-            cameraManager.Update();
-
-            //goalBase.Update(gameTime);
-            for (int i = 0; i < humanPlayers.Count; i++)
-                humanPlayers[i].Update(gameTime);
-
-            for (int i = 0; i < aiPlayers.Count; i++)
-                aiPlayers[i].Update(gameTime);
-
-
-            elapsedTime += gameTime.ElapsedGameTime;
-
-            if (elapsedTime > TimeSpan.FromSeconds(1))
+            // Show a simple example fade effect
+            if (AssetHelper.Loaded)
             {
-                elapsedTime -= TimeSpan.FromSeconds(1);
-                frameRate = frames;
-                frames = 0;
+                if (!IsVisible)
+                {
+                    videoPlayer.Stop();
+                    return;
+                }
+
+                if (videoPlayer.State != MediaState.Playing)
+                    videoPlayer.Play(video);
+
+                cameraManager.Update();
+
+                p1.Update(gameTime);
+                aI.Update(gameTime);
+                UnitCollection.Update(gameTime);
+                TowerCollection.Update(gameTime);
+                DebugInfo.Update(gameTime);
             }
+            
         }
 
         public override void HandleInput(InputManager input)
         {
-            for (int i = 0; i < humanPlayers.Count; i++)
-                humanPlayers[i].HandleInput(input);
+            if (AssetHelper.Loaded && contentLoaded)
+            {
+                p1.HandleInput(input);
+                aI.HandleInput(input);
+            }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             
-            if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+            if (!AssetHelper.Loaded && !contentLoaded)
             {
-                //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
-                ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
-                    (int)dimensions.X, (int)dimensions.Y), Color.White);
+                //Currently loading, display progress
+                ScreenManager.SpriteBatch.Begin();
+                //ScreenManager.SpriteBatch.Draw(loading_scree, Vector2.Zero, Color.White);
+                ScreenManager.SpriteBatch.Draw(AssetHelper.Get<Texture2D>("loading_screen"), Vector2.Zero, Color.White);
+
+                ScreenManager.SpriteBatch.DrawString(AssetHelper.Get<SpriteFont>("font"),
+                    "Loading Progress: " + AssetHelper.PercentLoaded + "%", new Vector2(50, 50), Color.DarkRed);
+                ScreenManager.SpriteBatch.End();
             }
+            else
+            {
+                ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
-            ScreenManager.SpriteBatch.End();
+                if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+                {
+                    //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
+                    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
+                        (int)dimensions.X, (int)dimensions.Y), Color.White);
+                }
 
-            ResetRenderStates();
+                ScreenManager.SpriteBatch.End();
 
-            for (int i = 0; i < humanPlayers.Count; i++)
-                humanPlayers[i].Draw(gameTime);
+                ResetRenderStates();
+                p1.Draw(gameTime);
+                aI.Draw(gameTime);
+                UnitCollection.Draw(gameTime);
+                TowerCollection.Draw(gameTime);
 
-            for (int i = 0; i < aiPlayers.Count; i++)
-                aiPlayers[i].Draw(gameTime);
-            //goalBase.Draw(gameTime);
 
-            ScreenManager.SpriteBatch.Begin();
-            string text = "FPS: " + frameRate + "\nTowers: " + humanPlayers[0].TowerCount + "\nUnits: " + humanPlayers[0].UnitCount;
-            ScreenManager.SpriteBatch.DrawString(font, text, new Vector2(11.0f, 11.0f), Color.Black);
-            ScreenManager.SpriteBatch.DrawString(font, text, new Vector2(10.0f, 10.0f), Color.White);
-            ScreenManager.SpriteBatch.End();
-
-            frames++;
+                ScreenManager.SpriteBatch.Begin();
+                DebugInfo.Draw();
+                ScreenManager.SpriteBatch.End();
+            }
         }
         #endregion
 
         #region Unload
         public override void UnloadContent()
         {
-           
+
         }
         #endregion
     }

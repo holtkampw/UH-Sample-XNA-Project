@@ -3,7 +3,7 @@
   <Asset Type="Graphics:NodeContent">
     <Name>RootNode</Name>
     <Identity>
-      <SourceFilename>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
+      <SourceFilename>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
       <SourceTool>FbxImporter</SourceTool>
     </Identity>
     <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
@@ -18429,7 +18429,7 @@
     <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
       <Name>character_anim:headM</Name>
       <Identity>
-        <SourceFilename>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
+        <SourceFilename>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
@@ -18463,7 +18463,7 @@
     <Resource ID="#Resource2" Type="Graphics:BasicMaterialContent">
       <Name>character_anim:jacketM</Name>
       <Identity>
-        <SourceFilename>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
+        <SourceFilename>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
@@ -18497,7 +18497,7 @@
     <Resource ID="#Resource3" Type="Graphics:BasicMaterialContent">
       <Name>character_anim:pantsM</Name>
       <Identity>
-        <SourceFilename>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
+        <SourceFilename>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
@@ -18531,7 +18531,7 @@
     <Resource ID="#Resource4" Type="Graphics:BasicMaterialContent">
       <Name>character_anim:upBodyM</Name>
       <Identity>
-        <SourceFilename>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
+        <SourceFilename>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
@@ -18565,7 +18565,7 @@
     <Resource ID="#Resource5" Type="Graphics:BasicMaterialContent">
       <Name>character_anim:eyeBallM</Name>
       <Identity>
-        <SourceFilename>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
+        <SourceFilename>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\Content\AnimatedModel\dude.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
