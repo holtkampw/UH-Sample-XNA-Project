@@ -39,6 +39,7 @@ namespace UHSampleGame
             new Asset("numTiles", typeof(Vector2), 20f, 10f),
             new Asset(TileMapLoad),       
             new Asset(PlayerLoad),
+            new Asset(BaseCollectionLoad),
             new Asset(LevelLoad),
             new Asset("videoPlayer", typeof(VideoPlayer), ""),
             new Asset("video", "Video\\oceanView", typeof(Video)),
@@ -128,10 +129,6 @@ namespace UHSampleGame
             else if (nextAsset.Type == typeof(Delegate))
             {
                 nextAsset.Call(game);
-            }
-            else if (nextAsset.Type == typeof(Player2))
-            {
-                data[nextAsset.Key] = new Player2((int)nextAsset.Params[0], (int)nextAsset.Params[1], (Tile2)nextAsset.Params[2], (PlayerType)nextAsset.Params[3]);
             }
             else if (nextAsset.Type == typeof(Vector2))
             {
@@ -267,33 +264,38 @@ namespace UHSampleGame
         #region PlayScree2 Items
         private static void UnitCollectionLoad(Game game)
         {
-            UnitCollection.Initialize(2);
+            UnitCollection.Initialize(8);
         }
 
         private static void TowerCollectionLoad(Game game)
         {
-            TowerCollection.Initialize(2);
+            TowerCollection.Initialize(8);
+        }
+
+        private static void BaseCollectionLoad(Game game)
+        {
+            BaseCollection.Initialize();
         }
 
         private static void TileMapLoad(Game game)
         {
             Vector2 numTiles = AssetHelper.Get<Vector2>("numTiles");
-            TileMap2.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
+            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
         }
 
         private static void PlayerLoad(Game game)
         {
-            data["p1"] = new Player2(0, 1, TileMap2.Tiles[0], PlayerType.Human);
-            data["aI"] = new Player2(1, 2, TileMap2.Tiles[TileMap2.Tiles.Count - 1], PlayerType.AI);
+            data["p1"] = new Player(1, 1, 5, TileMap.Tiles[0], PlayerType.Human);
+            data["aI"] = new Player(5, 2, 1, TileMap.Tiles[TileMap.Tiles.Count - 1], PlayerType.AI);
            // 
         }
 
         private static void LevelLoad(Game game)
         {
-            LevelManager2.Initialize();
-            LevelManager2.AddPlayer(AssetHelper.Get<Player2>("p1"));
-            LevelManager2.AddPlayer(AssetHelper.Get<Player2>("aI"));
-            LevelManager2.LoadLevel(1);
+            LevelManager.Initialize();
+            LevelManager.AddPlayer(AssetHelper.Get<Player>("p1"));
+            LevelManager.AddPlayer(AssetHelper.Get<Player>("aI"));
+            LevelManager.LoadLevel(1);
         }
 
         private static void VideoLoad(Game game)

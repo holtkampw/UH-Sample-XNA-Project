@@ -137,7 +137,7 @@
       <Time>2010-09-03T03:31:11.8592179-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\box_0.xml</Key>
-        <Value>2010-10-19T15:17:13.0806856-05:00</Value>
+        <Value>2010-10-20T14:25:01.7993371-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
     </Item>
@@ -151,7 +151,7 @@
       <Time>2010-09-03T03:31:12.0262274-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Model\pyramids_0.xml</Key>
-        <Value>2010-10-19T15:17:15.9488497-05:00</Value>
+        <Value>2010-10-20T14:25:04.5594949-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Model\plane_0.xnb</Request>
     </Item>
@@ -165,7 +165,7 @@
       <Time>2010-09-18T02:46:21.2835473-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\AnimatedModel\dude_0.xml</Key>
-        <Value>2010-10-19T15:17:23.315271-05:00</Value>
+        <Value>2010-10-20T14:25:11.7449059-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\head_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\AnimatedModel\jacket_0.xnb</Request>
@@ -182,7 +182,7 @@
       <Time>2010-10-14T16:24:10.0646803-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\enemyShip01_0.xml</Key>
-        <Value>2010-10-19T15:17:27.5435128-05:00</Value>
+        <Value>2010-10-20T14:25:15.3551124-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip01AColor_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
@@ -197,7 +197,7 @@
       <Time>2010-09-29T15:22:16.4028499-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\enemyShip02_0.xml</Key>
-        <Value>2010-10-19T15:17:28.630575-05:00</Value>
+        <Value>2010-10-20T14:25:16.240163-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\enemyShip02Color_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
@@ -212,7 +212,7 @@
       <Time>2010-09-29T15:20:18.3830995-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Base\oilRig_0.xml</Key>
-        <Value>2010-10-19T15:17:30.623689-05:00</Value>
+        <Value>2010-10-20T14:25:18.0482664-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Base\oilRigColor_0.xnb</Request>
     </Item>
@@ -226,7 +226,7 @@
       <Time>2010-10-06T14:29:14.9432924-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerA_red_0.xml</Key>
-        <Value>2010-10-19T15:17:31.69075-05:00</Value>
+        <Value>2010-10-20T14:25:19.0353229-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerAColor_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
@@ -241,7 +241,7 @@
       <Time>2010-09-29T15:25:57.6195028-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerB_red_0.xml</Key>
-        <Value>2010-10-19T15:17:32.8548166-05:00</Value>
+        <Value>2010-10-20T14:25:20.0923834-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Request>
     </Item>
@@ -255,7 +255,7 @@
       <Time>2010-09-29T15:26:17.3916337-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Towers\towerC_red_0.xml</Key>
-        <Value>2010-10-19T15:17:33.979881-05:00</Value>
+        <Value>2010-10-20T14:25:21.2504496-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Request>
     </Item>
@@ -269,7 +269,7 @@
       <Time>2010-09-29T18:49:05.3939103-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Units\boat_0.xml</Key>
-        <Value>2010-10-19T15:17:35.098945-05:00</Value>
+        <Value>2010-10-20T14:25:22.1525012-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\boatTexture_0.xnb</Request>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
@@ -284,7 +284,7 @@
       <Time>2010-10-06T15:09:03.5149109-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Objects\Base\enemyBaseShip01_0.xml</Key>
-        <Value>2010-10-19T15:17:37.8401018-05:00</Value>
+        <Value>2010-10-20T14:25:25.0826688-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\Objects\Base\enemyShipPlatformColor_0.xnb</Request>
     </Item>
@@ -298,7 +298,7 @@
       <Time>2010-10-14T17:57:40.6995903-05:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\MainMenu\oilBarrel_MainMenu_0.xml</Key>
-        <Value>2010-10-19T15:17:38.8001567-05:00</Value>
+        <Value>2010-10-20T14:25:26.1117276-05:00</Value>
       </Dependency>
       <Request>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\UHSampleGame\bin\x86\Debug\Content\MainMenu\menu_tex_0.xnb</Request>
     </Item>
@@ -706,7 +706,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Users\Philip\Desktop\UH-Sample-XNA-Project\InstancedModelPipeline\bin\x86\Debug\InstancedModelPipeline.dll</Key>
-        <Value>2010-10-14T16:24:10.05968-05:00</Value>
+        <Value>2010-09-30T02:40:24.344607-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>

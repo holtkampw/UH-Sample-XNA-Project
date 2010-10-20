@@ -12,7 +12,7 @@ namespace UHSampleGame.PathFinding
         class Node
         {
             public Tile parentTile;
-            public Tile tile;
+            public Tile Tile2;
             public float overallCost;
             public float currentCost;
             public float goalCost;
@@ -20,13 +20,13 @@ namespace UHSampleGame.PathFinding
             public Node()
                 : this(new Tile()) { }
 
-            public Node(Tile tile)
-                : this(null, tile, 0f, 0f, 0f) { }
+            public Node(Tile Tile2)
+                : this(null, Tile2, 0f, 0f, 0f) { }
 
-            public Node(Tile parentTile, Tile tile, float overallCost, float initialCost, float goalCost)
+            public Node(Tile parentTile, Tile Tile2, float overallCost, float initialCost, float goalCost)
             {
                 this.parentTile = parentTile;
-                this.tile = tile;
+                this.Tile2 = Tile2;
                 this.overallCost = overallCost;
                 this.currentCost = initialCost;
                 this.goalCost = goalCost;
@@ -65,7 +65,7 @@ namespace UHSampleGame.PathFinding
 
             //Add current node to open nodes
             openNodes.Add(startNode);
-            openDict.Add(startNode.tile.ID, startNode.tile);
+            openDict.Add(startNode.Tile2.ID, startNode.Tile2);
 
             do
             {
@@ -73,9 +73,9 @@ namespace UHSampleGame.PathFinding
                 currentNode = GetLowestCostNodeFromOpenNodes();
 
                 closedNodes.Add(currentNode);
-                closedDict.Add(currentNode.tile.ID, currentNode.tile);
+                closedDict.Add(currentNode.Tile2.ID, currentNode.Tile2);
                 openNodes.Remove(currentNode);
-                openDict.Remove(currentNode.tile.ID);
+                openDict.Remove(currentNode.Tile2.ID);
 
                 //Find walkable neighbor tiles not on the closed list
 
@@ -84,17 +84,17 @@ namespace UHSampleGame.PathFinding
                 //Handle if neighbor node is on the open list already
                 //and add to open list
                 AddNeighborNodesToOpenList(currentNode, neighborTiles);
-            } while (openNodes.Count > 0 && currentNode.tile != goalTile);
+            } while (openNodes.Count > 0 && currentNode.Tile2 != goalTile);
 
-            if (openNodes.Count == 0 && currentNode.tile != goalTile)
+            if (openNodes.Count == 0 && currentNode.Tile2 != goalTile)
                 return new List<Tile>();
 
-            path.Add(currentNode.tile);
+            path.Add(currentNode.Tile2);
             do
             {
                 for (int i = 0; i < closedNodes.Count; i++)
                 {
-                    if (closedNodes[i].tile == currentNode.parentTile)
+                    if (closedNodes[i].Tile2 == currentNode.parentTile)
                     {
                         currentNode = closedNodes[i];
                         break;
@@ -102,9 +102,9 @@ namespace UHSampleGame.PathFinding
                 }
                 //currentNode = closedNodes.Find(new Predicate<Node>(delegate(Node node)
                 //{
-                //    return node.tile == currentNode.parentTile;
-               // }));
-                path.Add(currentNode.tile);
+                //    return node.Tile2 == currentNode.parentTile;
+                // }));
+                path.Add(currentNode.Tile2);
 
             } while (currentNode.parentTile != null);
 
@@ -116,7 +116,7 @@ namespace UHSampleGame.PathFinding
 
         private List<Tile> GetWalkableNeighborsNotOnClosedList(Node currentNode)
         {
-            return TileMap.GetWalkableNeighbors(currentNode.tile, closedDict);
+            return TileMap.GetWalkableNeighbors(currentNode.Tile2, closedDict);
         }
 
         private void AddNeighborNodesToOpenList(Node currentNode, List<Tile> neighborTiles)
@@ -134,7 +134,7 @@ namespace UHSampleGame.PathFinding
                     openHasNeighbor = true;
                     for (int j = 0; j < openCount; j++)
                     {
-                        if (openNodes[j].tile == neighborTiles[i])
+                        if (openNodes[j].Tile2 == neighborTiles[i])
                         {
                             //openHasNeighbor = true;
                             openNodeSimilarIndex = j;
@@ -150,7 +150,7 @@ namespace UHSampleGame.PathFinding
                 {
                     if (neighborNode.currentCost < openNodes[openNodeSimilarIndex].currentCost)
                     {
-                        openNodes[openNodeSimilarIndex] = TransformToNode(openNodes[openNodeSimilarIndex].tile, currentNode);
+                        openNodes[openNodeSimilarIndex] = TransformToNode(openNodes[openNodeSimilarIndex].Tile2, currentNode);
                     }
                 }
                 else
@@ -173,25 +173,25 @@ namespace UHSampleGame.PathFinding
             return lowestCostNode;
         }
 
-        private Node TransformToNode(Tile tile, Node parentNode)
+        private Node TransformToNode(Tile Tile2, Node parentNode)
         {
             Node node = new Node();
-            if (tile == null)
+            if (Tile2 == null)
             {
-                tile = new Tile();
+                Tile2 = new Tile();
             }
-            node.tile = tile;
-            node.parentTile = parentNode.tile;
-            node.currentCost = GetDistanceBetweenTiles(ref tile, ref parentNode.tile) + parentNode.currentCost;
-            node.goalCost = GetDistanceToGoal(ref tile);
+            node.Tile2 = Tile2;
+            node.parentTile = parentNode.Tile2;
+            node.currentCost = GetDistanceBetweenTiles(ref Tile2, ref parentNode.Tile2) + parentNode.currentCost;
+            node.goalCost = GetDistanceToGoal(ref Tile2);
             node.overallCost = node.currentCost + node.goalCost;
 
             return node;
         }
 
-        private float GetDistanceToGoal(ref Tile tile)
+        private float GetDistanceToGoal(ref Tile Tile2)
         {
-            return GetDistanceBetweenTiles(ref tile, ref goalTile);
+            return GetDistanceBetweenTiles(ref Tile2, ref goalTile);
         }
 
         private float GetDistanceBetweenTiles(ref Tile tile1, ref Tile tile2)

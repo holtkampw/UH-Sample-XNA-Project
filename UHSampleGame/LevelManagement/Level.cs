@@ -104,19 +104,20 @@ namespace UHSampleGame.LevelManagement
 
                 if (towerNum == 0)
                 {
-                    Base gameObject = new TestBase(playerNum, teamNum, tile);
-                    currentPlayer.SetBase((TestBase)gameObject);
+                    Base gameObject = new Base(playerNum, teamNum, BaseType.type1,  tile);
+                    BaseCollection.Add(ref gameObject);
+                    currentPlayer.SetBase(gameObject);
                     TileMap.SetObject(gameObject, tile);
                 }
                 else
                 {
                     //Handle Multiple towers here
-                    Tower gameObject = new Tower(TowerType.TowerA, playerNum, teamNum, tile);
-                    currentPlayer.SetTowerForLevelMap((Tower)gameObject);
+                    Tower gameObject = new Tower(TowerType.TowerA);
+                    currentPlayer.SetTowerForLevelMap((Tower)gameObject, tile);
                     TileMap.SetObject(gameObject, tile);
                 }
 
-               
+
             }
         }
 

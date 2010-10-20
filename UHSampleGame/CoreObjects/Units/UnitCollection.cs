@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.TileSystem;
+using UHSampleGame.CoreObjects.Base;
 
 namespace UHSampleGame.CoreObjects.Units
 {
@@ -22,7 +23,7 @@ namespace UHSampleGame.CoreObjects.Units
         static Enum[] unitTypes = EnumHelper.EnumToArray(new UnitType());
 
         //units[playerNum][unitType][index]
-        static List<List<List<Unit2>>> units;
+        static List<List<List<Unit>>> units;
 
         //unitsCount[playerNum][unitType]
         static List<List<int>> unitsCount;
@@ -59,26 +60,26 @@ namespace UHSampleGame.CoreObjects.Units
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
             NumPlayers = numPlayers;
-            units = new List<List<List<Unit2>>>();
+            units = new List<List<List<Unit>>>();
             unitsCount = new List<List<int>>();
             unitsMaxIndex = new List<List<int>>();
             unitTransforms = new Matrix[MAX_UNITS];
 
             for (int i = 0; i < numPlayers; i++)
             {
-                units.Add(new List<List<Unit2>>());
+                units.Add(new List<List<Unit>>());
                 unitsCount.Add(new List<int>());
                 unitsMaxIndex.Add(new List<int>());
 
                 for (int j = 0; j < unitTypes.Length; j++)
                 {
-                    units[i].Add(new List<Unit2>());
+                    units[i].Add(new List<Unit>());
                     unitsCount[i].Add(0);
                     unitsMaxIndex[i].Add(0);
 
                     for (int k = 0; k < MAX_UNITS; k++)
                     {
-                        units[i][j].Add(new Unit2((UnitType)j));
+                        units[i][j].Add(new Unit((UnitType)j));
                     }
                 }
             }
@@ -111,14 +112,16 @@ namespace UHSampleGame.CoreObjects.Units
             return sum;
         }
 
-        public static void Add(int playerNum, UnitType unitType)
+        public static void Add(int playerNum, int attackPlayerNum, UnitType unitType)
         {
             //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
             for (int i = 0; i <= unitsMaxIndex[playerNum][(int)unitType]; i++)
             {
                 if (!units[playerNum][(int)unitType][i].IsActive())
                 {
-                    units[playerNum][(int)unitType][i].Deploy(TileMap2.Tiles[0], TileMap2.Tiles[TileMap2.Tiles.Count-2]);
+                    units[playerNum][(int)unitType][i].Deploy(BaseCollection.GetBaseTileForPlayer(playerNum),
+                        BaseCollection.GetBaseTileForPlayer(attackPlayerNum));
+
                     unitsCount[playerNum][(int)unitType]++;
 
                     if(i == unitsMaxIndex[playerNum][(int)unitType])
@@ -164,7 +167,7 @@ namespace UHSampleGame.CoreObjects.Units
         private static void DrawUnits(int i, int j)
         {
             drawCount = 0;
-            for (int k = 0; k < unitsMaxIndex[i][j] && drawCount < unitsCount[i][j]; k++)
+            for (int k = 0;/* k < unitsMaxIndex[i][j] &&*/ drawCount < unitsCount[i][j]; k++)
             {
                 if (units[i][j][k].IsActive())
                 {

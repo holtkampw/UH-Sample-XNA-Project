@@ -11,6 +11,7 @@ Content\Images\deepSea.xnb
 Content\MainMenu\left_arrow.xnb
 Content\MainMenu\right_arrow.xnb
 Content\MainMenu\a_button.xnb
+Content\Levels\loading_screen.xnb
 Content\Model\box.xnb
 Content\Model\pyramids.xnb
 Content\AnimatedModel\dude.xnb
@@ -40,7 +41,6 @@ Content\Objects\Towers\towerAColor_0.xnb
 Content\Objects\Towers\towerBColor_0.xnb
 Content\Objects\Towers\towerCColor_0.xnb
 Content\Objects\Units\boatTexture_0.xnb
-Content\Levels\loading_screen.xnb
 Content\Objects\Base\enemyShipPlatformColor_0.xnb
 Content\MainMenu\menu_tex_0.xnb
 Content\Video\intro.wmv

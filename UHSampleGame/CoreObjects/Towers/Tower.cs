@@ -10,222 +10,133 @@ using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.ScreenManagement;
 
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+
+using UHSampleGame.TileSystem;
+
+
 namespace UHSampleGame.CoreObjects.Towers
 {
-    //public enum TowerType { TowerA }
+    public enum TowerType { TowerA }
+    public enum TowerStatus { Inactive, Active }
 
     public class Tower
     {
 
-        #region Class Variables    
-        //Type Information
-        public static Dictionary<int, Model> Models = new Dictionary<int, Model>()
-        {
-            {(int)TowerType.TowerA, ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red")}
-        };
+        #region Class Variables
         public static Enum[] towerEnumType = EnumHelper.EnumToArray(new TowerType());
 
-        TimeSpan attackTime;
-        TimeSpan elapsedTime;
-        Unit unitToAttack;
-        public Tile Tile;
-        int attackPower;
-
-        public TowerType Type;
-
-        //TeamStaticObject
-        protected int PlayerNum;
-        protected int TeamNum;
-
-        //StaticModel
-        public float Scale;
-
-        CameraManager cameraManager;
-
-        //Model Stuff
-        Matrix view;
         public Matrix Transforms;
-        Matrix[] boneTransforms;
+        public float Scale;
+        public Vector3 Position;
+        Matrix scaleMatrix;
         Matrix rotationMatrixX;
         Matrix rotationMatrixY;
         Matrix rotationMatrixZ;
+        Matrix scaleRot;
 
-        //GameObject
-        public Vector3 Position;
+        public TowerType Type;
+        public TowerStatus Status;
+        public int TeamNum;
+        public int PlayerNum;
+        public Unit unitToAttack;
         #endregion
 
-        public Tower(TowerType newType, int playerNum, int teamNum, Tile tile)
+        #region Initialization
+        public Tower(TowerType type)
         {
-            this.Type = newType;
-            attackTime = new TimeSpan(0, 0, 0,0,500);
-            elapsedTime = new TimeSpan(0,0,1);
+            this.rotationMatrixX = Matrix.Identity;
+            this.rotationMatrixY = Matrix.Identity;
+            this.rotationMatrixZ = Matrix.Identity;
+            this.scaleRot = Matrix.Identity;
+            this.scaleMatrix = Matrix.Identity;
+            this.Type = type;
+            this.Status = TowerStatus.Inactive;
             unitToAttack = null;
-            attackPower = 10;
-            this.Tile = tile;
-            this.Position = tile.Position;
+        }
 
-            //TeamStaticObject
-            this.PlayerNum = playerNum;
-            this.TeamNum = teamNum;
-
-            foreach (TowerType type in towerEnumType)
+        public void Setup(Vector3 position)
+        {
+            this.Position = TileMap.GetTilePosFromPos(position);
+            switch(Type)
             {
-                switch (type)
-                {
-                    case TowerType.TowerA:
-                        this.Scale = 4.0f;
-                        break;
-                }
+                case TowerType.TowerA:
+                    this.Scale = 4.0f;
+                    break;
             }
-            SetupModel(Position);
-            SetupCamera();
+            UpdateScaleRotations();
+            UpdateTransforms();
+            this.Status = TowerStatus.Active;
+        }
+
+        public void Activate()
+        {
+            Status = TowerStatus.Active;
+        }
+
+        public bool IsActive()
+        {
+            return Status != TowerStatus.Inactive;
         }
 
         public void RegisterAttackUnit(GameEventArgs args)
         {
             if (args.Unit.TeamNum != TeamNum)
             {
-                if (unitToAttack == null || args.Unit.GetPathLength() < unitToAttack.GetPathLength())
+                if (unitToAttack == null || args.Unit.PathLength < unitToAttack.PathLength)
                 {
                     unitToAttack = args.Unit;
-                    unitToAttack.Died += GetNewAttackUnit;
+                    //unitToAttack.Died += GetNewAttackUnit;
                 }
             }
-            
-        }
 
-        private void GetNewAttackUnit(UnitType type, Unit unit)
-        {
-            unitToAttack = null;
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            if (unitToAttack != null)
-            {
-                elapsedTime = elapsedTime.Add(gameTime.ElapsedGameTime);
-                if (elapsedTime >= attackTime)
-                {
-                    AttackUnit();
-                    elapsedTime = TimeSpan.Zero;
-                }
-            }
-            else
-            {
-                elapsedTime = attackTime;
-            }
-            UpdateView();
-            UpdateTransforms();
-        }
-
-        public void Draw(GameTime gameTime)
-        {
-            // Draw the model. A model can have multiple meshes, so loop.
-            foreach (ModelMesh mesh in Models[(int)Type].Meshes)
-            {
-                // This is where the mesh orientation is set, as well 
-                // as our camera and projection.
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.EnableDefaultLighting();
-                    effect.World = boneTransforms[mesh.ParentBone.Index] * Transforms;
-                    effect.View = cameraManager.ViewMatrix;
-                    effect.Projection = cameraManager.ProjectionMatrix;
-                }
-                // Draw the mesh, using the effects set above.
-                mesh.Draw();
-            }
-        }
-
-        public void AttackUnit()
-        {
-            if (unitToAttack != null)
-            {
-                unitToAttack.TakeDamage(attackPower);
-            }
-        }
-
-        #region TeamStaticObject
-        public void SetPlayerNum(int newPlayerNum)
-        {
-            PlayerNum = newPlayerNum;
-        }
-
-        public void SetTeamNum(int newTeamNum)
-        {
-            TeamNum = newTeamNum;
         }
         #endregion
 
-        #region StaticTileObject
-        public Tile GetTile()
+        #region Matrix Setters
+        public void SetScale(float newScale)
         {
-            return TileMap.GetTileFromPos(Position);
-        }
-        #endregion
-
-        #region StaticModel
-        protected void SetupModel(Vector3 position)
-        {
-            //save bones
-            switch (Type)
-            {
-                case TowerType.TowerA:
-                    boneTransforms = new Matrix[Models[(int)Type].Bones.Count];
-                    Models[(int)Type].CopyAbsoluteBoneTransformsTo(boneTransforms);
-                    break;
-            }
-
-            //setup transforms
-            Transforms = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(position);
-
-            //give default rotation
-            rotationMatrixX = Matrix.CreateRotationX(0.0f);
-            rotationMatrixY = Matrix.CreateRotationY(0.0f);
-            rotationMatrixZ = Matrix.CreateRotationZ(0.0f);
-
-            //give default position
-            this.Position = position;
-        }
-
-        /// <summary>
-        /// Sets up default camera information
-        /// </summary>
-        protected void SetupCamera()
-        {
-            cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-            view = cameraManager.ViewMatrix;
+            this.Scale = newScale;
+            scaleMatrix = Matrix.CreateScale(this.Scale);
+            UpdateScaleRotations();
         }
 
         public void RotateX(float rotation)
         {
             rotationMatrixX = Matrix.CreateRotationX(rotation);
+            UpdateScaleRotations();
         }
 
         public void RotateY(float rotation)
         {
             rotationMatrixY = Matrix.CreateRotationY(rotation);
+            UpdateScaleRotations();
         }
 
         public void RotateZ(float rotation)
         {
             rotationMatrixZ = Matrix.CreateRotationZ(rotation);
-        }
-
-        public void UpdateView()
-        {
-            view = cameraManager.ViewMatrix;
+            UpdateScaleRotations();
         }
 
         public void UpdateTransforms()
         {
-            Matrix scaleMatrix = Matrix.CreateScale(this.Scale);
             Matrix translation = Matrix.CreateTranslation(Position);
-            Transforms = scaleMatrix *
-                    rotationMatrixX *
-                    rotationMatrixY *
-                    rotationMatrixZ *
-                    translation;
+            Transforms = Matrix.Multiply(scaleRot, translation);
+        }
+
+        void UpdateScaleRotations()
+        {
+            scaleMatrix = Matrix.CreateScale(this.Scale);
+            scaleRot = Matrix.Multiply(scaleMatrix,
+                    Matrix.Multiply(rotationMatrixX, Matrix.Multiply(rotationMatrixY, rotationMatrixZ)));
+        }
+        #endregion
+
+        #region Update/Draw
+        public void Update(GameTime gameTime)
+        {
         }
         #endregion
     }
