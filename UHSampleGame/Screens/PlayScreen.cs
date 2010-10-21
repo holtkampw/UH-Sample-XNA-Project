@@ -33,8 +33,9 @@ namespace UHSampleGame.Screens
 
         Texture2D loading_screen;
         Texture2D loading_screen_hl;
-        float currentLoadingOpacity;
-        Vector2 currentLoadingPosition;
+        float currentLoadingOpacity = 0.0f;
+        Vector2 currentLoadingPosition = Vector2.Zero;
+        Vector3 whiteVector3 = new Vector3(255, 255, 255);
 
         Video video;
         VideoPlayer videoPlayer;
@@ -84,7 +85,33 @@ namespace UHSampleGame.Screens
         public override void Update(GameTime gameTime)
         {
             //Call into the Asset helper to load your assets
-            AssetHelper.LoadOne(ScreenManager.Game);
+            if (!AssetHelper.Loaded)
+            {
+                AssetHelper.LoadOne(ScreenManager.Game);
+                currentLoadingPosition.X += 20.0f;
+                if (currentLoadingPosition.X < 600.0f)
+                {
+                    if (currentLoadingOpacity <= 0.95f)
+                    {
+                        currentLoadingOpacity += 0.05f;
+                    }
+                }
+                else
+                {
+                    if (currentLoadingOpacity >= 0.05f)
+                    {
+                        currentLoadingOpacity -= 0.05f;
+                    }
+                }
+
+                if (currentLoadingPosition.X >= 1200.0f)
+                {
+                    currentLoadingPosition.X = -200.0f;
+                    currentLoadingOpacity = 0.05f;
+                }
+
+
+            }
 
             if (AssetHelper.Loaded)
             {
@@ -97,6 +124,7 @@ namespace UHSampleGame.Screens
                 contentLoaded = true;
 
             }
+
             // Show a simple example fade effect
             if (AssetHelper.Loaded)
             {
@@ -138,7 +166,8 @@ namespace UHSampleGame.Screens
                 ScreenManager.SpriteBatch.Begin();
                 //ScreenManager.SpriteBatch.Draw(loading_scree, Vector2.Zero, Color.White);
                 ScreenManager.SpriteBatch.Draw(loading_screen, Vector2.Zero, Color.White);
-
+                ScreenManager.SpriteBatch.Draw(loading_screen_hl, currentLoadingPosition, 
+                    new Color(whiteVector3.X, whiteVector3.Y, whiteVector3.Z, currentLoadingOpacity));
                 ScreenManager.SpriteBatch.DrawString(font,
                     "Loading Progress: " + AssetHelper.PercentLoaded + "%", new Vector2(50, 50), Color.DarkRed);
                 ScreenManager.SpriteBatch.End();
