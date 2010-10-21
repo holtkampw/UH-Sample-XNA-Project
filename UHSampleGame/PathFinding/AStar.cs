@@ -7,7 +7,7 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.PathFinding
 {
-    public class AStar
+    public static class AStar
     {
         class Node
         {
@@ -33,40 +33,43 @@ namespace UHSampleGame.PathFinding
             }
         };
 
-        List<Node> openNodes;
-        List<Node> closedNodes;
+        static List<Node> openNodes = new List<Node>();
+        static List<Node> closedNodes = new List<Node>();
 
-        Tile startTile;
-        Tile goalTile;
+        static Tile StartTile = new Tile();
+        static Tile GoalTile = new Tile();
 
-        Dictionary<int, Tile> closedDict;
-        Dictionary<int, Tile> openDict;
-        Dictionary<int, Node> tileNodeDict;
+        static Dictionary<int, Tile> closedDict = new Dictionary<int,Tile>();
+        static Dictionary<int, Tile> openDict = new Dictionary<int,Tile>();
+        static Dictionary<int, Node> tileNodeDict = new Dictionary<int,Node>();
+        
+        static Node lowestCostNode = new Node();
 
-        public AStar(Tile startTile, Tile goalTile)
+        public static void InitAstar(Tile startTile, Tile goalTile)
         {
-            openNodes = new List<Node>();
-            closedNodes = new List<Node>();
-            openDict = new Dictionary<int, Tile>();
-            closedDict = new Dictionary<int, Tile>();
-            tileNodeDict = new Dictionary<int, Node>();
-
-            for (int i = 0; i < TileMap.Tiles.Count; i++)
+            openNodes.Clear();
+            closedNodes.Clear();
+            openDict.Clear();
+            closedDict.Clear();
+            if (tileNodeDict.Count == 0)
             {
-                tileNodeDict.Add(TileMap.Tiles[i].ID, new Node(TileMap.Tiles[i]));
+                for (int i = 0; i < TileMap.Tiles.Count; i++)
+                {
+                    tileNodeDict.Add(TileMap.Tiles[i].ID, new Node(TileMap.Tiles[i]));
+                }
             }
 
-            this.startTile = startTile;
-            this.goalTile = goalTile;
+            StartTile = startTile;
+            GoalTile = goalTile;
         }
 
-        public List<Tile> FindPath()
+        public static List<Tile> FindPath()
         {
-            if (startTile == goalTile)
+            if (StartTile == GoalTile)
             {
                 return new List<Tile>();
             }
-            Node startNode = new Node(startTile);
+            Node startNode = new Node(StartTile);
             Node currentNode = startNode;
             List<Tile> neighborTiles;
             List<Tile> path = new List<Tile>();
@@ -92,9 +95,9 @@ namespace UHSampleGame.PathFinding
                 //Handle if neighbor node is on the open list already
                 //and add to open list
                 AddNeighborNodesToOpenList(currentNode, neighborTiles);
-            } while (openNodes.Count > 0 && currentNode.currentTile != goalTile);
+            } while (openNodes.Count > 0 && currentNode.currentTile != GoalTile);
 
-            if (openNodes.Count == 0 && currentNode.currentTile != goalTile)
+            if (openNodes.Count == 0 && currentNode.currentTile != GoalTile)
                 return new List<Tile>();
 
             path.Add(currentNode.currentTile);
@@ -122,12 +125,12 @@ namespace UHSampleGame.PathFinding
 
         }
 
-        private List<Tile> GetWalkableNeighborsNotOnClosedList(Node currentNode)
+        static List<Tile> GetWalkableNeighborsNotOnClosedList(Node currentNode)
         {
             return TileMap.GetWalkableNeighbors(currentNode.currentTile, closedDict);
         }
 
-        private void AddNeighborNodesToOpenList(Node currentNode, List<Tile> neighborTiles)
+        static void AddNeighborNodesToOpenList(Node currentNode, List<Tile> neighborTiles)
         {
             bool openHasNeighbor = false;
             Node neighborNode;
@@ -169,9 +172,9 @@ namespace UHSampleGame.PathFinding
             }
         }
 
-        private Node GetLowestCostNodeFromOpenNodes()
+        static Node GetLowestCostNodeFromOpenNodes()
         {
-            Node lowestCostNode = new Node();
+
             lowestCostNode.overallCost = float.MaxValue;
             for (int i = 0; i < openNodes.Count; i++)
             {
@@ -181,7 +184,7 @@ namespace UHSampleGame.PathFinding
             return lowestCostNode;
         }
 
-        private Node TransformToNode(Tile Tile2, Node parentNode)
+        static Node TransformToNode(Tile Tile2, Node parentNode)
         {
             Node node = tileNodeDict[Tile2.ID];
             node.currentTile = Tile2;
@@ -193,12 +196,12 @@ namespace UHSampleGame.PathFinding
             return node;
         }
 
-        private float GetDistanceToGoal(ref Tile Tile2)
+        static float GetDistanceToGoal(ref Tile Tile2)
         {
-            return GetDistanceBetweenTiles(ref Tile2, ref goalTile);
+            return GetDistanceBetweenTiles(ref Tile2, ref GoalTile);
         }
 
-        private float GetDistanceBetweenTiles(ref Tile tile1, ref Tile tile2)
+        static  float GetDistanceBetweenTiles(ref Tile tile1, ref Tile tile2)
         {
             float first = (tile1.Position.X - tile2.Position.X);
             float second = (tile1.Position.Z - tile2.Position.Z);

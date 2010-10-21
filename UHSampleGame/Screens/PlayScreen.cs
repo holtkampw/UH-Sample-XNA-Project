@@ -130,12 +130,12 @@ namespace UHSampleGame.Screens
             {
                 if (!IsVisible)
                 {
-                    videoPlayer.Stop();
+                   // videoPlayer.Stop();
                     return;
                 }
 
-                if (videoPlayer.State != MediaState.Playing)
-                    videoPlayer.Play(video);
+               // if (videoPlayer.State != MediaState.Playing)
+               //     videoPlayer.Play(video);
 
                 cameraManager.Update();
 
@@ -176,12 +176,12 @@ namespace UHSampleGame.Screens
             {
                 ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
-                if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
-                {
+               // if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+               // {
                     //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
-                    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
-                        (int)dimensions.X, (int)dimensions.Y), Color.White);
-                }
+               //     ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
+               //         (int)dimensions.X, (int)dimensions.Y), Color.White);
+               // }
                 ScreenManager.SpriteBatch.Draw(playerMenuBg, Vector2.Zero, Color.White);
 
                 ScreenManager.SpriteBatch.End();

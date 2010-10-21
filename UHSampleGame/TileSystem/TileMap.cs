@@ -33,8 +33,9 @@ namespace UHSampleGame.TileSystem
         static int numTilesY;
         static List<NeighborTile> allNeighbors;
         static List<Tile> neighbors = new List<Tile>();
+        static int totalTiles;
 
-       // public static event TowerCreated TowerCreated;
+        // public static event TowerCreated TowerCreated;
 
         public static IList<Tile> Tiles
         {
@@ -76,6 +77,8 @@ namespace UHSampleGame.TileSystem
 
             numTilesX = (int)numTiles.X;
             numTilesY = (int)numTiles.Y;
+
+            totalTiles = numTilesX * numTilesY;
 
             upperLeftPos = new Vector3();
             lowerRightPos = new Vector3();
@@ -181,7 +184,7 @@ namespace UHSampleGame.TileSystem
                     break;
             }
 
-            if (newIndex < 0 || newIndex >= (numTilesX * numTilesY))
+            if (newIndex < 0 || newIndex >= totalTiles)
             {
                 newIndex = tileId;
             }
@@ -204,22 +207,26 @@ namespace UHSampleGame.TileSystem
             int xNum, yNum, index;
             xNum = yNum = index = 0;
 
-            xNum = (int)(((upperLeftPos.X - position.X) / (int)tileSize.X)+0.5f);
-            yNum = (int)((((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X)+0.5f);
+            //xNum = (int)(((upperLeftPos.X - position.X) / (int)tileSize.X));
+            //yNum = (int)(((upperLeftPos.Z - position.Z) / (int)tileSize.Y));
 
             //FIX THIS!!!
-            // xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
-            // yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+            xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
+            yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTilesX);
 
-             if (xNum < 0)
-                 xNum *= -1;
+            if (xNum < 0)
+                xNum *= -1;
 
-             if (yNum < 0)
-                 yNum *= -1;
+            if (yNum < 0)
+                yNum *= -1;
+
+            //xNum = (int)(xNum + 0.5f);
+           // yNum = (int)(yNum + 0.5f);
+           // yNum *= numTilesX;
 
             index = xNum + yNum;
 
-            if (index >= 0 && index < numTiles.X * numTiles.Y)
+            if (index >= 0 && index < totalTiles)
                 return tiles[index];
 
             return Tile.NullTile;
@@ -367,7 +374,7 @@ namespace UHSampleGame.TileSystem
 
         public static void SetTowerForLevelMap(Tower tower, Tile tile)
         {
-            
+
             tile.SetBlockableObject(tower);
             //tile2.SetBlockableObject(tower);
 
@@ -384,7 +391,7 @@ namespace UHSampleGame.TileSystem
 
         private static void OnTowerCreated()
         {
-           // if (TowerCreated != null)
+            // if (TowerCreated != null)
             //    TowerCreated();
         }
 
