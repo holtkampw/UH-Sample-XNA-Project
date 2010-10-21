@@ -113,7 +113,7 @@ namespace UHSampleGame.LevelManagement
                 {
                     //Handle Multiple towers here
                     Tower gameObject = new Tower(TowerType.TowerA);
-                    currentPlayer.SetTowerForLevelMap((Tower)gameObject, tile);
+                    currentPlayer.SetTowerForLevelMap(gameObject, tile);
                     TileMap.SetObject(gameObject, tile);
                 }
 

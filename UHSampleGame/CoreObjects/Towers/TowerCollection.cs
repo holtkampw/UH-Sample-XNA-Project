@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
+using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
@@ -119,6 +120,8 @@ namespace UHSampleGame.CoreObjects.Towers
                     towers[playerNum][(int)towerType][i].Type = towerType;
                     towers[playerNum][(int)towerType][i].Setup(position);
                     towerCount[playerNum][(int)towerType]++;
+                    TileMap.GetTileFromPos(position).SetBlockableObject(towers[playerNum][(int)towerType][i]);
+                    TileMap.UpdateTilePaths();
                     break;
                 }
             }
