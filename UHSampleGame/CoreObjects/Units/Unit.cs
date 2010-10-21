@@ -256,6 +256,7 @@ namespace UHSampleGame.CoreObjects.Units
             this.Health -= damage;
             if (Health <= 0)
             {
+                this.currentTile.RemoveUnit(Type, this);
                 OnDied();
             }
         }

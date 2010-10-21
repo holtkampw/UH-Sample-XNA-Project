@@ -204,14 +204,20 @@ namespace UHSampleGame.TileSystem
             int xNum, yNum, index;
             xNum = yNum = index = 0;
 
-            //xNum = (int)((upperLeftPos.X - position.X) / (int)tileSize.X);
-            //yNum = (int)(((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+            xNum = (int)(((upperLeftPos.X - position.X) / (int)tileSize.X)+0.5f);
+            yNum = (int)((((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X)+0.5f);
 
             //FIX THIS!!!
-             xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
-             yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
+            // xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
+            // yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTiles.X);
 
-            index = Math.Abs(xNum) + Math.Abs(yNum);
+             if (xNum < 0)
+                 xNum *= -1;
+
+             if (yNum < 0)
+                 yNum *= -1;
+
+            index = xNum + yNum;
 
             if (index >= 0 && index < numTiles.X * numTiles.Y)
                 return tiles[index];

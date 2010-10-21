@@ -24,6 +24,7 @@ namespace UHSampleGame.TileSystem
         Random rand;
         public int ID;
 
+
         public static Tile NullTile = new Tile();
 
         public event RegisterUnitWithTile UnitEnter;
@@ -132,7 +133,7 @@ namespace UHSampleGame.TileSystem
         public void AddUnit(UnitType type, Unit unit)
         {
             units.Add(unit);
-            unit.Died += RemoveUnit;
+            //unit.Died += RemoveUnit;
             OnUnitEnter(new GameEventArgs(unit));
         }
 
