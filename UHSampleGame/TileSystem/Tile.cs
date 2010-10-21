@@ -103,12 +103,12 @@ namespace UHSampleGame.TileSystem
 
         public void UpdatePathTo(Tile baseTile)
         {
-            AStar aStar = new AStar(this, baseTile);
+            AStar.InitAstar(this, baseTile);
 
             for (int i = Paths.Count; i < TileMap.Tiles.Count; i++)
                 Paths.Add(new List<Tile>());
 
-            Paths[baseTile.ID] = new List<Tile>(aStar.FindPath());
+            Paths[baseTile.ID] = AStar.FindPath(); //new List<Tile>(AStar.FindPath());
         }
 
         public Vector3 GetRandPoint()
@@ -132,8 +132,8 @@ namespace UHSampleGame.TileSystem
         public void AddUnit(UnitType type, Unit unit)
         {
             units.Add(unit);
-            unit.Died += RemoveUnit;
-            OnUnitEnter(new GameEventArgs(unit));
+            //unit.Died += RemoveUnit;
+            OnUnitEnter(unit);
         }
 
         public void RemoveUnit(UnitType type, Unit unit)
@@ -141,16 +141,16 @@ namespace UHSampleGame.TileSystem
             units.Remove(unit);
             //Set new unit to attack
             if (units.Count > 0)
-                OnUnitEnter(new GameEventArgs(units[0]));
+                OnUnitEnter(units[0]);
             else
-                OnUnitEnter(new GameEventArgs(null));
+                OnUnitEnter(null);
         }
 
-        private void OnUnitEnter(GameEventArgs args)
+        private void OnUnitEnter(Unit unit)
         {
             if (UnitEnter != null)
             {
-                UnitEnter(args);
+                UnitEnter(ref unit);
             }
         }
 

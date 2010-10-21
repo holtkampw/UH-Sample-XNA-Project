@@ -88,23 +88,23 @@ namespace UHSampleGame.CoreObjects.Towers
             return Status != TowerStatus.Inactive;
         }
 
-        public void RegisterAttackUnit(GameEventArgs args)
+        public void RegisterAttackUnit(ref Unit unit)
         {
-            if ((unitToAttack == null && args.Unit == null ) ||
-                (unitToAttack != null && unitToAttack.IsActive() && args.Unit == null))
+            if ((unitToAttack == null && unit == null ) ||
+                (unitToAttack != null && unitToAttack.IsActive() && unit == null))
                 return;
 
             if (unitToAttack != null && !unitToAttack.IsActive())
             {
-                unitToAttack = args.Unit;
+                unitToAttack = unit;
                 return;
             }
 
-            if (args.Unit.TeamNum != TeamNum)
+            if (unit.TeamNum != TeamNum)
             {
-                if (unitToAttack == null || args.Unit.PathLength < unitToAttack.PathLength)
+                if (unitToAttack == null || unit.PathLength < unitToAttack.PathLength)
                 {
-                    unitToAttack = args.Unit;
+                    unitToAttack = unit;
                     //unitToAttack.Died += GetNewAttackUnit;
                 }
             }

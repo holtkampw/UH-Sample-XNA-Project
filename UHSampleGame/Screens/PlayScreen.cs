@@ -50,7 +50,7 @@ namespace UHSampleGame.Screens
         public PlayScreen()
             : base("PlayScreen2")
         {
-          
+
         }
 
         public override void LoadContent()
@@ -112,6 +112,7 @@ namespace UHSampleGame.Screens
 
             cameraManager.Update();
 
+
             p1.Update(gameTime);
             aI.Update(gameTime);
             UnitCollection.Update(gameTime);
@@ -140,6 +141,7 @@ namespace UHSampleGame.Screens
                     ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
                         (int)dimensions.X, (int)dimensions.Y), Color.White);
                 }
+
                 ScreenManager.SpriteBatch.Draw(playerMenuBg, Vector2.Zero, Color.White);
 
                 ScreenManager.SpriteBatch.End();

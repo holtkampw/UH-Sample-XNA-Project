@@ -9,7 +9,7 @@ using UHSampleGame.CoreObjects.Base;
 
 namespace UHSampleGame.Events
 {
-    public delegate void RegisterUnitWithTile(GameEventArgs args);
+    public delegate void RegisterUnitWithTile(ref Unit unit);
     public delegate void UnitDied(UnitType type, Unit unit);
     public delegate void BaseDestroyed(Base destroyedBase);
     public delegate void GetNewGoalBase();
@@ -17,26 +17,13 @@ namespace UHSampleGame.Events
 
     public class GameEventArgs
     {
-        int tilesToGoal;
-        Unit unit;
+        public Unit Unit;
 
         public GameEventArgs(Unit unit)
         {
-            this.unit = unit;
-            if (unit != null)
-                this.tilesToGoal = unit.PathLength;
-            else
-                this.tilesToGoal = 10000;
+           Unit = unit;
         }
 
-        public int TilesToGoal
-        {
-            get { return tilesToGoal; }
-        }
 
-        public Unit Unit
-        {
-            get { return unit; }
-        }
     }
 }

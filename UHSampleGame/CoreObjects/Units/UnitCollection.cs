@@ -142,16 +142,20 @@ namespace UHSampleGame.CoreObjects.Units
 
         public static void Update(GameTime gameTime)
         {
+            Unit u;
             for (int i = 0; i < NumPlayers; i++)
                 for (int j = 0; j < unitTypes.Length; j++)
                 {
                     updateCount = 0;
                     for (int k = 0; k < MAX_UNITS && updateCount < unitsCount[i][j]; k++)
-                        if (units[i][j][k].IsActive())
+                    {
+                        u = units[i][j][k];
+                        if (u.Status != UnitStatus.Inactive)
                         {
-                            units[i][j][k].Update(gameTime);
+                            u.Update(gameTime);
                             updateCount++;
                         }
+                    }
                 }
         }
 
