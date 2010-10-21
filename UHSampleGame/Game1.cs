@@ -76,21 +76,12 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.Selection, Keys.Enter);
             inputManager.AddInput(InputAction.Selection, Buttons.A);
             inputManager.AddInput(InputAction.Selection, Buttons.Start);
-
-            //inputManager.AddInput(InputAction.Rotation, Keys.Space);
-            inputManager.AddInput(InputAction.RotateUp, Keys.Up);
-            inputManager.AddInput(InputAction.RotateUp, Keys.I);
-            inputManager.AddInput(InputAction.RotateDown, Keys.Down);
-            inputManager.AddInput(InputAction.RotateLeft, Keys.Left);
-            inputManager.AddInput(InputAction.RotateRight, Keys.Right);
-            inputManager.AddInput(InputAction.StrafeUp, Keys.W);
-            inputManager.AddInput(InputAction.StrafeDown, Keys.S);
-            inputManager.AddInput(InputAction.StrafeLeft, Keys.A);
-            inputManager.AddInput(InputAction.StrafeRight, Keys.D);
             
             //Menu Actions
             inputManager.AddInput(InputAction.MenuUp, Keys.Up);
             inputManager.AddInput(InputAction.MenuDown, Keys.Down);
+            inputManager.AddInput(InputAction.MenuLeft, Keys.Left);
+            inputManager.AddInput(InputAction.MenuRight, Keys.Right);
             inputManager.AddInput(InputAction.MenuSelect, Keys.Enter);
             inputManager.AddInput(InputAction.MenuCancel, Keys.Back);
 
@@ -101,7 +92,7 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.MenuSelect, Buttons.A);
             inputManager.AddInput(InputAction.MenuCancel, Buttons.B);
 
-            //inputManager.AddInput(InputAction.ExitGame, Buttons.Back);
+            inputManager.AddInput(InputAction.ExitGame, Buttons.Back);
             inputManager.AddInput(InputAction.ExitGame, Keys.Z);
 
 
