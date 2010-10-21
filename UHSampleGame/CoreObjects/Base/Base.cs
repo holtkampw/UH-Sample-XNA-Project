@@ -35,7 +35,7 @@ namespace UHSampleGame.CoreObjects.Base
         Matrix rotationMatrixZ;
         Model model;
 
-        public event BaseDestroyed2 baseDestroyed;
+        public event BaseDestroyed baseDestroyed;
 
         public Base GoalBase
         {

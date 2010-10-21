@@ -30,7 +30,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         bool isStuck;
         Random rand;
-        public event UnitDied2 Died;
+        public event UnitDied Died;
 
         public int Health;
         public int TeamNum;
@@ -51,7 +51,7 @@ namespace UHSampleGame.CoreObjects.Units
         {
             Status = UnitStatus.Inactive;
             Type = unitType;
-            Scale = 3.0f;
+            Scale = 1.5f;
             scaleMatrix = Matrix.CreateScale(this.Scale);
             rotationMatrixX = Matrix.Identity;
             rotationMatrixY = Matrix.Identity;
@@ -182,7 +182,7 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (IsNewTile())
             {
-               // previousTile.RemoveUnit(Type, this);
+                previousTile.RemoveUnit(Type, this);
                 if (currentTile == goalTile)
                 {
                     //Register Hit
@@ -191,7 +191,7 @@ namespace UHSampleGame.CoreObjects.Units
                 else
                 {
                     PathLength = currentTile.Paths[goalTile.ID].Count;
-                    //currentTile.AddUnit(Type, this);
+                    currentTile.AddUnit(Type, this);
                 }
             }
         }
@@ -249,6 +249,23 @@ namespace UHSampleGame.CoreObjects.Units
         void UpdatePositionAndRotation()
         {
             Position += velocity;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            this.Health -= damage;
+            if (Health <= 0)
+            {
+                OnDied();
+            }
+        }
+
+        private void OnDied()
+        {
+            if (Died != null)
+                Died(this.Type, this);
+
+            this.Status = UnitStatus.Inactive;
         }
     }
 }
