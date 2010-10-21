@@ -232,9 +232,10 @@ namespace UHSampleGame
         {
             //data["Background"] = LoadTextureStream(game.GraphicsDevice, "Background");
             //data["mainFont"] = game.Content.Load<SpriteFont>("mainFont");
-            data["loading_screen"] = game.Content.Load<Texture2D>("Levels\\loading_screen");
+            data["loading_screen"] = game.Content.Load<Texture2D>("LoadScreen\\levelLoader01");
             data["font"] = game.Content.Load<SpriteFont>("font");
             data["numTiles"] = new Vector2(20f, 10f);
+            data["loading_screen_hl"] = game.Content.Load<Texture2D>("LoadScreen\\levelLoader01_hl");
         }
 
         /// <summary>
@@ -286,9 +287,8 @@ namespace UHSampleGame
 
         private static void PlayerLoad(Game game)
         {
-            data["p1"] = new Player(1, 1, 5, TileMap.Tiles[0], PlayerType.Human);
-            data["aI"] = new Player(5, 2, 1, TileMap.Tiles[TileMap.Tiles.Count - 1], PlayerType.AI);
-           // 
+            data["p1"] = new Player(1, 1, 2, TileMap.Tiles[0], PlayerType.Human);
+            data["aI"] = new Player(2, 2, 1, TileMap.Tiles[TileMap.Tiles.Count - 1], PlayerType.AI);
         }
 
         private static void LevelLoad(Game game)

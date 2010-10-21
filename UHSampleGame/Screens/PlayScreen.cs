@@ -31,6 +31,11 @@ namespace UHSampleGame.Screens
         Texture2D playerMenuBg;
         CameraManager cameraManager;
 
+        Texture2D loading_screen;
+        Texture2D loading_screen_hl;
+        float currentLoadingOpacity;
+        Vector2 currentLoadingPosition;
+
         Video video;
         VideoPlayer videoPlayer;
         Vector2 dimensions;
@@ -50,6 +55,9 @@ namespace UHSampleGame.Screens
             : base("PlayScreen2")
         {
             AssetHelper.LoadOne(ScreenManager.Game);
+            font = AssetHelper.Get<SpriteFont>("font");
+            loading_screen = AssetHelper.Get<Texture2D>("loading_screen");
+            loading_screen_hl = AssetHelper.Get<Texture2D>("loading_screen_hl");
         }
 
         public override void LoadContent()
@@ -129,9 +137,9 @@ namespace UHSampleGame.Screens
                 //Currently loading, display progress
                 ScreenManager.SpriteBatch.Begin();
                 //ScreenManager.SpriteBatch.Draw(loading_scree, Vector2.Zero, Color.White);
-                ScreenManager.SpriteBatch.Draw(AssetHelper.Get<Texture2D>("loading_screen"), Vector2.Zero, Color.White);
+                ScreenManager.SpriteBatch.Draw(loading_screen, Vector2.Zero, Color.White);
 
-                ScreenManager.SpriteBatch.DrawString(AssetHelper.Get<SpriteFont>("font"),
+                ScreenManager.SpriteBatch.DrawString(font,
                     "Loading Progress: " + AssetHelper.PercentLoaded + "%", new Vector2(50, 50), Color.DarkRed);
                 ScreenManager.SpriteBatch.End();
             }
@@ -150,10 +158,11 @@ namespace UHSampleGame.Screens
                 ScreenManager.SpriteBatch.End();
 
                 ResetRenderStates();
-                p1.Draw(gameTime);
-                aI.Draw(gameTime);
+                
                 UnitCollection.Draw(gameTime);
                 TowerCollection.Draw(gameTime);
+                p1.Draw(gameTime);
+                aI.Draw(gameTime);
 
 
                 ScreenManager.SpriteBatch.Begin();
