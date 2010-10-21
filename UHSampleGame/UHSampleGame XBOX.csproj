@@ -112,6 +112,7 @@
     <Compile Include="ScreenManagement\Screen.cs" />
     <Compile Include="ScreenManagement\ScreenManager.cs" />
     <Compile Include="Screens\IntroScreen.cs" />
+    <Compile Include="Screens\LoadScreen.cs" />
     <Compile Include="Screens\MenuScreenTest.cs" />
     <Compile Include="Screens\PlayScreen.cs">
       <SubType>Code</SubType>
@@ -120,6 +121,7 @@
     <Compile Include="TileSystem\TileMap.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VectorNew2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

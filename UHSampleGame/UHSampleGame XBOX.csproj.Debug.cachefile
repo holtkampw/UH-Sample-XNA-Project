@@ -1,6 +1,7 @@
 Content\DummyText\Font.xnb
 Content\font.xnb
 Content\MainMenu\font.xnb
+Content\PlayerMenu\statusFont.xnb
 Content\DummyText\background.xnb
 Content\Model\background.xnb
 Content\Tiles\1.xnb
@@ -12,6 +13,11 @@ Content\MainMenu\left_arrow.xnb
 Content\MainMenu\right_arrow.xnb
 Content\MainMenu\a_button.xnb
 Content\Levels\loading_screen.xnb
+Content\MainMenu\mainMenu_Cover.xnb
+Content\PlayerMenu\playerMenu.xnb
+Content\PlayerMenu\playerMenuTab.xnb
+Content\LoadScreen\levelLoader01.xnb
+Content\LoadScreen\levelLoader01_hl.xnb
 Content\Model\box.xnb
 Content\Model\pyramids.xnb
 Content\AnimatedModel\dude.xnb
@@ -44,10 +50,6 @@ Content\Objects\Towers\towerCColor_0.xnb
 Content\Objects\Units\boatTexture_0.xnb
 Content\Objects\Base\enemyShipPlatformColor_0.xnb
 Content\MainMenu\menu_tex_0.xnb
-Content\MainMenu\mainMenu_Cover.xnb
-Content\PlayerMenu\playerMenu.xnb
-Content\PlayerMenu\playerMenuTab.xnb
-Content\PlayerMenu\statusFont.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv

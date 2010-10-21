@@ -114,38 +114,46 @@ namespace UHSampleGame
             if (nextAsset.Type == typeof(Texture2D))
             {
                 data[nextAsset.Key] = game.Content.Load<Texture2D>(nextAsset.Loc);//LoadTextureStream(game.GraphicsDevice, nextAsset.Loc);
+                index++;
             }
             else if (nextAsset.Type == typeof(Model))
             {
                 data[nextAsset.Key] = game.Content.Load<Model>(nextAsset.Loc);
+                index++;
             }
             else if (nextAsset.Type == typeof(SpriteFont))
             {
                 data[nextAsset.Key] = game.Content.Load<SpriteFont>(nextAsset.Loc);
+                index++;
             }
             else if (nextAsset.Type == typeof(SoundEffect))
             {
                 data[nextAsset.Key] = game.Content.Load<SoundEffect>(nextAsset.Loc);
+                index++;
             }
             else if (nextAsset.Type == typeof(Delegate))
             {
                 nextAsset.Call(game);
+                index++;
             }
             else if (nextAsset.Type == typeof(Vector2))
             {
                 data[nextAsset.Key] = new Vector2((float)nextAsset.Params[0], (float)nextAsset.Params[1]);
+                index++;
             }
             else if (nextAsset.Type == typeof(VideoPlayer))
             {
                 data[nextAsset.Key] = new VideoPlayer();
+                index++;
             }
             else if (nextAsset.Type == typeof(Video))
             {
                 data[nextAsset.Key] = game.Content.Load<Video>(nextAsset.Loc);
+                index++;
             }
 
 
-            index++;
+            
 
             return false;
         }

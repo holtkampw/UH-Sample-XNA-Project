@@ -45,6 +45,17 @@ namespace UHSampleGame.Players
         public PlayerType Type;
         public static Enum[] playerEnumType = EnumHelper.EnumToArray(new PlayerType());
 
+        //Global Location of Player (array of 4)
+        VectorNew2[] globalLocations = { new VectorNew2(0, 0), new VectorNew2(0, 0), new VectorNew2(0, 0), new VectorNew2(0, 0) };
+        //Local Location of Status > Health
+        //VectorNew2
+        //Local Location of Status > NumberOfUnits
+
+        //Local Location of Icons
+        //Local Location of Icon Offset
+        
+        //Local Location of 
+
         //HumanPlayer
         TeamableAnimatedObject avatar;
 
@@ -97,7 +108,7 @@ namespace UHSampleGame.Players
                 }
 
                 menuTabSource = new Rectangle[2];
-                menuTabSource[SELECTED] = new Rectangle(0, menuTab.Width + 1, menuTab.Width, menuTab.Height / 2);
+                menuTabSource[SELECTED] = new Rectangle(0, menuTab.Width, menuTab.Width, menuTab.Height / 2);
                 menuTabSource[NORMAL] = new Rectangle(0, 0, menuTab.Width, menuTab.Height / 2);
                 statusFont = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\statusFont");
                
