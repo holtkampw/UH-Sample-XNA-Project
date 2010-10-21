@@ -17,7 +17,7 @@ namespace UHSampleGame.CoreObjects.Units
     public class Unit
     {
         #region Class Variables
-        UnitStatus Status;
+        public UnitStatus Status;
         UnitType Type;
 
         Tile previousTile;
@@ -59,7 +59,7 @@ namespace UHSampleGame.CoreObjects.Units
             UpdateScaleRotations();
            //Fucking change this!!
             Position = Vector3.Zero;
-
+            Health = 50;
 
             rand = new Random(DateTime.Now.Millisecond);
         }

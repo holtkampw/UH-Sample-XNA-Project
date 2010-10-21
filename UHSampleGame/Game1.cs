@@ -77,7 +77,7 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.Selection, Buttons.A);
             inputManager.AddInput(InputAction.Selection, Buttons.Start);
 
-            inputManager.AddInput(InputAction.Rotation, Keys.Space);
+            //inputManager.AddInput(InputAction.Rotation, Keys.Space);
             inputManager.AddInput(InputAction.RotateUp, Keys.Up);
             inputManager.AddInput(InputAction.RotateUp, Keys.I);
             inputManager.AddInput(InputAction.RotateDown, Keys.Down);
@@ -101,7 +101,8 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.MenuSelect, Buttons.A);
             inputManager.AddInput(InputAction.MenuCancel, Buttons.B);
 
-            inputManager.AddInput(InputAction.ExitGame, Buttons.Back);
+            //inputManager.AddInput(InputAction.ExitGame, Buttons.Back);
+            inputManager.AddInput(InputAction.ExitGame, Keys.Z);
 
 
             this.Services.AddService(typeof(InputManager), inputManager);

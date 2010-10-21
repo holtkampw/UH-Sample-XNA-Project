@@ -76,9 +76,11 @@ namespace UHSampleGame.CoreObjects.Towers
             this.Status = TowerStatus.Active;
         }
 
-        public void Activate()
+        public void Activate(int playerNum, int teamNum)
         {
             Status = TowerStatus.Active;
+            PlayerNum = playerNum;
+            TeamNum = teamNum;
         }
 
         public bool IsActive()
@@ -88,6 +90,16 @@ namespace UHSampleGame.CoreObjects.Towers
 
         public void RegisterAttackUnit(GameEventArgs args)
         {
+            if ((unitToAttack == null && args.Unit == null ) ||
+                (unitToAttack != null && unitToAttack.IsActive() && args.Unit == null))
+                return;
+
+            if (unitToAttack != null && !unitToAttack.IsActive())
+            {
+                unitToAttack = args.Unit;
+                return;
+            }
+
             if (args.Unit.TeamNum != TeamNum)
             {
                 if (unitToAttack == null || args.Unit.PathLength < unitToAttack.PathLength)

@@ -152,9 +152,13 @@ namespace UHSampleGame.InputManagement
                         return true;
             }
 
-            foreach (Keys key in actionDictionary[action])
-                if (IsNewKeyPressed(key))
+            for (int i = 0; i < actionDictionary[action].Count; i++)
+                if (IsNewKeyPressed((Keys)actionDictionary[action][i]))
                     return true;
+
+            //foreach (Keys key in actionDictionary[action])
+            //    if (IsNewKeyPressed(key))     
+            //        return true;
 
             return false;
         }

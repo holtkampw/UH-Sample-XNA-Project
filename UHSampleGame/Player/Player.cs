@@ -142,17 +142,11 @@ namespace UHSampleGame.Players
 
                 if (input.CheckAction(InputAction.Selection))
                 {
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TargetPlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
+                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
                 }
 
                 if (input.CheckNewAction(InputAction.TowerBuild))
@@ -204,10 +198,9 @@ namespace UHSampleGame.Players
            // target.baseDestroyed += GetNewTargetBase;
         }
 
-        public void SetTowerForLevelMap(Tower tower, Tile tile)
+        public void SetTowerForLevelMap(TowerType towerType, Tile tile)
         {
-            TileMap.SetTowerForLevelMap(tower, tile);
-            TowerCollection.Add(PlayerNum, TeamNum, tower.Type, tile.Position);
+            TileMap.SetTowerForLevelMap(TowerCollection.Add(PlayerNum, TeamNum, towerType, tile.Position), tile);
         }
 
         public void DrawMenu(GameTime gameTime)

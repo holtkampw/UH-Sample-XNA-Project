@@ -23,7 +23,10 @@ namespace UHSampleGame.Events
         public GameEventArgs(Unit unit)
         {
             this.unit = unit;
-            this.tilesToGoal = unit.PathLength;
+            if (unit != null)
+                this.tilesToGoal = unit.PathLength;
+            else
+                this.tilesToGoal = 10000;
         }
 
         public int TilesToGoal
