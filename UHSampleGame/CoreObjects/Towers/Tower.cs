@@ -41,6 +41,9 @@ namespace UHSampleGame.CoreObjects.Towers
         public int TeamNum;
         public int PlayerNum;
         public Unit unitToAttack;
+
+        private TimeSpan timeToAttack;
+        private TimeSpan currentTimeToAttack;
         #endregion
 
         #region Initialization
@@ -54,6 +57,9 @@ namespace UHSampleGame.CoreObjects.Towers
             this.Type = type;
             this.Status = TowerStatus.Inactive;
             unitToAttack = null;
+
+            timeToAttack = new TimeSpan(0,0,1);
+            currentTimeToAttack = new TimeSpan();
         }
 
         public void Setup(Vector3 position)
@@ -90,7 +96,19 @@ namespace UHSampleGame.CoreObjects.Towers
                     //unitToAttack.Died += GetNewAttackUnit;
                 }
             }
+        }
 
+        private void Attack(GameTime gameTime)
+        {
+            if (unitToAttack != null)
+            {
+                currentTimeToAttack += gameTime.ElapsedGameTime;
+                if (currentTimeToAttack > timeToAttack)
+                {
+                    unitToAttack.TakeDamage(10);
+                    currentTimeToAttack = new TimeSpan();
+                }
+            }
         }
         #endregion
 
@@ -137,6 +155,7 @@ namespace UHSampleGame.CoreObjects.Towers
         #region Update/Draw
         public void Update(GameTime gameTime)
         {
+            Attack(gameTime);
         }
         #endregion
     }

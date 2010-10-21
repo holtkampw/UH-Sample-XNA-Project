@@ -26,7 +26,7 @@ namespace UHSampleGame.TileSystem
 
         public static Tile NullTile = new Tile();
 
-        public event RegisterUnitWithTile2 UnitEnter;
+        public event RegisterUnitWithTile UnitEnter;
 
         /// <summary>
         /// Represents a Tile2 of a Tile2 map
@@ -129,19 +129,19 @@ namespace UHSampleGame.TileSystem
             UnitEnter -= tower.RegisterAttackUnit;
         }
 
-        public void AddUnit(UnitType type, ref Unit unit)
+        public void AddUnit(UnitType type, Unit unit)
         {
             units.Add(unit);
-            //unit.Died += RemoveUnit;
-            //OnUnitEnter(new GameEventArgs(unit));
+            unit.Died += RemoveUnit;
+            OnUnitEnter(new GameEventArgs(unit));
         }
 
-        public void RemoveUnit(UnitType type, ref Unit unit)
+        public void RemoveUnit(UnitType type, Unit unit)
         {
             units.Remove(unit);
             //Set new unit to attack
-           // if (units.Count > 0)
-              //  OnUnitEnter(new GameEventArgs(units[0]));
+            if (units.Count > 0)
+                OnUnitEnter(new GameEventArgs(units[0]));
         }
 
         private void OnUnitEnter(GameEventArgs args)
