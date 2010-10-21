@@ -112,7 +112,7 @@ namespace UHSampleGame.CoreObjects.Units
             return sum;
         }
 
-        public static void Add(int playerNum, int attackPlayerNum, UnitType unitType)
+        public static void Add(int playerNum, int teamNum, int attackPlayerNum, UnitType unitType)
         {
             //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
             for (int i = 0; i <= unitsMaxIndex[playerNum][(int)unitType]; i++)
@@ -121,6 +121,9 @@ namespace UHSampleGame.CoreObjects.Units
                 {
                     units[playerNum][(int)unitType][i].Deploy(BaseCollection.GetBaseTileForPlayer(playerNum),
                         BaseCollection.GetBaseTileForPlayer(attackPlayerNum));
+
+                    units[playerNum][(int)unitType][i].PlayerNum = playerNum;
+                    units[playerNum][(int)unitType][i].TeamNum = teamNum;
 
                     unitsCount[playerNum][(int)unitType]++;
 
@@ -167,7 +170,7 @@ namespace UHSampleGame.CoreObjects.Units
         private static void DrawUnits(int i, int j)
         {
             drawCount = 0;
-            for (int k = 0;/* k < unitsMaxIndex[i][j] &&*/ drawCount < unitsCount[i][j]; k++)
+            for (int k = 0; k < unitsMaxIndex[i][j] && drawCount < unitsCount[i][j]; k++)
             {
                 if (units[i][j][k].IsActive())
                 {

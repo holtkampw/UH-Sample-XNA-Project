@@ -109,22 +109,23 @@ namespace UHSampleGame.CoreObjects.Towers
         #endregion
 
         #region Manipulation
-        public static void Add(int playerNum, int teamNum, TowerType towerType, Vector3 position)
+        public static Tower Add(int playerNum, int teamNum, TowerType towerType, Vector3 position)
         {
-            //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
+            //////////////////////REFACTOR FOR EFFICIENCY
             for (int i = 0; i < MAX_TOWERS; i++)
             {
                 if (!towers[playerNum][(int)towerType][i].IsActive())
                 {
-                    towers[playerNum][(int)towerType][i].Activate();
+                    towers[playerNum][(int)towerType][i].Activate(playerNum, teamNum);
                     towers[playerNum][(int)towerType][i].Type = towerType;
                     towers[playerNum][(int)towerType][i].Setup(position);
                     towerCount[playerNum][(int)towerType]++;
                     TileMap.GetTileFromPos(position).SetBlockableObject(towers[playerNum][(int)towerType][i]);
                     TileMap.UpdateTilePaths();
-                    break;
+                    return towers[playerNum][(int)towerType][i];
                 }
             }
+            return null;
         }
 
         public static void Remove()

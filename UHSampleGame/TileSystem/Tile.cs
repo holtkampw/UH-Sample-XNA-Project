@@ -142,6 +142,8 @@ namespace UHSampleGame.TileSystem
             //Set new unit to attack
             if (units.Count > 0)
                 OnUnitEnter(new GameEventArgs(units[0]));
+            else
+                OnUnitEnter(new GameEventArgs(null));
         }
 
         private void OnUnitEnter(GameEventArgs args)
