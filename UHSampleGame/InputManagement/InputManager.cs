@@ -12,9 +12,7 @@ namespace UHSampleGame.InputManagement
 {
     public enum InputAction
     {
-        RotateLeft, RotateRight, RotateUp, RotateDown,
-        StrafeLeft, StrafeRight, StrafeUp, StrafeDown,
-        Selection, Back, Rotation, MenuUp, MenuDown, 
+        Selection, Back, Rotation, MenuUp, MenuDown,
         MenuSelect, MenuCancel, TileMoveUp, TileMoveDown,
         TileMoveLeft, TileMoveRight, TowerBuild,
         ExitGame, MenuLeft, MenuRight,
@@ -32,6 +30,9 @@ namespace UHSampleGame.InputManagement
         Dictionary<PlayerIndex, GamePadState> previousGamePadStates;
         Dictionary<InputAction, Keys> items;
         Dictionary<InputAction, List<object>> actionDictionary;
+        Dictionary<InputAction, List<Keys>> keyActionDictionary;
+        Dictionary<InputAction, List<Buttons>> buttonActionDictionary;
+
         PlayerIndex[] playerIndexes;
         #endregion
 
@@ -46,6 +47,10 @@ namespace UHSampleGame.InputManagement
             previousGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
             items = new Dictionary<InputAction, Keys>();
             actionDictionary = new Dictionary<InputAction, List<object>>();
+
+            keyActionDictionary = new Dictionary<InputAction, List<Keys>>();
+            buttonActionDictionary = new Dictionary<InputAction, List<Buttons>>();
+
             playerIndexes = new PlayerIndex[4];
             playerIndexes[0] = PlayerIndex.One;
             playerIndexes[1] = PlayerIndex.Two;
@@ -87,17 +92,31 @@ namespace UHSampleGame.InputManagement
         /// <param name="key">The key to trigger the action</param>
         public void AddInput(InputAction action, Keys key)
         {
-            if (actionDictionary.ContainsKey(action))
+            //if (actionDictionary.ContainsKey(action))
+            //{
+            //    if (!actionDictionary[action].Contains(key))
+            //        actionDictionary[action].Add(key);
+            //}
+            //else
+            //{
+            //    List<object> newList = new List<object>();
+            //    newList.Add(key);
+            //    actionDictionary.Add(action, newList);
+            //}
+
+            if (keyActionDictionary.ContainsKey(action))
             {
-                if (!actionDictionary[action].Contains(key))
-                    actionDictionary[action].Add(key);
+                if (!keyActionDictionary[action].Contains(key))
+                    keyActionDictionary[action].Add(key);
             }
             else
             {
-                List<object> newList = new List<object>();
-                newList.Add(key);
-                actionDictionary.Add(action, newList);
+                List<Keys> keysList = new List<Keys>();
+                keysList.Add(key);
+                keyActionDictionary.Add(action, keysList);
             }
+
+
         }
 
         /// <summary>
@@ -107,16 +126,28 @@ namespace UHSampleGame.InputManagement
         /// <param name="button">The button to trigger the action</param>
         public void AddInput(InputAction action, Buttons button)
         {
-            if (actionDictionary.ContainsKey(action))
+            //if (actionDictionary.ContainsKey(action))
+            //{
+            //    if (!actionDictionary[action].Contains(button))
+            //        actionDictionary[action].Add(button);
+            //}
+            //else
+            //{
+            //    List<object> newList = new List<object>();
+            //    newList.Add(button);
+            //    actionDictionary.Add(action, newList);
+            //}
+
+            if (buttonActionDictionary.ContainsKey(action))
             {
-                if (!actionDictionary[action].Contains(button))
-                    actionDictionary[action].Add(button);
+                if (!buttonActionDictionary[action].Contains(button))
+                    buttonActionDictionary[action].Add(button);
             }
             else
             {
-                List<object> newList = new List<object>();
-                newList.Add(button);
-                actionDictionary.Add(action, newList);
+                List<Buttons> buttonsList = new List<Buttons>();
+                buttonsList.Add(button);
+                buttonActionDictionary.Add(action, buttonsList);
             }
         }
 
@@ -138,27 +169,41 @@ namespace UHSampleGame.InputManagement
         /// <returns>Returns true if the action has just been triggered</returns>
         public bool CheckNewAction(InputAction action, PlayerIndex? playerIndex)
         {
+            //if (!playerIndex.HasValue)
+            //{
+            //    for (int i = 0; i < playerIndexes.Length; i++)
+            //        foreach (Buttons button in actionDictionary[action])
+            //            if (IsNewButtonPressed(button, playerIndexes[i]))
+            //                return true;
+            //}
+            //else
+            //{
+            //    foreach (Buttons button in actionDictionary[action])
+            //        if (IsNewButtonPressed(button, playerIndex.Value))
+            //            return true;
+            //}
+
+            //foreach (Keys key in actionDictionary[action])
+            //    if (IsNewKeyPressed(key))
+            //        return true;
+
             if (!playerIndex.HasValue)
             {
                 for (int i = 0; i < playerIndexes.Length; i++)
-                    foreach (Buttons button in actionDictionary[action])
-                        if (IsNewButtonPressed(button, playerIndexes[i]))
+                   for(int j = 0; j<buttonActionDictionary[action].Count; j++)
+                        if (IsNewButtonPressed(buttonActionDictionary[action][j], playerIndexes[i]))
                             return true;
             }
             else
             {
-                foreach (Buttons button in actionDictionary[action])
-                    if (IsNewButtonPressed(button, playerIndex.Value))
+                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+                    if (IsNewButtonPressed(buttonActionDictionary[action][j], playerIndex.Value))
                         return true;
             }
 
-            for (int i = 0; i < actionDictionary[action].Count; i++)
-                if (IsNewKeyPressed((Keys)actionDictionary[action][i]))
+           for(int i =0; i<keyActionDictionary[action].Count; i++)
+                if (IsNewKeyPressed(keyActionDictionary[action][i]))
                     return true;
-
-            //foreach (Keys key in actionDictionary[action])
-            //    if (IsNewKeyPressed(key))     
-            //        return true;
 
             return false;
         }
@@ -181,22 +226,40 @@ namespace UHSampleGame.InputManagement
         /// <returns>Returns true if the action is triggered</returns>
         public bool CheckAction(InputAction action, PlayerIndex? playerIndex)
         {
+            //if (!playerIndex.HasValue)
+            //{
+            //    for (int i = 0; i < playerIndexes.Length; i++)
+            //        foreach (Buttons button in actionDictionary[action])
+            //            if (IsButtonPressed(button, playerIndexes[i]))
+            //                return true;
+            //}
+            //else
+            //{
+            //    foreach (Buttons button in actionDictionary[action])
+            //        if (IsButtonPressed(button, playerIndex.Value))
+            //            return true;
+            //}
+
+            //foreach (Keys key in actionDictionary[action])
+            //    if (IsKeyPressed(key))
+            //        return true;
+
             if (!playerIndex.HasValue)
             {
                 for (int i = 0; i < playerIndexes.Length; i++)
-                    foreach (Buttons button in actionDictionary[action])
-                        if (IsButtonPressed(button, playerIndexes[i]))
+                    for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+                        if (IsButtonPressed(buttonActionDictionary[action][j], playerIndexes[i]))
                             return true;
             }
             else
             {
-                foreach (Buttons button in actionDictionary[action])
-                    if (IsButtonPressed(button, playerIndex.Value))
+                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+                    if (IsButtonPressed(buttonActionDictionary[action][j], playerIndex.Value))
                         return true;
             }
 
-            foreach (Keys key in actionDictionary[action])
-                if (IsKeyPressed(key))
+            for (int i = 0; i < keyActionDictionary[action].Count; i++)
+                if (IsKeyPressed(keyActionDictionary[action][i]))
                     return true;
 
             return false;
@@ -258,7 +321,7 @@ namespace UHSampleGame.InputManagement
         #endregion KeyHelpers
 
 
-        
+
         #endregion
     }
 }
