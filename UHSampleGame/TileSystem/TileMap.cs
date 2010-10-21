@@ -142,7 +142,7 @@ namespace UHSampleGame.TileSystem
         /// <param name="Tile2">The start Tile2</param>
         /// <param name="neighborTile">The neighbor to examine</param>
         /// <returns>Returns the Tile2 neighbor or a null Tile2 if neighbor is not found</returns>
-        public static Tile GetTileNeighbor(Tile Tile2, NeighborTile neighborTile)
+        public static Tile GetTileNeighbor(ref Tile Tile2, NeighborTile neighborTile)
         {
             int newIndex = 0;// Tile2.ID;
             int min, max, tileId;
@@ -259,33 +259,33 @@ namespace UHSampleGame.TileSystem
             Tile currentNeighbor;
             for (int i = 0; i < allNeighbors.Count; i++)
             {
-                currentNeighbor = GetTileNeighbor(Tile2, allNeighbors[i]);
+                currentNeighbor = GetTileNeighbor(ref Tile2, allNeighbors[i]);
                 if (exclude != null && exclude.ContainsKey(currentNeighbor.ID))
                     continue;
                 if (currentNeighbor.IsWalkable())
                 {
                     if (allNeighbors[i] == NeighborTile.DownLeft)
                     {
-                        if (GetTileNeighbor(Tile2, NeighborTile.Down).IsWalkable() &&
-                            GetTileNeighbor(Tile2, NeighborTile.Left).IsWalkable())
+                        if (GetTileNeighbor(ref Tile2, NeighborTile.Down).IsWalkable() &&
+                            GetTileNeighbor(ref Tile2, NeighborTile.Left).IsWalkable())
                             neighbors.Add(currentNeighbor);
                     }
                     else if (allNeighbors[i] == NeighborTile.DownRight)
                     {
-                        if (GetTileNeighbor(Tile2, NeighborTile.Down).IsWalkable() &&
-                            GetTileNeighbor(Tile2, NeighborTile.Right).IsWalkable())
+                        if (GetTileNeighbor(ref Tile2, NeighborTile.Down).IsWalkable() &&
+                            GetTileNeighbor(ref Tile2, NeighborTile.Right).IsWalkable())
                             neighbors.Add(currentNeighbor);
                     }
                     else if (allNeighbors[i] == NeighborTile.UpLeft)
                     {
-                        if (GetTileNeighbor(Tile2, NeighborTile.Up).IsWalkable() &&
-                            GetTileNeighbor(Tile2, NeighborTile.Left).IsWalkable())
+                        if (GetTileNeighbor(ref Tile2, NeighborTile.Up).IsWalkable() &&
+                            GetTileNeighbor(ref Tile2, NeighborTile.Left).IsWalkable())
                             neighbors.Add(currentNeighbor);
                     }
                     else if (allNeighbors[i] == NeighborTile.UpRight)
                     {
-                        if (GetTileNeighbor(Tile2, NeighborTile.Up).IsWalkable() &&
-                            GetTileNeighbor(Tile2, NeighborTile.Right).IsWalkable())
+                        if (GetTileNeighbor(ref Tile2, NeighborTile.Up).IsWalkable() &&
+                            GetTileNeighbor(ref Tile2, NeighborTile.Right).IsWalkable())
                             neighbors.Add(currentNeighbor);
                     }
                     else
