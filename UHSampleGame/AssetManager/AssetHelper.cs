@@ -45,6 +45,7 @@ namespace UHSampleGame
             new Asset("video", "Video\\oceanView", typeof(Video)),
             new Asset(VideoLoad),
             new Asset("background", "water_tiled", typeof(Texture2D)),
+            new Asset("playerMenuBg", "PlayerMenu\\playerMenu", typeof(Texture2D)),
             new Asset("font", "font", typeof(SpriteFont)),
             new Asset("dimensions", typeof(Vector2), (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width,             
                                      (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height),

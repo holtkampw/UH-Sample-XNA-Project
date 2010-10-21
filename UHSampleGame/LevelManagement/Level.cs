@@ -19,20 +19,24 @@ namespace UHSampleGame.LevelManagement
         int id;
         List<List<int>> map;
         Vector2 numTiles;
-        List<Player> humanPlayers;
-        List<Player> aiPlayers;
+        //List<Player> humanPlayers;
+        //List<Player> aiPlayers;
+        List<Player> players;
+        List<int> humanPlayers = new List<int>();
+        List<int> computerPlayers = new List<int>();
 
         public int ID
         {
             get { return id; }
         }
 
-        public Level(int id, List<List<int>> map, List<Player> humanPlayers, List<Player> aiPlayers)
+        public Level(int id, List<List<int>> map, /*List<Player> humanPlayers, List<Player> aiPlayers*/ List<Player> players)
         {
             this.id = id;
             this.map = map;
-            this.humanPlayers = humanPlayers;
-            this.aiPlayers = aiPlayers;
+            this.players = players;
+            //this.humanPlayers = humanPlayers;
+            //this.aiPlayers = aiPlayers;
         }
 
         public void Load()
@@ -62,10 +66,10 @@ namespace UHSampleGame.LevelManagement
             }
 
             for (int i = 0; i < humanPlayers.Count; i++)
-                humanPlayers[i].SetTargetBase(aiPlayers[0].PlayerBase);
+                players[humanPlayers[i] - 1].SetTargetBase(players[computerPlayers[0] - 1].PlayerBase);
 
-            for (int i = 0; i < aiPlayers.Count; i++)
-                aiPlayers[i].SetTargetBase(humanPlayers[0].PlayerBase);
+            for (int i = 0; i < computerPlayers.Count; i++)
+                players[computerPlayers[i] - 1].SetTargetBase(players[humanPlayers[0] - 1].PlayerBase);
 
             TileMap.UpdateTilePaths();
 
@@ -95,12 +99,12 @@ namespace UHSampleGame.LevelManagement
             }
             else
             {
-                int playerNum, teamNum, towerNum, upgradeNum;
+                int playerType, playerNum, teamNum, towerNum, upgradeNum;
 
-                ExtractObjectKeyInfo(objectKey, out playerNum,
+                ExtractObjectKeyInfo(objectKey, out playerType, out playerNum,
                     out teamNum, out towerNum, out upgradeNum);
 
-                Player currentPlayer = GetPlayer(playerNum);
+                Player currentPlayer = GetPlayer(playerType, playerNum);
 
                 if (towerNum == 0)
                 {
@@ -121,19 +125,21 @@ namespace UHSampleGame.LevelManagement
             }
         }
 
-        protected Player GetPlayer(int playerNum)
+        protected Player GetPlayer(int playerType, int playerNum)
         {
-            if (playerNum < 5)
+            if (playerType == 1)
             {
-                return humanPlayers[playerNum - 1];
+                humanPlayers.Add(playerNum);
+                return players[playerNum - 1];
             }
             else
             {
-                return aiPlayers[playerNum - 5];
+                computerPlayers.Add(playerNum);
+                return players[playerNum - 1];
             }
         }
 
-        private void ExtractObjectKeyInfo(int objectKey, out int playerNum, out int teamNum, out int towerNum, out int upgradeNum)
+        private void ExtractObjectKeyInfo(int objectKey, out int playerType, out int playerNum, out int teamNum, out int towerNum, out int upgradeNum)
         {
             upgradeNum = objectKey % 10;
             objectKey = objectKey / 10;
@@ -145,6 +151,9 @@ namespace UHSampleGame.LevelManagement
             objectKey = objectKey / 10;
 
             playerNum = objectKey % 10;
+            objectKey = objectKey / 10;
+
+            playerType = objectKey % 10;
             objectKey = objectKey / 10;
         }
     }

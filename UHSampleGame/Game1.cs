@@ -121,6 +121,16 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.TowerBuild, Keys.Space);
             inputManager.AddInput(InputAction.TowerBuild, Buttons.RightTrigger);
 
+            //PlayerMenu
+            inputManager.AddInput(InputAction.PlayerMenuLeft, Buttons.DPadLeft);
+            inputManager.AddInput(InputAction.PlayerMenuRight, Buttons.DPadRight);
+            inputManager.AddInput(InputAction.PlayerMenuUp, Buttons.DPadUp);
+            inputManager.AddInput(InputAction.PlayerMenuDown, Buttons.DPadDown);
+            inputManager.AddInput(InputAction.PlayerMenuLeft, Keys.J);
+            inputManager.AddInput(InputAction.PlayerMenuRight, Keys.L);
+            inputManager.AddInput(InputAction.PlayerMenuUp, Keys.I);
+            inputManager.AddInput(InputAction.PlayerMenuDown, Keys.K);
+
             //Setup Screen Manager
             screenManager = new ScreenManager(this);
 
@@ -129,7 +139,7 @@ namespace UHSampleGame
             this.Services.AddService(typeof(CameraManager), cameraManager);
 
             //Set Starting Screen
-            screenManager.ShowScreen(new MenuScreenTest());
+            screenManager.ShowScreen(new IntroScreen());
         }
 
         /// <summary>

@@ -19,8 +19,20 @@ using UHSampleGame.Events;
 namespace UHSampleGame.Players
 {
     public enum PlayerType { Human, AI };
+    public enum PlayerMenuTabs { Status, DefenseTower, UnitTower, Powers}
     public class Player
     {
+        static Texture2D menuTab;
+        static List<List<Rectangle>> menuTabStartPositions;
+        static Vector2 menuTabOffset = new Vector2(15.0f, 0.0f);
+        const int NORMAL = 0;
+        const int SELECTED = 1;
+        static Rectangle[] menuTabSource;
+        PlayerMenuTabs currentlySelectedPlayerStatus;
+        public static Enum[] playerMenuTabsEnumType = EnumHelper.EnumToArray(new PlayerMenuTabs());
+        static int NUM_TABS = playerMenuTabsEnumType.Length;
+        static SpriteFont statusFont;
+
         public Base PlayerBase;
 
         protected int PlayerNum;
@@ -35,6 +47,8 @@ namespace UHSampleGame.Players
 
         //HumanPlayer
         TeamableAnimatedObject avatar;
+
+     
 
         #region Properties
        
@@ -60,6 +74,35 @@ namespace UHSampleGame.Players
                 avatar.PlayClip("Take 001");
                 avatar.SetPosition(PlayerBase.Position);
             }
+
+            if (menuTab == null)
+            {
+                menuTab = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenuTab");
+                menuTabStartPositions = new List<List<Rectangle>>();
+                for(int i = 0; i < 8; i++)
+                {
+                    menuTabStartPositions.Add(new List<Rectangle>());
+                    Vector2 position = Vector2.Zero;
+                    switch(i)
+                    {
+                        case 1:
+                            position = new Vector2(30, 170);
+                            break;
+                    }
+                    for (int j = 0; j < NUM_TABS; j++)
+                    {
+                        menuTabStartPositions[i].Add(new Rectangle((int)position.X, (int)position.Y, menuTab.Width, menuTab.Height / 2));
+                        position += menuTabOffset;
+                    }
+                }
+
+                menuTabSource = new Rectangle[2];
+                menuTabSource[SELECTED] = new Rectangle(0, menuTab.Width + 1, menuTab.Width, menuTab.Height / 2);
+                menuTabSource[NORMAL] = new Rectangle(0, 0, menuTab.Width, menuTab.Height / 2);
+                statusFont = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\statusFont");
+               
+            }
+            currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
         }
 
         public void SetBase(Base playerBase)
@@ -116,6 +159,18 @@ namespace UHSampleGame.Players
                 {
                     TowerCollection.Add(PlayerNum, TeamNum, TowerType.TowerA, this.avatar.Position);
                 }
+
+                if (input.CheckNewAction(InputAction.PlayerMenuLeft))
+                {
+                    if (((int)currentlySelectedPlayerStatus - 1) >= 0)
+                        currentlySelectedPlayerStatus--;
+                }
+
+                if (input.CheckNewAction(InputAction.PlayerMenuRight))
+                {
+                    if (((int)currentlySelectedPlayerStatus + 1) < playerMenuTabsEnumType.Length)
+                        currentlySelectedPlayerStatus++;
+                }
             }
         }
 
@@ -139,6 +194,8 @@ namespace UHSampleGame.Players
             {
                 avatar.Draw(gameTime);
             }
+
+            DrawMenu(gameTime);
         }
 
         public void SetTargetBase(Base target)
@@ -151,6 +208,42 @@ namespace UHSampleGame.Players
         {
             TileMap.SetTowerForLevelMap(tower, tile);
             TowerCollection.Add(PlayerNum, TeamNum, tower.Type, tile.Position);
+        }
+
+        public void DrawMenu(GameTime gameTime)
+        {
+            ScreenManager.SpriteBatch.Begin();
+            for (int i = 0; i < NUM_TABS; i++)
+            {
+                if ((int)currentlySelectedPlayerStatus == i)
+                {
+                    ScreenManager.SpriteBatch.Draw(menuTab, menuTabStartPositions[PlayerNum][i], menuTabSource[SELECTED], Color.White);
+                } else
+                {
+                    ScreenManager.SpriteBatch.Draw(menuTab, menuTabStartPositions[PlayerNum][i], menuTabSource[NORMAL], Color.White);
+                }
+            }
+            switch(currentlySelectedPlayerStatus)
+            {
+                case PlayerMenuTabs.Status:
+                    DrawStatus();
+                    break;
+                case PlayerMenuTabs.DefenseTower:
+                    break;
+                case PlayerMenuTabs.UnitTower:
+                    break;
+                case PlayerMenuTabs.Powers:
+                    break;
+            }
+
+            ScreenManager.SpriteBatch.End();
+
+        }
+
+        void DrawStatus()
+        {
+            
+
         }
     }
 }

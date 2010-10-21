@@ -14,8 +14,6 @@ namespace UHSampleGame.Screens
 {
     public class MenuScreenTest : Screen
     {
-        Video video;
-        VideoPlayer videoPlayer;
 
         Texture2D titleTexture;
 
@@ -145,17 +143,13 @@ namespace UHSampleGame.Screens
 
         public override void LoadContent()
         {
-            video = ScreenManager.Game.Content.Load<Video>("Video\\intro");
-            videoPlayer = new VideoPlayer();
-            videoPlayer.IsLooped = true;
 
-            titleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images\\deepSea");
+            titleTexture = ScreenManager.Game.Content.Load<Texture2D>("MainMenu\\mainMenu_Cover");
+
         }
 
         public override void UnloadContent()
         {
-            videoPlayer.Stop();
-            videoPlayer.Dispose();
         }
 
         public override void Update(GameTime gameTime)
@@ -173,28 +167,12 @@ namespace UHSampleGame.Screens
                 arrowUpdateTime = 0;
             }
             
-
-            if (!IsVisible)
-            {
-                videoPlayer.Stop();
-                return;
-            }
-
-            if (videoPlayer.State != MediaState.Playing)
-                videoPlayer.Play(video);
         }
 
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
-            Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
             spriteBatch.Begin();
-
-            if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
-            {
-                //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
-                spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, viewport.Width , viewport.Height), Color.White);
-            }
 
             spriteBatch.Draw(titleTexture, new Vector2(0, 0), Color.White);
 

@@ -28,6 +28,7 @@ namespace UHSampleGame.Screens
     {
         #region Class Variables
         Texture2D background;
+        Texture2D playerMenuBg;
         CameraManager cameraManager;
 
         Video video;
@@ -68,45 +69,6 @@ namespace UHSampleGame.Screens
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
 
-            //UnitCollection.Initialize(2);
-            //TowerCollection.Initialize(2);
-            //Vector2 numTiles = new Vector2(20, 10);
-
-            //TileMap2.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
-            //p1 = new Player2(0, 1, TileMap2.Tiles[0], PlayerType.Human);
-            //aI = new Player2(1, 2, TileMap2.Tiles[TileMap2.Tiles.Count - 1], PlayerType.AI);
-
-            //LevelManager2.Initialize();
-            //LevelManager2.AddPlayer(p1);
-            //LevelManager2.AddPlayer(aI);
-            //LevelManager2.LoadLevel(1);
-
-            //Viewport viewport = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport;
-            //dimensions = new Vector2(viewport.Width, viewport.Height);
-
-            //video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
-            //videoPlayer = new VideoPlayer();
-            //videoPlayer.IsLooped = true;
-
-            //if (videoPlayer.State != MediaState.Playing)
-            //    videoPlayer.Play(video);
-
-            //background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
-
-            //cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-
-            //if (numTiles.X == 10 && numTiles.Y == 10)
-            //{
-            //    cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
-            //    cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
-            //}
-            //else if (numTiles.X == 20 && numTiles.Y == 10)
-            //{
-            //    cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
-            //    cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
-            //}
-
-            //font = ScreenManager.Game.Content.Load<SpriteFont>("font");
         }
         #endregion
 
@@ -123,6 +85,7 @@ namespace UHSampleGame.Screens
                 p1 = AssetHelper.Get<Player>("p1");
                 aI = AssetHelper.Get<Player>("aI");
                 dimensions = AssetHelper.Get<Vector2>("dimensions");
+                playerMenuBg = AssetHelper.Get<Texture2D>("playerMenuBg");
                 contentLoaded = true;
 
             }
@@ -182,6 +145,7 @@ namespace UHSampleGame.Screens
                     ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
                         (int)dimensions.X, (int)dimensions.Y), Color.White);
                 }
+                ScreenManager.SpriteBatch.Draw(playerMenuBg, Vector2.Zero, Color.White);
 
                 ScreenManager.SpriteBatch.End();
 
