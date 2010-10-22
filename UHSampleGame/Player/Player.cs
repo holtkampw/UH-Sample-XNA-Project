@@ -23,12 +23,13 @@ namespace UHSampleGame.Players
     public class Player
     {
         static Texture2D menuTab;
-        static List<List<Rectangle>> menuTabStartPositions;
-        static Vector2 menuTabOffset = new Vector2(15.0f, 0.0f);
+        Texture2D playerMenuBg;
+
         const int NORMAL = 0;
         const int SELECTED = 1;
         static Rectangle[] menuTabSource;
         PlayerMenuTabs currentlySelectedPlayerStatus;
+
         public static Enum[] playerMenuTabsEnumType = EnumHelper.EnumToArray(new PlayerMenuTabs());
         static int NUM_TABS = playerMenuTabsEnumType.Length;
         static SpriteFont statusFont;
@@ -46,10 +47,16 @@ namespace UHSampleGame.Players
         public static Enum[] playerEnumType = EnumHelper.EnumToArray(new PlayerType());
 
         //Global Location of Player (array of 4)
-        VectorNew2[] globalLocations = { new VectorNew2(0, 0), new VectorNew2(0, 0), new VectorNew2(0, 0), new VectorNew2(0, 0) };
+        static Vector2[] globalLocations = { Vector2.Zero, new Vector2(40f, 30f), new Vector2(40f, 200f), new Vector2(40f, 370f), new Vector2(40f, 540f) };
+        //Local Location of Tab [playerNum][tabNum]
+        static Vector2[][] tabLocation;
+
+        //Local Location of money
+        static Vector2[] moneyLocation;
         //Local Location of Status > Health
-        //VectorNew2
+        static Vector2[] statusHealthLocation;
         //Local Location of Status > NumberOfUnits
+        static Vector2[] statusNumberOfUnitsLocation;
 
         //Local Location of Icons
         //Local Location of Icon Offset
@@ -58,7 +65,8 @@ namespace UHSampleGame.Players
 
         //HumanPlayer
         TeamableAnimatedObject avatar;
-
+        public int Money;
+        public int Health;
      
 
         #region Properties
@@ -88,24 +96,7 @@ namespace UHSampleGame.Players
 
             if (menuTab == null)
             {
-                menuTab = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenuTab");
-                menuTabStartPositions = new List<List<Rectangle>>();
-                for(int i = 0; i < 8; i++)
-                {
-                    menuTabStartPositions.Add(new List<Rectangle>());
-                    Vector2 position = Vector2.Zero;
-                    switch(i)
-                    {
-                        case 1:
-                            position = new Vector2(30, 170);
-                            break;
-                    }
-                    for (int j = 0; j < NUM_TABS; j++)
-                    {
-                        menuTabStartPositions[i].Add(new Rectangle((int)position.X, (int)position.Y, menuTab.Width, menuTab.Height / 2));
-                        position += menuTabOffset;
-                    }
-                }
+                menuTab = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenuTab");    
 
                 menuTabSource = new Rectangle[2];
                 menuTabSource[SELECTED] = new Rectangle(0, menuTab.Width, menuTab.Width, menuTab.Height / 2);
@@ -113,7 +104,30 @@ namespace UHSampleGame.Players
                 statusFont = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\statusFont");
                
             }
-            currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
+            if (tabLocation == null)
+            {
+                tabLocation = new Vector2[5][];
+                Vector2 tabOffset = new Vector2(15, 0);
+                moneyLocation = new Vector2[5];
+                statusHealthLocation = new Vector2[5];
+                statusNumberOfUnitsLocation = new Vector2[5];
+                for (int i = 1; i < 5; i++)
+                {
+                    Vector2 tabStartPosition = new Vector2(8, 148);
+                    tabLocation[i] = new Vector2[NUM_TABS];
+                    for (int t = 0; t < NUM_TABS; t++)
+                    {
+                        tabLocation[i][t] = globalLocations[i] + tabStartPosition;
+                        tabStartPosition += tabOffset;
+                    }
+
+                    moneyLocation[i] = globalLocations[i] + new Vector2(110, -1);
+                    statusHealthLocation[i] = globalLocations[i] + new Vector2(10, 40);
+                    statusNumberOfUnitsLocation[i] = globalLocations[i] + new Vector2(10, 80);
+                }
+            }
+                currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
+            playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
         }
 
         public void SetBase(Base playerBase)
@@ -217,27 +231,42 @@ namespace UHSampleGame.Players
         public void DrawMenu(GameTime gameTime)
         {
             ScreenManager.SpriteBatch.Begin();
-            for (int i = 0; i < NUM_TABS; i++)
+            ScreenManager.SpriteBatch.Draw(playerMenuBg, globalLocations[PlayerNum], Color.White);
+            
+            if (Type == PlayerType.Human)
             {
-                if ((int)currentlySelectedPlayerStatus == i)
+                ScreenManager.SpriteBatch.DrawString(statusFont, Money.ToString(), moneyLocation[PlayerNum], Color.White);
+
+                for (int i = 0; i < NUM_TABS; i++)
                 {
-                    ScreenManager.SpriteBatch.Draw(menuTab, menuTabStartPositions[PlayerNum][i], menuTabSource[SELECTED], Color.White);
-                } else
+                    if ((int)currentlySelectedPlayerStatus == i)
+                    {
+                        ScreenManager.SpriteBatch.Draw(menuTab, tabLocation[PlayerNum][i],
+                            menuTabSource[SELECTED], Color.White);
+                    }
+                    else
+                    {
+                        ScreenManager.SpriteBatch.Draw(menuTab, tabLocation[PlayerNum][i],
+                            menuTabSource[NORMAL], Color.White);
+                    }
+                }
+
+                switch (currentlySelectedPlayerStatus)
                 {
-                    ScreenManager.SpriteBatch.Draw(menuTab, menuTabStartPositions[PlayerNum][i], menuTabSource[NORMAL], Color.White);
+                    case PlayerMenuTabs.Status:
+                        DrawStatus();
+                        break;
+                    case PlayerMenuTabs.DefenseTower:
+                        break;
+                    case PlayerMenuTabs.UnitTower:
+                        break;
+                    case PlayerMenuTabs.Powers:
+                        break;
                 }
             }
-            switch(currentlySelectedPlayerStatus)
+            else
             {
-                case PlayerMenuTabs.Status:
-                    DrawStatus();
-                    break;
-                case PlayerMenuTabs.DefenseTower:
-                    break;
-                case PlayerMenuTabs.UnitTower:
-                    break;
-                case PlayerMenuTabs.Powers:
-                    break;
+                ScreenManager.SpriteBatch.DrawString(statusFont, "??????", moneyLocation[PlayerNum], Color.White);
             }
 
             ScreenManager.SpriteBatch.End();
@@ -246,7 +275,9 @@ namespace UHSampleGame.Players
 
         void DrawStatus()
         {
-            
+            ScreenManager.SpriteBatch.DrawString(statusFont, Health.ToString(), statusHealthLocation[PlayerNum], Color.White);
+            ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayer(PlayerNum).ToString(), 
+                statusNumberOfUnitsLocation[PlayerNum], Color.White);
 
         }
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace UHSampleGame
 {
@@ -10,7 +11,7 @@ namespace UHSampleGame
         int X = 0;
         int Y = 0;
 
-        public VectorNew2 Zero
+        public static VectorNew2 Zero
         {
             get { return new VectorNew2(0, 0); }
         }
@@ -29,6 +30,11 @@ namespace UHSampleGame
         public static VectorNew2 operator -(VectorNew2 v1, VectorNew2 v2)
         {
             return new VectorNew2(v1.X - v2.X, v1.Y - v2.Y);
+        }
+
+        public Vector2 ToVector2()
+        {
+            return new Vector2((float)this.X, (float)this.Y);
         }
 
 

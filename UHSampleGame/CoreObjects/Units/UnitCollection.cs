@@ -18,6 +18,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         #region Class Variables
         const int MAX_UNITS = 5000;
+        static int UnitCounter;
 
         static int NumPlayers;
         static Enum[] unitTypes = EnumHelper.EnumToArray(new UnitType());
@@ -103,13 +104,13 @@ namespace UHSampleGame.CoreObjects.Units
 
         public static int AllUnitCount()
         {
-            int sum = 0;
+            UnitCounter = 0;
 
             for (int i = 0; i < NumPlayers; i++)
                 for (int j = 0; j < unitTypes.Length; j++)
-                    sum += unitsCount[i][j];
+                    UnitCounter += unitsCount[i][j];
 
-            return sum;
+            return UnitCounter;
         }
 
         public static void Add(int playerNum, int teamNum, int attackPlayerNum, UnitType unitType)
@@ -245,6 +246,15 @@ namespace UHSampleGame.CoreObjects.Units
                     }
                 }
             }
+        }
+
+        public static int UnitCountForPlayer(int PlayerNum)
+        {
+            UnitCounter = 0;
+
+            for (int j = 0; j < unitTypes.Length; j++)
+                    UnitCounter += unitsCount[PlayerNum][j];
+            return UnitCounter;
         }
     }
 }

@@ -50,6 +50,10 @@ Content\Objects\Towers\towerCColor_0.xnb
 Content\Objects\Units\boatTexture_0.xnb
 Content\Objects\Base\enemyShipPlatformColor_0.xnb
 Content\MainMenu\menu_tex_0.xnb
+Content\PlayerMenu\player01.xnb
+Content\PlayerMenu\player02.xnb
+Content\PlayerMenu\player03.xnb
+Content\PlayerMenu\player04.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv
