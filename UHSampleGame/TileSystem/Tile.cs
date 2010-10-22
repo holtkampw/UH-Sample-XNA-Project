@@ -136,7 +136,7 @@ namespace UHSampleGame.TileSystem
             OnUnitEnter(unit);
         }
 
-        public void RemoveUnit(UnitType type, Unit unit)
+        public void RemoveUnit(UnitType type, ref Unit unit)
         {
             units.Remove(unit);
             //Set new unit to attack
@@ -154,9 +154,9 @@ namespace UHSampleGame.TileSystem
             }
         }
 
-        //public override bool Equals(object obj)
-        //{
-        //    return id == ((Tile2)obj).id;
-        //}
+        public override bool Equals(object obj)
+        {
+            return ID == ((Tile)obj).ID;
+        }
     }
 }

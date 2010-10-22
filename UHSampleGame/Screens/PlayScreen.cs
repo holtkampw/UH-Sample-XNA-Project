@@ -31,12 +31,6 @@ namespace UHSampleGame.Screens
         Texture2D playerMenuBg;
         CameraManager cameraManager;
 
-        Texture2D loading_screen;
-        Texture2D loading_screen_hl;
-        float currentLoadingOpacity = 0.0f;
-        Vector2 currentLoadingPosition = Vector2.Zero;
-        Vector3 whiteVector3 = new Vector3(255, 255, 255);
-
         Video video;
         VideoPlayer videoPlayer;
         Vector2 dimensions;
@@ -46,8 +40,9 @@ namespace UHSampleGame.Screens
 
         SpriteFont font;
 
+        bool isLoaded = false;
+
         Vector2 numTiles;
-        bool contentLoaded = false;
 
         #endregion
 
@@ -55,10 +50,7 @@ namespace UHSampleGame.Screens
         public PlayScreen()
             : base("PlayScreen2")
         {
-            AssetHelper.LoadOne(ScreenManager.Game);
-            font = AssetHelper.Get<SpriteFont>("font");
-            loading_screen = AssetHelper.Get<Texture2D>("loading_screen");
-            loading_screen_hl = AssetHelper.Get<Texture2D>("loading_screen_hl");
+
         }
 
         public override void LoadContent()
@@ -78,80 +70,62 @@ namespace UHSampleGame.Screens
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
 
+            videoPlayer = new VideoPlayer();
+            video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
+            videoPlayer.IsLooped = true;
+
+            background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
+            playerMenuBg= ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenu");
+            font = ScreenManager.Game.Content.Load<SpriteFont>("font");
+            dimensions = new Vector2((float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width,             
+                                     (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height);
+             
+            UnitCollection.Initialize(8);
+            TowerCollection.Initialize(8);
+            BaseCollection.Initialize();
+            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
+        
+            p1 = new Player(1, 1, 2, TileMap.Tiles[0], PlayerType.Human);
+            aI = new Player(2, 2, 1, TileMap.Tiles[TileMap.Tiles.Count - 1], PlayerType.AI);
+
+            LevelManager.Initialize();
+            LevelManager.AddPlayer(p1);
+            LevelManager.AddPlayer(aI);
+            LevelManager.LoadLevel(1);
+
+            isLoaded = true;
         }
         #endregion
 
         #region Update/Draw
         public override void Update(GameTime gameTime)
         {
-            //Call into the Asset helper to load your assets
-            if (!AssetHelper.Loaded)
+ 
+            if (!IsVisible)
             {
-                AssetHelper.LoadOne(ScreenManager.Game);
-                currentLoadingPosition.X += 20.0f;
-                if (currentLoadingPosition.X < 600.0f)
-                {
-                    if (currentLoadingOpacity <= 0.95f)
-                    {
-                        currentLoadingOpacity += 0.05f;
-                    }
-                }
-                else
-                {
-                    if (currentLoadingOpacity >= 0.05f)
-                    {
-                        currentLoadingOpacity -= 0.05f;
-                    }
-                }
-
-                if (currentLoadingPosition.X >= 1200.0f)
-                {
-                    currentLoadingPosition.X = -200.0f;
-                    currentLoadingOpacity = 0.05f;
-                }
-
-
+                videoPlayer.Stop();
+                return;
             }
 
-            if (AssetHelper.Loaded)
-            {
-                videoPlayer = AssetHelper.Get<VideoPlayer>("videoPlayer");
-                video = AssetHelper.Get<Video>("video");
-                p1 = AssetHelper.Get<Player>("p1");
-                aI = AssetHelper.Get<Player>("aI");
-                dimensions = AssetHelper.Get<Vector2>("dimensions");
-                playerMenuBg = AssetHelper.Get<Texture2D>("playerMenuBg");
-                contentLoaded = true;
+            if (videoPlayer.State != MediaState.Playing)
+                videoPlayer.Play(video);
 
-            }
+            cameraManager.Update();
 
-            // Show a simple example fade effect
-            if (AssetHelper.Loaded)
-            {
-                if (!IsVisible)
-                {
-                   // videoPlayer.Stop();
-                    return;
-                }
 
-               // if (videoPlayer.State != MediaState.Playing)
-               //     videoPlayer.Play(video);
-
-                cameraManager.Update();
-
-                p1.Update(gameTime);
-                aI.Update(gameTime);
-                UnitCollection.Update(gameTime);
-                TowerCollection.Update(gameTime);
-                DebugInfo.Update(gameTime);
-            }
+            p1.Update(gameTime);
+            aI.Update(gameTime);
+            UnitCollection.Update(gameTime);
+            TowerCollection.Update(gameTime);
+            DebugInfo.Update(gameTime);
             
         }
 
         public override void HandleInput(InputManager input)
         {
-            if (AssetHelper.Loaded && contentLoaded)
-            {
+
+            if (isLoaded)
+            { 
                 p1.HandleInput(input);
                 aI.HandleInput(input);
             }
@@ -159,29 +133,15 @@ namespace UHSampleGame.Screens
 
         public override void Draw(GameTime gameTime)
         {
-            
-            if (!AssetHelper.Loaded && !contentLoaded)
-            {
-                //Currently loading, display progress
-                ScreenManager.SpriteBatch.Begin();
-                //ScreenManager.SpriteBatch.Draw(loading_scree, Vector2.Zero, Color.White);
-                ScreenManager.SpriteBatch.Draw(loading_screen, Vector2.Zero, Color.White);
-                ScreenManager.SpriteBatch.Draw(loading_screen_hl, currentLoadingPosition, 
-                    new Color(whiteVector3.X, whiteVector3.Y, whiteVector3.Z, currentLoadingOpacity));
-                ScreenManager.SpriteBatch.DrawString(font,
-                    "Loading Progress: " + AssetHelper.PercentLoaded + "%", new Vector2(50, 50), Color.DarkRed);
-                ScreenManager.SpriteBatch.End();
-            }
-            else
-            {
+
                 ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
-               // if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
-               // {
-                    //spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, video.Width, video.Height), Color.White);
-               //     ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
-               //         (int)dimensions.X, (int)dimensions.Y), Color.White);
-               // }
+                if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+                {
+                    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
+                        (int)dimensions.X, (int)dimensions.Y), Color.White);
+                }
+
                 ScreenManager.SpriteBatch.Draw(playerMenuBg, Vector2.Zero, Color.White);
 
                 ScreenManager.SpriteBatch.End();
@@ -197,7 +157,6 @@ namespace UHSampleGame.Screens
                 ScreenManager.SpriteBatch.Begin();
                 DebugInfo.Draw();
                 ScreenManager.SpriteBatch.End();
-            }
         }
         #endregion
 
@@ -207,5 +166,7 @@ namespace UHSampleGame.Screens
 
         }
         #endregion
+
+       
     }
 }
