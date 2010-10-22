@@ -23,6 +23,8 @@ namespace UHSampleGame.Players
     public class Player
     {
         static Texture2D menuTab;
+        static List<List<Rectangle>> menuTabStartPositions;
+        static Vector2 menuTabOffset = new Vector2(15.0f, 0.0f);
         Texture2D playerMenuBg;
 
         const int NORMAL = 0;

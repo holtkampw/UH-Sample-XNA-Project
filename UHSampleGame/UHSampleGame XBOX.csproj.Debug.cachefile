@@ -13,11 +13,6 @@ Content\MainMenu\left_arrow.xnb
 Content\MainMenu\right_arrow.xnb
 Content\MainMenu\a_button.xnb
 Content\Levels\loading_screen.xnb
-Content\MainMenu\mainMenu_Cover.xnb
-Content\PlayerMenu\playerMenu.xnb
-Content\PlayerMenu\playerMenuTab.xnb
-Content\LoadScreen\levelLoader01.xnb
-Content\LoadScreen\levelLoader01_hl.xnb
 Content\Model\box.xnb
 Content\Model\pyramids.xnb
 Content\AnimatedModel\dude.xnb
@@ -32,7 +27,6 @@ Content\Objects\Base\enemyBaseShip01.xnb
 Content\MainMenu\oilBarrel_MainMenu.xnb
 Content\Video\intro.xnb
 Content\Video\oceanView.xnb
-Content\Video\splash.xnb
 Content\Objects\Towers\InstancedModel.xnb
 Content\Objects\Units\InstancedModel.xnb
 Content\Model\box_texture_0.xnb
@@ -54,6 +48,13 @@ Content\PlayerMenu\player01.xnb
 Content\PlayerMenu\player02.xnb
 Content\PlayerMenu\player03.xnb
 Content\PlayerMenu\player04.xnb
+Content\PlayerMenu\statusFont.xnb
+Content\MainMenu\mainMenu_Cover.xnb
+Content\PlayerMenu\playerMenu.xnb
+Content\PlayerMenu\playerMenuTab.xnb
+Content\Video\splash.xnb
+Content\LoadScreen\levelLoader01.xnb
+Content\LoadScreen\levelLoader01_hl.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv

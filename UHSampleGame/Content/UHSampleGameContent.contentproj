@@ -81,7 +81,8 @@
     <Compile Include="Model\box.fbx">
       <Name>box</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>ModelProcessor</Processor>      <Processor>ModelProcessor</Processor>
+      <Processor>InstancedModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +342,13 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
     <Compile Include="PlayerMenu\player02.png">
+  <ItemGroup>
+    <Compile Include="Model\InstancedModel.fx">
+      <Name>InstancedModel</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
       <Name>player02</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -365,3 +373,4 @@
   </Target>
 -->
 </Project>
+

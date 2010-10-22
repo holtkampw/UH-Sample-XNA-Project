@@ -17,7 +17,7 @@ namespace UHSampleGame.CoreObjects.Units
     {
 
         #region Class Variables
-        const int MAX_UNITS = 5000;
+        const int MAX_UNITS = 10000;
         static int UnitCounter;
 
         static int NumPlayers;
@@ -92,7 +92,7 @@ namespace UHSampleGame.CoreObjects.Units
                 switch ((UnitType)j)
                 {
                     case UnitType.TestUnit:
-                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Units\\enemyShip01"));
+                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Model\\box"));//"Objects\\Units\\enemyShip01"));
                         instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
                         instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
                         break;
@@ -128,12 +128,12 @@ namespace UHSampleGame.CoreObjects.Units
 
                     unitsCount[playerNum][(int)unitType]++;
 
-                    if(i == unitsMaxIndex[playerNum][(int)unitType])
+                    if (i == unitsMaxIndex[playerNum][(int)unitType])
                         unitsMaxIndex[playerNum][(int)unitType]++;
 
                     break;
                 }
-            } 
+            }
         }
 
         public static void Remove()
@@ -144,11 +144,13 @@ namespace UHSampleGame.CoreObjects.Units
         public static void Update(GameTime gameTime)
         {
             Unit u;
+            int uCount;
             for (int i = 0; i < NumPlayers; i++)
                 for (int j = 0; j < unitTypes.Length; j++)
                 {
                     updateCount = 0;
-                    for (int k = 0; k < MAX_UNITS && updateCount < unitsCount[i][j]; k++)
+                    uCount = unitsCount[i][j];
+                    for (int k = 0; k < MAX_UNITS && updateCount < uCount; k++)
                     {
                         u = units[i][j][k];
                         if (u.Status != UnitStatus.Inactive)
@@ -168,18 +170,21 @@ namespace UHSampleGame.CoreObjects.Units
                 {
                     DrawUnits(i, j);
                 }
-            }             
+            }
 
         }
 
         private static void DrawUnits(int i, int j)
         {
             drawCount = 0;
-            for (int k = 0; k < unitsMaxIndex[i][j] && drawCount < unitsCount[i][j]; k++)
+            int uMaxIndex = unitsMaxIndex[i][j];
+            Unit u;
+            for (int k = 0; k < uMaxIndex && drawCount < uMaxIndex; k++)
             {
-                if (units[i][j][k].IsActive())
+                u = units[i][j][k];
+                if (u.Status == UnitStatus.Deployed)
                 {
-                    unitTransforms[drawCount] = units[i][j][k].Transforms;
+                    unitTransforms[drawCount] = u.Transforms;
                     drawCount++;
                 }
             }
@@ -188,7 +193,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         }
 
-       
+
 
         private static void DrawInstancedUnits(int playerNum, int unitType, int amount)
         {
@@ -201,11 +206,12 @@ namespace UHSampleGame.CoreObjects.Units
             if ((instanceVertexBuffer == null) ||
                 (amount > instanceVertexBuffer.VertexCount))
             {
-                if (instanceVertexBuffer != null)
-                    instanceVertexBuffer.Dispose();
+                 if (instanceVertexBuffer != null)
+                     instanceVertexBuffer.Dispose();
 
-                instanceVertexBuffer = new DynamicVertexBuffer(ScreenManager.Game.GraphicsDevice, instanceVertexDeclaration,
-                                                               amount, BufferUsage.WriteOnly);
+                    instanceVertexBuffer = new DynamicVertexBuffer(ScreenManager.Game.GraphicsDevice, instanceVertexDeclaration,
+                                                                   amount, BufferUsage.WriteOnly);
+
             }
 
             // Transfer the latest instance transform matrices into the instanceVertexBuffer.
@@ -213,11 +219,11 @@ namespace UHSampleGame.CoreObjects.Units
 
             for (int i = 0; i < instancedModels[unitType].Meshes.Count; i++)
             {
-                for(int j = 0; j < instancedModels[unitType].Meshes[i].MeshParts.Count; j++)
+                for (int j = 0; j < instancedModels[unitType].Meshes[i].MeshParts.Count; j++)
                 {
                     // Tell the GPU to read from both the model vertex buffer plus our instanceVertexBuffer.
                     ScreenManager.Game.GraphicsDevice.SetVertexBuffers(
-                        new VertexBufferBinding(instancedModels[unitType].Meshes[i].MeshParts[j].VertexBuffer, 
+                        new VertexBufferBinding(instancedModels[unitType].Meshes[i].MeshParts[j].VertexBuffer,
                             instancedModels[unitType].Meshes[i].MeshParts[j].VertexOffset, 0),
                         new VertexBufferBinding(instanceVertexBuffer, 0, 1)
                     );

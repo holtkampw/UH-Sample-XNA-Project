@@ -45,6 +45,7 @@ namespace UHSampleGame.CoreObjects.Units
         Matrix rotationMatrixY;
         Matrix rotationMatrixZ;
         Matrix scaleRot;
+        Matrix translation;
         #endregion
 
         public Unit(UnitType unitType)
@@ -126,7 +127,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         void UpdatePath()
         {
-            SetCurrentTile(GetTile());
+            SetCurrentTile(TileMap.GetTileFromPos(Position));
 
             if (CheckIfStuck())
                 return;
@@ -136,7 +137,7 @@ namespace UHSampleGame.CoreObjects.Units
                 SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1]);
             }
 
-            if (currentTile.GetTileType() == TileType.Blocked)
+            if (currentTile.TileType == TileType.Blocked)
             {
                 if (previousTile.Paths[goalTile.ID].Count > 1)
                 {
@@ -155,7 +156,7 @@ namespace UHSampleGame.CoreObjects.Units
                     return;
             }
 
-            if (IsNewTile())
+            if (currentTile != previousTile)
             {
                 SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1]);
             }
@@ -165,8 +166,8 @@ namespace UHSampleGame.CoreObjects.Units
 
         void UpdateTransforms()
         {
-            Matrix translation = Matrix.CreateTranslation(Position);
-            Transforms = Matrix.Multiply(scaleRot, translation); 
+            Matrix.CreateTranslation(ref Position, out translation);
+            Matrix.Multiply(ref scaleRot, ref translation, out Transforms); 
         }
 
         void UpdateScaleRotations()
@@ -179,14 +180,15 @@ namespace UHSampleGame.CoreObjects.Units
         {
             previousTile = currentTile;
             currentTile = Tile2;
+            Unit unit = this;
 
-            if (IsNewTile())
+            if (currentTile != previousTile)
             {
-                previousTile.RemoveUnit(Type, this);
+                previousTile.RemoveUnit(Type, ref unit);
                 if (currentTile == goalTile)
                 {
                     //Register Hit
-                   // OnDied();
+                    OnDied();
                 }
                 else
                 {
@@ -254,9 +256,10 @@ namespace UHSampleGame.CoreObjects.Units
         public void TakeDamage(int damage)
         {
             this.Health -= damage;
+            Unit unit = this;
             if (Health <= 0)
             {
-                this.currentTile.RemoveUnit(Type, this);
+                this.currentTile.RemoveUnit(Type, ref unit);
                 OnDied();
             }
         }
