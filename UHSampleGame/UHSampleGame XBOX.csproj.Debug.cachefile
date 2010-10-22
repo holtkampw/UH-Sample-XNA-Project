@@ -26,7 +26,6 @@ Content\Objects\Base\enemyBaseShip01.xnb
 Content\MainMenu\oilBarrel_MainMenu.xnb
 Content\Video\intro.xnb
 Content\Video\oceanView.xnb
-Content\Video\splash.xnb
 Content\Objects\Towers\InstancedModel.xnb
 Content\Objects\Units\InstancedModel.xnb
 Content\Model\box_texture_0.xnb
@@ -44,10 +43,13 @@ Content\Objects\Towers\towerCColor_0.xnb
 Content\Objects\Units\boatTexture_0.xnb
 Content\Objects\Base\enemyShipPlatformColor_0.xnb
 Content\MainMenu\menu_tex_0.xnb
+Content\PlayerMenu\statusFont.xnb
 Content\MainMenu\mainMenu_Cover.xnb
 Content\PlayerMenu\playerMenu.xnb
 Content\PlayerMenu\playerMenuTab.xnb
-Content\PlayerMenu\statusFont.xnb
+Content\Video\splash.xnb
+Content\LoadScreen\levelLoader01.xnb
+Content\LoadScreen\levelLoader01_hl.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv
