@@ -70,9 +70,9 @@ namespace UHSampleGame.Screens
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
 
-            videoPlayer = new VideoPlayer();
-            video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
-            videoPlayer.IsLooped = true;
+            //videoPlayer = new VideoPlayer();
+            //video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
+            //videoPlayer.IsLooped = true;
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
             playerMenuBg= ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenu");
@@ -103,12 +103,12 @@ namespace UHSampleGame.Screens
  
             if (!IsVisible)
             {
-                videoPlayer.Stop();
+                //videoPlayer.Stop();
                 return;
             }
 
-            if (videoPlayer.State != MediaState.Playing)
-                videoPlayer.Play(video);
+            //if (videoPlayer.State != MediaState.Playing)
+            //    videoPlayer.Play(video);
 
             cameraManager.Update();
 
@@ -133,14 +133,13 @@ namespace UHSampleGame.Screens
 
         public override void Draw(GameTime gameTime)
         {
-
                 ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
-                if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
-                {
-                    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
-                        (int)dimensions.X, (int)dimensions.Y), Color.White);
-                }
+                //if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+                //{
+                //    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
+                //        (int)dimensions.X, (int)dimensions.Y), Color.White);
+                //}
 
                 ScreenManager.SpriteBatch.Draw(playerMenuBg, Vector2.Zero, Color.White);
 

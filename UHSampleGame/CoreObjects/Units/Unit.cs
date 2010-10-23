@@ -29,7 +29,7 @@ namespace UHSampleGame.CoreObjects.Units
         Vector3 velocity;
 
         bool isStuck;
-        Random rand;
+        static Random rand = new Random(DateTime.Now.Millisecond);
         public event UnitDied Died;
 
         public int Health;
@@ -61,8 +61,6 @@ namespace UHSampleGame.CoreObjects.Units
            //Fucking change this!!
             Position = Vector3.Zero;
             Health = 50;
-
-            rand = new Random(DateTime.Now.Millisecond);
         }
 
         #region Matrix Setters
@@ -193,7 +191,7 @@ namespace UHSampleGame.CoreObjects.Units
                 else
                 {
                     PathLength = currentTile.Paths[goalTile.ID].Count;
-                    currentTile.AddUnit(Type, this);
+                    currentTile.AddUnit(Type, ref unit);
                 }
             }
         }

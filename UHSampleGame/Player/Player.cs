@@ -59,8 +59,6 @@ namespace UHSampleGame.Players
         //HumanPlayer
         TeamableAnimatedObject avatar;
 
-     
-
         #region Properties
        
         #endregion
@@ -78,12 +76,12 @@ namespace UHSampleGame.Players
             //HumanPlayer
             if (Type == PlayerType.Human)
             {
-                avatar = new TeamableAnimatedObject(playerNum, teamNum,
-                    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+                //avatar = new TeamableAnimatedObject(playerNum, teamNum,
+                //    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
 
-                avatar.Scale = 2.0f;
-                avatar.PlayClip("Take 001");
-                avatar.SetPosition(PlayerBase.Position);
+                //avatar.Scale = 2.0f;
+                //avatar.PlayClip("Take 001");
+                //avatar.SetPosition(PlayerBase.Position);
             }
 
             if (menuTab == null)
@@ -139,17 +137,17 @@ namespace UHSampleGame.Players
                 if (input.CheckAction(InputAction.TileMoveRight))
                     avatar.SetPosition(avatar.Position + new Vector3(3, 0, 0));
 
-                if (avatar.Position.X < TileMap.Left)
-                    avatar.SetPosition(new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z));
+                //if (avatar.Position.X < TileMap.Left)
+                //    avatar.SetPosition(new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z));
 
-                if (avatar.Position.Z < TileMap.Top)
-                    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Top));
+                //if (avatar.Position.Z < TileMap.Top)
+                //    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Top));
 
-                if (avatar.Position.X > TileMap.Right)
-                    avatar.SetPosition(new Vector3(TileMap.Right, avatar.Position.Y, avatar.Position.Z));
+                //if (avatar.Position.X > TileMap.Right)
+                //    avatar.SetPosition(new Vector3(TileMap.Right, avatar.Position.Y, avatar.Position.Z));
 
-                if (avatar.Position.Z > TileMap.Bottom)
-                    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
+                //if (avatar.Position.Z > TileMap.Bottom)
+                //    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
 
                 if (input.CheckAction(InputAction.Selection))
                 {
@@ -186,7 +184,7 @@ namespace UHSampleGame.Players
             //HumanPlayer
             if (Type == PlayerType.Human)
             {
-                avatar.Update(gameTime);
+               // avatar.Update(gameTime);
             }
         }
 
@@ -197,7 +195,7 @@ namespace UHSampleGame.Players
             //HumanPlayer
             if (Type == PlayerType.Human)
             {
-                avatar.Draw(gameTime);
+               // avatar.Draw(gameTime);
             }
 
             DrawMenu(gameTime);

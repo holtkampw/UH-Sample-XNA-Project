@@ -37,10 +37,12 @@ namespace UHSampleGame.Debug
 
         public static void Draw()
         {
-            ScreenManager.SpriteBatch.DrawString(font, "FPS: " + frameRate, fpsOffset, Color.Black);
-            ScreenManager.SpriteBatch.DrawString(font, "FPS: " + frameRate, fpsPos, Color.White);
-            ScreenManager.SpriteBatch.DrawString(font, "Units: " + UnitCollection.AllUnitCount(), unitOffset, Color.Black);
-            ScreenManager.SpriteBatch.DrawString(font, "Units: " + UnitCollection.AllUnitCount(), unitPos, Color.White);
+            string print = String.Concat("FPS: ", frameRate);
+            ScreenManager.SpriteBatch.DrawString(font, print, fpsOffset, Color.Black);
+            ScreenManager.SpriteBatch.DrawString(font, print, fpsPos, Color.White);
+            print = String.Concat("Units: ", UnitCollection.AllUnitCount());
+            ScreenManager.SpriteBatch.DrawString(font,print, unitOffset, Color.Black);
+            ScreenManager.SpriteBatch.DrawString(font, print, unitPos, Color.White);
 
             frames++;
         }

@@ -21,7 +21,7 @@ namespace UHSampleGame.TileSystem
         Tower tower;
         List<Unit> units;
         public List<List<Tile>> Paths;
-        Random rand;
+        static Random rand = new Random(DateTime.Now.Millisecond);
         public int ID;
 
         public static Tile NullTile = new Tile();
@@ -50,10 +50,6 @@ namespace UHSampleGame.TileSystem
             this.units = new List<Unit>();
 
             SetTileType(tileType);
-
-            
-
-            rand = new Random(DateTime.Now.Millisecond);
 
         }
 
@@ -129,7 +125,7 @@ namespace UHSampleGame.TileSystem
             UnitEnter -= tower.RegisterAttackUnit;
         }
 
-        public void AddUnit(UnitType type, Unit unit)
+        public void AddUnit(UnitType type, ref Unit unit)
         {
             units.Add(unit);
             //unit.Died += RemoveUnit;
