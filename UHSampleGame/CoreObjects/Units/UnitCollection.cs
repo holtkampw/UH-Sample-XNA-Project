@@ -17,7 +17,7 @@ namespace UHSampleGame.CoreObjects.Units
     {
 
         #region Class Variables
-        const int MAX_UNITS = 10000;
+        public static int MAX_UNITS = 10000;
         static int UnitCounter;
 
         static int NumPlayers;
@@ -65,7 +65,7 @@ namespace UHSampleGame.CoreObjects.Units
             unitsCount = new List<List<int>>();
             unitsMaxIndex = new List<List<int>>();
             unitTransforms = new Matrix[MAX_UNITS];
-
+            
             for (int i = 0; i < numPlayers; i++)
             {
                 units.Add(new List<List<Unit>>());
@@ -92,7 +92,7 @@ namespace UHSampleGame.CoreObjects.Units
                 switch ((UnitType)j)
                 {
                     case UnitType.TestUnit:
-                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Model\\box"));//"Objects\\Units\\enemyShip01"));
+                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Units\\speedBoat01_BLUE"));//"Objects\\Units\\enemyShip01"));
                         instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
                         instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
                         break;
@@ -115,16 +115,18 @@ namespace UHSampleGame.CoreObjects.Units
 
         public static void Add(int playerNum, int teamNum, int attackPlayerNum, UnitType unitType)
         {
+            Unit u;
             //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
             for (int i = 0; i <= unitsMaxIndex[playerNum][(int)unitType]; i++)
             {
-                if (!units[playerNum][(int)unitType][i].IsActive())
+                u = units[playerNum][(int)unitType][i];
+                if (!u.IsActive())
                 {
-                    units[playerNum][(int)unitType][i].Deploy(BaseCollection.GetBaseTileForPlayer(playerNum),
+                    u.Deploy(BaseCollection.GetBaseTileForPlayer(playerNum),
                         BaseCollection.GetBaseTileForPlayer(attackPlayerNum));
 
-                    units[playerNum][(int)unitType][i].PlayerNum = playerNum;
-                    units[playerNum][(int)unitType][i].TeamNum = teamNum;
+                    u.PlayerNum = playerNum;
+                    u.TeamNum = teamNum;
 
                     unitsCount[playerNum][(int)unitType]++;
 
@@ -136,9 +138,10 @@ namespace UHSampleGame.CoreObjects.Units
             }
         }
 
-        public static void Remove()
+        public static void Remove(ref Unit unit)
         {
-
+            unitsCount[unit.PlayerNum][(int)unit.Type]--;
+            unit.Status = UnitStatus.Inactive;
         }
 
         public static void Update(GameTime gameTime)
@@ -197,7 +200,6 @@ namespace UHSampleGame.CoreObjects.Units
 
         private static void DrawInstancedUnits(int playerNum, int unitType, int amount)
         {
-            //int amount = units[playerNum][unitType].Count;
 
             if (amount == 0)
                 return;

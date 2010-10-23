@@ -167,11 +167,8 @@ namespace UHSampleGame.Players
 
                 if (input.CheckAction(InputAction.Selection))
                 {
-                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
-                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
+                    for(int i =0; i<10; i++)
+                        UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
                 }
 
                 if (input.CheckNewAction(InputAction.TowerBuild))

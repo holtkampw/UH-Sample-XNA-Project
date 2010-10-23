@@ -36,6 +36,8 @@ namespace UHSampleGame.CoreObjects.Towers
         Matrix rotationMatrixZ;
         Matrix scaleRot;
 
+        int attackStrength = 20;
+
         public TowerType Type;
         public TowerStatus Status;
         public int TeamNum;
@@ -58,14 +60,14 @@ namespace UHSampleGame.CoreObjects.Towers
             this.Status = TowerStatus.Inactive;
             unitToAttack = null;
 
-            timeToAttack = new TimeSpan(0,0,1);
+            timeToAttack = new TimeSpan(0, 0, 0, 0, 200);
             currentTimeToAttack = new TimeSpan();
         }
 
         public void Setup(Vector3 position)
         {
             this.Position = TileMap.GetTilePosFromPos(position);
-            switch(Type)
+            switch (Type)
             {
                 case TowerType.TowerA:
                     this.Scale = 4.0f;
@@ -88,9 +90,17 @@ namespace UHSampleGame.CoreObjects.Towers
             return Status != TowerStatus.Inactive;
         }
 
+        public void UnregisterAttackUnit(ref Unit unit)
+        {
+            if (unitToAttack != null && unitToAttack == unit)
+            {
+                unitToAttack = null;
+            }
+        }
+
         public void RegisterAttackUnit(ref Unit unit)
         {
-            if ((unitToAttack == null && unit == null ) ||
+            if ((unitToAttack == null && unit == null) ||
                 (unitToAttack != null && unitToAttack.IsActive() && unit == null))
                 return;
 
@@ -112,14 +122,18 @@ namespace UHSampleGame.CoreObjects.Towers
 
         private void Attack(GameTime gameTime)
         {
-            if (unitToAttack != null)
+            currentTimeToAttack += gameTime.ElapsedGameTime;
+            if (currentTimeToAttack > timeToAttack)
             {
-                currentTimeToAttack += gameTime.ElapsedGameTime;
-                if (currentTimeToAttack > timeToAttack)
+                if (unitToAttack != null)
                 {
-                    unitToAttack.TakeDamage(10);
-                    currentTimeToAttack = new TimeSpan();
+                    unitToAttack.TakeDamage(attackStrength);
+
+                    //DO XP GIVING HERE
+
+                    
                 }
+                currentTimeToAttack = TimeSpan.Zero;
             }
         }
         #endregion

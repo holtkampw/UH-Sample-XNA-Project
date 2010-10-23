@@ -15,6 +15,8 @@ namespace UHSampleGame.Debug
     {
         static int frames = 0;
         static int frameRate = 0;
+        static string frameRateString = "";
+        static string unitCount = "";
         static Vector2 fpsPos = new Vector2(1100, 10);
         static Vector2 fpsOffset = new Vector2(1100, 11);
         static Vector2 unitPos = new Vector2(1100, 30);
@@ -30,6 +32,7 @@ namespace UHSampleGame.Debug
             {
                 elapsedTime -= TimeSpan.FromSeconds(1);
                 frameRate = frames;
+                frameRateString = frameRate.ToString();
                 frames = 0;
             }
 
@@ -37,12 +40,13 @@ namespace UHSampleGame.Debug
 
         public static void Draw()
         {
-            string print = String.Concat("FPS: ", frameRate);
-            ScreenManager.SpriteBatch.DrawString(font, print, fpsOffset, Color.Black);
-            ScreenManager.SpriteBatch.DrawString(font, print, fpsPos, Color.White);
-            print = String.Concat("Units: ", UnitCollection.AllUnitCount());
-            ScreenManager.SpriteBatch.DrawString(font,print, unitOffset, Color.Black);
-            ScreenManager.SpriteBatch.DrawString(font, print, unitPos, Color.White);
+            unitCount = UnitCollection.AllUnitCount().ToString();
+            //ScreenManager.SpriteBatch.DrawString(font, "FPS", fpsOffset, Color.Black);
+           // ScreenManager.SpriteBatch.DrawString(font, "FPS", fpsPos, Color.White);
+            ScreenManager.SpriteBatch.DrawString(font, frameRateString, fpsOffset, Color.Black);
+            ScreenManager.SpriteBatch.DrawString(font, frameRateString, fpsPos, Color.White);
+            ScreenManager.SpriteBatch.DrawString(font, unitCount, unitOffset, Color.Black);
+            ScreenManager.SpriteBatch.DrawString(font, unitCount, unitPos, Color.White);
 
             frames++;
         }

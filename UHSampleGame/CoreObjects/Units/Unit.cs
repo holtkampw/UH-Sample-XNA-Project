@@ -18,7 +18,10 @@ namespace UHSampleGame.CoreObjects.Units
     {
         #region Class Variables
         public UnitStatus Status;
-        UnitType Type;
+        public UnitType Type;
+
+        static int currentID = 0;
+        public int ID;
 
         Tile previousTile;
         Tile currentTile;
@@ -30,7 +33,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         bool isStuck;
         static Random rand = new Random(DateTime.Now.Millisecond);
-        public event UnitDied Died;
+        public event UnitEvent Died;
 
         public int Health;
         public int TeamNum;
@@ -40,12 +43,12 @@ namespace UHSampleGame.CoreObjects.Units
         public Matrix Transforms;
         public float Scale;
         public Vector3 Position;
-        Matrix scaleMatrix;
-        Matrix rotationMatrixX;
-        Matrix rotationMatrixY;
-        Matrix rotationMatrixZ;
-        Matrix scaleRot;
-        Matrix translation;
+        static Matrix scaleMatrix;
+        static Matrix rotationMatrixX;
+        static Matrix rotationMatrixY;
+        static Matrix rotationMatrixZ;
+        static Matrix scaleRot;
+        static  Matrix translation;
         #endregion
 
         public Unit(UnitType unitType)
@@ -61,6 +64,8 @@ namespace UHSampleGame.CoreObjects.Units
            //Fucking change this!!
             Position = Vector3.Zero;
             Health = 50;
+            ID = currentID;
+            currentID++;
         }
 
         #region Matrix Setters
@@ -105,6 +110,9 @@ namespace UHSampleGame.CoreObjects.Units
             SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1]);
 
             Status = UnitStatus.Deployed;
+
+            UpdatePath();
+            UpdateTransforms();
         }
 
         public bool IsActive()
@@ -182,7 +190,7 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (currentTile != previousTile)
             {
-                previousTile.RemoveUnit(Type, ref unit);
+                previousTile.RemoveUnit(ref unit);
                 if (currentTile == goalTile)
                 {
                     //Register Hit
@@ -191,7 +199,7 @@ namespace UHSampleGame.CoreObjects.Units
                 else
                 {
                     PathLength = currentTile.Paths[goalTile.ID].Count;
-                    currentTile.AddUnit(Type, ref unit);
+                    currentTile.AddUnit(ref unit);
                 }
             }
         }
@@ -241,7 +249,6 @@ namespace UHSampleGame.CoreObjects.Units
             Vector3 normVel = new Vector3(velocity.X, velocity.Y, velocity.Z);
             normVel.Normalize();
 
-            //this.RotateY((float)Math.Atan2(velocity.X, velocity.Z));
             velocity.Normalize();
 
         }
@@ -257,17 +264,26 @@ namespace UHSampleGame.CoreObjects.Units
             Unit unit = this;
             if (Health <= 0)
             {
-                this.currentTile.RemoveUnit(Type, ref unit);
+                this.currentTile.RemoveUnit(ref unit);
                 OnDied();
             }
         }
 
         private void OnDied()
         {
-            if (Died != null)
-                Died(this.Type, this);
+            Unit u = this;
 
-            this.Status = UnitStatus.Inactive;
+            if (Died != null)
+                Died(ref u);
+
+            u.currentTile.RemoveUnit(ref u);
+
+            UnitCollection.Remove(ref u);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return ID == ((Unit)obj).ID;
         }
     }
 }
