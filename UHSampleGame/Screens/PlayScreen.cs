@@ -28,7 +28,6 @@ namespace UHSampleGame.Screens
     {
         #region Class Variables
         Texture2D background;
-        Texture2D playerMenuBg;
         CameraManager cameraManager;
 
         Video video;
@@ -75,7 +74,6 @@ namespace UHSampleGame.Screens
             //videoPlayer.IsLooped = true;
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
-            playerMenuBg= ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenu");
             font = ScreenManager.Game.Content.Load<SpriteFont>("font");
             dimensions = new Vector2((float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width,             
                                      (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height);
@@ -141,7 +139,6 @@ namespace UHSampleGame.Screens
                 //        (int)dimensions.X, (int)dimensions.Y), Color.White);
                 //}
 
-                ScreenManager.SpriteBatch.Draw(playerMenuBg, Vector2.Zero, Color.White);
 
                 ScreenManager.SpriteBatch.End();
 
