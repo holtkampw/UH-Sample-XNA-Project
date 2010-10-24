@@ -83,6 +83,8 @@ namespace UHSampleGame.Screens
             BaseCollection.Initialize();
             TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
         
+            //FIX THIS!!! assign players their tiles AFTER level manager is loaded... 
+            //Right now TileMap is being initialized TWICE!!!
             p1 = new Player(1, 1, 2, TileMap.Tiles[0], PlayerType.Human);
             aI = new Player(2, 2, 1, TileMap.Tiles[TileMap.Tiles.Count - 1], PlayerType.AI);
 

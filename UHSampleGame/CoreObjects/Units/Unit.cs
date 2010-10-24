@@ -264,7 +264,7 @@ namespace UHSampleGame.CoreObjects.Units
             Unit unit = this;
             if (Health <= 0)
             {
-                this.currentTile.RemoveUnit(ref unit);
+                //this.currentTile.RemoveUnit(ref unit);
                 OnDied();
             }
         }
@@ -273,12 +273,14 @@ namespace UHSampleGame.CoreObjects.Units
         {
             Unit u = this;
 
-            if (Died != null)
-                Died(ref u);
-
             u.currentTile.RemoveUnit(ref u);
 
             UnitCollection.Remove(ref u);
+
+            if (Died != null)
+                Died(ref u);
+
+            
         }
 
         public override bool Equals(object obj)

@@ -68,7 +68,10 @@ namespace UHSampleGame.Players
         //HumanPlayer
         TeamableAnimatedObject avatar;
         public int Money;
+        public string MoneyString;
         public int Health;
+        public string HealthString;
+        static string AIMoneyString = "??????";
         #region Properties
        
         #endregion
@@ -82,6 +85,10 @@ namespace UHSampleGame.Players
             SetBase(new Base(playerNum, teamNum, BaseType.type1, startTile));
             
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
+
+            //FIX THIS
+            HealthString = Health.ToString();
+            MoneyString = Money.ToString();
 
             //HumanPlayer
             if (Type == PlayerType.Human)
@@ -232,7 +239,7 @@ namespace UHSampleGame.Players
             
             if (Type == PlayerType.Human)
             {
-                ScreenManager.SpriteBatch.DrawString(statusFont, Money.ToString(), moneyLocation[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
 
                 for (int i = 0; i < NUM_TABS; i++)
                 {
@@ -263,7 +270,7 @@ namespace UHSampleGame.Players
             }
             else
             {
-                ScreenManager.SpriteBatch.DrawString(statusFont, "??????", moneyLocation[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.DrawString(statusFont, AIMoneyString, moneyLocation[PlayerNum], Color.White);
             }
 
             ScreenManager.SpriteBatch.End();
@@ -272,8 +279,8 @@ namespace UHSampleGame.Players
 
         void DrawStatus()
         {
-            ScreenManager.SpriteBatch.DrawString(statusFont, Health.ToString(), statusHealthLocation[PlayerNum], Color.White);
-            ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayer(PlayerNum).ToString(), 
+            ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
+            ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum), 
                 statusNumberOfUnitsLocation[PlayerNum], Color.White);
 
         }

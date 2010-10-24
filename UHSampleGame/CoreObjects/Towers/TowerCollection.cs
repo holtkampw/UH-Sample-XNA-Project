@@ -16,6 +16,7 @@ namespace UHSampleGame.CoreObjects.Towers
     {
 
         #region Class Variables
+
         const int MAX_TOWERS = 100;
 
         static int NumPlayers;
@@ -186,7 +187,7 @@ namespace UHSampleGame.CoreObjects.Towers
             if (amount == 0)
                 return;
 
-            instanceVertexBuffer = null; ///////////////////////////////////////////////////////////////////FIX THIS!
+            //instanceVertexBuffer = null; ///////////////////////////////////////////////////////////////////FIX THIS!
             // If we have more instances than room in our vertex buffer, grow it to the neccessary size.
             if ((instanceVertexBuffer == null) ||
                 (amount > instanceVertexBuffer.VertexCount))
@@ -205,6 +206,7 @@ namespace UHSampleGame.CoreObjects.Towers
             {
                 for (int j = 0; j < instancedModels[towerType].Meshes[i].MeshParts.Count; j++)
                 {
+
                     // Tell the GPU to read from both the model vertex buffer plus our instanceVertexBuffer.
                     ScreenManager.Game.GraphicsDevice.SetVertexBuffers(
                         new VertexBufferBinding(instancedModels[towerType].Meshes[i].MeshParts[j].VertexBuffer,

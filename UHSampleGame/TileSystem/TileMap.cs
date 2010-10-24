@@ -31,6 +31,7 @@ namespace UHSampleGame.TileSystem
         static Vector2 tileSize;
         static int numTilesX;
         static int numTilesY;
+        public static int TileCount;
         static List<NeighborTile> allNeighbors;
         static List<Tile> neighbors = new List<Tile>();
         static int totalTiles;
@@ -84,6 +85,7 @@ namespace UHSampleGame.TileSystem
             lowerRightPos = new Vector3();
 
             tiles = new List<Tile>();
+            TileCount = numTilesX * numTilesY;
             InitializeTiles();
             allNeighbors = new List<NeighborTile>();
             allNeighbors.Add(NeighborTile.Down);

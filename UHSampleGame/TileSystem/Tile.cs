@@ -20,11 +20,16 @@ namespace UHSampleGame.TileSystem
         public TileType TileType;
         Tower tower;
         List<Unit> units;
+        List<bool> unitsInTile;
+        List<int> unitIndexes;
+        int unitsCount;
         public List<List<Tile>> Paths;
         static Random rand = new Random(DateTime.Now.Millisecond);
         public int ID;
 
         public static Tile NullTile = new Tile();
+
+        //public static List<Tile> tempPath = new List<Tile>();
 
         public event UnitEvent UnitEnter;
         public event UnitEvent UnitExit;
@@ -49,7 +54,18 @@ namespace UHSampleGame.TileSystem
             this.TileType = tileType;
             this.Paths = new List<List<Tile>>();
             this.units = new List<Unit>();
+            this.unitsInTile = new List<bool>();
+            this.unitIndexes = new List<int>();
+            this.unitsCount = 0;
 
+            for (int i = Paths.Count; i < TileMap.TileCount; i++)
+                Paths.Add(new List<Tile>());
+
+            for (int i = 0; i < UnitCollection.TotalPossibleUnitCount(); i++)
+            {
+                unitsInTile.Add(false);
+                unitIndexes.Add(0);
+            }
             SetTileType(tileType);
 
         }
@@ -101,11 +117,9 @@ namespace UHSampleGame.TileSystem
         public void UpdatePathTo(Tile baseTile)
         {
             AStar.InitAstar(this, baseTile);
-
-            for (int i = Paths.Count; i < TileMap.Tiles.Count; i++)
-                Paths.Add(new List<Tile>());
-
-            Paths[baseTile.ID] = AStar.FindPath(); //new List<Tile>(AStar.FindPath());
+            List<Tile> tempPath = Paths[baseTile.ID];
+             AStar.FindPath(ref tempPath); //new List<Tile>(AStar.FindPath());
+             //Paths[baseTile.ID] = tempPath;
         }
 
         public Vector3 GetRandPoint()
@@ -130,24 +144,55 @@ namespace UHSampleGame.TileSystem
 
         public void AddUnit(ref Unit unit)
         {
-            units.Add(unit);
+            unitsInTile[unit.ID] = true;
+            unitIndexes[unitsCount] = unit.ID;
+            unitsCount++;
+            
+            // units.Add(unit);
             //unit.Died += RemoveUnit;
             OnUnitEnter(ref unit);
         }
 
         public void RemoveUnit(ref Unit unit)
         {
-            units.Remove(unit);
+            if (!unitsInTile[unit.ID])
+                return;
+
+            unitsInTile[unit.ID] = false;
+            for (int i = 0; i < unitsCount; i++)
+            {
+                if (unitIndexes[i] == unit.ID)
+                {
+                    unitIndexes[i] = unitIndexes[unitsCount - 1];      
+                }
+            }
+            unitsCount--;
+            //units.Remove(unit);
             //Set new unit to attack
             OnUnitExit(ref unit);
             //unit.Died -= RemoveUnit;
-            if (units.Count > 0)
-            {
-                Unit u = units[0];
-                OnUnitEnter(ref u);
-            }
+            //if (units.Count > 0)
+            //{
+            //    Unit u = units[0];
+            //    OnUnitEnter(ref u);
+            //}
             //else
               //  OnUnitEnter(null);
+
+            if (unitsCount > 0)
+            {
+                for (int i = 0; i < unitsCount; i++)
+                {
+                    if (unitsInTile[unitIndexes[i]])
+                    {
+                        Unit u = UnitCollection.GetUnitByID(unitIndexes[i]);
+                        OnUnitEnter(ref u);
+                        break;
+                    }
+                }
+                
+
+            }
 
         }
 

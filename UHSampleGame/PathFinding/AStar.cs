@@ -31,7 +31,13 @@ namespace UHSampleGame.PathFinding
                 this.currentCost = initialCost;
                 this.goalCost = goalCost;
             }
+
+            public static Node NullNode = new Node();
         };
+
+        static Node startNode;
+        static Node currentNode;
+        static List<Tile> neighborTiles;
 
         static List<Node> openNodes = new List<Node>();
         static List<Node> closedNodes = new List<Node>();
@@ -63,16 +69,18 @@ namespace UHSampleGame.PathFinding
             GoalTile = goalTile;
         }
 
-        public static List<Tile> FindPath()
+        public static void FindPath(ref List<Tile> path)
         {
+            path.Clear();
             if (StartTile == GoalTile)
             {
-                return new List<Tile>();
+                return;
+                //return new List<Tile>();
             }
-            Node startNode = new Node(StartTile);
-            Node currentNode = startNode;
-            List<Tile> neighborTiles;
-            List<Tile> path = new List<Tile>();
+            startNode = TransformToNode(StartTile, Node.NullNode);// new Node(StartTile);
+            currentNode = startNode;
+            //List<Tile> neighborTiles;
+            //List<Tile> path = new List<Tile>();
 
             //Add current node to open nodes
             openNodes.Add(startNode);
@@ -97,8 +105,14 @@ namespace UHSampleGame.PathFinding
                 AddNeighborNodesToOpenList(currentNode, neighborTiles);
             } while (openNodes.Count > 0 && currentNode.currentTile != GoalTile);
 
+
+            
             if (openNodes.Count == 0 && currentNode.currentTile != GoalTile)
-                return new List<Tile>();
+            {
+                return;
+                //return new List<Tile>();
+            }
+                
 
             path.Add(currentNode.currentTile);
             do
@@ -121,7 +135,7 @@ namespace UHSampleGame.PathFinding
 
             path.Reverse();
 
-            return path;
+           // return path;
 
         }
 

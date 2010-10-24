@@ -40,13 +40,13 @@ namespace UHSampleGame.Debug
 
         public static void Draw()
         {
-            unitCount = UnitCollection.AllUnitCount().ToString();
+            //unitCount = UnitCollection.AllUnitCount().ToString();
             //ScreenManager.SpriteBatch.DrawString(font, "FPS", fpsOffset, Color.Black);
            // ScreenManager.SpriteBatch.DrawString(font, "FPS", fpsPos, Color.White);
             ScreenManager.SpriteBatch.DrawString(font, frameRateString, fpsOffset, Color.Black);
             ScreenManager.SpriteBatch.DrawString(font, frameRateString, fpsPos, Color.White);
-            ScreenManager.SpriteBatch.DrawString(font, unitCount, unitOffset, Color.Black);
-            ScreenManager.SpriteBatch.DrawString(font, unitCount, unitPos, Color.White);
+            //ScreenManager.SpriteBatch.DrawString(font, unitCount, unitOffset, Color.Black);
+            //ScreenManager.SpriteBatch.DrawString(font, unitCount, unitPos, Color.White);
 
             frames++;
         }

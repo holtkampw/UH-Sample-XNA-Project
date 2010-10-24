@@ -13,11 +13,12 @@ using UHSampleGame.CoreObjects.Base;
 
 namespace UHSampleGame.CoreObjects.Units
 {
+    
     static class UnitCollection
     {
 
         #region Class Variables
-        public static int MAX_UNITS = 10000;
+        const int MAX_UNITS = 10000;
         static int UnitCounter;
 
         static int NumPlayers;
@@ -55,6 +56,9 @@ namespace UHSampleGame.CoreObjects.Units
 
         static int updateCount;
         static int drawCount;
+
+        public static List<String> unitCountForPlayerString;
+        public static List<int> unitCountForPlayer;
         #endregion
 
         public static void Initialize(int numPlayers)
@@ -65,12 +69,16 @@ namespace UHSampleGame.CoreObjects.Units
             unitsCount = new List<List<int>>();
             unitsMaxIndex = new List<List<int>>();
             unitTransforms = new Matrix[MAX_UNITS];
+            unitCountForPlayerString = new List<string>();
+            unitCountForPlayer = new List<int>();
             
             for (int i = 0; i < numPlayers; i++)
             {
                 units.Add(new List<List<Unit>>());
                 unitsCount.Add(new List<int>());
                 unitsMaxIndex.Add(new List<int>());
+                unitCountForPlayerString.Add("");
+                unitCountForPlayer.Add(0);
 
                 for (int j = 0; j < unitTypes.Length; j++)
                 {
@@ -101,6 +109,15 @@ namespace UHSampleGame.CoreObjects.Units
 
 
         }
+        public static int TotalPossibleUnitCount()
+        {
+            return MAX_UNITS * NumPlayers * unitTypes.Length;
+        }
+
+        public static Unit GetUnitByID(int id)
+        {
+            return units[id/(unitTypes.Length * MAX_UNITS)][(id/MAX_UNITS)%unitTypes.Length][id%MAX_UNITS];
+        }
 
         public static int AllUnitCount()
         {
@@ -128,6 +145,9 @@ namespace UHSampleGame.CoreObjects.Units
                     u.PlayerNum = playerNum;
                     u.TeamNum = teamNum;
 
+                    unitCountForPlayer[playerNum]++;
+                    unitCountForPlayerString[playerNum] = unitCountForPlayer[playerNum].ToString();
+
                     unitsCount[playerNum][(int)unitType]++;
 
                     if (i == unitsMaxIndex[playerNum][(int)unitType])
@@ -142,6 +162,8 @@ namespace UHSampleGame.CoreObjects.Units
         {
             unitsCount[unit.PlayerNum][(int)unit.Type]--;
             unit.Status = UnitStatus.Inactive;
+            unitCountForPlayer[unit.PlayerNum]++;
+            unitCountForPlayerString[unit.PlayerNum] = unitCountForPlayer[unit.PlayerNum].ToString();
         }
 
         public static void Update(GameTime gameTime)
@@ -256,13 +278,23 @@ namespace UHSampleGame.CoreObjects.Units
             }
         }
 
-        public static int UnitCountForPlayer(int PlayerNum)
+        public static int UnitCountForPlayer2(int PlayerNum)
         {
             UnitCounter = 0;
 
             for (int j = 0; j < unitTypes.Length; j++)
                     UnitCounter += unitsCount[PlayerNum][j];
             return UnitCounter;
+        }
+
+        public static int UnitCountForPlayer(int PlayerNum)
+        {
+            return unitCountForPlayer[PlayerNum];
+        }
+
+        public static string UnitCountForPlayerString(int playerNum)
+        {
+            return unitCountForPlayerString[playerNum];
         }
     }
 }
