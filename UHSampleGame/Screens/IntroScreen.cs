@@ -45,7 +45,9 @@ namespace UHSampleGame.Screens
         {
             if (!IsVisible)
             {
-                videoPlayer.Stop();
+                if (videoPlayer.State != MediaState.Stopped)
+                    videoPlayer.Stop();
+
                 return;
             }
 

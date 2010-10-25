@@ -131,7 +131,8 @@ namespace UHSampleGame.ScreenManagement
             //Update current screen that is available for interaction
             //TEMPORARY FIX
             for (int i = 0; i < screens.Count; i++)
-                screens[i].Update(gameTime);
+                if(screens[i].Status != ScreenStatus.Disabled)
+                    screens[i].Update(gameTime);
             //screens[screens.Count - 1].Update(gameTime);
             screens[screens.Count - 1].HandleInput(InputManager);
             //Yes this order is on purpose... if we add a screen in HandleInput then update the

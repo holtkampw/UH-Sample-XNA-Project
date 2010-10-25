@@ -70,8 +70,10 @@ namespace UHSampleGame.Screens
             // Signal the background thread to exit, then wait for it to do so.
             if (backgroundThread != null)
             {
+               
                 backgroundThreadExit.Set();
                 backgroundThread.Join();
+
             }
 
             // Once the load has finished, we use ResetElapsedTime to tell

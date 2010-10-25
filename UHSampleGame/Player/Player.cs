@@ -195,17 +195,17 @@ namespace UHSampleGame.Players
             //Human Player
             if (Type == PlayerType.Human)
             {
-                if (input.CheckAction(InputAction.TileMoveUp))
-                    avatar.SetPosition(avatar.Position + new Vector3(0, 0, -3));
+                //if (input.CheckAction(InputAction.TileMoveUp))
+                //    avatar.SetPosition(avatar.Position + new Vector3(0, 0, -3));
 
-                if (input.CheckAction(InputAction.TileMoveDown))
-                    avatar.SetPosition(avatar.Position + new Vector3(0, 0, 3));
+                //if (input.CheckAction(InputAction.TileMoveDown))
+                //    avatar.SetPosition(avatar.Position + new Vector3(0, 0, 3));
 
-                if (input.CheckAction(InputAction.TileMoveLeft))
-                    avatar.SetPosition(avatar.Position + new Vector3(-3, 0, 0));
+                //if (input.CheckAction(InputAction.TileMoveLeft))
+                //    avatar.SetPosition(avatar.Position + new Vector3(-3, 0, 0));
 
-                if (input.CheckAction(InputAction.TileMoveRight))
-                    avatar.SetPosition(avatar.Position + new Vector3(3, 0, 0));
+                //if (input.CheckAction(InputAction.TileMoveRight))
+                //    avatar.SetPosition(avatar.Position + new Vector3(3, 0, 0));
 
                 //if (avatar.Position.X < TileMap.Left)
                 //    avatar.SetPosition(new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z));
@@ -225,10 +225,10 @@ namespace UHSampleGame.Players
                         UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
                 }
 
-                if (input.CheckNewAction(InputAction.TowerBuild))
-                {
-                    TowerCollection.Add(PlayerNum, TeamNum, TowerType.TowerA, this.avatar.Position);
-                }
+                //if (input.CheckNewAction(InputAction.TowerBuild))
+                //{
+                //    TowerCollection.Add(PlayerNum, TeamNum, TowerType.TowerA, this.avatar.Position);
+                //}
 
                 if (input.CheckNewAction(InputAction.PlayerMenuLeft))
                 {
