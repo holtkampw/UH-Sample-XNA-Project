@@ -28,6 +28,9 @@ namespace UHSampleGame.Screens
     {
         #region Class Variables
         Texture2D background;
+        Texture2D playerBackground;
+        Color playerBackgroundColor;
+        Vector2 playerBackgroundLocation;
         CameraManager cameraManager;
 
         Video video;
@@ -74,6 +77,10 @@ namespace UHSampleGame.Screens
             //videoPlayer.IsLooped = true;
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
+            playerBackground = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player_bg");
+            playerBackgroundColor = new Color(255, 255, 255, 200);
+            playerBackgroundLocation = new Vector2(40.0f, 0.0f);
+
             font = ScreenManager.Game.Content.Load<SpriteFont>("font");
             dimensions = new Vector2((float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width,             
                                      (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height);
@@ -141,6 +148,7 @@ namespace UHSampleGame.Screens
                 //        (int)dimensions.X, (int)dimensions.Y), Color.White);
                 //}
 
+                ScreenManager.SpriteBatch.Draw(playerBackground, playerBackgroundLocation, playerBackgroundColor);
 
                 ScreenManager.SpriteBatch.End();
 

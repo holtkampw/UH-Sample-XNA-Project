@@ -187,7 +187,7 @@ namespace UHSampleGame.CoreObjects.Towers
             if (amount == 0)
                 return;
 
-            //instanceVertexBuffer = null; ///////////////////////////////////////////////////////////////////FIX THIS!
+            instanceVertexBuffer = null; ///////////////////////////////////////////////////////////////////FIX THIS!
             // If we have more instances than room in our vertex buffer, grow it to the neccessary size.
             if ((instanceVertexBuffer == null) ||
                 (amount > instanceVertexBuffer.VertexCount))

@@ -23,7 +23,6 @@ namespace UHSampleGame.Players
     public class Player
     {
         static Texture2D menuTab;
-        static List<List<Rectangle>> menuTabStartPositions;
         static Vector2 menuTabOffset = new Vector2(15.0f, 0.0f);
         Texture2D playerMenuBg;
 
@@ -56,14 +55,34 @@ namespace UHSampleGame.Players
         //Local Location of money
         static Vector2[] moneyLocation;
         //Local Location of Status > Health
+        static Vector2[] statusHealthNameLocation;
+        const string HealthName = "Health: ";
         static Vector2[] statusHealthLocation;
         //Local Location of Status > NumberOfUnits
+        static Vector2[] statusNumberOfUnitsNameLocation;
+        const string UnitsName = "Total Units: ";
         static Vector2[] statusNumberOfUnitsLocation;
 
-        //Local Location of Icons
-        //Local Location of Icon Offset
-        
-        //Local Location of 
+        //Local Location for Icons [playerNum][iconNum]
+        static Vector2[][] iconLocations;
+        static Rectangle[][] highlightIconLocations;
+        static Texture2D[] defenseIcons;
+        static Texture2D highlightIcon;
+        static Rectangle highlightIconSourceRect;
+        const int NUM_DEFENSE_TOWERS = 3;
+        int defenseTowerSelected = 0;
+        static Vector2 highlightOrigin;
+        static float[] highlightRotations = {   0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f,
+                                                1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f,
+                                                2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f, 2.6f, 2.7f, 2.8f, 2.9f,
+                                                3.0f, 3.1f, 3.2f, 3.3f, 3.4f, 3.5f, 3.6f, 3.7f, 3.8f, 3.9f,
+                                                4.0f, 4.1f, 4.2f, 4.3f, 4.4f, 4.5f, 4.6f, 4.7f, 4.8f, 4.9f,
+                                                5.0f, 5.1f, 5.2f, 5.3f, 5.4f, 5.5f, 5.6f, 5.7f, 5.8f, 5.9f,
+                                                6.0f, 6.1f  };
+        int currentHighlightRotation = 0;
+        static int maxHighlightRotations = highlightRotations.Length;
+        int elapsedHighlightUpdateTime = 0;
+        int maxHighlightUpdateTime = 25;
 
         //HumanPlayer
         TeamableAnimatedObject avatar;
@@ -109,32 +128,60 @@ namespace UHSampleGame.Players
                 menuTabSource[SELECTED] = new Rectangle(0, menuTab.Width, menuTab.Width, menuTab.Height / 2);
                 menuTabSource[NORMAL] = new Rectangle(0, 0, menuTab.Width, menuTab.Height / 2);
                 statusFont = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\statusFont");
-               
-            }
-            if (tabLocation == null)
-            {
+                highlightIcon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\icon_selector");
+
                 tabLocation = new Vector2[5][];
                 Vector2 tabOffset = new Vector2(15, 0);
                 moneyLocation = new Vector2[5];
+                statusHealthNameLocation = new Vector2[5];
                 statusHealthLocation = new Vector2[5];
+                statusNumberOfUnitsNameLocation = new Vector2[5];
                 statusNumberOfUnitsLocation = new Vector2[5];
-                for (int i = 1; i < 5; i++)
+                iconLocations = new Vector2[5][];
+                highlightIconLocations = new Rectangle[5][];
+                Vector2 iconOffset = new Vector2(0, 36);
+                for (int player = 1; player < 5; player++)
                 {
                     Vector2 tabStartPosition = new Vector2(8, 148);
-                    tabLocation[i] = new Vector2[NUM_TABS];
+                    tabLocation[player] = new Vector2[NUM_TABS];
                     for (int t = 0; t < NUM_TABS; t++)
                     {
-                        tabLocation[i][t] = globalLocations[i] + tabStartPosition;
+                        tabLocation[player][t] = globalLocations[player] + tabStartPosition;
                         tabStartPosition += tabOffset;
                     }
 
-                    moneyLocation[i] = globalLocations[i] + new Vector2(110, -1);
-                    statusHealthLocation[i] = globalLocations[i] + new Vector2(10, 40);
-                    statusNumberOfUnitsLocation[i] = globalLocations[i] + new Vector2(10, 80);
+                    moneyLocation[player] = globalLocations[player] + new Vector2(110, -1);
+                    statusHealthNameLocation[player] = globalLocations[player] + new Vector2(10, 40);
+                    statusHealthLocation[player] = globalLocations[player] + new Vector2(120, 40);
+                    statusNumberOfUnitsNameLocation[player] = globalLocations[player] + new Vector2(10, 80);
+                    statusNumberOfUnitsLocation[player] = globalLocations[player] + new Vector2(180, 80);
+
+                    iconLocations[player] = new Vector2[4];
+                    highlightIconLocations[player] = new Rectangle[4];
+                    Vector2 iconStartPosition = new Vector2(8, 36);
+                    
+                    for (int icon = 0; icon < 4; icon++)
+                    {
+                        iconLocations[player][icon] = globalLocations[player] + iconStartPosition;
+                        highlightIconLocations[player][icon] = new Rectangle((int)(iconLocations[player][icon].X - 5.0f + (highlightIcon.Width / 2)), 
+                            (int)(iconLocations[player][icon].Y - 5.0f + (highlightIcon.Height / 2)),
+                            highlightIcon.Width, highlightIcon.Height);
+                        iconStartPosition += iconOffset;
+                    }
                 }
+                defenseIcons = new Texture2D[3];
+                defenseIcons[0] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
+                defenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
+                defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\cannon_tower");
+                highlightIconSourceRect = new Rectangle(0, 0, highlightIcon.Width, highlightIcon.Height);
+                highlightOrigin = new Vector2(highlightIcon.Width / 2.0f, highlightIcon.Height / 2.0f);
             }
-                currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
-            playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
+                
+            currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
+            if(Type == PlayerType.Human)
+                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
+            else
+                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum + "computer");
         }
 
         public void SetBase(Base playerBase)
@@ -194,6 +241,24 @@ namespace UHSampleGame.Players
                     if (((int)currentlySelectedPlayerStatus + 1) < playerMenuTabsEnumType.Length)
                         currentlySelectedPlayerStatus++;
                 }
+
+                if (input.CheckNewAction(InputAction.PlayerMenuUp))
+                {
+                    if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
+                    {
+                        if (((int)defenseTowerSelected - 1) >= 0)
+                            defenseTowerSelected--;
+                    }
+                }
+
+                if (input.CheckNewAction(InputAction.PlayerMenuDown))
+                {
+                    if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
+                    {
+                        if (((int)defenseTowerSelected + 1) < NUM_DEFENSE_TOWERS)
+                            defenseTowerSelected++;
+                    }
+                }
             }
         }
 
@@ -205,6 +270,20 @@ namespace UHSampleGame.Players
             if (Type == PlayerType.Human)
             {
                // avatar.Update(gameTime);
+            }
+
+            elapsedHighlightUpdateTime += gameTime.ElapsedGameTime.Milliseconds;
+            if (elapsedHighlightUpdateTime > maxHighlightUpdateTime)
+            {
+                elapsedHighlightUpdateTime = 0;
+                if (currentHighlightRotation + 1 >= maxHighlightRotations)
+                {
+                    currentHighlightRotation = 0;
+                }
+                else
+                {
+                    currentHighlightRotation++;
+                }
             }
         }
 
@@ -261,6 +340,7 @@ namespace UHSampleGame.Players
                         DrawStatus();
                         break;
                     case PlayerMenuTabs.DefenseTower:
+                        DrawDefenseTowers();
                         break;
                     case PlayerMenuTabs.UnitTower:
                         break;
@@ -279,10 +359,30 @@ namespace UHSampleGame.Players
 
         void DrawStatus()
         {
+            ScreenManager.SpriteBatch.DrawString(statusFont, HealthName, statusHealthNameLocation[PlayerNum], Color.White);
             ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
+            ScreenManager.SpriteBatch.DrawString(statusFont, UnitsName, statusNumberOfUnitsNameLocation[PlayerNum], Color.White);
             ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum), 
                 statusNumberOfUnitsLocation[PlayerNum], Color.White);
+        }
 
+        void DrawDefenseTowers()
+        {
+            for (int i = 0; i < NUM_DEFENSE_TOWERS; i++)
+            {
+                ScreenManager.SpriteBatch.Draw(defenseIcons[i], iconLocations[PlayerNum][i], Color.White);
+                if (i == defenseTowerSelected)
+                {
+                    ScreenManager.SpriteBatch.Draw(highlightIcon,
+                        highlightIconLocations[PlayerNum][i],
+                        highlightIconSourceRect, 
+                        Color.White, 
+                        highlightRotations[currentHighlightRotation], 
+                        highlightOrigin,
+                        SpriteEffects.None, 
+                        1.0f);
+                }
+            }
         }
     }
 }

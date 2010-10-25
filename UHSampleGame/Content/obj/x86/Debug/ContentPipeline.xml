@@ -179,21 +179,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\LoadScreen\levelLoader01_hl.xnb</Output>
-      <Time>2010-10-21T18:28:06-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Model\box.fbx</Source>
-      <Name>Model\box</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\box.xnb</Output>
-      <Time>2010-09-30T02:11:14.0623768-05:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Model\box_0.xml</Key>
-        <Value>2010-10-21T16:47:10.3990998-05:00</Value>
-      </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
+      <Time>2010-10-24T11:37:12.4968764-05:00</Time>
     </Item>
     <Item>
       <Source>Model\pyramids.fbx</Source>
@@ -763,6 +749,567 @@
       <Options>None</Options>
       <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\player04.xnb</Output>
       <Time>2010-10-21T20:13:51.7685641-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\box.fbx</Source>
+      <Name>Model\box</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\box.xnb</Output>
+      <Time>2010-09-30T02:11:14.0623768-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Model\box_0.xml</Key>
+        <Value>2010-10-21T16:47:10.3990998-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\box_texture_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_BLUE.fbx</Source>
+      <Name>Objects\Units\speedBoat01_BLUE</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speedBoat01_BLUE.xnb</Output>
+      <Time>2010-10-24T11:37:12.5007848-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speedBoat01_BLUE_0.xml</Key>
+        <Value>2010-10-24T15:08:20.7515585-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_blue_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_GREEN.fbx</Source>
+      <Name>Objects\Units\speedBoat01_GREEN</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speedBoat01_GREEN.xnb</Output>
+      <Time>2010-10-24T11:37:12.5164184-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speedBoat01_GREEN_0.xml</Key>
+        <Value>2010-10-24T15:08:24.0959505-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_green_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_ORANGE.fbx</Source>
+      <Name>Objects\Units\speedBoat01_ORANGE</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speedBoat01_ORANGE.xnb</Output>
+      <Time>2010-10-24T11:37:12.5252123-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speedBoat01_ORANGE_0.xml</Key>
+        <Value>2010-10-24T15:08:25.5649825-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_orange_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_PINK.fbx</Source>
+      <Name>Objects\Units\speedBoat01_PINK</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speedBoat01_PINK.xnb</Output>
+      <Time>2010-10-24T11:37:12.5349833-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speedBoat01_PINK_0.xml</Key>
+        <Value>2010-10-24T15:08:26.6589425-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_pink_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_RED.fbx</Source>
+      <Name>Objects\Units\speedBoat01_RED</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speedBoat01_RED.xnb</Output>
+      <Time>2010-10-24T11:37:12.5506169-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speedBoat01_RED_0.xml</Key>
+        <Value>2010-10-24T15:08:28.0342065-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_RED_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_YELLOW.fbx</Source>
+      <Name>Objects\Units\speedBoat01_YELLOW</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speedBoat01_YELLOW.xnb</Output>
+      <Time>2010-10-24T11:37:12.5603879-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speedBoat01_YELLOW_0.xml</Key>
+        <Value>2010-10-24T15:08:29.0969105-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_yellow_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_BLUE.fbx</Source>
+      <Name>Objects\Units\speederBoat02_BLUE</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speederBoat02_BLUE.xnb</Output>
+      <Time>2010-10-24T11:37:12.5779757-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speederBoat02_BLUE_0.xml</Key>
+        <Value>2010-10-24T15:08:30.4409185-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Blue_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_Green.fbx</Source>
+      <Name>Objects\Units\speederBoat02_Green</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speederBoat02_Green.xnb</Output>
+      <Time>2010-10-24T11:37:12.5897009-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speederBoat02_Green_0.xml</Key>
+        <Value>2010-10-24T15:08:31.4567385-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Green_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_ORANGE.fbx</Source>
+      <Name>Objects\Units\speederBoat02_ORANGE</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speederBoat02_ORANGE.xnb</Output>
+      <Time>2010-10-24T11:37:12.6043574-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speederBoat02_ORANGE_0.xml</Key>
+        <Value>2010-10-24T15:08:32.6444665-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Orange_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_PINK.fbx</Source>
+      <Name>Objects\Units\speederBoat02_PINK</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speederBoat02_PINK.xnb</Output>
+      <Time>2010-10-24T11:37:12.6317162-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speederBoat02_PINK_0.xml</Key>
+        <Value>2010-10-24T15:08:33.6759145-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Pink_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_RED.fbx</Source>
+      <Name>Objects\Units\speederBoat02_RED</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speederBoat02_RED.xnb</Output>
+      <Time>2010-10-24T11:37:12.6414872-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speederBoat02_RED_0.xml</Key>
+        <Value>2010-10-24T15:08:35.0355505-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Red_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_YELLOW.fbx</Source>
+      <Name>Objects\Units\speederBoat02_YELLOW</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\speederBoat02_YELLOW.xnb</Output>
+      <Time>2010-10-24T11:37:12.6639605-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Units\speederBoat02_YELLOW_0.xml</Key>
+        <Value>2010-10-24T15:08:36.0826265-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Yellow_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Units\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Model\InstancedModel.fx</Source>
+      <Name>Model\InstancedModel</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Model\InstancedModel.xnb</Output>
+      <Time>2010-10-24T15:08:09.7494465-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_BLUE.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speedBoat01_BLUE_0.xml</Output>
+      <Time>2010-10-24T11:37:12.5007848-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder01_blue.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_blue_0.xnb</Output>
+      <Time>2010-10-24T11:37:13.352816-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_GREEN.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speedBoat01_GREEN_0.xml</Output>
+      <Time>2010-10-24T11:37:12.5164184-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder01_green.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_green_0.xnb</Output>
+      <Time>2010-10-24T11:37:13.7055491-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_ORANGE.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speedBoat01_ORANGE_0.xml</Output>
+      <Time>2010-10-24T11:37:12.5252123-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder01_orange.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_orange_0.xnb</Output>
+      <Time>2010-10-24T11:37:13.88045-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_PINK.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speedBoat01_PINK_0.xml</Output>
+      <Time>2010-10-24T11:37:12.5349833-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder01_pink.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_pink_0.xnb</Output>
+      <Time>2010-10-24T11:37:14.0387402-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_RED.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speedBoat01_RED_0.xml</Output>
+      <Time>2010-10-24T11:37:12.5506169-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder01_RED.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_RED_0.xnb</Output>
+      <Time>2010-10-24T11:37:12.9864035-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speedBoat01_YELLOW.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speedBoat01_YELLOW_0.xml</Output>
+      <Time>2010-10-24T11:37:12.5603879-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder01_yellow.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder01_yellow_0.xnb</Output>
+      <Time>2010-10-24T11:37:14.1237479-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_BLUE.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speederBoat02_BLUE_0.xml</Output>
+      <Time>2010-10-24T11:37:12.5779757-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder02_Blue.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Blue_0.xnb</Output>
+      <Time>2010-10-24T11:37:14.4031985-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_Green.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speederBoat02_Green_0.xml</Output>
+      <Time>2010-10-24T11:37:12.5897009-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder02_Green.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Green_0.xnb</Output>
+      <Time>2010-10-24T11:37:14.5175192-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_ORANGE.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speederBoat02_ORANGE_0.xml</Output>
+      <Time>2010-10-24T11:37:12.6043574-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder02_Orange.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Orange_0.xnb</Output>
+      <Time>2010-10-24T11:37:14.6142521-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_PINK.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speederBoat02_PINK_0.xml</Output>
+      <Time>2010-10-24T11:37:12.6317162-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder02_Pink.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Pink_0.xnb</Output>
+      <Time>2010-10-24T11:37:14.7070766-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_RED.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speederBoat02_RED_0.xml</Output>
+      <Time>2010-10-24T11:37:12.6414872-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder02_Red.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Red_0.xnb</Output>
+      <Time>2010-10-24T11:37:14.8223744-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Units\speederBoat02_YELLOW.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Units\speederBoat02_YELLOW_0.xml</Output>
+      <Time>2010-10-24T11:37:12.6639605-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\images\boatSpeeder02_Yellow.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\images\boatSpeeder02_Yellow_0.xnb</Output>
+      <Time>2010-10-24T11:37:14.9122676-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\player01computer.png</Source>
+      <Name>PlayerMenu\player01computer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\player01computer.xnb</Output>
+      <Time>2010-10-24T15:27:25.9660193-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\player02computer.png</Source>
+      <Name>PlayerMenu\player02computer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\player02computer.xnb</Output>
+      <Time>2010-10-24T15:27:34.2163889-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\player03computer.png</Source>
+      <Name>PlayerMenu\player03computer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\player03computer.xnb</Output>
+      <Time>2010-10-24T15:27:42.0604903-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\player04computer.png</Source>
+      <Name>PlayerMenu\player04computer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\player04computer.xnb</Output>
+      <Time>2010-10-24T15:27:47.8117227-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\player_bg.png</Source>
+      <Name>PlayerMenu\player_bg</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\player_bg.xnb</Output>
+      <Time>2010-10-24T15:40:12-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\Icons\cannon_tower.png</Source>
+      <Name>PlayerMenu\Icons\cannon_tower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\cannon_tower.xnb</Output>
+      <Time>2010-10-24T15:47:29.3092462-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\Icons\electric_tower.png</Source>
+      <Name>PlayerMenu\Icons\electric_tower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\electric_tower.xnb</Output>
+      <Time>2010-10-24T15:47:29.3561218-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\Icons\plasma_tower.png</Source>
+      <Name>PlayerMenu\Icons\plasma_tower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\plasma_tower.xnb</Output>
+      <Time>2010-10-24T15:47:35.7175382-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\Icons\icon_selector.png</Source>
+      <Name>PlayerMenu\Icons\icon_selector</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\icon_selector.xnb</Output>
+      <Time>2010-10-24T16:02:51.3250376-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
