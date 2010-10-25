@@ -46,6 +46,7 @@ namespace UHSampleGame.Screens
 
         public override void UnloadContent()
         {
+            
         }
 
         public override void HandleInput(InputManagement.InputManager input)
@@ -62,6 +63,7 @@ namespace UHSampleGame.Screens
                 backgroundThread.Start();
             }
 
+            
             // Perform the load operation.
             ScreenManager.RemoveScreen(this);
 
@@ -76,6 +78,8 @@ namespace UHSampleGame.Screens
 
             }
 
+            loading_screen.Dispose();
+            loading_screen_hl.Dispose();
             // Once the load has finished, we use ResetElapsedTime to tell
             // the  game timing mechanism that we have just finished a very
             // long frame, and that it should not try to catch up.

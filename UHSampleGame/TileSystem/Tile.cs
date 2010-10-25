@@ -19,8 +19,8 @@ namespace UHSampleGame.TileSystem
         public Vector2 Size;
         public TileType TileType;
         Tower tower;
-        List<Unit> units;
-        List<bool> unitsInTile;
+        //List<Unit> units;
+        //List<bool> unitsInTile;
         List<int> unitIndexes;
         int unitsCount;
         public List<List<Tile>> Paths;
@@ -53,8 +53,8 @@ namespace UHSampleGame.TileSystem
             this.Size = size;
             this.TileType = tileType;
             this.Paths = new List<List<Tile>>();
-            this.units = new List<Unit>();
-            this.unitsInTile = new List<bool>();
+            //this.units = new List<Unit>();
+            //this.unitsInTile = new List<bool>();
             this.unitIndexes = new List<int>();
             this.unitsCount = 0;
 
@@ -63,7 +63,7 @@ namespace UHSampleGame.TileSystem
 
             for (int i = 0; i < UnitCollection.TotalPossibleUnitCount(); i++)
             {
-                unitsInTile.Add(false);
+                //unitsInTile.Add(false);
                 unitIndexes.Add(0);
             }
             SetTileType(tileType);
@@ -91,10 +91,10 @@ namespace UHSampleGame.TileSystem
             this.TileType = tileType;
         }
 
-        public override string ToString()
-        {
-            return this.ID.ToString() + " " + TileType.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    return this.ID.ToString() + " " + TileType.ToString();
+        //}
 
         public void SetBlockableObject(Tower gameObject)
         {
@@ -144,7 +144,7 @@ namespace UHSampleGame.TileSystem
 
         public void AddUnit(ref Unit unit)
         {
-            unitsInTile[unit.ID] = true;
+            //unitsInTile[unit.ID] = true;
             unitIndexes[unitsCount] = unit.ID;
             unitsCount++;
             
@@ -155,10 +155,11 @@ namespace UHSampleGame.TileSystem
 
         public void RemoveUnit(ref Unit unit)
         {
-            if (!unitsInTile[unit.ID])
+            if (unit.CurrentTileID != this.ID)
+                //!unitsInTile[unit.ID])
                 return;
 
-            unitsInTile[unit.ID] = false;
+           // unitsInTile[unit.ID] = false;
             for (int i = 0; i < unitsCount; i++)
             {
                 if (unitIndexes[i] == unit.ID)
@@ -178,14 +179,17 @@ namespace UHSampleGame.TileSystem
             //}
             //else
               //  OnUnitEnter(null);
-
+            Unit u;
             if (unitsCount > 0)
             {
                 for (int i = 0; i < unitsCount; i++)
                 {
-                    if (unitsInTile[unitIndexes[i]])
+                    u = UnitCollection.GetUnitByID(unitIndexes[i]);
+                    if (u.CurrentTileID == this.ID
+                        && u.IsActive())
+                        //unitsInTile[unitIndexes[i]])
                     {
-                        Unit u = UnitCollection.GetUnitByID(unitIndexes[i]);
+                        
                         OnUnitEnter(ref u);
                         break;
                     }
@@ -212,9 +216,9 @@ namespace UHSampleGame.TileSystem
             }
         }
 
-        public override bool Equals(object obj)
-        {
-            return ID == ((Tile)obj).ID;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    return ID == ((Tile)obj).ID;
+        //}
     }
 }

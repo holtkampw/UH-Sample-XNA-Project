@@ -92,7 +92,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         public void UnregisterAttackUnit(ref Unit unit)
         {
-            if (unitToAttack != null && unitToAttack == unit)
+            if (unitToAttack != null && unitToAttack.ID == unit.ID)
             {
                 unitToAttack = null;
             }

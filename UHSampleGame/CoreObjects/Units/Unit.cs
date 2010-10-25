@@ -28,6 +28,15 @@ namespace UHSampleGame.CoreObjects.Units
         Tile goalTile;
         Tile focalTile;
 
+        Tile a1;
+        Tile a2;
+        Tile a3;
+        Tile a4;
+
+
+
+        public int CurrentTileID;
+
         Vector3 focalPoint;
         Vector3 velocity;
 
@@ -43,6 +52,7 @@ namespace UHSampleGame.CoreObjects.Units
         public Matrix Transforms;
         public float Scale;
         public Vector3 Position;
+        private Vector3 normVel;
         static Matrix scaleMatrix;
         static Matrix rotationMatrixX;
         static Matrix rotationMatrixY;
@@ -61,11 +71,13 @@ namespace UHSampleGame.CoreObjects.Units
             rotationMatrixY = Matrix.Identity;
             rotationMatrixZ = Matrix.Identity;
             UpdateScaleRotations();
+            normVel = new Vector3();
            //Fucking change this!!
             Position = Vector3.Zero;
             Health = 50;
             ID = currentID;
             currentID++;
+            CurrentTileID = 0;
         }
 
         #region Matrix Setters
@@ -186,12 +198,13 @@ namespace UHSampleGame.CoreObjects.Units
         {
             previousTile = currentTile;
             currentTile = Tile2;
+            
             Unit unit = this;
 
-            if (currentTile != previousTile)
+            if (currentTile.ID != previousTile.ID)
             {
                 previousTile.RemoveUnit(ref unit);
-                if (currentTile == goalTile)
+                if (currentTile.ID == goalTile.ID)
                 {
                     //Register Hit
                     OnDied();
@@ -200,6 +213,7 @@ namespace UHSampleGame.CoreObjects.Units
                 {
                     PathLength = currentTile.Paths[goalTile.ID].Count;
                     currentTile.AddUnit(ref unit);
+                    CurrentTileID = currentTile.ID;
                 }
             }
         }
@@ -246,8 +260,10 @@ namespace UHSampleGame.CoreObjects.Units
             focalPoint = focalTile.GetRandPoint();
 
             velocity = focalPoint - Position;
-            Vector3 normVel = new Vector3(velocity.X, velocity.Y, velocity.Z);
-            normVel.Normalize();
+            //normVel.X = velocity.X;
+            //normVel.Y = velocity.Y;
+            //normVel.Z = velocity.Z;
+            //normVel.Normalize();
 
             velocity.Normalize();
 
@@ -261,7 +277,7 @@ namespace UHSampleGame.CoreObjects.Units
         public void TakeDamage(int damage)
         {
             this.Health -= damage;
-            Unit unit = this;
+
             if (Health <= 0)
             {
                 //this.currentTile.RemoveUnit(ref unit);

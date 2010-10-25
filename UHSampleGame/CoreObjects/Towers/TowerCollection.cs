@@ -113,6 +113,10 @@ namespace UHSampleGame.CoreObjects.Towers
         public static Tower Add(int playerNum, int teamNum, TowerType towerType, Vector3 position)
         {
             //////////////////////REFACTOR FOR EFFICIENCY
+            Tile tile = TileMap.GetTileFromPos(position);
+            if (!tile.IsWalkable())
+                return null; 
+
             for (int i = 0; i < MAX_TOWERS; i++)
             {
                 if (!towers[playerNum][(int)towerType][i].IsActive())

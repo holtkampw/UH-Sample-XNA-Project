@@ -134,6 +134,7 @@ namespace UHSampleGame.Players
                 }
             }
                 currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
+            //BOX?
             playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
         }
 
