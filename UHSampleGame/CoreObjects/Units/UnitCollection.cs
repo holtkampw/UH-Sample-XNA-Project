@@ -18,7 +18,7 @@ namespace UHSampleGame.CoreObjects.Units
     {
 
         #region Class Variables
-        const int MAX_UNITS = 10000;
+        const int MAX_UNITS =2000;
         static int UnitCounter;
 
         static int NumPlayers;
@@ -150,7 +150,7 @@ namespace UHSampleGame.CoreObjects.Units
 
                     unitsCount[playerNum][(int)unitType]++;
 
-                    if (i == unitsMaxIndex[playerNum][(int)unitType])
+                    if (i == unitsMaxIndex[playerNum][(int)unitType] && i <MAX_UNITS-1)
                         unitsMaxIndex[playerNum][(int)unitType]++;
 
                     break;
@@ -162,7 +162,7 @@ namespace UHSampleGame.CoreObjects.Units
         {
             unitsCount[unit.PlayerNum][(int)unit.Type]--;
             unit.Status = UnitStatus.Inactive;
-            unitCountForPlayer[unit.PlayerNum]++;
+            unitCountForPlayer[unit.PlayerNum]--;
             unitCountForPlayerString[unit.PlayerNum] = unitCountForPlayer[unit.PlayerNum].ToString();
         }
 
