@@ -8,11 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
 using SkinnedModel;
+using UHSampleGame.TileSystem;
 #endregion
 
 namespace UHSampleGame.CoreObjects
 {
-    public class AnimatedModel : GameObject
+    public class AnimatedModel
     {
         #region Class Variables
         protected AnimationPlayer animationPlayer;
@@ -22,8 +23,21 @@ namespace UHSampleGame.CoreObjects
         protected float scale;
         CameraManager cameraManager;
 
+        /// <summary>
+        /// The Game the object is in
+        /// </summary>
+        protected Game game;
+        /// <summary>
+        /// The position of the object in 3D space
+        /// </summary>
+        public Vector3 Position;
+
         //animation stuff
         Matrix view;
+
+        //TeamableAnimatedObject
+        protected int PlayerNum;
+        protected int TeamNum;
         #endregion
 
         #region Properties
@@ -41,18 +55,23 @@ namespace UHSampleGame.CoreObjects
         /// <summary>
         /// Default Constructor to setup Model
         /// </summary>
-        public AnimatedModel() : base()
+        public AnimatedModel()
         {
             model = null;
+            game = ScreenManager.Game;
+            Position = Vector3.Zero;
         }
 
         /// <summary>
         /// Constructor consisting of a given model
         /// </summary>
         /// <param name="model">Model for use</param>
-        public AnimatedModel(Model model) : base()
+        public AnimatedModel(int playerNum, int teamNum, Model model)
         {
+            this.PlayerNum = playerNum;
+            this.TeamNum = teamNum;
             this.model = model;
+            Position = Vector3.Zero;
             SetupModel();
             SetupCamera();
         }
@@ -96,7 +115,7 @@ namespace UHSampleGame.CoreObjects
         protected void SetupCamera()
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-            view = Matrix.CreateTranslation(position) * Matrix.CreateScale(scale) * cameraManager.ViewMatrix;
+            view = Matrix.CreateTranslation(Position) * Matrix.CreateScale(scale) * cameraManager.ViewMatrix;
         }
         #endregion
 
@@ -113,7 +132,7 @@ namespace UHSampleGame.CoreObjects
         #endregion
 
         #region Update and Draw
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             //update view matrix
             UpdateView();
@@ -128,12 +147,12 @@ namespace UHSampleGame.CoreObjects
 
         public void UpdateView()
         {
-            view = Matrix.CreateScale(scale) * Matrix.CreateTranslation(position) *
+            view = Matrix.CreateScale(scale) * Matrix.CreateTranslation(Position) *
                     
                     cameraManager.ViewMatrix;
         }
 
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             foreach (ModelMesh mesh in model.Meshes)
             {
@@ -154,5 +173,11 @@ namespace UHSampleGame.CoreObjects
             }
         }
         #endregion
+
+        //AnimatedTileObject
+        public Tile GetTile()
+        {
+            return TileMap.GetTileFromPos(Position);
+        }
     }
 }

@@ -88,6 +88,13 @@ Content\PlayerMenu\Icons\cannon_tower.xnb
 Content\PlayerMenu\Icons\electric_tower.xnb
 Content\PlayerMenu\Icons\plasma_tower.xnb
 Content\PlayerMenu\Icons\icon_selector.xnb
+Content\PlayerMenu\towerTitle.xnb
+Content\PlayerMenu\towerPrice.xnb
+Content\PlayerMenu\towerDescription.xnb
+Content\Objects\Copter\playerShip01Color_0.xnb
+Content\Objects\Copter\playerShip01.xnb
+Content\Objects\Copter\squarePlacer_red.xnb
+Content\Objects\Copter\placeSquare_Color_0.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv

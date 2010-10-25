@@ -17,7 +17,7 @@ namespace UHSampleGame.CoreObjects
 
         public Tile GetTile()
         {
-            return TileMap.GetTileFromPos(position);
+            return TileMap.GetTileFromPos(Position);
         }
     }
 }

@@ -1311,6 +1311,107 @@
       <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\icon_selector.xnb</Output>
       <Time>2010-10-24T16:02:51.3250376-05:00</Time>
     </Item>
+    <Item>
+      <Source>PlayerMenu\towerTitle.spritefont</Source>
+      <Name>PlayerMenu\towerTitle</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\towerTitle.xnb</Output>
+      <Time>2010-10-25T14:51:53.969751-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\towerPrice.spritefont</Source>
+      <Name>PlayerMenu\towerPrice</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\towerPrice.xnb</Output>
+      <Time>2010-10-25T14:52:00.6586634-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\towerDescription.spritefont</Source>
+      <Name>PlayerMenu\towerDescription</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\towerDescription.xnb</Output>
+      <Time>2010-10-25T14:52:07.5976286-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Copter\playerShip01.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Copter\playerShip01_0.xml</Output>
+      <Time>2010-10-25T15:46:16.6854066-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Copter\playerShip01Color.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Copter\playerShip01Color_0.xnb</Output>
+      <Time>2010-10-25T15:18:39.8313422-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Copter\playerShip01.fbx</Source>
+      <Name>Objects\Copter\playerShip01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Copter\playerShip01.xnb</Output>
+      <Time>2010-10-25T15:46:16.6854066-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Copter\playerShip01_0.xml</Key>
+        <Value>2010-10-25T15:46:20.4046326-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Copter\playerShip01Color_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Copter\squarePlacer_red.fbx</Source>
+      <Name>Objects\Copter\squarePlacer_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Copter\squarePlacer_red.xnb</Output>
+      <Time>2010-10-25T16:25:26.9473114-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Copter\squarePlacer_red_0.xml</Key>
+        <Value>2010-10-25T16:33:23.4031862-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Copter\placeSquare_Color_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Copter\squarePlacer_red.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Objects\Copter\squarePlacer_red_0.xml</Output>
+      <Time>2010-10-25T16:25:26.9473114-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Copter\placeSquare_Color.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Copter\placeSquare_Color_0.xnb</Output>
+      <Time>2010-10-25T16:24:43.0390944-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

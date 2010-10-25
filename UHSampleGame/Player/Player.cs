@@ -20,6 +20,17 @@ namespace UHSampleGame.Players
 {
     public enum PlayerType { Human, AI };
     public enum PlayerMenuTabs { Status, DefenseTower, UnitTower, Powers}
+
+    struct TowerInformation
+    {
+        public string price;
+        public Vector2[] priceLocation;
+        public string name;
+        public Vector2[] nameLocation;
+        public string description;
+        public Vector2[] descriptionLocation;
+    }
+
     public class Player
     {
         static Texture2D menuTab;
@@ -84,8 +95,17 @@ namespace UHSampleGame.Players
         int elapsedHighlightUpdateTime = 0;
         int maxHighlightUpdateTime = 25;
 
+        //playerNum, towerNum
+        TowerInformation[] defenseTowerInfo;
+        SpriteFont towerTitle;
+        SpriteFont towerPrice;
+        SpriteFont towerDescription;
+
         //HumanPlayer
-        TeamableAnimatedObject avatar;
+        AnimatedModel avatar;
+        bool avatarMoved = true;
+        StaticModel avatarFollowingTile;
+
         public int Money;
         public string MoneyString;
         public int Health;
@@ -112,12 +132,15 @@ namespace UHSampleGame.Players
             //HumanPlayer
             if (Type == PlayerType.Human)
             {
-                //avatar = new TeamableAnimatedObject(playerNum, teamNum,
-                //    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+                avatar = new AnimatedModel(playerNum, teamNum,
+                    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
 
-                //avatar.Scale = 2.0f;
-                //avatar.PlayClip("Take 001");
-                //avatar.SetPosition(PlayerBase.Position);
+                avatar.Scale = 2.0f;
+                avatar.PlayClip("Take 001");
+                avatar.Position = new Vector3(PlayerBase.Position.X, 200.0f, PlayerBase.Position.Z);
+                avatarMoved = false;
+                avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
+                avatarFollowingTile.Scale = 4.0f;
             }
 
             if (menuTab == null)
@@ -140,6 +163,37 @@ namespace UHSampleGame.Players
                 iconLocations = new Vector2[5][];
                 highlightIconLocations = new Rectangle[5][];
                 Vector2 iconOffset = new Vector2(0, 36);
+
+                defenseTowerInfo = new TowerInformation[NUM_DEFENSE_TOWERS];
+                defenseIcons = new Texture2D[3];
+                defenseIcons[0] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
+                defenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
+                defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\cannon_tower");
+                defenseTowerInfo[0].name = "Plasma Tower";
+                defenseTowerInfo[0].price = "Price: $1000";
+                defenseTowerInfo[0].description = "Shoots quick, but weak blasts\nat the enemy";
+                defenseTowerInfo[0].nameLocation = new Vector2[5];
+                defenseTowerInfo[0].descriptionLocation = new Vector2[5];
+                defenseTowerInfo[0].priceLocation = new Vector2[5];
+
+                defenseTowerInfo[1].name = "Electric Tower";
+                defenseTowerInfo[1].price = "Price: $3000";
+                defenseTowerInfo[1].description = "Attacks enemies in all directions";
+                defenseTowerInfo[1].nameLocation = new Vector2[5];
+                defenseTowerInfo[1].descriptionLocation = new Vector2[5];
+                defenseTowerInfo[1].priceLocation = new Vector2[5];
+
+                defenseTowerInfo[2].name = "Cannon Tower";
+                defenseTowerInfo[2].price = "Price: $6000";
+                defenseTowerInfo[2].description = "Powerful, long range attack\nbut slower than other towers";
+                defenseTowerInfo[2].nameLocation = new Vector2[5];
+                defenseTowerInfo[2].descriptionLocation = new Vector2[5];
+                defenseTowerInfo[2].priceLocation = new Vector2[5];
+
+                towerTitle = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\towerTitle");
+                towerPrice = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\towerPrice");
+                towerDescription = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\towerDescription");
+
                 for (int player = 1; player < 5; player++)
                 {
                     Vector2 tabStartPosition = new Vector2(8, 148);
@@ -168,11 +222,16 @@ namespace UHSampleGame.Players
                             highlightIcon.Width, highlightIcon.Height);
                         iconStartPosition += iconOffset;
                     }
+
+                    for (int tower = 0; tower < NUM_DEFENSE_TOWERS; tower++)
+                    {
+                        defenseTowerInfo[tower].nameLocation[player] = globalLocations[player] + new Vector2(70.0f, 30);
+                        defenseTowerInfo[tower].priceLocation[player] = globalLocations[player] + new Vector2(70.0f, 64);
+                        defenseTowerInfo[tower].descriptionLocation[player] = globalLocations[player] + new Vector2(70.0f, 94);
+                    }
                 }
-                defenseIcons = new Texture2D[3];
-                defenseIcons[0] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
-                defenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
-                defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\cannon_tower");
+                
+                
                 highlightIconSourceRect = new Rectangle(0, 0, highlightIcon.Width, highlightIcon.Height);
                 highlightOrigin = new Vector2(highlightIcon.Width / 2.0f, highlightIcon.Height / 2.0f);
             }
@@ -195,29 +254,54 @@ namespace UHSampleGame.Players
             //Human Player
             if (Type == PlayerType.Human)
             {
-                //if (input.CheckAction(InputAction.TileMoveUp))
-                //    avatar.SetPosition(avatar.Position + new Vector3(0, 0, -3));
+                if (input.CheckAction(InputAction.TileMoveUp))
+                {
+                    avatar.Position = avatar.Position + new Vector3(0, 0, -3);
+                    avatarMoved = true;
+                }
 
-                //if (input.CheckAction(InputAction.TileMoveDown))
-                //    avatar.SetPosition(avatar.Position + new Vector3(0, 0, 3));
+                if (input.CheckAction(InputAction.TileMoveDown))
+                {
+                    avatar.Position = avatar.Position + new Vector3(0, 0, 3);
+                    avatarMoved = true;
+                }
 
-                //if (input.CheckAction(InputAction.TileMoveLeft))
-                //    avatar.SetPosition(avatar.Position + new Vector3(-3, 0, 0));
+                if (input.CheckAction(InputAction.TileMoveLeft))
+                {
+                    avatar.Position = avatar.Position + new Vector3(-3, 0, 0);
+                    avatarMoved = true;
+                }
 
-                //if (input.CheckAction(InputAction.TileMoveRight))
-                //    avatar.SetPosition(avatar.Position + new Vector3(3, 0, 0));
+                if (input.CheckAction(InputAction.TileMoveRight))
+                {
+                    avatar.Position = avatar.Position + new Vector3(3, 0, 0);
+                    avatarMoved = true;
+                }
 
-                //if (avatar.Position.X < TileMap.Left)
-                //    avatar.SetPosition(new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z));
+                if (avatar.Position.X < TileMap.Left)
+                {
+                    avatar.Position = new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z);
+                    avatarMoved = true;
+                }
 
-                //if (avatar.Position.Z < TileMap.Top)
-                //    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Top));
+                if (avatar.Position.Z < TileMap.Top)
+                {
+                    avatar.Position = new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Top);
+                    avatarMoved = true;
+                }
 
-                //if (avatar.Position.X > TileMap.Right)
-                //    avatar.SetPosition(new Vector3(TileMap.Right, avatar.Position.Y, avatar.Position.Z));
+                if (avatar.Position.X > TileMap.Right)
+                {
+                    avatar.Position = new Vector3(TileMap.Right, avatar.Position.Y, avatar.Position.Z);
+                    avatarMoved = true;
+                }
+                
 
-                //if (avatar.Position.Z > TileMap.Bottom)
-                //    avatar.SetPosition(new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom));
+                if (avatar.Position.Z > TileMap.Bottom)
+                {
+                    avatar.Position = new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom);
+                    avatarMoved = true;
+                }
 
                 if (input.CheckAction(InputAction.Selection))
                 {
@@ -269,7 +353,13 @@ namespace UHSampleGame.Players
             //HumanPlayer
             if (Type == PlayerType.Human)
             {
-               // avatar.Update(gameTime);
+                avatar.Update(gameTime);
+                if (avatarMoved)
+                {
+                    avatarMoved = false;
+                    avatarFollowingTile.Position = TileMap.GetTilePosFromPos(avatar.Position);
+                    avatarFollowingTile.Update(gameTime);
+                }
             }
 
             elapsedHighlightUpdateTime += gameTime.ElapsedGameTime.Milliseconds;
@@ -294,7 +384,8 @@ namespace UHSampleGame.Players
             //HumanPlayer
             if (Type == PlayerType.Human)
             {
-               // avatar.Draw(gameTime);
+                avatar.Draw(gameTime);
+                avatarFollowingTile.Draw(gameTime);
             }
 
             DrawMenu(gameTime);
@@ -381,8 +472,16 @@ namespace UHSampleGame.Players
                         highlightOrigin,
                         SpriteEffects.None, 
                         1.0f);
+                    ScreenManager.SpriteBatch.DrawString(towerTitle, defenseTowerInfo[i].name, 
+                        defenseTowerInfo[i].nameLocation[PlayerNum], Color.White);
+                    ScreenManager.SpriteBatch.DrawString(towerPrice, defenseTowerInfo[i].price, 
+                        defenseTowerInfo[i].priceLocation[PlayerNum], Color.White);
+                    ScreenManager.SpriteBatch.DrawString(towerDescription, defenseTowerInfo[i].description, 
+                        defenseTowerInfo[i].descriptionLocation[PlayerNum], Color.White);
                 }
+                
             }
+
         }
     }
 }
