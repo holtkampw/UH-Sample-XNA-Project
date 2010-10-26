@@ -64,6 +64,9 @@ namespace UHSampleGame.TileSystem
         {
             get { return tiles[tiles.Count - 1].Position.Z; }
         }
+        static List<Tile> walkableNeighbors;
+
+        static Dictionary<int, Tile> emptyExclude = new Dictionary<int,Tile>();
 
         public static void InitializeTileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
         {
@@ -98,9 +101,10 @@ namespace UHSampleGame.TileSystem
             allNeighbors.Add(NeighborTile.UpRight);
         }
 
-        public static void SetBase(Base setBase)
+        public static void SetBase(Base setBase, Tile tile)
         {
             bases.Add(setBase);
+            tile.TileType = TileType.Base;
         }
 
         protected static void InitializeTiles()
@@ -292,18 +296,20 @@ namespace UHSampleGame.TileSystem
         }
         public static List<Tile> GetWalkableNeighbors(Tile Tile2)
         {
-            return GetWalkableNeighbors(Tile2, null);
+            return GetWalkableNeighbors(Tile2, ref emptyExclude);
         }
 
-        public static List<Tile> GetWalkableNeighbors(Tile Tile2, Dictionary<int, Tile> exclude)
+        public static List<Tile> GetWalkableNeighbors(Tile Tile2, ref Dictionary<int, Tile> exclude)
         {
+            //REFACTOR with static neighbor list
             //List<Tile2> neighbors = new List<Tile2>();
             neighbors.Clear();
             Tile currentNeighbor;
             for (int i = 0; i < allNeighbors.Count; i++)
             {
                 currentNeighbor = GetTileNeighbor(ref Tile2, allNeighbors[i]);
-                if (exclude != null && exclude.ContainsKey(currentNeighbor.ID))
+                if (//exclude != null && 
+                    exclude.ContainsKey(currentNeighbor.ID))
                     continue;
                 if (currentNeighbor.IsWalkable())
                 {
@@ -372,22 +378,22 @@ namespace UHSampleGame.TileSystem
 
         public static void SetObject(Tower gameObject, Tile Tile2)
         {
-            SetTower(gameObject, Tile2);
+            SetTower(ref gameObject, ref Tile2);
         }
 
         public static void SetObject(Base gameObject, Tile Tile2)
         {
-            SetBase(gameObject);
+            SetBase(gameObject, Tile2);
         }
 
-        public static bool SetTower(Tower tower, Tile Tile2)
+        public static bool SetTower(ref Tower tower, ref Tile Tile2)
         {
             Tile2.SetBlockableObject(tower);
             if (IsTilePathsValid())
             {
                 UpdateTilePaths();
 
-                List<Tile> walkableNeighbors = GetWalkableNeighbors(Tile2);
+                walkableNeighbors = GetWalkableNeighbors(Tile2);
 
                 for (int i = 0; i < walkableNeighbors.Count; i++)
                 {
@@ -397,7 +403,19 @@ namespace UHSampleGame.TileSystem
                 return true;
             }
 
-            RemoveTower(ref Tile2);
+           // RemoveTower(ref Tile2);
+
+            Tile2.RemoveBlockableObject();
+            for (int j = 0; j < bases.Count; j++)
+            {
+                for (int i = 0; i < bases.Count; i++)
+                {
+                    if (i != j)
+                    {
+                        bases[i].Tile.UpdatePathTo(bases[j].Tile);
+                    }
+                }
+            }
             return false;
 
         }

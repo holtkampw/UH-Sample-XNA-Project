@@ -141,7 +141,7 @@ namespace UHSampleGame.PathFinding
 
         static List<Tile> GetWalkableNeighborsNotOnClosedList(Node currentNode)
         {
-            return TileMap.GetWalkableNeighbors(currentNode.currentTile, closedDict);
+            return TileMap.GetWalkableNeighbors(currentNode.currentTile, ref closedDict);
         }
 
         static void AddNeighborNodesToOpenList(Node currentNode, List<Tile> neighborTiles)
@@ -159,7 +159,7 @@ namespace UHSampleGame.PathFinding
                     openHasNeighbor = true;
                     for (int j = 0; j < openCount; j++)
                     {
-                        if (openNodes[j].currentTile == neighborTiles[i])
+                        if (openNodes[j].currentTile.ID == neighborTiles[i].ID)
                         {
                             //openHasNeighbor = true;
                             openNodeSimilarIndex = j;
@@ -217,9 +217,12 @@ namespace UHSampleGame.PathFinding
 
         static  float GetDistanceBetweenTiles(ref Tile tile1, ref Tile tile2)
         {
+            if (tile1.IsNull() || tile2.IsNull())
+                return 0;
+
             float first = (tile1.Position.X - tile2.Position.X);
             float second = (tile1.Position.Z - tile2.Position.Z);
-            // return Math.Abs(tile1.Position.X - tile1.Position.Y) + Math.Abs(tile2.Position.X - tile2.Position.Y);
+             //return Math.Abs(tile1.Position.X - tile1.Position.Y) + Math.Abs(tile2.Position.X - tile2.Position.Y);
             return (float)Math.Sqrt((first * first) + (second * second));
         }
     }

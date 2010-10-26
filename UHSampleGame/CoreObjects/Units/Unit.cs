@@ -146,7 +146,8 @@ namespace UHSampleGame.CoreObjects.Units
         void UpdatePath()
         {
             SetCurrentTile(TileMap.GetTileFromPos(Position));
-
+            if (CurrentTileID == goalTile.ID)
+                return;
             if (CheckIfStuck())
                 return;
 
@@ -213,8 +214,9 @@ namespace UHSampleGame.CoreObjects.Units
                 {
                     PathLength = currentTile.Paths[goalTile.ID].Count;
                     currentTile.AddUnit(ref unit);
-                    CurrentTileID = currentTile.ID;
+                    
                 }
+                CurrentTileID = currentTile.ID;
             }
         }
 

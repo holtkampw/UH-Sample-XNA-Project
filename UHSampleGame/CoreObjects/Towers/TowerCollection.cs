@@ -114,20 +114,26 @@ namespace UHSampleGame.CoreObjects.Towers
         {
             //////////////////////REFACTOR FOR EFFICIENCY
             Tile tile = TileMap.GetTileFromPos(position);
-            if (!tile.IsWalkable())
+            Tower tower;
+            if (!tile.IsWalkable() || tile.IsBase())
                 return null; 
 
             for (int i = 0; i < MAX_TOWERS; i++)
             {
-                if (!towers[playerNum][(int)towerType][i].IsActive())
+                tower = towers[playerNum][(int)towerType][i];
+                if (!tower.IsActive())
                 {
-                    towers[playerNum][(int)towerType][i].Activate(playerNum, teamNum);
-                    towers[playerNum][(int)towerType][i].Type = towerType;
-                    towers[playerNum][(int)towerType][i].Setup(position);
-                    towerCount[playerNum][(int)towerType]++;
-                    TileMap.GetTileFromPos(position).SetBlockableObject(towers[playerNum][(int)towerType][i]);
-                    TileMap.UpdateTilePaths();
-                    return towers[playerNum][(int)towerType][i];
+                    if (TileMap.SetTower(ref tower, ref tile))
+                    {
+                        towers[playerNum][(int)towerType][i].Activate(playerNum, teamNum);
+                        towers[playerNum][(int)towerType][i].Type = towerType;
+                        towers[playerNum][(int)towerType][i].Setup(position);
+                        towerCount[playerNum][(int)towerType]++;
+
+                        return towers[playerNum][(int)towerType][i];
+                    }
+
+                    
                 }
             }
             return null;
@@ -152,7 +158,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 //        towers[playerNum][(int)tile.Tower.Type][i].Status = TowerStatus.Inactive;
                 //}
                 moneyBack = tile.Tower.DestroyCost();
-                tile.RemoveBlockableObject();
+                TileMap.RemoveTower(ref tile);
             }
             return moneyBack;
         }

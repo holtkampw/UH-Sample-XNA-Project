@@ -305,7 +305,7 @@ namespace UHSampleGame.Players
 
                 if (input.CheckAction(InputAction.Selection))
                 {
-                    for(int i =0; i<10; i++)
+                    for(int i =0; i<1; i++)
                         UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
                 }
 

@@ -11,7 +11,7 @@ using UHSampleGame.PathFinding;
 
 namespace UHSampleGame.TileSystem
 {
-    public enum TileType { Walkable, Blocked, Path, Null }
+    public enum TileType { Walkable, Blocked, Path, Base, Null }
 
     public class Tile
     {
@@ -72,13 +72,17 @@ namespace UHSampleGame.TileSystem
 
         public bool IsWalkable()
         {
-            return TileType == TileType.Walkable;
+            return TileType == TileType.Walkable || TileType == TileType.Base;
         }
-
 
         public bool IsNull()
         {
             return TileType == TileType.Null;
+        }
+
+        public bool IsBase()
+        {
+            return TileType == TileType.Base;
         }
 
         public TileType GetTileType()
@@ -91,21 +95,26 @@ namespace UHSampleGame.TileSystem
             this.TileType = tileType;
         }
 
-        //public override string ToString()
-        //{
-        //    return this.ID.ToString() + " " + TileType.ToString();
-        //}
+        public override string ToString()
+        {
+            return this.ID.ToString() + " " + TileType.ToString();
+        }
 
         public void SetBlockableObject(Tower gameObject)
         {
             Tower = gameObject;
             SetTileType(TileType.Blocked);
+            //TileMap.UpdateTilePaths();
         }
 
         public void RemoveBlockableObject()
         {
+            if (TileType == TileType.Base)
+                return;
+
             Tower = null;
             SetTileType(TileType.Walkable);
+           // TileMap.UpdateTilePaths();
         }
 
         public List<Tile> GetPathTo(Tile baseTile)
@@ -116,9 +125,10 @@ namespace UHSampleGame.TileSystem
 
         public void UpdatePathTo(Tile baseTile)
         {
-            AStar.InitAstar(this, baseTile);
-            List<Tile> tempPath = Paths[baseTile.ID];
-             AStar.FindPath(ref tempPath); //new List<Tile>(AStar.FindPath());
+           // List<Tile> newList = new List<Tile>();
+            AStar2.InitAstar(this, baseTile);
+           // List<Tile> tempPath = Paths[baseTile.ID];
+            Paths[baseTile.ID] = new List<Tile>(AStar2.FindPath());
              //Paths[baseTile.ID] = tempPath;
         }
 
@@ -145,6 +155,8 @@ namespace UHSampleGame.TileSystem
         public void AddUnit(ref Unit unit)
         {
             //unitsInTile[unit.ID] = true;
+            if (unitsCount < 0)
+                return;
             unitIndexes[unitsCount] = unit.ID;
             unitsCount++;
             
