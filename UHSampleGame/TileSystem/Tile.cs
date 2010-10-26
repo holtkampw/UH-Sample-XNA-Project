@@ -18,7 +18,7 @@ namespace UHSampleGame.TileSystem
         public Vector3 Position;
         public Vector2 Size;
         public TileType TileType;
-        Tower tower;
+        public Tower Tower;
         //List<Unit> units;
         //List<bool> unitsInTile;
         List<int> unitIndexes;

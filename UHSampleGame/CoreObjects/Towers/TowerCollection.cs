@@ -133,9 +133,45 @@ namespace UHSampleGame.CoreObjects.Towers
             return null;
         }
 
-        public static void Remove()
+        public static void Remove(int playerNum, ref Vector3 position)
         {
+            Tile tile = TileMap.GetTileFromPos(position);
+            
 
+            //do we need to d this???? test without :)
+            for (int i = 0; i < MAX_TOWERS; i++)
+            {
+                if (towers[playerNum][(int)tile.Tower.Type][i].ID == tile.Tower.ID)
+                    towers[playerNum][(int)tile.Tower.Type][i].Status = TowerStatus.Inactive;
+            }
+
+            tile.RemoveBlockableObject();
+        }
+
+        public static void Repair(int playerNum, ref Vector3 position)
+        {
+            Tile tile = TileMap.GetTileFromPos(position);
+            if (tile.Tower != null)
+            {
+                //Do we need this??
+                for (int i = 0; i < MAX_TOWERS; i++)
+                {
+                    towers[playerNum][(int)tile.Tower.Type][i].Repair();
+                }
+            }
+        }
+
+        public static void Upgrade(int playerNum, ref Vector3 position)
+        {
+            Tile tile = TileMap.GetTileFromPos(position);
+            if (tile.Tower != null)
+            {
+                //DO we need this??
+                for (int i = 0; i < MAX_TOWERS; i++)
+                {
+                    towers[playerNum][(int)tile.Tower.Type][i].Upgrade();
+                }
+            }
         }
         #endregion
 

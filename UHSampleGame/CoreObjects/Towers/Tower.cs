@@ -46,6 +46,14 @@ namespace UHSampleGame.CoreObjects.Towers
 
         private TimeSpan timeToAttack;
         private TimeSpan currentTimeToAttack;
+
+        public int ID;
+
+        public int Health;
+        public int XP;
+        public int Level;
+
+        static int currentID = 0;
         #endregion
 
         #region Initialization
@@ -62,6 +70,13 @@ namespace UHSampleGame.CoreObjects.Towers
 
             timeToAttack = new TimeSpan(0, 0, 0, 0, 200);
             currentTimeToAttack = new TimeSpan();
+
+            Health = 0;
+            XP = 0;
+            Level = 0;
+
+            ID = currentID;
+            currentID++;
         }
 
         public void Setup(Vector3 position)
@@ -135,6 +150,17 @@ namespace UHSampleGame.CoreObjects.Towers
                 }
                 currentTimeToAttack = TimeSpan.Zero;
             }
+        }
+
+        public int Repair()
+        {
+            throw new NotImplementedException();
+           // return 0;
+        }
+
+        public int Upgrade()
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
