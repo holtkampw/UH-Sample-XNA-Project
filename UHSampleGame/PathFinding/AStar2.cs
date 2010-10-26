@@ -12,7 +12,7 @@ namespace UHSampleGame.PathFinding
         static Tile StartTile;
         static Tile GoalTile;
 
-        static List<Tile> closed = new List<Tile>();
+        static List<bool> closed = new List<bool>();
         static List<Tile> open = new List<Tile>();
         static List<Tile> cameFrom = new List<Tile>();
 
@@ -41,18 +41,14 @@ namespace UHSampleGame.PathFinding
                     gScore.Add(100000f);
                     hScore.Add(100000f);
                     fScore.Add(100000f);
+                    closed.Add(false);
                     cameFrom.Add(Tile.NullTile);
                 }
             }
             StartTile = startTile;
             GoalTile = goalTile;
 
-            if (startTile.ID == 0 && GoalTile.ID == 99)
-            {
-                closed.Clear();
-            }
-
-            closed.Clear();
+            //closed.Clear();
             open.Clear();
             finalPath.Clear();
 
@@ -62,6 +58,7 @@ namespace UHSampleGame.PathFinding
                 gScore[i] = 100000f;
                 hScore[i] = 100000f;
                 fScore[i] = 100000f;
+                closed[i] = false;
             }
 
             open.Add(startTile);
@@ -71,12 +68,15 @@ namespace UHSampleGame.PathFinding
             fScore[startTile.ID] = hScore[startTile.ID];
         }
 
-        public static List<Tile> FindPath()
+        public static void FindPath(ref List<Tile> path)
         {
+            path.Clear();
             if (StartTile.ID == GoalTile.ID)
             {
-                finalPath.Add(GoalTile);
-                return finalPath;
+                //finalPath.Add(GoalTile);
+                //return finalPath;
+                path.Add(GoalTile);
+                return;
             }
                 
             while (open.Count > 0)
@@ -84,16 +84,20 @@ namespace UHSampleGame.PathFinding
                 currentTile = GetLowestFScoreFromOpenSet();
                 if (currentTile.ID == GoalTile.ID)
                 {
-                    return ReconstructPath(GoalTile);
+                    ReconstructPath(ref path, GoalTile);
                 
                 }
                 open.Remove(currentTile);
-                closed.Add(currentTile);
+                closed[currentTile.ID] = true;
+                //closed.Add(currentTile);
 
                 neighbors = TileMap.GetWalkableNeighbors(currentTile);
                 for (int i = 0; i < neighbors.Count; i++)
                 {
-                    if (closed.Contains(neighbors[i]))
+                    //if (closed.Contains(neighbors[i]))
+                    //    continue;
+
+                    if (closed[neighbors[i].ID])
                         continue;
 
                     neighborTile = neighbors[i];
@@ -120,22 +124,23 @@ namespace UHSampleGame.PathFinding
                     }
                 }
             }
-            return emptyPath;
+
+            return;
         }
 
-        static List<Tile> ReconstructPath(Tile curTile)
+        static void ReconstructPath(ref List<Tile> path, Tile curTile)
         {
             if (!cameFrom[curTile.ID].IsNull())
             {
-                finalPath = ReconstructPath(cameFrom[curTile.ID]);
-                finalPath.Add(curTile);
-                return finalPath;
+                ReconstructPath(ref path, cameFrom[curTile.ID]);
+                path.Add(curTile);
+                //return finalPath;
             }
             else
             {
-                List<Tile> temp = new List<Tile>();
-                temp.Add(curTile);
-                return temp;
+                //List<Tile> temp = new List<Tile>();
+                path.Add(curTile);
+                //return temp;
             }
         }
 

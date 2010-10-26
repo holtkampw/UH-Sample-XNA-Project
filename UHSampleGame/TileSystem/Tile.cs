@@ -127,8 +127,8 @@ namespace UHSampleGame.TileSystem
         {
            // List<Tile> newList = new List<Tile>();
             AStar2.InitAstar(this, baseTile);
-           // List<Tile> tempPath = Paths[baseTile.ID];
-            Paths[baseTile.ID] = new List<Tile>(AStar2.FindPath());
+            List<Tile> tempPath = Paths[baseTile.ID];
+            AStar2.FindPath(ref tempPath);//new List<Tile>(AStar2.FindPath());
              //Paths[baseTile.ID] = tempPath;
         }
 
