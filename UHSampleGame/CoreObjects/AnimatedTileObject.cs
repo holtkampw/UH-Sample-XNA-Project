@@ -13,11 +13,11 @@ namespace UHSampleGame.CoreObjects
     public class AnimatedTileObject : AnimatedModel 
     {
         public AnimatedTileObject(Model model)
-            : base(model) { }
+            : base(0, 0, model) { }
 
         public Tile GetTile()
         {
-            return TileMap.GetTileFromPos(position);
+            return TileMap.GetTileFromPos(Position);
         }
     }
 }

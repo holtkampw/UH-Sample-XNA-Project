@@ -13,10 +13,18 @@ using UHSampleGame.ScreenManagement;
 namespace UHSampleGame.CoreObjects
 
 {
-    public class StaticModel : GameObject
+    public class StaticModel
     {
         #region Class Variables
         protected float scale;
+        /// <summary>
+        /// The Game the object is in
+        /// </summary>
+        protected Game game;
+        /// <summary>
+        /// The position of the object in 3D space
+        /// </summary>
+        public Vector3 Position;
 
         CameraManager cameraManager;
 
@@ -37,7 +45,8 @@ namespace UHSampleGame.CoreObjects
         public StaticModel(Vector3 position)
         {
              model = null;
-             this.position = position;
+             game = ScreenManager.Game;
+             this.Position = position;
              SetupModel(position);
              SetupCamera();
         }
@@ -49,6 +58,7 @@ namespace UHSampleGame.CoreObjects
         public StaticModel(Model newModel, Vector3 position)
         {
             this.model = newModel;
+            game = ScreenManager.Game;
             SetupModel(position);
             SetupCamera();
         }
@@ -85,7 +95,7 @@ namespace UHSampleGame.CoreObjects
             rotationMatrixZ = Matrix.CreateRotationZ(0.0f);
 
             //give default position
-            this.position = position;
+            this.Position = position;
         }
 
         /// <summary>
@@ -133,10 +143,10 @@ namespace UHSampleGame.CoreObjects
         #endregion
 
         #region Update and Draw
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             //update view matrix
-            UpdateView();
+            //UpdateView();
             UpdateTransforms();
         }
 
@@ -151,10 +161,10 @@ namespace UHSampleGame.CoreObjects
                     //rotationMatrixX *
                     rotationMatrixY *
                     //rotationMatrixZ * 
-                    Matrix.CreateTranslation(position);
+                    Matrix.CreateTranslation(Position);
         }
 
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             if (model != null)
             {
