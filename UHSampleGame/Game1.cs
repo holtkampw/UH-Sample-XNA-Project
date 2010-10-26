@@ -111,7 +111,13 @@ namespace UHSampleGame
 
             //Tower Action
             inputManager.AddInput(InputAction.TowerBuild, Keys.Space);
-            inputManager.AddInput(InputAction.TowerBuild, Buttons.RightTrigger);
+            inputManager.AddInput(InputAction.TowerBuild, Buttons.A);
+            inputManager.AddInput(InputAction.TowerDestroy, Keys.B);
+            inputManager.AddInput(InputAction.TowerDestroy, Buttons.B);
+            inputManager.AddInput(InputAction.TowerRepair, Keys.N);
+            inputManager.AddInput(InputAction.TowerRepair, Buttons.Y);
+            inputManager.AddInput(InputAction.TowerUpgrade, Keys.M);
+            inputManager.AddInput(InputAction.TowerUpgrade, Buttons.X);
 
             //PlayerMenu
             inputManager.AddInput(InputAction.PlayerMenuLeft, Buttons.DPadLeft);

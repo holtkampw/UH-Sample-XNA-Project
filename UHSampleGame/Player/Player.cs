@@ -106,7 +106,7 @@ namespace UHSampleGame.Players
         bool avatarMoved = true;
         StaticModel avatarFollowingTile;
 
-        public int Money;
+        public int Money = 1000;
         public string MoneyString;
         public int Health;
         public string HealthString;
@@ -309,10 +309,32 @@ namespace UHSampleGame.Players
                         UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, UnitType.TestUnit);
                 }
 
-                //if (input.CheckNewAction(InputAction.TowerBuild))
-                //{
-                //    TowerCollection.Add(PlayerNum, TeamNum, TowerType.TowerA, this.avatar.Position);
-                //}
+                if (input.CheckNewAction(InputAction.TowerBuild))
+                {
+                    Tower tower = TowerCollection.Add(PlayerNum, TeamNum, TowerType.TowerA, this.avatar.Position);
+                    if(tower != null)
+                        Money -= tower.Cost;
+
+                    MoneyString = Money.ToString();
+                }
+
+                if (input.CheckNewAction(InputAction.TowerDestroy))
+                {
+                    Money += TowerCollection.Remove(PlayerNum, ref this.avatar.Position);
+                    MoneyString = Money.ToString();
+                }
+
+                if (input.CheckNewAction(InputAction.TowerRepair))
+                {
+                    Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatar.Position);
+                    MoneyString = Money.ToString();
+                }
+
+                if (input.CheckNewAction(InputAction.TowerUpgrade))
+                {
+                    Money -= TowerCollection.Upgrade(PlayerNum, Money, ref this.avatar.Position);
+                    MoneyString = Money.ToString();
+                }
 
                 if (input.CheckNewAction(InputAction.PlayerMenuLeft))
                 {

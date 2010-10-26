@@ -98,13 +98,13 @@ namespace UHSampleGame.TileSystem
 
         public void SetBlockableObject(Tower gameObject)
         {
-            this.tower = gameObject;
+            Tower = gameObject;
             SetTileType(TileType.Blocked);
         }
 
         public void RemoveBlockableObject()
         {
-            this.tower = null;
+            Tower = null;
             SetTileType(TileType.Walkable);
         }
 

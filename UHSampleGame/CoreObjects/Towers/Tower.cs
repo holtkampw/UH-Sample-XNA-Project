@@ -50,8 +50,11 @@ namespace UHSampleGame.CoreObjects.Towers
         public int ID;
 
         public int Health;
+        public int HealthCapacity;
         public int XP;
         public int Level;
+        public int Cost;
+        public int TotalInvestedCost;
 
         static int currentID = 0;
         #endregion
@@ -71,9 +74,13 @@ namespace UHSampleGame.CoreObjects.Towers
             timeToAttack = new TimeSpan(0, 0, 0, 0, 200);
             currentTimeToAttack = new TimeSpan();
 
-            Health = 0;
+            //Depends on Type
+            HealthCapacity = 100;
+            Health = HealthCapacity;
             XP = 0;
             Level = 0;
+            Cost = 100;
+            TotalInvestedCost = Cost;
 
             ID = currentID;
             currentID++;
@@ -152,15 +159,37 @@ namespace UHSampleGame.CoreObjects.Towers
             }
         }
 
-        public int Repair()
+        public int Repair(int money)
         {
-            throw new NotImplementedException();
-           // return 0;
+            float perc = 1.0f-(Health / (float)HealthCapacity);
+            Health = HealthCapacity;
+            int costToRepair = (int)(perc * Cost);
+
+            if (money >= costToRepair)
+                return costToRepair;
+
+            return 0;
         }
 
-        public int Upgrade()
+        public int Upgrade(int money)
         {
-            throw new NotImplementedException();
+            int upgradeCost = Cost + (int)((Level / 4.0f) * Cost);
+
+            if (money >= upgradeCost)
+            {
+                TotalInvestedCost += upgradeCost;
+                Level++;
+                XP = 0;
+                return upgradeCost;
+            }
+
+            return 0;
+        }
+
+        public int DestroyCost()
+        {
+            float perc = (Health / (float)HealthCapacity);
+            return (int)(TotalInvestedCost * perc*.75f);
         }
         #endregion
 
@@ -210,5 +239,7 @@ namespace UHSampleGame.CoreObjects.Towers
             Attack(gameTime);
         }
         #endregion
+
+        
     }
 }

@@ -133,45 +133,63 @@ namespace UHSampleGame.CoreObjects.Towers
             return null;
         }
 
-        public static void Remove(int playerNum, ref Vector3 position)
+        public static int Remove(int teamNum, ref Vector3 position)
         {
             Tile tile = TileMap.GetTileFromPos(position);
-            
+            int moneyBack = 0;
 
-            //do we need to d this???? test without :)
-            for (int i = 0; i < MAX_TOWERS; i++)
+            if (tile.Tower == null)
+                return 0 ;
+
+            if (tile.Tower.TeamNum == teamNum)
             {
-                if (towers[playerNum][(int)tile.Tower.Type][i].ID == tile.Tower.ID)
-                    towers[playerNum][(int)tile.Tower.Type][i].Status = TowerStatus.Inactive;
-            }
+                tile.Tower.Status = TowerStatus.Inactive;
 
-            tile.RemoveBlockableObject();
+                //do we need to d this???? test without :)
+                //for (int i = 0; i < MAX_TOWERS; i++)
+                //{
+                //    if (towers[playerNum][(int)tile.Tower.Type][i].ID == tile.Tower.ID)
+                //        towers[playerNum][(int)tile.Tower.Type][i].Status = TowerStatus.Inactive;
+                //}
+                moneyBack = tile.Tower.DestroyCost();
+                tile.RemoveBlockableObject();
+            }
+            return moneyBack;
         }
 
-        public static void Repair(int playerNum, ref Vector3 position)
+        public static int Repair(int teamNum, int money, ref Vector3 position)
         {
             Tile tile = TileMap.GetTileFromPos(position);
             if (tile.Tower != null)
             {
+                if (tile.Tower.TeamNum == teamNum)
+                    tile.Tower.Repair(money);
                 //Do we need this??
-                for (int i = 0; i < MAX_TOWERS; i++)
-                {
-                    towers[playerNum][(int)tile.Tower.Type][i].Repair();
-                }
+                //for (int i = 0; i < MAX_TOWERS; i++)
+                //{
+                //    if (towers[playerNum][(int)tile.Tower.Type][i].ID == tile.Tower.ID)
+                //        return towers[playerNum][(int)tile.Tower.Type][i].Repair(money);
+                //}
             }
+            return 0;
         }
 
-        public static void Upgrade(int playerNum, ref Vector3 position)
+        public static int Upgrade(int teamNum, int money, ref Vector3 position)
         {
             Tile tile = TileMap.GetTileFromPos(position);
             if (tile.Tower != null)
             {
+                if (tile.Tower.TeamNum == teamNum)
+                    return tile.Tower.Upgrade(money);
                 //DO we need this??
-                for (int i = 0; i < MAX_TOWERS; i++)
-                {
-                    towers[playerNum][(int)tile.Tower.Type][i].Upgrade();
-                }
+                //for (int i = 0; i < MAX_TOWERS; i++)
+                //{
+                //    if (towers[playerNum][(int)tile.Tower.Type][i].ID == tile.Tower.ID)
+                //        towers[playerNum][(int)tile.Tower.Type][i].Upgrade(money);
+                //}
             }
+            return 0;
+
         }
         #endregion
 
