@@ -86,8 +86,18 @@ namespace UHSampleGame.CoreObjects.Towers
             {
                 switch ((TowerType)j)
                 {
-                    case TowerType.TowerA:
+                    case TowerType.Plasma:
                         instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red"));
+                        instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
+                        instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
+                        break;
+                    case TowerType.Electric:
+                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerB_red"));
+                        instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
+                        instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
+                        break;
+                    case TowerType.Cannon:
+                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerC_red"));
                         instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
                         instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
                         break;

@@ -18,7 +18,7 @@ using UHSampleGame.TileSystem;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public enum TowerType { TowerA }
+    public enum TowerType { Plasma, Cannon, Electric }
     public enum TowerStatus { Inactive, Active }
 
     public class Tower
@@ -66,11 +66,18 @@ namespace UHSampleGame.CoreObjects.Towers
 
         public void Setup(Vector3 position)
         {
-            this.Position = TileMap.GetTilePosFromPos(position);
+            this.Position = position;
+            //this.Position = TileMap.GetTilePosFromPos(position);
             switch (Type)
             {
-                case TowerType.TowerA:
+                case TowerType.Plasma:
                     this.Scale = 4.0f;
+                    break;
+                case TowerType.Electric:
+                    this.Scale = 3.0f;
+                    break;
+                case TowerType.Cannon:
+                    this.Scale = 2.0f;
                     break;
             }
             UpdateScaleRotations();

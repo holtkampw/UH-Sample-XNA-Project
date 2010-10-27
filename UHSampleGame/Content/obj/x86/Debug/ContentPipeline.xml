@@ -272,34 +272,6 @@
       <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
     </Item>
     <Item>
-      <Source>Objects\Towers\towerB_red.fbx</Source>
-      <Name>Objects\Towers\towerB_red</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerB_red.xnb</Output>
-      <Time>2010-09-30T02:11:15.1149289-05:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Objects\Towers\towerB_red_0.xml</Key>
-        <Value>2010-10-21T16:47:47.3668258-05:00</Value>
-      </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Request>
-    </Item>
-    <Item>
-      <Source>Objects\Towers\towerC_red.fbx</Source>
-      <Name>Objects\Towers\towerC_red</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerC_red.xnb</Output>
-      <Time>2010-09-30T02:11:15.2263411-05:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Objects\Towers\towerC_red_0.xml</Key>
-        <Value>2010-10-21T16:47:48.4532498-05:00</Value>
-      </Dependency>
-      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Request>
-    </Item>
-    <Item>
       <Source>Objects\Units\boat.fbx</Source>
       <Name>Objects\Units\boat</Name>
       <Importer>FbxImporter</Importer>
@@ -1276,22 +1248,13 @@
       <Time>2010-10-24T15:40:12-05:00</Time>
     </Item>
     <Item>
-      <Source>PlayerMenu\Icons\cannon_tower.png</Source>
-      <Name>PlayerMenu\Icons\cannon_tower</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\cannon_tower.xnb</Output>
-      <Time>2010-10-24T15:47:29.3092462-05:00</Time>
-    </Item>
-    <Item>
       <Source>PlayerMenu\Icons\electric_tower.png</Source>
       <Name>PlayerMenu\Icons\electric_tower</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\electric_tower.xnb</Output>
-      <Time>2010-10-24T15:47:29.3561218-05:00</Time>
+      <Time>2010-10-25T23:09:17-05:00</Time>
     </Item>
     <Item>
       <Source>PlayerMenu\Icons\plasma_tower.png</Source>
@@ -1300,7 +1263,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\plasma_tower.xnb</Output>
-      <Time>2010-10-24T15:47:35.7175382-05:00</Time>
+      <Time>2010-10-25T23:23:19-05:00</Time>
     </Item>
     <Item>
       <Source>PlayerMenu\Icons\icon_selector.png</Source>
@@ -1411,6 +1374,72 @@
       <Options>None</Options>
       <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Copter\placeSquare_Color_0.xnb</Output>
       <Time>2010-10-25T16:24:43.0390944-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Objects\Towers\towerB_red.fbx</Source>
+      <Name>Objects\Towers\towerB_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerB_red.xnb</Output>
+      <Time>2010-09-30T02:11:15.1149289-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Towers\towerB_red_0.xml</Key>
+        <Value>2010-10-21T16:47:47.3668258-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerBColor_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Objects\Towers\towerC_red.fbx</Source>
+      <Name>Objects\Towers\towerC_red</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerC_red.xnb</Output>
+      <Time>2010-09-30T02:11:15.2263411-05:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Objects\Towers\towerC_red_0.xml</Key>
+        <Value>2010-10-21T16:47:48.4532498-05:00</Value>
+      </Dependency>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\towerCColor_0.xnb</Request>
+      <Request>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\Objects\Towers\InstancedModel.xnb</Request>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\Icons\plasma360_tower.png</Source>
+      <Name>PlayerMenu\Icons\plasma360_tower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\Icons\plasma360_tower.xnb</Output>
+      <Time>2010-10-25T23:15:22.5502425-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\unit_meter_animated.png</Source>
+      <Name>PlayerMenu\unit_meter_animated</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\unit_meter_animated.xnb</Output>
+      <Time>2010-10-26T13:55:15-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\unit_meter_base.png</Source>
+      <Name>PlayerMenu\unit_meter_base</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\unit_meter_base.xnb</Output>
+      <Time>2010-10-26T13:54:27-05:00</Time>
+    </Item>
+    <Item>
+      <Source>PlayerMenu\unit_meter_overlay.png</Source>
+      <Name>PlayerMenu\unit_meter_overlay</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William Holtkamp\Desktop\Cup\UHSampleGame\bin\x86\Debug\Content\PlayerMenu\unit_meter_overlay.xnb</Output>
+      <Time>2010-10-26T17:04:42-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

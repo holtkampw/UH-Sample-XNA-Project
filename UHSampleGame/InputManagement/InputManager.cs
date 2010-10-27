@@ -16,7 +16,8 @@ namespace UHSampleGame.InputManagement
         MenuSelect, MenuCancel, TileMoveUp, TileMoveDown,
         TileMoveLeft, TileMoveRight, TowerBuild,
         ExitGame, MenuLeft, MenuRight,
-        PlayerMenuLeft, PlayerMenuRight, PlayerMenuUp, PlayerMenuDown
+        PlayerMenuLeft, PlayerMenuRight, PlayerMenuUp, PlayerMenuDown,
+        UnitBuild, UnitLeft, UnitRight, UnitUp, UnitDown,
     };
 
     public class InputManager
@@ -218,6 +219,34 @@ namespace UHSampleGame.InputManagement
             return CheckReleaseAction(action, null);
         }
 
+        public bool CheckNewReleaseAction(InputAction action)
+        {
+            return CheckNewReleaseAction(action, null);
+        }
+
+        public bool CheckNewReleaseAction(InputAction action, PlayerIndex? playerIndex)
+        {
+            if (!playerIndex.HasValue)
+            {
+                for (int i = 0; i < playerIndexes.Length; i++)
+                    for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+                        if (IsNewButtonReleased(buttonActionDictionary[action][j], playerIndexes[i]))
+                            return true;
+            }
+            else
+            {
+                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+                    if (IsNewButtonReleased(buttonActionDictionary[action][j], playerIndex.Value))
+                        return true;
+            }
+
+            for (int i = 0; i < keyActionDictionary[action].Count; i++)
+                if (IsNewKeyReleased(keyActionDictionary[action][i]))
+                    return true;
+
+            return false;
+        }
+
         /// <summary>
         /// Checks if the action has just been released
         /// </summary>
@@ -233,6 +262,11 @@ namespace UHSampleGame.InputManagement
         private bool IsNewButtonPressed(Buttons button, PlayerIndex playerIndex)
         {
             return IsButtonPressed(button, playerIndex) && previousGamePadStates[playerIndex].IsButtonUp(button);
+        }
+
+        private bool IsNewButtonReleased(Buttons button, PlayerIndex playerIndex)
+        {
+            return IsButtonReleased(button, playerIndex) && previousGamePadStates[playerIndex].IsButtonDown(button);
         }
 
         private bool IsButtonPressed(Buttons button, PlayerIndex playerIndex)
@@ -252,6 +286,11 @@ namespace UHSampleGame.InputManagement
             return IsKeyPressed(key) && previousKeyboardState.IsKeyUp(key);
         }
 
+        private bool IsNewKeyReleased(Keys key)
+        {
+            return IsKeyReleased(key) && previousKeyboardState.IsKeyDown(key);
+        }
+
         private bool IsKeyPressed(Keys key)
         {
             return currentKeyboardState.IsKeyDown(key);
@@ -266,5 +305,7 @@ namespace UHSampleGame.InputManagement
 
 
         #endregion
+
+        
     }
 }
