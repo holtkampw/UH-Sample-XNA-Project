@@ -64,7 +64,8 @@ namespace UHSampleGame.ScreenManagement
             if (screen != null && screens.Count > 1)
             {
                 screen.UnloadContent();
-                return screens.Remove(screen);
+                screens.Remove(screen);
+                screens[screens.Count - 1].SetStatus(ScreenStatus.Visible);
             }
             return false;
         }

@@ -463,11 +463,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlayerMenu\Icons\cannon_tower.png">
-      <Name>cannon_tower</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="PlayerMenu\Icons\electric_tower.png">
       <Name>electric_tower</Name>
       <Importer>TextureImporter</Importer>
@@ -543,6 +538,55 @@
     </Compile>
     <Compile Include="PlayerMenu\unit_meter_overlay.png">
       <Name>unit_meter_overlay</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MultiplayerLobby\mPlayer01_idle.png">
+      <Name>mPlayer01_idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mPlayer01_ready.png">
+      <Name>mPlayer01_ready</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mPlayer02_idle.png">
+      <Name>mPlayer02_idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mPlayer02_ready.png">
+      <Name>mPlayer02_ready</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mPlayer03_idle.png">
+      <Name>mPlayer03_idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mPlayer03_ready.png">
+      <Name>mPlayer03_ready</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mPlayer04_idle.png">
+      <Name>mPlayer04_idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mPlayer04_ready.png">
+      <Name>mPlayer04_ready</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MultiplayerLobby\background.png">
+      <Name>background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
