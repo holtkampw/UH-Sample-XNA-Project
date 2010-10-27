@@ -48,3 +48,6 @@
 
 *.vsp
 *.psess
+/InstancedModelPipeline/bin
+/UHSampleGame/bin
+/UHSampleGame/Content/bin

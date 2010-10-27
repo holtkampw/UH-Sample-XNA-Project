@@ -11,16 +11,16 @@ using UHSampleGame.PathFinding;
 
 namespace UHSampleGame.TileSystem
 {
-    public enum TileType { Walkable, Blocked, Path, Null }
+    public enum TileType { Walkable, Blocked, Path, Base, Null }
 
     public class Tile
     {
         public Vector3 Position;
         public Vector2 Size;
         public TileType TileType;
-        Tower tower;
-        List<Unit> units;
-        List<bool> unitsInTile;
+        public Tower Tower;
+        //List<Unit> units;
+        //List<bool> unitsInTile;
         List<int> unitIndexes;
         int unitsCount;
         public List<List<Tile>> Paths;
@@ -53,8 +53,8 @@ namespace UHSampleGame.TileSystem
             this.Size = size;
             this.TileType = tileType;
             this.Paths = new List<List<Tile>>();
-            this.units = new List<Unit>();
-            this.unitsInTile = new List<bool>();
+            //this.units = new List<Unit>();
+            //this.unitsInTile = new List<bool>();
             this.unitIndexes = new List<int>();
             this.unitsCount = 0;
 
@@ -63,7 +63,7 @@ namespace UHSampleGame.TileSystem
 
             for (int i = 0; i < UnitCollection.TotalPossibleUnitCount(); i++)
             {
-                unitsInTile.Add(false);
+                //unitsInTile.Add(false);
                 unitIndexes.Add(0);
             }
             SetTileType(tileType);
@@ -72,13 +72,17 @@ namespace UHSampleGame.TileSystem
 
         public bool IsWalkable()
         {
-            return TileType == TileType.Walkable;
+            return TileType == TileType.Walkable || TileType == TileType.Base;
         }
-
 
         public bool IsNull()
         {
             return TileType == TileType.Null;
+        }
+
+        public bool IsBase()
+        {
+            return TileType == TileType.Base;
         }
 
         public TileType GetTileType()
@@ -98,14 +102,19 @@ namespace UHSampleGame.TileSystem
 
         public void SetBlockableObject(Tower gameObject)
         {
-            this.tower = gameObject;
+            Tower = gameObject;
             SetTileType(TileType.Blocked);
+            //TileMap.UpdateTilePaths();
         }
 
         public void RemoveBlockableObject()
         {
-            this.tower = null;
+            if (TileType == TileType.Base)
+                return;
+
+            Tower = null;
             SetTileType(TileType.Walkable);
+           // TileMap.UpdateTilePaths();
         }
 
         public List<Tile> GetPathTo(Tile baseTile)
@@ -116,9 +125,10 @@ namespace UHSampleGame.TileSystem
 
         public void UpdatePathTo(Tile baseTile)
         {
-            AStar.InitAstar(this, baseTile);
+           // List<Tile> newList = new List<Tile>();
+            AStar2.InitAstar(this, baseTile);
             List<Tile> tempPath = Paths[baseTile.ID];
-             AStar.FindPath(ref tempPath); //new List<Tile>(AStar.FindPath());
+            AStar2.FindPath(ref tempPath);//new List<Tile>(AStar2.FindPath());
              //Paths[baseTile.ID] = tempPath;
         }
 
@@ -144,7 +154,9 @@ namespace UHSampleGame.TileSystem
 
         public void AddUnit(ref Unit unit)
         {
-            unitsInTile[unit.ID] = true;
+            //unitsInTile[unit.ID] = true;
+            if (unitsCount < 0)
+                return;
             unitIndexes[unitsCount] = unit.ID;
             unitsCount++;
             
@@ -155,10 +167,11 @@ namespace UHSampleGame.TileSystem
 
         public void RemoveUnit(ref Unit unit)
         {
-            if (!unitsInTile[unit.ID])
+            if (unit.CurrentTileID != this.ID)
+                //!unitsInTile[unit.ID])
                 return;
 
-            unitsInTile[unit.ID] = false;
+           // unitsInTile[unit.ID] = false;
             for (int i = 0; i < unitsCount; i++)
             {
                 if (unitIndexes[i] == unit.ID)
@@ -178,14 +191,17 @@ namespace UHSampleGame.TileSystem
             //}
             //else
               //  OnUnitEnter(null);
-
+            Unit u;
             if (unitsCount > 0)
             {
                 for (int i = 0; i < unitsCount; i++)
                 {
-                    if (unitsInTile[unitIndexes[i]])
+                    u = UnitCollection.GetUnitByID(unitIndexes[i]);
+                    if (u.CurrentTileID == this.ID
+                        && u.IsActive())
+                        //unitsInTile[unitIndexes[i]])
                     {
-                        Unit u = UnitCollection.GetUnitByID(unitIndexes[i]);
+                        
                         OnUnitEnter(ref u);
                         break;
                     }
@@ -212,9 +228,9 @@ namespace UHSampleGame.TileSystem
             }
         }
 
-        public override bool Equals(object obj)
-        {
-            return ID == ((Tile)obj).ID;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    return ID == ((Tile)obj).ID;
+        //}
     }
 }

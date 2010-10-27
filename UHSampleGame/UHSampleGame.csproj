@@ -142,7 +142,7 @@
     <Compile Include="LevelManagement\LevelManager.cs" />
     <Compile Include="MenuSystem\MenuEntry.cs" />
     <Compile Include="MenuSystem\MenuScreen.cs" />
-    <Compile Include="PathFinding\AStar.cs" />
+    <Compile Include="PathFinding\AStar2.cs" />
     <Compile Include="Player\AIPlayer.cs" />
     <Compile Include="Player\HumanPlayer.cs" />
     <Compile Include="Player\Player.cs" />

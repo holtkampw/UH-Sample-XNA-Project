@@ -216,11 +216,13 @@
     <Compile Include="Objects\Towers\towerB_red.fbx">
       <Name>towerB_red</Name>
       <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
       <Processor>InstancedModelProcessor</Processor>
     </Compile>
     <Compile Include="Objects\Towers\towerC_red.fbx">
       <Name>towerC_red</Name>
       <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
       <Processor>InstancedModelProcessor</Processor>
     </Compile>
   </ItemGroup>
@@ -461,6 +463,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlayerMenu\Icons\cannon_tower.png">
+      <Name>cannon_tower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="PlayerMenu\Icons\electric_tower.png">
       <Name>electric_tower</Name>
       <Importer>TextureImporter</Importer>

@@ -120,27 +120,94 @@ namespace UHSampleGame.CoreObjects.Towers
         #endregion
 
         #region Manipulation
-        public static Tower Add(int playerNum, int teamNum, TowerType towerType, Vector3 position)
+        public static Tower Add(int playerNum, int teamNum, int money, TowerType towerType, Vector3 position)
         {
             //////////////////////REFACTOR FOR EFFICIENCY
+            Tile tile = TileMap.GetTileFromPos(position);
+            Tower tower;
+            if (!tile.IsWalkable() || tile.IsBase())
+                return null;
+
+            if (towers[playerNum][(int)towerType][0].Cost > money)
+                return null;
+
             for (int i = 0; i < MAX_TOWERS; i++)
             {
-                if (!towers[playerNum][(int)towerType][i].IsActive())
+                tower = towers[playerNum][(int)towerType][i];
+                if (!tower.IsActive())
                 {
-                    towers[playerNum][(int)towerType][i].Activate(playerNum, teamNum);
-                    towers[playerNum][(int)towerType][i].Type = towerType;
-                    towers[playerNum][(int)towerType][i].Setup(position);
-                    towerCount[playerNum][(int)towerType]++;
-                    TileMap.GetTileFromPos(position).SetBlockableObject(towers[playerNum][(int)towerType][i]);
-                    TileMap.UpdateTilePaths();
-                    return towers[playerNum][(int)towerType][i];
+                    if (TileMap.SetTower(ref tower, ref tile))
+                    {
+                        towers[playerNum][(int)towerType][i].Activate(playerNum, teamNum);
+                        towers[playerNum][(int)towerType][i].Type = towerType;
+                        towers[playerNum][(int)towerType][i].Setup(position);
+                        towerCount[playerNum][(int)towerType]++;
+
+                        return towers[playerNum][(int)towerType][i];
+                    }
+
+                    
                 }
             }
             return null;
         }
 
-        public static void Remove()
+        public static int Remove(int teamNum, ref Vector3 position)
         {
+            Tile tile = TileMap.GetTileFromPos(position);
+            int moneyBack = 0;
+
+            if (tile.Tower == null)
+                return 0 ;
+
+            if (tile.Tower.TeamNum == teamNum)
+            {
+                tile.Tower.Status = TowerStatus.Inactive;
+
+                //do we need to d this???? test without :)
+                //for (int i = 0; i < MAX_TOWERS; i++)
+                //{
+                //    if (towers[playerNum][(int)tile.Tower.Type][i].ID == tile.Tower.ID)
+                //        towers[playerNum][(int)tile.Tower.Type][i].Status = TowerStatus.Inactive;
+                //}
+                moneyBack = tile.Tower.DestroyCost();
+                TileMap.RemoveTower(ref tile);
+            }
+            return moneyBack;
+        }
+
+        public static int Repair(int teamNum, int money, ref Vector3 position)
+        {
+            Tile tile = TileMap.GetTileFromPos(position);
+            if (tile.Tower != null)
+            {
+                if (tile.Tower.TeamNum == teamNum)
+                    tile.Tower.Repair(money);
+                //Do we need this??
+                //for (int i = 0; i < MAX_TOWERS; i++)
+                //{
+                //    if (towers[playerNum][(int)tile.Tower.Type][i].ID == tile.Tower.ID)
+                //        return towers[playerNum][(int)tile.Tower.Type][i].Repair(money);
+                //}
+            }
+            return 0;
+        }
+
+        public static int Upgrade(int teamNum, int money, ref Vector3 position)
+        {
+            Tile tile = TileMap.GetTileFromPos(position);
+            if (tile.Tower != null)
+            {
+                if (tile.Tower.TeamNum == teamNum)
+                    return tile.Tower.Upgrade(money);
+                //DO we need this??
+                //for (int i = 0; i < MAX_TOWERS; i++)
+                //{
+                //    if (towers[playerNum][(int)tile.Tower.Type][i].ID == tile.Tower.ID)
+                //        towers[playerNum][(int)tile.Tower.Type][i].Upgrade(money);
+                //}
+            }
+            return 0;
 
         }
         #endregion

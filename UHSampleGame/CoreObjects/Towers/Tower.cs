@@ -46,6 +46,17 @@ namespace UHSampleGame.CoreObjects.Towers
 
         private TimeSpan timeToAttack;
         private TimeSpan currentTimeToAttack;
+
+        public int ID;
+
+        public int Health;
+        public int HealthCapacity;
+        public int XP;
+        public int Level;
+        public int Cost;
+        public int TotalInvestedCost;
+
+        static int currentID = 0;
         #endregion
 
         #region Initialization
@@ -62,6 +73,17 @@ namespace UHSampleGame.CoreObjects.Towers
 
             timeToAttack = new TimeSpan(0, 0, 0, 0, 200);
             currentTimeToAttack = new TimeSpan();
+
+            //Depends on Type
+            HealthCapacity = 100;
+            Health = HealthCapacity;
+            XP = 0;
+            Level = 0;
+            Cost = 100;
+            TotalInvestedCost = Cost;
+
+            ID = currentID;
+            currentID++;
         }
 
         public void Setup(Vector3 position)
@@ -99,7 +121,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         public void UnregisterAttackUnit(ref Unit unit)
         {
-            if (unitToAttack != null && unitToAttack == unit)
+            if (unitToAttack != null && unitToAttack.ID == unit.ID)
             {
                 unitToAttack = null;
             }
@@ -142,6 +164,39 @@ namespace UHSampleGame.CoreObjects.Towers
                 }
                 currentTimeToAttack = TimeSpan.Zero;
             }
+        }
+
+        public int Repair(int money)
+        {
+            float perc = 1.0f-(Health / (float)HealthCapacity);
+            Health = HealthCapacity;
+            int costToRepair = (int)(perc * Cost);
+
+            if (money >= costToRepair)
+                return costToRepair;
+
+            return 0;
+        }
+
+        public int Upgrade(int money)
+        {
+            int upgradeCost = Cost + (int)((Level / 4.0f) * Cost);
+
+            if (money >= upgradeCost)
+            {
+                TotalInvestedCost += upgradeCost;
+                Level++;
+                XP = 0;
+                return upgradeCost;
+            }
+
+            return 0;
+        }
+
+        public int DestroyCost()
+        {
+            float perc = (Health / (float)HealthCapacity);
+            return (int)(TotalInvestedCost * perc*.75f);
         }
         #endregion
 
@@ -191,5 +246,7 @@ namespace UHSampleGame.CoreObjects.Towers
             Attack(gameTime);
         }
         #endregion
+
+        
     }
 }

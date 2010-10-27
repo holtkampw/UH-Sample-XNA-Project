@@ -114,7 +114,7 @@ namespace UHSampleGame.Players
         bool avatarMoved = true;
         StaticModel avatarFollowingTile;
 
-        public int Money;
+        public int Money = 1000;
         public string MoneyString;
         public int Health;
         public string HealthString;
@@ -217,6 +217,7 @@ namespace UHSampleGame.Players
                 defenseIcons = new Texture2D[3];
                 defenseIcons[0] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
                 defenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
+                defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\cannon_tower");
                 defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma360_tower");
                 defenseTowerInfo[0].name = "Plasma Tower";
                 defenseTowerInfo[0].price = "Price: $1000";
@@ -234,8 +235,10 @@ namespace UHSampleGame.Players
                 defenseTowerInfo[1].priceLocation = new Vector2[5];
                 defenseTowerInfo[1].type = TowerType.Electric;
 
+                defenseTowerInfo[2].name = "Cannon Tower";
                 defenseTowerInfo[2].name = "Plasma360 Tower";
                 defenseTowerInfo[2].price = "Price: $6000";
+                defenseTowerInfo[2].description = "Powerful, long range attack\nbut slower than other towers";
                 defenseTowerInfo[2].description = "A stronger, quicker version\n of the Plasma tower.  It\n shoots in multiple directions at once.";
                 defenseTowerInfo[2].nameLocation = new Vector2[5];
                 defenseTowerInfo[2].descriptionLocation = new Vector2[5];
@@ -341,6 +344,7 @@ namespace UHSampleGame.Players
                     
                 }
                 
+                
                 highlightIconSourceRect = new Rectangle(0, 0, highlightIcon.Width, highlightIcon.Height);
                 highlightOrigin = new Vector2(highlightIcon.Width / 2.0f, highlightIcon.Height / 2.0f);
             }
@@ -414,7 +418,29 @@ namespace UHSampleGame.Players
 
                 if (input.CheckNewAction(InputAction.TowerBuild))
                 {
-                    TowerCollection.Add(PlayerNum, TeamNum, lastBuiltTower, this.avatarFollowingTile.Position);
+                    Tower tower = TowerCollection.Add(PlayerNum, TeamNum, Money, lastBuiltTower, this.avatarFollowingTile.Position);
+                    if(tower != null)
+                        Money -= tower.Cost;
+
+                    MoneyString = Money.ToString();
+                }
+
+                if (input.CheckNewAction(InputAction.TowerDestroy))
+                {
+                    Money += TowerCollection.Remove(PlayerNum, ref this.avatar.Position);
+                    MoneyString = Money.ToString();
+                }
+
+                if (input.CheckNewAction(InputAction.TowerRepair))
+                {
+                    Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatar.Position);
+                    MoneyString = Money.ToString();
+                }
+
+                if (input.CheckNewAction(InputAction.TowerUpgrade))
+                {
+                    Money -= TowerCollection.Upgrade(PlayerNum, Money, ref this.avatar.Position);
+                    MoneyString = Money.ToString();
                 }
 
                 if (input.CheckNewAction(InputAction.PlayerMenuLeft))
@@ -627,7 +653,7 @@ namespace UHSampleGame.Players
 
         public void SetTowerForLevelMap(TowerType towerType, Tile tile)
         {
-            TileMap.SetTowerForLevelMap(TowerCollection.Add(PlayerNum, TeamNum, towerType, tile.Position), tile);
+            TileMap.SetTowerForLevelMap(TowerCollection.Add(PlayerNum, TeamNum, 100000, towerType, tile.Position), tile);
         }
 
         public void DrawMenu(GameTime gameTime)

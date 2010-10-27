@@ -14,7 +14,8 @@ namespace UHSampleGame.InputManagement
     {
         Selection, Back, Rotation, MenuUp, MenuDown,
         MenuSelect, MenuCancel, TileMoveUp, TileMoveDown,
-        TileMoveLeft, TileMoveRight, TowerBuild,
+        TileMoveLeft, TileMoveRight, 
+        TowerBuild, TowerDestroy, TowerRepair, TowerUpgrade,
         ExitGame, MenuLeft, MenuRight,
         PlayerMenuLeft, PlayerMenuRight, PlayerMenuUp, PlayerMenuDown,
         UnitBuild, UnitLeft, UnitRight, UnitUp, UnitDown,
