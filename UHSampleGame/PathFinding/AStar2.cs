@@ -29,9 +29,6 @@ namespace UHSampleGame.PathFinding
         static List<Tile> neighbors;
         static Tile neighborTile;
 
-        static List<Tile> finalPath =  new List<Tile>();
-        static List<Tile> emptyPath = new List<Tile>();
-
         public static void InitAstar(Tile startTile, Tile goalTile)
         {
             if (gScore.Count < 1)
@@ -50,7 +47,6 @@ namespace UHSampleGame.PathFinding
 
             //closed.Clear();
             open.Clear();
-            finalPath.Clear();
 
             for (int i = 0; i < TileMap.TileCount; i++)
             {

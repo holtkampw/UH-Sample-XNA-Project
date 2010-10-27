@@ -110,13 +110,16 @@ namespace UHSampleGame.CoreObjects.Towers
         #endregion
 
         #region Manipulation
-        public static Tower Add(int playerNum, int teamNum, TowerType towerType, Vector3 position)
+        public static Tower Add(int playerNum, int teamNum, int money, TowerType towerType, Vector3 position)
         {
             //////////////////////REFACTOR FOR EFFICIENCY
             Tile tile = TileMap.GetTileFromPos(position);
             Tower tower;
             if (!tile.IsWalkable() || tile.IsBase())
-                return null; 
+                return null;
+
+            if (towers[playerNum][(int)towerType][0].Cost > money)
+                return null;
 
             for (int i = 0; i < MAX_TOWERS; i++)
             {

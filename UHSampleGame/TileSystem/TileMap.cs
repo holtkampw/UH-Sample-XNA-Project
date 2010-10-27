@@ -304,7 +304,7 @@ namespace UHSampleGame.TileSystem
             //REFACTOR with static neighbor list
             //List<Tile2> neighbors = new List<Tile2>();
             neighbors.Clear();
-            Tile currentNeighbor;
+            //Tile currentNeighbor;
 
             for(int i =0; i< allNeighbors.Count; i++)
                 tileNeighbors[i] = GetTileNeighbor(ref Tile2, allNeighbors[i]);

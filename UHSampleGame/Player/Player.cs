@@ -311,7 +311,7 @@ namespace UHSampleGame.Players
 
                 if (input.CheckNewAction(InputAction.TowerBuild))
                 {
-                    Tower tower = TowerCollection.Add(PlayerNum, TeamNum, TowerType.TowerA, this.avatar.Position);
+                    Tower tower = TowerCollection.Add(PlayerNum, TeamNum, Money, TowerType.TowerA, this.avatar.Position);
                     if(tower != null)
                         Money -= tower.Cost;
 
@@ -421,7 +421,7 @@ namespace UHSampleGame.Players
 
         public void SetTowerForLevelMap(TowerType towerType, Tile tile)
         {
-            TileMap.SetTowerForLevelMap(TowerCollection.Add(PlayerNum, TeamNum, towerType, tile.Position), tile);
+            TileMap.SetTowerForLevelMap(TowerCollection.Add(PlayerNum, TeamNum, 100000, towerType, tile.Position), tile);
         }
 
         public void DrawMenu(GameTime gameTime)
