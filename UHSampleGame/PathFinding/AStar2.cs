@@ -67,6 +67,7 @@ namespace UHSampleGame.PathFinding
         public static void FindPath(ref List<Tile> path)
         {
             path.Clear();
+            path.Capacity = 100;
             if (StartTile.ID == GoalTile.ID)
             {
                 //finalPath.Add(GoalTile);

@@ -164,9 +164,9 @@ namespace UHSampleGame.TileSystem
             max = maxs[tileId];// min + numTilesX - 1;
             switch (neighborTile)
             {
-                case NeighborTile.Up: newIndex = tileId - (int)numTiles.X;
+                case NeighborTile.Up: newIndex = tileId - numTilesX;
                     break;
-                case NeighborTile.Down: newIndex = tileId + (int)numTiles.X;
+                case NeighborTile.Down: newIndex = tileId + numTilesX;
                     break;
                 case NeighborTile.Left: newIndex = tileId - 1;
                     if (newIndex < min)
@@ -177,19 +177,19 @@ namespace UHSampleGame.TileSystem
                         newIndex = tileId;
                     break;
                 case NeighborTile.UpLeft: newIndex = tileId - numTilesX - 1;
-                    if (newIndex < min - (int)numTiles.X)
+                    if (newIndex < min - numTilesX)
                         newIndex = tileId;
                     break;
                 case NeighborTile.UpRight: newIndex = tileId - numTilesX + 1;
-                    if (newIndex > max - (int)numTiles.X)
+                    if (newIndex > max - numTilesX)
                         newIndex = tileId;
                     break;
                 case NeighborTile.DownLeft: newIndex = tileId + numTilesX - 1;
-                    if (newIndex < min + (int)numTiles.X)
+                    if (newIndex < min + numTilesX)
                         newIndex = tileId;
                     break;
                 case NeighborTile.DownRight: newIndex = tileId + numTilesX + 1;
-                    if (newIndex > max + (int)numTiles.X)
+                    if (newIndex > max + numTilesX)
                         newIndex = tileId;
                     break;
             }
