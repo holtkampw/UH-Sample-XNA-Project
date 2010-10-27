@@ -159,6 +159,8 @@ namespace UHSampleGame.Players
         int elapsedUnitMeterUpdateTime = 0;
         int maxUnitMeterUpdateDate = 20;
 
+        static PlayerIndex[] playerIndexes = { 0, PlayerIndex.One, PlayerIndex.Two, PlayerIndex.Three, PlayerIndex.Four };
+
       
         #region Properties
        
@@ -217,7 +219,6 @@ namespace UHSampleGame.Players
                 defenseIcons = new Texture2D[3];
                 defenseIcons[0] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
                 defenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
-                defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\cannon_tower");
                 defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma360_tower");
                 defenseTowerInfo[0].name = "Plasma Tower";
                 defenseTowerInfo[0].price = "Price: $1000";
@@ -235,10 +236,8 @@ namespace UHSampleGame.Players
                 defenseTowerInfo[1].priceLocation = new Vector2[5];
                 defenseTowerInfo[1].type = TowerType.Electric;
 
-                defenseTowerInfo[2].name = "Cannon Tower";
                 defenseTowerInfo[2].name = "Plasma360 Tower";
                 defenseTowerInfo[2].price = "Price: $6000";
-                defenseTowerInfo[2].description = "Powerful, long range attack\nbut slower than other towers";
                 defenseTowerInfo[2].description = "A stronger, quicker version\n of the Plasma tower.  It\n shoots in multiple directions at once.";
                 defenseTowerInfo[2].nameLocation = new Vector2[5];
                 defenseTowerInfo[2].descriptionLocation = new Vector2[5];
@@ -367,25 +366,25 @@ namespace UHSampleGame.Players
             //Human Player
             if (Type == PlayerType.Human)
             {
-                if (input.CheckAction(InputAction.TileMoveUp))
+                if (input.CheckAction(InputAction.TileMoveUp, playerIndexes[PlayerNum]))
                 {
                     avatar.Position = avatar.Position + new Vector3(0, 0, -3);
                     avatarMoved = true;
                 }
 
-                if (input.CheckAction(InputAction.TileMoveDown))
+                if (input.CheckAction(InputAction.TileMoveDown, playerIndexes[PlayerNum]))
                 {
                     avatar.Position = avatar.Position + new Vector3(0, 0, 3);
                     avatarMoved = true;
                 }
 
-                if (input.CheckAction(InputAction.TileMoveLeft))
+                if (input.CheckAction(InputAction.TileMoveLeft, playerIndexes[PlayerNum]))
                 {
                     avatar.Position = avatar.Position + new Vector3(-3, 0, 0);
                     avatarMoved = true;
                 }
 
-                if (input.CheckAction(InputAction.TileMoveRight))
+                if (input.CheckAction(InputAction.TileMoveRight, playerIndexes[PlayerNum]))
                 {
                     avatar.Position = avatar.Position + new Vector3(3, 0, 0);
                     avatarMoved = true;
@@ -416,7 +415,7 @@ namespace UHSampleGame.Players
                     avatarMoved = true;
                 }
 
-                if (input.CheckNewAction(InputAction.TowerBuild))
+                if (input.CheckNewAction(InputAction.TowerBuild, playerIndexes[PlayerNum]))
                 {
                     Tower tower = TowerCollection.Add(PlayerNum, TeamNum, Money, lastBuiltTower, this.avatarFollowingTile.Position);
                     if(tower != null)
@@ -425,39 +424,39 @@ namespace UHSampleGame.Players
                     MoneyString = Money.ToString();
                 }
 
-                if (input.CheckNewAction(InputAction.TowerDestroy))
+                if (input.CheckNewAction(InputAction.TowerDestroy, playerIndexes[PlayerNum]))
                 {
                     Money += TowerCollection.Remove(PlayerNum, ref this.avatar.Position);
                     MoneyString = Money.ToString();
                 }
 
-                if (input.CheckNewAction(InputAction.TowerRepair))
+                if (input.CheckNewAction(InputAction.TowerRepair, playerIndexes[PlayerNum]))
                 {
                     Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatar.Position);
                     MoneyString = Money.ToString();
                 }
 
-                if (input.CheckNewAction(InputAction.TowerUpgrade))
+                if (input.CheckNewAction(InputAction.TowerUpgrade, playerIndexes[PlayerNum]))
                 {
                     Money -= TowerCollection.Upgrade(PlayerNum, Money, ref this.avatar.Position);
                     MoneyString = Money.ToString();
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuLeft))
+                if (input.CheckNewAction(InputAction.PlayerMenuLeft, playerIndexes[PlayerNum]))
                 {
                     if (((int)currentlySelectedPlayerStatus - 1) >= 0)
                         currentlySelectedPlayerStatus--;
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuRight))
+                if (input.CheckNewAction(InputAction.PlayerMenuRight, playerIndexes[PlayerNum]))
                 {
                     if (((int)currentlySelectedPlayerStatus + 1) < playerMenuTabsEnumType.Length)
                         currentlySelectedPlayerStatus++;
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuUp))
+                if (input.CheckNewAction(InputAction.PlayerMenuUp, playerIndexes[PlayerNum]))
                 {
                     if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
                     {
@@ -468,7 +467,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuDown))
+                if (input.CheckNewAction(InputAction.PlayerMenuDown, playerIndexes[PlayerNum]))
                 {
                     if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
                     {
@@ -479,7 +478,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckAction(InputAction.UnitUp))
+                if (input.CheckAction(InputAction.UnitUp, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.Y < 1)
                         unitSelectionPosition.Y += 1;
@@ -487,7 +486,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = true;
                 }
 
-                if (input.CheckAction(InputAction.UnitLeft))
+                if (input.CheckAction(InputAction.UnitLeft, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.X > -1)
                         unitSelectionPosition.X -= 1;
@@ -495,14 +494,14 @@ namespace UHSampleGame.Players
                        
                 }
 
-                if (input.CheckAction(InputAction.UnitDown))
+                if (input.CheckAction(InputAction.UnitDown, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.Y > -1)
                         unitSelectionPosition.Y -= 1;
                     unitScreenActivated = true;
                 }
 
-                if (input.CheckAction(InputAction.UnitRight))
+                if (input.CheckAction(InputAction.UnitRight, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.X < 1)
                         unitSelectionPosition.X += 1;
@@ -524,10 +523,19 @@ namespace UHSampleGame.Players
                 }
 
 
-                if (input.CheckAction(InputAction.UnitBuild))
+                if (input.CheckAction(InputAction.UnitBuild, playerIndexes[PlayerNum]))
                 {
 
                     if (selectedUnit != queuedUnitType)
+                    {
+                        queuedUnits = 0;
+                        queuedDeclineMode = false;
+                        unitsDeployed = 0;
+                        queuedUnitsToDeploy = 0;
+                        percentOfUnitsQueued = 0;
+                    }
+
+                    if (queuedDeclineMode && input.CheckNewAction(InputAction.UnitBuild, playerIndexes[PlayerNum]))
                     {
                         queuedUnits = 0;
                         queuedDeclineMode = false;
@@ -553,13 +561,13 @@ namespace UHSampleGame.Players
 
                         if (!queuedDeclineMode)
                         {
-                            percentOfUnitsQueued += 0.5f;
+                            percentOfUnitsQueued += 1.4f;
                         }
                         queuedUnitType = selectedUnit;
                     }
                 }
 
-                if (input.CheckNewReleaseAction(InputAction.UnitBuild) || (percentOfUnitsQueued >= 100.0f))
+                if (input.CheckNewReleaseAction(InputAction.UnitBuild, playerIndexes[PlayerNum]) || (percentOfUnitsQueued >= 100.0f))
                 {
                     if (!queuedDeclineMode)
                     { 
