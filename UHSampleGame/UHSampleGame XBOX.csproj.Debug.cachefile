@@ -24,8 +24,6 @@ Content\Objects\Units\enemyShip01.xnb
 Content\Objects\Units\enemyShip02.xnb
 Content\Objects\Base\oilRig.xnb
 Content\Objects\Towers\towerA_red.xnb
-Content\Objects\Towers\towerB_red.xnb
-Content\Objects\Towers\towerC_red.xnb
 Content\Objects\Units\boat.xnb
 Content\Objects\Base\enemyBaseShip01.xnb
 Content\MainMenu\oilBarrel_MainMenu.xnb
@@ -84,7 +82,6 @@ Content\PlayerMenu\player02computer.xnb
 Content\PlayerMenu\player03computer.xnb
 Content\PlayerMenu\player04computer.xnb
 Content\PlayerMenu\player_bg.xnb
-Content\PlayerMenu\Icons\cannon_tower.xnb
 Content\PlayerMenu\Icons\electric_tower.xnb
 Content\PlayerMenu\Icons\plasma_tower.xnb
 Content\PlayerMenu\Icons\icon_selector.xnb
@@ -95,6 +92,12 @@ Content\Objects\Copter\playerShip01Color_0.xnb
 Content\Objects\Copter\playerShip01.xnb
 Content\Objects\Copter\squarePlacer_red.xnb
 Content\Objects\Copter\placeSquare_Color_0.xnb
+Content\Objects\Towers\towerB_red.xnb
+Content\Objects\Towers\towerC_red.xnb
+Content\PlayerMenu\Icons\plasma360_tower.xnb
+Content\PlayerMenu\unit_meter_animated.xnb
+Content\PlayerMenu\unit_meter_base.xnb
+Content\PlayerMenu\unit_meter_overlay.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv
