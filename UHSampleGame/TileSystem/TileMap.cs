@@ -451,6 +451,16 @@ namespace UHSampleGame.TileSystem
             UpdateTilePaths();
         }
 
+        public static Tile GetTileForPlayer(int playerNum)
+        {
+            for(int i = 0; i < bases.Count; i++)
+            {
+                if (bases[i].PlayerNum == playerNum)
+                    return bases[i].Tile;
+            }
+            return Tile.NullTile;
+        }
+
         public static void Draw()
         {
             Microsoft.Xna.Framework.Graphics.Texture2D first = ScreenManagement.ScreenManager.Game.Content.Load<Microsoft.Xna.Framework.Graphics.Texture2D>("Tiles\\1");

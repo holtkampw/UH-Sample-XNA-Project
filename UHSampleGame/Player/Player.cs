@@ -55,10 +55,10 @@ namespace UHSampleGame.Players
 
         public Base PlayerBase;
 
-        protected int PlayerNum;
-        protected int TeamNum;
+        public int PlayerNum;
+        public int TeamNum;
 
-        protected int TargetPlayerNum;
+        public int TargetPlayerNum;
 
         protected CameraManager cameraManager;
 
@@ -166,37 +166,163 @@ namespace UHSampleGame.Players
        
         #endregion
 
-        public Player(int playerNum, int teamNum, int targetPlayerNum, Tile startTile, PlayerType type)
+        public void SharedSetup(int playerNum, int teamNum, PlayerType type)
         {
             this.PlayerNum = playerNum;
-            this.TargetPlayerNum = targetPlayerNum;
             this.TeamNum = teamNum;
             this.Type = type;
-            SetBase(new Base(playerNum, teamNum, BaseType.type1, startTile));
-            
+
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
             //FIX THIS
             HealthString = Health.ToString();
             MoneyString = Money.ToString();
 
-            //HumanPlayer
-            if (Type == PlayerType.Human)
-            {
-                avatar = new AnimatedModel(playerNum, teamNum,
-                    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+            SetupStatic();
+            //SetupNonStatic();
 
-                avatar.Scale = 2.0f;
-                avatar.PlayClip("Take 001");
-                avatar.Position = new Vector3(PlayerBase.Position.X, 200.0f, PlayerBase.Position.Z);
-                avatarMoved = false;
-                avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
-                avatarFollowingTile.Scale = 4.0f;
+            currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
+            if (Type == PlayerType.Human)
+                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
+            else
+                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum + "computer");
+        }
+
+        public Player()
+        {
+
+        }
+
+        public void PlayerSetup(int playerNum, int teamNum, Base gameObject, PlayerType playerType)
+        {
+            SharedSetup(playerNum, teamNum, playerType);
+            SetBase(gameObject);
+        }
+
+        public Player(int playerNum, int teamNum, Base gameObject, PlayerType playerType)
+        {
+            SharedSetup(playerNum, teamNum, playerType);
+            SetBase(gameObject);
+        }
+
+        public Player(int playerNum, int teamNum, int targetPlayerNum, Tile startTile, PlayerType type)
+        {
+            SharedSetup(playerNum, teamNum, type);
+            this.TargetPlayerNum = targetPlayerNum;
+            SetBase(new Base(playerNum, teamNum, BaseType.type1, startTile));
+
+            SetupAvatar(); 
+            
+        }
+
+        /*
+        public void SetupNonStatic()
+        {
+            unitIconLocation = new Vector2[5][];
+            highlightUnitIconLocations = new Rectangle[5][];
+            unitIcons = new Texture2D[MAX_UNIT_TYPES];
+            Vector2 unitIconOffset = new Vector2(44.0f, 0.0f);
+            Vector2 unitIconRowOffset = new Vector2(0.0f, 44.0f);
+            unitInformation = new UnitInformation[MAX_UNIT_TYPES];
+
+            unitInformation[1].type = UnitType.SpeedBoat;
+            unitInformation[1].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
+
+            unitInformation[6].type = UnitType.SpeederBoat;
+            unitInformation[6].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
+
+            unitMeterBaseTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_base");
+            unitMeterBaseLocation = new Rectangle[5];
+            unitMeterOverlayTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_overlay");
+            unitMeterOverlaySource = new Rectangle(0, 0, 30, 200);
+            unitMeterOverlayDestination = new Rectangle[5];
+            unitMeterHighlightTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_animated");
+            unitMeterHightlightSource = new Rectangle(0, 0, 30, 0);
+            unitMeterOverlayBaseY = new float[5];
+
+            for (int player = 1; player < 5; player++)
+            {
+                Vector2 iconOffset = new Vector2(0, 36);
+                Vector2 tabStartPosition = new Vector2(8, 148);
+                tabLocation[player] = new Vector2[NUM_TABS];
+                for (int t = 0; t < NUM_TABS; t++)
+                {
+                    tabLocation[player][t] = globalLocations[player] + tabStartPosition;
+                    tabStartPosition += tabOffset;
+                }
+
+                moneyLocation[player] = globalLocations[player] + new Vector2(110, -1);
+                statusHealthNameLocation[player] = globalLocations[player] + new Vector2(10, 40);
+                statusHealthLocation[player] = globalLocations[player] + new Vector2(120, 40);
+                statusNumberOfUnitsNameLocation[player] = globalLocations[player] + new Vector2(10, 80);
+                statusNumberOfUnitsLocation[player] = globalLocations[player] + new Vector2(180, 80);
+
+                iconLocations[player] = new Vector2[4];
+                highlightIconLocations[player] = new Rectangle[4];
+                Vector2 iconStartPosition = new Vector2(8, 36);
+
+                for (int icon = 0; icon < 4; icon++)
+                {
+                    iconLocations[player][icon] = globalLocations[player] + iconStartPosition;
+                    highlightIconLocations[player][icon] = new Rectangle((int)(iconLocations[player][icon].X - 5.0f + (highlightIcon.Width / 2)),
+                        (int)(iconLocations[player][icon].Y - 5.0f + (highlightIcon.Height / 2)),
+                        highlightIcon.Width, highlightIcon.Height);
+                    iconStartPosition += iconOffset;
+                }
+
+                for (int tower = 0; tower < NUM_DEFENSE_TOWERS; tower++)
+                {
+                    defenseTowerInfo[tower].nameLocation[player] = globalLocations[player] + new Vector2(70.0f, 30);
+                    defenseTowerInfo[tower].priceLocation[player] = globalLocations[player] + new Vector2(70.0f, 64);
+                    defenseTowerInfo[tower].descriptionLocation[player] = globalLocations[player] + new Vector2(70.0f, 94);
+                }
+
+                unitIconLocation[player] = new Vector2[MAX_UNIT_TYPES];
+                highlightUnitIconLocations[player] = new Rectangle[MAX_UNIT_TYPES];
+                Vector2 unitIconStartPosition = new Vector2(48, 36);
+                for (int unit = 0; unit < MAX_UNIT_TYPES; unit++)
+                {
+                    if (unit == 4)
+                    {
+                        //move over invalid middle
+                        unitIconStartPosition += unitIconOffset;
+                    }
+                    unitIconLocation[player][unit] = globalLocations[player] + unitIconStartPosition;
+                    highlightUnitIconLocations[player][unit] = new Rectangle((int)(unitIconLocation[player][unit].X - 5.0f + (highlightIcon.Width / 2)),
+                        (int)(unitIconLocation[player][unit].Y - 5.0f + (highlightIcon.Height / 2)),
+                        highlightIcon.Width, highlightIcon.Height);
+                    unitIconStartPosition += unitIconOffset;
+                    if (unit == 2 || unit == 4)
+                    {
+                        unitIconStartPosition += unitIconRowOffset;
+                        unitIconStartPosition.X = 48;
+                    }
+                }
+
+                unitMeterOverlayDestination[player] = new Rectangle((int)globalLocations[player].X + 8,
+                    (int)globalLocations[player].Y + 44 + 100,
+                    15,
+                    0);
+                unitMeterOverlayBaseY[player] = unitMeterOverlayDestination[player].Y;
+
+                unitMeterBaseLocation[player] = new Rectangle((int)globalLocations[player].X + 8,
+                    (int)globalLocations[player].Y + 44,
+                    15,
+                    100);
+
             }
 
-            if (menuTab == null)
+
+            highlightIconSourceRect = new Rectangle(0, 0, highlightIcon.Width, highlightIcon.Height);
+            highlightOrigin = new Vector2(highlightIcon.Width / 2.0f, highlightIcon.Height / 2.0f);
+        }
+        */
+
+        public void SetupStatic()
+        {
+            if (/*menuTab == null*/ true)
             {
-                menuTab = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenuTab");    
+                menuTab = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenuTab");
 
                 menuTabSource = new Rectangle[2];
                 menuTabSource[SELECTED] = new Rectangle(0, menuTab.Width, menuTab.Width, menuTab.Height / 2);
@@ -291,11 +417,11 @@ namespace UHSampleGame.Players
                     iconLocations[player] = new Vector2[4];
                     highlightIconLocations[player] = new Rectangle[4];
                     Vector2 iconStartPosition = new Vector2(8, 36);
-                    
+
                     for (int icon = 0; icon < 4; icon++)
                     {
                         iconLocations[player][icon] = globalLocations[player] + iconStartPosition;
-                        highlightIconLocations[player][icon] = new Rectangle((int)(iconLocations[player][icon].X - 5.0f + (highlightIcon.Width / 2)), 
+                        highlightIconLocations[player][icon] = new Rectangle((int)(iconLocations[player][icon].X - 5.0f + (highlightIcon.Width / 2)),
                             (int)(iconLocations[player][icon].Y - 5.0f + (highlightIcon.Height / 2)),
                             highlightIcon.Width, highlightIcon.Height);
                         iconStartPosition += iconOffset;
@@ -331,34 +457,46 @@ namespace UHSampleGame.Players
                     }
 
                     unitMeterOverlayDestination[player] = new Rectangle((int)globalLocations[player].X + 8,
-                        (int)globalLocations[player].Y + 44 + 100, 
-                        15, 
+                        (int)globalLocations[player].Y + 44 + 100,
+                        15,
                         0);
                     unitMeterOverlayBaseY[player] = unitMeterOverlayDestination[player].Y;
 
-                    unitMeterBaseLocation[player] = new Rectangle((int)globalLocations[player].X + 8, 
-                        (int)globalLocations[player].Y + 44, 
-                        15, 
+                    unitMeterBaseLocation[player] = new Rectangle((int)globalLocations[player].X + 8,
+                        (int)globalLocations[player].Y + 44,
+                        15,
                         100);
-                    
+
                 }
-                
-                
+
+
                 highlightIconSourceRect = new Rectangle(0, 0, highlightIcon.Width, highlightIcon.Height);
                 highlightOrigin = new Vector2(highlightIcon.Width / 2.0f, highlightIcon.Height / 2.0f);
             }
-                
-            currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
-            if(Type == PlayerType.Human)
-                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
-            else
-                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum + "computer");
         }
 
         public void SetBase(Base playerBase)
         {
             this.PlayerBase = playerBase;
+
+            if (Type == PlayerType.Human && avatar == null)
+            {
+                SetupAvatar();  
+            }
             // TileMap2.SetBase(playerBase);
+        }
+
+        public void SetupAvatar()
+        {
+            avatar = new AnimatedModel(PlayerNum, TeamNum,
+                    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+
+            avatar.Scale = 2.0f;
+            avatar.PlayClip("Take 001");
+            avatar.Position = new Vector3(PlayerBase.Position.X, 200.0f, PlayerBase.Position.Z);
+            avatarMoved = false;
+            avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
+            avatarFollowingTile.Scale = 4.0f;
         }
 
         public void HandleInput(InputManager input)
@@ -656,6 +794,7 @@ namespace UHSampleGame.Players
         public void SetTargetBase(Base target)
         {
             PlayerBase.SetGoalBase(target);
+            this.TargetPlayerNum = target.PlayerNum;
            // target.baseDestroyed += GetNewTargetBase;
         }
 

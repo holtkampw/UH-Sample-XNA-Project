@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
 using UHSampleGame.TileSystem;
+using UHSampleGame.ProjectileManagment;
 
 
 namespace UHSampleGame.CoreObjects.Towers
@@ -158,6 +159,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 {
                     unitToAttack.TakeDamage(attackStrength);
 
+                    ProjectileManager.AddParticle(this.Position);
                     //DO XP GIVING HERE
 
                     

@@ -89,6 +89,10 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.MenuDown, Buttons.LeftThumbstickDown);
             inputManager.AddInput(InputAction.MenuLeft, Buttons.LeftThumbstickLeft);
             inputManager.AddInput(InputAction.MenuRight, Buttons.LeftThumbstickRight);
+            inputManager.AddInput(InputAction.MenuUp, Buttons.DPadUp);
+            inputManager.AddInput(InputAction.MenuDown, Buttons.DPadDown);
+            inputManager.AddInput(InputAction.MenuLeft, Buttons.DPadLeft);
+            inputManager.AddInput(InputAction.MenuRight, Buttons.DPadRight);
             inputManager.AddInput(InputAction.MenuSelect, Buttons.A);
             inputManager.AddInput(InputAction.MenuCancel, Buttons.B);
 
@@ -145,9 +149,16 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.StartGame, Buttons.X);
             inputManager.AddInput(InputAction.BackToMainMenu, Buttons.Y);
             inputManager.AddInput(InputAction.JoinGame, Buttons.A);
+            inputManager.AddInput(InputAction.TeamUp, Buttons.LeftThumbstickUp);
+            inputManager.AddInput(InputAction.TeamDown, Buttons.LeftThumbstickDown);
+            inputManager.AddInput(InputAction.TeamUp, Buttons.DPadUp);
+            inputManager.AddInput(InputAction.TeamUp, Buttons.DPadDown);
             inputManager.AddInput(InputAction.StartGame, Keys.X);
             inputManager.AddInput(InputAction.BackToMainMenu, Keys.Y);
             inputManager.AddInput(InputAction.JoinGame, Keys.A);
+            inputManager.AddInput(InputAction.TeamUp, Keys.Up);
+            inputManager.AddInput(InputAction.TeamDown, Keys.Down);
+            
             
             //Setup Screen Manager
             screenManager = new ScreenManager(this);

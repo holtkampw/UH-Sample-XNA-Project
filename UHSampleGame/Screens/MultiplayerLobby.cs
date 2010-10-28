@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.InputManagement;
+using UHSampleGame.Players;
+using UHSampleGame.LevelManagement;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,13 +18,15 @@ namespace UHSampleGame.Screens
         #region Class Variables
         Texture2D background;
 
-        const int ACTIVE = 1;
-        const int IDLE = 0;
-        //playerNum, ACTIVE/IDLE
-        Texture2D[][] playerIcons;
-        bool[] activePlayers;
+        //playerNum, teamNum
+        Texture2D[][] activeIcons;
+        Texture2D[] idleIcons;
         Vector2[] playerIconLocations;
         PlayerIndex[] playerIndexes;
+        PlayerSetup[] playerSetup;
+
+        char[] numtoCharMapping = {' ', 'A', 'B', 'C', 'D'};
+
         #endregion
 
         #region Initialization
@@ -33,19 +38,28 @@ namespace UHSampleGame.Screens
         public override void LoadContent()
         {
             background = ScreenManager.Game.Content.Load<Texture2D>("MultiplayerLobby\\background");
-            playerIcons = new Texture2D[5][];
-            activePlayers = new bool[5];
+            activeIcons = new Texture2D[5][];
+            idleIcons = new Texture2D[5];
             playerIconLocations = new Vector2[5];
             Vector2 currentPosition = new Vector2(40, 230);
             Vector2 offset = new Vector2(300, 0);
+            playerSetup = new PlayerSetup[5];
             for (int i = 1; i < 5; i++)
             {
-                playerIcons[i] = new Texture2D[2];
-                playerIcons[i][IDLE] = ScreenManager.Game.Content.Load<Texture2D>("MultiplayerLobby\\mPlayer0" + i + "_idle");
-                playerIcons[i][ACTIVE] = ScreenManager.Game.Content.Load<Texture2D>("MultiplayerLobby\\mPlayer0" + i + "_ready");
-                activePlayers[i] = false;
+                activeIcons[i] = new Texture2D[5];
+                idleIcons[i] = ScreenManager.Game.Content.Load<Texture2D>("MultiplayerLobby\\mPlayer0" + i + "_idle");
+                
+                for (int t = 1; t < 5; t++ )
+                    activeIcons[i][t] = ScreenManager.Game.Content.Load<Texture2D>("MultiplayerLobby\\mSelect_player0" + i + numtoCharMapping[t]);
+                
                 playerIconLocations[i] = currentPosition;
                 currentPosition += offset;
+
+                playerSetup[i] = new PlayerSetup();
+                playerSetup[i].active = false;
+                playerSetup[i].playerNum = i;
+                playerSetup[i].type = PlayerType.Human;
+                playerSetup[i].teamNum = i;
             }
 
             playerIndexes = new PlayerIndex[5];
@@ -68,21 +82,61 @@ namespace UHSampleGame.Screens
             {
                 if (input.CheckNewAction(InputAction.JoinGame, playerIndexes[i]))
                 {
-                    if (activePlayers[i])
-                        activePlayers[i] = false;
+                    if (playerSetup[i].active)
+                        playerSetup[i].active = false;
                     else
-                        activePlayers[i] = true;
+                        playerSetup[i].active = true;
                 }
-            }
 
-            if (input.CheckNewAction(InputAction.StartGame))
-            {
-                //Start Game//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if (input.CheckNewAction(InputAction.TeamUp, playerIndexes[i]))
+                {
+                    if (playerSetup[i].teamNum - 1 >= 1)
+                        playerSetup[i].teamNum--;
+                    else
+                        playerSetup[i].teamNum = 4;
+                }
+
+                if (input.CheckNewAction(InputAction.TeamDown, playerIndexes[i]))
+                {
+                    if (playerSetup[i].teamNum + 1 <= 4)
+                        playerSetup[i].teamNum++;
+                    else
+                        playerSetup[i].teamNum = 1;
+                }
             }
 
             if (input.CheckNewAction(InputAction.BackToMainMenu))
             {
                 ScreenManager.RemoveScreen(this.Name);
+            }
+
+            if (input.CheckNewAction(InputAction.StartGame))
+            {
+                int numActivePlayers = 0;
+                for (int i = 1; i < playerSetup.Length; i++)
+                {
+                    if (playerSetup[i].active)
+                        numActivePlayers++;
+                }
+
+                LevelType levelType = LevelType.MultiTwo;
+                switch(numActivePlayers)
+                {
+                    case 0:
+                        return;
+                    case 1:
+                        return;
+                    case 2:
+                        levelType = LevelType.MultiTwo;
+                        break;
+                    case 3:
+                        levelType = LevelType.MultiThree;
+                        break;
+                    case 4:
+                        levelType = LevelType.MultiFour;
+                        break;
+                }
+                screenManager.ShowScreen(new LoadScreen(levelType, playerSetup));
             }
         }
         #endregion
@@ -95,9 +149,9 @@ namespace UHSampleGame.Screens
 
         private Texture2D ActiveTexture(int player)
         {
-            if (activePlayers[player])
-                return playerIcons[player][ACTIVE];
-            return playerIcons[player][IDLE];
+            if (playerSetup[player].active)
+                return activeIcons[player][playerSetup[player].teamNum];
+            return idleIcons[player];
         }
 
         public override void Draw(GameTime gameTime)
