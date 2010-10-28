@@ -5,6 +5,8 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using UHSampleGame.ScreenManagement;
+using UHSampleGame.LevelManagement;
+using UHSampleGame.Players;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -27,21 +29,35 @@ namespace UHSampleGame.Screens
 
         GameTime loadStartTime;
         TimeSpan loadAnimationTimer;
+        PlayerSetup[] playerTypes;
+        LevelType levelType;
         #endregion
 
-        public LoadScreen():
+        public LoadScreen(LevelType levelType, PlayerSetup[] playerTypes) :
             base("LoadScreen")
         {
             backgroundThread = new Thread(BackgroundWorkerThread);
             backgroundThreadExit = new ManualResetEvent(false);
 
             graphicsDevice = ScreenManager.Game.GraphicsDevice;
+            this.playerTypes = playerTypes;
+            this.levelType = levelType;
         }
+
 
         public override void LoadContent()
         {
-            loading_screen = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01");
-            loading_screen_hl = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01_hl");
+            switch(levelType)
+            {
+                case LevelType.SingleOne:
+                    loading_screen = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01");
+                    loading_screen_hl = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01_hl");
+                    break;
+                default:
+                    loading_screen = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01");
+                    loading_screen_hl = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01_hl");
+                    break;
+            }
         }
 
         public override void UnloadContent()
@@ -67,7 +83,7 @@ namespace UHSampleGame.Screens
             // Perform the load operation.
             ScreenManager.RemoveScreen(this);
 
-            ScreenManager.ShowScreen(new PlayScreen());
+            ScreenManager.ShowScreen(new PlayScreen(playerTypes));
 
             // Signal the background thread to exit, then wait for it to do so.
             if (backgroundThread != null)

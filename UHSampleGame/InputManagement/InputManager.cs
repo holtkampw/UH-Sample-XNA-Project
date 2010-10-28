@@ -19,7 +19,7 @@ namespace UHSampleGame.InputManagement
         ExitGame, MenuLeft, MenuRight,
         PlayerMenuLeft, PlayerMenuRight, PlayerMenuUp, PlayerMenuDown,
         UnitBuild, UnitLeft, UnitRight, UnitUp, UnitDown,
-        JoinGame, BackToMainMenu, StartGame,
+        JoinGame, BackToMainMenu, StartGame, TeamUp, TeamDown,
     };
 
     public class InputManager

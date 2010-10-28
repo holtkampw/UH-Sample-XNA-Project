@@ -17,6 +17,7 @@ using UHSampleGame.Players;
 using UHSampleGame.LevelManagement;
 using UHSampleGame.Debug;
 using UHSampleGame;
+using UHSampleGame.ProjectileManagment;
 
 using Microsoft.Xna.Framework.Media;
 #endregion
@@ -33,12 +34,10 @@ namespace UHSampleGame.Screens
         Vector2 playerBackgroundLocation;
         CameraManager cameraManager;
 
-        Video video;
-        VideoPlayer videoPlayer;
         Vector2 dimensions;
 
-        Player p1;
-        Player aI;
+        //Player p1;
+        //Player aI;
 
         SpriteFont font;
 
@@ -46,35 +45,34 @@ namespace UHSampleGame.Screens
 
         Vector2 numTiles;
 
+        PlayerSetup[] playerSetup;
         #endregion
 
         #region Initialization
-        public PlayScreen()
+        public PlayScreen(PlayerSetup[] playerSetup)
             : base("PlayScreen2")
         {
-
+            this.playerSetup = playerSetup;
         }
 
         public override void LoadContent()
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
-            numTiles = new Vector2(20, 10);
+            numTiles = new Vector2(10, 10);
 
             if (numTiles.X == 10 && numTiles.Y == 10)
             {
-                cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
-                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
+                //cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
+                //cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
+                cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
+                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
             else if (numTiles.X == 20 && numTiles.Y == 10)
             {
                 cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
-
-            //videoPlayer = new VideoPlayer();
-            //video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
-            //videoPlayer.IsLooped = true;
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
             playerBackground = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player_bg");
@@ -84,21 +82,26 @@ namespace UHSampleGame.Screens
             font = ScreenManager.Game.Content.Load<SpriteFont>("font");
             dimensions = new Vector2((float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Width,             
                                      (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height);
-             
+
+
             UnitCollection.Initialize(8);
             TowerCollection.Initialize(8);
             BaseCollection.Initialize();
-            TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
+            PlayerCollection.Initialize();
+            ProjectileManager.Initialize();
+            //TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
+            //PlayerCollection.Initialize(playerTypes);
         
             //FIX THIS!!! assign players their tiles AFTER level manager is loaded... 
             //Right now TileMap is being initialized TWICE!!!
-            p1 = new Player(1, 1, 2, TileMap.Tiles[0], PlayerType.Human);
-            aI = new Player(2, 2, 1, TileMap.Tiles[TileMap.Tiles.Count - 1], PlayerType.AI);
+            //p1 = new Player(1, 1, 2, TileMap.Tiles[0], PlayerType.Human);
+            //aI = new Player(2, 2, 1, TileMap.Tiles[TileMap.Tiles.Count - 1], PlayerType.AI);
 
             LevelManager.Initialize();
-            LevelManager.AddPlayer(p1);
-            LevelManager.AddPlayer(aI);
-            LevelManager.LoadLevel(1);
+            LevelManager.CreateLevel(numTiles, playerSetup);
+            /*LevelManager.AddPlayer(p1);
+            LevelManager.AddPlayer(aI);*/
+            //LevelManager.LoadLevel(1);
 
             isLoaded = true;
         }
@@ -120,10 +123,12 @@ namespace UHSampleGame.Screens
             cameraManager.Update();
 
 
-            p1.Update(gameTime);
-            aI.Update(gameTime);
+ ///           p1.Update(gameTime);
+ //           aI.Update(gameTime);
             UnitCollection.Update(gameTime);
             TowerCollection.Update(gameTime);
+            PlayerCollection.Update(gameTime);
+            ProjectileManager.Update(gameTime);
             DebugInfo.Update(gameTime);
             
         }
@@ -132,9 +137,10 @@ namespace UHSampleGame.Screens
         {
 
             if (isLoaded)
-            { 
-                p1.HandleInput(input);
-                aI.HandleInput(input);
+            {
+                PlayerCollection.HandleInput(input);
+ //               p1.HandleInput(input);
+ //               aI.HandleInput(input);
             }
         }
 
@@ -156,8 +162,10 @@ namespace UHSampleGame.Screens
                 
                 UnitCollection.Draw(gameTime);
                 TowerCollection.Draw(gameTime);
-                p1.Draw(gameTime);
-                aI.Draw(gameTime);
+                PlayerCollection.Draw(gameTime);
+                ProjectileManager.Draw(gameTime);
+//                p1.Draw(gameTime);
+//                aI.Draw(gameTime);
 
 
                 ScreenManager.SpriteBatch.Begin();

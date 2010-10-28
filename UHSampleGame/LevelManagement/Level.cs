@@ -24,6 +24,7 @@ namespace UHSampleGame.LevelManagement
         List<Player> players;
         List<int> humanPlayers = new List<int>();
         List<int> computerPlayers = new List<int>();
+        List<PlayerSetup> playerSetup;
 
         public int ID
         {
@@ -37,6 +38,14 @@ namespace UHSampleGame.LevelManagement
             this.players = players;
             //this.humanPlayers = humanPlayers;
             //this.aiPlayers = aiPlayers;
+        }
+
+        public Level(int id, List<List<int>> map, List<PlayerSetup> playerSetup)
+        {
+            //Created Map!
+            this.id = id;
+            this.map = map;
+            this.playerSetup = playerSetup;
         }
 
         public void Load()
@@ -65,14 +74,45 @@ namespace UHSampleGame.LevelManagement
                 }
             }
 
-            for (int i = 0; i < humanPlayers.Count; i++)
-                players[humanPlayers[i] - 1].SetTargetBase(players[computerPlayers[0] - 1].PlayerBase);
+            //for (int i = 0; i < humanPlayers.Count; i++)
+            //    players[humanPlayers[i] - 1].SetTargetBase(players[computerPlayers[0] - 1].PlayerBase);
 
-            for (int i = 0; i < computerPlayers.Count; i++)
-                players[computerPlayers[i] - 1].SetTargetBase(players[humanPlayers[0] - 1].PlayerBase);
+            //for (int i = 0; i < computerPlayers.Count; i++)
+            //    players[computerPlayers[i] - 1].SetTargetBase(players[humanPlayers[0] - 1].PlayerBase);
+
+            int activePlayers = 0;
+            for (int i = 0; i < playerSetup.Count; i++)
+                if (playerSetup[i].active)
+                    activePlayers++;
+
+            int[] targetPlayerNum = new int[activePlayers];
+
+            for (int p = 0; p < playerSetup.Count; p++)
+            {
+                for (int next = 0; next < playerSetup.Count; next++)
+                {
+                    if (p != next && playerSetup[next].active)
+                    {
+                        if (playerSetup[p].teamNum != playerSetup[next].teamNum)
+                        {
+                            targetPlayerNum[p] = next;
+                        }
+                    }
+                }
+            }
+
+
+            int index = 0;
+            for (int i = 0; i < playerSetup.Count; i++)
+            {
+                if (playerSetup[i].active)
+                {
+                    PlayerCollection.SetTargetFor(playerSetup[i].playerNum, playerSetup[targetPlayerNum[index]].playerNum);
+                    index++;
+                }
+            }
 
             TileMap.UpdateTilePaths();
-
         }
 
         /// <summary>
@@ -104,20 +144,34 @@ namespace UHSampleGame.LevelManagement
                 ExtractObjectKeyInfo(objectKey, out playerType, out playerNum,
                     out teamNum, out towerNum, out upgradeNum);
 
-                Player currentPlayer = GetPlayer(playerType, playerNum);
+                //Player currentPlayer = GetPlayer(playerType, playerNum);
 
                 if (towerNum == 0)
                 {
-                    Base gameObject = new Base(playerNum, teamNum, BaseType.type1,  tile);
-                    BaseCollection.Add(ref gameObject);
-                    currentPlayer.SetBase(gameObject);
-                    TileMap.SetObject(gameObject, tile);
+                    for(int i = 0; i < playerSetup.Count; i++)
+                    {
+                        if(playerNum == playerSetup[i].playerNum) //Found Player!
+                        {
+                            Base gameObject = new Base(playerNum, teamNum, BaseType.type1, tile);
+                            PlayerType newPlayerType = PlayerType.AI;
+                            if (playerType == 1)
+                                newPlayerType = PlayerType.Human;
+
+                            PlayerCollection.AddPlayer(new Player(playerNum, teamNum, gameObject, newPlayerType));
+                            BaseCollection.Add(ref gameObject);
+                            //PlayerCollection.SetBaseFor(playerNum, gameObject);
+                            TileMap.SetObject(gameObject, tile);
+                            break;
+                        }
+                    }
                 }
                 else
                 {
                     //Handle Multiple towers here
                     //Tower gameObject = new Tower(TowerType.TowerA);
-                    currentPlayer.SetTowerForLevelMap(TowerType.Plasma, tile);
+                    
+                    
+                    //currentPlayer.SetTowerForLevelMap(TowerType.Plasma, tile);
                     //TileMap.SetObject(gameObject, tile);
                 }
 

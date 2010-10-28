@@ -55,10 +55,10 @@ namespace UHSampleGame.Players
 
         public Base PlayerBase;
 
-        protected int PlayerNum;
-        protected int TeamNum;
+        public int PlayerNum;
+        public int TeamNum;
 
-        protected int TargetPlayerNum;
+        public int TargetPlayerNum;
 
         protected CameraManager cameraManager;
 
@@ -114,7 +114,7 @@ namespace UHSampleGame.Players
         bool avatarMoved = true;
         StaticModel avatarFollowingTile;
 
-        public int Money = 1000;
+        public int Money = 10000;
         public string MoneyString;
         public int Health;
         public string HealthString;
@@ -159,42 +159,170 @@ namespace UHSampleGame.Players
         int elapsedUnitMeterUpdateTime = 0;
         int maxUnitMeterUpdateDate = 20;
 
+        static PlayerIndex[] playerIndexes = { 0, PlayerIndex.One, PlayerIndex.Two, PlayerIndex.Three, PlayerIndex.Four };
+
       
         #region Properties
        
         #endregion
 
-        public Player(int playerNum, int teamNum, int targetPlayerNum, Tile startTile, PlayerType type)
+        public void SharedSetup(int playerNum, int teamNum, PlayerType type)
         {
             this.PlayerNum = playerNum;
-            this.TargetPlayerNum = targetPlayerNum;
             this.TeamNum = teamNum;
             this.Type = type;
-            SetBase(new Base(playerNum, teamNum, BaseType.type1, startTile));
-            
+
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
             //FIX THIS
             HealthString = Health.ToString();
             MoneyString = Money.ToString();
 
-            //HumanPlayer
-            if (Type == PlayerType.Human)
-            {
-                avatar = new AnimatedModel(playerNum, teamNum,
-                    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+            SetupStatic();
+            //SetupNonStatic();
 
-                avatar.Scale = 2.0f;
-                avatar.PlayClip("Take 001");
-                avatar.Position = new Vector3(PlayerBase.Position.X, 200.0f, PlayerBase.Position.Z);
-                avatarMoved = false;
-                avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
-                avatarFollowingTile.Scale = 4.0f;
+            currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
+            if (Type == PlayerType.Human)
+                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
+            else
+                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum + "computer");
+        }
+
+        public Player()
+        {
+
+        }
+
+        public void PlayerSetup(int playerNum, int teamNum, Base gameObject, PlayerType playerType)
+        {
+            SharedSetup(playerNum, teamNum, playerType);
+            SetBase(gameObject);
+        }
+
+        public Player(int playerNum, int teamNum, Base gameObject, PlayerType playerType)
+        {
+            SharedSetup(playerNum, teamNum, playerType);
+            SetBase(gameObject);
+        }
+
+        public Player(int playerNum, int teamNum, int targetPlayerNum, Tile startTile, PlayerType type)
+        {
+            SharedSetup(playerNum, teamNum, type);
+            this.TargetPlayerNum = targetPlayerNum;
+            SetBase(new Base(playerNum, teamNum, BaseType.type1, startTile));
+
+            SetupAvatar(); 
+            
+        }
+
+        /*
+        public void SetupNonStatic()
+        {
+            unitIconLocation = new Vector2[5][];
+            highlightUnitIconLocations = new Rectangle[5][];
+            unitIcons = new Texture2D[MAX_UNIT_TYPES];
+            Vector2 unitIconOffset = new Vector2(44.0f, 0.0f);
+            Vector2 unitIconRowOffset = new Vector2(0.0f, 44.0f);
+            unitInformation = new UnitInformation[MAX_UNIT_TYPES];
+
+            unitInformation[1].type = UnitType.SpeedBoat;
+            unitInformation[1].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
+
+            unitInformation[6].type = UnitType.SpeederBoat;
+            unitInformation[6].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
+
+            unitMeterBaseTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_base");
+            unitMeterBaseLocation = new Rectangle[5];
+            unitMeterOverlayTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_overlay");
+            unitMeterOverlaySource = new Rectangle(0, 0, 30, 200);
+            unitMeterOverlayDestination = new Rectangle[5];
+            unitMeterHighlightTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_animated");
+            unitMeterHightlightSource = new Rectangle(0, 0, 30, 0);
+            unitMeterOverlayBaseY = new float[5];
+
+            for (int player = 1; player < 5; player++)
+            {
+                Vector2 iconOffset = new Vector2(0, 36);
+                Vector2 tabStartPosition = new Vector2(8, 148);
+                tabLocation[player] = new Vector2[NUM_TABS];
+                for (int t = 0; t < NUM_TABS; t++)
+                {
+                    tabLocation[player][t] = globalLocations[player] + tabStartPosition;
+                    tabStartPosition += tabOffset;
+                }
+
+                moneyLocation[player] = globalLocations[player] + new Vector2(110, -1);
+                statusHealthNameLocation[player] = globalLocations[player] + new Vector2(10, 40);
+                statusHealthLocation[player] = globalLocations[player] + new Vector2(120, 40);
+                statusNumberOfUnitsNameLocation[player] = globalLocations[player] + new Vector2(10, 80);
+                statusNumberOfUnitsLocation[player] = globalLocations[player] + new Vector2(180, 80);
+
+                iconLocations[player] = new Vector2[4];
+                highlightIconLocations[player] = new Rectangle[4];
+                Vector2 iconStartPosition = new Vector2(8, 36);
+
+                for (int icon = 0; icon < 4; icon++)
+                {
+                    iconLocations[player][icon] = globalLocations[player] + iconStartPosition;
+                    highlightIconLocations[player][icon] = new Rectangle((int)(iconLocations[player][icon].X - 5.0f + (highlightIcon.Width / 2)),
+                        (int)(iconLocations[player][icon].Y - 5.0f + (highlightIcon.Height / 2)),
+                        highlightIcon.Width, highlightIcon.Height);
+                    iconStartPosition += iconOffset;
+                }
+
+                for (int tower = 0; tower < NUM_DEFENSE_TOWERS; tower++)
+                {
+                    defenseTowerInfo[tower].nameLocation[player] = globalLocations[player] + new Vector2(70.0f, 30);
+                    defenseTowerInfo[tower].priceLocation[player] = globalLocations[player] + new Vector2(70.0f, 64);
+                    defenseTowerInfo[tower].descriptionLocation[player] = globalLocations[player] + new Vector2(70.0f, 94);
+                }
+
+                unitIconLocation[player] = new Vector2[MAX_UNIT_TYPES];
+                highlightUnitIconLocations[player] = new Rectangle[MAX_UNIT_TYPES];
+                Vector2 unitIconStartPosition = new Vector2(48, 36);
+                for (int unit = 0; unit < MAX_UNIT_TYPES; unit++)
+                {
+                    if (unit == 4)
+                    {
+                        //move over invalid middle
+                        unitIconStartPosition += unitIconOffset;
+                    }
+                    unitIconLocation[player][unit] = globalLocations[player] + unitIconStartPosition;
+                    highlightUnitIconLocations[player][unit] = new Rectangle((int)(unitIconLocation[player][unit].X - 5.0f + (highlightIcon.Width / 2)),
+                        (int)(unitIconLocation[player][unit].Y - 5.0f + (highlightIcon.Height / 2)),
+                        highlightIcon.Width, highlightIcon.Height);
+                    unitIconStartPosition += unitIconOffset;
+                    if (unit == 2 || unit == 4)
+                    {
+                        unitIconStartPosition += unitIconRowOffset;
+                        unitIconStartPosition.X = 48;
+                    }
+                }
+
+                unitMeterOverlayDestination[player] = new Rectangle((int)globalLocations[player].X + 8,
+                    (int)globalLocations[player].Y + 44 + 100,
+                    15,
+                    0);
+                unitMeterOverlayBaseY[player] = unitMeterOverlayDestination[player].Y;
+
+                unitMeterBaseLocation[player] = new Rectangle((int)globalLocations[player].X + 8,
+                    (int)globalLocations[player].Y + 44,
+                    15,
+                    100);
+
             }
 
-            if (menuTab == null)
+
+            highlightIconSourceRect = new Rectangle(0, 0, highlightIcon.Width, highlightIcon.Height);
+            highlightOrigin = new Vector2(highlightIcon.Width / 2.0f, highlightIcon.Height / 2.0f);
+        }
+        */
+
+        public void SetupStatic()
+        {
+            if (/*menuTab == null*/ true)
             {
-                menuTab = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenuTab");    
+                menuTab = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\playerMenuTab");
 
                 menuTabSource = new Rectangle[2];
                 menuTabSource[SELECTED] = new Rectangle(0, menuTab.Width, menuTab.Width, menuTab.Height / 2);
@@ -217,7 +345,6 @@ namespace UHSampleGame.Players
                 defenseIcons = new Texture2D[3];
                 defenseIcons[0] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
                 defenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
-                defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\cannon_tower");
                 defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma360_tower");
                 defenseTowerInfo[0].name = "Plasma Tower";
                 defenseTowerInfo[0].price = "Price: $1000";
@@ -235,10 +362,8 @@ namespace UHSampleGame.Players
                 defenseTowerInfo[1].priceLocation = new Vector2[5];
                 defenseTowerInfo[1].type = TowerType.Electric;
 
-                defenseTowerInfo[2].name = "Cannon Tower";
                 defenseTowerInfo[2].name = "Plasma360 Tower";
                 defenseTowerInfo[2].price = "Price: $6000";
-                defenseTowerInfo[2].description = "Powerful, long range attack\nbut slower than other towers";
                 defenseTowerInfo[2].description = "A stronger, quicker version\n of the Plasma tower.  It\n shoots in multiple directions at once.";
                 defenseTowerInfo[2].nameLocation = new Vector2[5];
                 defenseTowerInfo[2].descriptionLocation = new Vector2[5];
@@ -292,11 +417,11 @@ namespace UHSampleGame.Players
                     iconLocations[player] = new Vector2[4];
                     highlightIconLocations[player] = new Rectangle[4];
                     Vector2 iconStartPosition = new Vector2(8, 36);
-                    
+
                     for (int icon = 0; icon < 4; icon++)
                     {
                         iconLocations[player][icon] = globalLocations[player] + iconStartPosition;
-                        highlightIconLocations[player][icon] = new Rectangle((int)(iconLocations[player][icon].X - 5.0f + (highlightIcon.Width / 2)), 
+                        highlightIconLocations[player][icon] = new Rectangle((int)(iconLocations[player][icon].X - 5.0f + (highlightIcon.Width / 2)),
                             (int)(iconLocations[player][icon].Y - 5.0f + (highlightIcon.Height / 2)),
                             highlightIcon.Width, highlightIcon.Height);
                         iconStartPosition += iconOffset;
@@ -332,34 +457,46 @@ namespace UHSampleGame.Players
                     }
 
                     unitMeterOverlayDestination[player] = new Rectangle((int)globalLocations[player].X + 8,
-                        (int)globalLocations[player].Y + 44 + 100, 
-                        15, 
+                        (int)globalLocations[player].Y + 44 + 100,
+                        15,
                         0);
                     unitMeterOverlayBaseY[player] = unitMeterOverlayDestination[player].Y;
 
-                    unitMeterBaseLocation[player] = new Rectangle((int)globalLocations[player].X + 8, 
-                        (int)globalLocations[player].Y + 44, 
-                        15, 
+                    unitMeterBaseLocation[player] = new Rectangle((int)globalLocations[player].X + 8,
+                        (int)globalLocations[player].Y + 44,
+                        15,
                         100);
-                    
+
                 }
-                
-                
+
+
                 highlightIconSourceRect = new Rectangle(0, 0, highlightIcon.Width, highlightIcon.Height);
                 highlightOrigin = new Vector2(highlightIcon.Width / 2.0f, highlightIcon.Height / 2.0f);
             }
-                
-            currentlySelectedPlayerStatus = PlayerMenuTabs.Status;
-            if(Type == PlayerType.Human)
-                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
-            else
-                playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum + "computer");
         }
 
         public void SetBase(Base playerBase)
         {
             this.PlayerBase = playerBase;
+
+            if (Type == PlayerType.Human && avatar == null)
+            {
+                SetupAvatar();  
+            }
             // TileMap2.SetBase(playerBase);
+        }
+
+        public void SetupAvatar()
+        {
+            avatar = new AnimatedModel(PlayerNum, TeamNum,
+                    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+
+            avatar.Scale = 2.0f;
+            avatar.PlayClip("Take 001");
+            avatar.Position = new Vector3(PlayerBase.Position.X, 200.0f, PlayerBase.Position.Z);
+            avatarMoved = false;
+            avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
+            avatarFollowingTile.Scale = 4.0f;
         }
 
         public void HandleInput(InputManager input)
@@ -367,25 +504,25 @@ namespace UHSampleGame.Players
             //Human Player
             if (Type == PlayerType.Human)
             {
-                if (input.CheckAction(InputAction.TileMoveUp))
+                if (input.CheckAction(InputAction.TileMoveUp, playerIndexes[PlayerNum]))
                 {
                     avatar.Position = avatar.Position + new Vector3(0, 0, -3);
                     avatarMoved = true;
                 }
 
-                if (input.CheckAction(InputAction.TileMoveDown))
+                if (input.CheckAction(InputAction.TileMoveDown, playerIndexes[PlayerNum]))
                 {
                     avatar.Position = avatar.Position + new Vector3(0, 0, 3);
                     avatarMoved = true;
                 }
 
-                if (input.CheckAction(InputAction.TileMoveLeft))
+                if (input.CheckAction(InputAction.TileMoveLeft, playerIndexes[PlayerNum]))
                 {
                     avatar.Position = avatar.Position + new Vector3(-3, 0, 0);
                     avatarMoved = true;
                 }
 
-                if (input.CheckAction(InputAction.TileMoveRight))
+                if (input.CheckAction(InputAction.TileMoveRight, playerIndexes[PlayerNum]))
                 {
                     avatar.Position = avatar.Position + new Vector3(3, 0, 0);
                     avatarMoved = true;
@@ -416,7 +553,7 @@ namespace UHSampleGame.Players
                     avatarMoved = true;
                 }
 
-                if (input.CheckNewAction(InputAction.TowerBuild))
+                if (input.CheckNewAction(InputAction.TowerBuild, playerIndexes[PlayerNum]))
                 {
                     Tower tower = TowerCollection.Add(PlayerNum, TeamNum, Money, lastBuiltTower, this.avatarFollowingTile.Position);
                     if(tower != null)
@@ -425,39 +562,39 @@ namespace UHSampleGame.Players
                     MoneyString = Money.ToString();
                 }
 
-                if (input.CheckNewAction(InputAction.TowerDestroy))
+                if (input.CheckNewAction(InputAction.TowerDestroy, playerIndexes[PlayerNum]))
                 {
                     Money += TowerCollection.Remove(PlayerNum, ref this.avatar.Position);
                     MoneyString = Money.ToString();
                 }
 
-                if (input.CheckNewAction(InputAction.TowerRepair))
+                if (input.CheckNewAction(InputAction.TowerRepair, playerIndexes[PlayerNum]))
                 {
                     Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatar.Position);
                     MoneyString = Money.ToString();
                 }
 
-                if (input.CheckNewAction(InputAction.TowerUpgrade))
+                if (input.CheckNewAction(InputAction.TowerUpgrade, playerIndexes[PlayerNum]))
                 {
                     Money -= TowerCollection.Upgrade(PlayerNum, Money, ref this.avatar.Position);
                     MoneyString = Money.ToString();
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuLeft))
+                if (input.CheckNewAction(InputAction.PlayerMenuLeft, playerIndexes[PlayerNum]))
                 {
                     if (((int)currentlySelectedPlayerStatus - 1) >= 0)
                         currentlySelectedPlayerStatus--;
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuRight))
+                if (input.CheckNewAction(InputAction.PlayerMenuRight, playerIndexes[PlayerNum]))
                 {
                     if (((int)currentlySelectedPlayerStatus + 1) < playerMenuTabsEnumType.Length)
                         currentlySelectedPlayerStatus++;
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuUp))
+                if (input.CheckNewAction(InputAction.PlayerMenuUp, playerIndexes[PlayerNum]))
                 {
                     if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
                     {
@@ -468,7 +605,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuDown))
+                if (input.CheckNewAction(InputAction.PlayerMenuDown, playerIndexes[PlayerNum]))
                 {
                     if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
                     {
@@ -479,7 +616,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckAction(InputAction.UnitUp))
+                if (input.CheckAction(InputAction.UnitUp, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.Y < 1)
                         unitSelectionPosition.Y += 1;
@@ -487,7 +624,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = true;
                 }
 
-                if (input.CheckAction(InputAction.UnitLeft))
+                if (input.CheckAction(InputAction.UnitLeft, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.X > -1)
                         unitSelectionPosition.X -= 1;
@@ -495,14 +632,14 @@ namespace UHSampleGame.Players
                        
                 }
 
-                if (input.CheckAction(InputAction.UnitDown))
+                if (input.CheckAction(InputAction.UnitDown, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.Y > -1)
                         unitSelectionPosition.Y -= 1;
                     unitScreenActivated = true;
                 }
 
-                if (input.CheckAction(InputAction.UnitRight))
+                if (input.CheckAction(InputAction.UnitRight, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.X < 1)
                         unitSelectionPosition.X += 1;
@@ -524,10 +661,19 @@ namespace UHSampleGame.Players
                 }
 
 
-                if (input.CheckAction(InputAction.UnitBuild))
+                if (input.CheckAction(InputAction.UnitBuild, playerIndexes[PlayerNum]))
                 {
 
                     if (selectedUnit != queuedUnitType)
+                    {
+                        queuedUnits = 0;
+                        queuedDeclineMode = false;
+                        unitsDeployed = 0;
+                        queuedUnitsToDeploy = 0;
+                        percentOfUnitsQueued = 0;
+                    }
+
+                    if (queuedDeclineMode && input.CheckNewAction(InputAction.UnitBuild, playerIndexes[PlayerNum]))
                     {
                         queuedUnits = 0;
                         queuedDeclineMode = false;
@@ -553,13 +699,13 @@ namespace UHSampleGame.Players
 
                         if (!queuedDeclineMode)
                         {
-                            percentOfUnitsQueued += 0.5f;
+                            percentOfUnitsQueued += 1.4f;
                         }
                         queuedUnitType = selectedUnit;
                     }
                 }
 
-                if (input.CheckNewReleaseAction(InputAction.UnitBuild) || (percentOfUnitsQueued >= 100.0f))
+                if (input.CheckNewReleaseAction(InputAction.UnitBuild, playerIndexes[PlayerNum]) || (percentOfUnitsQueued >= 100.0f))
                 {
                     if (!queuedDeclineMode)
                     { 
@@ -648,6 +794,7 @@ namespace UHSampleGame.Players
         public void SetTargetBase(Base target)
         {
             PlayerBase.SetGoalBase(target);
+            this.TargetPlayerNum = target.PlayerNum;
            // target.baseDestroyed += GetNewTargetBase;
         }
 

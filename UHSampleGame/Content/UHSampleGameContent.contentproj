@@ -543,13 +543,121 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MultiplayerLobby\mPlayer01_idle.png">
-      <Name>mPlayer01_idle</Name>
+    <Compile Include="Particles\explosion.png">
+      <Name>explosion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="MultiplayerLobby\mPlayer01_ready.png">
-      <Name>mPlayer01_ready</Name>
+    <Compile Include="Particles\fire.png">
+      <Name>fire</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Particles\ParticleEffect.fx">
+      <Name>ParticleEffect</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Particles\smoke.png">
+      <Name>smoke</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MultiplayerLobby\mSelect_player01A.png">
+      <Name>mSelect_player01A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player01B.png">
+      <Name>mSelect_player01B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player01C.png">
+      <Name>mSelect_player01C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player01D.png">
+      <Name>mSelect_player01D</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player02A.png">
+      <Name>mSelect_player02A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player02B.png">
+      <Name>mSelect_player02B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player02C.png">
+      <Name>mSelect_player02C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player02D.png">
+      <Name>mSelect_player02D</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player03A.png">
+      <Name>mSelect_player03A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player03B.png">
+      <Name>mSelect_player03B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player03C.png">
+      <Name>mSelect_player03C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player03D.png">
+      <Name>mSelect_player03D</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player04A.png">
+      <Name>mSelect_player04A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player04B.png">
+      <Name>mSelect_player04B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player04C.png">
+      <Name>mSelect_player04C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\mSelect_player04D.png">
+      <Name>mSelect_player04D</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MultiplayerLobby\background.png">
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MultiplayerLobby\mPlayer01_idle.png">
+      <Name>mPlayer01_idle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -558,35 +666,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="MultiplayerLobby\mPlayer02_ready.png">
-      <Name>mPlayer02_ready</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="MultiplayerLobby\mPlayer03_idle.png">
       <Name>mPlayer03_idle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="MultiplayerLobby\mPlayer03_ready.png">
-      <Name>mPlayer03_ready</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="MultiplayerLobby\mPlayer04_idle.png">
       <Name>mPlayer04_idle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="MultiplayerLobby\mPlayer04_ready.png">
-      <Name>mPlayer04_ready</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="MultiplayerLobby\background.png">
-      <Name>background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

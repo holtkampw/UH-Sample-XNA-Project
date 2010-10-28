@@ -207,9 +207,10 @@ namespace UHSampleGame.CoreObjects.Units
         private static void DrawUnits(int i, int j)
         {
             drawCount = 0;
+            int uCount = unitsCount[i][j];
             int uMaxIndex = unitsMaxIndex[i][j];
             Unit u;
-            for (int k = 0; k < uMaxIndex && drawCount < uMaxIndex; k++)
+            for (int k = 0; k < MAX_UNITS && drawCount < uCount; k++)
             {
                 u = units[i][j][k];
                 if (u.Status == UnitStatus.Deployed)
@@ -246,6 +247,12 @@ namespace UHSampleGame.CoreObjects.Units
             // Transfer the latest instance transform matrices into the instanceVertexBuffer.
             instanceVertexBuffer.SetData(unitTransforms, 0, amount, SetDataOptions.Discard);
 
+            // Set up the instance rendering effect.
+            Effect effect = instancedModels[unitType].Meshes[0].MeshParts[0].Effect;
+            effect.CurrentTechnique = effect.Techniques["HardwareInstancing"];
+            effect.Parameters["View"].SetValue(cameraManager.ViewMatrix);
+            effect.Parameters["Projection"].SetValue(cameraManager.ProjectionMatrix);
+
             for (int i = 0; i < instancedModels[unitType].Meshes.Count; i++)
             {
                 for (int j = 0; j < instancedModels[unitType].Meshes[i].MeshParts.Count; j++)
@@ -259,14 +266,7 @@ namespace UHSampleGame.CoreObjects.Units
 
                     ScreenManager.Game.GraphicsDevice.Indices = instancedModels[unitType].Meshes[i].MeshParts[j].IndexBuffer;
 
-                    // Set up the instance rendering effect.
-                    Effect effect = instancedModels[unitType].Meshes[i].MeshParts[j].Effect;
-
-                    effect.CurrentTechnique = effect.Techniques["HardwareInstancing"];
-
                     effect.Parameters["World"].SetValue(instancedModelBones[unitType][instancedModels[unitType].Meshes[i].ParentBone.Index]);
-                    effect.Parameters["View"].SetValue(cameraManager.ViewMatrix);
-                    effect.Parameters["Projection"].SetValue(cameraManager.ProjectionMatrix);
 
                     // Draw all the instance copies in a single call.
                     for (int k = 0; k < effect.CurrentTechnique.Passes.Count; k++)

@@ -136,17 +136,18 @@ namespace UHSampleGame.CoreObjects.Towers
                 tower = towers[playerNum][(int)towerType][i];
                 if (!tower.IsActive())
                 {
+                    DateTime d = DateTime.Now;
                     if (TileMap.SetTower(ref tower, ref tile))
                     {
+                        Console.WriteLine(DateTime.Now.Subtract(d).TotalMilliseconds.ToString());
+                       
                         towers[playerNum][(int)towerType][i].Activate(playerNum, teamNum);
                         towers[playerNum][(int)towerType][i].Type = towerType;
                         towers[playerNum][(int)towerType][i].Setup(position);
                         towerCount[playerNum][(int)towerType]++;
-
                         return towers[playerNum][(int)towerType][i];
                     }
 
-                    
                 }
             }
             return null;

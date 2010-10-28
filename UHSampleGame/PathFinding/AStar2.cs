@@ -13,6 +13,7 @@ namespace UHSampleGame.PathFinding
         static Tile GoalTile;
 
         static List<bool> closed = new List<bool>();
+        static List<bool> openBool = new List<bool>();
         static List<Tile> open = new List<Tile>();
         static List<Tile> cameFrom = new List<Tile>();
 
@@ -39,6 +40,7 @@ namespace UHSampleGame.PathFinding
                     hScore.Add(100000f);
                     fScore.Add(100000f);
                     closed.Add(false);
+                    openBool.Add(false);
                     cameFrom.Add(Tile.NullTile);
                 }
             }
@@ -55,9 +57,11 @@ namespace UHSampleGame.PathFinding
                 hScore[i] = 100000f;
                 fScore[i] = 100000f;
                 closed[i] = false;
+                openBool[i] = false;
             }
 
             open.Add(startTile);
+            openBool[startTile.ID] = true;
 
             gScore[startTile.ID] = 0;
             hScore[startTile.ID] = GetDistanceBetweenTiles(ref StartTile, ref GoalTile);
@@ -85,6 +89,7 @@ namespace UHSampleGame.PathFinding
                 
                 }
                 open.Remove(currentTile);
+                openBool[currentTile.ID] = false;
                 closed[currentTile.ID] = true;
                 //closed.Add(currentTile);
 
@@ -100,9 +105,10 @@ namespace UHSampleGame.PathFinding
                     neighborTile = neighbors[i];
                     tentativeGScore = gScore[currentTile.ID] + GetDistanceBetweenTiles(ref currentTile, ref neighborTile);
 
-                    if (!open.Contains(neighborTile))
+                    if (!openBool[neighborTile.ID])
                     {
                         open.Add(neighborTile);
+                        openBool[neighborTile.ID] = true;
                         tentaiveIsBetter = true;
                     }
                     else if (tentativeGScore < gScore[neighborTile.ID])
