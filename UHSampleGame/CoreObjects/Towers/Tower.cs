@@ -157,9 +157,8 @@ namespace UHSampleGame.CoreObjects.Towers
             {
                 if (unitToAttack != null)
                 {
+                    ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
                     unitToAttack.TakeDamage(attackStrength);
-
-                    ProjectileManager.AddParticle(this.Position);
                     //DO XP GIVING HERE
 
                     

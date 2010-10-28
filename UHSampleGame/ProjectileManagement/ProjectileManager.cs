@@ -59,15 +59,21 @@ namespace UHSampleGame.ProjectileManagment
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
         }
 
-        public static void AddParticle(Vector3 position)
+        public static void AddParticle(Vector3 startPosition, Vector3 endPosition)
         {
+
             for (int i = 0; i < MAX_PROJECTILES; i++)
             {
                 if (!projectiles[i].Active)
                 {
                     projectiles[i].Active = true;
-                    projectiles[i].Position = position;
+                    projectiles[i].Position = startPosition;
+                    Vector3 vel = new Vector3(
+                        (endPosition.X - startPosition.X), (endPosition.Y - startPosition.Y), (endPosition.Z - startPosition.Z));
+                    vel.Normalize();
+                    projectiles[i].velocity = vel; 
                     projectileCount++;
+                    break;
                 }
             }
         }
@@ -76,7 +82,7 @@ namespace UHSampleGame.ProjectileManagment
         {
             updatedProjectiles = 0;
             if (projectileCount == 0)
-                return; 
+                return;
             for (int i = 0; i < MAX_PROJECTILES; i++)
             {
                 if (projectiles[i].Active)

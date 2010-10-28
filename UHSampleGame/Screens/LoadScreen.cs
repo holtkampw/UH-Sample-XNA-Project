@@ -20,8 +20,6 @@ namespace UHSampleGame.Screens
         Vector2 currentLoadingPosition = Vector2.Zero;
         Vector3 whiteVector3 = new Vector3(255, 255, 255);
 
-
-       
         Thread backgroundThread;
         EventWaitHandle backgroundThreadExit;
 
@@ -52,6 +50,12 @@ namespace UHSampleGame.Screens
                 case LevelType.SingleOne:
                     loading_screen = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01");
                     loading_screen_hl = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01_hl");
+                    break;
+                case LevelType.MultiTwo:
+                case LevelType.MultiThree:
+                case LevelType.MultiFour:
+                    loading_screen = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoaderMultiplay");
+                    loading_screen_hl = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoaderMultiplay_hl");
                     break;
                 default:
                     loading_screen = ScreenManager.Game.Content.Load<Texture2D>("LoadScreen\\levelLoader01");
@@ -106,14 +110,14 @@ namespace UHSampleGame.Screens
         {
             currentLoadingPosition.X += 16.0f;
             if (currentLoadingPosition.X < 600.0f)
-                currentLoadingOpacity += 10f;    
+                currentLoadingOpacity += 30f;    
             else
-                currentLoadingOpacity -= 10f;
+                currentLoadingOpacity -= 30f;
 
 
-            if (currentLoadingPosition.X >= 1220.0f)
+            if (currentLoadingPosition.X >= 1280.0f)
             {
-                currentLoadingPosition.X = -500.0f;
+                currentLoadingPosition.X = -900.0f;
                 currentLoadingOpacity = 0;
             }
             currentLoadingOpacity = MathHelper.Clamp(currentLoadingOpacity, 0, 255);

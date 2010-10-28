@@ -677,6 +677,384 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Objects\Copter\player01Ship01.fbx">
+      <Name>player01Ship01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Copter\player02Ship01.fbx">
+      <Name>player02Ship01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Copter\player03Ship01.fbx">
+      <Name>player03Ship01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Copter\player04Ship01.fbx">
+      <Name>player04Ship01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LoadScreen\levelLoaderMultiplay.png">
+      <Name>levelLoaderMultiplay</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LoadScreen\levelLoaderMultiplay_hl.png">
+      <Name>levelLoaderMultiplay_hl</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PlayerMenu\Tabs\player01DefensiveUnitsA.png">
+      <Name>player01DefensiveUnitsA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01DefensiveUnitsB.png">
+      <Name>player01DefensiveUnitsB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01DefensiveUnitsC.png">
+      <Name>player01DefensiveUnitsC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01DefensiveUnitsD.png">
+      <Name>player01DefensiveUnitsD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01OffensiveUnitsA.png">
+      <Name>player01OffensiveUnitsA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01OffensiveUnitsB.png">
+      <Name>player01OffensiveUnitsB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01OffensiveUnitsC.png">
+      <Name>player01OffensiveUnitsC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01OffensiveUnitsD.png">
+      <Name>player01OffensiveUnitsD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01PowerA.png">
+      <Name>player01PowerA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01PowerB.png">
+      <Name>player01PowerB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01PowerC.png">
+      <Name>player01PowerC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01PowerD.png">
+      <Name>player01PowerD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01StatusA.png">
+      <Name>player01StatusA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01StatusB.png">
+      <Name>player01StatusB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01StatusC.png">
+      <Name>player01StatusC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01StatusD.png">
+      <Name>player01StatusD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02DefensiveUnitsA.png">
+      <Name>player02DefensiveUnitsA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02DefensiveUnitsB.png">
+      <Name>player02DefensiveUnitsB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02DefensiveUnitsC.png">
+      <Name>player02DefensiveUnitsC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02DefensiveUnitsD.png">
+      <Name>player02DefensiveUnitsD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02OffensiveUnitsA.png">
+      <Name>player02OffensiveUnitsA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02OffensiveUnitsB.png">
+      <Name>player02OffensiveUnitsB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02OffensiveUnitsC.png">
+      <Name>player02OffensiveUnitsC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02OffensiveUnitsD.png">
+      <Name>player02OffensiveUnitsD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02PowerA.png">
+      <Name>player02PowerA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02PowerB.png">
+      <Name>player02PowerB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02PowerC.png">
+      <Name>player02PowerC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02PowerD.png">
+      <Name>player02PowerD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02StatusA.png">
+      <Name>player02StatusA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02StatusB.png">
+      <Name>player02StatusB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02StatusC.png">
+      <Name>player02StatusC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02StatusD.png">
+      <Name>player02StatusD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03DefensiveUnitsA.png">
+      <Name>player03DefensiveUnitsA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03DefensiveUnitsB.png">
+      <Name>player03DefensiveUnitsB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03DefensiveUnitsC.png">
+      <Name>player03DefensiveUnitsC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03DefensiveUnitsD.png">
+      <Name>player03DefensiveUnitsD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03OffensiveUnitsA.png">
+      <Name>player03OffensiveUnitsA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03OffensiveUnitsB.png">
+      <Name>player03OffensiveUnitsB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03OffensiveUnitsC.png">
+      <Name>player03OffensiveUnitsC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03OffensiveUnitsD.png">
+      <Name>player03OffensiveUnitsD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03PowerA.png">
+      <Name>player03PowerA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03PowerB.png">
+      <Name>player03PowerB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03PowerC.png">
+      <Name>player03PowerC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03PowerD.png">
+      <Name>player03PowerD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03StatusA.png">
+      <Name>player03StatusA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03StatusB.png">
+      <Name>player03StatusB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03StatusC.png">
+      <Name>player03StatusC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03StatusD.png">
+      <Name>player03StatusD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04DefensiveUnitsA.png">
+      <Name>player04DefensiveUnitsA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04DefensiveUnitsB.png">
+      <Name>player04DefensiveUnitsB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04DefensiveUnitsC.png">
+      <Name>player04DefensiveUnitsC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04DefensiveUnitsD.png">
+      <Name>player04DefensiveUnitsD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04OffensiveUnitsA.png">
+      <Name>player04OffensiveUnitsA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04OffensiveUnitsB.png">
+      <Name>player04OffensiveUnitsB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04OffensiveUnitsC.png">
+      <Name>player04OffensiveUnitsC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04OffensiveUnitsD.png">
+      <Name>player04OffensiveUnitsD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04PowerA.png">
+      <Name>player04PowerA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04PowerB.png">
+      <Name>player04PowerB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04PowerC.png">
+      <Name>player04PowerC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04PowerD.png">
+      <Name>player04PowerD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04StatusA.png">
+      <Name>player04StatusA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04StatusB.png">
+      <Name>player04StatusB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04StatusC.png">
+      <Name>player04StatusC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04StatusD.png">
+      <Name>player04StatusD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PlayerMenu\Tabs\computerModeA.png">
+      <Name>computerModeA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\computerModeB.png">
+      <Name>computerModeB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\computerModeC.png">
+      <Name>computerModeC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\computerModeD.png">
+      <Name>computerModeD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
