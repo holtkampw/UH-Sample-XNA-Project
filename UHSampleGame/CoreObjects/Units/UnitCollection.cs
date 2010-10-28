@@ -99,8 +99,13 @@ namespace UHSampleGame.CoreObjects.Units
             {
                 switch ((UnitType)j)
                 {
-                    case UnitType.TestUnit:
+                    case UnitType.SpeedBoat:
                         instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Units\\speedBoat01_BLUE"));//"Objects\\Units\\enemyShip01"));
+                        instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
+                        instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
+                        break;
+                    case UnitType.SpeederBoat:
+                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Units\\speederBoat02_BLUE"));//"Objects\\Units\\enemyShip01"));
                         instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
                         instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
                         break;
@@ -226,7 +231,7 @@ namespace UHSampleGame.CoreObjects.Units
             if (amount == 0)
                 return;
 
-            // If we have more instances than room in our vertex buffer, grow it to the neccessary size.
+            instanceVertexBuffer = null;// If we have more instances than room in our vertex buffer, grow it to the neccessary size.
             if ((instanceVertexBuffer == null) ||
                 (amount > instanceVertexBuffer.VertexCount))
             {
@@ -295,6 +300,13 @@ namespace UHSampleGame.CoreObjects.Units
         public static string UnitCountForPlayerString(int playerNum)
         {
             return unitCountForPlayerString[playerNum];
+        }
+
+        internal static int MaxUnitsToDeployFor(int PlayerNum, UnitType unitType)
+        {
+            int unitsOut = UnitCountForPlayer(PlayerNum);
+            /////////////////////////////////////////FIX THIS TO USE THE NUMBER OF UNITS CREATED VIA UNIT TOWERS//////////////////////////////////////////////////
+            return MAX_UNITS - unitsOut;
         }
     }
 }

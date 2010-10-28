@@ -129,6 +129,26 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.PlayerMenuUp, Keys.I);
             inputManager.AddInput(InputAction.PlayerMenuDown, Keys.K);
 
+            //UnitAction
+            inputManager.AddInput(InputAction.UnitBuild, Buttons.RightTrigger);
+            inputManager.AddInput(InputAction.UnitBuild, Keys.U);
+            inputManager.AddInput(InputAction.UnitLeft, Buttons.RightThumbstickLeft);
+            inputManager.AddInput(InputAction.UnitRight, Buttons.RightThumbstickRight);
+            inputManager.AddInput(InputAction.UnitUp, Buttons.RightThumbstickUp);
+            inputManager.AddInput(InputAction.UnitDown, Buttons.RightThumbstickDown);
+            inputManager.AddInput(InputAction.UnitLeft, Keys.A);
+            inputManager.AddInput(InputAction.UnitRight, Keys.D);
+            inputManager.AddInput(InputAction.UnitUp, Keys.W);
+            inputManager.AddInput(InputAction.UnitDown, Keys.S);
+
+            //GameLobby
+            inputManager.AddInput(InputAction.StartGame, Buttons.X);
+            inputManager.AddInput(InputAction.BackToMainMenu, Buttons.Y);
+            inputManager.AddInput(InputAction.JoinGame, Buttons.A);
+            inputManager.AddInput(InputAction.StartGame, Keys.X);
+            inputManager.AddInput(InputAction.BackToMainMenu, Keys.Y);
+            inputManager.AddInput(InputAction.JoinGame, Keys.A);
+            
             //Setup Screen Manager
             screenManager = new ScreenManager(this);
 
