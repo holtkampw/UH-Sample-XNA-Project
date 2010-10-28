@@ -110,7 +110,7 @@ namespace UHSampleGame.Players
         SpriteFont towerDescription;
 
         //HumanPlayer
-        AnimatedModel avatar;
+        StaticModel avatar;
         bool avatarMoved = true;
         StaticModel avatarFollowingTile;
 
@@ -488,12 +488,21 @@ namespace UHSampleGame.Players
 
         public void SetupAvatar()
         {
-            avatar = new AnimatedModel(PlayerNum, TeamNum,
-                    ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
+            //avatar = new AnimatedModel(PlayerNum, TeamNum,
+            //        ScreenManager.Game.Content.Load<Model>("AnimatedModel\\dude"));
 
-            avatar.Scale = 2.0f;
-            avatar.PlayClip("Take 001");
-            avatar.Position = new Vector3(PlayerBase.Position.X, 200.0f, PlayerBase.Position.Z);
+            //avatar.Scale = 2.0f;
+            //avatar.PlayClip("Take 001");
+            //avatar.Position = new Vector3(PlayerBase.Position.X, 200.0f, PlayerBase.Position.Z);
+            //avatarMoved = false;
+            //avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
+            //avatarFollowingTile.Scale = 4.0f;
+
+            avatar = new StaticModel(
+                ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\player0" + PlayerNum + "Ship01"),
+                new Vector3(PlayerBase.Position.X, 300.0f, PlayerBase.Position.Z));
+            avatar.Scale = 6.0f;
+
             avatarMoved = false;
             avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
             avatarFollowingTile.Scale = 4.0f;
