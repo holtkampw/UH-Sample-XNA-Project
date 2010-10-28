@@ -42,7 +42,7 @@ namespace UHSampleGame.ProjectileManagment
         ParticleEmitter trailEmitter;
 
         public Vector3 Position;
-        Vector3 velocity;
+        public Vector3 velocity;
         float age;
 
         static Random random = new Random();

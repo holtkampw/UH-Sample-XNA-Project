@@ -19,7 +19,7 @@ using UHSampleGame.Events;
 namespace UHSampleGame.Players
 {
     public enum PlayerType { Human, AI };
-    public enum PlayerMenuTabs { Status, DefenseTower, UnitTower, Powers}
+    public enum PlayerMenuTabs { Status, UnitTower, DefenseTower, Powers }
 
     struct TowerInformation
     {
@@ -160,7 +160,15 @@ namespace UHSampleGame.Players
         int maxUnitMeterUpdateDate = 20;
 
         static PlayerIndex[] playerIndexes = { 0, PlayerIndex.One, PlayerIndex.Two, PlayerIndex.Three, PlayerIndex.Four };
+        static char[] mapTeamNumToTeamChar = { ' ', 'A', 'B', 'C', 'D' };
 
+        //PlayerNum, TeamNum
+        static Texture2D[][] defensiveTab;
+        static Texture2D[][] offensiveTab;
+        static Texture2D[][] powersTab;
+        static Texture2D[][] statusTab;
+        static Texture2D[] computerTags;
+        static Vector2[] computerTagLocations;
       
         #region Properties
        
@@ -472,6 +480,40 @@ namespace UHSampleGame.Players
 
                 highlightIconSourceRect = new Rectangle(0, 0, highlightIcon.Width, highlightIcon.Height);
                 highlightOrigin = new Vector2(highlightIcon.Width / 2.0f, highlightIcon.Height / 2.0f);
+
+
+                defensiveTab = new Texture2D[5][];
+                offensiveTab = new Texture2D[5][];
+                statusTab = new Texture2D[5][];
+                powersTab = new Texture2D[5][];
+
+                computerTags = new Texture2D[5];
+                computerTagLocations = new Vector2[5];
+
+                for (int player = 1; player < 5; player++)
+                {
+                    defensiveTab[player] = new Texture2D[5];
+                    offensiveTab[player] = new Texture2D[5];
+                    statusTab[player] = new Texture2D[5];
+                    powersTab[player] = new Texture2D[5];
+
+                    computerTags[player] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\computerMode" + mapTeamNumToTeamChar[player]);
+                    computerTagLocations[player] = globalLocations[player] + new Vector2(0, 105);
+
+                    for (int team = 1; team < 5; team++)
+                    {
+                        defensiveTab[player][team] = 
+                            ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\player0" + player + "DefensiveUnits" + mapTeamNumToTeamChar[team]);
+                        offensiveTab[player][team] = 
+                            ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\player0" + player + "OffensiveUnits" + mapTeamNumToTeamChar[team]);
+                        statusTab[player][team] = 
+                            ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\player0" + player + "Status" + mapTeamNumToTeamChar[team]);
+                        powersTab[player][team] = 
+                            ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\player0" + player + "Power" + mapTeamNumToTeamChar[team]);
+
+                    }
+                }
+
             }
         }
 
@@ -815,51 +857,79 @@ namespace UHSampleGame.Players
         public void DrawMenu(GameTime gameTime)
         {
             ScreenManager.SpriteBatch.Begin();
-            ScreenManager.SpriteBatch.Draw(playerMenuBg, globalLocations[PlayerNum], Color.White);
-            
+ 
+            switch (currentlySelectedPlayerStatus)
+            {
+                case PlayerMenuTabs.Status:
+                    DrawStatus();
+                    break;
+                case PlayerMenuTabs.DefenseTower:
+                    DrawDefenseTowers();
+                    break;
+                case PlayerMenuTabs.UnitTower:
+                    DrawOffenseTowers();
+                    break;
+                case PlayerMenuTabs.Powers:
+                    DrawPowers();
+                    break;
+            }
+
             if (Type == PlayerType.Human)
             {
                 ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
-
-                if (!unitScreenActivated)
-                {
-                    for (int i = 0; i < NUM_TABS; i++)
-                    {
-                        if ((int)currentlySelectedPlayerStatus == i)
-                        {
-                            ScreenManager.SpriteBatch.Draw(menuTab, tabLocation[PlayerNum][i],
-                                menuTabSource[SELECTED], Color.White);
-                        }
-                        else
-                        {
-                            ScreenManager.SpriteBatch.Draw(menuTab, tabLocation[PlayerNum][i],
-                                menuTabSource[NORMAL], Color.White);
-                        }
-                    }
-
-                    switch (currentlySelectedPlayerStatus)
-                    {
-                        case PlayerMenuTabs.Status:
-                            DrawStatus();
-                            break;
-                        case PlayerMenuTabs.DefenseTower:
-                            DrawDefenseTowers();
-                            break;
-                        case PlayerMenuTabs.UnitTower:
-                            break;
-                        case PlayerMenuTabs.Powers:
-                            break;
-                    }
-                }
-                else
-                {
-                    DrawDeployTab();
-                }
             }
             else
             {
                 ScreenManager.SpriteBatch.DrawString(statusFont, AIMoneyString, moneyLocation[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], computerTagLocations[PlayerNum], Color.White);
             }
+            
+
+            //ScreenManager.SpriteBatch.Draw(playerMenuBg, globalLocations[PlayerNum], Color.White);
+            
+            //if (Type == PlayerType.Human)
+            //{
+            //    ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
+
+            //    if (!unitScreenActivated)
+            //    {
+            //        for (int i = 0; i < NUM_TABS; i++)
+            //        {
+            //            if ((int)currentlySelectedPlayerStatus == i)
+            //            {
+            //                ScreenManager.SpriteBatch.Draw(menuTab, tabLocation[PlayerNum][i],
+            //                    menuTabSource[SELECTED], Color.White);
+            //            }
+            //            else
+            //            {
+            //                ScreenManager.SpriteBatch.Draw(menuTab, tabLocation[PlayerNum][i],
+            //                    menuTabSource[NORMAL], Color.White);
+            //            }
+            //        }
+
+            //        switch (currentlySelectedPlayerStatus)
+            //        {
+            //            case PlayerMenuTabs.Status:
+            //                DrawStatus();
+            //                break;
+            //            case PlayerMenuTabs.DefenseTower:
+            //                DrawDefenseTowers();
+            //                break;
+            //            case PlayerMenuTabs.UnitTower:
+            //                break;
+            //            case PlayerMenuTabs.Powers:
+            //                break;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        DrawDeployTab();
+            //    }
+            //}
+            //else
+            //{
+            //    ScreenManager.SpriteBatch.DrawString(statusFont, AIMoneyString, moneyLocation[PlayerNum], Color.White);
+            //}
 
             ScreenManager.SpriteBatch.End();
 
@@ -867,37 +937,49 @@ namespace UHSampleGame.Players
 
         void DrawStatus()
         {
-            ScreenManager.SpriteBatch.DrawString(statusFont, HealthName, statusHealthNameLocation[PlayerNum], Color.White);
-            ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
-            ScreenManager.SpriteBatch.DrawString(statusFont, UnitsName, statusNumberOfUnitsNameLocation[PlayerNum], Color.White);
-            ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum), 
-                statusNumberOfUnitsLocation[PlayerNum], Color.White);
+            ScreenManager.SpriteBatch.Draw(statusTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
+            //ScreenManager.SpriteBatch.DrawString(statusFont, HealthName, statusHealthNameLocation[PlayerNum], Color.White);
+            //ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
+            //ScreenManager.SpriteBatch.DrawString(statusFont, UnitsName, statusNumberOfUnitsNameLocation[PlayerNum], Color.White);
+            //ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum), 
+            //    statusNumberOfUnitsLocation[PlayerNum], Color.White);
         }
 
         void DrawDefenseTowers()
         {
-            for (int i = 0; i < NUM_DEFENSE_TOWERS; i++)
-            {
-                ScreenManager.SpriteBatch.Draw(defenseIcons[i], iconLocations[PlayerNum][i], Color.White);
-                if (i == defenseTowerSelected)
-                {
-                    ScreenManager.SpriteBatch.Draw(highlightIcon,
-                        highlightIconLocations[PlayerNum][i],
-                        highlightIconSourceRect, 
-                        Color.White, 
-                        highlightRotations[currentHighlightRotation], 
-                        highlightOrigin,
-                        SpriteEffects.None, 
-                        1.0f);
-                    ScreenManager.SpriteBatch.DrawString(towerTitle, defenseTowerInfo[i].name, 
-                        defenseTowerInfo[i].nameLocation[PlayerNum], Color.White);
-                    ScreenManager.SpriteBatch.DrawString(towerPrice, defenseTowerInfo[i].price, 
-                        defenseTowerInfo[i].priceLocation[PlayerNum], Color.White);
-                    ScreenManager.SpriteBatch.DrawString(towerDescription, defenseTowerInfo[i].description, 
-                        defenseTowerInfo[i].descriptionLocation[PlayerNum], Color.White);
-                }
+            ScreenManager.SpriteBatch.Draw(defensiveTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
+            //for (int i = 0; i < NUM_DEFENSE_TOWERS; i++)
+            //{
+            //    ScreenManager.SpriteBatch.Draw(defenseIcons[i], iconLocations[PlayerNum][i], Color.White);
+            //    if (i == defenseTowerSelected)
+            //    {
+            //        ScreenManager.SpriteBatch.Draw(highlightIcon,
+            //            highlightIconLocations[PlayerNum][i],
+            //            highlightIconSourceRect, 
+            //            Color.White, 
+            //            highlightRotations[currentHighlightRotation], 
+            //            highlightOrigin,
+            //            SpriteEffects.None, 
+            //            1.0f);
+            //        ScreenManager.SpriteBatch.DrawString(towerTitle, defenseTowerInfo[i].name, 
+            //            defenseTowerInfo[i].nameLocation[PlayerNum], Color.White);
+            //        ScreenManager.SpriteBatch.DrawString(towerPrice, defenseTowerInfo[i].price, 
+            //            defenseTowerInfo[i].priceLocation[PlayerNum], Color.White);
+            //        ScreenManager.SpriteBatch.DrawString(towerDescription, defenseTowerInfo[i].description, 
+            //            defenseTowerInfo[i].descriptionLocation[PlayerNum], Color.White);
+            //    }
                 
-            }
+            //}
+        }
+
+        void DrawOffenseTowers()
+        {
+            ScreenManager.SpriteBatch.Draw(offensiveTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
+        }
+
+        void DrawPowers()
+        {
+            ScreenManager.SpriteBatch.Draw(powersTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
         }
 
         void DrawDeployTab()
