@@ -536,6 +536,7 @@ namespace UHSampleGame.Players
         public void TakeDamage()
         {
             Health--;
+            HealthString = Health.ToString();
             if (Health <= 0)
             {
                 //Event if died??
