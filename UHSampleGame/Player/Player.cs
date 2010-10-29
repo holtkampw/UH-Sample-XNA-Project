@@ -883,8 +883,9 @@ namespace UHSampleGame.Players
             }
             else
             {
+                ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], globalLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.DrawString(statusFont, AIMoneyString, moneyLocation[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], computerTagLocations[PlayerNum], Color.White);
+                
             }
             
 
