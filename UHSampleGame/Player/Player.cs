@@ -143,7 +143,7 @@ namespace UHSampleGame.Players
 
         int queuedUnitType;
         int elapsedUnitDeployTime = 0;
-        int maxUnitDeployTime = 20;
+        int maxUnitDeployTime = 50;
         Texture2D unitMeterBaseTexture;
         Rectangle[] unitMeterBaseLocation;
 

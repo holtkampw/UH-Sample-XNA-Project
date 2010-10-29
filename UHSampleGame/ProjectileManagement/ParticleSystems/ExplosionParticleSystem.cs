@@ -30,7 +30,7 @@ namespace UHSampleGame.ProjectileManagment
         {
             settings.TextureName = "explosion";
 
-            settings.MaxParticles = 100;
+            settings.MaxParticles = 20000;
 
             settings.Duration = TimeSpan.FromSeconds(2);
             settings.DurationRandomness = 1;
@@ -38,8 +38,8 @@ namespace UHSampleGame.ProjectileManagment
             settings.MinHorizontalVelocity = 20;
             settings.MaxHorizontalVelocity = 30;
 
-            settings.MinVerticalVelocity = -20;
-            settings.MaxVerticalVelocity = 20;
+            settings.MinVerticalVelocity = 0;
+            settings.MaxVerticalVelocity = 10;
 
             settings.EndVelocity = 0;
 
@@ -53,7 +53,7 @@ namespace UHSampleGame.ProjectileManagment
             settings.MaxStartSize = 7;
 
             settings.MinEndSize = 70;
-            settings.MaxEndSize = 140;
+            settings.MaxEndSize = 170;
 
             // Use additive blending.
             settings.BlendState = BlendState.Additive;

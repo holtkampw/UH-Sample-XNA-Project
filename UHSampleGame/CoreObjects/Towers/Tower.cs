@@ -155,7 +155,7 @@ namespace UHSampleGame.CoreObjects.Towers
             currentTimeToAttack += gameTime.ElapsedGameTime;
             if (currentTimeToAttack > timeToAttack)
             {
-                if (unitToAttack != null)
+                if (unitToAttack != null && unitToAttack.Health > 0)
                 {
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
                     unitToAttack.TakeDamage(attackStrength);
