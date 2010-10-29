@@ -145,7 +145,7 @@ namespace UHSampleGame.CoreObjects.Units
                 if (!u.IsActive())
                 {
                     u.Deploy(BaseCollection.GetBaseTileForPlayer(playerNum),
-                        BaseCollection.GetBaseTileForPlayer(attackPlayerNum));
+                        BaseCollection.GetBaseTileForPlayer(attackPlayerNum), attackPlayerNum);
 
                     u.PlayerNum = playerNum;
                     u.TeamNum = teamNum;
