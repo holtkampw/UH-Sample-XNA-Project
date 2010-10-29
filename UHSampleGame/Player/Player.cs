@@ -152,6 +152,7 @@ namespace UHSampleGame.Players
         Rectangle unitMeterOverlaySource;
         Rectangle[] unitMeterOverlayDestination;
         float[] unitMeterOverlayBaseY;
+        float[] unitMeterOverlayMaxHeight;
 
         //Texture2D[] unitMeterHighlightTexture;
         //Rectangle unitMeterHightlightSource;
@@ -399,6 +400,7 @@ namespace UHSampleGame.Players
 
                 unitMeterBaseTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_base");
                 unitMeterBaseLocation = new Rectangle[5];
+                unitMeterOverlayMaxHeight = new float[5];
                 
                 //unitMeterHighlightTexture = new Texture2D[5];
                 unitMeterOverlayTexture = new Texture2D[5];
@@ -481,11 +483,14 @@ namespace UHSampleGame.Players
                         50,
                         0);
                     unitMeterOverlayBaseY[player] = unitMeterOverlayDestination[player].Y;
+                    
 
                     unitMeterBaseLocation[player] = new Rectangle((int)globalLocations[player].X + 8,
                         (int)globalLocations[player].Y + 44,
                         50,
                         120);
+
+                    unitMeterOverlayMaxHeight[player] = unitMeterBaseLocation[player].Height - 20.0f;
 
                 }
 
@@ -1087,14 +1092,17 @@ namespace UHSampleGame.Players
                 {
                     unitMeterOverlayDestination[PlayerNum].Height = (int)(
                         ((float) queuedUnits / (float)queuedUnitsToDeploy) * 
-                        //((float)queuedUnits / (float)UnitCollection.MaxUnitsToDeployFor(PlayerNum, unitInformation[queuedUnitType].type)) *
-                        unitMeterBaseLocation[PlayerNum].Height);
-                    unitMeterOverlayDestination[PlayerNum].Y = (int)(unitMeterOverlayBaseY[PlayerNum] - unitMeterOverlayDestination[PlayerNum].Height);
+                        unitMeterOverlayMaxHeight[PlayerNum]);
+                    //((float)queuedUnits / (float)UnitCollection.MaxUnitsToDeployFor(PlayerNum, unitInformation[queuedUnitType].type)) *
+                    //unitMeterBaseLocation[PlayerNum].Height);
+
+                   unitMeterOverlayDestination[PlayerNum].Y = (int)(unitMeterOverlayBaseY[PlayerNum] - unitMeterOverlayDestination[PlayerNum].Height);
                 }
                 else
                 {
                     unitMeterOverlayDestination[PlayerNum].Height = (int)((percentOfUnitsQueued / 100.0f) * 
-                        unitMeterBaseLocation[PlayerNum].Height);
+                        unitMeterOverlayMaxHeight[PlayerNum]);
+                    // unitMeterBaseLocation[PlayerNum].Height);
                     unitMeterOverlayDestination[PlayerNum].Y = (int)(unitMeterOverlayBaseY[PlayerNum] - unitMeterOverlayDestination[PlayerNum].Height);
                 }
 

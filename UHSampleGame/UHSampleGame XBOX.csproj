@@ -128,6 +128,7 @@
     <Compile Include="Screens\PlayScreen.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Screens\WinScreen.cs" />
     <Compile Include="TileSystem\Tile.cs" />
     <Compile Include="TileSystem\TileMap.cs">
       <SubType>Code</SubType>

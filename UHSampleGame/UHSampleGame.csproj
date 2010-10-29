@@ -168,6 +168,7 @@
     <Compile Include="Screens\MenuScreenTest.cs" />
     <Compile Include="Screens\MultiplayerLobby.cs" />
     <Compile Include="Screens\PlayScreen.cs" />
+    <Compile Include="Screens\WinScreen.cs" />
     <Compile Include="TileSystem\Tile.cs" />
     <Compile Include="TileSystem\TileMap.cs" />
     <Compile Include="VectorNew2.cs" />

@@ -162,6 +162,7 @@ namespace UHSampleGame
             
             //Setup Screen Manager
             screenManager = new ScreenManager(this);
+            this.Services.AddService(typeof(ScreenManager), screenManager);
 
             //Setup Camera
             cameraManager = new CameraManager();

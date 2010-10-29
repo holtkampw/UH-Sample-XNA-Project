@@ -9,6 +9,7 @@ using UHSampleGame.LevelManagement;
 using UHSampleGame.CoreObjects.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using UHSampleGame.Screens;
 
 namespace UHSampleGame.Players
 {
@@ -25,6 +26,10 @@ namespace UHSampleGame.Players
         #region Class Variables
         static Player[] Players;
         static bool[] activePlayer;
+        static bool[] teamsActive;
+        static int numTeamsActive;
+        static ScreenManager screenManager;
+        static int winTeam;
         #endregion
         public static void Initialize()
         {
@@ -42,6 +47,14 @@ namespace UHSampleGame.Players
             activePlayer[2] = false;
             activePlayer[3] = false;
             activePlayer[4] = false;
+
+            teamsActive = new bool[5];
+            for (int i = 0; i < 5; i++)
+            {
+                teamsActive[i] = false;
+            }
+
+            screenManager = (ScreenManager)ScreenManager.Game.Services.GetService(typeof(ScreenManager));
         }
 
         public static void Update(GameTime gameTime)
@@ -56,6 +69,41 @@ namespace UHSampleGame.Players
         public static void SetPlayerInactive(int playerNum)
         {
             activePlayer[playerNum] = false;
+            CheckGameWin();
+        }
+
+        public static void CheckGameWin()
+        {
+            //Reset Teams
+            for (int i = 1; i < 5; i++)
+            {
+                teamsActive[i] = false;
+            }
+
+            //Check players to see who's alive
+            for (int p = 1; p < activePlayer.Length; p++)
+            {
+                if (activePlayer[p])
+                    teamsActive[Players[p].TeamNum] = true;
+            }
+
+            //Check Win condition
+            numTeamsActive = 0;
+            for (int i = 1; i < 5; i++)
+            {
+                if (teamsActive[i])
+                {
+                    numTeamsActive++;
+                    winTeam = i;
+                }
+            }
+
+            if (numTeamsActive == 1)
+            {
+                //Show Win Screen
+                screenManager.RemoveScreen("PlayScreen");
+                screenManager.ShowScreen(new WinScreen(winTeam));
+            }
         }
 
         public static void Draw(GameTime gameTime)
@@ -83,6 +131,7 @@ namespace UHSampleGame.Players
         {
             Players[player.PlayerNum] = player;
             activePlayer[player.PlayerNum] = true;
+            teamsActive[player.TeamNum] = true;
         }
 
         public static void AttackPlayer(int playerNum)
