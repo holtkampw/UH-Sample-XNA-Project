@@ -210,7 +210,7 @@ namespace UHSampleGame.CoreObjects.Units
                     for (int k = 0; k < MAX_UNITS && updateCount < uCount; k++)
                     {
                         u = units[i][j][k];
-                        if (u.Status != UnitStatus.Inactive)
+                        if (u.Status == UnitStatus.Deployed)
                         {
                             u.Update(gameTime);
                             updateCount++;

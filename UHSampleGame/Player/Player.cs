@@ -665,6 +665,17 @@ namespace UHSampleGame.Players
                     if (((int)currentlySelectedPlayerStatus - 1) >= 0)
                         currentlySelectedPlayerStatus--;
                     unitScreenActivated = false;
+
+                    if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                        lastBuiltTower = TowerType.Unit;
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
+                    {
+                        if (((int)defenseTowerSelected - 1) >= 0)
+                            defenseTowerSelected--;
+                        else
+                            defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
+                        lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
+                    }
                 }
 
                 if (input.CheckNewAction(InputAction.PlayerMenuRight, playerIndexes[PlayerNum]))
@@ -672,6 +683,17 @@ namespace UHSampleGame.Players
                     if (((int)currentlySelectedPlayerStatus + 1) < playerMenuTabsEnumType.Length)
                         currentlySelectedPlayerStatus++;
                     unitScreenActivated = false;
+
+                    if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                        lastBuiltTower = TowerType.Unit;
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
+                    {
+                        if (((int)defenseTowerSelected - 1) >= 0)
+                            defenseTowerSelected--;
+                        else
+                            defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
+                        lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
+                    }
                 }
 
                 if (input.CheckNewAction(InputAction.PlayerMenuUp, playerIndexes[PlayerNum]))
@@ -684,8 +706,8 @@ namespace UHSampleGame.Players
                             defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
                         lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
                     }
-                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
-                        lastBuiltTower = TowerType.Unit;
+                    //else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                   //     lastBuiltTower = TowerType.Unit;
 
                     unitScreenActivated = false;
                 }
@@ -700,8 +722,8 @@ namespace UHSampleGame.Players
                             defenseTowerSelected = 0;
                         lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
                     }
-                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
-                        lastBuiltTower = TowerType.Unit;
+                   // else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                    //    lastBuiltTower = TowerType.Unit;
 
 
                     unitScreenActivated = false;

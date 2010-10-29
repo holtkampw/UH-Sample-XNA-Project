@@ -54,6 +54,9 @@ namespace UHSampleGame.CoreObjects.Towers
         public int Cost;
         public int TotalInvestedCost;
 
+        TimeSpan unitBuild = new TimeSpan(0, 0, 1);
+        TimeSpan currentTimeSpan = new TimeSpan();
+
         static int currentID = 0;
         #endregion
 
@@ -195,9 +198,14 @@ namespace UHSampleGame.CoreObjects.Towers
             return (int)(TotalInvestedCost * perc*.75f);
         }
 
-        private void BuildUnit()
+        private void BuildUnit(GameTime gameTime)
         {
-            UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
+            currentTimeSpan = currentTimeSpan.Add(gameTime.ElapsedGameTime);
+            if (currentTimeSpan > unitBuild)
+            {
+                UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
+                currentTimeSpan = TimeSpan.Zero;
+            }
         }
         #endregion
 
@@ -248,7 +256,9 @@ namespace UHSampleGame.CoreObjects.Towers
             if (Type != TowerType.Unit)
                 Attack(gameTime);
             else
-                BuildUnit();
+            {
+                BuildUnit(gameTime);
+            }
         }
         #endregion
 
