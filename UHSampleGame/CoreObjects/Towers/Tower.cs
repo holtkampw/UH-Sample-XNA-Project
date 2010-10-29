@@ -9,11 +9,6 @@ using UHSampleGame.Events;
 using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.ScreenManagement;
-
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-
-using UHSampleGame.TileSystem;
 using UHSampleGame.ProjectileManagment;
 
 
@@ -159,9 +154,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 {
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
                     unitToAttack.TakeDamage(attackStrength);
-                    //DO XP GIVING HERE
-
-                    
+                    //DO XP GIVING HERE                    
                 }
                 currentTimeToAttack = TimeSpan.Zero;
             }

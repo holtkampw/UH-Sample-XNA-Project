@@ -21,6 +21,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         static int NumPlayers;
         static Enum[] towerTypes = EnumHelper.EnumToArray(new TowerType());
+        static string[] mapTeamNumToColor = { " ", "red", "Blue", "Green", "yellow" };
 
         //units[playerNum][unitType][index]
         static List<List<List<Tower>>> towers;
@@ -37,11 +38,11 @@ namespace UHSampleGame.CoreObjects.Towers
             new VertexElement(48, VertexElementFormat.Vector4, VertexElementUsage.BlendWeight, 3)
         );
 
-        //instancedModels[unitType]
-        static List<Model> instancedModels;
+        //instancedModels[unitType][teamNum]
+        static List<List<Model>> instancedModels;
 
-        //instancedModelBones[unitType]
-        static List<Matrix[]> instancedModelBones;
+        //instancedModelBones[unitType][teamNum]
+        static List<List<Matrix[]>> instancedModelBones;
 
         //unitTransforms[playerNum][unitType][index]
         static Matrix[] towerTransforms;
@@ -80,27 +81,34 @@ namespace UHSampleGame.CoreObjects.Towers
                 }
             }
 
-            instancedModels = new List<Model>();
-            instancedModelBones = new List<Matrix[]>();
+            instancedModels = new List<List<Model>>();
+            instancedModelBones = new List<List<Matrix[]>>();
             for (int j = 0; j < towerTypes.Length; j++)
             {
-                switch ((TowerType)j)
+                instancedModelBones.Add(new List<Matrix[]>());
+                instancedModels.Add(new List<Model>());
+                instancedModels[j].Add(null);
+                instancedModelBones[j].Add(null);
+                for (int p = 1; p < 5; p++)
                 {
-                    case TowerType.Plasma:
-                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_red"));
-                        instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
-                        instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
-                        break;
-                    case TowerType.Electric:
-                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerB_red"));
-                        instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
-                        instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
-                        break;
-                    case TowerType.Cannon:
-                        instancedModels.Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerC_red"));
-                        instancedModelBones.Add(new Matrix[instancedModels[j].Bones.Count]);
-                        instancedModels[j].CopyAbsoluteBoneTransformsTo(instancedModelBones[j]);
-                        break;
+                    switch ((TowerType)j)
+                    {
+                        case TowerType.Plasma:
+                            instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerA_" + mapTeamNumToColor[p]));
+                            instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
+                            instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
+                            break;
+                        case TowerType.Electric:
+                            instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerB_" + mapTeamNumToColor[p]));
+                            instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
+                            instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
+                            break;
+                        case TowerType.Cannon:
+                            instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerC_" + mapTeamNumToColor[p]));
+                            instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
+                            instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
+                            break;
+                    }
                 }
             }
 
@@ -280,26 +288,26 @@ namespace UHSampleGame.CoreObjects.Towers
             // Transfer the latest instance transform matrices into the instanceVertexBuffer.
             instanceVertexBuffer.SetData(towerTransforms, 0, amount, SetDataOptions.Discard);
 
-            for (int i = 0; i < instancedModels[towerType].Meshes.Count; i++)
+            for (int i = 0; i < instancedModels[towerType][playerNum].Meshes.Count; i++)
             {
-                for (int j = 0; j < instancedModels[towerType].Meshes[i].MeshParts.Count; j++)
+                for (int j = 0; j < instancedModels[towerType][playerNum].Meshes[i].MeshParts.Count; j++)
                 {
 
                     // Tell the GPU to read from both the model vertex buffer plus our instanceVertexBuffer.
                     ScreenManager.Game.GraphicsDevice.SetVertexBuffers(
-                        new VertexBufferBinding(instancedModels[towerType].Meshes[i].MeshParts[j].VertexBuffer,
-                            instancedModels[towerType].Meshes[i].MeshParts[j].VertexOffset, 0),
+                        new VertexBufferBinding(instancedModels[towerType][playerNum].Meshes[i].MeshParts[j].VertexBuffer,
+                            instancedModels[towerType][playerNum].Meshes[i].MeshParts[j].VertexOffset, 0),
                         new VertexBufferBinding(instanceVertexBuffer, 0, 1)
                     );
 
-                    ScreenManager.Game.GraphicsDevice.Indices = instancedModels[towerType].Meshes[i].MeshParts[j].IndexBuffer;
+                    ScreenManager.Game.GraphicsDevice.Indices = instancedModels[towerType][playerNum].Meshes[i].MeshParts[j].IndexBuffer;
 
                     // Set up the instance rendering effect.
-                    Effect effect = instancedModels[towerType].Meshes[i].MeshParts[j].Effect;
+                    Effect effect = instancedModels[towerType][playerNum].Meshes[i].MeshParts[j].Effect;
 
                     effect.CurrentTechnique = effect.Techniques["HardwareInstancing"];
 
-                    effect.Parameters["World"].SetValue(instancedModelBones[towerType][instancedModels[towerType].Meshes[i].ParentBone.Index]);
+                    effect.Parameters["World"].SetValue(instancedModelBones[towerType][playerNum][instancedModels[towerType][playerNum].Meshes[i].ParentBone.Index]);
                     effect.Parameters["View"].SetValue(cameraManager.ViewMatrix);
                     effect.Parameters["Projection"].SetValue(cameraManager.ProjectionMatrix);
 
@@ -309,9 +317,9 @@ namespace UHSampleGame.CoreObjects.Towers
                         effect.CurrentTechnique.Passes[k].Apply();
 
                         ScreenManager.Game.GraphicsDevice.DrawInstancedPrimitives(PrimitiveType.TriangleList, 0, 0,
-                                                                instancedModels[towerType].Meshes[i].MeshParts[j].NumVertices,
-                                                                instancedModels[towerType].Meshes[i].MeshParts[j].StartIndex,
-                                                                instancedModels[towerType].Meshes[i].MeshParts[j].PrimitiveCount,
+                                                                instancedModels[towerType][playerNum].Meshes[i].MeshParts[j].NumVertices,
+                                                                instancedModels[towerType][playerNum].Meshes[i].MeshParts[j].StartIndex,
+                                                                instancedModels[towerType][playerNum].Meshes[i].MeshParts[j].PrimitiveCount,
                                                                 amount);
                     }
                 }

@@ -1166,6 +1166,78 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Objects\Towers\towerA_Blue.fbx">
+      <Name>towerA_Blue</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerA_Green.fbx">
+      <Name>towerA_Green</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerA_Orange.fbx">
+      <Name>towerA_Orange</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerA_Pink.fbx">
+      <Name>towerA_Pink</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerA_Yellow.fbx">
+      <Name>towerA_Yellow</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerB_Blue.fbx">
+      <Name>towerB_Blue</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerB_Green.fbx">
+      <Name>towerB_Green</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerB_pink.fbx">
+      <Name>towerB_pink</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerB_yellow.fbx">
+      <Name>towerB_yellow</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerC_Blue.fbx">
+      <Name>towerC_Blue</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerC_Green.fbx">
+      <Name>towerC_Green</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerC_Orange.fbx">
+      <Name>towerC_Orange</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerC_Pink.fbx">
+      <Name>towerC_Pink</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Towers\towerC_Yellow.fbx">
+      <Name>towerC_Yellow</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
