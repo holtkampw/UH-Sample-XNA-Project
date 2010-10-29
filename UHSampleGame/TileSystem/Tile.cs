@@ -25,6 +25,7 @@ namespace UHSampleGame.TileSystem
         List<int> unitIndexes;
         int unitsCount;
         public List<List<Tile>> Paths;
+        public List<List<int>> PathsInts;
         static Random rand = new Random(DateTime.Now.Millisecond);
         public int ID;
 
@@ -53,14 +54,18 @@ namespace UHSampleGame.TileSystem
             this.Position = position;
             this.Size = size;
             this.TileType = tileType;
-            this.Paths = new List<List<Tile>>();
+            //this.Paths = new List<List<Tile>>();
+            this.PathsInts = new List<List<int>>();
             //this.units = new List<Unit>();
             //this.unitsInTile = new List<bool>();
             this.unitIndexes = new List<int>();
             this.unitsCount = 0;
 
-            for (int i = Paths.Count; i < TileMap.TileCount; i++)
-                Paths.Add(new List<Tile>());
+            for (int i = 0/*Paths.Count*/; i < TileMap.TileCount; i++)
+            {
+                //Paths.Add(new List<Tile>());
+                PathsInts.Add(new List<int>());
+            }
 
             for (int i = 0; i < UnitCollection.TotalPossibleUnitCount(); i++)
             {
@@ -118,18 +123,13 @@ namespace UHSampleGame.TileSystem
            // TileMap.UpdateTilePaths();
         }
 
-        public List<Tile> GetPathTo(Tile baseTile)
-        {
-            UpdatePathTo(baseTile);
-            return Paths[baseTile.ID];
-        }
-
         public void UpdatePathTo(Tile baseTile)
         {
            // List<Tile> newList = new List<Tile>();
             AStar2.InitAstar(this, baseTile);
-            List<Tile> tempPath = Paths[baseTile.ID];
-            AStar2.FindPath(ref tempPath);//new List<Tile>(AStar2.FindPath());
+           // List<Tile> tempPath = Paths[baseTile.ID];
+            List<int> tempIntPath = PathsInts[baseTile.ID];
+            AStar2.FindPath(ref tempIntPath);//new List<Tile>(AStar2.FindPath());
             //Paths[baseTile.ID] = tempPath;
         }
 
