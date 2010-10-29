@@ -27,10 +27,10 @@ namespace UHSampleGame.CoreObjects.Units
         int goalTileID;
         int focalTileID;
 
-        Tile previousTile;
-        Tile currentTile;
-        Tile goalTile;
-        Tile focalTile;
+        //Tile previousTile;
+       // Tile currentTile;
+        //Tile goalTile;
+       // Tile focalTile;
 
         public int CurrentTileID;
 
@@ -115,9 +115,9 @@ namespace UHSampleGame.CoreObjects.Units
             CurrentTileID = baseTile.ID;
             goalTileID = goalTile.ID;
             
-            this.previousTile = baseTile;
-            this.currentTile = baseTile;
-            this.goalTile = goalTile;
+           // this.previousTile = baseTile;
+            //this.currentTile = baseTile;
+            //this.goalTile = goalTile;
             this.Position = baseTile.Position;
 
             SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].Paths[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
@@ -147,27 +147,27 @@ namespace UHSampleGame.CoreObjects.Units
         void UpdatePath()
         {
             SetCurrentTile(TileMap.GetTileFromPos(Position));
-            if (CurrentTileID == goalTile.ID)
+            if (CurrentTileID == goalTileID)
                 return;
             if (CheckIfStuck())
                 return;
 
             if (!TileMap.Tiles[focalTileID].IsWalkable())
             {
-                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].Paths[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
+                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].Paths[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
             }
 
-            if (currentTile.TileType == TileType.Blocked)
+            if (TileMap.Tiles[CurrentTileID].TileType == TileType.Blocked)
             {
-                if (previousTile.Paths[goalTile.ID].Count > 1)
+                if (TileMap.Tiles[previousTileID].Paths[goalTileID].Count > 1)
                 {
-                    SetFocalPointAndVelocity(TileMap.Tiles[previousTileID].Paths[goalTile.ID][1]);//previousTile.Paths[goalTile.ID][1]);
+                    SetFocalPointAndVelocity(TileMap.Tiles[previousTileID].Paths[goalTileID][1]);//previousTile.Paths[goalTile.ID][1]);
                 }
                 else
                 {
                     List<Tile> goodNieghbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
                     if (goodNieghbors.Count > 0)
-                        SetFocalPointAndVelocity(goodNieghbors[0].Paths[goalTile.ID][1]);
+                        SetFocalPointAndVelocity(goodNieghbors[0].Paths[goalTileID][1]);
                     else
                         throw new NotImplementedException("NO walkable neighbors... handle this!");
                 }
@@ -178,7 +178,7 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (CurrentTileID != previousTileID)
             {
-                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].Paths[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
+                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].Paths[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
             }
 
             UpdatePositionAndRotation();
@@ -213,7 +213,7 @@ namespace UHSampleGame.CoreObjects.Units
                 }
                 else
                 {
-                    PathLength = TileMap.Tiles[CurrentTileID].Paths[goalTile.ID].Count;
+                    PathLength = TileMap.Tiles[CurrentTileID].Paths[goalTileID].Count;
                     TileMap.Tiles[CurrentTileID].AddUnit(ref unit);
                     
                 }
@@ -233,7 +233,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         bool CheckIfStuck()
         {
-            if (TileMap.Tiles[CurrentTileID].Paths[goalTile.ID].Count < 1)
+            if (TileMap.Tiles[CurrentTileID].Paths[goalTileID].Count < 1)
             {
                 //FIX MATH.ABS CRAP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 if ((Math.Abs(Position.X - focalPoint.X) < 30 && Math.Abs(Position.Z - focalPoint.Z) < 30)

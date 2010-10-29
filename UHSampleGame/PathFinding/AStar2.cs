@@ -55,7 +55,7 @@ namespace UHSampleGame.PathFinding
             {
                 tileInformation[i].position = TileMap.Tiles[i].Position;
                 tileInformation[i].ID = TileMap.Tiles[i].ID;
-                tileInformation[i].neighbors = TileMap.GetWalkableNeighborsAsArray(TileMap.Tiles[i]);
+                tileInformation[i].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]);
                 
             }
             
@@ -143,7 +143,7 @@ namespace UHSampleGame.PathFinding
                 //closed.Add(currentTile);
 
                 //neighbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[currentTile.ID]);
-                tileInformation[currentTile].neighbors = TileMap.GetWalkableNeighborsAsArray(TileMap.Tiles[currentTile]);
+                tileInformation[currentTile].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[currentTile]);
                 for (int i = 0; i < /*neighbors.Count*/ tileInformation[currentTile].neighbors.Count; i++)
                 {
                     if (closed[/*neighbors[i].ID*/  tileInformation[currentTile].neighbors[i]])
