@@ -26,12 +26,12 @@ namespace UHSampleGame.ProjectileManagment
         #region Constants
 
         const float trailParticlesPerSecond = 200;
-        const int numExplosionParticles = 30;
-        const int numExplosionSmokeParticles = 50;
+        const int numExplosionParticles = 40;
+        const int numExplosionSmokeParticles = 30;
         const float projectileLifespan = 1.5f;
-        const float sidewaysVelocityRange = 60;
-        const float verticalVelocityRange = 40;
-        const float gravity = 15;
+        const float sidewaysVelocityRange = 100;
+        const float verticalVelocityRange = 10;
+        const float gravity = 2;
 
         #endregion
 
@@ -71,6 +71,14 @@ namespace UHSampleGame.ProjectileManagment
             // Use the particle emitter helper to output our trail particles.
             trailEmitter = new ParticleEmitter(projectileTrailParticles,
                                                trailParticlesPerSecond, Position);
+        }
+
+        public void SetPositionAndVelocity(Vector3 position, Vector3 velocity)
+        {
+            this.Position = position;
+            this.velocity.X = velocity.X * sidewaysVelocityRange;
+            this.velocity.Y = velocity.Y * verticalVelocityRange;
+            this.velocity.Z = velocity.Z * sidewaysVelocityRange;
         }
 
 

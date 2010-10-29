@@ -1062,6 +1062,110 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PlayerMenu\Tabs\player01BACKGROUND_A.png">
+      <Name>player01BACKGROUND_A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01BACKGROUND_B.png">
+      <Name>player01BACKGROUND_B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01BACKGROUND_C.png">
+      <Name>player01BACKGROUND_C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player01BACKGROUND_D.png">
+      <Name>player01BACKGROUND_D</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02BACKGROUND_A.png">
+      <Name>player02BACKGROUND_A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02BACKGROUND_B.png">
+      <Name>player02BACKGROUND_B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02BACKGROUND_C.png">
+      <Name>player02BACKGROUND_C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player02BACKGROUND_D.png">
+      <Name>player02BACKGROUND_D</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03BACKGROUND_A.png">
+      <Name>player03BACKGROUND_A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03BACKGROUND_B.png">
+      <Name>player03BACKGROUND_B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03BACKGROUND_C.png">
+      <Name>player03BACKGROUND_C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player03BACKGROUND_D.png">
+      <Name>player03BACKGROUND_D</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04BACKGROUND_A.png">
+      <Name>player04BACKGROUND_A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04BACKGROUND_B.png">
+      <Name>player04BACKGROUND_B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04BACKGROUND_C.png">
+      <Name>player04BACKGROUND_C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\Tabs\player04BACKGROUND_D.png">
+      <Name>player04BACKGROUND_D</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PlayerMenu\unit_meter_overlay_01.png">
+      <Name>unit_meter_overlay_01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\unit_meter_overlay_02.png">
+      <Name>unit_meter_overlay_02</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\unit_meter_overlay_03.png">
+      <Name>unit_meter_overlay_03</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PlayerMenu\unit_meter_overlay_04.png">
+      <Name>unit_meter_overlay_04</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

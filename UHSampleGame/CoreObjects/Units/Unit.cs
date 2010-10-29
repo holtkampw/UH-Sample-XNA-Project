@@ -61,6 +61,7 @@ namespace UHSampleGame.CoreObjects.Units
         static Matrix rotationMatrixZ;
         static Matrix scaleRot;
         static  Matrix translation;
+        public int Damage;
         #endregion
 
         public Unit(UnitType unitType)
@@ -74,12 +75,27 @@ namespace UHSampleGame.CoreObjects.Units
             rotationMatrixZ = Matrix.Identity;
             UpdateScaleRotations();
             normVel = new Vector3();
-           //Fucking change this!!
+           
+            //Fucking change this!!
             Position = Vector3.Zero;
+            
             Health = 50;
             ID = currentID;
             currentID++;
             CurrentTileID = 0;
+
+            switch (Type)
+            {
+                case UnitType.SpeedBoat:
+                    Damage = 50;
+                    break;
+                case UnitType.SpeederBoat:
+                    Damage = 100;
+                    break;
+                default:
+                    Damage = 10;
+                    break;
+            }
         }
 
         #region Matrix Setters
@@ -295,7 +311,6 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (Health <= 0)
             {
-                //this.currentTile.RemoveUnit(ref unit);
                 OnDied();
             }
         }

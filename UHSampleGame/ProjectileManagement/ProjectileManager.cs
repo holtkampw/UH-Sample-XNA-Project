@@ -23,6 +23,7 @@ namespace UHSampleGame.ProjectileManagment
         static int projectileCount;
         static int updatedProjectiles;
         static CameraManager cameraManager;
+        static Vector3 vel = new Vector3();
         #endregion
 
         public static void Initialize()
@@ -65,14 +66,14 @@ namespace UHSampleGame.ProjectileManagment
             for (int i = 0; i < MAX_PROJECTILES; i++)
             {
                 if (!projectiles[i].Active)
-                {
-                    projectiles[i].Active = true;
-                    projectiles[i].Position = startPosition;
-                    Vector3 vel = new Vector3(
-                        (endPosition.X - startPosition.X), (endPosition.Y - startPosition.Y), (endPosition.Z - startPosition.Z));
+                {       
+                    vel.X = (endPosition.X - startPosition.X);
+                    vel.Y = (endPosition.Y - startPosition.Y);
+                    vel.Z = (endPosition.Z - startPosition.Z);
                     vel.Normalize();
-                    projectiles[i].velocity = vel; 
+                    projectiles[i].SetPositionAndVelocity(startPosition, vel);
                     projectileCount++;
+                    projectiles[i].Active = true;
                     break;
                 }
             }
