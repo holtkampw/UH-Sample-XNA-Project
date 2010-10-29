@@ -74,8 +74,10 @@ namespace UHSampleGame.Players
         static Vector2[] moneyLocation;
         //Local Location of Status > Health
         static Vector2[] statusHealthLocation;
+        static Vector2[] computerStatusHealthLocation;
         //Local Location of Status > NumberOfUnits
         static Vector2[] statusNumberOfUnitsLocation;
+        static Vector2[] computerStatusNumberOfUnitsLocation;
 
         //Local Location for Icons [playerNum][iconNum]
         static Vector2[][] iconLocations;
@@ -338,7 +340,9 @@ namespace UHSampleGame.Players
                 Vector2 tabOffset = new Vector2(15, 0);
                 moneyLocation = new Vector2[5];
                 statusHealthLocation = new Vector2[5];
+                computerStatusHealthLocation = new Vector2[5];
                 statusNumberOfUnitsLocation = new Vector2[5];
+                computerStatusNumberOfUnitsLocation = new Vector2[5];
                 iconLocations = new Vector2[5][];
                 highlightIconLocations = new Rectangle[5][];
                 Vector2 iconOffset = new Vector2(0, 36);
@@ -411,8 +415,10 @@ namespace UHSampleGame.Players
                     }
 
                     moneyLocation[player] = globalLocations[player] + new Vector2(110, -1);
-                    statusHealthLocation[player] = globalLocations[player] + new Vector2(160, 40);
-                    statusNumberOfUnitsLocation[player] = globalLocations[player] + new Vector2(160, 60);
+                    statusHealthLocation[player] = globalLocations[player] + new Vector2(164, 38);
+                    computerStatusHealthLocation[player] = globalLocations[player] + new Vector2(178, 62);
+                    statusNumberOfUnitsLocation[player] = globalLocations[player] + new Vector2(164, 60);
+                    computerStatusNumberOfUnitsLocation[player] = globalLocations[player] + new Vector2(178, 82);
 
                     iconLocations[player] = new Vector2[4];
                     highlightIconLocations[player] = new Rectangle[4];
@@ -881,12 +887,7 @@ namespace UHSampleGame.Players
             {
                 ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
             }
-            else
-            {
-                ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], globalLocations[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusFont, AIMoneyString, moneyLocation[PlayerNum], Color.White);
-                
-            }
+            
             
 
             //ScreenManager.SpriteBatch.Draw(playerMenuBg, globalLocations[PlayerNum], Color.White);
@@ -941,10 +942,20 @@ namespace UHSampleGame.Players
 
         void DrawStatus()
         {
-            ScreenManager.SpriteBatch.Draw(statusTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
-            ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
-            ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum), 
-                statusNumberOfUnitsLocation[PlayerNum], Color.White);
+            if (Type == PlayerType.Human)
+            {
+                ScreenManager.SpriteBatch.Draw(statusTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
+                    statusNumberOfUnitsLocation[PlayerNum], Color.White);
+            }
+            else
+            {
+                ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], globalLocations[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, computerStatusHealthLocation[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
+                    computerStatusNumberOfUnitsLocation[PlayerNum], Color.White);
+            }
         }
 
         void DrawDefenseTowers()

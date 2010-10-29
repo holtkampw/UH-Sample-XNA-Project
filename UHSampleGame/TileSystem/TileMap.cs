@@ -449,6 +449,55 @@ namespace UHSampleGame.TileSystem
             return neighbors;
         }
 
+
+        public static List<int> GetWalkableNeighborsInts(Tile Tile2)
+        {
+            //REFACTOR with static neighbor list
+            //List<Tile2> neighbors = new List<Tile2>();
+            intNeighbors.Clear();
+            //Tile currentNeighbor;
+
+            //for(int i =0; i< allNeighbors.Count; i++)
+            //    tileNeighbors[i] = Tile2.tileNeighbors[(int)allNeighbors[i]];// GetTileNeighbor(ref Tile2, allNeighbors[i]);
+
+            for (int i = 0; i < allNeighbors.Count; i++)
+            {
+                //currentNeighbor = GetTileNeighbor(ref Tile2, allNeighbors[i]);
+
+                if (Tile2.tileNeighbors[i].IsWalkable())
+                {
+                    if (i == 6)//allNeighbors[i] == NeighborTile.DownLeft)
+                    {
+                        if (Tile2.tileNeighbors[5].IsWalkable() &&
+                            Tile2.tileNeighbors[7].IsWalkable())
+                            intNeighbors.Add(Tile2.tileNeighbors[i].ID);
+                    }
+                    else if (i == 4)//allNeighbors[i] == NeighborTile.DownRight)
+                    {
+                        if (Tile2.tileNeighbors[5].IsWalkable() &&
+                            Tile2.tileNeighbors[3].IsWalkable())
+                            intNeighbors.Add(Tile2.tileNeighbors[i].ID);
+                    }
+                    else if (i == 0)//allNeighbors[i] == NeighborTile.UpLeft)
+                    {
+                        if (Tile2.tileNeighbors[1].IsWalkable() &&
+                            Tile2.tileNeighbors[7].IsWalkable())
+                            intNeighbors.Add(Tile2.tileNeighbors[i].ID);
+                    }
+                    else if (i == 2)//allNeighbors[i] == NeighborTile.UpRight)
+                    {
+                        if (Tile2.tileNeighbors[1].IsWalkable() &&
+                            Tile2.tileNeighbors[3].IsWalkable())
+                            intNeighbors.Add(Tile2.tileNeighbors[i].ID);
+                    }
+                    else
+                        intNeighbors.Add(Tile2.tileNeighbors[i].ID);
+                }
+
+            }
+            return intNeighbors;
+        }
+
         public static void UpdateTilePaths()
         {
             for (int j = 0; j < bases.Count; j++)
