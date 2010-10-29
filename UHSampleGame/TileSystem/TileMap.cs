@@ -519,7 +519,7 @@ namespace UHSampleGame.TileSystem
                     if (i != j)
                     {
                         bases[i].Tile.UpdatePathTo(bases[j].Tile);
-                        if (bases[j].Tile.Paths[bases[i].Tile.ID].Count == 0)
+                        if (bases[j].Tile.PathsInts[bases[i].Tile.ID].Count == 0)
                         {
                             return false;
                         }

@@ -121,12 +121,12 @@ namespace UHSampleGame.PathFinding
             tileInformation[startTile.ID].fScore = tileInformation[startTile.ID].hScore;
         }
 
-        public static void FindPath(ref List<Tile> path)
+        public static void FindPath(ref List<int> path)
         {
             path.Clear();
             if (StartTile.ID == GoalTile.ID)
             {      
-                path.Add(GoalTile);
+                path.Add(GoalTile.ID);
                 return;
             }
 
@@ -184,18 +184,18 @@ namespace UHSampleGame.PathFinding
             return;
         }
 
-        static void ReconstructPath(ref List<Tile> path,/* int curTile */Tile curTile)
+        static void ReconstructPath(ref List<int> path,/* int curTile */Tile curTile)
         {
             if (cameFrom[curTile.ID]!=-1)
             {
                 ReconstructPath(ref path, TileMap.Tiles[cameFrom[curTile.ID]]);
-                path.Add(curTile);
+                path.Add(curTile.ID);
                 //return finalPath;
             }
             else
             {
                 //List<Tile> temp = new List<Tile>();
-                path.Add(curTile);
+                path.Add(curTile.ID);
                 //return temp;
             }
             //if (cameFrom[curTile] != -1)
