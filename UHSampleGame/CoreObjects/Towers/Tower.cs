@@ -102,6 +102,9 @@ namespace UHSampleGame.CoreObjects.Towers
                 case TowerType.Cannon:
                     this.Scale = 2.0f;
                     break;
+                case TowerType.Unit:
+                    this.Scale = 2.0f;
+                    break;
             }
             UpdateScaleRotations();
             UpdateTransforms();
