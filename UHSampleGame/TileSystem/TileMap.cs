@@ -39,6 +39,7 @@ namespace UHSampleGame.TileSystem
         static List<NeighborTile> allNeighbors;
         static List<Tile> neighbors = new List<Tile>();
         static int totalTiles;
+        static List<int> intNeighbors = new List<int>();
 
         // public static event TowerCreated TowerCreated;
 
@@ -106,6 +107,8 @@ namespace UHSampleGame.TileSystem
             allNeighbors.Add(NeighborTile.Down);
             allNeighbors.Add(NeighborTile.DownLeft);
             allNeighbors.Add(NeighborTile.Left);
+
+
 
         }
 
@@ -356,7 +359,7 @@ namespace UHSampleGame.TileSystem
 
         public static List<int> GetWalkableNeighborsAsArray(Tile Tile2)
         {
-            List<int> intNeighbors = new List<int>();
+            intNeighbors.Clear();
             for (int i = 0; i < allNeighbors.Count; i++)
                 tileNeighbors[i] = GetTileNeighbor(ref Tile2, allNeighbors[i]);
 

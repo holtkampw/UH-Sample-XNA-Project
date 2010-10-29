@@ -25,7 +25,7 @@ namespace UHSampleGame.PathFinding
 
         //static List<bool> closed = new List<bool>();
         //static List<Tile> open = new List<Tile>();
-        static List<Tile> cameFrom = new List<Tile>();
+        static List<int> cameFrom = new List<int>();
 
         //static List<float> gScore = new List<float>();
         //static List<float> hScore = new List<float>();
@@ -37,6 +37,7 @@ namespace UHSampleGame.PathFinding
         static float lowestScore;
         static Tile returnTile;
         static Tile currentTile;
+        static int currentTileID;
         //static List<Tile> neighbors;
         //static Tile neighborTile;
 
@@ -88,7 +89,8 @@ namespace UHSampleGame.PathFinding
                     //hScore.Add(100000f);
                     //fScore.Add(100000f);
                     //closed.Add(false);
-                    cameFrom.Add(Tile.NullTile);
+                    cameFrom.Add(-1);
+                    //cameFrom.Add(Tile.NullTile);
                 }
             }
             StartTile = startTile;
@@ -100,7 +102,8 @@ namespace UHSampleGame.PathFinding
 
             for (int i = 0; i < TileMap.TileCount; i++)
             {
-                cameFrom[i] = Tile.NullTile;
+                cameFrom[i] = -1;
+                //cameFrom[i] = Tile.NullTile;
                 //gScore[i] = 100000f;
                 //hScore[i] = 100000f;
                 //fScore[i] = 100000f;
@@ -166,7 +169,8 @@ namespace UHSampleGame.PathFinding
 
                     if (tentaiveIsBetter)
                     {
-                        cameFrom[/*neighborTile.ID*/tileInformation[currentTile].neighbors[i]] = TileMap.Tiles[currentTile];
+                       // cameFrom[/*neighborTile.ID*/tileInformation[currentTile].neighbors[i]] = TileMap.Tiles[currentTile];
+                        cameFrom[tileInformation[currentTile].neighbors[i]] = TileMap.Tiles[currentTile].ID;
                         tileInformation[/*neighborTile.ID*/tileInformation[currentTile].neighbors[i]].gScore = tentativeGScore;
                         tileInformation[/*neighborTile.ID*/tileInformation[currentTile].neighbors[i]].hScore = GetDistanceBetweenTiles(/*neighborTile.ID*/tileInformation[currentTile].neighbors[i], GoalTile.ID);//GetDistanceBetweenTiles(ref neighborTile, ref GoalTile);
                         tileInformation[/*neighborTile.ID*/tileInformation[currentTile].neighbors[i]].fScore = tileInformation[/*neighborTile.ID*/tileInformation[currentTile].neighbors[i]].gScore + tileInformation[/*neighborTile.ID*/tileInformation[currentTile].neighbors[i]].hScore;
@@ -182,9 +186,9 @@ namespace UHSampleGame.PathFinding
 
         static void ReconstructPath(ref List<Tile> path,/* int curTile */Tile curTile)
         {
-            if (!cameFrom[curTile.ID].IsNull())
+            if (cameFrom[curTile.ID]!=-1)
             {
-                ReconstructPath(ref path, cameFrom[curTile.ID]);
+                ReconstructPath(ref path, TileMap.Tiles[cameFrom[curTile.ID]]);
                 path.Add(curTile);
                 //return finalPath;
             }

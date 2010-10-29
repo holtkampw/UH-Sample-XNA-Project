@@ -23,17 +23,14 @@ namespace UHSampleGame.CoreObjects.Units
         static int currentID = 0;
         public int ID;
 
+        int previousTileID;
+        int goalTileID;
+        int focalTileID;
+
         Tile previousTile;
         Tile currentTile;
         Tile goalTile;
         Tile focalTile;
-
-        Tile a1;
-        Tile a2;
-        Tile a3;
-        Tile a4;
-
-
 
         public int CurrentTileID;
 
@@ -114,12 +111,16 @@ namespace UHSampleGame.CoreObjects.Units
 
         public void Deploy(Tile baseTile, Tile goalTile)
         {
+            previousTileID = baseTile.ID;
+            CurrentTileID = baseTile.ID;
+            goalTileID = goalTile.ID;
+            
             this.previousTile = baseTile;
             this.currentTile = baseTile;
             this.goalTile = goalTile;
             this.Position = baseTile.Position;
 
-            SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1]);
+            SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].Paths[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
 
             Status = UnitStatus.Deployed;
 
@@ -151,20 +152,20 @@ namespace UHSampleGame.CoreObjects.Units
             if (CheckIfStuck())
                 return;
 
-            if (!focalTile.IsWalkable())
+            if (!TileMap.Tiles[focalTileID].IsWalkable())
             {
-                SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1]);
+                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].Paths[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
             }
 
             if (currentTile.TileType == TileType.Blocked)
             {
                 if (previousTile.Paths[goalTile.ID].Count > 1)
                 {
-                    SetFocalPointAndVelocity(previousTile.Paths[goalTile.ID][1]);
+                    SetFocalPointAndVelocity(TileMap.Tiles[previousTileID].Paths[goalTile.ID][1]);//previousTile.Paths[goalTile.ID][1]);
                 }
                 else
                 {
-                    List<Tile> goodNieghbors = TileMap.GetWalkableNeighbors(currentTile);
+                    List<Tile> goodNieghbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
                     if (goodNieghbors.Count > 0)
                         SetFocalPointAndVelocity(goodNieghbors[0].Paths[goalTile.ID][1]);
                     else
@@ -175,9 +176,9 @@ namespace UHSampleGame.CoreObjects.Units
                     return;
             }
 
-            if (currentTile != previousTile)
+            if (CurrentTileID != previousTileID)
             {
-                SetFocalPointAndVelocity(currentTile.Paths[goalTile.ID][1]);
+                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].Paths[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
             }
 
             UpdatePositionAndRotation();
@@ -197,26 +198,26 @@ namespace UHSampleGame.CoreObjects.Units
 
         void SetCurrentTile(Tile Tile2)
         {
-            previousTile = currentTile;
-            currentTile = Tile2;
+            previousTileID = CurrentTileID;
+            CurrentTileID = Tile2.ID;
             
             Unit unit = this;
 
-            if (currentTile.ID != previousTile.ID)
+            if (CurrentTileID != previousTileID)
             {
-                previousTile.RemoveUnit(ref unit);
-                if (currentTile.ID == goalTile.ID)
+                TileMap.Tiles[previousTileID].RemoveUnit(ref unit);
+                if (CurrentTileID == goalTileID)
                 {
                     //Register Hit
                     OnDied();
                 }
                 else
                 {
-                    PathLength = currentTile.Paths[goalTile.ID].Count;
-                    currentTile.AddUnit(ref unit);
+                    PathLength = TileMap.Tiles[CurrentTileID].Paths[goalTile.ID].Count;
+                    TileMap.Tiles[CurrentTileID].AddUnit(ref unit);
                     
                 }
-                CurrentTileID = currentTile.ID;
+                //CurrentTileID = currentTile.ID;
             }
         }
 
@@ -227,20 +228,21 @@ namespace UHSampleGame.CoreObjects.Units
 
         bool IsNewTile()
         {
-            return currentTile != previousTile;
+            return CurrentTileID != previousTileID;
         }
 
         bool CheckIfStuck()
         {
-            if (currentTile.Paths[goalTile.ID].Count < 1)
+            if (TileMap.Tiles[CurrentTileID].Paths[goalTile.ID].Count < 1)
             {
+                //FIX MATH.ABS CRAP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 if ((Math.Abs(Position.X - focalPoint.X) < 30 && Math.Abs(Position.Z - focalPoint.Z) < 30)
                     || !TileMap.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
                 {
-                    List<Tile> stuckTiles = TileMap.GetWalkableNeighbors(currentTile);
-                    stuckTiles.Add(currentTile);
+                    List<Tile> stuckTiles = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
+                    stuckTiles.Add(TileMap.Tiles[CurrentTileID]);
 
-                    if (stuckTiles.Count == 1 && !currentTile.IsWalkable())
+                    if (stuckTiles.Count == 1 && !TileMap.Tiles[CurrentTileID].IsWalkable())
                     {
                         throw new NotImplementedException("No walkable neighbors with blocked current Tile2... handle this!");
                     }
@@ -258,8 +260,9 @@ namespace UHSampleGame.CoreObjects.Units
 
         void SetFocalPointAndVelocity(Tile newTile)
         {
-            focalTile = newTile;
-            focalPoint = focalTile.GetRandPoint();
+            focalTileID = newTile.ID;
+           // focalTile = newTile;
+            focalPoint = TileMap.Tiles[focalTileID].GetRandPoint();
 
             velocity = focalPoint - Position;
             //normVel.X = velocity.X;
@@ -291,7 +294,7 @@ namespace UHSampleGame.CoreObjects.Units
         {
             Unit u = this;
 
-            u.currentTile.RemoveUnit(ref u);
+            TileMap.Tiles[u.CurrentTileID].RemoveUnit(ref u);
 
             UnitCollection.Remove(ref u);
 
