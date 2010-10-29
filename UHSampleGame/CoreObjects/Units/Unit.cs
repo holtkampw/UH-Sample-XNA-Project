@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 using UHSampleGame.TileSystem;
 using UHSampleGame.Events;
+using UHSampleGame.Players;
 
 namespace UHSampleGame.CoreObjects.Units
 {
@@ -45,6 +46,7 @@ namespace UHSampleGame.CoreObjects.Units
         public int TeamNum;
         public int PlayerNum;
         public int PathLength;
+        public int PlayerToAttack;
 
         float diffX;
         float diffZ;
@@ -128,12 +130,12 @@ namespace UHSampleGame.CoreObjects.Units
             Status = UnitStatus.Active; 
         }
 
-        public void Deploy(Tile baseTile, Tile goalTile)
+        public void Deploy(Tile baseTile, Tile goalTile, int playerToAttack)
         {
             previousTileID = baseTile.ID;
             CurrentTileID = baseTile.ID;
             goalTileID = goalTile.ID;
-            
+            PlayerToAttack = playerToAttack;
            // this.previousTile = baseTile;
             //this.currentTile = baseTile;
             //this.goalTile = goalTile;
@@ -228,6 +230,7 @@ namespace UHSampleGame.CoreObjects.Units
                 if (CurrentTileID == goalTileID)
                 {
                     //Register Hit
+                    PlayerCollection.AttackPlayer(PlayerToAttack);
                     OnDied();
                 }
                 else

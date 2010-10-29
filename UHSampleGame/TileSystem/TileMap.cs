@@ -612,6 +612,7 @@ namespace UHSampleGame.TileSystem
         public static void RemoveTower(ref Tile Tile2)
         {
             Tile2.RemoveBlockableObject();
+            AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
             UpdateTilePaths();
         }
 
