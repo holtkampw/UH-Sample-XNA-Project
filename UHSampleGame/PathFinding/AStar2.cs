@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace UHSampleGame.PathFinding
 {
+
     public struct TileInformation
     {
         public float gScore;
@@ -50,15 +51,35 @@ namespace UHSampleGame.PathFinding
             closed = new bool[TileMap.TileCount];
 
             tileInformation = new TileInformation[TileMap.TileCount];
-
+            
             for (int i = 0; i < TileMap.TileCount; i++)
             {
-                tileInformation[i].position = TileMap.Tiles[i].Position;
-                tileInformation[i].ID = TileMap.Tiles[i].ID;
-                tileInformation[i].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]);
+                TileInformation tInfo;
+                tInfo.gScore = 0;
+                tInfo.fScore = 0;
+                tInfo.hScore = 0;
+                
+                tInfo.position = TileMap.Tiles[i].Position;
+                tInfo.ID = TileMap.Tiles[i].ID;
+                tInfo.neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]);
+                tileInformation[i] = tInfo;
+                //tileInformation[i].position = TileMap.Tiles[i].Position;
+                //tileInformation[i].ID = TileMap.Tiles[i].ID;
+                //tileInformation[i].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]);
                 
             }
             
+        }
+
+        public static void UpdateWalkableNeighborsForTileID(int id)
+        {
+            int index;
+            for (int i = 0; i < 8; i++)
+            {
+                index = TileMap.Tiles[id].tileNeighbors[i].ID;
+                if(index >=0)
+                    tileInformation[index].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[id].tileNeighbors[i]);
+            }
         }
 
         public static void InitAstar(Tile startTile, Tile goalTile)
@@ -143,7 +164,7 @@ namespace UHSampleGame.PathFinding
                 //closed.Add(currentTile);
 
                 //neighbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[currentTile.ID]);
-                tileInformation[currentTile].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[currentTile]);
+                //tileInformation[currentTile].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[currentTile]);
                 for (int i = 0; i < /*neighbors.Count*/ tileInformation[currentTile].neighbors.Count; i++)
                 {
                     if (closed[/*neighbors[i].ID*/  tileInformation[currentTile].neighbors[i]])
