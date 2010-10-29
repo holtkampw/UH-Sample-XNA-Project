@@ -147,15 +147,15 @@ namespace UHSampleGame.Players
         Texture2D unitMeterBaseTexture;
         Rectangle[] unitMeterBaseLocation;
 
-        Texture2D unitMeterOverlayTexture;
+        Texture2D[] unitMeterOverlayTexture;
         Rectangle unitMeterOverlaySource;
         Rectangle[] unitMeterOverlayDestination;
         float[] unitMeterOverlayBaseY;
 
-        Texture2D unitMeterHighlightTexture;
-        Rectangle unitMeterHightlightSource;
-        int elapsedUnitMeterUpdateTime = 0;
-        int maxUnitMeterUpdateDate = 20;
+        //Texture2D[] unitMeterHighlightTexture;
+        //Rectangle unitMeterHightlightSource;
+        //int elapsedUnitMeterUpdateTime = 0;
+        //int maxUnitMeterUpdateDate = 20;
 
         static PlayerIndex[] playerIndexes = { 0, PlayerIndex.One, PlayerIndex.Two, PlayerIndex.Three, PlayerIndex.Four };
         static char[] mapTeamNumToTeamChar = { ' ', 'A', 'B', 'C', 'D' };
@@ -167,6 +167,7 @@ namespace UHSampleGame.Players
         static Texture2D[][] statusTab;
         static Texture2D[] computerTags;
         static Vector2[] computerTagLocations;
+        static Texture2D[][] backgroundTabs;
       
         #region Properties
        
@@ -397,11 +398,16 @@ namespace UHSampleGame.Players
 
                 unitMeterBaseTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_base");
                 unitMeterBaseLocation = new Rectangle[5];
-                unitMeterOverlayTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_overlay");
-                unitMeterOverlaySource = new Rectangle(0, 0, 30, 200);
+                
+                //unitMeterHighlightTexture = new Texture2D[5];
+                unitMeterOverlayTexture = new Texture2D[5];
+                for (int i = 1; i < 5; i++ )
+                    unitMeterOverlayTexture[i] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_overlay_0" + i);
+
+                unitMeterOverlaySource = new Rectangle(0, 10, 50, 100);
                 unitMeterOverlayDestination = new Rectangle[5];
-                unitMeterHighlightTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_animated");
-                unitMeterHightlightSource = new Rectangle(0, 0, 30, 0);
+                //unitMeterHighlightTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_animated");
+                //unitMeterHightlightSource = new Rectangle(0, 0, 30, 0);
                 unitMeterOverlayBaseY = new float[5];
 
                 for (int player = 1; player < 5; player++)
@@ -470,15 +476,15 @@ namespace UHSampleGame.Players
                     }
 
                     unitMeterOverlayDestination[player] = new Rectangle((int)globalLocations[player].X + 8,
-                        (int)globalLocations[player].Y + 44 + 100,
-                        15,
+                        (int)globalLocations[player].Y + 44 + 110,
+                        50,
                         0);
                     unitMeterOverlayBaseY[player] = unitMeterOverlayDestination[player].Y;
 
                     unitMeterBaseLocation[player] = new Rectangle((int)globalLocations[player].X + 8,
                         (int)globalLocations[player].Y + 44,
-                        15,
-                        100);
+                        50,
+                        120);
 
                 }
 
@@ -491,6 +497,7 @@ namespace UHSampleGame.Players
                 offensiveTab = new Texture2D[5][];
                 statusTab = new Texture2D[5][];
                 powersTab = new Texture2D[5][];
+                backgroundTabs = new Texture2D[5][];
 
                 computerTags = new Texture2D[5];
                 computerTagLocations = new Vector2[5];
@@ -501,6 +508,7 @@ namespace UHSampleGame.Players
                     offensiveTab[player] = new Texture2D[5];
                     statusTab[player] = new Texture2D[5];
                     powersTab[player] = new Texture2D[5];
+                    backgroundTabs[player] = new Texture2D[5];
 
                     computerTags[player] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\computerMode" + mapTeamNumToTeamChar[player]);
                     computerTagLocations[player] = globalLocations[player] + new Vector2(0, 105);
@@ -515,6 +523,8 @@ namespace UHSampleGame.Players
                             ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\player0" + player + "Status" + mapTeamNumToTeamChar[team]);
                         powersTab[player][team] = 
                             ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\player0" + player + "Power" + mapTeamNumToTeamChar[team]);
+                        backgroundTabs[player][team] =
+                            ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Tabs\\player0" + player + "BACKGROUND_" + mapTeamNumToTeamChar[team]);
 
                     }
                 }
@@ -822,14 +832,14 @@ namespace UHSampleGame.Players
                     unitsDeployed++;
                 }
 
-                elapsedUnitMeterUpdateTime += gameTime.ElapsedGameTime.Milliseconds;
-                if (elapsedUnitMeterUpdateTime >= maxUnitMeterUpdateDate)
-                {
-                    elapsedUnitMeterUpdateTime = 0;
-                    unitMeterHightlightSource.Y += 2;
-                    if (unitMeterHightlightSource.Y >= unitMeterHighlightTexture.Height)
-                        unitMeterHightlightSource.Y = 0;
-                }
+                //elapsedUnitMeterUpdateTime += gameTime.ElapsedGameTime.Milliseconds;
+                //if (elapsedUnitMeterUpdateTime >= maxUnitMeterUpdateDate)
+                //{
+                //    elapsedUnitMeterUpdateTime = 0;
+                //    unitMeterHightlightSource.Y += 2;
+                //    if (unitMeterHightlightSource.Y >= unitMeterHighlightTexture.Height)
+                //        unitMeterHightlightSource.Y = 0;
+                //}
             }
             else
             {
@@ -866,22 +876,30 @@ namespace UHSampleGame.Players
         public void DrawMenu(GameTime gameTime)
         {
             ScreenManager.SpriteBatch.Begin();
- 
-            switch (currentlySelectedPlayerStatus)
+
+            if (!unitScreenActivated)
             {
-                case PlayerMenuTabs.Status:
-                    DrawStatus();
-                    break;
-                case PlayerMenuTabs.DefenseTower:
-                    DrawDefenseTowers();
-                    break;
-                case PlayerMenuTabs.UnitTower:
-                    DrawOffenseTowers();
-                    break;
-                case PlayerMenuTabs.Powers:
-                    DrawPowers();
-                    break;
+                switch (currentlySelectedPlayerStatus)
+                {
+                    case PlayerMenuTabs.Status:
+                        DrawStatus();
+                        break;
+                    case PlayerMenuTabs.DefenseTower:
+                        DrawDefenseTowers();
+                        break;
+                    case PlayerMenuTabs.UnitTower:
+                        DrawOffenseTowers();
+                        break;
+                    case PlayerMenuTabs.Powers:
+                        DrawPowers();
+                        break;
+                }
             }
+            else
+            {
+                DrawDeployTab();
+            }
+
 
             if (Type == PlayerType.Human)
             {
@@ -997,6 +1015,7 @@ namespace UHSampleGame.Players
 
         void DrawDeployTab()
         {
+            ScreenManager.SpriteBatch.Draw(backgroundTabs[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
             for (int i = 0; i < MAX_UNIT_TYPES; i++)
             {
                 if (unitInformation[i].icon != null)
@@ -1038,7 +1057,7 @@ namespace UHSampleGame.Players
 
                 //unitMeterHightlightSource.Height = unitMeterOverlayDestination[PlayerNum].Height;
 
-                ScreenManager.SpriteBatch.Draw(unitMeterOverlayTexture, unitMeterOverlayDestination[PlayerNum],
+                ScreenManager.SpriteBatch.Draw(unitMeterOverlayTexture[TeamNum], unitMeterOverlayDestination[PlayerNum],
                     unitMeterOverlaySource, Color.White);
                 //ScreenManager.SpriteBatch.Draw(unitMeterHighlightTexture, unitMeterOverlayDestination[PlayerNum],
                 //    unitMeterHightlightSource, new Color(255, 255, 255, 50));
