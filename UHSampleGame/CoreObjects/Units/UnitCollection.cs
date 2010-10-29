@@ -207,9 +207,10 @@ namespace UHSampleGame.CoreObjects.Units
         private static void DrawUnits(int i, int j)
         {
             drawCount = 0;
+            int uCount = unitsCount[i][j];
             int uMaxIndex = unitsMaxIndex[i][j];
             Unit u;
-            for (int k = 0; k < uMaxIndex && drawCount < uMaxIndex; k++)
+            for (int k = 0; k < MAX_UNITS && drawCount < uCount; k++)
             {
                 u = units[i][j][k];
                 if (u.Status == UnitStatus.Deployed)
