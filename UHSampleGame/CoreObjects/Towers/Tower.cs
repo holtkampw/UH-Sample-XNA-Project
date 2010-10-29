@@ -9,12 +9,13 @@ using UHSampleGame.Events;
 using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.ScreenManagement;
+
 using UHSampleGame.ProjectileManagment;
 
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public enum TowerType { Plasma, Cannon, Electric }
+    public enum TowerType { Plasma, Cannon, Electric, Unit }
     public enum TowerStatus { Inactive, Active }
 
     public class Tower
@@ -34,6 +35,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         int attackStrength = 20;
 
+        public UnitType UnitTypeToBuild = UnitType.SpeedBoat;
         public TowerType Type;
         public TowerStatus Status;
         public int TeamNum;
@@ -51,6 +53,9 @@ namespace UHSampleGame.CoreObjects.Towers
         public int Level;
         public int Cost;
         public int TotalInvestedCost;
+
+        TimeSpan unitBuild = new TimeSpan(0, 0, 1);
+        TimeSpan currentTimeSpan = new TimeSpan();
 
         static int currentID = 0;
         #endregion
@@ -192,7 +197,18 @@ namespace UHSampleGame.CoreObjects.Towers
             float perc = (Health / (float)HealthCapacity);
             return (int)(TotalInvestedCost * perc*.75f);
         }
+
+        private void BuildUnit(GameTime gameTime)
+        {
+            currentTimeSpan = currentTimeSpan.Add(gameTime.ElapsedGameTime);
+            if (currentTimeSpan > unitBuild)
+            {
+                UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
+                currentTimeSpan = TimeSpan.Zero;
+            }
+        }
         #endregion
+
 
         #region Matrix Setters
         public void SetScale(float newScale)
@@ -237,7 +253,12 @@ namespace UHSampleGame.CoreObjects.Towers
         #region Update/Draw
         public void Update(GameTime gameTime)
         {
-            Attack(gameTime);
+            if (Type != TowerType.Unit)
+                Attack(gameTime);
+            else
+            {
+                BuildUnit(gameTime);
+            }
         }
         #endregion
 

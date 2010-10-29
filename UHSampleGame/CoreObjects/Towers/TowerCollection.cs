@@ -108,6 +108,11 @@ namespace UHSampleGame.CoreObjects.Towers
                             instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
                             instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
                             break;
+                        case TowerType.Unit:
+                            instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerC_" + mapTeamNumToColor[p]));//+ mapTeamNumToColor[p]));
+                            instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
+                            instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
+                            break;
                     }
                 }
             }
@@ -144,10 +149,10 @@ namespace UHSampleGame.CoreObjects.Towers
                 tower = towers[playerNum][(int)towerType][i];
                 if (!tower.IsActive())
                 {
-                    DateTime d = DateTime.Now;
+
                     if (TileMap.SetTower(ref tower, ref tile))
                     {
-                        Console.WriteLine(DateTime.Now.Subtract(d).TotalMilliseconds.ToString());
+
                        
                         towers[playerNum][(int)towerType][i].Activate(playerNum, teamNum);
                         towers[playerNum][(int)towerType][i].Type = towerType;

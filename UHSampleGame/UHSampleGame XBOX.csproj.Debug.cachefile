@@ -251,6 +251,12 @@ Content\Objects\Towers\towerC_Orange_0.xnb
 Content\Objects\Towers\towerC_Pink_0.xnb
 Content\Objects\Towers\towerC_Yellow_0.xnb
 Content\OverlayScreens\win_screen.xnb
+Content\Objects\Towers\baseTowerA.xnb
+Content\Objects\Towers\enemyShipPlatformColor_0.xnb
+Content\OverlayScreens\mWinner_TeamA.xnb
+Content\OverlayScreens\mWinner_TeamB.xnb
+Content\OverlayScreens\mWinner_TeamC.xnb
+Content\OverlayScreens\mWinner_TeamD.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv

@@ -135,7 +135,7 @@ namespace UHSampleGame.CoreObjects.Units
             return UnitCounter;
         }
 
-        public static void Add(int playerNum, int teamNum, int attackPlayerNum, UnitType unitType)
+        public static void Build(int playerNum, int teamNum, UnitType unitType)
         {
             Unit u;
             //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
@@ -144,9 +144,8 @@ namespace UHSampleGame.CoreObjects.Units
                 u = units[playerNum][(int)unitType][i];
                 if (!u.IsActive())
                 {
-                    u.Deploy(BaseCollection.GetBaseTileForPlayer(playerNum),
-                        BaseCollection.GetBaseTileForPlayer(attackPlayerNum), attackPlayerNum);
-
+                    u.Activate();
+                   
                     u.PlayerNum = playerNum;
                     u.TeamNum = teamNum;
 
@@ -155,8 +154,36 @@ namespace UHSampleGame.CoreObjects.Units
 
                     unitsCount[playerNum][(int)unitType]++;
 
-                    if (i == unitsMaxIndex[playerNum][(int)unitType] && i <MAX_UNITS-1)
+                    if (i == unitsMaxIndex[playerNum][(int)unitType] && i < MAX_UNITS - 1)
                         unitsMaxIndex[playerNum][(int)unitType]++;
+
+                    break;
+                }
+            }
+        }
+
+        public static void Deploy(int playerNum, int teamNum, int attackPlayerNum, UnitType unitType)
+        {
+            Unit u;
+            //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
+            for (int i = 0; i <= unitsMaxIndex[playerNum][(int)unitType]; i++)
+            {
+                u = units[playerNum][(int)unitType][i];
+                if (u.IsActive())
+                {
+                    u.Deploy(BaseCollection.GetBaseTileForPlayer(playerNum),
+                        BaseCollection.GetBaseTileForPlayer(attackPlayerNum), attackPlayerNum);
+
+                    u.PlayerNum = playerNum;
+                    u.TeamNum = teamNum;
+
+                   // unitCountForPlayer[playerNum]++;
+                    //unitCountForPlayerString[playerNum] = unitCountForPlayer[playerNum].ToString();
+
+                    ///unitsCount[playerNum][(int)unitType]++;
+
+                    //if (i == unitsMaxIndex[playerNum][(int)unitType] && i <MAX_UNITS-1)
+                     //   unitsMaxIndex[playerNum][(int)unitType]++;
 
                     break;
                 }
@@ -183,7 +210,7 @@ namespace UHSampleGame.CoreObjects.Units
                     for (int k = 0; k < MAX_UNITS && updateCount < uCount; k++)
                     {
                         u = units[i][j][k];
-                        if (u.Status != UnitStatus.Inactive)
+                        if (u.Status == UnitStatus.Deployed)
                         {
                             u.Update(gameTime);
                             updateCount++;

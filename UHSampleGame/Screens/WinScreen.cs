@@ -15,6 +15,7 @@ namespace UHSampleGame.Screens
         Texture2D win_screen;
         int teamNum;
         ScreenManager screenManager;
+        char[] mapTeamNumToLetter = { ' ', 'A', 'B', 'C', 'D' };
         #endregion
 
         public WinScreen(int teamNum) :
@@ -26,7 +27,7 @@ namespace UHSampleGame.Screens
 
         public override void LoadContent()
         {
-            win_screen = ScreenManager.Game.Content.Load<Texture2D>("OverlayScreens\\win_screen");
+            win_screen = ScreenManager.Game.Content.Load<Texture2D>("OverlayScreens\\mWinner_Team" + mapTeamNumToLetter[teamNum]);
             screenManager = (ScreenManager)ScreenManager.Game.Services.GetService(typeof(ScreenManager));
         }
 

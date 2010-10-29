@@ -1239,8 +1239,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objects\Towers\baseTowerA.fbx">
+      <Name>baseTowerA</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>InstancedModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="OverlayScreens\win_screen.png">
       <Name>win_screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="OverlayScreens\mWinner_TeamA.png">
+      <Name>mWinner_TeamA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="OverlayScreens\mWinner_TeamB.png">
+      <Name>mWinner_TeamB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="OverlayScreens\mWinner_TeamC.png">
+      <Name>mWinner_TeamC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="OverlayScreens\mWinner_TeamD.png">
+      <Name>mWinner_TeamD</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
