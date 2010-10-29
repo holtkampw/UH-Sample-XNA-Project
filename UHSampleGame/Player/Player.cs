@@ -111,10 +111,11 @@ namespace UHSampleGame.Players
         StaticModel avatar;
         bool avatarMoved = true;
         StaticModel avatarFollowingTile;
+        public bool IsActive = true;
 
         public int Money = 10000;
         public string MoneyString;
-        public int Health;
+        public int Health = 100;
         public string HealthString;
         static string AIMoneyString = "??????";
 
@@ -530,6 +531,18 @@ namespace UHSampleGame.Players
                 }
 
             }
+        }
+
+        public void TakeDamage()
+        {
+            Health--;
+            HealthString = Health.ToString();
+            if (Health <= 0)
+            {
+                //Event if died??
+                PlayerCollection.SetPlayerInactive(PlayerNum);
+            }
+            
         }
 
         public void SetBase(Base playerBase)

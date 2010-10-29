@@ -53,6 +53,11 @@ namespace UHSampleGame.Players
             }
         }
 
+        public static void SetPlayerInactive(int playerNum)
+        {
+            activePlayer[playerNum] = false;
+        }
+
         public static void Draw(GameTime gameTime)
         {
             for (int i = 1; i < Players.Length; i++)
@@ -78,6 +83,11 @@ namespace UHSampleGame.Players
         {
             Players[player.PlayerNum] = player;
             activePlayer[player.PlayerNum] = true;
+        }
+
+        public static void AttackPlayer(int playerNum)
+        {
+            Players[playerNum].TakeDamage();
         }
 
         public static void SetBaseFor(int playerNum, Base playerBase )
