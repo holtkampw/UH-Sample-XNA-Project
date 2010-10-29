@@ -130,7 +130,7 @@ namespace UHSampleGame.TileSystem
             AStar2.InitAstar(this, baseTile);
             List<Tile> tempPath = Paths[baseTile.ID];
             AStar2.FindPath(ref tempPath);//new List<Tile>(AStar2.FindPath());
-             //Paths[baseTile.ID] = tempPath;
+            //Paths[baseTile.ID] = tempPath;
         }
 
         public Vector3 GetRandPoint()

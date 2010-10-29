@@ -11,6 +11,7 @@ using UHSampleGame.CoreObjects.Towers;
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.TileSystem;
 using UHSampleGame.Players;
+using UHSampleGame.PathFinding;
 
 namespace UHSampleGame.LevelManagement
 {
@@ -62,6 +63,7 @@ namespace UHSampleGame.LevelManagement
         {
             this.numTiles = new Vector2(map[0].Count, map.Count);
             TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100, 100));
+            TileMap.InitializeTileMap(new Vector3(200, 0, -500), numTiles, new Vector2(100, 100));
 
             for (int row = 0; row < map.Count; row++)
             {
@@ -112,6 +114,7 @@ namespace UHSampleGame.LevelManagement
                 }
             }
 
+            AStar2.Setup();
             TileMap.UpdateTilePaths();
         }
 

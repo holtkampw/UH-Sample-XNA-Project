@@ -106,6 +106,7 @@ namespace UHSampleGame.TileSystem
             allNeighbors.Add(NeighborTile.Down);
             allNeighbors.Add(NeighborTile.DownLeft);
             allNeighbors.Add(NeighborTile.Left);
+
         }
 
         public static void SetBase(Base setBase, Tile tile)
@@ -351,6 +352,50 @@ namespace UHSampleGame.TileSystem
                     return tiles[i];
             }
             return null;
+        }
+
+        public static List<int> GetWalkableNeighborsAsArray(Tile Tile2)
+        {
+            List<int> intNeighbors = new List<int>();
+            for (int i = 0; i < allNeighbors.Count; i++)
+                tileNeighbors[i] = GetTileNeighbor(ref Tile2, allNeighbors[i]);
+
+            for (int i = 0; i < allNeighbors.Count; i++)
+            {
+                //currentNeighbor = GetTileNeighbor(ref Tile2, allNeighbors[i]);
+
+                if (tileNeighbors[i].IsWalkable())
+                {
+                    if (i == 6)//allNeighbors[i] == NeighborTile.DownLeft)
+                    {
+                        if (tileNeighbors[5].IsWalkable() &&
+                            tileNeighbors[7].IsWalkable())
+                            intNeighbors.Add(tileNeighbors[i].ID);
+                    }
+                    else if (i == 4)//allNeighbors[i] == NeighborTile.DownRight)
+                    {
+                        if (tileNeighbors[5].IsWalkable() &&
+                            tileNeighbors[3].IsWalkable())
+                            intNeighbors.Add(tileNeighbors[i].ID);
+                    }
+                    else if (i == 0)//allNeighbors[i] == NeighborTile.UpLeft)
+                    {
+                        if (tileNeighbors[1].IsWalkable() &&
+                            tileNeighbors[7].IsWalkable())
+                            intNeighbors.Add(tileNeighbors[i].ID);
+                    }
+                    else if (i == 2)//allNeighbors[i] == NeighborTile.UpRight)
+                    {
+                        if (tileNeighbors[1].IsWalkable() &&
+                            tileNeighbors[3].IsWalkable())
+                            intNeighbors.Add(tileNeighbors[i].ID);
+                    }
+                    else
+                        intNeighbors.Add(tileNeighbors[i].ID);
+                }
+
+            }
+            return intNeighbors;
         }
 
         public static List<Tile> GetWalkableNeighbors(Tile Tile2)
