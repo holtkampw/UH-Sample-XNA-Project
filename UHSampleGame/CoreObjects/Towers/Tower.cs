@@ -10,16 +10,12 @@ using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.ScreenManagement;
 
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-
-using UHSampleGame.TileSystem;
 using UHSampleGame.ProjectileManagment;
 
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public enum TowerType { Plasma, Cannon, Electric }
+    public enum TowerType { Plasma, Cannon, Electric, Unit }
     public enum TowerStatus { Inactive, Active }
 
     public class Tower
@@ -39,6 +35,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         int attackStrength = 20;
 
+        public UnitType UnitTypeToBuild = UnitType.SpeedBoat;
         public TowerType Type;
         public TowerStatus Status;
         public int TeamNum;
@@ -199,7 +196,13 @@ namespace UHSampleGame.CoreObjects.Towers
             float perc = (Health / (float)HealthCapacity);
             return (int)(TotalInvestedCost * perc*.75f);
         }
+
+        private void BuildUnit()
+        {
+            UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
+        }
         #endregion
+
 
         #region Matrix Setters
         public void SetScale(float newScale)
@@ -244,7 +247,10 @@ namespace UHSampleGame.CoreObjects.Towers
         #region Update/Draw
         public void Update(GameTime gameTime)
         {
-            Attack(gameTime);
+            if (Type != TowerType.Unit)
+                Attack(gameTime);
+            else
+                BuildUnit();
         }
         #endregion
 

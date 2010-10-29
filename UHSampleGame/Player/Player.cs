@@ -634,6 +634,7 @@ namespace UHSampleGame.Players
 
                 if (input.CheckNewAction(InputAction.TowerBuild, playerIndexes[PlayerNum]))
                 {
+                    
                     Tower tower = TowerCollection.Add(PlayerNum, TeamNum, Money, lastBuiltTower, this.avatarFollowingTile.Position);
                     if(tower != null)
                         Money -= tower.Cost;
@@ -683,6 +684,9 @@ namespace UHSampleGame.Players
                             defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
                         lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
                     }
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                        lastBuiltTower = TowerType.Unit;
+
                     unitScreenActivated = false;
                 }
 
@@ -696,6 +700,10 @@ namespace UHSampleGame.Players
                             defenseTowerSelected = 0;
                         lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
                     }
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                        lastBuiltTower = TowerType.Unit;
+
+
                     unitScreenActivated = false;
                 }
 
@@ -840,7 +848,7 @@ namespace UHSampleGame.Players
                 if (elapsedUnitDeployTime >= maxUnitDeployTime)
                 {
                     elapsedUnitDeployTime = 0;
-                    UnitCollection.Add(PlayerNum, TeamNum, TargetPlayerNum, unitInformation[queuedUnitType].type);
+                    UnitCollection.Deploy(PlayerNum, TeamNum, TargetPlayerNum, unitInformation[queuedUnitType].type);
                     queuedUnits--;
                     unitsDeployed++;
                 }
