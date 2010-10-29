@@ -114,7 +114,7 @@ namespace UHSampleGame.Players
         bool avatarMoved = true;
         StaticModel avatarFollowingTile;
 
-        public int Money = 1000;
+        public int Money = 10000;
         public string MoneyString;
         public int Health;
         public string HealthString;
