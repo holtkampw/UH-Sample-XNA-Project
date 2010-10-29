@@ -51,7 +51,7 @@ namespace UHSampleGame.Screens
 
         #region Initialization
         public PlayScreen(PlayerSetup[] playerSetup)
-            : base("PlayScreen2")
+            : base("PlayScreen")
         {
             this.playerSetup = playerSetup;
         }

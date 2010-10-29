@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using UHSampleGame.TileSystem;
 using UHSampleGame.Events;
 using UHSampleGame.Players;
+using UHSampleGame.ProjectileManagment;
 
 namespace UHSampleGame.CoreObjects.Units
 {
@@ -231,6 +232,7 @@ namespace UHSampleGame.CoreObjects.Units
                 {
                     //Register Hit
                     PlayerCollection.AttackPlayer(PlayerToAttack);
+                    ProjectileManager.AddParticle(unit.Position, unit.Position);
                     OnDied();
                 }
                 else
