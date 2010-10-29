@@ -156,9 +156,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 {
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
                     unitToAttack.TakeDamage(attackStrength);
-                    //DO XP GIVING HERE
-
-                    
+                    //DO XP GIVING HERE                    
                 }
                 currentTimeToAttack = TimeSpan.Zero;
             }
