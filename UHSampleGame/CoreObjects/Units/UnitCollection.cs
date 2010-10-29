@@ -77,7 +77,7 @@ namespace UHSampleGame.CoreObjects.Units
                 units.Add(new List<List<Unit>>());
                 unitsCount.Add(new List<int>());
                 unitsMaxIndex.Add(new List<int>());
-                unitCountForPlayerString.Add("");
+                unitCountForPlayerString.Add("0");
                 unitCountForPlayer.Add(0);
 
                 for (int j = 0; j < unitTypes.Length; j++)

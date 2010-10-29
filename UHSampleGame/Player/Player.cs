@@ -73,12 +73,8 @@ namespace UHSampleGame.Players
         //Local Location of money
         static Vector2[] moneyLocation;
         //Local Location of Status > Health
-        static Vector2[] statusHealthNameLocation;
-        const string HealthName = "Health: ";
         static Vector2[] statusHealthLocation;
         //Local Location of Status > NumberOfUnits
-        static Vector2[] statusNumberOfUnitsNameLocation;
-        const string UnitsName = "Total Units: ";
         static Vector2[] statusNumberOfUnitsLocation;
 
         //Local Location for Icons [playerNum][iconNum]
@@ -341,9 +337,7 @@ namespace UHSampleGame.Players
                 tabLocation = new Vector2[5][];
                 Vector2 tabOffset = new Vector2(15, 0);
                 moneyLocation = new Vector2[5];
-                statusHealthNameLocation = new Vector2[5];
                 statusHealthLocation = new Vector2[5];
-                statusNumberOfUnitsNameLocation = new Vector2[5];
                 statusNumberOfUnitsLocation = new Vector2[5];
                 iconLocations = new Vector2[5][];
                 highlightIconLocations = new Rectangle[5][];
@@ -356,7 +350,7 @@ namespace UHSampleGame.Players
                 defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma360_tower");
                 defenseTowerInfo[0].name = "Plasma Tower";
                 defenseTowerInfo[0].price = "Price: $1000";
-                defenseTowerInfo[0].description = "Shoots quick, but weak blasts\nat the enemy";
+                defenseTowerInfo[0].description = "Shoots quick, but weak\nblasts at the enemy";
                 defenseTowerInfo[0].nameLocation = new Vector2[5];
                 defenseTowerInfo[0].descriptionLocation = new Vector2[5];
                 defenseTowerInfo[0].priceLocation = new Vector2[5];
@@ -364,7 +358,7 @@ namespace UHSampleGame.Players
 
                 defenseTowerInfo[1].name = "Electric Tower";
                 defenseTowerInfo[1].price = "Price: $3000";
-                defenseTowerInfo[1].description = "Attacks enemies in all directions";
+                defenseTowerInfo[1].description = "Attacks enemies in\nall directions";
                 defenseTowerInfo[1].nameLocation = new Vector2[5];
                 defenseTowerInfo[1].descriptionLocation = new Vector2[5];
                 defenseTowerInfo[1].priceLocation = new Vector2[5];
@@ -372,7 +366,7 @@ namespace UHSampleGame.Players
 
                 defenseTowerInfo[2].name = "Plasma360 Tower";
                 defenseTowerInfo[2].price = "Price: $6000";
-                defenseTowerInfo[2].description = "A stronger, quicker version\n of the Plasma tower.  It\n shoots in multiple directions at once.";
+                defenseTowerInfo[2].description = "A plasma tower that\nshoots in multiple\ndirections at once.";
                 defenseTowerInfo[2].nameLocation = new Vector2[5];
                 defenseTowerInfo[2].descriptionLocation = new Vector2[5];
                 defenseTowerInfo[2].type = TowerType.Cannon;
@@ -417,29 +411,34 @@ namespace UHSampleGame.Players
                     }
 
                     moneyLocation[player] = globalLocations[player] + new Vector2(110, -1);
-                    statusHealthNameLocation[player] = globalLocations[player] + new Vector2(10, 40);
-                    statusHealthLocation[player] = globalLocations[player] + new Vector2(120, 40);
-                    statusNumberOfUnitsNameLocation[player] = globalLocations[player] + new Vector2(10, 80);
-                    statusNumberOfUnitsLocation[player] = globalLocations[player] + new Vector2(180, 80);
+                    statusHealthLocation[player] = globalLocations[player] + new Vector2(160, 40);
+                    statusNumberOfUnitsLocation[player] = globalLocations[player] + new Vector2(160, 60);
 
                     iconLocations[player] = new Vector2[4];
                     highlightIconLocations[player] = new Rectangle[4];
-                    Vector2 iconStartPosition = new Vector2(8, 36);
-
+                    Vector2 iconStartPosition = new Vector2(30, 36);
+                    Vector2 iconrowOffset = new Vector2(36, 0);
                     for (int icon = 0; icon < 4; icon++)
                     {
                         iconLocations[player][icon] = globalLocations[player] + iconStartPosition;
                         highlightIconLocations[player][icon] = new Rectangle((int)(iconLocations[player][icon].X - 5.0f + (highlightIcon.Width / 2)),
                             (int)(iconLocations[player][icon].Y - 5.0f + (highlightIcon.Height / 2)),
                             highlightIcon.Width, highlightIcon.Height);
-                        iconStartPosition += iconOffset;
+                        
+                        if (icon % 2 == 1)
+                        {
+                            iconStartPosition += iconrowOffset;
+                            iconStartPosition.Y = iconrowOffset.X;
+                        }
+                        else
+                            iconStartPosition += iconOffset;
                     }
 
                     for (int tower = 0; tower < NUM_DEFENSE_TOWERS; tower++)
                     {
-                        defenseTowerInfo[tower].nameLocation[player] = globalLocations[player] + new Vector2(70.0f, 30);
-                        defenseTowerInfo[tower].priceLocation[player] = globalLocations[player] + new Vector2(70.0f, 64);
-                        defenseTowerInfo[tower].descriptionLocation[player] = globalLocations[player] + new Vector2(70.0f, 94);
+                        defenseTowerInfo[tower].nameLocation[player] = globalLocations[player] + new Vector2(120.0f, 30);
+                        defenseTowerInfo[tower].priceLocation[player] = globalLocations[player] + new Vector2(120.0f, 64);
+                        defenseTowerInfo[tower].descriptionLocation[player] = globalLocations[player] + new Vector2(120.0f, 94);
                     }
 
                     unitIconLocation[player] = new Vector2[MAX_UNIT_TYPES];
@@ -651,6 +650,8 @@ namespace UHSampleGame.Players
                     {
                         if (((int)defenseTowerSelected - 1) >= 0)
                             defenseTowerSelected--;
+                        else
+                            defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
                         lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
                     }
                     unitScreenActivated = false;
@@ -662,6 +663,8 @@ namespace UHSampleGame.Players
                     {
                         if (((int)defenseTowerSelected + 1) < NUM_DEFENSE_TOWERS)
                             defenseTowerSelected++;
+                        else
+                            defenseTowerSelected = 0;
                         lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
                     }
                     unitScreenActivated = false;
@@ -938,38 +941,36 @@ namespace UHSampleGame.Players
         void DrawStatus()
         {
             ScreenManager.SpriteBatch.Draw(statusTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
-            //ScreenManager.SpriteBatch.DrawString(statusFont, HealthName, statusHealthNameLocation[PlayerNum], Color.White);
-            //ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
-            //ScreenManager.SpriteBatch.DrawString(statusFont, UnitsName, statusNumberOfUnitsNameLocation[PlayerNum], Color.White);
-            //ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum), 
-            //    statusNumberOfUnitsLocation[PlayerNum], Color.White);
+            ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
+            ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum), 
+                statusNumberOfUnitsLocation[PlayerNum], Color.White);
         }
 
         void DrawDefenseTowers()
         {
             ScreenManager.SpriteBatch.Draw(defensiveTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
-            //for (int i = 0; i < NUM_DEFENSE_TOWERS; i++)
-            //{
-            //    ScreenManager.SpriteBatch.Draw(defenseIcons[i], iconLocations[PlayerNum][i], Color.White);
-            //    if (i == defenseTowerSelected)
-            //    {
-            //        ScreenManager.SpriteBatch.Draw(highlightIcon,
-            //            highlightIconLocations[PlayerNum][i],
-            //            highlightIconSourceRect, 
-            //            Color.White, 
-            //            highlightRotations[currentHighlightRotation], 
-            //            highlightOrigin,
-            //            SpriteEffects.None, 
-            //            1.0f);
-            //        ScreenManager.SpriteBatch.DrawString(towerTitle, defenseTowerInfo[i].name, 
-            //            defenseTowerInfo[i].nameLocation[PlayerNum], Color.White);
-            //        ScreenManager.SpriteBatch.DrawString(towerPrice, defenseTowerInfo[i].price, 
-            //            defenseTowerInfo[i].priceLocation[PlayerNum], Color.White);
-            //        ScreenManager.SpriteBatch.DrawString(towerDescription, defenseTowerInfo[i].description, 
-            //            defenseTowerInfo[i].descriptionLocation[PlayerNum], Color.White);
-            //    }
-                
-            //}
+            for (int i = 0; i < NUM_DEFENSE_TOWERS; i++)
+            {
+                ScreenManager.SpriteBatch.Draw(defenseIcons[i], iconLocations[PlayerNum][i], Color.White);
+                if (i == defenseTowerSelected)
+                {
+                    ScreenManager.SpriteBatch.Draw(highlightIcon,
+                        highlightIconLocations[PlayerNum][i],
+                        highlightIconSourceRect,
+                        Color.White,
+                        highlightRotations[currentHighlightRotation],
+                        highlightOrigin,
+                        SpriteEffects.None,
+                        1.0f);
+                    ScreenManager.SpriteBatch.DrawString(towerTitle, defenseTowerInfo[i].name,
+                        defenseTowerInfo[i].nameLocation[PlayerNum], Color.White);
+                    ScreenManager.SpriteBatch.DrawString(towerPrice, defenseTowerInfo[i].price,
+                        defenseTowerInfo[i].priceLocation[PlayerNum], Color.White);
+                    ScreenManager.SpriteBatch.DrawString(towerDescription, defenseTowerInfo[i].description,
+                        defenseTowerInfo[i].descriptionLocation[PlayerNum], Color.White);
+                }
+
+            }
         }
 
         void DrawOffenseTowers()
