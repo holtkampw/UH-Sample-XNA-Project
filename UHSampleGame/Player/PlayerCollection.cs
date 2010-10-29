@@ -8,6 +8,7 @@ using UHSampleGame.ScreenManagement;
 using UHSampleGame.LevelManagement;
 using UHSampleGame.CoreObjects.Base;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace UHSampleGame.Players
 {
@@ -57,7 +58,10 @@ namespace UHSampleGame.Players
             for (int i = 1; i < Players.Length; i++)
             {
                 if (activePlayer[i])
+                {
                     Players[i].Draw(gameTime);
+                    ResetRenderStates();
+                }
             }
         }
 
@@ -84,6 +88,14 @@ namespace UHSampleGame.Players
         public static void SetTargetFor(int playerNum, int targetNum)
         {
             Players[playerNum].SetTargetBase(Players[targetNum].PlayerBase);
+        }
+
+        public static void ResetRenderStates()
+        {
+            ScreenManager.GraphicsDeviceManager.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            ScreenManager.GraphicsDeviceManager.GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            ScreenManager.GraphicsDeviceManager.GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
+            ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
         }
 
     }

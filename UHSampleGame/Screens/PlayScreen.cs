@@ -18,6 +18,7 @@ using UHSampleGame.LevelManagement;
 using UHSampleGame.Debug;
 using UHSampleGame;
 using UHSampleGame.ProjectileManagment;
+using UHSampleGame.PathFinding;
 
 using Microsoft.Xna.Framework.Media;
 #endregion
@@ -66,7 +67,7 @@ namespace UHSampleGame.Screens
                 //cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
                 //cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
                 cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
-                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
+                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
             }
             else if (numTiles.X == 20 && numTiles.Y == 10)
             {
@@ -74,7 +75,7 @@ namespace UHSampleGame.Screens
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
             }
 
-            background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
+            background = ScreenManager.Game.Content.Load<Texture2D>("PlayScreen\\oceanWaveBackground");
             playerBackground = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player_bg");
             playerBackgroundColor = new Color(255, 255, 255, 200);
             playerBackgroundLocation = new Vector2(40.0f, 0.0f);
@@ -147,7 +148,7 @@ namespace UHSampleGame.Screens
         public override void Draw(GameTime gameTime)
         {
                 ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-
+                ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
                 //if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
                 //{
                 //    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
