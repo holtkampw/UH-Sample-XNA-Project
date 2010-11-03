@@ -43,7 +43,7 @@ namespace UHSampleGame
             graphics.PreferredBackBufferHeight = 720;
 
             //Set Game to full screen or windowed screen
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
 
             //Should Mouse be visible?
             this.IsMouseVisible = false;

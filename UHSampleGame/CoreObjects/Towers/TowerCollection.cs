@@ -109,7 +109,7 @@ namespace UHSampleGame.CoreObjects.Towers
                             instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
                             break;
                         case TowerType.Unit:
-                            instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\towerC_" + mapTeamNumToColor[p]));//+ mapTeamNumToColor[p]));
+                            instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\baseTowerA"));//+ mapTeamNumToColor[p]));
                             instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
                             instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
                             break;
