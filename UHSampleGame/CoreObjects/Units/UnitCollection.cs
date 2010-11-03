@@ -147,7 +147,7 @@ namespace UHSampleGame.CoreObjects.Units
             for (int i = 0; i <= unitsMaxIndex[playerNum][(int)unitType]; i++)
             {
                 u = units[playerNum][(int)unitType][i];
-                if (!u.IsActive())
+                if (!u.IsActive() && !u.IsDeployed())
                 {
                     u.Activate();
                    
@@ -171,10 +171,10 @@ namespace UHSampleGame.CoreObjects.Units
         {
             Unit u;
             //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
-            for (int i = 0; i <= unitsMaxIndex[playerNum][(int)unitType]; i++)
+            for (int i = 0; i <= MAX_UNITS /* unitsMaxIndex[playerNum][(int)unitType]*/; i++)
             {
                 u = units[playerNum][(int)unitType][i];
-                if (!u.IsActive())
+                if (u.IsActive())
                 {
                     u.Deploy(BaseCollection.GetBaseTileForPlayer(playerNum),
                         BaseCollection.GetBaseTileForPlayer(attackPlayerNum), attackPlayerNum);
@@ -183,13 +183,13 @@ namespace UHSampleGame.CoreObjects.Units
                     u.TeamNum = teamNum;
                     unitDeployedForPlayer[playerNum][(int)unitType]++;
 
-                    //unitCountForPlayer[playerNum]++;
+                   // unitCountForPlayer[playerNum]++;
                     //unitCountForPlayerString[playerNum] = unitCountForPlayer[playerNum].ToString();
 
                   // unitsCount[playerNum][(int)unitType]++;
 
-                   if (i == unitsMaxIndex[playerNum][(int)unitType] && i <MAX_UNITS-1)
-                        unitsMaxIndex[playerNum][(int)unitType]++;
+                   //if (i == unitsMaxIndex[playerNum][(int)unitType] && i <MAX_UNITS-1)
+                   //     unitsMaxIndex[playerNum][(int)unitType]++;
 
                     break;
                 }
@@ -217,7 +217,7 @@ namespace UHSampleGame.CoreObjects.Units
                     for (int k = 0; k < MAX_UNITS && updateCount < uCount; k++)
                     {
                         u = units[i][j][k];
-                        if (u.Status == UnitStatus.Deployed)
+                         if (u.Status == UnitStatus.Deployed)
                         {
                             u.Update(gameTime);
                             updateCount++;

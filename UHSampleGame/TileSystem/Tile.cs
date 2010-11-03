@@ -199,7 +199,7 @@ namespace UHSampleGame.TileSystem
                 {
                     u = UnitCollection.GetUnitByID(unitIndexes[i]);
                     if (u.CurrentTileID == this.ID
-                        && u.IsActive())
+                        && u.IsDeployed())
                         //unitsInTile[unitIndexes[i]])
                     {
                         

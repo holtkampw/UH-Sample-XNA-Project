@@ -802,10 +802,10 @@ namespace UHSampleGame.Players
 
                     if (!queuedDeclineMode || queuedUnitsToDeploy == 0)
                     {
-                        int amountLeft = UnitCollection.MaxUnitsToDeployFor(PlayerNum, unitInformation[selectedUnit].type);
+                        int amountLeft =  UnitCollection.MaxUnitsToDeployFor(PlayerNum, unitInformation[selectedUnit].type);
                         if (queuedUnits + queuedUnitAmount <= amountLeft)
                         {
-                            queuedUnits += queuedUnitAmount;
+                            queuedUnits += 100;// queuedUnitAmount;
 
                             if (queuedUnitsToDeploy != 0 && queuedDeclineMode)
                             {
@@ -875,6 +875,7 @@ namespace UHSampleGame.Players
                 if (elapsedUnitDeployTime >= maxUnitDeployTime)
                 {
                     elapsedUnitDeployTime = 0;
+
                     UnitCollection.Deploy(PlayerNum, TeamNum, TargetPlayerNum, unitInformation[queuedUnitType].type);
                     queuedUnits--;
                     unitsDeployed++;

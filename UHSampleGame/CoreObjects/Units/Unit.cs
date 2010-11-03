@@ -152,7 +152,12 @@ namespace UHSampleGame.CoreObjects.Units
 
         public bool IsActive()
         {
-            return Status != UnitStatus.Inactive;
+            return Status == UnitStatus.Active;
+        }
+
+        public bool IsDeployed()
+        {
+            return Status == UnitStatus.Deployed;
         }
 
         public void Update(GameTime gameTime)

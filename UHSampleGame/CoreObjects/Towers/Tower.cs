@@ -134,10 +134,10 @@ namespace UHSampleGame.CoreObjects.Towers
         public void RegisterAttackUnit(ref Unit unit)
         {
             if ((unitToAttack == null && unit == null) ||
-                (unitToAttack != null && unitToAttack.IsActive() && unit == null))
+                (unitToAttack != null && unitToAttack.IsDeployed() && unit == null))
                 return;
 
-            if (unitToAttack != null && !unitToAttack.IsActive())
+            if (unitToAttack != null && !unitToAttack.IsDeployed())
             {
                 unitToAttack = unit;
                 return;
@@ -206,7 +206,9 @@ namespace UHSampleGame.CoreObjects.Towers
             currentTimeSpan = currentTimeSpan.Add(gameTime.ElapsedGameTime);
             if (currentTimeSpan > unitBuild)
             {
-                UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
+                for(int i=0; i<5; i++)
+                    UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
+
                 currentTimeSpan = TimeSpan.Zero;
             }
         }
