@@ -15,6 +15,7 @@ using UHSampleGame.InputManagement;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.Events;
+using UHSampleGame.ProjectileManagment;
 
 namespace UHSampleGame.Players
 {
@@ -112,6 +113,7 @@ namespace UHSampleGame.Players
         bool avatarMoved = true;
         StaticModel avatarFollowingTile;
         public bool IsActive = true;
+        public bool IsDead = false;
 
         public int Money = 10000;
         public string MoneyString;
@@ -545,7 +547,10 @@ namespace UHSampleGame.Players
             if (Health <= 0)
             {
                 //Event if died??
-                PlayerCollection.SetPlayerInactive(PlayerNum);
+                UnitCollection.SetAllUnitsImmovable(PlayerNum);
+                TowerCollection.SetAllNoShoot(PlayerNum);
+                IsDead = true;
+                
             }
             
         }
@@ -843,6 +848,20 @@ namespace UHSampleGame.Players
         {
             PlayerBase.Update(gameTime);
 
+            if (IsDead)
+            {
+                if (UnitCollection.Destroy(PlayerNum) && TowerCollection.Destroy(PlayerNum))
+                {
+                    PlayerBase.Destroy();
+                    Vector3 nv = new Vector3();
+                    nv.X = avatar.Position.X;
+                    nv.Y = avatar.Position.Y + 5;
+                    nv.Z = avatar.Position.Z;
+                    ProjectileManager.AddParticle(avatar.Position, nv);
+                    PlayerCollection.SetPlayerInactive(PlayerNum);
+                }
+            }
+
             //HumanPlayer
             if (Type == PlayerType.Human)
             {
@@ -954,54 +973,6 @@ namespace UHSampleGame.Players
             {
                 ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
             }
-            
-            
-
-            //ScreenManager.SpriteBatch.Draw(playerMenuBg, globalLocations[PlayerNum], Color.White);
-            
-            //if (Type == PlayerType.Human)
-            //{
-            //    ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
-
-            //    if (!unitScreenActivated)
-            //    {
-            //        for (int i = 0; i < NUM_TABS; i++)
-            //        {
-            //            if ((int)currentlySelectedPlayerStatus == i)
-            //            {
-            //                ScreenManager.SpriteBatch.Draw(menuTab, tabLocation[PlayerNum][i],
-            //                    menuTabSource[SELECTED], Color.White);
-            //            }
-            //            else
-            //            {
-            //                ScreenManager.SpriteBatch.Draw(menuTab, tabLocation[PlayerNum][i],
-            //                    menuTabSource[NORMAL], Color.White);
-            //            }
-            //        }
-
-            //        switch (currentlySelectedPlayerStatus)
-            //        {
-            //            case PlayerMenuTabs.Status:
-            //                DrawStatus();
-            //                break;
-            //            case PlayerMenuTabs.DefenseTower:
-            //                DrawDefenseTowers();
-            //                break;
-            //            case PlayerMenuTabs.UnitTower:
-            //                break;
-            //            case PlayerMenuTabs.Powers:
-            //                break;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        DrawDeployTab();
-            //    }
-            //}
-            //else
-            //{
-            //    ScreenManager.SpriteBatch.DrawString(statusFont, AIMoneyString, moneyLocation[PlayerNum], Color.White);
-            //}
 
             ScreenManager.SpriteBatch.End();
 

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.TileSystem;
+using UHSampleGame.ProjectileManagment;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
@@ -133,6 +134,50 @@ namespace UHSampleGame.CoreObjects.Towers
         #endregion
 
         #region Manipulation
+        public static void SetAllNoShoot(int playerNum)
+        {
+            for (int j = 0; j < towerTypes.Length; j++)
+            {
+                for (int i = 0; i < MAX_TOWERS; i++)
+                {
+
+                    if (towers[playerNum][j][i].IsActive())
+                    {
+                        towers[playerNum][j][i].Status = TowerStatus.ActiveNoShoot;
+                    }
+                }
+            }
+        }
+
+        public static bool Destroy(int playerNum)
+        {
+            Tower t;
+            Vector3 nv = new Vector3();
+            int count = 0;
+            int maxCount = 3;
+            for (int j = 0; j < towerTypes.Length; j++)
+            {
+                for (int i = 0; i < MAX_TOWERS; i++)
+                {
+
+                    t = towers[playerNum][j][i];
+                    if (t.IsActive() || t.Status == TowerStatus.ActiveNoShoot)
+                    {
+                        t.Status = TowerStatus.Inactive;
+                        nv.X = t.Position.X;
+                        nv.Y = t.Position.Y + 5;
+                        nv.Z = t.Position.Z;
+                        ProjectileManager.AddParticle(t.Position, nv);
+                        count++;
+                        if (count >= maxCount)
+                            return false;
+                    }
+                }
+               
+            }
+            return true;
+        }
+
         public static Tower Add(int playerNum, int teamNum, int money, TowerType towerType, Vector3 position)
         {
             //////////////////////REFACTOR FOR EFFICIENCY
@@ -153,7 +198,7 @@ namespace UHSampleGame.CoreObjects.Towers
                     if (TileMap.SetTower(ref tower, ref tile))
                     {
 
-                       
+
                         towers[playerNum][(int)towerType][i].Activate(playerNum, teamNum);
                         towers[playerNum][(int)towerType][i].Type = towerType;
                         towers[playerNum][(int)towerType][i].Setup(position);
@@ -172,7 +217,7 @@ namespace UHSampleGame.CoreObjects.Towers
             int moneyBack = 0;
 
             if (tile.Tower == null)
-                return 0 ;
+                return 0;
 
             if (tile.Tower.TeamNum == teamNum)
             {
@@ -259,7 +304,7 @@ namespace UHSampleGame.CoreObjects.Towers
             drawCount = 0;
             for (int k = 0; k < MAX_TOWERS && drawCount < towerCount[i][j]; k++)
             {
-                if (towers[i][j][k].IsActive())
+                if (towers[i][j][k].IsActive() || towers[i][j][k].Status == TowerStatus.ActiveNoShoot)
                 {
                     towerTransforms[drawCount] = towers[i][j][k].Transforms;
                     drawCount++;

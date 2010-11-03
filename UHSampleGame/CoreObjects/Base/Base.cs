@@ -10,6 +10,7 @@ using UHSampleGame.TileSystem;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.Events;
 using UHSampleGame.CameraManagement;
+using UHSampleGame.ProjectileManagment;
 
 namespace UHSampleGame.CoreObjects.Base
 {
@@ -223,5 +224,14 @@ namespace UHSampleGame.CoreObjects.Base
         }
         #endregion
 
+
+        internal void Destroy()
+        {
+            Vector3 nv = new Vector3();
+            nv.X = Position.X;
+            nv.Y = Position.Y+5;
+            nv.Z = Position.Z;
+            ProjectileManager.AddParticle(Position, Position);
+        }
     }
 }

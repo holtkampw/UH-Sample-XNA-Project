@@ -16,7 +16,7 @@ using UHSampleGame.ProjectileManagment;
 namespace UHSampleGame.CoreObjects.Towers
 {
     public enum TowerType { Plasma, Cannon, Electric, Unit }
-    public enum TowerStatus { Inactive, Active }
+    public enum TowerStatus { Inactive, Active, ActiveNoShoot }
 
     public class Tower
     {

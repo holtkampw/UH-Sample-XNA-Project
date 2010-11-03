@@ -14,7 +14,7 @@ using UHSampleGame.ProjectileManagment;
 namespace UHSampleGame.CoreObjects.Units
 {
     public enum UnitType { SpeedBoat, SpeederBoat };
-    public enum UnitStatus { Active, Deployed, Inactive };
+    public enum UnitStatus { Active, Deployed, Inactive, Immovable };
 
     public class Unit
     {

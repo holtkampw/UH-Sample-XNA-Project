@@ -69,6 +69,7 @@ namespace UHSampleGame.Players
         public static void SetPlayerInactive(int playerNum)
         {
             activePlayer[playerNum] = false;
+
             CheckGameWin();
         }
 

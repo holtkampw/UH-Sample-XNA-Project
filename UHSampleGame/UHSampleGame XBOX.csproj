@@ -76,6 +76,8 @@
     <Compile Include="CoreObjects\StaticTileObject.cs" />
     <Compile Include="CoreObjects\TeamableAnimatedObject.cs" />
     <Compile Include="CoreObjects\TeamableStaticObject.cs" />
+    <Compile Include="CoreObjects\Terrain Objects\TerrainObject.cs" />
+    <Compile Include="CoreObjects\Terrain Objects\TerrainObjectCollection.cs" />
     <Compile Include="CoreObjects\Towers\Tower.cs">
       <SubType>Code</SubType>
     </Compile>
