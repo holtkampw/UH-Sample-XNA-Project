@@ -10,6 +10,7 @@ using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.TileSystem;
 using UHSampleGame.ProjectileManagment;
+using UHSampleGame.Players;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
@@ -54,6 +55,13 @@ namespace UHSampleGame.CoreObjects.Towers
 
         static int updateCount;
         static int drawCount;
+
+        static Texture2D hudBackground;
+        static Rectangle hudBackgroundLocation = new Rectangle(0, 0, 40, 20);
+        static Rectangle hudBackgroundSourceLocation = new Rectangle(0, 0, 1280, 394);
+        static Vector2 hudBackgroundOffsetFromTower = new Vector2(-20, 8);
+        static Color hudColor = new Color(255, 255, 255, 255);
+        static Vector3 hudTempLocation;
         #endregion
 
         #region Initialize
@@ -118,6 +126,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 }
             }
 
+            hudBackground = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus");
 
         }
 
@@ -297,6 +306,42 @@ namespace UHSampleGame.CoreObjects.Towers
                 }
             }
 
+            for (int p = 1; p <= PlayerCollection.NumPlayers; p++)
+            {
+                if (PlayerCollection.ShowHUDFor(p))
+                {
+                    ScreenManager.SpriteBatch.Begin();
+                    for (int j = 0; j < towerTypes.Length; j++)
+                    {
+                        drawCount = 0;
+                        for (int k = 0; k < MAX_TOWERS && updateCount < towerCount[p][j]; k++)
+                            if (towers[p][j][k].IsActive())
+                            {
+                                hudTempLocation = ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Project(
+                                         towers[p][j][k].Position,
+                                         cameraManager.ProjectionMatrix,
+                                         cameraManager.ViewMatrix,
+                                         Matrix.Identity
+                                );
+                                hudBackgroundLocation.X = (int)(hudTempLocation.X + hudBackgroundOffsetFromTower.X);
+                                hudBackgroundLocation.Y = (int)(hudTempLocation.Y + hudBackgroundOffsetFromTower.Y);
+
+                                //draw background
+                                ScreenManager.SpriteBatch.Draw(hudBackground,
+                                    hudBackgroundLocation, hudBackgroundSourceLocation, hudColor);
+
+                                //draw health bar
+
+                                //draw upgrade bar
+
+                                drawCount++;
+                            }
+                    }
+
+                    ScreenManager.SpriteBatch.End();
+                }
+            }
+
         }
 
         private static void DrawTowers(int i, int j)
@@ -312,6 +357,8 @@ namespace UHSampleGame.CoreObjects.Towers
             }
 
             DrawInstancedTowers(i, j, drawCount);
+
+            
 
         }
 

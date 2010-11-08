@@ -158,6 +158,9 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.JoinGame, Keys.A);
             inputManager.AddInput(InputAction.TeamUp, Keys.Up);
             inputManager.AddInput(InputAction.TeamDown, Keys.Down);
+
+            inputManager.AddInput(InputAction.HUD, Buttons.LeftStick);
+            inputManager.AddInput(InputAction.HUD, Keys.H);
             
             
             //Setup Screen Manager

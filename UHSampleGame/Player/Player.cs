@@ -156,11 +156,6 @@ namespace UHSampleGame.Players
         float[] unitMeterOverlayBaseY;
         float[] unitMeterOverlayMaxHeight;
 
-        //Texture2D[] unitMeterHighlightTexture;
-        //Rectangle unitMeterHightlightSource;
-        //int elapsedUnitMeterUpdateTime = 0;
-        //int maxUnitMeterUpdateDate = 20;
-
         static PlayerIndex[] playerIndexes = { 0, PlayerIndex.One, PlayerIndex.Two, PlayerIndex.Three, PlayerIndex.Four };
         static char[] mapTeamNumToTeamChar = { ' ', 'A', 'B', 'C', 'D' };
 
@@ -172,7 +167,8 @@ namespace UHSampleGame.Players
         static Texture2D[] computerTags;
         static Vector2[] computerTagLocations;
         static Texture2D[][] backgroundTabs;
-      
+
+        public bool isHUDDisplayed = false;
         #region Properties
        
         #endregion
@@ -838,6 +834,16 @@ namespace UHSampleGame.Players
                         queuedUnitsToDeploy = totalUnits - unitsDeployed;
                         percentOfUnitsQueued = 0;
                     }
+                }
+
+                if (input.CheckNewAction(InputAction.HUD, playerIndexes[PlayerNum]))
+                {
+                    isHUDDisplayed = true;
+                }
+                
+                if(input.CheckNewReleaseAction(InputAction.HUD, playerIndexes[PlayerNum]))
+                {
+                    isHUDDisplayed = false;
                 }
 
 

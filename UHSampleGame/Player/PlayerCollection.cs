@@ -31,6 +31,16 @@ namespace UHSampleGame.Players
         static ScreenManager screenManager;
         static int winTeam;
         #endregion
+
+        public static int NumPlayers
+        {
+            get
+            {
+                return Players.Length - 1;
+            }
+        }
+
+
         public static void Initialize()
         {
             
@@ -156,6 +166,11 @@ namespace UHSampleGame.Players
             ScreenManager.GraphicsDeviceManager.GraphicsDevice.BlendState = BlendState.AlphaBlend;
             ScreenManager.GraphicsDeviceManager.GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             ScreenManager.GraphicsDeviceManager.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
+        }
+
+        public static bool ShowHUDFor(int playerNum)
+        {
+            return Players[playerNum].isHUDDisplayed;
         }
 
     }

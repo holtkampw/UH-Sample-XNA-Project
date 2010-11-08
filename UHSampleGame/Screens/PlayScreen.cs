@@ -166,6 +166,7 @@ namespace UHSampleGame.Screens
                 
                 UnitCollection.Draw(gameTime);
                 TowerCollection.Draw(gameTime);
+                ResetRenderStates();
                 PlayerCollection.Draw(gameTime);
                 ProjectileManager.Draw(gameTime);
 //                p1.Draw(gameTime);
