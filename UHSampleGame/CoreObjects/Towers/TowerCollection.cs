@@ -62,6 +62,22 @@ namespace UHSampleGame.CoreObjects.Towers
         static Vector2 hudBackgroundOffsetFromTower = new Vector2(-20, 8);
         static Color hudColor = new Color(255, 255, 255, 255);
         static Vector3 hudTempLocation;
+
+        static Vector2 levelLocation = Vector2.Zero;
+        static Vector2 levelOffset = new Vector2(1, 1);
+        static SpriteFont levelFont;
+
+        static Texture2D hudHealthBar;
+        static Rectangle hudHealthSource = new Rectangle(0, 0, 904, 136);
+        static Rectangle hudHealthDestination = new Rectangle(0, 0, 34, 10);
+        static Rectangle hudHealthMaxDestination = new Rectangle(0, 0, 34, 10);
+        static Vector2 hudHealthOffset = new Vector2(6, 0);
+
+        static Texture2D hudUpgradeBar;
+        static Rectangle hudUpgradeSource = new Rectangle(0, 0, 904, 136);
+        static Rectangle hudUpgradeDestination = new Rectangle(0, 0, 34, 10);
+        static Rectangle hudUpgradeMaxDestination = new Rectangle(0, 0, 34, 10);
+        static Vector2 hudUpgradeOffset = new Vector2(6, 10);
         #endregion
 
         #region Initialize
@@ -127,7 +143,9 @@ namespace UHSampleGame.CoreObjects.Towers
             }
 
             hudBackground = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus");
-
+            levelFont = ScreenManager.Game.Content.Load<SpriteFont>("HUD\\levelFont");
+            hudHealthBar = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus_Health");
+            hudUpgradeBar = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus_Growth");
         }
 
         public static int AllTowerCount()
@@ -326,13 +344,29 @@ namespace UHSampleGame.CoreObjects.Towers
                                 hudBackgroundLocation.X = (int)(hudTempLocation.X + hudBackgroundOffsetFromTower.X);
                                 hudBackgroundLocation.Y = (int)(hudTempLocation.Y + hudBackgroundOffsetFromTower.Y);
 
+                                levelLocation.X = hudBackgroundLocation.X;
+                                levelLocation.Y = hudBackgroundLocation.Y;
+                                levelLocation += levelOffset;
+
                                 //draw background
                                 ScreenManager.SpriteBatch.Draw(hudBackground,
                                     hudBackgroundLocation, hudBackgroundSourceLocation, hudColor);
 
+                                //draw level num
+                                ScreenManager.SpriteBatch.DrawString(levelFont, towers[p][j][k].LevelString,
+                                    levelLocation, hudColor);
+
                                 //draw health bar
+                                hudHealthDestination.X = (int)(hudBackgroundLocation.X + hudHealthOffset.X);
+                                hudHealthDestination.Y = (int)(hudBackgroundLocation.Y + hudHealthOffset.Y);
+                                ScreenManager.SpriteBatch.Draw(hudHealthBar,
+                                    hudHealthDestination, hudHealthSource, hudColor);
 
                                 //draw upgrade bar
+                                hudUpgradeDestination.X = (int)(hudBackgroundLocation.X + hudUpgradeOffset.X);
+                                hudUpgradeDestination.Y = (int)(hudBackgroundLocation.Y + hudUpgradeOffset.Y);
+                                ScreenManager.SpriteBatch.Draw(hudUpgradeBar,
+                                    hudUpgradeDestination, hudUpgradeSource, hudColor);
 
                                 drawCount++;
                             }

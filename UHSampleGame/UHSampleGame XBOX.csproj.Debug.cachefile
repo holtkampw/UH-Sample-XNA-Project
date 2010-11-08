@@ -262,6 +262,7 @@ Content\Objects\Terrain Objects\bouy_Red_0.xnb
 Content\HUD\towerStatus.xnb
 Content\HUD\towerStatus_Growth.xnb
 Content\HUD\towerStatus_Health.xnb
+Content\HUD\levelFont.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv

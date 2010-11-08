@@ -860,10 +860,13 @@ namespace UHSampleGame.Players
                 {
                     PlayerBase.Destroy();
                     Vector3 nv = new Vector3();
-                    nv.X = avatar.Position.X;
-                    nv.Y = avatar.Position.Y + 5;
-                    nv.Z = avatar.Position.Z;
-                    ProjectileManager.AddParticle(avatar.Position, nv);
+                    if (this.Type != PlayerType.AI)
+                    {
+                        nv.X = avatar.Position.X;
+                        nv.Y = avatar.Position.Y + 5;
+                        nv.Z = avatar.Position.Z;
+                        ProjectileManager.AddParticle(avatar.Position, nv);
+                    }
                     PlayerCollection.SetPlayerInactive(PlayerNum);
                 }
             }
