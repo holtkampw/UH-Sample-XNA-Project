@@ -190,7 +190,7 @@ namespace UHSampleGame.CoreObjects.Towers
             }
         }
 
-        public static bool Destroy(int playerNum)
+        public static bool DestroyAll(int playerNum)
         {
             Tower t;
             Vector3 nv = new Vector3();
@@ -209,6 +209,11 @@ namespace UHSampleGame.CoreObjects.Towers
                         nv.Y = t.Position.Y + 5;
                         nv.Z = t.Position.Z;
                         ProjectileManager.AddParticle(t.Position, nv);
+                        for (int n = 0; n < t.tile.tileNeighbors.Count; n++)
+                        {
+                            t.tile.tileNeighbors[n].UnregisterTowerListenerForTower(ref t);
+                            t.tile.tileNeighbors[n].UnregisterTowerListenerForUnit(ref t);
+                        }
                         count++;
                         if (count >= maxCount)
                             return false;
@@ -252,6 +257,18 @@ namespace UHSampleGame.CoreObjects.Towers
             return null;
         }
 
+        public static void Destroy(ref Tower tower)
+        {
+            tower.Status = TowerStatus.Inactive;
+            tower.tile.RemoveBlockableObject();
+            for (int i = 0; i < tower.tile.tileNeighbors.Count; i++)
+            {
+                tower.tile.tileNeighbors[i].UnregisterTowerListenerForTower(ref tower);
+                tower.tile.tileNeighbors[i].UnregisterTowerListenerForUnit(ref tower);
+            }
+            
+        }
+
         public static int Remove(int teamNum, ref Vector3 position)
         {
             Tile tile = TileMap.GetTileFromPos(position);
@@ -271,6 +288,10 @@ namespace UHSampleGame.CoreObjects.Towers
                 //        towers[playerNum][(int)tile.Tower.Type][i].Status = TowerStatus.Inactive;
                 //}
                 moneyBack = tile.Tower.DestroyCost();
+                for (int i = 0; i < tile.tileNeighbors.Count; i++)
+                {
+                    tile.tileNeighbors[i].UnregisterTowerListenerForTower(ref tile.Tower);
+                }
                 TileMap.RemoveTower(ref tile);
             }
             return moneyBack;
