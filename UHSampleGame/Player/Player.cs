@@ -931,7 +931,7 @@ namespace UHSampleGame.Players
 
             if (IsDead)
             {
-                if (UnitCollection.Destroy(PlayerNum) && TowerCollection.Destroy(PlayerNum))
+                if (UnitCollection.Destroy(PlayerNum) && TowerCollection.DestroyAll(PlayerNum))
                 {
                     PlayerBase.Destroy();
                     Vector3 nv = new Vector3();
