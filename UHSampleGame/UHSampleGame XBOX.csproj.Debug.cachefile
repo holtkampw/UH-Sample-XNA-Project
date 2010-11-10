@@ -177,7 +177,6 @@ Content\Objects\Units\speederBoat02_PINK.xnb
 Content\Objects\Units\speederBoat02_RED.xnb
 Content\Objects\Units\speederBoat02_YELLOW.xnb
 Content\Objects\Copter\playerShip01.xnb
-Content\Objects\Copter\squarePlacer_red.xnb
 Content\Objects\Copter\player01Ship01.xnb
 Content\Objects\Copter\player02Ship01.xnb
 Content\Objects\Copter\player03Ship01.xnb
@@ -231,7 +230,6 @@ Content\Objects\images\boatSpeeder02_Pink_0.xnb
 Content\Objects\images\boatSpeeder02_Red_0.xnb
 Content\Objects\images\boatSpeeder02_Yellow_0.xnb
 Content\Objects\Copter\playerShip01Color_0.xnb
-Content\Objects\Copter\placeSquare_Color_0.xnb
 Content\Objects\Copter\playerShip01RED_0.xnb
 Content\Objects\Copter\playerShip01BLUE_0.xnb
 Content\Objects\Copter\playerShip01PURPLE_0.xnb
@@ -277,6 +275,14 @@ Content\Objects\Towers\mainBase01Color_0.xnb
 Content\Objects\Towers\baseTowerB.xnb
 Content\PlayerMenu\Icons\speedBoat.xnb
 Content\PlayerMenu\Icons\speederBoat.xnb
+Content\Objects\Copter\Boxes\box_02.xnb
+Content\Objects\Copter\Boxes\box_03.xnb
+Content\Objects\Copter\Boxes\box_04.xnb
+Content\Objects\Copter\Boxes\box_01.xnb
+Content\Objects\Copter\Boxes\boxBlue_0.xnb
+Content\Objects\Copter\Boxes\boxGreen_0.xnb
+Content\Objects\Copter\Boxes\boxPurple_0.xnb
+Content\Objects\Copter\Boxes\boxRed_0.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv

@@ -512,13 +512,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Objects\Copter\squarePlacer_red.fbx">
-      <Name>squarePlacer_red</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="PlayerMenu\Icons\plasma360_tower.png">
       <Name>plasma360_tower</Name>
       <Importer>TextureImporter</Importer>
@@ -1380,6 +1373,28 @@
       <Name>speederBoat</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Objects\Copter\Boxes\box_02.fbx">
+      <Name>box_02</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Copter\Boxes\box_03.fbx">
+      <Name>box_03</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Copter\Boxes\box_04.fbx">
+      <Name>box_04</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Objects\Copter\Boxes\box_01.fbx">
+      <Name>box_01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

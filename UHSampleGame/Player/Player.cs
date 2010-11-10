@@ -548,8 +548,11 @@ namespace UHSampleGame.Players
             avatar.Scale = 6.0f;
 
             avatarMoved = false;
-            avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
+            avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\Boxes\\box_0" + PlayerNum), 
+                    TileMap.GetTilePosFromPos(avatar.Position));
+            avatarFollowingTile.glow = true;
             avatarFollowingTile.Scale = 4.0f;
+            
         }
 
         public void HandleInput(InputManager input)
@@ -848,8 +851,8 @@ namespace UHSampleGame.Players
                 {
                     avatarMoved = false;
                     avatarFollowingTile.Position = TileMap.GetTilePosFromPos(avatar.Position);
-                    avatarFollowingTile.Update(gameTime);
                 }
+                avatarFollowingTile.Update(gameTime);
             }
 
             elapsedHighlightUpdateTime += gameTime.ElapsedGameTime.Milliseconds;
