@@ -133,8 +133,13 @@ namespace UHSampleGame.CoreObjects.Towers
                             instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
                             instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
                             break;
-                        case TowerType.Unit:
+                        case TowerType.SmallUnit:
                             instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\baseTowerA"));//+ mapTeamNumToColor[p]));
+                            instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
+                            instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
+                            break;
+                        case TowerType.LargeUnit:
+                            instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\baseTowerB"));//+ mapTeamNumToColor[p]));
                             instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
                             instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
                             break;

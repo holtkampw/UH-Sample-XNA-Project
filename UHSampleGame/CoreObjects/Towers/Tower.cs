@@ -15,7 +15,7 @@ using UHSampleGame.ProjectileManagment;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public enum TowerType { Plasma, Cannon, Electric, Unit }
+    public enum TowerType { Plasma, Cannon, Electric, SmallUnit, LargeUnit }
     public enum TowerStatus { Inactive, Active, ActiveNoShoot }
 
     public class Tower
@@ -55,6 +55,8 @@ namespace UHSampleGame.CoreObjects.Towers
         public string LevelString = "1";
         public int Cost;
         public int TotalInvestedCost;
+
+        int unitCreationAmount;
 
         TimeSpan unitBuild = new TimeSpan(0, 0, 1);
         TimeSpan currentTimeSpan = new TimeSpan();
@@ -106,7 +108,10 @@ namespace UHSampleGame.CoreObjects.Towers
                 case TowerType.Cannon:
                     this.Scale = 2.0f;
                     break;
-                case TowerType.Unit:
+                case TowerType.SmallUnit:
+                    this.Scale = 2.0f;
+                    break;
+                case TowerType.LargeUnit:
                     this.Scale = 2.0f;
                     break;
             }
@@ -231,7 +236,11 @@ namespace UHSampleGame.CoreObjects.Towers
             currentTimeSpan = currentTimeSpan.Add(gameTime.ElapsedGameTime);
             if (currentTimeSpan > unitBuild)
             {
-                for(int i=0; i<5; i++)
+                if (Type == TowerType.SmallUnit)
+                    unitCreationAmount = 2;
+                else
+                    unitCreationAmount = 4;
+                for (int i = 0; i < unitCreationAmount; i++)
                     UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
 
                 currentTimeSpan = TimeSpan.Zero;
@@ -282,7 +291,7 @@ namespace UHSampleGame.CoreObjects.Towers
         #region Update/Draw
         public void Update(GameTime gameTime)
         {
-            if (Type != TowerType.Unit)
+            if (Type != TowerType.SmallUnit && Type != TowerType.LargeUnit)
                 Attack(gameTime);
             else
             {
