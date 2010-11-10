@@ -184,7 +184,8 @@ namespace UHSampleGame.Players
                 {
                     for (int j = 1; j <= NumPlayers; j++)
                     {
-                        if (i != j && j != oldPlayerNum && Players[i].TeamNum != Players[j].TeamNum)
+                        if (i != j && j != oldPlayerNum && Players[i].TeamNum != Players[j].TeamNum &&
+                           !Players[j].IsDead)
                         {
                             Players[i].TargetPlayerNum = j;
                             break;

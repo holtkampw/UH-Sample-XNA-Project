@@ -210,6 +210,8 @@ namespace UHSampleGame.CoreObjects.Units
                         if (count >= maxCount)
                             return false;
                     }
+                    else if (u.Status == UnitStatus.Active)
+                        u.Status = UnitStatus.Inactive;
                 }
             }
             return true;
