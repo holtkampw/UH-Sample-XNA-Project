@@ -29,6 +29,8 @@ namespace UHSampleGame.CoreObjects.Units
         int goalTileID;
         int focalTileID;
 
+        public int XPToGive;
+
         //Tile previousTile;
        // Tile currentTile;
         //Tile goalTile;
@@ -89,12 +91,15 @@ namespace UHSampleGame.CoreObjects.Units
             {
                 case UnitType.SpeedBoat:
                     Damage = 50;
+                    XPToGive = 2;
                     break;
                 case UnitType.SpeederBoat:
                     Damage = 100;
+                    XPToGive = 3;
                     break;
                 default:
                     Damage = 10;
+                    XPToGive = 1;
                     break;
             }
         }

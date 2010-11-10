@@ -56,7 +56,7 @@ namespace UHSampleGame.CoreObjects.Towers
         static int updateCount;
         static int drawCount;
 
-        static Texture2D hudBackground;
+        static Texture2D[] hudBackground;
         static Rectangle hudBackgroundLocation = new Rectangle(0, 0, 40, 20);
         static Rectangle hudBackgroundSourceLocation = new Rectangle(0, 0, 1280, 394);
         static Vector2 hudBackgroundOffsetFromTower = new Vector2(-20, 8);
@@ -69,15 +69,15 @@ namespace UHSampleGame.CoreObjects.Towers
 
         static Texture2D hudHealthBar;
         static Rectangle hudHealthSource = new Rectangle(0, 0, 904, 136);
-        static Rectangle hudHealthDestination = new Rectangle(0, 0, 34, 10);
-        static Rectangle hudHealthMaxDestination = new Rectangle(0, 0, 34, 10);
-        static Vector2 hudHealthOffset = new Vector2(6, 0);
+        static Rectangle hudHealthDestination = new Rectangle(0, 0, 40, 10);
+        static Rectangle hudHealthMaxDestination = new Rectangle(0, 0, 40, 10);
+        static Vector2 hudHealthOffset = new Vector2(0, 0);
 
-        static Texture2D hudUpgradeBar;
+        static Texture2D[] hudUpgradeBar;
         static Rectangle hudUpgradeSource = new Rectangle(0, 0, 904, 136);
-        static Rectangle hudUpgradeDestination = new Rectangle(0, 0, 34, 10);
-        static Rectangle hudUpgradeMaxDestination = new Rectangle(0, 0, 34, 10);
-        static Vector2 hudUpgradeOffset = new Vector2(6, 10);
+        static Rectangle hudUpgradeDestination = new Rectangle(0, 0, 40, 10);
+        static Rectangle hudUpgradeMaxDestination = new Rectangle(0, 0, 40, 10);
+        static Vector2 hudUpgradeOffset = new Vector2(0, 10);
         #endregion
 
         #region Initialize
@@ -133,8 +133,13 @@ namespace UHSampleGame.CoreObjects.Towers
                             instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
                             instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
                             break;
-                        case TowerType.Unit:
+                        case TowerType.SmallUnit:
                             instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\baseTowerA"));//+ mapTeamNumToColor[p]));
+                            instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
+                            instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
+                            break;
+                        case TowerType.LargeUnit:
+                            instancedModels[j].Add(ScreenManagement.ScreenManager.Game.Content.Load<Model>("Objects\\Towers\\baseTowerB"));//+ mapTeamNumToColor[p]));
                             instancedModelBones[j].Add(new Matrix[instancedModels[j][p].Bones.Count]);
                             instancedModels[j][p].CopyAbsoluteBoneTransformsTo(instancedModelBones[j][p]);
                             break;
@@ -142,10 +147,18 @@ namespace UHSampleGame.CoreObjects.Towers
                 }
             }
 
-            hudBackground = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus");
+            hudBackground = new Texture2D[5];
+            hudBackground[1] = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus1");
+            hudBackground[2] = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus2");
+            hudBackground[3] = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus3");
+            hudBackground[4] = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus4");
             levelFont = ScreenManager.Game.Content.Load<SpriteFont>("HUD\\levelFont");
             hudHealthBar = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus_Health");
-            hudUpgradeBar = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus_Growth");
+            hudUpgradeBar = new Texture2D[5];
+            hudUpgradeBar[1] = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus_Growth1");
+            hudUpgradeBar[2] = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus_Growth2");
+            hudUpgradeBar[3] = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus_Growth3");
+            hudUpgradeBar[4] = ScreenManager.Game.Content.Load<Texture2D>("HUD\\towerStatus_Growth3");
         }
 
         public static int AllTowerCount()
@@ -349,7 +362,7 @@ namespace UHSampleGame.CoreObjects.Towers
                                 levelLocation += levelOffset;
 
                                 //draw background
-                                ScreenManager.SpriteBatch.Draw(hudBackground,
+                                ScreenManager.SpriteBatch.Draw(hudBackground[towers[p][j][k].Level],
                                     hudBackgroundLocation, hudBackgroundSourceLocation, hudColor);
 
                                 //draw level num
@@ -365,7 +378,8 @@ namespace UHSampleGame.CoreObjects.Towers
                                 //draw upgrade bar
                                 hudUpgradeDestination.X = (int)(hudBackgroundLocation.X + hudUpgradeOffset.X);
                                 hudUpgradeDestination.Y = (int)(hudBackgroundLocation.Y + hudUpgradeOffset.Y);
-                                ScreenManager.SpriteBatch.Draw(hudUpgradeBar,
+                                hudUpgradeDestination.Width = (int)((towers[p][j][k].XP / 100) * hudUpgradeMaxDestination.Width);
+                                ScreenManager.SpriteBatch.Draw(hudUpgradeBar[towers[p][j][k].Level],
                                     hudUpgradeDestination, hudUpgradeSource, hudColor);
 
                                 drawCount++;

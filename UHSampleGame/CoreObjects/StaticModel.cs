@@ -25,6 +25,13 @@ namespace UHSampleGame.CoreObjects
         /// The position of the object in 3D space
         /// </summary>
         public Vector3 Position;
+        public bool glow;
+        public float startGlowScale;
+        public float endGlowScale;
+        public float currentGlowScale;
+        public int elapsedGlowTime;
+        public int maxGlowTime = 40;
+        bool glowDecreasing = true;
 
         CameraManager cameraManager;
 
@@ -105,6 +112,14 @@ namespace UHSampleGame.CoreObjects
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
             view = cameraManager.ViewMatrix;
+
+            if (glow == true)
+            {
+                this.startGlowScale = scale;
+                this.endGlowScale = scale - 0.6f;
+                this.currentGlowScale = scale;
+            }
+
         }
         #endregion
 
@@ -147,7 +162,7 @@ namespace UHSampleGame.CoreObjects
         {
             //update view matrix
             //UpdateView();
-            UpdateTransforms();
+            UpdateTransforms(gameTime);
         }
 
         public void UpdateView()
@@ -155,13 +170,43 @@ namespace UHSampleGame.CoreObjects
             view = cameraManager.ViewMatrix;
         }
 
-        public void UpdateTransforms()
+        public void UpdateTransforms(GameTime gameTime)
         {
-            transforms = Matrix.CreateScale(scale) *
+            if (glow == true)
+            {
+                elapsedGlowTime += gameTime.ElapsedGameTime.Milliseconds;
+                if (elapsedGlowTime >= maxGlowTime)
+                {
+                    elapsedGlowTime = 0;
+                    if (glowDecreasing)
+                    {
+                        currentGlowScale -= 0.1f;
+                    }
+                    else
+                    {
+                        currentGlowScale += 0.1f;
+                    }
+
+                    if (currentGlowScale <= endGlowScale || currentGlowScale >= startGlowScale)
+                    {
+                        glowDecreasing = !glowDecreasing;
+                    }
+                }
+
+                transforms = Matrix.CreateScale(currentGlowScale) *
                     //rotationMatrixX *
                     rotationMatrixY *
                     //rotationMatrixZ * 
                     Matrix.CreateTranslation(Position);
+            }
+            else
+            {
+                transforms = Matrix.CreateScale(scale) *
+                    //rotationMatrixX *
+                        rotationMatrixY *
+                    //rotationMatrixZ * 
+                        Matrix.CreateTranslation(Position);
+            }
         }
 
         public void Draw(GameTime gameTime)

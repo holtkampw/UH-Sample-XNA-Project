@@ -15,7 +15,7 @@ using UHSampleGame.ProjectileManagment;
 
 namespace UHSampleGame.CoreObjects.Towers
 {
-    public enum TowerType { Plasma, Cannon, Electric, Unit }
+    public enum TowerType { Plasma, Cannon, Electric, SmallUnit, LargeUnit }
     public enum TowerStatus { Inactive, Active, ActiveNoShoot }
 
     public class Tower
@@ -41,6 +41,7 @@ namespace UHSampleGame.CoreObjects.Towers
         public int TeamNum;
         public int PlayerNum;
         public Unit unitToAttack;
+        int currentXPToGive;
 
         private TimeSpan timeToAttack;
         private TimeSpan currentTimeToAttack;
@@ -54,6 +55,8 @@ namespace UHSampleGame.CoreObjects.Towers
         public string LevelString = "1";
         public int Cost;
         public int TotalInvestedCost;
+
+        int unitCreationAmount;
 
         TimeSpan unitBuild = new TimeSpan(0, 0, 1);
         TimeSpan currentTimeSpan = new TimeSpan();
@@ -82,6 +85,7 @@ namespace UHSampleGame.CoreObjects.Towers
             Health = HealthCapacity;
             XP = 0;
             Level = 0;
+            Level = 1;
             Cost = 100;
             TotalInvestedCost = Cost;
 
@@ -104,7 +108,10 @@ namespace UHSampleGame.CoreObjects.Towers
                 case TowerType.Cannon:
                     this.Scale = 2.0f;
                     break;
-                case TowerType.Unit:
+                case TowerType.SmallUnit:
+                    this.Scale = 2.0f;
+                    break;
+                case TowerType.LargeUnit:
                     this.Scale = 2.0f;
                     break;
             }
@@ -142,6 +149,7 @@ namespace UHSampleGame.CoreObjects.Towers
             if (unitToAttack != null && !unitToAttack.IsDeployed())
             {
                 unitToAttack = unit;
+                currentXPToGive = unitToAttack.XPToGive;
                 return;
             }
 
@@ -150,6 +158,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 if (unitToAttack == null || unit.PathLength < unitToAttack.PathLength)
                 {
                     unitToAttack = unit;
+                    currentXPToGive = unitToAttack.XPToGive;
                     //unitToAttack.Died += GetNewAttackUnit;
                 }
             }
@@ -167,6 +176,17 @@ namespace UHSampleGame.CoreObjects.Towers
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
                     unitToAttack.TakeDamage(attackStrength);
                     //DO XP GIVING HERE                    
+
+                    //DO XP GIVING HERE        
+                    if (Level < 4 && unitToAttack == null)
+                    {
+                        XP += currentXPToGive + (int)((Level / 4.0f) * currentXPToGive);
+                        if (XP > 100)
+                        {
+                            XPUpgrade();
+                        }
+                    }
+                    
                 }
                 
             }
@@ -199,6 +219,12 @@ namespace UHSampleGame.CoreObjects.Towers
             return 0;
         }
 
+        public void XPUpgrade()
+        {
+            Level++;
+            XP = 0;
+        }
+
         public int DestroyCost()
         {
             float perc = (Health / (float)HealthCapacity);
@@ -210,7 +236,11 @@ namespace UHSampleGame.CoreObjects.Towers
             currentTimeSpan = currentTimeSpan.Add(gameTime.ElapsedGameTime);
             if (currentTimeSpan > unitBuild)
             {
-                for(int i=0; i<5; i++)
+                if (Type == TowerType.SmallUnit)
+                    unitCreationAmount = 2;
+                else
+                    unitCreationAmount = 4;
+                for (int i = 0; i < unitCreationAmount; i++)
                     UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
 
                 currentTimeSpan = TimeSpan.Zero;
@@ -261,7 +291,7 @@ namespace UHSampleGame.CoreObjects.Towers
         #region Update/Draw
         public void Update(GameTime gameTime)
         {
-            if (Type != TowerType.Unit)
+            if (Type != TowerType.SmallUnit && Type != TowerType.LargeUnit)
                 Attack(gameTime);
             else
             {
