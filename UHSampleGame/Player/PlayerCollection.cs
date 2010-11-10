@@ -195,5 +195,27 @@ namespace UHSampleGame.Players
             }
         }
 
+
+        public static int GetNextTargetFor(int p)
+        {
+            int currentTarget = Players[p].TargetPlayerNum;
+            
+            for (int i = 1; i <= NumPlayers; i++)
+            {
+                if (currentTarget + 1 <= NumPlayers)
+                {
+                    currentTarget++;
+                }
+                else
+                {
+                    currentTarget = 1;
+                }
+
+                if (!Players[currentTarget].IsDead && Players[currentTarget].TeamNum != Players[p].TeamNum)
+                    return currentTarget;
+            }
+            
+            return currentTarget;
+        }
     }
 }

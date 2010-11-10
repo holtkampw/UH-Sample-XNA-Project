@@ -88,7 +88,6 @@ namespace UHSampleGame.Screens
             ScreenManager.RemoveScreen(this);
 
             ScreenManager.ShowScreen(new PlayScreen(playerTypes));
-
             // Signal the background thread to exit, then wait for it to do so.
             if (backgroundThread != null)
             {
