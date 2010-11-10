@@ -147,6 +147,9 @@ namespace UHSampleGame.CoreObjects.Towers
                 (unitToAttack != null && unitToAttack.IsDeployed() && unit == null))
                 return;
 
+            if (unitToAttack != null && unitToAttack.Health <= 0)
+                unitToAttack = null;
+
             if (unitToAttack != null && !unitToAttack.IsDeployed())
             {
                 unitToAttack = unit;
@@ -175,11 +178,11 @@ namespace UHSampleGame.CoreObjects.Towers
                 {
                     currentTimeToAttack = TimeSpan.Zero;
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
-                    unitToAttack.TakeDamage(attackStrength);
+                    bool kill = unitToAttack.TakeDamage(attackStrength);
                     //DO XP GIVING HERE                    
 
                     //DO XP GIVING HERE        
-                    if (Level < 4 && unitToAttack == null)
+                    if (Level < 4 && kill)
                     {
                         XP += currentXPToGive + (int)((Level / 4.0f) * currentXPToGive);
                         if (XP > 100)
@@ -187,9 +190,13 @@ namespace UHSampleGame.CoreObjects.Towers
                             XPUpgrade();
                         }
                     }
-                    return;
+                    
                 }
-
+                else if (unitToAttack != null && unitToAttack.Health <= 0)
+                {
+                    unitToAttack = null;
+                }
+                return;
             }
             currentTimeToAttack += gameTime.ElapsedGameTime;
         }

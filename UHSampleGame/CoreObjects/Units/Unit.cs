@@ -321,22 +321,24 @@ namespace UHSampleGame.CoreObjects.Units
             Position += velocity;
         }
 
-        public void TakeDamage(int damage)
+        public bool TakeDamage(int damage)
         {
             this.Health -= damage;
 
             if (Health <= 0)
             {
                 OnDied();
+                return true;
             }
+            return false;
         }
 
         private void OnDied()
         {
             Unit u = this;
-
+            
             TileMap.Tiles[u.CurrentTileID].RemoveUnit(ref u);
-
+            this.Status = UnitStatus.Inactive;
             UnitCollection.Remove(ref u);
 
             if (Died != null)
