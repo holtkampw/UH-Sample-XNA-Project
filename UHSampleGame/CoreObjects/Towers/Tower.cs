@@ -167,10 +167,10 @@ namespace UHSampleGame.CoreObjects.Towers
 
         private void Attack(GameTime gameTime)
         {
-            
+
             if (currentTimeToAttack > timeToAttack)
             {
-                currentTimeToAttack += gameTime.ElapsedGameTime;
+
                 if (unitToAttack != null && unitToAttack.Health > 0)
                 {
                     currentTimeToAttack = TimeSpan.Zero;
@@ -187,15 +187,16 @@ namespace UHSampleGame.CoreObjects.Towers
                             XPUpgrade();
                         }
                     }
-                    
+                    return;
                 }
-                
+
             }
+            currentTimeToAttack += gameTime.ElapsedGameTime;
         }
 
         public int Repair(int money)
         {
-            float perc = 1.0f-(Health / (float)HealthCapacity);
+            float perc = 1.0f - (Health / (float)HealthCapacity);
             Health = HealthCapacity;
             int costToRepair = (int)(perc * Cost);
 
@@ -229,7 +230,7 @@ namespace UHSampleGame.CoreObjects.Towers
         public int DestroyCost()
         {
             float perc = (Health / (float)HealthCapacity);
-            return (int)(TotalInvestedCost * perc*.75f);
+            return (int)(TotalInvestedCost * perc * .75f);
         }
 
         private void BuildUnit(GameTime gameTime)
@@ -301,6 +302,6 @@ namespace UHSampleGame.CoreObjects.Towers
         }
         #endregion
 
-        
+
     }
 }
