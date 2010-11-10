@@ -1029,8 +1029,6 @@ namespace UHSampleGame.Players
             if (Type == PlayerType.Human)
             {
                 ScreenManager.SpriteBatch.Draw(statusTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
                 ScreenManager.SpriteBatch.Draw(healthicon, healthIconLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.Draw(numUnitsIcon, numUnitsIconLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.DrawString(statusScreenFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
@@ -1040,8 +1038,6 @@ namespace UHSampleGame.Players
             else
             {
                 ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], globalLocations[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusFont, HealthString, computerStatusHealthLocation[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
                 ScreenManager.SpriteBatch.DrawString(statusScreenFont, HealthString, 
                     computerStatusHealthLocation[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.DrawString(statusScreenFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
