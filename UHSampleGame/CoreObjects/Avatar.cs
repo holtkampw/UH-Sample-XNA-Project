@@ -46,6 +46,12 @@ namespace UHSampleGame.CoreObjects
         float yaw = 0;
         float roll = 0;
         Matrix YawPitchRollMatrix;
+
+        Vector3 D;
+        Vector3 Right;
+        Vector3 Backwards;   
+        Vector3 Up;
+
         #endregion
 
         #region Initialization
@@ -231,9 +237,9 @@ namespace UHSampleGame.CoreObjects
             Vector3 D = (P - O);
             Vector3 Right = Vector3.Cross(U, D);
             Vector3.Normalize(ref Right, out Right);
-            Vector3 Backwards = Vector3.Cross(Right, U);
+            Backwards = Vector3.Cross(Right, U);
             Vector3.Normalize(ref Backwards, out Backwards);
-            Vector3 Up = Vector3.Cross(Backwards, Right);
+            Up = Vector3.Cross(Backwards, Right);
             
             
             //D.Normalize();
@@ -244,10 +250,22 @@ namespace UHSampleGame.CoreObjects
             ////    yaw = MathHelper.TwoPi - yaw;
             //ResetYawPitchRoll();
 
-
-            Matrix rot = new Matrix(Right.X, Right.Y, Right.Z, 0, Up.X, Up.Y, 
-                Up.Z, 0, Backwards.X, Backwards.Y, Backwards.Z, 0, 0, 0, 0, 1);
-            LocalRotationMatrix = rot;
+            LocalRotationMatrix.M11 = Right.X;
+            LocalRotationMatrix.M12 = Right.Y;
+            LocalRotationMatrix.M13 = Right.Z;
+            LocalRotationMatrix.M14 = 0;
+            LocalRotationMatrix.M21 = Up.X;
+            LocalRotationMatrix.M22 = Up.Y;
+            LocalRotationMatrix.M23 = Up.Z;
+            LocalRotationMatrix.M24 = 0;
+            LocalRotationMatrix.M31 = Backwards.X;
+            LocalRotationMatrix.M32 = Backwards.Y;
+            LocalRotationMatrix.M33 = Backwards.Z;
+            LocalRotationMatrix.M34 = 0;
+            LocalRotationMatrix.M41 = 0;
+            LocalRotationMatrix.M42 = 0;
+            LocalRotationMatrix.M43 = 0;
+            LocalRotationMatrix.M44 = 1;
         }
 
         public void ResetRoll()
