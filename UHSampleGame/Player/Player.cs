@@ -183,6 +183,13 @@ namespace UHSampleGame.Players
         static Vector2 numUnitsIconOffset = new Vector2(60, 85);
         static SpriteFont statusScreenFont;
 
+        static Texture2D[] attackingPlayer;
+        int elapsedPlayerToAttackChange = 0;
+        int maxPlayerToAttackChange = 2000;
+        bool pickEnemyTargetPressed = false;
+        Color enemyTargetOpacity = new Color(255, 255, 255, 0);
+        static Vector2[] attackingPlayerLocation;
+
 
         #region Properties
        
@@ -193,6 +200,9 @@ namespace UHSampleGame.Players
             this.PlayerNum = playerNum;
             this.TeamNum = teamNum;
             this.Type = type;
+
+            IsActive = true;
+            IsDead = false;
 
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
@@ -212,7 +222,8 @@ namespace UHSampleGame.Players
 
         public Player()
         {
-
+            IsActive = false;
+            IsDead = true;
         }
 
         public void PlayerSetup(int playerNum, int teamNum, Base gameObject, PlayerType playerType)
@@ -532,6 +543,14 @@ namespace UHSampleGame.Players
                     numUnitsIconLocations[i] = globalLocations[i] + numUnitsIconOffset;
                 }
                 statusScreenFont = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\statusScreenFont");
+
+                attackingPlayer = new Texture2D[5];
+                attackingPlayerLocation = new Vector2[5];
+                for (int p = 1; p < 5; p++)
+                {
+                    attackingPlayer[p] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Attacking\\" + p);
+                    attackingPlayerLocation[p] = globalLocations[p] + new Vector2(260.0f, 126.0f);
+                }
 
             }
         }
@@ -889,6 +908,19 @@ namespace UHSampleGame.Players
                     isHUDDisplayed = false;
                 }
 
+                if (input.CheckNewAction(InputAction.PickEnemyTarget, playerIndexes[PlayerNum]))
+                {
+                    if (pickEnemyTargetPressed)
+                    {
+                        this.TargetPlayerNum = PlayerCollection.GetNextTargetFor(this.PlayerNum);
+                        PlayerCollection.SetTargetFor(PlayerNum, TargetPlayerNum);
+                    }
+
+                    //get opacity to display draw
+                    enemyTargetOpacity.A = 255;
+                    pickEnemyTargetPressed = true;
+                }
+
 
             }
         }
@@ -967,6 +999,25 @@ namespace UHSampleGame.Players
             {
                 queuedUnitsToDeploy = 0;
             }
+
+            if (pickEnemyTargetPressed)
+            {
+                elapsedPlayerToAttackChange += gameTime.ElapsedGameTime.Milliseconds;
+                if (elapsedPlayerToAttackChange >= maxPlayerToAttackChange)
+                {
+                    pickEnemyTargetPressed = false;
+                    elapsedPlayerToAttackChange = 0;
+                }
+            }
+
+            if (enemyTargetOpacity.A > 0)
+            {
+                if (enemyTargetOpacity.A <= 4)
+                    enemyTargetOpacity.A = 0;
+                else
+                    enemyTargetOpacity.A -= 4;
+                
+            }
         }
 
         public void Draw(GameTime gameTime)
@@ -997,7 +1048,7 @@ namespace UHSampleGame.Players
 
         public void DrawMenu(GameTime gameTime)
         {
-            ScreenManager.SpriteBatch.Begin();
+            ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
 
             if (!unitScreenActivated)
             {
@@ -1026,6 +1077,11 @@ namespace UHSampleGame.Players
             if (Type == PlayerType.Human)
             {
                 ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
+                if(enemyTargetOpacity.A > 0)
+                {
+                    ScreenManager.SpriteBatch.Draw(attackingPlayer[TargetPlayerNum], 
+                        attackingPlayerLocation[PlayerNum], enemyTargetOpacity);
+                }
             }
 
             ScreenManager.SpriteBatch.End();

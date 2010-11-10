@@ -18,9 +18,9 @@ FBXHeaderExtension:  {
         Month: 10
         Day: 25
         Hour: 19
-        Minute: 33
-        Second: 32
-        Millisecond: 286
+        Minute: 36
+        Second: 27
+        Millisecond: 131
     }
     Creator: "FBX SDK/FBX Plugins version 2011.2"
 }
@@ -586,22 +586,22 @@ Objects:  {
             Comment: ""
         }
         Properties60:  {
-            Property: "DocumentUrl", "KString", "", "C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\Animations Stuff\Autodesk Maya\playerShip01_GREEN.fbx"
+            Property: "DocumentUrl", "KString", "", "C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\Animations Stuff\Autodesk Maya\playerSHip01_PURPLE.fbx"
              
-            Property: "SrcDocumentUrl", "KString", "", "C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\Animations Stuff\Autodesk Maya\playerShip01_GREEN.fbx"
+            Property: "SrcDocumentUrl", "KString", "", "C:\Users\Carlos Rances Lacayo\Documents\Game Development Fall 2010\GIT\UH-Sample-XNA-Project\Animations Stuff\Autodesk Maya\playerSHip01_PURPLE.fbx"
              
             Property: "Original", "Compound", ""
             Property: "Original|ApplicationVendor", "KString", "", "Autodesk"
             Property: "Original|ApplicationName", "KString", "", "Maya"
             Property: "Original|ApplicationVersion", "KString", "", "2011.2"
-            Property: "Original|DateTime_GMT", "DateTime", "", "26/10/2010 00:33:32.283"
-            Property: "Original|FileName", "KString", "", "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/playerShip01_GREEN.fbx"
+            Property: "Original|DateTime_GMT", "DateTime", "", "26/10/2010 00:36:27.128"
+            Property: "Original|FileName", "KString", "", "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/playerSHip01_PURPLE.fbx"
              
             Property: "LastSaved", "Compound", ""
             Property: "LastSaved|ApplicationVendor", "KString", "", "Autodesk"
             Property: "LastSaved|ApplicationName", "KString", "", "Maya"
             Property: "LastSaved|ApplicationVersion", "KString", "", "2011.2"
-            Property: "LastSaved|DateTime_GMT", "DateTime", "", "26/10/2010 00:33:32.283"
+            Property: "LastSaved|DateTime_GMT", "DateTime", "", "26/10/2010 00:36:27.128"
         }
     }
     Material: "Material::blinn1", "" {
@@ -645,7 +645,7 @@ Objects:  {
             Property: "LastFrame", "int", "",0
             Property: "Width", "int", "",0
             Property: "Height", "int", "",0
-            Property: "Path", "KString", "", "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/playerShip01GREEN.tga"
+            Property: "Path", "KString", "", "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/playerShip01PURPLE.tga"
              
             Property: "StartFrame", "int", "",0
             Property: "StopFrame", "int", "",0
@@ -657,9 +657,9 @@ Objects:  {
             Property: "AccessMode", "enum", "",0
         }
         UseMipMap: 0
-        Filename: "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/playerShip01GREEN.tga"
+        Filename: "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/playerShip01PURPLE.tga"
         
-        RelativeFilename: "playerShip01GREEN.tga"
+        RelativeFilename: "playerShip01PURPLE.tga"
     }
     Texture: "Texture::file1", "" {
         Type: "TextureVideoClip"
@@ -683,9 +683,9 @@ Objects:  {
             Property: "UVSet", "KString", "", "map1"
         }
         Media: "Video::file1"
-        FileName: "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/playerShip01GREEN.tga"
+        FileName: "C:/Users/Carlos Rances Lacayo/Documents/Game Development Fall 2010/GIT/UH-Sample-XNA-Project/Animations Stuff/Autodesk Maya/Photoshop Layer/playerShip01PURPLE.tga"
         
-        RelativeFilename: "playerShip01GREEN.tga"
+        RelativeFilename: "playerShip01PURPLE.tga"
         ModelUVTranslation: 0,0
         ModelUVScaling: 1,1
         Texture_Alpha_Source: "None"

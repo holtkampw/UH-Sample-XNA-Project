@@ -106,6 +106,7 @@ namespace UHSampleGame.Screens
             LevelManager.AddPlayer(aI);*/
             //LevelManager.LoadLevel(1);
 
+            GC.Collect();//force garbage collection
             isLoaded = true;
         }
         #endregion

@@ -172,25 +172,38 @@ namespace UHSampleGame.CoreObjects
                     if (Velocity.X > 0)
                     {
                         Velocity.X--;
+                        if(Velocity.X < 1.0f)
+                            Velocity.X = 0;
                     } else if (Velocity.X < 0)
                     {
                         Velocity.X++;
+                        if(Velocity.X > -1.0f)
+                            Velocity.X = 0;
                     }
+
 
                     if (Velocity.Y > 0)
                     {
                         Velocity.Y--;
+                        if (Velocity.Y < 1.0f)
+                            Velocity.Y = 0;
                     } else if (Velocity.Y < 0)
                     {
                         Velocity.Y++;
+                        if (Velocity.Y > -1.0f)
+                            Velocity.Y = 0;
                     }
 
                     if (Velocity.Z > 0)
                     {
                         Velocity.Z--;
+                        if (Velocity.Z < 1.0f)
+                            Velocity.Z = 0;
                     } else if (Velocity.Z < 0)
                     {
                         Velocity.Z++;
+                        if (Velocity.Z > -1.0f)
+                            Velocity.Z = 0;
                     }
 
                     if (pitch > 0)
@@ -323,25 +336,25 @@ namespace UHSampleGame.CoreObjects
            
             if (input.CheckAction(InputAction.TileMoveUp, index))
             {
-                Velocity = Velocity + new Vector3(0, 0, -1);
+                Velocity = Velocity + new Vector3(0, 0, -0.5f);
                 avatarMoved = true;
             }
 
             if (input.CheckAction(InputAction.TileMoveDown, index))
             {
-                Velocity = Velocity + new Vector3(0, 0, 1);
+                Velocity = Velocity + new Vector3(0, 0, 0.5f);
                 avatarMoved = true;
             }
 
             if (input.CheckAction(InputAction.TileMoveLeft, index))
             {
-                Velocity = Velocity + new Vector3(-1, 0, 0);
+                Velocity = Velocity + new Vector3(-0.5f, 0, 0);
                 avatarMoved = true;
             }
 
             if (input.CheckAction(InputAction.TileMoveRight, index))
             {
-                Velocity = Velocity + new Vector3(1, 0, 0);
+                Velocity = Velocity + new Vector3(0.5f, 0, 0);
                 avatarMoved = true;
             }
 
