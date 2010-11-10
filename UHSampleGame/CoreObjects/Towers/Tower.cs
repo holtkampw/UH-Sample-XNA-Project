@@ -157,16 +157,18 @@ namespace UHSampleGame.CoreObjects.Towers
 
         private void Attack(GameTime gameTime)
         {
-            currentTimeToAttack += gameTime.ElapsedGameTime;
+            
             if (currentTimeToAttack > timeToAttack)
             {
+                currentTimeToAttack += gameTime.ElapsedGameTime;
                 if (unitToAttack != null && unitToAttack.Health > 0)
                 {
+                    currentTimeToAttack = TimeSpan.Zero;
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
                     unitToAttack.TakeDamage(attackStrength);
                     //DO XP GIVING HERE                    
                 }
-                currentTimeToAttack = TimeSpan.Zero;
+                
             }
         }
 
@@ -215,7 +217,6 @@ namespace UHSampleGame.CoreObjects.Towers
             }
         }
         #endregion
-
 
         #region Matrix Setters
         public void SetScale(float newScale)
