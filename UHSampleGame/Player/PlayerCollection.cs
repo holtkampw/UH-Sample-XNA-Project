@@ -175,13 +175,16 @@ namespace UHSampleGame.Players
 
         public static void UpdateTargetPlayers(int oldPlayerNum)
         {
-            for (int i = 0; i < NumPlayers; i++)
+            for (int i = 1; i <= NumPlayers; i++)
             {
+                if (i == oldPlayerNum)
+                    continue;
+
                 if (Players[i].TargetPlayerNum == oldPlayerNum)
                 {
-                    for (int j = 0; j < NumPlayers; j++)
+                    for (int j = 1; j <= NumPlayers; j++)
                     {
-                        if (i != j && j != oldPlayerNum && Players[i].TeamNum != Players[i].TeamNum)
+                        if (i != j && j != oldPlayerNum && Players[i].TeamNum != Players[j].TeamNum)
                         {
                             Players[i].TargetPlayerNum = j;
                             break;

@@ -219,7 +219,7 @@ namespace UHSampleGame.CoreObjects.Units
         {
             Unit u;
             //////////////////////////////////////////////////////////REFACTOR FOR EFFICIENCY
-            for (int i = 0; i <= MAX_UNITS /* unitsMaxIndex[playerNum][(int)unitType]*/; i++)
+            for (int i = 0; i < MAX_UNITS /* unitsMaxIndex[playerNum][(int)unitType]*/; i++)
             {
                 u = units[playerNum][(int)unitType][i];
                 if (u.IsActive())
@@ -398,9 +398,9 @@ namespace UHSampleGame.CoreObjects.Units
             Unit u;
             Player player;
             Player target;
-            for (int i = 0; i < NumPlayers; i++)
+            for (int i = 1; i <= PlayerCollection.NumPlayers; i++)
             {
-                if (i == oldPlayerNum)
+                if (i == oldPlayerNum || PlayerCollection.Players[i].IsDead)
                     continue;
 
                 player = PlayerCollection.Players[i];
@@ -418,7 +418,6 @@ namespace UHSampleGame.CoreObjects.Units
                     }
                 }
             }
-            throw new NotImplementedException();
         }
     }
 }

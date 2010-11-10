@@ -543,13 +543,13 @@ namespace UHSampleGame.Players
             if (Health <= 0)
             {
                 //Event if died??
-                UnitCollection.SetAllUnitsImmovable(PlayerNum);
-                TowerCollection.SetAllNoShoot(PlayerNum);
+                
                 IsDead = true;
                 PlayerCollection.CheckGameWin();
                 PlayerCollection.UpdateTargetPlayers(PlayerNum);
                 UnitCollection.SetOtherUnitsToNewTarget(PlayerNum);
-                
+                UnitCollection.SetAllUnitsImmovable(PlayerNum);
+                TowerCollection.SetAllNoShoot(PlayerNum);
             }
             
         }
@@ -872,6 +872,7 @@ namespace UHSampleGame.Players
                     }
                     PlayerCollection.SetPlayerInactive(PlayerNum);
                 }
+                return;
             }
 
             //HumanPlayer
