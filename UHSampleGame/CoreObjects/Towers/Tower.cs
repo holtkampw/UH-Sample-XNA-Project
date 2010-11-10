@@ -40,7 +40,11 @@ namespace UHSampleGame.CoreObjects.Towers
         public TowerStatus Status;
         public int TeamNum;
         public int PlayerNum;
+<<<<<<< HEAD
         public Unit unitToAttack;
+=======
+        public Unit unitToAttack;
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
         int currentXPToGive;
 
         private TimeSpan timeToAttack;
@@ -55,6 +59,8 @@ namespace UHSampleGame.CoreObjects.Towers
         public string LevelString = "1";
         public int Cost;
         public int TotalInvestedCost;
+
+        int unitCreationAmount;
 
         int unitCreationAmount;
 
@@ -109,6 +115,12 @@ namespace UHSampleGame.CoreObjects.Towers
                     this.Scale = 2.0f;
                     break;
                 case TowerType.SmallUnit:
+<<<<<<< HEAD
+                    this.Scale = 2.0f;
+                    break;
+                case TowerType.LargeUnit:
+=======
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                     this.Scale = 2.0f;
                     break;
                 case TowerType.LargeUnit:
@@ -148,7 +160,11 @@ namespace UHSampleGame.CoreObjects.Towers
 
             if (unitToAttack != null && !unitToAttack.IsDeployed())
             {
+<<<<<<< HEAD
                 unitToAttack = unit;
+=======
+                unitToAttack = unit;
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                 currentXPToGive = unitToAttack.XPToGive;
                 return;
             }
@@ -157,7 +173,11 @@ namespace UHSampleGame.CoreObjects.Towers
             {
                 if (unitToAttack == null || unit.PathLength < unitToAttack.PathLength)
                 {
+<<<<<<< HEAD
                     unitToAttack = unit;
+=======
+                    unitToAttack = unit;
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                     currentXPToGive = unitToAttack.XPToGive;
                     //unitToAttack.Died += GetNewAttackUnit;
                 }
@@ -235,11 +255,19 @@ namespace UHSampleGame.CoreObjects.Towers
         {
             currentTimeSpan = currentTimeSpan.Add(gameTime.ElapsedGameTime);
             if (currentTimeSpan > unitBuild)
+<<<<<<< HEAD
             {
                 if (Type == TowerType.SmallUnit)
                     unitCreationAmount = 2;
                 else
                     unitCreationAmount = 4;
+=======
+            {
+                if (Type == TowerType.SmallUnit)
+                    unitCreationAmount = 2;
+                else
+                    unitCreationAmount = 4;
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                 for (int i = 0; i < unitCreationAmount; i++)
                     UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
 

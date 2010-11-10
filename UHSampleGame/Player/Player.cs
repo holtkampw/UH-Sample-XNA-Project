@@ -113,6 +113,11 @@ namespace UHSampleGame.Players
         int offenseTowerSelected = 0;
         TowerInformation[] offenseTowerInfo;
 
+        static Texture2D[] offenseIcons;
+        const int NUM_OFFENSE_TOWERS = 2;
+        int offenseTowerSelected = 0;
+        TowerInformation[] offenseTowerInfo;
+
         //HumanPlayer
         Avatar avatar;
         bool avatarMoved = true;
@@ -183,6 +188,19 @@ namespace UHSampleGame.Players
         static Vector2 numUnitsIconOffset = new Vector2(60, 85);
         static SpriteFont statusScreenFont;
 
+<<<<<<< HEAD
+        public bool isHUDDisplayed = false;
+
+        static Texture2D healthicon;
+        static Texture2D numUnitsIcon;
+        static Vector2[] healthIconLocations;
+        static Vector2[] numUnitsIconLocations;
+        static Vector2 healthIconOffset = new Vector2(60, 33);
+        static Vector2 numUnitsIconOffset = new Vector2(60, 85);
+        static SpriteFont statusScreenFont;
+
+=======
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
         #region Properties
        
         #endregion
@@ -284,7 +302,11 @@ namespace UHSampleGame.Players
                 defenseTowerInfo[2].price = "Price: $6000";
                 defenseTowerInfo[2].description = "A plasma tower that\nshoots in multiple\ndirections at once.";
                 defenseTowerInfo[2].nameLocation = new Vector2[5];
+<<<<<<< HEAD
                 defenseTowerInfo[2].descriptionLocation = new Vector2[5];
+=======
+                defenseTowerInfo[2].descriptionLocation = new Vector2[5];
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                 defenseTowerInfo[2].priceLocation = new Vector2[5];
                 defenseTowerInfo[2].type = TowerType.Cannon;
 
@@ -294,6 +316,27 @@ namespace UHSampleGame.Players
                 towerTitle = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\towerTitle");
                 towerPrice = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\towerPrice");
                 towerDescription = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\towerDescription");
+
+                offenseTowerInfo = new TowerInformation[NUM_OFFENSE_TOWERS];
+                offenseIcons = new Texture2D[NUM_OFFENSE_TOWERS];
+                offenseIcons[0] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
+                offenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
+
+                offenseTowerInfo[0].name = "Small Training Area";
+                offenseTowerInfo[0].price = "Price: $3000";
+                offenseTowerInfo[0].description = "Trains units\nfor use";
+                offenseTowerInfo[0].nameLocation = new Vector2[5];
+                offenseTowerInfo[0].descriptionLocation = new Vector2[5];
+                offenseTowerInfo[0].priceLocation = new Vector2[5];
+                offenseTowerInfo[0].type = TowerType.SmallUnit;
+
+                offenseTowerInfo[1].name = "Large Training Area";
+                offenseTowerInfo[1].price = "Price: $6000";
+                offenseTowerInfo[1].description = "Trains units\nfor use much\nmore quickly";
+                offenseTowerInfo[1].nameLocation = new Vector2[5];
+                offenseTowerInfo[1].descriptionLocation = new Vector2[5];
+                offenseTowerInfo[1].priceLocation = new Vector2[5];
+                offenseTowerInfo[1].type = TowerType.LargeUnit;
 
                 offenseTowerInfo = new TowerInformation[NUM_OFFENSE_TOWERS];
                 offenseIcons = new Texture2D[NUM_OFFENSE_TOWERS];
@@ -389,6 +432,7 @@ namespace UHSampleGame.Players
                         defenseTowerInfo[tower].nameLocation[player] = globalLocations[player] + new Vector2(120.0f, 30);
                         defenseTowerInfo[tower].priceLocation[player] = globalLocations[player] + new Vector2(120.0f, 64);
                         defenseTowerInfo[tower].descriptionLocation[player] = globalLocations[player] + new Vector2(120.0f, 94);
+<<<<<<< HEAD
                     }
 
                     for (int tower = 0; tower < NUM_OFFENSE_TOWERS; tower++)
@@ -398,6 +442,17 @@ namespace UHSampleGame.Players
                         offenseTowerInfo[tower].descriptionLocation[player] = globalLocations[player] + new Vector2(120.0f, 94);
                     }
 
+=======
+                    }
+
+                    for (int tower = 0; tower < NUM_OFFENSE_TOWERS; tower++)
+                    {
+                        offenseTowerInfo[tower].nameLocation[player] = globalLocations[player] + new Vector2(120.0f, 30);
+                        offenseTowerInfo[tower].priceLocation[player] = globalLocations[player] + new Vector2(120.0f, 64);
+                        offenseTowerInfo[tower].descriptionLocation[player] = globalLocations[player] + new Vector2(120.0f, 94);
+                    }
+
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                     unitIconLocation[player] = new Vector2[MAX_UNIT_TYPES];
                     highlightUnitIconLocations[player] = new Rectangle[MAX_UNIT_TYPES];
                     Vector2 unitIconStartPosition = new Vector2(48, 36);
@@ -498,6 +553,17 @@ namespace UHSampleGame.Players
                 }
                 statusScreenFont = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\statusScreenFont");
 
+                healthicon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\icon_health");
+                numUnitsIcon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\icon_num_units");
+                healthIconLocations = new Vector2[5];
+                numUnitsIconLocations = new Vector2[5];
+                for (int i = 1; i < 5; i++)
+                {
+                    healthIconLocations[i] = globalLocations[i] + healthIconOffset;
+                    numUnitsIconLocations[i] = globalLocations[i] + numUnitsIconOffset;
+                }
+                statusScreenFont = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\statusScreenFont");
+
             }
         }
 
@@ -549,7 +615,11 @@ namespace UHSampleGame.Players
 
             avatarMoved = false;
             avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\Boxes\\box_0" + PlayerNum), 
+<<<<<<< HEAD
                     TileMap.GetTilePosFromPos(avatar.Position));
+=======
+                    TileMap.GetTilePosFromPos(avatar.Position));
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
             avatarFollowingTile.glow = true;
             avatarFollowingTile.Scale = 4.0f;
             
@@ -559,6 +629,7 @@ namespace UHSampleGame.Players
         {
             //Human Player
             if (Type == PlayerType.Human)
+<<<<<<< HEAD
             {
                 avatarMoved = avatar.HandleInput(input, playerIndexes[PlayerNum]);
 
@@ -566,6 +637,15 @@ namespace UHSampleGame.Players
                 {
                     avatar.Position = new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z);
                     avatarMoved = true;
+=======
+            {
+                avatarMoved = avatar.HandleInput(input, playerIndexes[PlayerNum]);
+
+                if (avatar.Position.X < TileMap.Left)
+                {
+                    avatar.Position = new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z);
+                    avatarMoved = true;
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                 }
 
                 if (avatar.Position.Z < TileMap.Top)
@@ -637,12 +717,21 @@ namespace UHSampleGame.Players
                         //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
                     }
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                    {
+                        //if (((int)defenseTowerSelected - 1) >= 0)
+                        //    defenseTowerSelected--;
+                        //else
+                        //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
+                        lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
+                    }
                 }
 
                 if (input.CheckNewAction(InputAction.PlayerMenuRight, playerIndexes[PlayerNum]))
                 {
                     if (((int)currentlySelectedPlayerStatus + 1) < playerMenuTabsEnumType.Length)
                         currentlySelectedPlayerStatus++;
+<<<<<<< HEAD
                     unitScreenActivated = false;
 
                     if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
@@ -652,6 +741,25 @@ namespace UHSampleGame.Players
                         //else
                         //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
                         lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
+=======
+                    unitScreenActivated = false;
+
+                    if (currentlySelectedPlayerStatus == PlayerMenuTabs.DefenseTower)
+                    {
+                        //if (((int)defenseTowerSelected - 1) >= 0)
+                        //    defenseTowerSelected--;
+                        //else
+                        //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
+                        lastBuiltTower = defenseTowerInfo[defenseTowerSelected].type;
+                    }
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                    {
+                        //if (((int)defenseTowerSelected - 1) >= 0)
+                        //    defenseTowerSelected--;
+                        //else
+                        //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
+                        lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                     }
                     else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
                     {
@@ -681,6 +789,17 @@ namespace UHSampleGame.Players
                             offenseTowerSelected = NUM_OFFENSE_TOWERS - 1;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
                     }
+<<<<<<< HEAD
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                    {
+                        if (((int)offenseTowerSelected - 1) >= 0)
+                            offenseTowerSelected--;
+                        else
+                            offenseTowerSelected = NUM_OFFENSE_TOWERS - 1;
+                        lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
+                    }
+=======
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
 
                     unitScreenActivated = false;
                 }
@@ -703,6 +822,17 @@ namespace UHSampleGame.Players
                             offenseTowerSelected =0;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
                     }
+<<<<<<< HEAD
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
+                    {
+                        if (((int)offenseTowerSelected + 1) < NUM_OFFENSE_TOWERS)
+                            offenseTowerSelected++;
+                        else
+                            offenseTowerSelected =0;
+                        lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
+                    }
+=======
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
 
                     unitScreenActivated = false;
                 }
@@ -852,7 +982,11 @@ namespace UHSampleGame.Players
                 {
                     avatarMoved = false;
                     avatarFollowingTile.Position = TileMap.GetTilePosFromPos(avatar.Position);
+<<<<<<< HEAD
                 }
+=======
+                }
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                 avatarFollowingTile.Update(gameTime);
             }
 
@@ -973,12 +1107,21 @@ namespace UHSampleGame.Players
             }
             else
             {
+<<<<<<< HEAD
                 ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], globalLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.Draw(healthicon, healthIconLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.Draw(numUnitsIcon, numUnitsIconLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.DrawString(statusScreenFont, HealthString,
                     statusHealthLocation[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.DrawString(statusScreenFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
+=======
+                ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], globalLocations[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.Draw(healthicon, healthIconLocations[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.Draw(numUnitsIcon, numUnitsIconLocations[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.DrawString(statusScreenFont, HealthString,
+                    statusHealthLocation[PlayerNum], Color.White);
+                ScreenManager.SpriteBatch.DrawString(statusScreenFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
                     statusNumberOfUnitsLocation[PlayerNum], Color.White);
             }
         }
@@ -1012,6 +1155,7 @@ namespace UHSampleGame.Players
 
         void DrawOffenseTowers()
         {
+<<<<<<< HEAD
             ScreenManager.SpriteBatch.Draw(offensiveTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
 
             for (int i = 0; i < NUM_OFFENSE_TOWERS; i++)
@@ -1035,6 +1179,31 @@ namespace UHSampleGame.Players
                         offenseTowerInfo[i].descriptionLocation[PlayerNum], Color.White);
                 }
 
+=======
+            ScreenManager.SpriteBatch.Draw(offensiveTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
+
+            for (int i = 0; i < NUM_OFFENSE_TOWERS; i++)
+            {
+                ScreenManager.SpriteBatch.Draw(offenseIcons[i], iconLocations[PlayerNum][i], Color.White);
+                if (i == offenseTowerSelected)
+                {
+                    ScreenManager.SpriteBatch.Draw(highlightIcon,
+                        highlightIconLocations[PlayerNum][i],
+                        highlightIconSourceRect,
+                        Color.White,
+                        highlightRotations[currentHighlightRotation],
+                        highlightOrigin,
+                        SpriteEffects.None,
+                        1.0f);
+                    ScreenManager.SpriteBatch.DrawString(towerTitle, offenseTowerInfo[i].name,
+                        offenseTowerInfo[i].nameLocation[PlayerNum], Color.White);
+                    ScreenManager.SpriteBatch.DrawString(towerPrice, offenseTowerInfo[i].price,
+                        offenseTowerInfo[i].priceLocation[PlayerNum], Color.White);
+                    ScreenManager.SpriteBatch.DrawString(towerDescription, offenseTowerInfo[i].description,
+                        offenseTowerInfo[i].descriptionLocation[PlayerNum], Color.White);
+                }
+
+>>>>>>> ea2a09c22888654baa4f32283fd69020834b5209
             }
         }
 
