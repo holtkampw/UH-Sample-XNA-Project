@@ -50,7 +50,8 @@ namespace UHSampleGame.CoreObjects.Towers
         public int Health;
         public int HealthCapacity;
         public int XP;
-        public int Level;
+        public int Level = 1;
+        public string LevelString = "1";
         public int Cost;
         public int TotalInvestedCost;
 
@@ -58,6 +59,7 @@ namespace UHSampleGame.CoreObjects.Towers
         TimeSpan currentTimeSpan = new TimeSpan();
 
         static int currentID = 0;
+
         #endregion
 
         #region Initialization

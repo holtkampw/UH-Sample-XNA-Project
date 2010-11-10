@@ -11,6 +11,7 @@ using UHSampleGame.CameraManagement;
 using UHSampleGame.TileSystem;
 using UHSampleGame.CoreObjects.Base;
 using UHSampleGame.ProjectileManagment;
+using UHSampleGame.Players;
 
 namespace UHSampleGame.CoreObjects.Units
 {
@@ -196,7 +197,6 @@ namespace UHSampleGame.CoreObjects.Units
             {
                 for (int i = 0; i < MAX_UNITS; i++)
                 {
-
                     u = units[playerNum][j][i];
                     if (u.IsDeployed() || u.Status == UnitStatus.Immovable)
                     {
@@ -392,5 +392,33 @@ namespace UHSampleGame.CoreObjects.Units
             return unitsCount[PlayerNum][(int)unitType] - unitDeployedForPlayer[PlayerNum][(int)unitType];
         }
 
+
+        internal static void SetOtherUnitsToNewTarget(int oldPlayerNum)
+        {
+            Unit u;
+            Player player;
+            Player target;
+            for (int i = 0; i < NumPlayers; i++)
+            {
+                if (i == oldPlayerNum)
+                    continue;
+
+                player = PlayerCollection.Players[i];
+                target = PlayerCollection.Players[player.TargetPlayerNum];
+
+                for (int j = 0; j < unitTypes.Length; j++)
+                {
+                    for (int k = 0; k < MAX_UNITS; k++)
+                    {
+                        u = units[i][j][k];
+                        if (u.Status == UnitStatus.Deployed && u.PlayerToAttack == oldPlayerNum)
+                        {
+                            u.UpdateTargetPlayer(ref target.PlayerBase.Tile, player.TargetPlayerNum);
+                        }
+                    }
+                }
+            }
+            throw new NotImplementedException();
+        }
     }
 }

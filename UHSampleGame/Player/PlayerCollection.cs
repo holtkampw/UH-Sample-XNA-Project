@@ -24,7 +24,7 @@ namespace UHSampleGame.Players
     public static class PlayerCollection
     {
         #region Class Variables
-        static Player[] Players;
+        public static Player[] Players;
         static bool[] activePlayer;
         static bool[] teamsActive;
         static int numTeamsActive;
@@ -94,7 +94,7 @@ namespace UHSampleGame.Players
             //Check players to see who's alive
             for (int p = 1; p < activePlayer.Length; p++)
             {
-                if (activePlayer[p])
+                if (!Players[p].IsDead)//activePlayer[p])
                     teamsActive[Players[p].TeamNum] = true;
             }
 
@@ -171,6 +171,24 @@ namespace UHSampleGame.Players
         public static bool ShowHUDFor(int playerNum)
         {
             return Players[playerNum].isHUDDisplayed;
+        }
+
+        public static void UpdateTargetPlayers(int oldPlayerNum)
+        {
+            for (int i = 0; i < NumPlayers; i++)
+            {
+                if (Players[i].TargetPlayerNum == oldPlayerNum)
+                {
+                    for (int j = 0; j < NumPlayers; j++)
+                    {
+                        if (i != j && j != oldPlayerNum && Players[i].TeamNum != Players[i].TeamNum)
+                        {
+                            Players[i].TargetPlayerNum = j;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
     }
