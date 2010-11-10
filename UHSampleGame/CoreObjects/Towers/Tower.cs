@@ -41,6 +41,7 @@ namespace UHSampleGame.CoreObjects.Towers
         public int TeamNum;
         public int PlayerNum;
         public Unit unitToAttack;
+        int currentXPToGive;
 
         private TimeSpan timeToAttack;
         private TimeSpan currentTimeToAttack;
@@ -81,7 +82,7 @@ namespace UHSampleGame.CoreObjects.Towers
             HealthCapacity = 100;
             Health = HealthCapacity;
             XP = 0;
-            Level = 0;
+            Level = 1;
             Cost = 100;
             TotalInvestedCost = Cost;
 
@@ -142,6 +143,7 @@ namespace UHSampleGame.CoreObjects.Towers
             if (unitToAttack != null && !unitToAttack.IsDeployed())
             {
                 unitToAttack = unit;
+                currentXPToGive = unitToAttack.XPToGive;
                 return;
             }
 
@@ -150,6 +152,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 if (unitToAttack == null || unit.PathLength < unitToAttack.PathLength)
                 {
                     unitToAttack = unit;
+                    currentXPToGive = unitToAttack.XPToGive;
                     //unitToAttack.Died += GetNewAttackUnit;
                 }
             }
@@ -163,8 +166,19 @@ namespace UHSampleGame.CoreObjects.Towers
                 if (unitToAttack != null && unitToAttack.Health > 0)
                 {
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
+                    
                     unitToAttack.TakeDamage(attackStrength);
-                    //DO XP GIVING HERE                    
+
+                    //DO XP GIVING HERE        
+                    if (Level < 4 && unitToAttack == null)
+                    {
+                        XP += currentXPToGive + (int)((Level / 4.0f) * currentXPToGive);
+                        if (XP > 100)
+                        {
+                            XPUpgrade();
+                        }
+                    }
+                    
                 }
                 currentTimeToAttack = TimeSpan.Zero;
             }
@@ -195,6 +209,12 @@ namespace UHSampleGame.CoreObjects.Towers
             }
 
             return 0;
+        }
+
+        public void XPUpgrade()
+        {
+            Level++;
+            XP = 0;
         }
 
         public int DestroyCost()
