@@ -19,7 +19,7 @@ namespace UHSampleGame.CoreObjects.Base
     public class Base
     {
         protected Base goalBase;
-        protected Tile tile;
+        public Tile Tile;
         protected int health;
         public int PlayerNum;
         public int TeamNum;
@@ -45,11 +45,6 @@ namespace UHSampleGame.CoreObjects.Base
 
         public Vector3 Position;
 
-        public Tile Tile
-        {
-            get { return tile; }
-        }
-
         public int Health
         {
             get { return health; }
@@ -60,7 +55,7 @@ namespace UHSampleGame.CoreObjects.Base
             PlayerNum = playerNum;
             TeamNum = teamNum;
             this.Scale = 2.75f;
-            this.tile = tile;
+            this.Tile = tile;
             this.Position = tile.Position;
 
             this.model = ScreenManager.Game.Content.Load<Model>("Objects\\Base\\oilRig");

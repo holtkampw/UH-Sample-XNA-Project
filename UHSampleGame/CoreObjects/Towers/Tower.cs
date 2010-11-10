@@ -82,6 +82,7 @@ namespace UHSampleGame.CoreObjects.Towers
             HealthCapacity = 100;
             Health = HealthCapacity;
             XP = 0;
+            Level = 0;
             Level = 1;
             Cost = 100;
             TotalInvestedCost = Cost;
@@ -160,14 +161,16 @@ namespace UHSampleGame.CoreObjects.Towers
 
         private void Attack(GameTime gameTime)
         {
-            currentTimeToAttack += gameTime.ElapsedGameTime;
+            
             if (currentTimeToAttack > timeToAttack)
             {
+                currentTimeToAttack += gameTime.ElapsedGameTime;
                 if (unitToAttack != null && unitToAttack.Health > 0)
                 {
+                    currentTimeToAttack = TimeSpan.Zero;
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
-                    
                     unitToAttack.TakeDamage(attackStrength);
+                    //DO XP GIVING HERE                    
 
                     //DO XP GIVING HERE        
                     if (Level < 4 && unitToAttack == null)
@@ -180,7 +183,7 @@ namespace UHSampleGame.CoreObjects.Towers
                     }
                     
                 }
-                currentTimeToAttack = TimeSpan.Zero;
+                
             }
         }
 
@@ -235,7 +238,6 @@ namespace UHSampleGame.CoreObjects.Towers
             }
         }
         #endregion
-
 
         #region Matrix Setters
         public void SetScale(float newScale)

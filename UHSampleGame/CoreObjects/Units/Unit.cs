@@ -242,7 +242,11 @@ namespace UHSampleGame.CoreObjects.Units
                 {
                     //Register Hit
                     PlayerCollection.AttackPlayer(PlayerToAttack);
-                    ProjectileManager.AddParticle(unit.Position, unit.Position);
+                    Vector3 nv = new Vector3();
+                    nv.X = unit.Position.X;
+                    nv.Y = unit.Position.Y + 1;
+                    nv.Z = unit.Position.Z;
+                    ProjectileManager.AddParticle(unit.Position, nv);
                     OnDied();
                 }
                 else
@@ -339,6 +343,19 @@ namespace UHSampleGame.CoreObjects.Units
                 Died(ref u);
 
             
+        }
+
+        public void UpdateTargetPlayer(ref Tile newGoalTile, int newTargetPlayer)
+        {
+            goalTileID = newGoalTile.ID;
+            PlayerToAttack = newTargetPlayer;
+
+            SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[newGoalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
+
+            Status = UnitStatus.Deployed;
+
+            UpdatePath();
+            UpdateTransforms();
         }
 
         public override bool Equals(object obj)
