@@ -408,6 +408,8 @@ namespace UHSampleGame.CoreObjects.Units
                 player = PlayerCollection.Players[i];
                 target = PlayerCollection.Players[player.TargetPlayerNum];
 
+                if (target.IsDead)
+                    continue;
                 for (int j = 0; j < unitTypes.Length; j++)
                 {
                     for (int k = 0; k < MAX_UNITS; k++)
