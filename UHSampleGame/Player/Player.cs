@@ -114,7 +114,7 @@ namespace UHSampleGame.Players
         TowerInformation[] offenseTowerInfo;
 
         //HumanPlayer
-        StaticModel avatar;
+        Avatar avatar;
         bool avatarMoved = true;
         StaticModel avatarFollowingTile;
         public bool IsActive = true;
@@ -324,10 +324,10 @@ namespace UHSampleGame.Players
                 unitInformation = new UnitInformation[MAX_UNIT_TYPES];
 
                 unitInformation[1].type = UnitType.SpeedBoat;
-                unitInformation[1].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma_tower");
+                unitInformation[1].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\speedBoat");
 
                 unitInformation[6].type = UnitType.SpeederBoat;
-                unitInformation[6].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
+                unitInformation[6].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\speederBoat");
 
                 unitMeterBaseTexture = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\unit_meter_base");
                 unitMeterBaseLocation = new Rectangle[5];
@@ -542,7 +542,7 @@ namespace UHSampleGame.Players
             //avatarFollowingTile = new StaticModel(ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\squarePlacer_red"), avatar.Position);
             //avatarFollowingTile.Scale = 4.0f;
 
-            avatar = new StaticModel(
+            avatar = new Avatar(
                 ScreenManager.Game.Content.Load<Model>("Objects\\Copter\\player0" + PlayerNum + "Ship01"),
                 new Vector3(PlayerBase.Position.X, 300.0f, PlayerBase.Position.Z));
             avatar.Scale = 6.0f;
@@ -557,29 +557,7 @@ namespace UHSampleGame.Players
             //Human Player
             if (Type == PlayerType.Human)
             {
-                if (input.CheckAction(InputAction.TileMoveUp, playerIndexes[PlayerNum]))
-                {
-                    avatar.Position = avatar.Position + new Vector3(0, 0, -3);
-                    avatarMoved = true;
-                }
-
-                if (input.CheckAction(InputAction.TileMoveDown, playerIndexes[PlayerNum]))
-                {
-                    avatar.Position = avatar.Position + new Vector3(0, 0, 3);
-                    avatarMoved = true;
-                }
-
-                if (input.CheckAction(InputAction.TileMoveLeft, playerIndexes[PlayerNum]))
-                {
-                    avatar.Position = avatar.Position + new Vector3(-3, 0, 0);
-                    avatarMoved = true;
-                }
-
-                if (input.CheckAction(InputAction.TileMoveRight, playerIndexes[PlayerNum]))
-                {
-                    avatar.Position = avatar.Position + new Vector3(3, 0, 0);
-                    avatarMoved = true;
-                }
+                avatarMoved = avatar.HandleInput(input, playerIndexes[PlayerNum]);
 
                 if (avatar.Position.X < TileMap.Left)
                 {

@@ -69,6 +69,7 @@
     <Compile Include="AssetManager\AssetHelper.cs" />
     <Compile Include="CameraManagement\CameraManager.cs" />
     <Compile Include="CoreObjects\AnimatedTileObject.cs" />
+    <Compile Include="CoreObjects\Avatar.cs" />
     <Compile Include="CoreObjects\Base\Base.cs" />
     <Compile Include="CoreObjects\Base\BaseCollection.cs" />
     <Compile Include="CoreObjects\GameObject.cs" />

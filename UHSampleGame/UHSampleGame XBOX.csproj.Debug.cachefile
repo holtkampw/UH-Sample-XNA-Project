@@ -275,6 +275,8 @@ Content\PlayerMenu\Icons\icon_num_units.xnb
 Content\PlayerMenu\statusScreenFont.xnb
 Content\Objects\Towers\mainBase01Color_0.xnb
 Content\Objects\Towers\baseTowerB.xnb
+Content\PlayerMenu\Icons\speedBoat.xnb
+Content\PlayerMenu\Icons\speederBoat.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv
