@@ -1081,7 +1081,6 @@ namespace UHSampleGame.Players
                         break;
                 }
             }
-            else
             else if(unitScreenActivated)
             {
                 DrawDeployTab();
