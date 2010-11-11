@@ -591,6 +591,12 @@ namespace UHSampleGame.Players
             // TileMap2.SetBase(playerBase);
         }
 
+        public void AddMoney(int amount)
+        {
+            this.Money += amount;
+            this.MoneyString = this.Money.ToString();
+        }
+
         public void SetupAvatar()
         {
             //avatar = new AnimatedModel(PlayerNum, TeamNum,

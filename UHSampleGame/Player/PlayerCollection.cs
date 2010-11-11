@@ -30,6 +30,10 @@ namespace UHSampleGame.Players
         static int numTeamsActive;
         static ScreenManager screenManager;
         static int winTeam;
+        static int elapsedMoneyUpdateTime;
+        static int maxMoneyUpdateTime = 10000;
+        static int moneyAmountPerUpdate = 20;
+        static bool updateMoney = false;
         #endregion
 
         public static int NumPlayers
@@ -69,11 +73,25 @@ namespace UHSampleGame.Players
 
         public static void Update(GameTime gameTime)
         {
+
+            updateMoney = false;
+            elapsedMoneyUpdateTime += gameTime.ElapsedGameTime.Milliseconds;
+            if (elapsedMoneyUpdateTime >= maxMoneyUpdateTime)
+            {
+                elapsedMoneyUpdateTime = 0;
+                updateMoney = true;
+            }
+
             for (int i = 1; i < Players.Length; i++)
             {
-                if(activePlayer[i])
+                if (activePlayer[i])
+                {
                     Players[i].Update(gameTime);
+                    if (updateMoney)
+                        Players[i].AddMoney(moneyAmountPerUpdate);
+                }
             }
+
         }
 
         public static void SetPlayerInactive(int playerNum)
@@ -220,8 +238,7 @@ namespace UHSampleGame.Players
 
         public static void EarnedMoneyForPlayer(int playerNum, int money)
         {
-            Players[playerNum].Money += money;
-            Players[playerNum].MoneyString = Players[playerNum].Money.ToString();
+            Players[playerNum].AddMoney(money);
         }
     }
 }
