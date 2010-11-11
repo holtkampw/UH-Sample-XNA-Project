@@ -671,5 +671,49 @@ namespace UHSampleGame.TileSystem
             }
         }
 
+
+        public static Tower GetTowerInformationAtPosition(Vector3 position)
+        {
+            return TileMap.tiles[TileMap.GetTileIndexFromPos(position)].Tower;
+        }
+
+        public static int GetTileIndexFromPos(Vector3 position)
+        {
+            int xNum, yNum, index;
+            float xN, yN;
+            //xNum = yNum = index = 0;
+
+            //xNum = (int)Math.Round((upperLeftPos.X - position.X) / (int)tileSize.X);
+            //yNum = (int)(Math.Round((upperLeftPos.Z - position.Z) / (int)tileSize.Y) * numTilesX);
+
+            xN = (upperLeftPos.X - position.X) / tileSize.X;
+            yN = (upperLeftPos.Z - position.Z) / tileSize.Y;
+
+            //FIX THIS!!!
+
+
+            //if (xNum < 0)
+            //    xNum *= -1;
+
+            //if (yNum < 0)
+            //    yNum *= -1;
+
+            //Good
+            //if (xN < 0)
+            //    xN *= -1;
+
+            //if (yN < 0)
+            //    yN *= -1;
+
+            xNum = xN < 0 ? (int)(-xN + 0.5f) : (int)(xN + 0.5f);
+            yNum = yN < 0 ? (int)(-yN + 0.5f) * numTilesX : (int)(yN + 0.5f) * numTilesX;
+
+            index = xNum + yNum;
+
+            if (index >= 0 && index < totalTiles)
+                return index;
+
+            return 0;
+        }
     }
 }

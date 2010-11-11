@@ -35,6 +35,11 @@ namespace UHSampleGame.MenuSystem
            
         }
 
+        public override void Reload()
+        {
+            
+        }
+
         public override void HandleInput(InputManager input)
         {
             // Move to the previous menu entry

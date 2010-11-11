@@ -100,6 +100,7 @@ namespace UHSampleGame.ScreenManagement
             {
                 if (screens[i] == screen)
                 {
+                    screens[i].Reload();
                     foundAtIndex = i;
                     break;
                 }

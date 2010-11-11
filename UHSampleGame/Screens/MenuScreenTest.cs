@@ -24,6 +24,10 @@ namespace UHSampleGame.Screens
         Vector3 menuPosition;
         float modelRotation = 14.9f;
         float rotationOffset = 1.57f;
+        //float modelRotation = 0f;
+        //float rotationOffset = 1.57f;
+        //float rotationX = -30f;
+        //float rotationZ = 30f;
 
         CameraManager cameraManager;
 
@@ -69,6 +73,8 @@ namespace UHSampleGame.Screens
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
             cameraManager.SetPosition(new Vector3(0.0f, 0.0f, 500.0f));
             cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
+            //cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
+            //cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
 
             menuPosition = new Vector3(100.0f, 0.0f, 0.0f);
 
@@ -166,6 +172,12 @@ namespace UHSampleGame.Screens
         {
         }
 
+        public override void Reload()
+        {
+            cameraManager.SetPosition(new Vector3(0.0f, 0.0f, 500.0f));
+            cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
+        }
+
         public override void Update(GameTime gameTime)
         {
             cameraManager.Update();
@@ -179,8 +191,7 @@ namespace UHSampleGame.Screens
                     currentArrowIndex = 1;
 
                 arrowUpdateTime = 0;
-            }
-            
+            }            
         }
 
         public override void Draw(GameTime gameTime)
@@ -237,7 +248,9 @@ namespace UHSampleGame.Screens
                     effect.EnableDefaultLighting();
                     effect.World = menuTransforms[mesh.ParentBone.Index] *
                         Matrix.CreateScale(16.0f) *
+                      //  Matrix.CreateRotationX(rotationX) * 
                         Matrix.CreateRotationY(modelRotation) * 
+                      //  Matrix.CreateRotationZ(rotationZ) * 
                         Matrix.CreateTranslation(menuPosition);
                        // * Matrix.CreateScale(10.0f);// *
                         /*Matrix.CreateRotationY(modelRotation)

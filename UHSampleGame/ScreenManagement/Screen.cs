@@ -91,6 +91,8 @@ namespace UHSampleGame.ScreenManagement
         /// </summary>
         /// <param name="gameTime">Contains timer information</param>
         public abstract void Draw(GameTime gameTime);
+
+        public abstract void Reload();
         #endregion
 
         #region Helpers
