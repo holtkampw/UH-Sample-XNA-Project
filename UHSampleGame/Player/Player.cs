@@ -16,6 +16,7 @@ using UHSampleGame.ScreenManagement;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.Events;
 using UHSampleGame.ProjectileManagment;
+using UHSampleGame.Screens;
 
 namespace UHSampleGame.Players
 {
@@ -193,6 +194,7 @@ namespace UHSampleGame.Players
         bool towerInfoScreenActivated = false;
         Tower hoverTower = null;
 
+        ScreenManager screenManager;
 
         #region Properties
        
@@ -221,6 +223,8 @@ namespace UHSampleGame.Players
                 playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum);
             else
                 playerMenuBg = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\player0" + playerNum + "computer");
+
+            screenManager = (ScreenManager)ScreenManager.Game.Services.GetService(typeof(ScreenManager));
         }
 
         public Player()
@@ -933,7 +937,10 @@ namespace UHSampleGame.Players
                     towerInfoScreenActivated = false;
                 }
 
-
+                if (input.CheckNewAction(InputAction.Pause, playerIndexes[PlayerNum]))
+                {
+                    screenManager.ShowScreen(new PauseScreen());
+                }
             }
         }
 

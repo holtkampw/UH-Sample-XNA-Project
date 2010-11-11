@@ -292,6 +292,7 @@ Content\PlayerMenu\TowerInfo\repair.xnb
 Content\PlayerMenu\TowerInfo\speed.xnb
 Content\PlayerMenu\TowerInfo\attack.xnb
 Content\PlayerMenu\towerInfoFont.xnb
+Content\OverlayScreens\pauseScreen.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv

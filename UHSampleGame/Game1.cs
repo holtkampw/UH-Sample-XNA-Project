@@ -167,7 +167,9 @@ namespace UHSampleGame
 
             inputManager.AddInput(InputAction.TowerInformation, Buttons.RightShoulder);
             inputManager.AddInput(InputAction.TowerInformation, Keys.P);
-            
+
+            inputManager.AddInput(InputAction.Pause, Buttons.Start);
+            inputManager.AddInput(InputAction.Pause, Keys.Z);
             
             //Setup Screen Manager
             screenManager = new ScreenManager(this);

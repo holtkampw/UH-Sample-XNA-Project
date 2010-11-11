@@ -232,7 +232,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 {
                     unitIconLocation[player] = new Vector2[MAX_UNIT_TYPES];
                     highlightUnitIconLocations[player] = new Rectangle[MAX_UNIT_TYPES];
-                    Vector2 unitIconStartPosition = new Vector2(170, 70);
+                    Vector2 unitIconStartPosition = new Vector2(180, 60);
                     for (int unit = 0; unit < MAX_UNIT_TYPES; unit++)
                     {
                         unitIconLocation[player][unit] = globalLocations[player] + unitIconStartPosition;
@@ -244,7 +244,7 @@ namespace UHSampleGame.CoreObjects.Towers
                         if (unit == 1)
                         {
                             unitIconStartPosition += unitIconRowOffset;
-                            unitIconStartPosition.X = 170;
+                            unitIconStartPosition.X = 180;
                         }
                     }
 

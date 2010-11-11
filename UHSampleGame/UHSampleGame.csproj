@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <ProjectGuid>{A06FBD7B-DC01-4507-8229-B23BDFAC269E}</ProjectGuid>
@@ -170,6 +170,7 @@
     <Compile Include="Screens\LoadScreen.cs" />
     <Compile Include="Screens\MenuScreenTest.cs" />
     <Compile Include="Screens\MultiplayerLobby.cs" />
+    <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="Screens\WinScreen.cs" />
     <Compile Include="TileSystem\Tile.cs" />
