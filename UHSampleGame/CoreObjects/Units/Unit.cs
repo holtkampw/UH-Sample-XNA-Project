@@ -24,6 +24,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         static int currentID = 0;
         public int ID;
+        public int MoneyToGive;
 
         int previousTileID;
         int goalTileID;
@@ -92,10 +93,12 @@ namespace UHSampleGame.CoreObjects.Units
                 case UnitType.SpeedBoat:
                     Damage = 50;
                     XPToGive = 2;
+                    MoneyToGive = 5;
                     break;
                 case UnitType.SpeederBoat:
                     Damage = 100;
                     XPToGive = 3;
+                    MoneyToGive = 10;
                     break;
                 default:
                     Damage = 10;

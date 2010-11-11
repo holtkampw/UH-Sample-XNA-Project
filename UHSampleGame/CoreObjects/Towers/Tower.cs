@@ -11,6 +11,7 @@ using UHSampleGame.CameraManagement;
 using UHSampleGame.ScreenManagement;
 
 using UHSampleGame.ProjectileManagment;
+using UHSampleGame.Players;
 
 
 namespace UHSampleGame.CoreObjects.Towers
@@ -82,6 +83,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         TimeSpan unitBuild = new TimeSpan(0, 0, 1);
         TimeSpan currentTimeSpan = new TimeSpan();
+        static int moneyToGive = 0;
 
         static int currentID = 0;
 
@@ -376,12 +378,17 @@ namespace UHSampleGame.CoreObjects.Towers
                 {
                     currentTimeToAttack = TimeSpan.Zero;
                     ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
+                    moneyToGive = unitToAttack.MoneyToGive;
                     bool kill = unitToAttack.TakeDamage(attackStrength);
-      
+
+                    if (kill)
+                    {
+                        PlayerCollection.EarnedMoneyForPlayer(PlayerNum, moneyToGive);
+                    }
                     if (Level < 4 && kill)
                     {
                         XP += currentXPToGive + (int)((Level / 4.0f) * currentXPToGive);
-                        if (XP > 100)
+                        if (XP >= 100 )
                         {
                             XPUpgrade();
                         }

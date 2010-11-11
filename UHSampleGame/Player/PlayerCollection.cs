@@ -217,5 +217,11 @@ namespace UHSampleGame.Players
             
             return currentTarget;
         }
+
+        public static void EarnedMoneyForPlayer(int playerNum, int money)
+        {
+            Players[playerNum].Money += money;
+            Players[playerNum].MoneyString = Players[playerNum].Money.ToString();
+        }
     }
 }

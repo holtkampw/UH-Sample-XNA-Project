@@ -937,7 +937,7 @@ namespace UHSampleGame.Players
                     towerInfoScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.Pause, playerIndexes[PlayerNum]))
+                if (input.CheckNewAction(InputAction.Pause, playerIndexes[PlayerNum] ))
                 {
                     screenManager.ShowScreen(new PauseScreen());
                 }
