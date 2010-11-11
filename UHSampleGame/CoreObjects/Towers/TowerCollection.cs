@@ -303,7 +303,7 @@ namespace UHSampleGame.CoreObjects.Towers
             if (tile.Tower != null)
             {
                 if (tile.Tower.TeamNum == teamNum)
-                    tile.Tower.Repair(money);
+                    return tile.Tower.Repair(money);
                 //Do we need this??
                 //for (int i = 0; i < MAX_TOWERS; i++)
                 //{
@@ -321,6 +321,7 @@ namespace UHSampleGame.CoreObjects.Towers
             {
                 if (tile.Tower.TeamNum == teamNum)
                     return tile.Tower.Upgrade(money);
+                
                 //DO we need this??
                 //for (int i = 0; i < MAX_TOWERS; i++)
                 //{

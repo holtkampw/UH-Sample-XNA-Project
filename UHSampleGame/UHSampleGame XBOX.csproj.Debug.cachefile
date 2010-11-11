@@ -5,7 +5,6 @@ Content\PlayerMenu\statusFont.xnb
 Content\PlayerMenu\towerTitle.xnb
 Content\PlayerMenu\towerPrice.xnb
 Content\PlayerMenu\towerDescription.xnb
-Content\HUD\levelFont.xnb
 Content\DummyText\background.xnb
 Content\Model\background.xnb
 Content\Tiles\1.xnb
@@ -153,14 +152,6 @@ Content\PlayerMenu\unit_meter_overlay_01.xnb
 Content\PlayerMenu\unit_meter_overlay_02.xnb
 Content\PlayerMenu\unit_meter_overlay_03.xnb
 Content\PlayerMenu\unit_meter_overlay_04.xnb
-Content\OverlayScreens\win_screen.xnb
-Content\OverlayScreens\mWinner_TeamA.xnb
-Content\OverlayScreens\mWinner_TeamB.xnb
-Content\OverlayScreens\mWinner_TeamC.xnb
-Content\OverlayScreens\mWinner_TeamD.xnb
-Content\HUD\towerStatus.xnb
-Content\HUD\towerStatus_Growth.xnb
-Content\HUD\towerStatus_Health.xnb
 Content\Model\box.xnb
 Content\Model\pyramids.xnb
 Content\AnimatedModel\dude.xnb
@@ -204,8 +195,6 @@ Content\Objects\Towers\towerC_Green.xnb
 Content\Objects\Towers\towerC_Orange.xnb
 Content\Objects\Towers\towerC_Pink.xnb
 Content\Objects\Towers\towerC_Yellow.xnb
-Content\Objects\Towers\baseTowerA.xnb
-Content\Objects\Terrain Objects\bouyRED.xnb
 Content\Video\intro.xnb
 Content\Video\oceanView.xnb
 Content\Video\splash.xnb
@@ -259,9 +248,19 @@ Content\Objects\Towers\towerC_Green_0.xnb
 Content\Objects\Towers\towerC_Orange_0.xnb
 Content\Objects\Towers\towerC_Pink_0.xnb
 Content\Objects\Towers\towerC_Yellow_0.xnb
+Content\OverlayScreens\win_screen.xnb
+Content\Objects\Towers\baseTowerA.xnb
 Content\Objects\Towers\enemyShipPlatformColor_0.xnb
+Content\OverlayScreens\mWinner_TeamA.xnb
+Content\OverlayScreens\mWinner_TeamB.xnb
+Content\OverlayScreens\mWinner_TeamC.xnb
+Content\OverlayScreens\mWinner_TeamD.xnb
+Content\Objects\Terrain Objects\bouyRED.xnb
 Content\Objects\Terrain Objects\bouy_Red_0.xnb
-Content\PlayerMenu\statusScreenFont.xnb
+Content\HUD\towerStatus.xnb
+Content\HUD\towerStatus_Growth.xnb
+Content\HUD\towerStatus_Health.xnb
+Content\HUD\levelFont.xnb
 Content\HUD\towerStatus_Growth1.xnb
 Content\HUD\towerStatus_Growth2.xnb
 Content\HUD\towerStatus_Growth3.xnb
@@ -271,14 +270,15 @@ Content\HUD\towerStatus3.xnb
 Content\HUD\towerStatus4.xnb
 Content\PlayerMenu\Icons\icon_health.xnb
 Content\PlayerMenu\Icons\icon_num_units.xnb
+Content\PlayerMenu\statusScreenFont.xnb
+Content\Objects\Towers\mainBase01Color_0.xnb
+Content\Objects\Towers\baseTowerB.xnb
 Content\PlayerMenu\Icons\speedBoat.xnb
 Content\PlayerMenu\Icons\speederBoat.xnb
-Content\Objects\Towers\baseTowerB.xnb
 Content\Objects\Copter\Boxes\box_02.xnb
 Content\Objects\Copter\Boxes\box_03.xnb
 Content\Objects\Copter\Boxes\box_04.xnb
 Content\Objects\Copter\Boxes\box_01.xnb
-Content\Objects\Towers\mainBase01Color_0.xnb
 Content\Objects\Copter\Boxes\boxBlue_0.xnb
 Content\Objects\Copter\Boxes\boxGreen_0.xnb
 Content\Objects\Copter\Boxes\boxPurple_0.xnb
@@ -287,6 +287,11 @@ Content\PlayerMenu\Attacking\1.xnb
 Content\PlayerMenu\Attacking\2.xnb
 Content\PlayerMenu\Attacking\3.xnb
 Content\PlayerMenu\Attacking\4.xnb
+Content\PlayerMenu\TowerInfo\recycle.xnb
+Content\PlayerMenu\TowerInfo\repair.xnb
+Content\PlayerMenu\TowerInfo\speed.xnb
+Content\PlayerMenu\TowerInfo\attack.xnb
+Content\PlayerMenu\towerInfoFont.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv
