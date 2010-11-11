@@ -63,6 +63,7 @@ namespace UHSampleGame.CoreObjects.Units
         static Matrix rotationMatrixX;
         static Matrix rotationMatrixY;
         static Matrix rotationMatrixZ;
+        static Matrix LocalRotationMatrix;
         static Matrix scaleRot;
         static  Matrix translation;
         public int Damage;
@@ -77,6 +78,7 @@ namespace UHSampleGame.CoreObjects.Units
             rotationMatrixX = Matrix.Identity;
             rotationMatrixY = Matrix.Identity;
             rotationMatrixZ = Matrix.Identity;
+            LocalRotationMatrix = Matrix.Identity;
             UpdateScaleRotations();
             normVel = new Vector3();
            
@@ -222,13 +224,55 @@ namespace UHSampleGame.CoreObjects.Units
         void UpdateTransforms()
         {
             Matrix.CreateTranslation(ref Position, out translation);
+            UpdateScaleRotations();
             Matrix.Multiply(ref scaleRot, ref translation, out Transforms); 
         }
 
         void UpdateScaleRotations()
         {
-            scaleRot = Matrix.Multiply(scaleMatrix, 
-                    Matrix.Multiply(rotationMatrixX, Matrix.Multiply(rotationMatrixY, rotationMatrixZ)));
+            scaleRot = Matrix.Multiply(scaleMatrix, LocalRotationMatrix);
+           // scaleRot = Matrix.Multiply(scaleMatrix, 
+            //        Matrix.Multiply(rotationMatrixX, Matrix.Multiply(rotationMatrixY, rotationMatrixZ)));
+        }
+
+        // O is your object's position
+        // P is the position of the object to face
+        // U is the nominal "up" vector (typically Vector3.Y)
+        // Note: this does not work when O is straight below or straight above P
+        void RotateToFace(Vector3 O, Vector3 P, Vector3 U)
+        {
+            Vector3 D = (P - O);
+            Vector3 Right = Vector3.Cross(U, D);
+            Vector3.Normalize(ref Right, out Right);
+            Vector3 Backwards = Vector3.Cross(Right, U);
+            Vector3.Normalize(ref Backwards, out Backwards);
+            Vector3 Up = Vector3.Cross(Backwards, Right);
+
+
+            //D.Normalize();
+
+            //roll = (float)Math.Asin(D.Z);
+            //yaw = (float)Math.Acos(D.X / Math.Cos(roll));
+            ////if (D.Y < 0)
+            ////    yaw = MathHelper.TwoPi - yaw;
+            //ResetYawPitchRoll();
+
+            LocalRotationMatrix.M11 = Right.X;
+            LocalRotationMatrix.M12 = Right.Y;
+            LocalRotationMatrix.M13 = Right.Z;
+            LocalRotationMatrix.M14 = 0;
+            LocalRotationMatrix.M21 = Up.X;
+            LocalRotationMatrix.M22 = Up.Y;
+            LocalRotationMatrix.M23 = Up.Z;
+            LocalRotationMatrix.M24 = 0;
+            LocalRotationMatrix.M31 = Backwards.X;
+            LocalRotationMatrix.M32 = Backwards.Y;
+            LocalRotationMatrix.M33 = Backwards.Z;
+            LocalRotationMatrix.M34 = 0;
+            LocalRotationMatrix.M41 = 0;
+            LocalRotationMatrix.M42 = 0;
+            LocalRotationMatrix.M43 = 0;
+            LocalRotationMatrix.M44 = 1;
         }
 
         void SetCurrentTile(int tileID)
@@ -321,7 +365,9 @@ namespace UHSampleGame.CoreObjects.Units
 
         void UpdatePositionAndRotation()
         {
+            RotateToFace(Position, focalPoint, Vector3.Up);
             Position += velocity;
+            
         }
 
         public bool TakeDamage(int damage)
