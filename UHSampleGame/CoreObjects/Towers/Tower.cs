@@ -352,8 +352,11 @@ namespace UHSampleGame.CoreObjects.Towers
 
             if (unitToAttack != null && !unitToAttack.IsDeployed())
             {
-                unitToAttack = unit;
-                currentXPToGive = unitToAttack.XPToGive;
+                if (unit.TeamNum != TeamNum)
+                {
+                    unitToAttack = unit;
+                    currentXPToGive = unitToAttack.XPToGive;
+                }
                 return;
             }
 
@@ -534,6 +537,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 tile.tileNeighbors[i].UnregisterTowerListenerForUnit(ref t);
             }
         }
+
         #endregion
 
         #region Matrix Setters
