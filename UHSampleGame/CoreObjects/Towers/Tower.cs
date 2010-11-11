@@ -41,8 +41,12 @@ namespace UHSampleGame.CoreObjects.Towers
         public int TeamNum;
         public int PlayerNum;
         public Unit unitToAttack;
+        public List<Tower> towersToAttack;
+        public Tile tile;
 
         int currentXPToGive;
+
+        public event TowerEvent Died;
 
         private TimeSpan timeToAttack;
         private TimeSpan currentTimeToAttack;
@@ -77,8 +81,9 @@ namespace UHSampleGame.CoreObjects.Towers
             this.Type = type;
             this.Status = TowerStatus.Inactive;
             unitToAttack = null;
+            towersToAttack = new List<Tower>();
 
-            timeToAttack = new TimeSpan(0, 0, 0, 0, 200);
+            timeToAttack = new TimeSpan(0, 0, 1);
             currentTimeToAttack = new TimeSpan();
 
             //Depends on Type
@@ -131,6 +136,28 @@ namespace UHSampleGame.CoreObjects.Towers
         public bool IsActive()
         {
             return Status != TowerStatus.Inactive;
+        }
+
+        public void RegisterAttackTower(ref Tower tower)
+        {
+            if (tower.TeamNum == this.TeamNum)
+                return;
+
+            if (towersToAttack.Count > 0 && towersToAttack[0].Health < tower.Health)
+            {
+                towersToAttack.Insert(0, tower);
+            }
+            else if (!towersToAttack.Contains(tower))
+            {
+                towersToAttack.Add(tower);
+            }
+
+
+        }
+
+        public void UnregisterAttackTower(ref Tower tower)
+        {
+            towersToAttack.Remove(tower);
         }
 
         public void UnregisterAttackUnit(ref Unit unit)
@@ -190,9 +217,23 @@ namespace UHSampleGame.CoreObjects.Towers
                             XPUpgrade();
                         }
                     }
-                    
+
                 }
-                else if (unitToAttack != null && unitToAttack.Health <= 0)
+                else if (towersToAttack.Count > 0)
+                {
+                    currentTimeToAttack = TimeSpan.Zero;
+                    ProjectileManager.AddParticle(this.Position, towersToAttack[0].Position);
+                    bool kill = towersToAttack[0].TakeDamage(attackStrength);
+                    //if (kill)
+                       // towersToAttack.Remove(towersToAttack[0]);
+                }
+
+                if (towersToAttack.Count > 0 && towersToAttack[0].Health <= 0)
+                {
+                    towersToAttack.RemoveAt(0);
+                }
+
+                if (unitToAttack != null && unitToAttack.Health <= 0)
                 {
                     unitToAttack = null;
                 }
@@ -254,6 +295,29 @@ namespace UHSampleGame.CoreObjects.Towers
 
                 currentTimeSpan = TimeSpan.Zero;
             }
+        }
+
+        public bool TakeDamage(int damage)
+        {
+            Health -= damage;
+
+            if (Health <= 0)
+            {
+                OnDied();
+                return true;
+            }
+            return false;
+        }
+
+        public void OnDied()
+        {
+            Tower t = this;
+            this.Status = TowerStatus.Inactive;
+            tile.RemoveBlockableObject();
+            this.tile.UnregisterTowerListenerForTower(ref t);
+            this.tile.UnregisterTowerListenerForUnit(ref t);
+            
+
         }
         #endregion
 

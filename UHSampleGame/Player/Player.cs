@@ -943,7 +943,7 @@ namespace UHSampleGame.Players
 
             if (IsDead)
             {
-                if (UnitCollection.Destroy(PlayerNum) && TowerCollection.Destroy(PlayerNum))
+                if (UnitCollection.Destroy(PlayerNum) && TowerCollection.DestroyAll(PlayerNum))
                 {
                     PlayerBase.Destroy();
                     Vector3 nv = new Vector3();
@@ -1062,6 +1062,7 @@ namespace UHSampleGame.Players
         {
             ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
 
+            if (!unitScreenActivated)
             if (!unitScreenActivated && !towerInfoScreenActivated)
             {
                 switch (currentlySelectedPlayerStatus)
@@ -1080,6 +1081,7 @@ namespace UHSampleGame.Players
                         break;
                 }
             }
+            else
             else if(unitScreenActivated)
             {
                 DrawDeployTab();

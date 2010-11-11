@@ -562,8 +562,13 @@ namespace UHSampleGame.TileSystem
 
                 for (int i = 0; i < walkableNeighbors.Count; i++)
                 {
-                    walkableNeighbors[i].RegisterTowerListener(ref tower);
+                    walkableNeighbors[i].RegisterTowerListenerForUnit(ref tower);
                 }
+                for (int i = 0; i < Tile2.tileNeighbors.Count; i++)
+                {
+                    Tile2.tileNeighbors[i].RegisterTowerListenerForTower(ref tower);
+                }
+                tower.tile = Tile2;
                 OnTowerCreated();
                 return true;
             }
@@ -598,7 +603,12 @@ namespace UHSampleGame.TileSystem
 
             for (int i = 0; i < walkableNeighbors.Count; i++)
             {
-                walkableNeighbors[i].RegisterTowerListener(ref tower);
+                walkableNeighbors[i].RegisterTowerListenerForUnit(ref tower);
+            }
+
+            for (int i = 0; i < tile.tileNeighbors.Count; i++)
+            {
+                tile.tileNeighbors[i].RegisterTowerListenerForTower(ref tower);
             }
             //OnTowerCreated();
         }

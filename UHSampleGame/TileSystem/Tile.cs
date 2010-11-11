@@ -36,6 +36,9 @@ namespace UHSampleGame.TileSystem
         public event UnitEvent UnitEnter;
         public event UnitEvent UnitExit;
 
+        public event TowerEvent TowerEnter;
+        public event TowerEvent TowerExit;
+
         /// <summary>
         /// Represents a Tile2 of a Tile2 map
         /// </summary>
@@ -110,7 +113,7 @@ namespace UHSampleGame.TileSystem
         {
             Tower = gameObject;
             SetTileType(TileType.Blocked);
-            //TileMap.UpdateTilePaths();
+            OnTowerEnter(ref gameObject);
         }
 
         public void RemoveBlockableObject()
@@ -118,9 +121,10 @@ namespace UHSampleGame.TileSystem
             if (TileType == TileType.Base)
                 return;
 
+            OnTowerExit(ref Tower);
             Tower = null;
             SetTileType(TileType.Walkable);
-           // TileMap.UpdateTilePaths();
+
         }
 
         public void UpdatePathTo(Tile baseTile)
@@ -141,13 +145,28 @@ namespace UHSampleGame.TileSystem
             return new Vector3(Position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, Position.Z + rand.Next(-sizeY, sizeY));
         }
 
-        public void RegisterTowerListener(ref Tower tower)
+        public void RegisterTowerListenerForTower(ref Tower tower)
+        {
+            TowerEnter += tower.RegisterAttackTower;
+            TowerExit += tower.UnregisterAttackTower;
+
+            if(Tower != null)
+                OnTowerEnter(ref this.Tower);
+        }
+
+        public void UnregisterTowerListenerForTower(ref Tower tower)
+        {
+            TowerEnter -= tower.RegisterAttackTower;
+            TowerExit -= tower.UnregisterAttackTower;
+        }
+
+        public void RegisterTowerListenerForUnit(ref Tower tower)
         {
             UnitEnter += tower.RegisterAttackUnit;
             UnitExit += tower.UnregisterAttackUnit;
         }
 
-        public void UnregisterTowerListener(ref Tower tower)
+        public void UnregisterTowerListenerForUnit(ref Tower tower)
         {
             UnitEnter -= tower.RegisterAttackUnit;
             UnitExit -= tower.UnregisterAttackUnit;
@@ -211,6 +230,18 @@ namespace UHSampleGame.TileSystem
 
             }
 
+        }
+
+        private void OnTowerEnter(ref Tower tower)
+        {
+            if (TowerEnter != null)
+                TowerEnter(ref tower);
+        }
+
+        private void OnTowerExit(ref Tower tower)
+        {
+            if (TowerExit != null)
+                TowerExit(ref tower);
         }
 
         private void OnUnitExit(ref Unit unit)
