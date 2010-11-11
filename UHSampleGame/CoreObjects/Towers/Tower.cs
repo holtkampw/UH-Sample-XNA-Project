@@ -131,6 +131,13 @@ namespace UHSampleGame.CoreObjects.Towers
             Status = TowerStatus.Active;
             PlayerNum = playerNum;
             TeamNum = teamNum;
+            HealthCapacity = 100;
+            Health = HealthCapacity;
+            XP = 0;
+            Level = 1;
+            Cost = 100;
+            TotalInvestedCost = Cost;
+            towersToAttack.Clear();
         }
 
         public bool IsActive()
@@ -151,7 +158,6 @@ namespace UHSampleGame.CoreObjects.Towers
             {
                 towersToAttack.Add(tower);
             }
-
 
         }
 
@@ -312,12 +318,14 @@ namespace UHSampleGame.CoreObjects.Towers
         public void OnDied()
         {
             Tower t = this;
+            t.towersToAttack.Clear();
             this.Status = TowerStatus.Inactive;
             tile.RemoveBlockableObject();
-            this.tile.UnregisterTowerListenerForTower(ref t);
-            this.tile.UnregisterTowerListenerForUnit(ref t);
-            
-
+            for (int i = 0; i < tile.tileNeighbors.Count; i++)
+            {
+                tile.tileNeighbors[i].UnregisterTowerListenerForTower(ref t);
+                tile.tileNeighbors[i].UnregisterTowerListenerForUnit(ref t);
+            }
         }
         #endregion
 

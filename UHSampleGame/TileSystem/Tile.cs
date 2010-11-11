@@ -150,7 +150,7 @@ namespace UHSampleGame.TileSystem
             TowerEnter += tower.RegisterAttackTower;
             TowerExit += tower.UnregisterAttackTower;
 
-            if(Tower != null)
+            if(this.Tower != null)
                 OnTowerEnter(ref this.Tower);
         }
 

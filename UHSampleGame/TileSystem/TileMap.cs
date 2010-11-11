@@ -555,7 +555,6 @@ namespace UHSampleGame.TileSystem
             AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
             if (IsTilePathsValid())
             {
-
                 UpdateTilePaths();
 
                 walkableNeighbors = GetWalkableNeighbors(Tile2);
@@ -576,6 +575,11 @@ namespace UHSampleGame.TileSystem
            // RemoveTower(ref Tile2);
 
             Tile2.RemoveBlockableObject();
+            for (int i = 0; i < Tile2.tileNeighbors.Count; i++)
+            {
+                Tile2.tileNeighbors[i].UnregisterTowerListenerForTower(ref tower);
+                Tile2.tileNeighbors[i].UnregisterTowerListenerForUnit(ref tower);
+            }
             AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
             for (int j = 0; j < bases.Count; j++)
             {
@@ -621,7 +625,13 @@ namespace UHSampleGame.TileSystem
 
         public static void RemoveTower(ref Tile Tile2)
         {
+            for (int i = 0; i < Tile2.tileNeighbors.Count; i++)
+            {
+                Tile2.tileNeighbors[i].UnregisterTowerListenerForTower(ref Tile2.Tower);
+                Tile2.tileNeighbors[i].UnregisterTowerListenerForUnit(ref Tile2.Tower);
+            }
             Tile2.RemoveBlockableObject();
+            
             AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
             UpdateTilePaths();
         }
