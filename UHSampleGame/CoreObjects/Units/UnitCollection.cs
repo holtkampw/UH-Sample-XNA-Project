@@ -128,7 +128,7 @@ namespace UHSampleGame.CoreObjects.Units
 
         public static Unit GetUnitByID(int id)
         {
-            return units[id / (unitTypes.Length * MAX_UNITS)][(id / MAX_UNITS) % unitTypes.Length][id % MAX_UNITS];
+            return units[id / (unitTypes.Length * NumPlayers *MAX_UNITS)][(id / MAX_UNITS) % unitTypes.Length][id % MAX_UNITS];
         }
 
         public static int AllUnitCount()
