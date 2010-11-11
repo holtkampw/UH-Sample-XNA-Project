@@ -394,6 +394,7 @@ namespace UHSampleGame.CoreObjects.Towers
                                 //draw health bar
                                 hudHealthDestination.X = (int)(hudBackgroundLocation.X + hudHealthOffset.X);
                                 hudHealthDestination.Y = (int)(hudBackgroundLocation.Y + hudHealthOffset.Y);
+                                hudHealthDestination.Width =  (int)((towers[p][j][k].Health /(float)towers[p][j][k].HealthCapacity) *hudHealthMaxDestination.Width);
                                 ScreenManager.SpriteBatch.Draw(hudHealthBar,
                                     hudHealthDestination, hudHealthSource, hudColor);
 
