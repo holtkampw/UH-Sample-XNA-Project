@@ -41,6 +41,11 @@ namespace UHSampleGame.Screens
             videoPlayer.Dispose();
         }
 
+        public override void Reload()
+        {
+            
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (!IsVisible)

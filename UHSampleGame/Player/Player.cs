@@ -190,6 +190,8 @@ namespace UHSampleGame.Players
         Color enemyTargetOpacity = new Color(255, 255, 255, 0);
         static Vector2[] attackingPlayerLocation;
 
+        bool towerInfoScreenActivated = false;
+
 
         #region Properties
        
@@ -921,6 +923,16 @@ namespace UHSampleGame.Players
                     pickEnemyTargetPressed = true;
                 }
 
+                if (input.CheckNewAction(InputAction.TowerInformation, playerIndexes[PlayerNum]))
+                {
+                    towerInfoScreenActivated = true;
+                }
+
+                if (input.CheckNewReleaseAction(InputAction.TowerInformation, playerIndexes[PlayerNum]))
+                {
+                    towerInfoScreenActivated = false;
+                }
+
 
             }
         }
@@ -1050,7 +1062,7 @@ namespace UHSampleGame.Players
         {
             ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
 
-            if (!unitScreenActivated)
+            if (!unitScreenActivated && !towerInfoScreenActivated)
             {
                 switch (currentlySelectedPlayerStatus)
                 {
@@ -1068,9 +1080,13 @@ namespace UHSampleGame.Players
                         break;
                 }
             }
-            else
+            else if(unitScreenActivated)
             {
                 DrawDeployTab();
+            }
+            else if (towerInfoScreenActivated)
+            {
+                DrawTowerInformation();
             }
 
 
@@ -1225,7 +1241,11 @@ namespace UHSampleGame.Players
                 //    unitMeterHightlightSource, new Color(255, 255, 255, 50));
 
             }
+        }
 
+        void DrawTowerInformation()
+        {
+            TileMap.GetTowerInformationAtPosition(avatar.Position);
         }
     }
 }

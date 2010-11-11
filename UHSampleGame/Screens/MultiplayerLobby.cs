@@ -73,6 +73,11 @@ namespace UHSampleGame.Screens
         {
             
         }
+
+        public override void Reload()
+        {
+            
+        }
         #endregion
 
         #region Input

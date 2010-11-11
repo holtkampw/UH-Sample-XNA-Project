@@ -42,6 +42,10 @@ namespace UHSampleGame.Screens
             this.levelType = levelType;
         }
 
+        public override void Reload()
+        {
+            
+        }
 
         public override void LoadContent()
         {

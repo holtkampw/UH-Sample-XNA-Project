@@ -109,6 +109,12 @@ namespace UHSampleGame.Screens
             GC.Collect();//force garbage collection
             isLoaded = true;
         }
+
+        public override void Reload()
+        {
+            cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
+            cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
+        }
         #endregion
 
         #region Update/Draw

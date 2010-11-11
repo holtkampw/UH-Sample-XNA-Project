@@ -164,6 +164,9 @@ namespace UHSampleGame
 
             inputManager.AddInput(InputAction.PickEnemyTarget, Buttons.LeftShoulder);
             inputManager.AddInput(InputAction.PickEnemyTarget, Keys.Q);
+
+            inputManager.AddInput(InputAction.TowerInformation, Buttons.RightShoulder);
+            inputManager.AddInput(InputAction.TowerInformation, Keys.P);
             
             
             //Setup Screen Manager

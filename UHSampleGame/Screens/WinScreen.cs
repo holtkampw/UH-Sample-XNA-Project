@@ -36,6 +36,11 @@ namespace UHSampleGame.Screens
             
         }
 
+        public override void Reload()
+        {
+            
+        }
+
         public override void HandleInput(InputManager input)
         {
             if (input.CheckNewAction(InputAction.Selection))
