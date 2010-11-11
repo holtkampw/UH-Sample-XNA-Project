@@ -124,7 +124,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         static Vector2[][] unitIconLocation;
         static Rectangle[][] highlightUnitIconLocations;
-        const int MAX_UNIT_TYPES = 8;
+        const int MAX_UNIT_TYPES = 4;
         static Vector2 unitIconOffset = new Vector2(44.0f, 0.0f);
         static Vector2 unitIconRowOffset = new Vector2(0.0f, 44.0f);
         static Texture2D highlightIcon;
@@ -232,24 +232,19 @@ namespace UHSampleGame.CoreObjects.Towers
                 {
                     unitIconLocation[player] = new Vector2[MAX_UNIT_TYPES];
                     highlightUnitIconLocations[player] = new Rectangle[MAX_UNIT_TYPES];
-                    Vector2 unitIconStartPosition = new Vector2(154, 36);
+                    Vector2 unitIconStartPosition = new Vector2(170, 70);
                     for (int unit = 0; unit < MAX_UNIT_TYPES; unit++)
                     {
-                        if (unit == 4)
-                        {
-                            //move over invalid middle
-                            unitIconStartPosition += unitIconOffset;
-                        }
                         unitIconLocation[player][unit] = globalLocations[player] + unitIconStartPosition;
                         highlightUnitIconLocations[player][unit] = new Rectangle((int)
                             (unitIconLocation[player][unit].X - 5.0f + (highlightIcon.Width / 2)),
                             (int)(unitIconLocation[player][unit].Y - 5.0f + (highlightIcon.Height / 2)),
                             highlightIcon.Width, highlightIcon.Height);
                         unitIconStartPosition += unitIconOffset;
-                        if (unit == 2 || unit == 4)
+                        if (unit == 1)
                         {
                             unitIconStartPosition += unitIconRowOffset;
-                            unitIconStartPosition.X = 154;
+                            unitIconStartPosition.X = 170;
                         }
                     }
 
@@ -263,11 +258,11 @@ namespace UHSampleGame.CoreObjects.Towers
 
                 unitInformation = new UnitInformation[MAX_UNIT_TYPES];
 
-                unitInformation[1].type = UnitType.SpeedBoat;
-                unitInformation[1].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\speedBoat");
+                unitInformation[0].type = UnitType.SpeedBoat;
+                unitInformation[0].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\speedBoat");
 
-                unitInformation[6].type = UnitType.SpeederBoat;
-                unitInformation[6].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\speederBoat");
+                unitInformation[2].type = UnitType.SpeederBoat;
+                unitInformation[2].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\speederBoat");
 
             }
 
@@ -286,9 +281,9 @@ namespace UHSampleGame.CoreObjects.Towers
             UpgradeAmounts[4].price = 6000;
             UpgradeAmounts[4].priceString = UpgradeAmounts[4].price.ToString();
 
-            unitTypeSelected = 1;
+            unitTypeSelected = 0;
             unitSelectionPosition.X = 0;
-            unitSelectionPosition.Y = 1;
+            unitSelectionPosition.Y = 0;
 
             DestroyCost();
             UpgradeCost();
@@ -301,6 +296,13 @@ namespace UHSampleGame.CoreObjects.Towers
             Status = TowerStatus.Active;
             PlayerNum = playerNum;
             TeamNum = teamNum;
+            HealthCapacity = 100;
+            Health = HealthCapacity;
+            XP = 0;
+            Level = 1;
+            Cost = 100;
+            TotalInvestedCost = Cost;
+            towersToAttack.Clear();
         }
 
         public bool IsActive()
@@ -321,7 +323,6 @@ namespace UHSampleGame.CoreObjects.Towers
             {
                 towersToAttack.Add(tower);
             }
-
 
         }
 
@@ -517,12 +518,14 @@ namespace UHSampleGame.CoreObjects.Towers
         public void OnDied()
         {
             Tower t = this;
+            t.towersToAttack.Clear();
             this.Status = TowerStatus.Inactive;
             tile.RemoveBlockableObject();
-            this.tile.UnregisterTowerListenerForTower(ref t);
-            this.tile.UnregisterTowerListenerForUnit(ref t);
-            
-
+            for (int i = 0; i < tile.tileNeighbors.Count; i++)
+            {
+                tile.tileNeighbors[i].UnregisterTowerListenerForTower(ref t);
+                tile.tileNeighbors[i].UnregisterTowerListenerForUnit(ref t);
+            }
         }
         #endregion
 
@@ -579,30 +582,58 @@ namespace UHSampleGame.CoreObjects.Towers
 
         public void InputLeft()
         {
-            if (unitSelectionPosition.X > -1)
-                unitSelectionPosition.X -= 1;
-            ValidateUnitInput();
+            if (unitTypeSelected == 1)
+            {
+                if (unitInformation[0].icon != null)
+                    unitTypeSelected = 0;
+            }
+            else if (unitTypeSelected == 3)
+            {
+                if (unitInformation[2].icon != null)
+                    unitTypeSelected = 2;
+            }
         }
 
         public void InputRight()
         {
-            if (unitSelectionPosition.X < 1)
-                unitSelectionPosition.X += 1;
-            ValidateUnitInput();
+            if (unitTypeSelected == 0)
+            {
+                if (unitInformation[1].icon != null)
+                    unitTypeSelected = 1;
+            }
+            else if (unitTypeSelected == 2)
+            {
+                if (unitInformation[3].icon != null)
+                    unitTypeSelected = 3;
+            }
         }
 
         public void InputUp()
         {
-            if (unitSelectionPosition.Y < 1)
-                unitSelectionPosition.Y += 1;
-            ValidateUnitInput();
+            if (unitTypeSelected == 2)
+            {
+                if (unitInformation[0].icon != null)
+                    unitTypeSelected = 0;
+            }
+            else if (unitTypeSelected == 3)
+            {
+                if (unitInformation[1].icon != null)
+                    unitTypeSelected = 1;
+            }
         }
 
         public void InputDown()
         {
-            if (unitSelectionPosition.Y > -1)
-                unitSelectionPosition.Y -= 1;
-            ValidateUnitInput();
+            if (unitTypeSelected == 0)
+            {
+                if (unitInformation[2].icon != null)
+                    unitTypeSelected = 2;
+            }
+            else if (unitTypeSelected == 1)
+            {
+                if (unitInformation[3].icon != null)
+                    unitTypeSelected = 3;
+            }
         }
 
         public void ValidateUnitInput()
@@ -611,13 +642,13 @@ namespace UHSampleGame.CoreObjects.Towers
             // 3 | - | 4
             // 5 | 6 | 7
             //case 1
-            if (unitSelectionPosition.X == 0 && unitSelectionPosition.Y == 1)
+            if (unitSelectionPosition.X == 0 && unitSelectionPosition.Y == 0)
             {
-                unitTypeSelected = 1;         
+                unitTypeSelected = 0;         
             }
-            else if (unitSelectionPosition.X == 0 && unitSelectionPosition.Y == -1)
+            else if (unitSelectionPosition.X == 0 && unitSelectionPosition.Y == 1)
             {
-                unitTypeSelected = 6;
+                unitTypeSelected = 2;
             }
             UnitTypeToBuild = unitInformation[unitTypeSelected].type;
         }

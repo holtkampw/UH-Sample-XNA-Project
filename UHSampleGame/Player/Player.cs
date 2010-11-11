@@ -193,6 +193,7 @@ namespace UHSampleGame.Players
         bool towerInfoScreenActivated = false;
         Tower hoverTower = null;
 
+
         #region Properties
        
         #endregion
@@ -637,6 +638,7 @@ namespace UHSampleGame.Players
                     avatarMoved = true;
                 }
                 
+
                 if (avatar.Position.Z > TileMap.Bottom)
                 {
                     avatar.Position = new Vector3(avatar.Position.X, avatar.Position.Y, TileMap.Bottom);
@@ -698,14 +700,7 @@ namespace UHSampleGame.Players
                         //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
                     }
-                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
-                    {
-                        //if (((int)defenseTowerSelected - 1) >= 0)
-                        //    defenseTowerSelected--;
-                        //else
-                        //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
-                        lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
-                    }
+                    
                 }
 
                 if (input.CheckNewAction(InputAction.PlayerMenuRight, playerIndexes[PlayerNum]))
@@ -735,14 +730,7 @@ namespace UHSampleGame.Players
                         //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
                     }
-                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.UnitTower)
-                    {
-                        //if (((int)defenseTowerSelected - 1) >= 0)
-                        //    defenseTowerSelected--;
-                        //else
-                        //    defenseTowerSelected = NUM_DEFENSE_TOWERS - 1;
-                        lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
-                    }
+                   
                 }
 
                 if (input.CheckNewAction(InputAction.PlayerMenuUp, playerIndexes[PlayerNum]))
@@ -768,6 +756,7 @@ namespace UHSampleGame.Players
                             offenseTowerSelected = NUM_OFFENSE_TOWERS - 1;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
                     }
+
 
                     unitScreenActivated = false;
                 }
@@ -795,7 +784,6 @@ namespace UHSampleGame.Players
                             offenseTowerSelected =0;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
                     }
-
                     unitScreenActivated = false;
                 }
 
@@ -925,6 +913,7 @@ namespace UHSampleGame.Players
 
                 if (input.CheckAction(InputAction.TowerInformation, playerIndexes[PlayerNum]))
                 {
+                    towerInfoScreenActivated = true;
                     if (avatarMoved || !towerInfoScreenActivated)
                     {
                         if ((hoverTower = TileMap.GetTowerInformationAtPosition(avatar.Position)) != null)
@@ -1256,6 +1245,7 @@ namespace UHSampleGame.Players
 
         void DrawTowerInformation(GameTime gameTime)
         {
+            TileMap.GetTowerInformationAtPosition(avatar.Position);
             ScreenManager.SpriteBatch.Draw(backgroundTabs[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
             if(hoverTower != null)
                 hoverTower.DrawHud(gameTime);
