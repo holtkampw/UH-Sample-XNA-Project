@@ -924,7 +924,7 @@ namespace UHSampleGame.Players
                 if (input.CheckAction(InputAction.TowerInformation, playerIndexes[PlayerNum]))
                 {
                     towerInfoScreenActivated = true;
-                    if (avatarMoved || !towerInfoScreenActivated)
+                    if (true)//avatarMoved || !towerInfoScreenActivated)
                     {
                         if ((hoverTower = TileMap.GetTowerInformationAtPosition(avatar.Position)) != null)
                         {

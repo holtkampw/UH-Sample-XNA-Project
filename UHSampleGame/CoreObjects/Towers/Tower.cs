@@ -158,7 +158,7 @@ namespace UHSampleGame.CoreObjects.Towers
             currentTimeToAttack = new TimeSpan();
 
             //Depends on Type
-            HealthCapacity = 100;
+            HealthCapacity = 1000;
             Health = HealthCapacity;
             XP = 0;
             Level = 0;
@@ -304,7 +304,7 @@ namespace UHSampleGame.CoreObjects.Towers
             Status = TowerStatus.Active;
             PlayerNum = playerNum;
             TeamNum = teamNum;
-            HealthCapacity = 100;
+            HealthCapacity = 1000;
             Health = HealthCapacity;
             XP = 0;
             Level = 1;
@@ -519,7 +519,7 @@ namespace UHSampleGame.CoreObjects.Towers
         public bool TakeDamage(int damage)
         {
             Health -= damage;
-
+  
             if (Health <= 0)
             {
                 OnDied();
@@ -527,6 +527,7 @@ namespace UHSampleGame.CoreObjects.Towers
             }
             else
             {
+                
                 RepairCost();
                 DestroyCost();
             }

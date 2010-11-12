@@ -97,7 +97,7 @@ namespace UHSampleGame
             inputManager.AddInput(InputAction.MenuCancel, Buttons.B);
 
             inputManager.AddInput(InputAction.ExitGame, Buttons.Back);
-            inputManager.AddInput(InputAction.ExitGame, Keys.Z);
+            inputManager.AddInput(InputAction.ExitGame, Keys.Escape);
 
 
             this.Services.AddService(typeof(InputManager), inputManager);
