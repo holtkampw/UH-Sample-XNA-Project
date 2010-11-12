@@ -30,7 +30,7 @@ namespace UHSampleGame.ProjectileManagment
         {
             settings.TextureName = "explosion";
 
-            settings.MaxParticles = 20000;
+            settings.MaxParticles = 30000;
 
             settings.Duration = TimeSpan.FromSeconds(2);
             settings.DurationRandomness = 1;

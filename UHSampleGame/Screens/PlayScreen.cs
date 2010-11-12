@@ -60,7 +60,7 @@ namespace UHSampleGame.Screens
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
-            numTiles = new Vector2(10, 10);
+            numTiles = new Vector2(14, 12);
 
             if (numTiles.X == 10 && numTiles.Y == 10)
             {

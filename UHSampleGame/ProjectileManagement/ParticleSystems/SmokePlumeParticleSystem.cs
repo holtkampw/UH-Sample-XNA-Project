@@ -30,7 +30,7 @@ namespace UHSampleGame.ProjectileManagment
         {
             settings.TextureName = "smoke";
 
-            settings.MaxParticles = 600;
+            settings.MaxParticles = 1000;
 
             settings.Duration = TimeSpan.FromSeconds(10);
 

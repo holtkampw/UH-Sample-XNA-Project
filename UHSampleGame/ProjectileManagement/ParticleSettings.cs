@@ -26,7 +26,7 @@ namespace UHSampleGame.ProjectileManagment
 
 
         // Maximum number of particles that can be displayed at one time.
-        public int MaxParticles = 5000;
+        public int MaxParticles = 10000;
 
 
         // How long these particles will last.

@@ -30,7 +30,7 @@ namespace UHSampleGame.ProjectileManagment
         {
             settings.TextureName = "fire";
 
-            settings.MaxParticles = 2400;
+            settings.MaxParticles = 10000;
 
             settings.Duration = TimeSpan.FromSeconds(2);
 
