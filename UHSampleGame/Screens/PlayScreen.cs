@@ -62,26 +62,9 @@ namespace UHSampleGame.Screens
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
-            numTiles = new Vector2(20, 16);
+            numTiles = new Vector2(22, 16);
 
-            if (numTiles.X == 10 && numTiles.Y == 10)
-            {
-                //cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
-                //cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
-                cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
-                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
-                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
-            }
-            else if (numTiles.X == 20 && numTiles.Y == 10)
-            {
-                cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
-                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
-            }
-            else if (numTiles.X == 20 && numTiles.Y == 16)
-            {
-                cameraManager.SetPosition(new Vector3(0.0f, 2000.0f, 500.0f));
-                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
-            }
+            SetupCamera();
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
             background = ScreenManager.Game.Content.Load<Texture2D>("PlayScreen\\oceanWaveBackground");
@@ -128,9 +111,32 @@ namespace UHSampleGame.Screens
 
         public override void Reload()
         {
-            cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
-            cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
+            SetupCamera();
         }
+
+        public void SetupCamera()
+        {
+            if (numTiles.X == 10 && numTiles.Y == 10)
+            {
+                //cameraManager.SetPosition(new Vector3(0.0f, 1400.0f, 500.0f));
+                //cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 50.0f));
+                cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
+                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
+                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
+            }
+            else if (numTiles.X == 20 && numTiles.Y == 10)
+            {
+                cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
+                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
+            }
+            else if (numTiles.X == 22 && numTiles.Y == 16)
+            {
+                cameraManager.SetPosition(new Vector3(0.0f, 2800.0f, 500.0f));
+                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
+            }
+        }
+
+
         #endregion
 
         #region Update/Draw
