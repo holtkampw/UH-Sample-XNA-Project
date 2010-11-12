@@ -21,6 +21,7 @@ using UHSampleGame.ProjectileManagment;
 using UHSampleGame.PathFinding;
 
 using Microsoft.Xna.Framework.Media;
+using System.Threading;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -47,6 +48,7 @@ namespace UHSampleGame.Screens
         Vector2 numTiles;
 
         PlayerSetup[] playerSetup;
+
         #endregion
 
         #region Initialization
@@ -117,6 +119,9 @@ namespace UHSampleGame.Screens
             LevelManager.AddPlayer(aI);*/
             //LevelManager.LoadLevel(1);
 
+            //Start Thread            
+            TileMap.pathThread.Start();
+
             GC.Collect();//force garbage collection
             isLoaded = true;
         }
@@ -150,6 +155,7 @@ namespace UHSampleGame.Screens
             TowerCollection.Update(gameTime);
             PlayerCollection.Update(gameTime);
             ProjectileManager.Update(gameTime);
+            TileMap.Update(gameTime);
             DebugInfo.Update(gameTime);
             
         }
@@ -200,7 +206,8 @@ namespace UHSampleGame.Screens
         #region Unload
         public override void UnloadContent()
         {
-
+            TileMap.pathThreadExit.Set();
+            TileMap.pathThread.Join();
         }
         #endregion
 

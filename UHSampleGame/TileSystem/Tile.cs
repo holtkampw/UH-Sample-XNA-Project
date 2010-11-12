@@ -129,12 +129,14 @@ namespace UHSampleGame.TileSystem
 
         public void UpdatePathTo(Tile baseTile)
         {
-           // List<Tile> newList = new List<Tile>();
+            
+            // List<Tile> newList = new List<Tile>();
             AStar2.InitAstar(this, baseTile);
-           // List<Tile> tempPath = Paths[baseTile.ID];
+            // List<Tile> tempPath = Paths[baseTile.ID];
             List<int> tempIntPath = PathsInts[baseTile.ID];
             AStar2.FindPath(ref tempIntPath);//new List<Tile>(AStar2.FindPath());
             //Paths[baseTile.ID] = tempPath;
+            
         }
 
         public Vector3 GetRandPoint()

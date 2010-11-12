@@ -11,6 +11,7 @@ using UHSampleGame.ScreenManagement;
 using UHSampleGame.Events;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.ProjectileManagment;
+using UHSampleGame.PathFinding;
 
 namespace UHSampleGame.CoreObjects.Base
 {
@@ -227,6 +228,12 @@ namespace UHSampleGame.CoreObjects.Base
             nv.Y = Position.Y+5;
             nv.Z = Position.Z;
             ProjectileManager.AddParticle(Position, Position);
+        }
+
+        public bool IsThereAPathTo(int tileID, int blockedTile)
+        {
+            AStar2.ReadOnlyInit(this.Tile, TileMap.Tiles[tileID], blockedTile);
+            return (AStar2.GetReadOnlyPathCount() > 0);
         }
     }
 }

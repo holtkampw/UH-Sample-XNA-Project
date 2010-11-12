@@ -10,6 +10,8 @@ using UHSampleGame.CoreObjects.Towers;
 using UHSampleGame.CoreObjects;
 using UHSampleGame.Events;
 using UHSampleGame.PathFinding;
+using System.Threading;
+using UHSampleGame.Screens;
 
 namespace UHSampleGame.TileSystem
 {
@@ -41,6 +43,10 @@ namespace UHSampleGame.TileSystem
         static List<Tile> neighbors = new List<Tile>();
         static int totalTiles;
         static List<List<int>> intNeighbors = new List<List<int>>();
+
+        static int MAX_THREADS = 5;
+        public static Thread pathThread;
+        public static EventWaitHandle pathThreadExit;
         
         // public static event TowerCreated TowerCreated;
 
@@ -110,7 +116,14 @@ namespace UHSampleGame.TileSystem
             allNeighbors.Add(NeighborTile.Left);
 
 
+            //pathThread = new Thread[MAX_THREADS];
+            //for (int i = 0; i < MAX_THREADS; i++)
+            //{
+                //pathThread[i] = new Thread(ThreadedTilePaths);
+            //}
 
+            pathThread = new Thread(ThreadedTilePaths);
+            pathThreadExit = new ManualResetEvent(false);
         }
 
         public static void SetBase(Base setBase, Tile tile)
@@ -507,16 +520,57 @@ namespace UHSampleGame.TileSystem
             return intNeighbors[Tile2.ID];
         }
 
+        public static void Update(GameTime gameTime)
+        {
+            //kill all threads
+        }
+
         public static void UpdateTilePaths()
         {
-            for (int j = 0; j < bases.Count; j++)
+            //int index = -1;
+            ////find thread
+            //for (int i = 0; i < MAX_THREADS; i++)
+            //{
+            //    if (pathThread[i].ThreadState == ThreadState.Aborted || pathThread[i].ThreadState == ThreadState.Unstarted)
+            //    {
+            //        index = i;
+            //        break;
+            //    }
+            //}
+
+            //if (index != -1)
+            //{
+            //    //pathThread[index] = new Thread(threadedTilePaths);
+            //    pathThread[index].Start(index);
+            //}
+            
+        }
+
+        public static void ThreadedTilePaths(object indexToKill)
+        {
+#if XBOX
+            int[] cpus = new int[1];
+            cpus[0] = 3;
+            Thread.CurrentThread.SetProcessorAffinity(cpus);
+#endif
+            if (AStar2.SetupDone)
             {
-                for (int i = 0; i < tiles.Count; i++)
+                while (!pathThreadExit.WaitOne(2)) //thread goes on forever!
                 {
-                    if (tiles[i].IsWalkable())
-                        tiles[i].UpdatePathTo(bases[j].Tile);
+                    for (int j = 0; j < bases.Count; j++)
+                    {
+                        for (int i = 0; i < tiles.Count; i++)
+                        {
+                            if (tiles[i].IsWalkable())
+                                tiles[i].UpdatePathTo(bases[j].Tile);
+                        }
+                    }
                 }
             }
+            
+            //pathThread[(int)indexToKill].Join();
+            //pathThread[(int)indexToKill] = null;
+           // pathThread[(int)indexToKill].Abort();
         }
 
         public static bool IsTilePathsValid()
@@ -529,6 +583,24 @@ namespace UHSampleGame.TileSystem
                     {
                         bases[i].Tile.UpdatePathTo(bases[j].Tile);
                         if (bases[j].Tile.PathsInts[bases[i].Tile.ID].Count == 0)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        public static bool IsTilePathsValidFor(int newBlockableTile)
+        {
+            for (int j = 0; j < bases.Count; j++)
+            {
+                for (int i = 0; i < bases.Count; i++)
+                {
+                    if (i != j)
+                    {
+                        if (!bases[j].IsThereAPathTo(bases[i].Tile.ID, newBlockableTile))
                         {
                             return false;
                         }
@@ -551,11 +623,13 @@ namespace UHSampleGame.TileSystem
         public static bool SetTower(ref Tower tower, ref Tile Tile2)
         {
            
-            Tile2.SetBlockableObject(tower);
-            AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
-            if (IsTilePathsValid())
+            //Tile2.SetBlockableObject(tower);
+            //AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
+            if (IsTilePathsValidFor(Tile2.ID))
             {
-                UpdateTilePaths();
+                Tile2.SetBlockableObject(tower);
+                AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
+                //UpdateTilePaths();
 
                 walkableNeighbors = GetWalkableNeighbors(Tile2);
 
@@ -574,23 +648,23 @@ namespace UHSampleGame.TileSystem
 
            // RemoveTower(ref Tile2);
 
-            Tile2.RemoveBlockableObject();
-            for (int i = 0; i < Tile2.tileNeighbors.Count; i++)
-            {
-                Tile2.tileNeighbors[i].UnregisterTowerListenerForTower(ref tower);
-                Tile2.tileNeighbors[i].UnregisterTowerListenerForUnit(ref tower);
-            }
-            AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
-            for (int j = 0; j < bases.Count; j++)
-            {
-                for (int i = 0; i < bases.Count; i++)
-                {
-                    if (i != j)
-                    {
-                        bases[i].Tile.UpdatePathTo(bases[j].Tile);
-                    }
-                }
-            }
+            //Tile2.RemoveBlockableObject();
+            //for (int i = 0; i < Tile2.tileNeighbors.Count; i++)
+            //{
+            //    Tile2.tileNeighbors[i].UnregisterTowerListenerForTower(ref tower);
+            //    Tile2.tileNeighbors[i].UnregisterTowerListenerForUnit(ref tower);
+            //}
+            //AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
+            //for (int j = 0; j < bases.Count; j++)
+            //{
+            //    for (int i = 0; i < bases.Count; i++)
+            //    {
+            //        if (i != j)
+            //        {
+            //            bases[i].Tile.UpdatePathTo(bases[j].Tile);
+            //        }
+            //    }
+            //}
             return false;
 
         }
@@ -633,7 +707,7 @@ namespace UHSampleGame.TileSystem
             Tile2.RemoveBlockableObject();
             
             AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
-            UpdateTilePaths();
+            //UpdateTilePaths();
         }
 
         public static Tile GetTileForPlayer(int playerNum)
