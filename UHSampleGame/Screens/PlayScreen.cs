@@ -60,7 +60,7 @@ namespace UHSampleGame.Screens
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
-            numTiles = new Vector2(14, 12);
+            numTiles = new Vector2(20, 16);
 
             if (numTiles.X == 10 && numTiles.Y == 10)
             {
@@ -74,6 +74,11 @@ namespace UHSampleGame.Screens
             {
                 cameraManager.SetPosition(new Vector3(0.0f, 1700.0f, 500.0f));
                 cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, 100.0f));
+            }
+            else if (numTiles.X == 20 && numTiles.Y == 16)
+            {
+                cameraManager.SetPosition(new Vector3(0.0f, 2000.0f, 500.0f));
+                cameraManager.SetLookAtPoint(new Vector3(0.0f, 0.0f, -500.0f));
             }
 
             background = ScreenManager.Game.Content.Load<Texture2D>("water_tiled");
@@ -95,7 +100,7 @@ namespace UHSampleGame.Screens
 
             Song backgroundSong = ScreenManager.Game.Content.Load<Song>("Sounds\\Backgrounds\\multiplayer"); 
             MediaPlayer.Play(backgroundSong);
-            MediaPlayer.Volume = 0.3f;
+            MediaPlayer.Volume = 0.1f;
             MediaPlayer.IsRepeating = true;
 
             //TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));

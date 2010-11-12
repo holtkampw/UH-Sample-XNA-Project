@@ -394,7 +394,7 @@ namespace UHSampleGame.CoreObjects.Towers
                     {
                         PlayerCollection.EarnedMoneyForPlayer(PlayerNum, moneyToGive);
                        
-                        killEffect.Play(0.8f, 1.0f, 0.0f);
+                        killEffect.Play(0.4f, 1.0f, 0.0f);
                     }
                     if (Level < 4 && kill)
                     {

@@ -112,7 +112,7 @@ namespace UHSampleGame.Screens
                     selected--;
 
                 modelRotation += rotationOffset;
-                tickEffect.Play(0.6f, 1.0f, 0.0f);
+                tickEffect.Play(0.15f, 1.0f, 0.0f);
             }
             
             if (input.CheckNewAction(InputAction.MenuRight))
@@ -123,7 +123,7 @@ namespace UHSampleGame.Screens
                     selected++;
 
                 modelRotation -= rotationOffset;
-                tickEffect.Play(0.6f, 1.0f, 0.0f);
+                tickEffect.Play(0.15f, 1.0f, 0.0f);
             }
             
             if (input.CheckNewAction(InputAction.Selection))
