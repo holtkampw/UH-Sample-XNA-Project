@@ -11,6 +11,7 @@ using UHSampleGame.CameraManagement;
 using UHSampleGame.InputManagement;
 using UHSampleGame.LevelManagement;
 using UHSampleGame.Players;
+using Microsoft.Xna.Framework.Audio;
 
 namespace UHSampleGame.Screens
 {
@@ -46,6 +47,7 @@ namespace UHSampleGame.Screens
         string text;
         SpriteFont font;
         Vector2 text_position;
+        SoundEffect tickEffect;
 
         public MenuScreenTest()
             :base("MenuScreenTest")
@@ -96,6 +98,8 @@ namespace UHSampleGame.Screens
             a_button_position = new Vector2(720.0f, 600.0f);
             font = ScreenManager.Game.Content.Load<SpriteFont>("MainMenu\\font");
             text_position = new Vector2(790.0f, 600.0f);
+
+            tickEffect = ScreenManager.Game.Content.Load<SoundEffect>("Sounds\\Effects\\explosion");
         }
 
         public override void HandleInput(InputManager input)
@@ -108,6 +112,7 @@ namespace UHSampleGame.Screens
                     selected--;
 
                 modelRotation += rotationOffset;
+                tickEffect.Play(0.6f, 1.0f, 0.0f);
             }
             
             if (input.CheckNewAction(InputAction.MenuRight))
@@ -118,6 +123,7 @@ namespace UHSampleGame.Screens
                     selected++;
 
                 modelRotation -= rotationOffset;
+                tickEffect.Play(0.6f, 1.0f, 0.0f);
             }
             
             if (input.CheckNewAction(InputAction.Selection))

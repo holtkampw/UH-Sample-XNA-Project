@@ -31,8 +31,8 @@ namespace UHSampleGame.Players
         static ScreenManager screenManager;
         static int winTeam;
         static int elapsedMoneyUpdateTime;
-        static int maxMoneyUpdateTime = 10000;
-        static int moneyAmountPerUpdate = 20;
+        static int maxMoneyUpdateTime = 1000;
+        static int moneyAmountPerUpdate = 2;
         static bool updateMoney = false;
         #endregion
 

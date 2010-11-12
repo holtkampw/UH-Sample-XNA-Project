@@ -12,6 +12,8 @@ using UHSampleGame.ScreenManagement;
 
 using UHSampleGame.ProjectileManagment;
 using UHSampleGame.Players;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 
 namespace UHSampleGame.CoreObjects.Towers
@@ -132,6 +134,8 @@ namespace UHSampleGame.CoreObjects.Towers
         static Texture2D highlightIcon;
         static UnitInformation[] unitInformation;
         static Vector2[] globalLocations = { Vector2.Zero, new Vector2(40f, 30f), new Vector2(40f, 200f), new Vector2(40f, 370f), new Vector2(40f, 540f) };
+
+        static SoundEffect killEffect;
 
         Vector2 unitSelectionPosition = Vector2.Zero;
         #endregion
@@ -266,6 +270,8 @@ namespace UHSampleGame.CoreObjects.Towers
                 unitInformation[2].type = UnitType.SpeederBoat;
                 unitInformation[2].icon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\speederBoat");
 
+                killEffect = ScreenManager.Game.Content.Load<SoundEffect>("Sounds\\Effects\\explosion");
+
             }
 
             // TowerUpgrades[nextLevel]
@@ -387,6 +393,8 @@ namespace UHSampleGame.CoreObjects.Towers
                     if (kill)
                     {
                         PlayerCollection.EarnedMoneyForPlayer(PlayerNum, moneyToGive);
+                       
+                        killEffect.Play(0.8f, 1.0f, 0.0f);
                     }
                     if (Level < 4 && kill)
                     {
@@ -603,6 +611,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 if (unitInformation[2].icon != null)
                     unitTypeSelected = 2;
             }
+            ValidateUnitInput();
         }
 
         public void InputRight()
@@ -617,6 +626,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 if (unitInformation[3].icon != null)
                     unitTypeSelected = 3;
             }
+            ValidateUnitInput();
         }
 
         public void InputUp()
@@ -631,6 +641,7 @@ namespace UHSampleGame.CoreObjects.Towers
                 if (unitInformation[1].icon != null)
                     unitTypeSelected = 1;
             }
+            ValidateUnitInput();
         }
 
         public void InputDown()
@@ -645,22 +656,23 @@ namespace UHSampleGame.CoreObjects.Towers
                 if (unitInformation[3].icon != null)
                     unitTypeSelected = 3;
             }
+            ValidateUnitInput();
         }
 
         public void ValidateUnitInput()
         {
-            // 0 | 1 | 2
-            // 3 | - | 4
-            // 5 | 6 | 7
-            //case 1
-            if (unitSelectionPosition.X == 0 && unitSelectionPosition.Y == 0)
-            {
-                unitTypeSelected = 0;         
-            }
-            else if (unitSelectionPosition.X == 0 && unitSelectionPosition.Y == 1)
-            {
-                unitTypeSelected = 2;
-            }
+            //// 0 | 1 | 2
+            //// 3 | - | 4
+            //// 5 | 6 | 7
+            ////case 1
+            //if (unitSelectionPosition.X == 0 && unitSelectionPosition.Y == 0)
+            //{
+            //    unitTypeSelected = 0;         
+            //}
+            //else if (unitSelectionPosition.X == 0 && unitSelectionPosition.Y == 1)
+            //{
+            //    unitTypeSelected = 2;
+            //}
             UnitTypeToBuild = unitInformation[unitTypeSelected].type;
         }
 

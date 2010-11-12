@@ -293,6 +293,10 @@ Content\PlayerMenu\TowerInfo\speed.xnb
 Content\PlayerMenu\TowerInfo\attack.xnb
 Content\PlayerMenu\towerInfoFont.xnb
 Content\OverlayScreens\pauseScreen.xnb
+Content\Sounds\Backgrounds\multiplayer.xnb
+Content\Sounds\Effects\explosion.xnb
+Content\Sounds\Effects\pop.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv
+Content\Sounds\Backgrounds\multiplayer.wma

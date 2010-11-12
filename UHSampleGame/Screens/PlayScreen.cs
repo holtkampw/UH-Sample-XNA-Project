@@ -92,6 +92,12 @@ namespace UHSampleGame.Screens
             BaseCollection.Initialize();
             PlayerCollection.Initialize();
             ProjectileManager.Initialize();
+
+            Song backgroundSong = ScreenManager.Game.Content.Load<Song>("Sounds\\Backgrounds\\multiplayer"); 
+            MediaPlayer.Play(backgroundSong);
+            MediaPlayer.Volume = 0.3f;
+            MediaPlayer.IsRepeating = true;
+
             //TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
             //PlayerCollection.Initialize(playerTypes);
         
