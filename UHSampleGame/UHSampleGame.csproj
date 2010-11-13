@@ -166,6 +166,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="ScreenManagement\Screen.cs" />
     <Compile Include="ScreenManagement\ScreenManager.cs" />
+    <Compile Include="Screens\ControlsScreen.cs" />
     <Compile Include="Screens\IntroScreen.cs" />
     <Compile Include="Screens\LoadScreen.cs" />
     <Compile Include="Screens\MenuScreenTest.cs" />
