@@ -195,6 +195,7 @@ namespace UHSampleGame.Players
         Tower hoverTower = null;
 
         ScreenManager screenManager;
+        private int tempAmount;
 
         #region Properties
        
@@ -679,8 +680,14 @@ namespace UHSampleGame.Players
 
                 if (input.CheckNewAction(InputAction.TowerUpgrade, playerIndexes[PlayerNum]))
                 {
-                    Money -= TowerCollection.Upgrade(PlayerNum, Money, ref this.avatar.Position);
+                    tempAmount = TowerCollection.Upgrade(PlayerNum, Money, ref this.avatar.Position);
+                    Money -= tempAmount;
                     MoneyString = Money.ToString();
+                    if (tempAmount > 0)
+                    {
+                        ProjectileManager.AddStar(TileMap.GetTilePosFromPos(avatar.Position));
+                    }
+
                 }
 
                 if (input.CheckNewAction(InputAction.PlayerMenuLeft, playerIndexes[PlayerNum]))

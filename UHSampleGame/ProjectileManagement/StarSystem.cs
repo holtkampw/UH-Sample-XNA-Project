@@ -14,14 +14,7 @@ using Microsoft.Xna.Framework;
 
 namespace UHSampleGame.ProjectileManagment
 {
-    /// <summary>
-    /// This class demonstrates how to combine several different particle systems
-    /// to build up a more sophisticated composite effect. It implements a rocket
-    /// projectile, which arcs up into the sky using a ParticleEmitter to leave a
-    /// steady stream of trail particles behind it. After a while it explodes,
-    /// creating a sudden burst of explosion and smoke particles.
-    /// </summary>
-    class Projectile
+    class Star
     {
         #region Constants
 
@@ -33,13 +26,15 @@ namespace UHSampleGame.ProjectileManagment
         const float verticalVelocityRange = 10;
         const float gravity = 2;
 
+        const float radius = 60;
+        float degrees = 0;
+        float altitude = 0;
         #endregion
 
         #region Fields
 
-        ParticleSystem explosionParticles;
-        ParticleSystem explosionSmokeParticles;
-        ParticleEmitter trailEmitter;
+        ParticleSystem starParticles;
+        ParticleEmitter starTrail;
 
         public Vector3 Position;
         public Vector3 velocity;
@@ -54,12 +49,9 @@ namespace UHSampleGame.ProjectileManagment
         /// <summary>
         /// Constructs a new projectile.
         /// </summary>
-        public Projectile(ParticleSystem explosionParticles,
-                          ParticleSystem explosionSmokeParticles,
-                          ParticleSystem projectileTrailParticles)
+        public Star(ParticleSystem starParticles)
         {
-            this.explosionParticles = explosionParticles;
-            this.explosionSmokeParticles = explosionSmokeParticles;
+            this.starParticles = starParticles;
 
             // Start at the origin, firing in a random (but roughly upward) direction.
             Position = Vector3.Zero;
@@ -68,18 +60,14 @@ namespace UHSampleGame.ProjectileManagment
             velocity.Y = (float)(random.NextDouble() + 0.5) * verticalVelocityRange;
             velocity.Z = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
 
-            // Use the particle emitter helper to output our trail particles.
-            trailEmitter = new ParticleEmitter(projectileTrailParticles,
+            this.starTrail = new ParticleEmitter(starParticles,
                                                trailParticlesPerSecond, Position);
         }
 
-        public void SetPositionAndVelocity(Vector3 position, Vector3 velocity)
+        public void SetPositionAndVelocity(Vector3 position)
         {
             this.Position = position;
-            this.velocity.X = velocity.X * sidewaysVelocityRange;
-            this.velocity.Y = velocity.Y * verticalVelocityRange;
-            this.velocity.Z = velocity.Z * sidewaysVelocityRange;
-            Active = true;
+            this.Active = true;
         }
 
 
@@ -91,29 +79,58 @@ namespace UHSampleGame.ProjectileManagment
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // Simple projectile physics.
-            Position += velocity * elapsedTime;
-            velocity.Y -= elapsedTime * gravity;
-            age += elapsedTime;
+            //Position += velocity * elapsedTime;
+            //velocity.Y -= elapsedTime * gravity;
+            //age += elapsedTime;
 
-            // Update the particle emitter, which will create our particle trail.
-            trailEmitter.Update(gameTime, Position);
-
+            //Vector3 newPosition = Position + RandomPointOnCircle();
             // If enough time has passed, explode! Note how we pass our velocity
             // in to the AddParticle method: this lets the explosion be influenced
             // by the speed and direction of the projectile which created it.
-            if (age > projectileLifespan)
+
+            //starTrail.Update(gameTime, newPosition);
+
+            starParticles.AddParticle(Position + GetNextPointOnCircle(), Vector3.Zero);
+            degrees += 10f;
+            if(degrees >= 360)
+                altitude += 8f;
+
+            if (degrees >= 720)
             {
-                for (int i = 0; i < numExplosionParticles; i++)
-                    explosionParticles.AddParticle(Position, velocity);
-
-                for (int i = 0; i < numExplosionSmokeParticles; i++)
-                    explosionSmokeParticles.AddParticle(Position, velocity);
-
+                degrees = 0;
+                altitude = 0;
                 Active = false;
                 return false;
             }
-                
+            //if (age > projectileLifespan)
+            //{
+            //    for (int i = 0; i < numExplosionParticles; i++)
+            //        starParticles.AddParticle(newPosition, velocity);
+
+            //    Active = false;
+            //    return false;
+            //}
+
             return true;
+        }
+
+        Vector3 RandomPointOnCircle()
+        {
+            const float radius = 100;
+            const float height = 100;
+
+            double angle = random.NextDouble() * Math.PI * 2;
+
+            float x = (float)Math.Cos(angle);
+            float y = (float)Math.Sin(angle);
+
+            return new Vector3(x * radius, 0, y * radius);
+        }
+
+
+        Vector3 GetNextPointOnCircle()
+        {
+            return new Vector3((float)(radius * Math.Cos((Math.PI / 180) * degrees)), altitude, (float)(radius * Math.Sin((Math.PI / 180) * degrees)));
         }
     }
 }

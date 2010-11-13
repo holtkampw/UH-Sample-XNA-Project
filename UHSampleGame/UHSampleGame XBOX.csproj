@@ -116,9 +116,11 @@
     <Compile Include="ProjectileManagement\ParticleSystems\FireParticleSystem.cs" />
     <Compile Include="ProjectileManagement\ParticleSystems\ProjectileTrailParticleSystem.cs" />
     <Compile Include="ProjectileManagement\ParticleSystems\SmokePlumeParticleSystem.cs" />
+    <Compile Include="ProjectileManagement\ParticleSystems\StarParticles.cs" />
     <Compile Include="ProjectileManagement\ParticleVertex.cs" />
     <Compile Include="ProjectileManagement\Projectile.cs" />
     <Compile Include="ProjectileManagement\ProjectileManager.cs" />
+    <Compile Include="ProjectileManagement\StarSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
