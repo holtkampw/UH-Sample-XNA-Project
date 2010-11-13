@@ -218,7 +218,11 @@ namespace UHSampleGame.CoreObjects.Units
                         }
                     }
                     else
-                        throw new NotImplementedException("NO walkable neighbors... handle this!");
+                    {
+                        Health = 0;
+                        OnDied();
+                        //throw new NotImplementedException("NO walkable neighbors... handle this!");
+                    }
                 }
 
                 if (CheckIfStuck())
@@ -289,6 +293,12 @@ namespace UHSampleGame.CoreObjects.Units
 
         void SetCurrentTile(int tileID)
         {
+            if (tileID == -1)
+            {
+                Health = 0;
+                OnDied();
+                //FIX THIS...........................
+            }
             previousTileID = CurrentTileID;
             CurrentTileID = tileID;
             
@@ -345,7 +355,9 @@ namespace UHSampleGame.CoreObjects.Units
 
                     if (stuckTiles.Count == 1 && !TileMap.Tiles[CurrentTileID].IsWalkable())
                     {
-                        throw new NotImplementedException("No walkable neighbors with blocked current Tile2... handle this!");
+                        Health = 0;
+                        OnDied();
+                        //throw new NotImplementedException("No walkable neighbors with blocked current Tile2... handle this!");
                     }
 
                     SetFocalPointAndVelocity(stuckTiles[rand.Next(stuckTiles.Count)].ID);

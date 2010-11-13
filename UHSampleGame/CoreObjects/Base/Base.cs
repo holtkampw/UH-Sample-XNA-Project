@@ -232,7 +232,7 @@ namespace UHSampleGame.CoreObjects.Base
 
         public bool IsThereAPathTo(int tileID, int blockedTile)
         {
-            AStar2.ReadOnlyInit(this.Tile, TileMap.Tiles[tileID], blockedTile);
+            AStar2.ReadOnlyInit(this.Tile.ID, TileMap.Tiles[tileID].ID, blockedTile);
             return (AStar2.GetReadOnlyPathCount() > 0);
         }
     }
