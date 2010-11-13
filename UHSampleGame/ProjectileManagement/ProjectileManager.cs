@@ -42,6 +42,11 @@ namespace UHSampleGame.ProjectileManagment
         static Stopwatch timer;
         static float FrequencyInverse;
         static float elapsedMilliseconds;
+
+        public static object projectileLock = new object();
+        public static object upgradeLock = new object();
+        public static object repairLock = new object();
+
         #endregion
 
         public static void Initialize()
@@ -141,19 +146,21 @@ namespace UHSampleGame.ProjectileManagment
 
         public static void AddParticle(Vector3 startPosition, Vector3 endPosition)
         {
-
-            for (int i = 0; i < MAX_PROJECTILES; i++)
+            lock (projectileLock)
             {
-                if (!projectiles[i].Active)
-                {       
-                    vel.X = (endPosition.X - startPosition.X);
-                    vel.Y = (endPosition.Y - startPosition.Y);
-                    vel.Z = (endPosition.Z - startPosition.Z);
-                    vel.Normalize();
-                    projectiles[i].SetPositionAndVelocity(startPosition, vel);
-                    projectileCount++;
-                    projectiles[i].Active = true;
-                    break;
+                for (int i = 0; i < MAX_PROJECTILES; i++)
+                {
+                    if (!projectiles[i].Active)
+                    {
+                        vel.X = (endPosition.X - startPosition.X);
+                        vel.Y = (endPosition.Y - startPosition.Y);
+                        vel.Z = (endPosition.Z - startPosition.Z);
+                        vel.Normalize();
+                        projectiles[i].SetPositionAndVelocity(startPosition, vel);
+                        projectileCount++;
+                        projectiles[i].Active = true;
+                        break;
+                    }
                 }
             }
         }
@@ -163,14 +170,18 @@ namespace UHSampleGame.ProjectileManagment
             if (playerNum > 4 || playerNum < 1)
                 return;
 
-            for (int i = 0; i < MAX_PROJECTILES; i++)
+            lock (upgradeLock)
             {
-                if (!upgradeEffect[playerNum][i].Active)
+
+                for (int i = 0; i < MAX_PROJECTILES; i++)
                 {
-                    upgradeEffect[playerNum][i].SetPositionAndVelocity(position);
-                    upgradeCount[playerNum]++;
-                    upgradeEffect[playerNum][i].Active = true;
-                    break;
+                    if (!upgradeEffect[playerNum][i].Active)
+                    {
+                        upgradeEffect[playerNum][i].SetPositionAndVelocity(position);
+                        upgradeCount[playerNum]++;
+                        upgradeEffect[playerNum][i].Active = true;
+                        break;
+                    }
                 }
             }
         }
@@ -180,14 +191,17 @@ namespace UHSampleGame.ProjectileManagment
             if (playerNum > 4 || playerNum < 1)
                 return;
 
-            for (int i = 0; i < MAX_PROJECTILES; i++)
+            lock (repairLock)
             {
-                if (!repairEffect[playerNum][i].Active)
+                for (int i = 0; i < MAX_PROJECTILES; i++)
                 {
-                    repairEffect[playerNum][i].SetPositionAndVelocity(position);
-                    repairCount[playerNum]++;
-                    repairEffect[playerNum][i].Active = true;
-                    break;
+                    if (!repairEffect[playerNum][i].Active)
+                    {
+                        repairEffect[playerNum][i].SetPositionAndVelocity(position);
+                        repairCount[playerNum]++;
+                        repairEffect[playerNum][i].Active = true;
+                        break;
+                    }
                 }
             }
         }
@@ -222,40 +236,19 @@ namespace UHSampleGame.ProjectileManagment
                 repairCount[1] == 0 && repairCount[2] == 0 && repairCount[3] == 0 && repairCount[4] == 0)
                 return;
 
-
-            for (int i = 0; (i < MAX_PROJECTILES) && (updatedProjectiles < projectilesToUpdate) ; i++)
+            lock (projectileLock)
             {
-                if (projectiles[i].Active)
+                for (int i = 0; (i < MAX_PROJECTILES) && (updatedProjectiles < projectilesToUpdate); i++)
                 {
-                    if (!projectiles[i].Update(elapsedTime))
+                    if (projectiles[i].Active)
                     {
-                        // Remove projectiles at the end of their life.
-                        projectiles[i].Active = false;
-                        projectileCount--;
-                        updatedProjectiles++;
-                        if (updatedProjectiles >= projectilesToUpdate)
+                        if (!projectiles[i].Update(elapsedTime))
                         {
-                            break;
-                        }
-                    }
-                }
-            }
-
-            for (int p = 1; p < 5; p++)
-            {
-                updatedStars = 0;
-                starsToUpdate = upgradeCount[p];
-                for (int i = 0; (i < MAX_PROJECTILES) && (updatedStars < starsToUpdate); i++)
-                {
-                    if (upgradeEffect[p][i].Active)
-                    {
-                        if (!upgradeEffect[p][i].Update(elapsedTime))
-                        {
-                            upgradeEffect[p][i].Active = false;
-                            upgradeCount[p]--;
-                            updatedStars++;
-
-                            if (updatedStars >= starsToUpdate)
+                            // Remove projectiles at the end of their life.
+                            projectiles[i].Active = false;
+                            projectileCount--;
+                            updatedProjectiles++;
+                            if (updatedProjectiles >= projectilesToUpdate)
                             {
                                 break;
                             }
@@ -267,20 +260,49 @@ namespace UHSampleGame.ProjectileManagment
             for (int p = 1; p < 5; p++)
             {
                 updatedStars = 0;
-                starsToUpdate = repairCount[p];
-                for (int i = 0; (i < MAX_PROJECTILES) && (updatedStars < starsToUpdate); i++)
+                lock (upgradeLock)
                 {
-                    if (repairEffect[p][i].Active)
+                    starsToUpdate = upgradeCount[p];
+                    for (int i = 0; (i < MAX_PROJECTILES) && (updatedStars < starsToUpdate); i++)
                     {
-                        if (!repairEffect[p][i].Update(elapsedTime))
+                        if (upgradeEffect[p][i].Active)
                         {
-                            repairEffect[p][i].Active = false;
-                            repairCount[p]--;
-                            updatedStars++;
-
-                            if (updatedStars >= starsToUpdate)
+                            if (!upgradeEffect[p][i].Update(elapsedTime))
                             {
-                                break;
+                                upgradeEffect[p][i].Active = false;
+                                upgradeCount[p]--;
+                                updatedStars++;
+
+                                if (updatedStars >= starsToUpdate)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int p = 1; p < 5; p++)
+            {
+                updatedStars = 0;
+                lock (repairLock)
+                {
+                    starsToUpdate = repairCount[p];
+                    for (int i = 0; (i < MAX_PROJECTILES) && (updatedStars < starsToUpdate); i++)
+                    {
+                        if (repairEffect[p][i].Active)
+                        {
+                            if (!repairEffect[p][i].Update(elapsedTime))
+                            {
+                                repairEffect[p][i].Active = false;
+                                repairCount[p]--;
+                                updatedStars++;
+
+                                if (updatedStars >= starsToUpdate)
+                                {
+                                    break;
+                                }
                             }
                         }
                     }
@@ -291,6 +313,7 @@ namespace UHSampleGame.ProjectileManagment
 
         public static void Draw(float elapsedTime)
         {
+
             explosionParticles.SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
             explosionSmokeParticles.SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
             projectileTrailParticles.SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
