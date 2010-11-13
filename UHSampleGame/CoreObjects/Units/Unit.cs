@@ -209,7 +209,16 @@ namespace UHSampleGame.CoreObjects.Units
                 {
                     List<Tile> goodNieghbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
                     if (goodNieghbors.Count > 0)
-                        SetFocalPointAndVelocity(goodNieghbors[0].PathsInts[goalTileID][1]);
+                    {
+                        for (int i = 0; i < goodNieghbors.Count; i++)
+                        {
+                            if (goodNieghbors[i].PathsInts[goalTileID].Count > 0)
+                            {
+                                SetFocalPointAndVelocity(goodNieghbors[i].PathsInts[goalTileID][1]);
+                                break;
+                            }
+                        }
+                    }
                     else
                         throw new NotImplementedException("NO walkable neighbors... handle this!");
                 }
