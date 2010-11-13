@@ -479,7 +479,8 @@ namespace UHSampleGame.TileSystem
                     {
                         for (int i = 0; i < tiles.Count; i++)
                         {
-                            lock (AStar2.tileInformationLock)
+                            //lock (AStar2.tileInformationLock)
+                            lock(AStar2.locks[i])
                             {
                                 if (tiles[i].IsWalkable())
                                     tiles[i].UpdatePathTo(bases[j].Tile);
@@ -496,20 +497,32 @@ namespace UHSampleGame.TileSystem
 
         public static bool IsTilePathsValid()
         {
+            bool pathInvalid = false;
             for (int j = 0; j < bases.Count; j++)
             {
                 for (int i = 0; i < bases.Count; i++)
                 {
                     if (i != j)
                     {
-                        lock (AStar2.tileInformationLock)
+                        pathInvalid = false;
+                        //lock (AStar2.tileInformationLock)
+                        lock(AStar2.locks[i])
                         {
                             bases[i].Tile.UpdatePathTo(bases[j].Tile);
+                        }
+
+                        lock (AStar2.locks[j])
+                        {
                             if (bases[j].Tile.PathsInts[bases[i].Tile.ID].Count == 0)
                             {
-                                return false;
+                                pathInvalid = true;
+                                //return false;
                             }
                         }
+                        
+                        if (pathInvalid)
+                            return false;
+                        
                     }
                 }
             }

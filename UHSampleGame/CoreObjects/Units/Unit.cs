@@ -153,16 +153,14 @@ namespace UHSampleGame.CoreObjects.Units
             //this.goalTile = goalTile;
             this.Position = baseTile.Position;
 
-            lock (AStar2.tileInformationLock)
+            //lock (AStar2.tileInformationLock)
+            lock(AStar2.locks[CurrentTileID])
             {
                 SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
-
-
-                Status = UnitStatus.Deployed;
-
-                UpdatePath();
-                UpdateTransforms();
             }
+            Status = UnitStatus.Deployed;
+            UpdatePath();
+            UpdateTransforms();
         }
 
         public bool IsActive()
@@ -209,7 +207,16 @@ namespace UHSampleGame.CoreObjects.Units
                 {
                     List<Tile> goodNieghbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
                     if (goodNieghbors.Count > 0)
-                        SetFocalPointAndVelocity(goodNieghbors[0].PathsInts[goalTileID][1]);
+                    {
+                        for (int i = 0; i < goodNieghbors.Count; i++)
+                        {
+                            if (goodNieghbors[i].PathsInts[goalTileID].Count > 0)
+                            {
+                                SetFocalPointAndVelocity(goodNieghbors[i].PathsInts[goalTileID][1]);
+                                break;
+                            }
+                        }
+                    }
                     else
                         throw new NotImplementedException("NO walkable neighbors... handle this!");
                 }

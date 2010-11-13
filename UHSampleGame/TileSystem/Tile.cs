@@ -19,7 +19,7 @@ namespace UHSampleGame.TileSystem
         public Vector2 Size;
         public TileType TileType;
         public Tower Tower;
-        public List<Tile> tileNeighbors = new List<Tile>();
+        public List<Tile> tileNeighbors;
         //List<Unit> units;
         //List<bool> unitsInTile;
         List<int> unitIndexes;
@@ -63,6 +63,7 @@ namespace UHSampleGame.TileSystem
             //this.unitsInTile = new List<bool>();
             this.unitIndexes = new List<int>();
             this.unitsCount = 0;
+            this.tileNeighbors = new List<Tile>();
 
             for (int i = 0/*Paths.Count*/; i < TileMap.TileCount; i++)
             {
