@@ -13,7 +13,11 @@ namespace UHSampleGame.Screens
     {
         #region Class Variables
         Texture2D controls_screen;
-        ScreenManager screenManager;
+        Texture2D front;
+        Texture2D back;
+        Vector2 frontPosition = new Vector2(0.0f, 130.0f);
+        Vector2 backPosition = new Vector2(0.0f, 138.0f);
+        bool showFront = true;
         #endregion
 
         public ControlsScreen() :
@@ -24,7 +28,9 @@ namespace UHSampleGame.Screens
 
         public override void LoadContent()
         {
-            controls_screen = ScreenManager.Game.Content.Load<Texture2D>("OverlayScreens\\controlsScreen");
+            controls_screen = ScreenManager.Game.Content.Load<Texture2D>("OverlayScreens\\menuControllerBackground");
+            front = ScreenManager.Game.Content.Load<Texture2D>("OverlayScreens\\menuControllers_FrontView");
+            back = ScreenManager.Game.Content.Load<Texture2D>("OverlayScreens\\menuControllers_topFrontView"); 
             screenManager = (ScreenManager)ScreenManager.Game.Services.GetService(typeof(ScreenManager));
         }
 
@@ -42,6 +48,11 @@ namespace UHSampleGame.Screens
         {
             if (input.CheckNewAction(InputAction.Selection))
             {
+                showFront = !showFront;
+            }
+
+            if (input.CheckNewAction(InputAction.MenuCancel))
+            {
                 screenManager.RemoveScreen(this);
             }
         }
@@ -55,6 +66,14 @@ namespace UHSampleGame.Screens
         {
             ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             ScreenManager.SpriteBatch.Draw(controls_screen, Vector2.Zero, Color.White);
+            if (showFront)
+            {
+                ScreenManager.SpriteBatch.Draw(front, frontPosition, Color.White);
+            }
+            else
+            {
+                ScreenManager.SpriteBatch.Draw(back, backPosition, Color.White);
+            }
             ScreenManager.SpriteBatch.End();
         }
     }

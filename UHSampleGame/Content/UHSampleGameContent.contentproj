@@ -1491,8 +1491,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OverlayScreens\controlsScreen.png">
-      <Name>controlsScreen</Name>
+    <Compile Include="OverlayScreens\menuControllerBackground.png">
+      <Name>menuControllerBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="OverlayScreens\menuControllers_FrontView.png">
+      <Name>menuControllers_FrontView</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="OverlayScreens\menuControllers_topFrontView.png">
+      <Name>menuControllers_topFrontView</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
