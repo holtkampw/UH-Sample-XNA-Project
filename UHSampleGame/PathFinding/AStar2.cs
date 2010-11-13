@@ -73,13 +73,23 @@ namespace UHSampleGame.PathFinding
                 tInfo.ID = TileMap.Tiles[i].ID;
                 tInfo.neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]);
                 tileInformation[i] = tInfo;
+
+                TileInformation rTInfo;
+                rTInfo.gScore = 0;
+                rTInfo.fScore = 0;
+                rTInfo.hScore = 0;
+
+                rTInfo.position = TileMap.Tiles[i].Position;
+                rTInfo.ID = TileMap.Tiles[i].ID;
+                rTInfo.neighbors = new List<int>(TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]));
+                readOnlyTileInformation[i] = rTInfo;
                 //tileInformation[i].position = TileMap.Tiles[i].Position;
                 //tileInformation[i].ID = TileMap.Tiles[i].ID;
                 //tileInformation[i].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]);
                 
             }
 
-            Array.Copy(tileInformation, readOnlyTileInformation, tileInformation.Length);
+           // Array.Copy(tileInformation, readOnlyTileInformation, tileInformation.Length);
             SetupDone = true;
         }
 
@@ -321,7 +331,15 @@ namespace UHSampleGame.PathFinding
         #region Read Only
         public static void ReadOnlyInit(Tile startTile, Tile goalTile, int blockedTile)
         {
-            Array.Copy(tileInformation, readOnlyTileInformation, tileInformation.Length);
+           // Array.Copy(tileInformation, readOnlyTileInformation, tileInformation.Length);
+
+            for (int i = 0; i < tileInformation.Length; i++)
+            {
+                readOnlyTileInformation[i].ID = tileInformation[i].ID;
+                readOnlyTileInformation[i].position = tileInformation[i].position;
+                for (int j = 0; j < tileInformation[i].neighbors.Count; j++)
+                    readOnlyTileInformation[i].neighbors[j] = tileInformation[i].neighbors[j];
+            }
 
             readOnlyWalkableInts = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[blockedTile]);
             for (int i = 0; i < readOnlyWalkableInts.Count; i++)
