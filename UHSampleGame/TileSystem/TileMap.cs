@@ -184,46 +184,7 @@ namespace UHSampleGame.TileSystem
                 tiles[i].tileNeighbors[(int)NeighborTile.Down] = GetTileNeighbor(tiles[i], NeighborTile.Down);
                 tiles[i].tileNeighbors[(int)NeighborTile.DownLeft] = GetTileNeighbor(tiles[i], NeighborTile.DownLeft);
                 tiles[i].tileNeighbors[(int)NeighborTile.Left] = GetTileNeighbor(tiles[i], NeighborTile.Left);
-                //    if (i - numTilesX - 1 >= 0)
-                //        tiles[i].tileNeighbors[(int)NeighborTile.UpLeft] = tiles[i - numTilesX - 1];
-                //    else
-                //        tiles[i].tileNeighbors[(int)NeighborTile.UpLeft] = Tile.NullTile;
-
-                //    if (i - numTilesX >= 0)
-                //        tiles[i].tileNeighbors[(int)NeighborTile.Up] = tiles[i - numTilesX];
-                //    else
-                //        tiles[i].tileNeighbors[(int)NeighborTile.Up] = Tile.NullTile;
-
-                //    if (i - numTilesX + 1 >= 0)
-                //        tiles[i].tileNeighbors[(int)NeighborTile.UpRight] = tiles[i - numTilesX + 1];
-                //    else
-                //        tiles[i].tileNeighbors[(int)NeighborTile.UpRight] = Tile.NullTile;
-
-                //    if (i + 1 < TileCount)
-                //        tiles[i].tileNeighbors[(int)NeighborTile.Right] = tiles[i + 1];
-                //    else
-                //        tiles[i].tileNeighbors[(int)NeighborTile.Right] = Tile.NullTile;
-
-                //    if (i + numTilesX + 1 < TileCount)
-                //        tiles[i].tileNeighbors[(int)NeighborTile.DownRight] = tiles[i + numTilesX + 1];
-                //    else
-                //        tiles[i].tileNeighbors[(int)NeighborTile.DownRight] = Tile.NullTile;
-
-                //    if (i + numTilesX < TileCount)
-                //        tiles[i].tileNeighbors[(int)NeighborTile.Down] = tiles[i + numTilesX];
-                //    else
-                //        tiles[i].tileNeighbors[(int)NeighborTile.Down] = Tile.NullTile;
-
-                //    if (i + numTilesX - 1 < TileCount)
-                //        tiles[i].tileNeighbors[(int)NeighborTile.DownLeft] = tiles[i + numTilesX - 1];
-                //    else
-                //        tiles[i].tileNeighbors[(int)NeighborTile.DownLeft] = Tile.NullTile;
-
-                //    if (i - 1 >= 0)
-                //        tiles[i].tileNeighbors[(int)NeighborTile.Left] = tiles[i - 1];
-                //    else
-                //        tiles[i].tileNeighbors[(int)NeighborTile.Left] = Tile.NullTile;
-                //}
+                
             }
             lowerRightPos = new Vector3(tiles[tiles.Count - 1].Position.X + (tileSize.X / 2), 0,
                 tiles[tiles.Count - 1].Position.Z + (tileSize.Y / 2));
@@ -379,50 +340,6 @@ namespace UHSampleGame.TileSystem
             }
             return null;
         }
-
-        //public static List<int> GetWalkableNeighborsAsArray(Tile Tile2)
-        //{
-        //    intNeighbors[Tile2.ID].Clear();
-        //    for (int i = 0; i < allNeighbors.Count; i++)
-        //        tileNeighbors[i] = GetTileNeighbor(ref Tile2, allNeighbors[i]);
-
-        //    for (int i = 0; i < allNeighbors.Count; i++)
-        //    {
-        //        //currentNeighbor = GetTileNeighbor(ref Tile2, allNeighbors[i]);
-
-        //        if (tileNeighbors[i].IsWalkable())
-        //        {
-        //            if (i == 6)//allNeighbors[i] == NeighborTile.DownLeft)
-        //            {
-        //                if (tileNeighbors[5].IsWalkable() &&
-        //                    tileNeighbors[7].IsWalkable())
-        //                    intNeighbors[Tile2.ID].Add(tileNeighbors[i].ID);
-        //            }
-        //            else if (i == 4)//allNeighbors[i] == NeighborTile.DownRight)
-        //            {
-        //                if (tileNeighbors[5].IsWalkable() &&
-        //                    tileNeighbors[3].IsWalkable())
-        //                    intNeighbors[Tile2.ID].Add(tileNeighbors[i].ID);
-        //            }
-        //            else if (i == 0)//allNeighbors[i] == NeighborTile.UpLeft)
-        //            {
-        //                if (tileNeighbors[1].IsWalkable() &&
-        //                    tileNeighbors[7].IsWalkable())
-        //                    intNeighbors[Tile2.ID].Add(tileNeighbors[i].ID);
-        //            }
-        //            else if (i == 2)//allNeighbors[i] == NeighborTile.UpRight)
-        //            {
-        //                if (tileNeighbors[1].IsWalkable() &&
-        //                    tileNeighbors[3].IsWalkable())
-        //                    intNeighbors[Tile2.ID].Add(tileNeighbors[i].ID);
-        //            }
-        //            else
-        //                intNeighbors[Tile2.ID].Add(tileNeighbors[i].ID);
-        //        }
-
-        //    }
-        //    return intNeighbors[Tile2.ID];
-        //}
 
         public static List<Tile> GetWalkableNeighbors(Tile Tile2)
         {

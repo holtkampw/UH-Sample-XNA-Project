@@ -242,18 +242,7 @@ namespace UHSampleGame.PathFinding
                 path.Add(curTile.ID);
                 //return temp;
             }
-            //if (cameFrom[curTile] != -1)
-            //{
-            //    ReconstructPath(ref path, cameFrom[curTile]);
-            //    path.Add(TileMap.Tiles[curTile]);
-            //    //return finalPath;
-            //}
-            //else
-            //{
-            //    //List<Tile> temp = new List<Tile>();
-            //    path.Add(TileMap.Tiles[curTile]);
-            //    //return temp;
-            //}
+
         }
 
         static void ReadOnlyReconstructPath(ref List<int> path, Tile curTile)
@@ -270,31 +259,8 @@ namespace UHSampleGame.PathFinding
           
         }
 
-        static /*Tile*/ int GetLowestFScoreFromOpenSet()
+        static int GetLowestFScoreFromOpenSet()
         {
-            //lowestScore = float.MaxValue;
-            //for (int i = 0; i < open.Count; i++)
-            //{
-            //    if (/*fScore[open[i].ID]*/tileInformation[open[i].ID].fScore < lowestScore)
-            //    {
-            //        lowestScore = tileInformation[open[i].ID].fScore;//fScore[open[i].ID];
-            //        returnTile = open[i];
-            //    }
-            //}
-            //return returnTile;
-
-            //lowestScore = float.MaxValue;
-            //for (int i = 0; i < open.Count; i++)
-            //{
-            //    if (tileInformation[open[i].ID].fScore < lowestScore)
-            //    {
-            //        lowestScore = tileInformation[open[i].ID].fScore;
-            //        returnTile = open[i];//TileMap.Tiles[open[i]];
-            //    }
-            //}
-            //return returnTile;
-
-
             lowestScore = float.MaxValue;
             int returnItem = 0;
             for (int i = 0; i < open.Count; i++)
@@ -378,6 +344,11 @@ namespace UHSampleGame.PathFinding
                 {
                     readOnlyCameFrom.Add(-1);
                 }
+            }
+
+            for (int i = 0; i < TileMap.TileCount; i++)
+            {
+                readOnlyCameFrom[i] = -1;
             }
             
             readOnlyStartTile = startTile;
