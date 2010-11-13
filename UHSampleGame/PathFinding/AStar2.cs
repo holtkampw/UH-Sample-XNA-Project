@@ -86,7 +86,11 @@ namespace UHSampleGame.PathFinding
                 for (int j = 0; j < tInfo.neighbors.Count; j++)
                 {
                     rTInfo.neighbors.Add(tInfo.neighbors[j]);
+                    rTInfo.neighbors.Remove(tInfo.neighbors[j]);
+                    rTInfo.neighbors[j] = tInfo.neighbors[j];
                 }
+
+
                 readOnlyTileInformation[i] = rTInfo;
                 //tileInformation[i].position = TileMap.Tiles[i].Position;
                 //tileInformation[i].ID = TileMap.Tiles[i].ID;
@@ -125,18 +129,17 @@ namespace UHSampleGame.PathFinding
             //    }
             //}
 
-            lock (tileInformationLock)
+            
+            for (int i = 0; i < TileMap.TileCount; i++)
             {
-                for (int i = 0; i < TileMap.TileCount; i++)
-                {
-                    tileInformation[i].gScore = 100000f;
-                    tileInformation[i].fScore = 100000f;
-                    tileInformation[i].hScore = 100000f;
-                    //open[i] = -1;
-                    closed[i] = false;
-                    //cameFrom[i] = -1;
-                }
+                tileInformation[i].gScore = 100000f;
+                tileInformation[i].fScore = 100000f;
+                tileInformation[i].hScore = 100000f;
+                //open[i] = -1;
+                closed[i] = false;
+                //cameFrom[i] = -1;
             }
+
             if (cameFrom.Count < 1)
             {
                 for (int i = 0; i < TileMap.TileCount; i++)
@@ -172,12 +175,12 @@ namespace UHSampleGame.PathFinding
             //hScore[startTile.ID] = GetDistanceBetweenTiles(ref StartTile, ref GoalTile);
             //fScore[startTile.ID] = hScore[startTile.ID];
 
-            lock (tileInformationLock)
-            {
-                tileInformation[startTile.ID].gScore = 0;
-                tileInformation[startTile.ID].hScore = GetDistanceBetweenTiles(StartTile.ID, GoalTile.ID);//GetDistanceBetweenTiles(ref StartTile, ref GoalTile);
-                tileInformation[startTile.ID].fScore = tileInformation[startTile.ID].hScore;
-            }
+           
+            tileInformation[startTile.ID].gScore = 0;
+            tileInformation[startTile.ID].hScore = GetDistanceBetweenTiles(StartTile.ID, GoalTile.ID);//GetDistanceBetweenTiles(ref StartTile, ref GoalTile);
+            tileInformation[startTile.ID].fScore = tileInformation[startTile.ID].hScore;
+                
+            
         }
 
         public static void FindPath(ref List<int> path)
@@ -204,8 +207,8 @@ namespace UHSampleGame.PathFinding
                 //neighbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[currentTile.ID]);
                 //tileInformation[currentTile].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[currentTile]);
 
-                lock (tileInformationLock)
-                {
+                //lock (tileInformationLock)
+                //{
                     for (int i = 0; i < /*neighbors.Count*/ tileInformation[currentTile].neighbors.Count; i++)
                     {
                         if (closed[/*neighbors[i].ID*/  tileInformation[currentTile].neighbors[i]])
@@ -241,7 +244,7 @@ namespace UHSampleGame.PathFinding
                             //fScore[neighborTile.ID] = gScore[neighborTile.ID] + hScore[neighborTile.ID];
                         }
                     }
-                }
+                //}
             }
 
             return;
@@ -282,8 +285,8 @@ namespace UHSampleGame.PathFinding
         {
             lowestScore = float.MaxValue;
             int returnItem = 0;
-            lock (tileInformationLock)
-            {
+            //lock (tileInformationLock)
+            //{
                 for (int i = 0; i < open.Count; i++)
                 {
                     if (tileInformation[open[i]].fScore < lowestScore)
@@ -292,7 +295,7 @@ namespace UHSampleGame.PathFinding
                         returnItem = open[i];
                     }
                 }
-            }
+            //}
             return returnItem;
         }
 

@@ -479,8 +479,11 @@ namespace UHSampleGame.TileSystem
                     {
                         for (int i = 0; i < tiles.Count; i++)
                         {
-                            if (tiles[i].IsWalkable())
-                                tiles[i].UpdatePathTo(bases[j].Tile);
+                            lock (AStar2.tileInformationLock)
+                            {
+                                if (tiles[i].IsWalkable())
+                                    tiles[i].UpdatePathTo(bases[j].Tile);
+                            }
                         }
                     }
                 }
@@ -499,10 +502,13 @@ namespace UHSampleGame.TileSystem
                 {
                     if (i != j)
                     {
-                        bases[i].Tile.UpdatePathTo(bases[j].Tile);
-                        if (bases[j].Tile.PathsInts[bases[i].Tile.ID].Count == 0)
+                        lock (AStar2.tileInformationLock)
                         {
-                            return false;
+                            bases[i].Tile.UpdatePathTo(bases[j].Tile);
+                            if (bases[j].Tile.PathsInts[bases[i].Tile.ID].Count == 0)
+                            {
+                                return false;
+                            }
                         }
                     }
                 }
