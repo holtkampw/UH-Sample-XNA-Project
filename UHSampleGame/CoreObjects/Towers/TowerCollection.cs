@@ -78,6 +78,8 @@ namespace UHSampleGame.CoreObjects.Towers
         static Rectangle hudUpgradeDestination = new Rectangle(0, 0, 40, 10);
         static Rectangle hudUpgradeMaxDestination = new Rectangle(0, 0, 40, 10);
         static Vector2 hudUpgradeOffset = new Vector2(0, 10);
+
+        static int upgradeAmount = 0;
         #endregion
 
         #region Initialize
@@ -302,7 +304,11 @@ namespace UHSampleGame.CoreObjects.Towers
             if (tile.Tower != null)
             {
                 if (tile.Tower.TeamNum == teamNum)
-                    return tile.Tower.Repair(money);
+                    if ((upgradeAmount = tile.Tower.Repair(money)) > 0)
+                    {
+                        ProjectileManager.Repair(tile.Position, tile.Tower.PlayerNum);
+                        return upgradeAmount;
+                    }
                 //Do we need this??
                 //for (int i = 0; i < MAX_TOWERS; i++)
                 //{
@@ -319,7 +325,13 @@ namespace UHSampleGame.CoreObjects.Towers
             if (tile.Tower != null)
             {
                 if (tile.Tower.TeamNum == teamNum)
-                    return tile.Tower.Upgrade(money);
+                {
+                    if ((upgradeAmount = tile.Tower.Upgrade(money)) > 0)
+                    {
+                        ProjectileManager.Upgrade(tile.Position, tile.Tower.PlayerNum);
+                        return upgradeAmount;
+                    }
+                }
                 
                 //DO we need this??
                 //for (int i = 0; i < MAX_TOWERS; i++)

@@ -472,7 +472,7 @@ namespace UHSampleGame.TileSystem
 #endif
             if (AStar2.SetupDone)
             {
-                while (!pathThreadExit.WaitOne(2)) //thread goes on forever!
+                while (!pathThreadExit.WaitOne(8)) //thread goes on forever!
                 {
                     for (int j = 0; j < bases.Count; j++)
                     {

@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework;
 
 namespace UHSampleGame.ProjectileManagment
 {
-    class Star
+    class Repair
     {
         #region Constants
 
@@ -27,41 +27,40 @@ namespace UHSampleGame.ProjectileManagment
         const float gravity = 2;
 
         const float radius = 60;
-        float degrees = 0;
-        float altitude = 0;
+
         #endregion
 
         #region Fields
 
         ParticleSystem starParticles;
-        ParticleEmitter starTrail;
 
         public Vector3 Position;
         public Vector3 velocity;
-        float age;
 
         static Random random = new Random();
         public bool Active = false;
 
+        int delay = 0;
+        int nextUpdateTime = 300;
+        
+        int degrees = 0;
+        int altitude = 0;
+        Vector3 fromCircle = Vector3.Zero;
         #endregion
 
 
         /// <summary>
         /// Constructs a new projectile.
         /// </summary>
-        public Star(ParticleSystem starParticles)
+        public Repair(ParticleSystem starParticles)
         {
             this.starParticles = starParticles;
 
             // Start at the origin, firing in a random (but roughly upward) direction.
             Position = Vector3.Zero;
 
-            velocity.X = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
-            velocity.Y = (float)(random.NextDouble() + 0.5) * verticalVelocityRange;
-            velocity.Z = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
+            velocity = Vector3.Zero;
 
-            this.starTrail = new ParticleEmitter(starParticles,
-                                               trailParticlesPerSecond, Position);
         }
 
         public void SetPositionAndVelocity(Vector3 position)
@@ -74,33 +73,28 @@ namespace UHSampleGame.ProjectileManagment
         /// <summary>
         /// Updates the projectile.
         /// </summary>
-        public bool Update(GameTime gameTime)
+        public bool Update(float elapsedTime)
         {
-            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Simple projectile physics.
-            //Position += velocity * elapsedTime;
-            //velocity.Y -= elapsedTime * gravity;
-            //age += elapsedTime;
-
-            //Vector3 newPosition = Position + RandomPointOnCircle();
-            // If enough time has passed, explode! Note how we pass our velocity
-            // in to the AddParticle method: this lets the explosion be influenced
-            // by the speed and direction of the projectile which created it.
-
-            //starTrail.Update(gameTime, newPosition);
-
-            starParticles.AddParticle(Position + GetNextPointOnCircle(), Vector3.Zero);
-            degrees += 10f;
-            if(degrees >= 360)
-                altitude += 8f;
-
-            if (degrees >= 720)
+            delay += (int)elapsedTime;
+            if (delay >= nextUpdateTime)
             {
-                degrees = 0;
-                altitude = 0;
-                Active = false;
-                return false;
+                delay = 0;
+                for (degrees = 0; degrees <= 360; degrees += 30)
+                {
+                    GetNextPointOnCircle();
+                    starParticles.AddParticle(fromCircle, velocity);
+                }
+
+                altitude += 30;
+
+                if (altitude >= 150)
+                {
+                    degrees = 0;
+                    altitude = 0;
+                    Active = false;
+                    return false;
+                }
             }
             //if (age > projectileLifespan)
             //{
@@ -128,9 +122,11 @@ namespace UHSampleGame.ProjectileManagment
         }
 
 
-        Vector3 GetNextPointOnCircle()
+        void GetNextPointOnCircle()
         {
-            return new Vector3((float)(radius * Math.Cos((Math.PI / 180) * degrees)), altitude, (float)(radius * Math.Sin((Math.PI / 180) * degrees)));
+            fromCircle.X = Position.X + (float)(radius * Math.Cos((Math.PI / 180) * degrees));
+            fromCircle.Y = (float)altitude;
+            fromCircle.Z = Position.Z + (float)(radius * Math.Sin((Math.PI / 180) * degrees));
         }
     }
 }

@@ -37,7 +37,7 @@ namespace UHSampleGame.Screens
         CameraManager cameraManager;
 
         Vector2 dimensions;
-
+        Song backgroundSong;
         //Player p1;
         //Player aI;
 
@@ -83,10 +83,8 @@ namespace UHSampleGame.Screens
             PlayerCollection.Initialize();
             ProjectileManager.Initialize();
 
-            Song backgroundSong = ScreenManager.Game.Content.Load<Song>("Sounds\\Backgrounds\\multiplayer"); 
-            MediaPlayer.Play(backgroundSong);
-            MediaPlayer.Volume = 0.1f;
-            MediaPlayer.IsRepeating = true;
+            backgroundSong = ScreenManager.Game.Content.Load<Song>("Sounds\\Backgrounds\\multiplayer"); 
+            
 
             //TileMap.InitializeTileMap(Vector3.Zero, numTiles, new Vector2(100f, 100f));
             //PlayerCollection.Initialize(playerTypes);
@@ -104,6 +102,7 @@ namespace UHSampleGame.Screens
 
             //Start Thread            
             TileMap.pathThread.Start();
+            ProjectileManager.particleThread.Start();
 
             GC.Collect();//force garbage collection
             isLoaded = true;
@@ -149,6 +148,13 @@ namespace UHSampleGame.Screens
                 return;
             }
 
+            if (MediaPlayer.State == MediaState.Stopped)
+            {
+                MediaPlayer.Play(backgroundSong);
+                MediaPlayer.Volume = 0.1f;
+                MediaPlayer.IsRepeating = true;
+            }
+
             //if (videoPlayer.State != MediaState.Playing)
             //    videoPlayer.Play(video);
 
@@ -160,7 +166,7 @@ namespace UHSampleGame.Screens
             UnitCollection.Update(gameTime);
             TowerCollection.Update(gameTime);
             PlayerCollection.Update(gameTime);
-            ProjectileManager.Update(gameTime);
+            //ProjectileManager.Update(gameTime);
             TileMap.Update(gameTime);
             DebugInfo.Update(gameTime);
             
@@ -198,7 +204,7 @@ namespace UHSampleGame.Screens
                 TowerCollection.Draw(gameTime);
                 ResetRenderStates();
                 PlayerCollection.Draw(gameTime);
-                ProjectileManager.Draw(gameTime);
+                //ProjectileManager.Draw(gameTime);
 //                p1.Draw(gameTime);
 //                aI.Draw(gameTime);
 
@@ -214,6 +220,8 @@ namespace UHSampleGame.Screens
         {
             TileMap.pathThreadExit.Set();
             TileMap.pathThread.Join();
+            ProjectileManager.particleThreadExit.Set();
+            ProjectileManager.particleThread.Join();
         }
         #endregion
 

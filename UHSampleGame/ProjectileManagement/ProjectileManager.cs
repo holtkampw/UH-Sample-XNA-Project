@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame;
 using UHSampleGame.CameraManagement;
+using System.Threading;
+using System.Diagnostics; 
 
 namespace UHSampleGame.ProjectileManagment
 {
@@ -13,7 +15,9 @@ namespace UHSampleGame.ProjectileManagment
     {
         #region Class Variables
         static List<Projectile> projectiles;
-        static List<Star> stars;
+        static List<List<Upgrade>> upgradeEffect;
+        static List<List<Repair>> repairEffect;
+       
         const int MAX_PROJECTILES = 5000;
 
         static ParticleSystem explosionParticles;
@@ -21,15 +25,23 @@ namespace UHSampleGame.ProjectileManagment
         static ParticleSystem projectileTrailParticles;
         static ParticleSystem smokePlumeParticles;
         static ParticleSystem fireParticles;
-        static StarParticleSystem starParticles;
+        static ParticleSystem[] upgradeParticles;
+        static ParticleSystem[] repairParticles;
         static int projectileCount;
         static int updatedProjectiles;
         static int projectilesToUpdate;
-        static int starCount;
+        static int[] upgradeCount;
         static int updatedStars;
         static int starsToUpdate;
+        static int[] repairCount;
         static CameraManager cameraManager;
         static Vector3 vel = new Vector3();
+
+        public static Thread particleThread;
+        public static EventWaitHandle particleThreadExit;
+        static Stopwatch timer;
+        static float FrequencyInverse;
+        static float elapsedMilliseconds;
         #endregion
 
         public static void Initialize()
@@ -40,7 +52,39 @@ namespace UHSampleGame.ProjectileManagment
             projectileTrailParticles = new ProjectileTrailParticleSystem(ScreenManager.Game, ScreenManager.Game.Content);
             smokePlumeParticles = new SmokePlumeParticleSystem(ScreenManager.Game, ScreenManager.Game.Content);
             fireParticles = new FireParticleSystem(ScreenManager.Game, ScreenManager.Game.Content);
-            starParticles = new StarParticleSystem(ScreenManager.Game, ScreenManager.Game.Content);
+            //starParticles = new StarParticleSystem(ScreenManager.Game, ScreenManager.Game.Content);
+            upgradeParticles = new ParticleSystem[5];
+            repairParticles = new ParticleSystem[5];
+            for (int i = 1; i < 5; i++)
+            {
+                
+                switch(i)
+                {
+                    case 1:
+                        upgradeParticles[i] = new P1Upgrade(ScreenManager.Game, ScreenManager.Game.Content);
+                        repairParticles[i] = new P1Upgrade(ScreenManager.Game, ScreenManager.Game.Content);
+                        break;
+                    case 2:
+                        upgradeParticles[i] = new P2Upgrade(ScreenManager.Game, ScreenManager.Game.Content);
+                        repairParticles[i] = new P2Upgrade(ScreenManager.Game, ScreenManager.Game.Content);
+                        break;
+                    case 3:
+                        upgradeParticles[i] = new P3Upgrade(ScreenManager.Game, ScreenManager.Game.Content);
+                        repairParticles[i] = new P3Upgrade(ScreenManager.Game, ScreenManager.Game.Content);
+                        break;
+                    case 4:
+                        upgradeParticles[i] = new P4Upgrade(ScreenManager.Game, ScreenManager.Game.Content);
+                        repairParticles[i] = new P4Upgrade(ScreenManager.Game, ScreenManager.Game.Content);
+                        break;
+
+                }
+
+                upgradeParticles[i].DrawOrder = 600;
+                repairParticles[i].DrawOrder = 600;
+                ScreenManager.Game.Components.Add(upgradeParticles[i]);
+                ScreenManager.Game.Components.Add(repairParticles[i]);
+            }
+
 
             // Set the draw order so the explosions and fire
             // will appear over the top of the smoke.
@@ -49,7 +93,7 @@ namespace UHSampleGame.ProjectileManagment
             projectileTrailParticles.DrawOrder = 300;
             explosionParticles.DrawOrder = 400;
             fireParticles.DrawOrder = 500;
-            starParticles.DrawOrder = 600;
+            //starParticles.DrawOrder = 600;
 
             // Register the particle system components.
             ScreenManager.Game.Components.Add(explosionParticles);
@@ -57,18 +101,42 @@ namespace UHSampleGame.ProjectileManagment
             ScreenManager.Game.Components.Add(projectileTrailParticles);
             ScreenManager.Game.Components.Add(smokePlumeParticles);
             ScreenManager.Game.Components.Add(fireParticles);
-            ScreenManager.Game.Components.Add(starParticles);
+            //ScreenManager.Game.Components.Add(starParticles);
 
             projectiles = new List<Projectile>();
-            stars = new List<Star>();
+            //stars = new List<Star>();
+            
             for (int i = 0; i < MAX_PROJECTILES; i++)
             {
                 projectiles.Add(new Projectile(explosionParticles, explosionSmokeParticles, projectileTrailParticles));
-                stars.Add(new Star(starParticles));
+                //stars.Add(new Star(starParticles));
+            }
+
+            upgradeEffect = new List<List<Upgrade>>();
+            upgradeCount = new int[5];
+            upgradeEffect.Add(new List<Upgrade>());
+            repairEffect = new List<List<Repair>>();
+            repairEffect.Add(new List<Repair>());
+            repairCount = new int[5];
+            for (int p = 1; p < 5; p++)
+            {
+                upgradeEffect.Add(new List<Upgrade>());
+                repairEffect.Add(new List<Repair>());
+                for (int i = 0; i < MAX_PROJECTILES; i++)
+                {
+                    upgradeEffect[p].Add(new Upgrade(upgradeParticles[p]));
+                    repairEffect[p].Add(new Repair(repairParticles[p]));
+                }
+                upgradeCount[p] = 0;
+                repairCount[p] = 0;
             }
             projectileCount = 0;
-
+            
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
+
+            particleThread = new Thread(ThreadedUpdate);
+            particleThreadExit = new ManualResetEvent(false);
+            timer = System.Diagnostics.Stopwatch.StartNew();
         }
 
         public static void AddParticle(Vector3 startPosition, Vector3 endPosition)
@@ -90,34 +158,76 @@ namespace UHSampleGame.ProjectileManagment
             }
         }
 
-        public static void AddStar(Vector3 position)
+        public static void Upgrade(Vector3 position, int playerNum)
         {
+            if (playerNum > 4 || playerNum < 1)
+                return;
+
             for (int i = 0; i < MAX_PROJECTILES; i++)
             {
-                if (!stars[i].Active)
+                if (!upgradeEffect[playerNum][i].Active)
                 {
-                    stars[i].SetPositionAndVelocity(position);
-                    starCount++;
-                    stars[i].Active = true;
+                    upgradeEffect[playerNum][i].SetPositionAndVelocity(position);
+                    upgradeCount[playerNum]++;
+                    upgradeEffect[playerNum][i].Active = true;
                     break;
                 }
             }
         }
 
+        public static void Repair(Vector3 position, int playerNum)
+        {
+            if (playerNum > 4 || playerNum < 1)
+                return;
 
-        public static void Update(GameTime gameTime)
+            for (int i = 0; i < MAX_PROJECTILES; i++)
+            {
+                if (!repairEffect[playerNum][i].Active)
+                {
+                    repairEffect[playerNum][i].SetPositionAndVelocity(position);
+                    repairCount[playerNum]++;
+                    repairEffect[playerNum][i].Active = true;
+                    break;
+                }
+            }
+        }
+
+        public static void ThreadedUpdate()
+        {
+#if XBOX
+            int[] cpus = new int[1];
+            cpus[0] = 5;
+            Thread.CurrentThread.SetProcessorAffinity(cpus);
+#endif
+
+            timer.Start();
+            while (!particleThreadExit.WaitOne(8)) //thread goes on forever!
+            {
+                FrequencyInverse = (float)(1.0 / (double)Stopwatch.Frequency);
+                elapsedMilliseconds = timer.ElapsedTicks * FrequencyInverse;
+                Update(elapsedMilliseconds);
+                Draw(elapsedMilliseconds);
+            }
+            timer.Stop();
+        }
+
+
+        public static void Update(float elapsedTime)
         {
             updatedProjectiles = 0;
-            updatedStars = 0;
-            starsToUpdate = starCount;
             projectilesToUpdate = projectileCount;
-            if (projectileCount == 0 && starCount == 0)
+
+            if (projectileCount == 0 && 
+                upgradeCount[1] == 0 && upgradeCount[2] == 0 && upgradeCount[3] == 0 && upgradeCount[4] == 0 &&
+                repairCount[1] == 0 && repairCount[2] == 0 && repairCount[3] == 0 && repairCount[4] == 0)
                 return;
-            for (int i = 0; i < MAX_PROJECTILES; i++)
+
+
+            for (int i = 0; (i < MAX_PROJECTILES) && (updatedProjectiles < projectilesToUpdate) ; i++)
             {
                 if (projectiles[i].Active)
                 {
-                    if (!projectiles[i].Update(gameTime))
+                    if (!projectiles[i].Update(elapsedTime))
                     {
                         // Remove projectiles at the end of their life.
                         projectiles[i].Active = false;
@@ -131,19 +241,47 @@ namespace UHSampleGame.ProjectileManagment
                 }
             }
 
-            for (int i = 0; i < MAX_PROJECTILES; i++)
+            for (int p = 1; p < 5; p++)
             {
-                if (stars[i].Active)
+                updatedStars = 0;
+                starsToUpdate = upgradeCount[p];
+                for (int i = 0; (i < MAX_PROJECTILES) && (updatedStars < starsToUpdate); i++)
                 {
-                    if (!stars[i].Update(gameTime))
+                    if (upgradeEffect[p][i].Active)
                     {
-                        stars[i].Active = false;
-                        starCount--;
-                        updatedStars++;
-
-                        if (updatedStars >= starsToUpdate)
+                        if (!upgradeEffect[p][i].Update(elapsedTime))
                         {
-                            break;
+                            upgradeEffect[p][i].Active = false;
+                            upgradeCount[p]--;
+                            updatedStars++;
+
+                            if (updatedStars >= starsToUpdate)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int p = 1; p < 5; p++)
+            {
+                updatedStars = 0;
+                starsToUpdate = repairCount[p];
+                for (int i = 0; (i < MAX_PROJECTILES) && (updatedStars < starsToUpdate); i++)
+                {
+                    if (repairEffect[p][i].Active)
+                    {
+                        if (!repairEffect[p][i].Update(elapsedTime))
+                        {
+                            repairEffect[p][i].Active = false;
+                            repairCount[p]--;
+                            updatedStars++;
+
+                            if (updatedStars >= starsToUpdate)
+                            {
+                                break;
+                            }
                         }
                     }
                 }
@@ -151,14 +289,19 @@ namespace UHSampleGame.ProjectileManagment
 
         }
 
-        public static void Draw(GameTime gameTime)
+        public static void Draw(float elapsedTime)
         {
-            explosionParticles.SetCamera(cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
-            explosionSmokeParticles.SetCamera(cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
-            projectileTrailParticles.SetCamera(cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
-            smokePlumeParticles.SetCamera(cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
-            fireParticles.SetCamera(cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
-            starParticles.SetCamera(cameraManager.ViewMatrix, cameraManager.ProjectionMatrix);
+            explosionParticles.SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
+            explosionSmokeParticles.SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
+            projectileTrailParticles.SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
+            smokePlumeParticles.SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
+            fireParticles.SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
+
+            for (int p = 1; p < 5; p++)
+            {
+                upgradeParticles[p].SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
+                repairParticles[p].SetCamera(ref cameraManager.ViewMatrix, ref cameraManager.ProjectionMatrix);
+            }
         }
     }
 }

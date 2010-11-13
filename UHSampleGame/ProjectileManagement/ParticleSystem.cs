@@ -27,7 +27,7 @@ namespace UHSampleGame.ProjectileManagment
 
 
         // Settings class controls the appearance and animation of this particle system.
-        ParticleSettings settings = new ParticleSettings();
+        public ParticleSettings settings = new ParticleSettings();
 
 
         // For loading the effect and particle texture.
@@ -147,8 +147,14 @@ namespace UHSampleGame.ProjectileManagment
 
         // Shared random number generator.
         static Random random = new Random();
+        float particleDuration;
+        int age;
+        float particleAge;
 
-
+        Vector2 viewportScale;
+        int stride;
+        int nextFreeParticle;
+        Color randomValues;
         #endregion
 
         #region Initialization
@@ -161,6 +167,7 @@ namespace UHSampleGame.ProjectileManagment
             : base(game)
         {
             this.content = content;
+            viewportScale = new Vector2(0.5f / ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.AspectRatio, -0.5f);
         }
 
 
@@ -310,14 +317,14 @@ namespace UHSampleGame.ProjectileManagment
         /// </summary>
         void RetireActiveParticles()
         {
-            float particleDuration = (float)settings.Duration.TotalSeconds;
+            particleDuration = (float)settings.Duration.TotalSeconds;
 
             while (firstActiveParticle != firstNewParticle)
             {
                 // Is this particle old enough to retire?
                 // We multiply the active particle index by four, because each
                 // particle consists of a quad that is made up of four vertices.
-                float particleAge = currentTime - particles[firstActiveParticle * 4].Time;
+                particleAge = currentTime - particles[firstActiveParticle * 4].Time;
 
                 if (particleAge < particleDuration)
                     break;
@@ -347,7 +354,7 @@ namespace UHSampleGame.ProjectileManagment
                 // the GPU is sure to be finished with it?
                 // We multiply the retired particle index by four, because each
                 // particle consists of a quad that is made up of four vertices.
-                int age = drawCounter - (int)particles[firstRetiredParticle * 4].Time;
+                age = drawCounter - (int)particles[firstRetiredParticle * 4].Time;
 
                 // The GPU is never supposed to get more than 2 frames behind the CPU.
                 // We add 1 to that, just to be safe in case of buggy drivers that
@@ -391,7 +398,7 @@ namespace UHSampleGame.ProjectileManagment
 
                 // Set an effect parameter describing the viewport size. This is
                 // needed to convert particle sizes into screen space point sizes.
-                effectViewportScaleParameter.SetValue(new Vector2(0.5f / ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.AspectRatio, -0.5f));
+                effectViewportScaleParameter.SetValue(viewportScale);
 
                 // Set an effect parameter describing the current time. All the vertex
                 // shader particle animation is keyed off this value.
@@ -402,31 +409,31 @@ namespace UHSampleGame.ProjectileManagment
                 ScreenManager.GraphicsDeviceManager.GraphicsDevice.Indices = indexBuffer;
 
                 // Activate the particle effect.
-                foreach (EffectPass pass in particleEffect.CurrentTechnique.Passes)
+                for (int i = 0; i < particleEffect.CurrentTechnique.Passes.Count; i++ )
                 {
-                    pass.Apply();
+                    particleEffect.CurrentTechnique.Passes[i].Apply();
 
                     if (firstActiveParticle < firstFreeParticle)
                     {
                         // If the active particles are all in one consecutive range,
                         // we can draw them all in a single call.
                         ScreenManager.GraphicsDeviceManager.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0,
-                                                     firstActiveParticle * 4, (firstFreeParticle - firstActiveParticle) * 4,
-                                                     firstActiveParticle * 6, (firstFreeParticle - firstActiveParticle) * 2);
+                                                        firstActiveParticle * 4, (firstFreeParticle - firstActiveParticle) * 4,
+                                                        firstActiveParticle * 6, (firstFreeParticle - firstActiveParticle) * 2);
                     }
                     else
                     {
                         // If the active particle range wraps past the end of the queue
                         // back to the start, we must split them over two draw calls.
                         ScreenManager.GraphicsDeviceManager.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0,
-                                                     firstActiveParticle * 4, (settings.MaxParticles - firstActiveParticle) * 4,
-                                                     firstActiveParticle * 6, (settings.MaxParticles - firstActiveParticle) * 2);
+                                                        firstActiveParticle * 4, (settings.MaxParticles - firstActiveParticle) * 4,
+                                                        firstActiveParticle * 6, (settings.MaxParticles - firstActiveParticle) * 2);
 
                         if (firstFreeParticle > 0)
                         {
                             ScreenManager.GraphicsDeviceManager.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0,
-                                                         0, firstFreeParticle * 4,
-                                                         0, firstFreeParticle * 2);
+                                                            0, firstFreeParticle * 4,
+                                                            0, firstFreeParticle * 2);
                         }
                     }
                 }
@@ -446,7 +453,7 @@ namespace UHSampleGame.ProjectileManagment
         /// </summary>
         void AddNewParticlesToVertexBuffer()
         {
-            int stride = ParticleVertex.SizeInBytes;
+            stride = ParticleVertex.SizeInBytes;
 
             if (firstNewParticle < firstFreeParticle)
             {
@@ -488,7 +495,7 @@ namespace UHSampleGame.ProjectileManagment
         /// Sets the camera view and projection matrices
         /// that will be used to draw this particle system.
         /// </summary>
-        public void SetCamera(Matrix view, Matrix projection)
+        public void SetCamera(ref Matrix view, ref Matrix projection)
         {
             effectViewParameter.SetValue(view);
             effectProjectionParameter.SetValue(projection);
@@ -501,7 +508,7 @@ namespace UHSampleGame.ProjectileManagment
         public void AddParticle(Vector3 position, Vector3 velocity)
         {
             // Figure out where in the circular queue to allocate the new particle.
-            int nextFreeParticle = firstFreeParticle + 1;
+            nextFreeParticle = firstFreeParticle + 1;
 
             if (nextFreeParticle >= settings.MaxParticles)
                 nextFreeParticle = 0;
@@ -531,7 +538,7 @@ namespace UHSampleGame.ProjectileManagment
 
             // Choose four random control values. These will be used by the vertex
             // shader to give each particle a different size, rotation, and color.
-            Color randomValues = new Color((byte)random.Next(255),
+            randomValues = new Color((byte)random.Next(255),
                                            (byte)random.Next(255),
                                            (byte)random.Next(255),
                                            (byte)random.Next(255));

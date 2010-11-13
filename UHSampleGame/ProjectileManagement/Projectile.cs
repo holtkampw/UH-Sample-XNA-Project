@@ -48,6 +48,8 @@ namespace UHSampleGame.ProjectileManagment
         static Random random = new Random();
         public bool Active = false;
 
+        float elapsedTime;
+
         #endregion
 
 
@@ -86,9 +88,9 @@ namespace UHSampleGame.ProjectileManagment
         /// <summary>
         /// Updates the projectile.
         /// </summary>
-        public bool Update(GameTime gameTime)
+        public bool Update(float elapsedTime)
         {
-            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            elapsedTime = elapsedTime / 1000.0f;
 
             // Simple projectile physics.
             Position += velocity * elapsedTime;
@@ -96,7 +98,7 @@ namespace UHSampleGame.ProjectileManagment
             age += elapsedTime;
 
             // Update the particle emitter, which will create our particle trail.
-            trailEmitter.Update(gameTime, Position);
+            trailEmitter.Update(elapsedTime, Position);
 
             // If enough time has passed, explode! Note how we pass our velocity
             // in to the AddParticle method: this lets the explosion be influenced

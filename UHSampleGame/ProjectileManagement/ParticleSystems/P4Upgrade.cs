@@ -19,9 +19,9 @@ namespace UHSampleGame.ProjectileManagment
     /// <summary>
     /// Custom particle system for creating the fiery part of the explosions.
     /// </summary>
-    class StarParticleSystem : ParticleSystem
+    class P4Upgrade : ParticleSystem
     {
-        public StarParticleSystem(Game game, ContentManager content)
+        public P4Upgrade(Game game, ContentManager content)
             : base(game, content)
         { }
 
@@ -32,7 +32,7 @@ namespace UHSampleGame.ProjectileManagment
 
             settings.MaxParticles = 30000;
 
-            settings.Duration = TimeSpan.FromSeconds(2);
+            settings.Duration = TimeSpan.FromSeconds(1);
             settings.DurationRandomness = 1;
 
             settings.MinHorizontalVelocity = 30;
@@ -43,8 +43,8 @@ namespace UHSampleGame.ProjectileManagment
 
             settings.EndVelocity = 0;
 
-            settings.MinColor = Color.DarkBlue;
-            settings.MaxColor = Color.LightBlue;
+            settings.MinColor = Color.MediumPurple;
+            settings.MaxColor = Color.DarkViolet;
 
             settings.MinRotateSpeed = -1;
             settings.MaxRotateSpeed = 3;

@@ -680,13 +680,8 @@ namespace UHSampleGame.Players
 
                 if (input.CheckNewAction(InputAction.TowerUpgrade, playerIndexes[PlayerNum]))
                 {
-                    tempAmount = TowerCollection.Upgrade(PlayerNum, Money, ref this.avatar.Position);
-                    Money -= tempAmount;
+                    Money -= TowerCollection.Upgrade(TeamNum, Money, ref this.avatar.Position);
                     MoneyString = Money.ToString();
-                    if (tempAmount > 0)
-                    {
-                        ProjectileManager.AddStar(TileMap.GetTilePosFromPos(avatar.Position));
-                    }
 
                 }
 

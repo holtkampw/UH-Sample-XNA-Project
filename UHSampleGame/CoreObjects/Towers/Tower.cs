@@ -481,6 +481,7 @@ namespace UHSampleGame.CoreObjects.Towers
         {
             Level++;
             XP = 0;
+            ProjectileManager.Upgrade(this.Position, this.PlayerNum);
         }
 
         public bool CanUpgrade()
