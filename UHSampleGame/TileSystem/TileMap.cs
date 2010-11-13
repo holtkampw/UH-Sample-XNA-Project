@@ -282,14 +282,15 @@ namespace UHSampleGame.TileSystem
             //if (yN < 0)
             //    yN *= -1;
 
-            xNum = xN < 0 ? (int)(-xN + 0.5f) : (int)(xN + 0.5f);
-            yNum = yN < 0 ? (int)(-yN + 0.5f) * numTilesX : (int)(yN + 0.5f) * numTilesX;
+            xNum = xN < 0 ? (int)(-xN) : (int)(xN);
+            yNum = yN < 0 ? (int)(-yN) * numTilesX : (int)(yN) * numTilesX;
 
             index = xNum + yNum;
 
             if (index >= 0 && index < totalTiles)
                 return tiles[index];
 
+            int here = 0;
             return Tile.NullTile;
         }
 
@@ -472,7 +473,7 @@ namespace UHSampleGame.TileSystem
 #endif
             if (AStar2.SetupDone)
             {
-                while (!pathThreadExit.WaitOne(8)) //thread goes on forever!
+                while (!pathThreadExit.WaitOne(1)) //thread goes on forever!
                 {
                     for (int j = 0; j < bases.Count; j++)
                     {

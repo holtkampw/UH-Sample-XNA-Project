@@ -10,6 +10,7 @@ using UHSampleGame.TileSystem;
 using UHSampleGame.Events;
 using UHSampleGame.Players;
 using UHSampleGame.ProjectileManagment;
+using UHSampleGame.PathFinding;
 
 namespace UHSampleGame.CoreObjects.Units
 {
@@ -152,12 +153,16 @@ namespace UHSampleGame.CoreObjects.Units
             //this.goalTile = goalTile;
             this.Position = baseTile.Position;
 
-            SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
+            lock (AStar2.tileInformationLock)
+            {
+                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
 
-            Status = UnitStatus.Deployed;
 
-            UpdatePath();
-            UpdateTransforms();
+                Status = UnitStatus.Deployed;
+
+                UpdatePath();
+                UpdateTransforms();
+            }
         }
 
         public bool IsActive()

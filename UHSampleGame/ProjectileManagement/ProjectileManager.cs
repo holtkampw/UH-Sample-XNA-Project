@@ -18,7 +18,7 @@ namespace UHSampleGame.ProjectileManagment
         static List<List<Upgrade>> upgradeEffect;
         static List<List<Repair>> repairEffect;
        
-        const int MAX_PROJECTILES = 5000;
+        const int MAX_PROJECTILES = 900;
 
         static ParticleSystem explosionParticles;
         static ParticleSystem explosionSmokeParticles;
