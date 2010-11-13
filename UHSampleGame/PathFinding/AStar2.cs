@@ -50,6 +50,8 @@ namespace UHSampleGame.PathFinding
         static List<int> readOnlyWalkableInts = new List<int>(TileMap.Tiles.Count);
         public static bool SetupDone = false;
 
+
+        public static object[] locks;
         public static object tileInformationLock = new object();
 
         public static void Setup()
@@ -61,6 +63,8 @@ namespace UHSampleGame.PathFinding
 
             tileInformation = new TileInformation[TileMap.TileCount];
             readOnlyTileInformation = new TileInformation[TileMap.TileCount];
+
+            locks = new object[TileMap.TileCount];
 
             for (int i = 0; i < TileMap.TileCount; i++)
             {
@@ -90,6 +94,7 @@ namespace UHSampleGame.PathFinding
                 //tileInformation[i].position = TileMap.Tiles[i].Position;
                 //tileInformation[i].ID = TileMap.Tiles[i].ID;
                 //tileInformation[i].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]);
+                locks[i] = new object();
 
             }
 
@@ -100,9 +105,11 @@ namespace UHSampleGame.PathFinding
         public static void UpdateWalkableNeighborsForTileID(int id)
         {
             int index;
-            lock (tileInformationLock)
-            {
+            //lock (tileInformationLock)
+            //{
 
+            lock (locks[id])
+            {
                 for (int i = 0; i < 8; i++)
                 {
                     index = TileMap.Tiles[id].tileNeighbors[i].ID;
@@ -110,6 +117,7 @@ namespace UHSampleGame.PathFinding
                         tileInformation[index].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[id].tileNeighbors[i]);
                 }
             }
+            //}
         }
 
 
@@ -150,6 +158,12 @@ namespace UHSampleGame.PathFinding
             for (int i = 0; i < TileMap.TileCount; i++)
             {
                 cameFrom[i] = -1;
+                tileInformation[i].gScore = 100000f;
+                tileInformation[i].fScore = 100000f;
+                tileInformation[i].hScore = 100000f;
+                //open[i] = -1;
+                closed[i] = false;
+                //cameFrom[i] = -1;
             }
 
             open.Add(startTileID);
@@ -188,7 +202,10 @@ namespace UHSampleGame.PathFinding
                 //neighbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[currentTile.ID]);
                 //tileInformation[currentTile].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[currentTile]);
 
-                lock (tileInformationLock)
+               
+                //lock (tileInformationLock)
+                //{
+                lock (locks[currentTile])
                 {
                     for (int i = 0; i < /*neighbors.Count*/ tileInformation[currentTile].neighbors.Count; i++)
                     {
@@ -226,6 +243,8 @@ namespace UHSampleGame.PathFinding
                             //fScore[neighborTile.ID] = gScore[neighborTile.ID] + hScore[neighborTile.ID];
                         }
                     }
+
+                    //}
                 }
             }
 
@@ -267,8 +286,9 @@ namespace UHSampleGame.PathFinding
         {
             lowestScore = float.MaxValue;
             int returnItem = 0;
-            lock (tileInformationLock)
-            {
+
+            //lock (tileInformationLock)
+            //{
                 for (int i = 0; i < open.Count; i++)
                 {
                     if (tileInformation[open[i]].fScore < lowestScore)
@@ -277,7 +297,8 @@ namespace UHSampleGame.PathFinding
                         returnItem = open[i];
                     }
                 }
-            }
+            
+            //}
             return returnItem;
         }
 
@@ -310,14 +331,14 @@ namespace UHSampleGame.PathFinding
                 return 0;
 
             float result = 0;
-            lock (tileInformationLock)
-            {
+            //lock (tileInformationLock)
+            //{
                 float first = (tileInformation[tile1].position.X - tileInformation[tile2].position.X);
                 float second = (tileInformation[tile1].position.Z - tileInformation[tile2].position.Z);
                 //return Math.Abs(tile1.Position.X - tile1.Position.Y) + Math.Abs(tile2.Position.X - tile2.Position.Y);
                 result = (float)Math.Sqrt((first * first) + (second * second));
                 return result;
-            }
+            //}
 
         }
 
@@ -332,10 +353,11 @@ namespace UHSampleGame.PathFinding
         }
 
         #region Read Only
+
         public static void ReadOnlyInit(int startTileID, int goalTileID, int blockedTile)
         {
-            lock (tileInformationLock)
-            {
+            //lock (tileInformationLock)
+            //{
                 //!Array.Copy(tileInformation, readOnlyTileInformation, tileInformation.Length);
 
 
@@ -344,10 +366,14 @@ namespace UHSampleGame.PathFinding
                     readOnlyTileInformation[i].ID = tileInformation[i].ID;
                     readOnlyTileInformation[i].position = tileInformation[i].position;
                     readOnlyTileInformation[i].neighbors.Clear();
-                    for (int j = 0; j < tileInformation[i].neighbors.Count; j++)
-                        readOnlyTileInformation[i].neighbors.Add(tileInformation[i].neighbors[j]);
+                    lock (locks[i])
+                    {
+                        for (int j = 0; j < tileInformation[i].neighbors.Count; j++)
+                            readOnlyTileInformation[i].neighbors.Add(tileInformation[i].neighbors[j]);
+                    }
                 }
-            }
+            //}
+
 
             readOnlyWalkableInts = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[blockedTile]);
             for (int i = 0; i < readOnlyWalkableInts.Count; i++)

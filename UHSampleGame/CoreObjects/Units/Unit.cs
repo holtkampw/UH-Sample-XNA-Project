@@ -153,16 +153,14 @@ namespace UHSampleGame.CoreObjects.Units
             //this.goalTile = goalTile;
             this.Position = baseTile.Position;
 
-            lock (AStar2.tileInformationLock)
+            //lock (AStar2.tileInformationLock)
+            lock(AStar2.locks[CurrentTileID])
             {
                 SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
-
-
-                Status = UnitStatus.Deployed;
-
-                UpdatePath();
-                UpdateTransforms();
             }
+            Status = UnitStatus.Deployed;
+            UpdatePath();
+            UpdateTransforms();
         }
 
         public bool IsActive()
