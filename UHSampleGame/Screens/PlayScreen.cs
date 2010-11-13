@@ -104,8 +104,16 @@ namespace UHSampleGame.Screens
             TileMap.pathThread.Start();
             ProjectileManager.particleThread.Start();
 
+            if (MediaPlayer.State == MediaState.Stopped)
+            {
+                MediaPlayer.Play(backgroundSong);
+                MediaPlayer.Volume = 0.1f;
+                MediaPlayer.IsRepeating = true;
+            }
+
             GC.Collect();//force garbage collection
             isLoaded = true;
+
         }
 
         public override void Reload()
@@ -148,12 +156,7 @@ namespace UHSampleGame.Screens
                 return;
             }
 
-            if (MediaPlayer.State == MediaState.Stopped)
-            {
-                MediaPlayer.Play(backgroundSong);
-                MediaPlayer.Volume = 0.1f;
-                MediaPlayer.IsRepeating = true;
-            }
+            
 
             //if (videoPlayer.State != MediaState.Playing)
             //    videoPlayer.Play(video);
@@ -168,7 +171,7 @@ namespace UHSampleGame.Screens
             PlayerCollection.Update(gameTime);
             //ProjectileManager.Update(gameTime);
             TileMap.Update(gameTime);
-            DebugInfo.Update(gameTime);
+            //DebugInfo.Update(gameTime);
             
         }
 

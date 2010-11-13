@@ -32,10 +32,12 @@ namespace UHSampleGame.PathFinding
 
         static TileInformation[] tileInformation;
         static bool[] closed;
+        static bool[] openContains;
         static List<int> open = new List<int>(TileMap.Tiles.Count);
 
         static TileInformation[] readOnlyTileInformation;
         static bool[] readOnlyClosed;
+        static bool[] readOnlyOpenContains;
         static List<int> readOnlyCameFrom = new List<int>(TileMap.Tiles.Count);
         static List<int> readOnlyOpen = new List<int>(TileMap.Tiles.Count);
         static int readOnlyStartTileID;
@@ -52,8 +54,10 @@ namespace UHSampleGame.PathFinding
 
         public static void Setup()
         {
+            openContains = new bool[TileMap.TileCount];
             closed = new bool[TileMap.TileCount];
             readOnlyClosed = new bool[TileMap.TileCount];
+            readOnlyOpenContains = new bool[TileMap.TileCount];
 
             tileInformation = new TileInformation[TileMap.TileCount];
             readOnlyTileInformation = new TileInformation[TileMap.TileCount];
@@ -129,6 +133,7 @@ namespace UHSampleGame.PathFinding
                     tileInformation[i].hScore = 100000f;
                     //open[i] = -1;
                     closed[i] = false;
+                    openContains[i] = false;
                     //cameFrom[i] = -1;
                 }
             }
@@ -136,36 +141,19 @@ namespace UHSampleGame.PathFinding
             {
                 for (int i = 0; i < TileMap.TileCount; i++)
                 {
-                    //gScore.Add(100000f);
-                    //hScore.Add(100000f);
-                    //fScore.Add(100000f);
-                    //closed.Add(false);
                     cameFrom.Add(-1);
-                    //cameFrom.Add(Tile.NullTile);
                 }
             }
             StartTileID = startTileID;
             GoalTileID = goalTileID;
 
-            //closed.Clear();
-            //open.Clear();
-
-
             for (int i = 0; i < TileMap.TileCount; i++)
             {
                 cameFrom[i] = -1;
-                //cameFrom[i] = Tile.NullTile;
-                //gScore[i] = 100000f;
-                //hScore[i] = 100000f;
-                //fScore[i] = 100000f;
-                //closed[i] = false;
             }
 
             open.Add(startTileID);
-
-            //gScore[startTile.ID] = 0;
-            //hScore[startTile.ID] = GetDistanceBetweenTiles(ref StartTile, ref GoalTile);
-            //fScore[startTile.ID] = hScore[startTile.ID];
+            openContains[startTileID] = true;
 
             lock (tileInformationLock)
             {
@@ -193,6 +181,7 @@ namespace UHSampleGame.PathFinding
                     ReconstructPath(ref path, GoalTileID);
                 }
                 open.Remove(currentTile);
+                openContains[currentTile] = false;
                 closed[currentTile] = true;
                 //closed.Add(currentTile);
 
@@ -210,11 +199,12 @@ namespace UHSampleGame.PathFinding
                         //tentativeGScore = gScore[currentTile.ID]  + GetDistanceBetweenTiles(ref currentTile, ref neighborTile);
                         tentativeGScore = tileInformation[currentTile].gScore + GetDistanceBetweenTiles(currentTile, /*neighborTile.ID*/ tileInformation[currentTile].neighbors[i]);
 
-                        if (!open.Contains(/*neighborTile*//*TileMap.Tiles[tileInformation[currentTile.ID].neighbors[i]]))*/tileInformation[currentTile].neighbors[i]))
+                        if (!openContains[tileInformation[currentTile].neighbors[i]])//!open.Contains(/*neighborTile*//*TileMap.Tiles[tileInformation[currentTile.ID].neighbors[i]]))*/tileInformation[currentTile].neighbors[i]))
                         //if(OpenContains(neighborTile.ID))
                         {
                             open.Add(/*neighborTile*//*TileMap.Tiles[tileInformation[currentTile.ID].neighbors[i]]);*/tileInformation[currentTile].neighbors[i]);
                             //AddOpen(neighborTile.ID);
+                            openContains[tileInformation[currentTile].neighbors[i]] = true;
                             tentaiveIsBetter = true;
                         }
                         else if (tentativeGScore < /*gScore[neighborTile.ID])*/tileInformation[/*neighborTile.ID*/tileInformation[currentTile].neighbors[i]].gScore)
@@ -372,6 +362,7 @@ namespace UHSampleGame.PathFinding
                 readOnlyTileInformation[i].fScore = 100000f;
                 readOnlyTileInformation[i].hScore = 100000f;
                 readOnlyClosed[i] = false;
+                readOnlyOpenContains[i] = false;
             }
 
             if (readOnlyCameFrom.Count < 1)
@@ -391,6 +382,7 @@ namespace UHSampleGame.PathFinding
             readOnlyGoalTileID = goalTileID;
 
             readOnlyOpen.Add(startTileID);
+            readOnlyOpenContains[startTileID] = true;
 
             readOnlyTileInformation[readOnlyStartTileID].gScore = 0;
             readOnlyTileInformation[readOnlyStartTileID].hScore = ReadOnlyGetDistanceBetweenTiles(readOnlyStartTileID, readOnlyGoalTileID);
@@ -416,6 +408,7 @@ namespace UHSampleGame.PathFinding
                     ReadOnlyReconstructPath(ref readOnlyPath, readOnlyGoalTileID);
                 }
                 readOnlyOpen.Remove(readOnlyCurrentTile);
+                readOnlyOpenContains[readOnlyCurrentTile] = false;
                 readOnlyClosed[readOnlyCurrentTile] = true;
 
                 for (int i = 0; i < readOnlyTileInformation[readOnlyCurrentTile].neighbors.Count; i++)
@@ -427,9 +420,10 @@ namespace UHSampleGame.PathFinding
                     readOnlyTentativeGScore = readOnlyTileInformation[readOnlyCurrentTile].gScore +
                         ReadOnlyGetDistanceBetweenTiles(readOnlyCurrentTile, readOnlyTileInformation[readOnlyCurrentTile].neighbors[i]);
 
-                    if (!readOnlyOpen.Contains(readOnlyTileInformation[readOnlyCurrentTile].neighbors[i]))
+                    if (!readOnlyOpenContains[readOnlyTileInformation[readOnlyCurrentTile].neighbors[i]])//!readOnlyOpen.Contains(readOnlyTileInformation[readOnlyCurrentTile].neighbors[i]))
                     {
                         readOnlyOpen.Add(readOnlyTileInformation[readOnlyCurrentTile].neighbors[i]);
+                        readOnlyOpenContains[readOnlyTileInformation[readOnlyCurrentTile].neighbors[i]] = true;
                         readOnlyTentativeIsBetter = true;
                     }
                     else if (readOnlyTentativeGScore < readOnlyTileInformation[readOnlyTileInformation[readOnlyCurrentTile].neighbors[i]].gScore)
