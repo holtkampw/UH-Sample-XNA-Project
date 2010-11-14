@@ -26,6 +26,7 @@ namespace UHSampleGame.TileSystem
         int unitsCount;
         public List<List<Tile>> Paths;
         public List<List<int>> PathsInts;
+        public List<List<int>> UnSafePaths;
         static Random rand = new Random(DateTime.Now.Millisecond);
         public int ID;
 
@@ -59,6 +60,7 @@ namespace UHSampleGame.TileSystem
             this.TileType = tileType;
             //this.Paths = new List<List<Tile>>();
             this.PathsInts = new List<List<int>>();
+            this.UnSafePaths = new List<List<int>>();
             //this.units = new List<Unit>();
             //this.unitsInTile = new List<bool>();
             this.unitIndexes = new List<int>();
@@ -69,6 +71,7 @@ namespace UHSampleGame.TileSystem
             {
                 //Paths.Add(new List<Tile>());
                 PathsInts.Add(new List<int>());
+                UnSafePaths.Add(new List<int>());
             }
 
             for (int i = 0; i < UnitCollection.TotalPossibleUnitCount(); i++)
@@ -125,7 +128,7 @@ namespace UHSampleGame.TileSystem
             OnTowerExit(ref Tower);
             Tower = null;
             SetTileType(TileType.Walkable);
-
+            AStar2.Update = true;
         }
 
         public void UpdatePathTo(Tile baseTile)
@@ -134,7 +137,7 @@ namespace UHSampleGame.TileSystem
             // List<Tile> newList = new List<Tile>();
             AStar2.InitAstar(this.ID, baseTile.ID);
             // List<Tile> tempPath = Paths[baseTile.ID];
-            List<int> tempIntPath = PathsInts[baseTile.ID];
+            List<int> tempIntPath = UnSafePaths[baseTile.ID];
             AStar2.FindPath(ref tempIntPath);//new List<Tile>(AStar2.FindPath());
             //Paths[baseTile.ID] = tempPath;
             
