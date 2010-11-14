@@ -152,7 +152,7 @@ namespace UHSampleGame.CoreObjects.Towers
             this.Type = type;
             this.Status = TowerStatus.Inactive;
             unitToAttack = null;
-            towersToAttack = new List<Tower>();
+            towersToAttack = new List<Tower>(8);
 
             timeToAttack = new TimeSpan(0, 0, 1);
             currentTimeToAttack = new TimeSpan();

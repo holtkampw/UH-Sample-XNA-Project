@@ -133,12 +133,24 @@ namespace UHSampleGame.TileSystem
 
         public void UpdatePathTo(Tile baseTile)
         {
-            
+            bool loop = true;
             // List<Tile> newList = new List<Tile>();
             AStar2.InitAstar(this.ID, baseTile.ID);
             // List<Tile> tempPath = Paths[baseTile.ID];
             List<int> tempIntPath = UnSafePaths[baseTile.ID];
-            AStar2.FindPath(ref tempIntPath);//new List<Tile>(AStar2.FindPath());
+            do
+            {
+                try
+                {
+                    AStar2.FindPath(ref tempIntPath);//new List<Tile>(AStar2.FindPath());
+                    loop = false;
+                }
+                catch
+                {
+                    int a = 0;
+                    loop = true;
+                }
+            } while (loop);
             //Paths[baseTile.ID] = tempPath;
             
         }

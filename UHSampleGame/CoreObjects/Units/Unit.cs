@@ -31,6 +31,7 @@ namespace UHSampleGame.CoreObjects.Units
         int goalTileID;
         int focalTileID;
 
+        public static List<Tile> stuckTiles = new List<Tile>(9);
         public int XPToGive;
 
         //Tile previousTile;
@@ -351,13 +352,15 @@ namespace UHSampleGame.CoreObjects.Units
                 if ((diffX < 30 && diffZ < 30)
                     || !TileMap.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
                 {
-                    List<Tile> stuckTiles = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
+                    //Increase capacity???!?!?!?!?!?!? check for this... could cause GC!!!!
+                    stuckTiles = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
                     stuckTiles.Add(TileMap.Tiles[CurrentTileID]);
 
                     if (stuckTiles.Count == 1 && !TileMap.Tiles[CurrentTileID].IsWalkable())
                     {
                         Health = 0;
                         OnDied();
+                        return true;
                         //throw new NotImplementedException("No walkable neighbors with blocked current Tile2... handle this!");
                     }
 

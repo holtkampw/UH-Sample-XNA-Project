@@ -19,7 +19,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         #region Class Variables
 
-        const int MAX_TOWERS = 100;
+        const int MAX_TOWERS = 352;
 
         static int NumPlayers;
         static Enum[] towerTypes = EnumHelper.EnumToArray(new TowerType());

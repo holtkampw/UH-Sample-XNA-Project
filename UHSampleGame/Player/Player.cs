@@ -121,7 +121,7 @@ namespace UHSampleGame.Players
         public bool IsActive = true;
         public bool IsDead = false;
 
-        public int Money = 10000;
+        public int Money = 1000000;
         public string MoneyString;
         public int Health = 100;
         public string HealthString;
