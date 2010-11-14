@@ -146,9 +146,9 @@ namespace UHSampleGame.TileSystem
         public Vector3 GetRandPoint()
         {
             //rand = new Random(DateTime.Now.Millisecond);
-            int sizeX = (int)(Size.X / 3);
-            int sizeY = (int)(Size.Y / 3);
-            return new Vector3(Position.X + rand.Next(-sizeX, sizeX), 0/*rand.Next(-10, 10)*/, Position.Z + rand.Next(-sizeY, sizeY));
+            int sizeX = (int)(2*Size.X / 3);
+            int sizeY = (int)(2*Size.Y / 3);
+            return new Vector3(Position.X + rand.Next(0, sizeX), 0/*rand.Next(-10, 10)*/, Position.Z + rand.Next(0, sizeY));
         }
 
         public void RegisterTowerListenerForTower(ref Tower tower)
