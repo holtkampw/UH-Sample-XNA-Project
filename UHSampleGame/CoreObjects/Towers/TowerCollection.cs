@@ -262,11 +262,13 @@ namespace UHSampleGame.CoreObjects.Towers
         {
             tower.Status = TowerStatus.Inactive;
             tower.tile.RemoveBlockableObject();
-            for (int i = 0; i < tower.tile.tileNeighbors.Count; i++)
-            {
-                tower.tile.tileNeighbors[i].UnregisterTowerListenerForTower(ref tower);
-                tower.tile.tileNeighbors[i].UnregisterTowerListenerForUnit(ref tower);
-            }
+
+
+            //for (int i = 0; i < tower.tile.tileNeighbors.Count; i++)
+            //{
+            //    tower.tile.tileNeighbors[i].UnregisterTowerListenerForTower(ref tower);
+            //    tower.tile.tileNeighbors[i].UnregisterTowerListenerForUnit(ref tower);
+            //}
             
         }
 

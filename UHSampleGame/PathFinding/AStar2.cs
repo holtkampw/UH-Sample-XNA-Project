@@ -5,6 +5,7 @@ using System.Text;
 
 using UHSampleGame.TileSystem;
 using Microsoft.Xna.Framework;
+using UHSampleGame.CoreObjects.Towers;
 
 namespace UHSampleGame.PathFinding
 {
@@ -50,8 +51,11 @@ namespace UHSampleGame.PathFinding
         static List<int> readOnlyWalkableInts = new List<int>(TileMap.Tiles.Count);
         public static bool SetupDone = false;
 
-
-
+        public static List<Tower> towersBuilt = new List<Tower>(TileMap.Tiles.Count);
+        public static List<int> towersRemoved = new List<int>(TileMap.Tiles.Count);
+        public static List<Tower> safeTowersBuilt = new List<Tower>(TileMap.Tiles.Count);
+        public static List<int> safeTowersRemoved = new List<int>(TileMap.Tiles.Count);
+        public static object towerLock = new object();
 
         //public static object[] locks;
         //public static object tileInformationLock = new object();
@@ -110,6 +114,7 @@ namespace UHSampleGame.PathFinding
                     sTInfo.neighbors.Add(tInfo.neighbors[j]);
                 }
                 safeTileInformation[i] = sTInfo;
+
                 //tileInformation[i].position = TileMap.Tiles[i].Position;
                 //tileInformation[i].ID = TileMap.Tiles[i].ID;
                 //tileInformation[i].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[i]);
@@ -119,6 +124,29 @@ namespace UHSampleGame.PathFinding
 
             // Array.Copy(tileInformation, readOnlyTileInformation, tileInformation.Length);
             SetupDone = true;
+        }
+
+        public static void PrepareTowerList()
+        {
+            lock (towerLock)
+            {
+                safeTowersBuilt.Clear();
+                safeTowersRemoved.Clear();
+                for (int i = 0; i < towersBuilt.Count; i++)
+                {
+                    safeTowersBuilt.Add(towersBuilt[i]);
+                }
+
+                for (int i = 0; i < towersRemoved.Count; i++)
+                {
+                    safeTowersRemoved.Add(towersRemoved[i]);
+                }
+
+                towersBuilt.Clear();
+                towersRemoved.Clear();
+
+            }
+
         }
 
         public static void UpdateWalkableNeighborsForTileID(int id) //REVISIT WHO CALLS THIS
@@ -527,6 +555,7 @@ namespace UHSampleGame.PathFinding
                         TileMap.Tiles[i].PathsInts[k] = TileMap.Tiles[i].UnSafePaths[k];
                     }
                 }
+                
             }
         }
     }
