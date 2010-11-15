@@ -201,8 +201,6 @@ namespace UHSampleGame.Screens
             if (isLoaded)
             {
                 PlayerCollection.HandleInput();
- //               p1.HandleInput(input);
- //               aI.HandleInput(input);
             }
         }
 
@@ -230,6 +228,7 @@ namespace UHSampleGame.Screens
                 TowerCollection.Draw(gameTime);
                 ResetRenderStates();
                 PlayerCollection.Draw(gameTime);
+                PowerManager.Draw(gameTime);
                 //ProjectileManager.Draw(gameTime);
 //                p1.Draw(gameTime);
 //                aI.Draw(gameTime);
