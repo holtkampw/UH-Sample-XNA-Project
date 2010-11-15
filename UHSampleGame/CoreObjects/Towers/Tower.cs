@@ -131,6 +131,7 @@ namespace UHSampleGame.CoreObjects.Towers
         const int MAX_UNIT_TYPES = 4;
         static Vector2 unitIconOffset = new Vector2(44.0f, 0.0f);
         static Vector2 unitIconRowOffset = new Vector2(0.0f, 44.0f);
+       
         static Texture2D highlightIcon;
         static UnitInformation[] unitInformation;
         static Vector2[] globalLocations = { Vector2.Zero, new Vector2(40f, 30f), new Vector2(40f, 200f), new Vector2(40f, 370f), new Vector2(40f, 540f) };
@@ -138,6 +139,8 @@ namespace UHSampleGame.CoreObjects.Towers
         static SoundEffect killEffect;
 
         Vector2 unitSelectionPosition = Vector2.Zero;
+        static string dollar = "$";
+        static Vector2 dollarOffset = new Vector2(20, 0);
         #endregion
 
         #region Initialization
@@ -255,11 +258,11 @@ namespace UHSampleGame.CoreObjects.Towers
                     }
 
                    upgradeIconOffset[player] = globalLocations[player] + new Vector2(10, 30);
-                   upgradeStringOffset[player] = globalLocations[player] + new Vector2(54, 35);
+                   upgradeStringOffset[player] = globalLocations[player] + new Vector2(74, 35);
                    repairIconOffset[player] = globalLocations[player] + new Vector2(10, 75);
-                   repairStringOffset[player] = globalLocations[player] + new Vector2(54, 80);
+                   repairStringOffset[player] = globalLocations[player] + new Vector2(74, 80);
                    recycleIconOffset[player] = globalLocations[player] + new Vector2(10, 120);
-                   recycleStringOffset[player] = globalLocations[player] + new Vector2(54, 125);
+                   recycleStringOffset[player] = globalLocations[player] + new Vector2(74, 125);
                 }
 
                 unitInformation = new UnitInformation[MAX_UNIT_TYPES];
@@ -689,17 +692,21 @@ namespace UHSampleGame.CoreObjects.Towers
                 ScreenManager.SpriteBatch.Draw(upgradeIcon[(int)UpgradeAmounts[Level + 1].type],
                     upgradeIconOffset[PlayerNum], Color.White);
 
+                ScreenManager.SpriteBatch.DrawString(font, dollar, upgradeStringOffset[PlayerNum] - dollarOffset, Color.White);
                 SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, upgradeCost, upgradeStringOffset[PlayerNum], Color.White);
                 //ScreenManager.SpriteBatch.DrawString(font, upgradeCostString,
                 //    upgradeStringOffset[PlayerNum], Color.White);
             }
 
             ScreenManager.SpriteBatch.Draw(recycleIcon, recycleIconOffset[PlayerNum], Color.White);
+            ScreenManager.SpriteBatch.DrawString(font, dollar, recycleStringOffset[PlayerNum] - dollarOffset, Color.White);
+            SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, destroyCost, recycleStringOffset[PlayerNum], Color.White);
             //ScreenManager.SpriteBatch.DrawString(font, destroyCostString, recycleStringOffset[PlayerNum], Color.White);
+            ScreenManager.SpriteBatch.DrawString(font, dollar, repairStringOffset[PlayerNum] - dollarOffset, Color.White);
             SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, repairCost, repairStringOffset[PlayerNum], Color.White);
             ScreenManager.SpriteBatch.Draw(repairIcon, repairIconOffset[PlayerNum], Color.White);
             
-            SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, repairCost, repairStringOffset[PlayerNum], Color.White);
+            //SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, repairCost, repairStringOffset[PlayerNum], Color.White);
             //ScreenManager.SpriteBatch.DrawString(font, repairCostString, repairStringOffset[PlayerNum], Color.White);
 
             if (BaseType == BaseTowerType.Offense)
