@@ -22,6 +22,7 @@ using UHSampleGame.PathFinding;
 
 using Microsoft.Xna.Framework.Media;
 using System.Threading;
+using UHSampleGame.PowerManagement;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -35,6 +36,8 @@ namespace UHSampleGame.Screens
         Color playerBackgroundColor;
         Vector2 playerBackgroundLocation;
         CameraManager cameraManager;
+
+        bool IsDisposed = false;
 
         Vector2 dimensions;
         Song backgroundSong;
@@ -77,11 +80,12 @@ namespace UHSampleGame.Screens
                                      (float)ScreenManager.GraphicsDeviceManager.GraphicsDevice.Viewport.Height);
 
 
-            UnitCollection.Initialize(8);
-            TowerCollection.Initialize(8);
+            UnitCollection.Initialize(5);
+            TowerCollection.Initialize(5);
             BaseCollection.Initialize();
             PlayerCollection.Initialize();
-            ProjectileManager.Initialize();
+            ProjectileManager.Initialize(); 
+            PowerManager.Initialize();
 
             backgroundSong = ScreenManager.Game.Content.Load<Song>("Sounds\\Backgrounds\\multiplayer"); 
             
@@ -102,7 +106,7 @@ namespace UHSampleGame.Screens
 
             //Start Thread            
             TileMap.pathThread.Start();
-            ProjectileManager.particleThread.Start();
+            ProjectileManager.particleThread.Start(); 
 
             if (MediaPlayer.State == MediaState.Stopped)
             {
@@ -167,11 +171,14 @@ namespace UHSampleGame.Screens
  ///           p1.Update(gameTime);
  //           aI.Update(gameTime);
             UnitCollection.Update(gameTime);
+            if (IsDisposed)
+                return;
             TowerCollection.Update(gameTime);
             PlayerCollection.Update(gameTime);
             //ProjectileManager.Update(gameTime);
-            TileMap.Update(gameTime);
-            //DebugInfo.Update(gameTime);
+            //TileMap.Update(gameTime);
+            PowerManager.Update(gameTime);
+            DebugInfo.Update(gameTime);
             
         }
 
@@ -188,6 +195,9 @@ namespace UHSampleGame.Screens
 
         public override void Draw(GameTime gameTime)
         {
+            if (IsDisposed)
+                return;
+
                 ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
                 ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
@@ -225,6 +235,9 @@ namespace UHSampleGame.Screens
             TileMap.pathThread.Join();
             ProjectileManager.particleThreadExit.Set();
             ProjectileManager.particleThread.Join();
+            UnitCollection.Dispose();
+            ProjectileManager.Dispose();
+            IsDisposed = true;
         }
         #endregion
 

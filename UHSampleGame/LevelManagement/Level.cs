@@ -115,7 +115,7 @@ namespace UHSampleGame.LevelManagement
             }
 
             AStar2.Setup(); 
-            //TileMap.UpdateTilePaths(); //WILL PLAYED WITH THIS
+            TileMap.UpdateTilePaths();
         }
 
         /// <summary>

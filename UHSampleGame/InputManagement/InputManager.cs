@@ -21,7 +21,7 @@ namespace UHSampleGame.InputManagement
         UnitBuild, UnitLeft, UnitRight, UnitUp, UnitDown,
         JoinGame, BackToMainMenu, StartGame, TeamUp, TeamDown,
         HUD, PickEnemyTarget, TowerInformation, 
-        Pause
+        Pause, PowerActivate
     };
 
     public class InputManager

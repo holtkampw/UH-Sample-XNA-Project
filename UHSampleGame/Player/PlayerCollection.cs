@@ -101,7 +101,7 @@ namespace UHSampleGame.Players
             CheckGameWin();
         }
 
-        public static void CheckGameWin()
+        public static bool CheckGameWin()
         {
             //Reset Teams
             for (int i = 1; i < 5; i++)
@@ -132,7 +132,9 @@ namespace UHSampleGame.Players
                 //Show Win Screen
                 screenManager.RemoveScreen("PlayScreen");
                 screenManager.ShowScreen(new WinScreen(winTeam));
+                return true;
             }
+            return false;
         }
 
         public static void Draw(GameTime gameTime)
@@ -163,9 +165,9 @@ namespace UHSampleGame.Players
             teamsActive[player.TeamNum] = true;
         }
 
-        public static void AttackPlayer(int playerNum)
+        public static bool AttackPlayer(int playerNum)
         {
-            Players[playerNum].TakeDamage();
+            return Players[playerNum].TakeDamage();
         }
 
         public static void SetBaseFor(int playerNum, Base playerBase )
@@ -239,6 +241,71 @@ namespace UHSampleGame.Players
         public static void EarnedMoneyForPlayer(int playerNum, int money)
         {
             Players[playerNum].AddMoney(money);
+        }
+
+        public static void SetRezoneFor(int PlayerNum)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if(i != PlayerNum)
+                    Players[i].Rezone = true;
+            }
+                
+        }
+
+        public static void RemoveRezoneFor(int i)
+        {
+            Players[i].Rezone = false;
+        }
+
+        public static bool ChargeMoneyForPlayer(int PlayerNum, int amount)
+        {
+            if (Players[PlayerNum].Money >= amount)
+            {
+                Players[PlayerNum].Money -= amount;
+                //Players[PlayerNum].MoneyString = Players[PlayerNum].Money.ToString();
+                return true;
+            }
+            return false;
+        }
+
+        public static void SetEMPFor(int i)
+        {
+            Players[i].EMPActive = true;
+        }
+
+        public static bool CheckEMPFor(int i)
+        {
+            return Players[i].EMPActive; 
+        }
+
+        public static void RemoveEMPFor(int i)
+        {
+            Players[i].EMPActive = false;
+        }
+
+        public static void SetFreezeEnemiesFor(int PlayerNum)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if (i != PlayerNum)
+                    Players[i].FreezeActive = true;
+            }
+        }
+
+        public static bool CheckFreezeEnemiesFor(int i)
+        {
+            return Players[i].FreezeActive;
+        }
+
+        public static void RemoveFreezeEnemiesFor(int i)
+        {
+            Players[i].FreezeActive = false;
+        }
+
+        internal static int CheckAttackingPlayerFor(int PlayerNum)
+        {
+            return Players[PlayerNum].TargetPlayerNum;
         }
     }
 }

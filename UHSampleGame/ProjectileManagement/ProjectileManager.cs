@@ -49,6 +49,47 @@ namespace UHSampleGame.ProjectileManagment
 
         #endregion
 
+        public static void Dispose()
+        {
+            ScreenManager.Game.Components.Remove(explosionParticles);
+            ScreenManager.Game.Components.Remove(explosionSmokeParticles);
+            ScreenManager.Game.Components.Remove(projectileTrailParticles);
+            ScreenManager.Game.Components.Remove(smokePlumeParticles);
+            ScreenManager.Game.Components.Remove(fireParticles);
+
+            explosionParticles.Dispose();
+            explosionSmokeParticles.Dispose();
+            projectileTrailParticles.Dispose();
+            smokePlumeParticles.Dispose();
+            fireParticles.Dispose();
+            for (int i = 0; i < upgradeParticles.Length; i++)
+            {
+                if(upgradeParticles[i] != null)
+                    upgradeParticles[i].Dispose();
+            }
+
+            for (int i = 0; i < repairParticles.Length; i++)
+            {
+                if (repairParticles[i] != null)
+                    repairParticles[i].Dispose();
+            }
+
+            explosionParticles = null;
+            explosionSmokeParticles = null;
+            projectileTrailParticles = null;
+            smokePlumeParticles = null;
+            fireParticles = null;
+            upgradeParticles = null;
+            repairParticles = null;
+
+            projectiles = null;
+            upgradeEffect = null;
+            upgradeCount = null;
+            repairEffect = null;
+            repairCount = null;
+            GC.Collect();
+        }
+
         public static void Initialize()
         {
             // Construct our particle system components.

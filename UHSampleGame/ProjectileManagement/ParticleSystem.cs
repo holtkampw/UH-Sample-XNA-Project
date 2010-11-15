@@ -192,6 +192,13 @@ namespace UHSampleGame.ProjectileManagment
             base.Initialize();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            particles = null;
+            
+            base.Dispose(disposing);
+        }
+
 
         /// <summary>
         /// Derived particle system classes should override this method

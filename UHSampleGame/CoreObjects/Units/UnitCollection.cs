@@ -59,20 +59,33 @@ namespace UHSampleGame.CoreObjects.Units
         static int updateCount;
         static int drawCount;
 
-        public static List<String> unitCountForPlayerString;
+        //public static List<String> unitCountForPlayerString;
         public static List<int> unitCountForPlayer;
         public static List<List<int>> unitDeployedForPlayer;
         #endregion
 
+        public static void Dispose()
+        {
+            units = null;
+            unitsCount = null;
+            unitsMaxIndex = null;
+            unitTransforms = null;
+            unitCountForPlayer = null;
+            unitDeployedForPlayer = null;
+            instancedModelBones = null;
+            instancedModels = null;
+            GC.Collect();
+        }
+
         public static void Initialize(int numPlayers)
         {
             cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
-            NumPlayers = numPlayers;
+            NumPlayers =   numPlayers;
             units = new List<List<List<Unit>>>();
             unitsCount = new List<List<int>>();
             unitsMaxIndex = new List<List<int>>();
             unitTransforms = new Matrix[MAX_UNITS];
-            unitCountForPlayerString = new List<string>();
+            //unitCountForPlayerString = new List<string>();
             unitCountForPlayer = new List<int>();
             unitDeployedForPlayer = new List<List<int>>();
 
@@ -81,7 +94,7 @@ namespace UHSampleGame.CoreObjects.Units
                 units.Add(new List<List<Unit>>());
                 unitsCount.Add(new List<int>());
                 unitsMaxIndex.Add(new List<int>());
-                unitCountForPlayerString.Add("0");
+                //unitCountForPlayerString.Add("0");
                 unitCountForPlayer.Add(0);
                 unitDeployedForPlayer.Add(new List<int>());
 
@@ -157,7 +170,7 @@ namespace UHSampleGame.CoreObjects.Units
                     u.TeamNum = teamNum;
 
                     unitCountForPlayer[playerNum]++;
-                    unitCountForPlayerString[playerNum] = unitCountForPlayer[playerNum].ToString();
+                    //unitCountForPlayerString[playerNum] = unitCountForPlayer[playerNum].ToString();
 
                     unitsCount[playerNum][(int)unitType]++;
 
@@ -252,7 +265,7 @@ namespace UHSampleGame.CoreObjects.Units
             unit.Status = UnitStatus.Inactive;
             unitCountForPlayer[unit.PlayerNum]--;
             unitDeployedForPlayer[unit.PlayerToAttack][(int)unit.Type]--;
-            unitCountForPlayerString[unit.PlayerNum] = unitCountForPlayer[unit.PlayerNum].ToString();
+            //unitCountForPlayerString[unit.PlayerNum] = unitCountForPlayer[unit.PlayerNum].ToString();
         }
 
         public static void Update(GameTime gameTime)
@@ -269,7 +282,8 @@ namespace UHSampleGame.CoreObjects.Units
                         u = units[i][j][k];
                         if (u.Status == UnitStatus.Deployed)
                         {
-                            u.Update(gameTime);
+                            if (u.Update(gameTime))
+                                return;
                             updateCount++;
                         }
                     }
@@ -381,10 +395,10 @@ namespace UHSampleGame.CoreObjects.Units
             return unitCountForPlayer[PlayerNum];
         }
 
-        public static string UnitCountForPlayerString(int playerNum)
-        {
-            return unitCountForPlayerString[playerNum];
-        }
+        //public static string UnitCountForPlayerString(int playerNum)
+        //{
+        //   // return unitCountForPlayerString[playerNum];
+        //}
 
         internal static int MaxUnitsToDeployFor(int PlayerNum, UnitType unitType)
         {

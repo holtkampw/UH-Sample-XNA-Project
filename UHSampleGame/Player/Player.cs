@@ -17,12 +17,13 @@ using UHSampleGame.CameraManagement;
 using UHSampleGame.Events;
 using UHSampleGame.ProjectileManagment;
 using UHSampleGame.Screens;
+using UHSampleGame.PowerManagement;
 
 namespace UHSampleGame.Players
 {
     public enum PlayerType { Human, AI };
     public enum PlayerMenuTabs { Status, UnitTower, DefenseTower, Powers }
-
+    
     struct TowerInformation
     {
         public string price;
@@ -103,6 +104,18 @@ namespace UHSampleGame.Players
         int maxHighlightUpdateTime = 25;
         TowerType lastBuiltTower;
 
+        static Vector2[][] powerIconLocations;
+        static Rectangle[][] powerHighlightIconLocations;
+        static Texture2D[] powerIcons;
+        int powerSelected = 0;
+        int NUM_POWERS = EnumHelper.EnumToArray(new PowerType()).Length;
+        static Vector2[] powerPriceLocation;
+        static Vector2[] powerDescriptionLocation;
+        static Vector2[] powerNameLocation;
+        static Vector2 powerIconStartPosition;
+        static Vector2 powerIconOffset = new Vector2(0, 34);
+        static Vector2 powerIconRowOffset = new Vector2(0, 34);
+
         //playerNum, towerNum
         TowerInformation[] defenseTowerInfo;
         SpriteFont towerTitle;
@@ -121,10 +134,10 @@ namespace UHSampleGame.Players
         public bool IsActive = true;
         public bool IsDead = false;
 
-        public int Money = 1000000;
-        public string MoneyString;
+        public int Money = 10000;
+        //public string MoneyString;
         public int Health = 100;
-        public string HealthString;
+        //public string HealthString;
         static string AIMoneyString = "??????";
 
         //Current Selected Unit 
@@ -196,6 +209,9 @@ namespace UHSampleGame.Players
 
         ScreenManager screenManager;
         private int tempAmount;
+        public bool Rezone;
+        public bool EMPActive;
+        public bool FreezeActive;
 
         #region Properties
        
@@ -213,8 +229,8 @@ namespace UHSampleGame.Players
             this.cameraManager = (CameraManager)ScreenManager.Game.Services.GetService(typeof(CameraManager));
 
             //FIX THIS
-            HealthString = Health.ToString();
-            MoneyString = Money.ToString();
+            //HealthString = Health.ToString();
+            //MoneyString = Money.ToString();
 
             SetupStatic();
             //SetupNonStatic();
@@ -386,6 +402,13 @@ namespace UHSampleGame.Players
                 //unitMeterHightlightSource = new Rectangle(0, 0, 30, 0);
                 unitMeterOverlayBaseY = new float[5];
 
+
+                powerIconLocations = new Vector2[5][];
+                powerHighlightIconLocations = new Rectangle[5][];
+                powerNameLocation = new Vector2[5];
+                powerDescriptionLocation = new Vector2[5];
+                powerPriceLocation = new Vector2[5];
+
                 for (int player = 1; player < 5; player++)
                 {
                     Vector2 tabStartPosition = new Vector2(8, 148);
@@ -477,6 +500,53 @@ namespace UHSampleGame.Players
 
                     unitMeterOverlayMaxHeight[player] = unitMeterBaseLocation[player].Height - 20.0f;
 
+                    
+                    //POWERS
+                    powerIcons = new Texture2D[NUM_POWERS];
+                    powerIconLocations[player] = new Vector2[NUM_POWERS];
+                    powerHighlightIconLocations[player] = new Rectangle[NUM_POWERS];
+
+                    powerNameLocation[player] = globalLocations[player] + new Vector2(120.0f, 30);
+                    powerPriceLocation[player] = globalLocations[player] + new Vector2(120.0f, 64);
+                    powerDescriptionLocation[player] = globalLocations[player] + new Vector2(120.0f, 94);
+                    powerIconStartPosition = new Vector2(8, 34);
+                    for (int power = 0; power < NUM_POWERS; power++)
+                    {
+                        switch ((PowerType)power)
+                        {
+                            case PowerType.FreezeEnemies:
+                                powerIcons[power] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\icon_PFrozen");
+                                break;
+                            case PowerType.Rezoning:
+                                powerIcons[power] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\icon_PZone");
+                                break;
+                            case PowerType.StrongTowers:
+                                powerIcons[power] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\icon_PStrong");
+                                break;
+                            case PowerType.EMP:
+                                powerIcons[power] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\icon_PEMP");
+                                break;
+                            case PowerType.Bombastic:
+                                powerIcons[power] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\icon_PBombastic");
+                                break;
+
+                        }
+
+                        powerIconLocations[player][power] = globalLocations[player] + powerIconStartPosition;
+
+                        powerHighlightIconLocations[player][power] = new Rectangle((int)(powerIconLocations[player][power].X - 5.0f + (highlightIcon.Width / 2)),
+                            (int)(powerIconLocations[player][power].Y - 5.0f + (highlightIcon.Height / 2)),
+                            highlightIcon.Width, highlightIcon.Height);
+
+                        if (power % 3 == 1 && power != 0)
+                        {
+                            powerIconStartPosition.Y = powerIconOffset.Y;
+                            powerIconStartPosition.X += powerIconOffset.Y;
+                        }
+                        else
+                            powerIconStartPosition += powerIconRowOffset;
+                        
+                    }
                 }
 
 
@@ -528,6 +598,8 @@ namespace UHSampleGame.Players
                             "BACKGROUND_" + mapTeamNumToTeamChar[team]);
 
                     }
+
+
                 }
 
                 healthicon = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\icon_health");
@@ -563,21 +635,24 @@ namespace UHSampleGame.Players
             }
         }
 
-        public void TakeDamage()
+        public bool TakeDamage()
         {
             Health--;
-            HealthString = Health.ToString();
+            //HealthString = Health.ToString();
             if (Health <= 0)
             {
                 //Event if died??
                 
                 IsDead = true;
-                PlayerCollection.CheckGameWin();
+                if (PlayerCollection.CheckGameWin())
+                    return true;
+
                 PlayerCollection.UpdateTargetPlayers(PlayerNum);
                 UnitCollection.SetOtherUnitsToNewTarget(PlayerNum);
                 UnitCollection.SetAllUnitsImmovable(PlayerNum);
                 TowerCollection.SetAllNoShoot(PlayerNum);
             }
+            return false;
             
         }
 
@@ -595,7 +670,7 @@ namespace UHSampleGame.Players
         public void AddMoney(int amount)
         {
             this.Money += amount;
-            this.MoneyString = this.Money.ToString();
+            //this.MoneyString = this.Money.ToString();
         }
 
         public void SetupAvatar()
@@ -658,30 +733,41 @@ namespace UHSampleGame.Players
 
                 if (input.CheckNewAction(InputAction.TowerBuild, playerIndexes[PlayerNum]))
                 {
-                    
-                    Tower tower = TowerCollection.Add(PlayerNum, TeamNum, Money, lastBuiltTower, this.avatarFollowingTile.Position);
-                    if(tower != null)
-                        Money -= tower.Cost;
+                    if (!this.Rezone)
+                    {
+                        Tower tower = TowerCollection.Add(PlayerNum, TeamNum, Money, lastBuiltTower, this.avatarFollowingTile.Position);
+                        if (tower != null)
+                            Money -= tower.Cost;
 
-                    MoneyString = Money.ToString();
+                        ///MoneyString = Money.ToString();
+                    }
                 }
 
                 if (input.CheckNewAction(InputAction.TowerDestroy, playerIndexes[PlayerNum]))
                 {
-                    Money += TowerCollection.Remove(PlayerNum, ref this.avatar.Position);
-                    MoneyString = Money.ToString();
+                    if (!this.Rezone)
+                    {
+                        Money += TowerCollection.Remove(PlayerNum, ref this.avatar.Position);
+                        //MoneyString = Money.ToString();
+                    }
                 }
 
                 if (input.CheckNewAction(InputAction.TowerRepair, playerIndexes[PlayerNum]))
                 {
-                    Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatar.Position);
-                    MoneyString = Money.ToString();
+                    if (!this.Rezone)
+                    {
+                        Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatar.Position);
+                        //MoneyString = Money.ToString();
+                    }
                 }
 
                 if (input.CheckNewAction(InputAction.TowerUpgrade, playerIndexes[PlayerNum]))
                 {
-                    Money -= TowerCollection.Upgrade(TeamNum, Money, ref this.avatar.Position);
-                    MoneyString = Money.ToString();
+                    if (!this.Rezone)
+                    {
+                        Money -= TowerCollection.Upgrade(TeamNum, Money, ref this.avatar.Position);
+                        //MoneyString = Money.ToString();
+                    }
 
                 }
 
@@ -768,6 +854,13 @@ namespace UHSampleGame.Players
                             offenseTowerSelected = NUM_OFFENSE_TOWERS - 1;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
                     }
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.Powers)
+                    {
+                        if (((int)powerSelected - 1) >= 0)
+                            powerSelected--;
+                        else
+                            powerSelected = NUM_POWERS - 1;
+                    }
 
 
                     unitScreenActivated = false;
@@ -795,6 +888,13 @@ namespace UHSampleGame.Players
                         else
                             offenseTowerSelected =0;
                         lastBuiltTower = offenseTowerInfo[offenseTowerSelected].type;
+                    }
+                    else if (currentlySelectedPlayerStatus == PlayerMenuTabs.Powers)
+                    {
+                        if (((int)powerSelected + 1) < NUM_POWERS)
+                            powerSelected++;
+                        else
+                            powerSelected = 0;
                     }
                     unitScreenActivated = false;
                 }
@@ -949,6 +1049,11 @@ namespace UHSampleGame.Players
                 {
                     screenManager.ShowScreen(new PauseScreen());
                 }
+
+                if (input.CheckNewAction(InputAction.PowerActivate, playerIndexes[PlayerNum]))
+                {
+                    PowerManager.AddPower((PowerType)powerSelected, PlayerNum);
+                }
             }
         }
 
@@ -1095,19 +1200,21 @@ namespace UHSampleGame.Players
                         break;
                 }
             }
-            else if(unitScreenActivated)
-            {
-                DrawDeployTab();
-            }
             else if (towerInfoScreenActivated)
             {
                 DrawTowerInformation(gameTime);
             }
+            else if(unitScreenActivated)
+            {
+                DrawDeployTab();
+            }
+            
 
 
             if (Type == PlayerType.Human)
             {
-                ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
+                SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, statusFont, Money, moneyLocation[PlayerNum], Color.White);
+                //ScreenManager.SpriteBatch.DrawString(statusFont, MoneyString, moneyLocation[PlayerNum], Color.White);
                 if(enemyTargetOpacity.A > 0)
                 {
                     ScreenManager.SpriteBatch.Draw(attackingPlayer[TargetPlayerNum], 
@@ -1126,20 +1233,26 @@ namespace UHSampleGame.Players
                 ScreenManager.SpriteBatch.Draw(statusTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.Draw(healthicon, healthIconLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.Draw(numUnitsIcon, numUnitsIconLocations[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusScreenFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusScreenFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
-                    statusNumberOfUnitsLocation[PlayerNum], Color.White);
+                SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, statusScreenFont, Health, statusHealthLocation[PlayerNum], Color.White);
+                //ScreenManager.SpriteBatch.DrawString(statusScreenFont, HealthString, statusHealthLocation[PlayerNum], Color.White);
+                SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, statusScreenFont, 
+                    UnitCollection.UnitCountForPlayer(PlayerNum), statusNumberOfUnitsLocation[PlayerNum], Color.White);
+                ///ScreenManager.SpriteBatch.DrawString(statusScreenFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
+                //    statusNumberOfUnitsLocation[PlayerNum], Color.White);
             }
             else
             {
                 ScreenManager.SpriteBatch.Draw(computerTags[TeamNum], globalLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.Draw(healthicon, healthIconLocations[PlayerNum], Color.White);
                 ScreenManager.SpriteBatch.Draw(numUnitsIcon, numUnitsIconLocations[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusScreenFont, HealthString,
-                    statusHealthLocation[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(statusScreenFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
+                SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, statusScreenFont, Health, statusHealthLocation[PlayerNum], Color.White);
+                //ScreenManager.SpriteBatch.DrawString(statusScreenFont, HealthString,
+                //    statusHealthLocation[PlayerNum], Color.White);
 
-                    statusNumberOfUnitsLocation[PlayerNum], Color.White);
+                SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, statusScreenFont,
+                    UnitCollection.UnitCountForPlayer(PlayerNum), statusNumberOfUnitsLocation[PlayerNum], Color.White);
+                //ScreenManager.SpriteBatch.DrawString(statusScreenFont, UnitCollection.UnitCountForPlayerString(PlayerNum),
+                //statusNumberOfUnitsLocation[PlayerNum], Color.White);
             }
         }
 
@@ -1201,6 +1314,31 @@ namespace UHSampleGame.Players
         void DrawPowers()
         {
             ScreenManager.SpriteBatch.Draw(powersTab[PlayerNum][TeamNum], globalLocations[PlayerNum], Color.White);
+
+            for (int i = 0; i < PowerManager.NumPowers; i++)
+            {
+                ScreenManager.SpriteBatch.Draw(powerIcons[i],
+                        powerIconLocations[PlayerNum][i], Color.White);
+                
+                if (powerSelected == i)
+                {
+                    ScreenManager.SpriteBatch.Draw(highlightIcon,
+                        powerHighlightIconLocations[PlayerNum][i],
+                        highlightIconSourceRect,
+                        Color.White,
+                        highlightRotations[currentHighlightRotation],
+                        highlightOrigin,
+                        SpriteEffects.None,
+                        1.0f);
+                    ScreenManager.SpriteBatch.DrawString(towerTitle, PowerManager.powerInformation[i].name,
+                        powerNameLocation[PlayerNum], Color.White);
+                    ScreenManager.SpriteBatch.DrawString(towerPrice, PowerManager.powerInformation[i].costString,
+                        powerPriceLocation[PlayerNum], Color.White);
+                    ScreenManager.SpriteBatch.DrawString(towerDescription, PowerManager.powerInformation[i].description,
+                        powerDescriptionLocation[PlayerNum], Color.White);
+                }
+            }
+
         }
 
         void DrawDeployTab()

@@ -22,7 +22,7 @@ namespace UHSampleGame.CoreObjects.Units
         #region Class Variables
         public UnitStatus Status;
         public UnitType Type;
-
+        bool gameOver = false;
         static int currentID = 0;
         public int ID;
         public int MoneyToGive;
@@ -31,7 +31,6 @@ namespace UHSampleGame.CoreObjects.Units
         int goalTileID;
         int focalTileID;
 
-        public static List<Tile> stuckTiles = new List<Tile>(9);
         public int XPToGive;
 
         //Tile previousTile;
@@ -155,10 +154,10 @@ namespace UHSampleGame.CoreObjects.Units
             this.Position = baseTile.Position;
 
             //lock (AStar2.tileInformationLock)
-            //lock(AStar2.locks[CurrentTileID])
-            //{
+            lock(AStar2.locks[CurrentTileID][goalTile.ID])
+            {
                 SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
-            //}
+            }
             Status = UnitStatus.Deployed;
             UpdatePath();
             UpdateTransforms();
@@ -174,10 +173,17 @@ namespace UHSampleGame.CoreObjects.Units
             return Status == UnitStatus.Deployed;
         }
 
-        public void Update(GameTime gameTime)
+        public bool Update(GameTime gameTime)
         {
-            UpdatePath();
-            UpdateTransforms();
+            if (!PlayerCollection.CheckFreezeEnemiesFor(this.PlayerNum))
+            {
+                UpdatePath();
+                UpdateTransforms();
+
+                if (gameOver)
+                    return true;
+            }
+            return false;
         }
 
         public void Draw(GameTime gameTime)
@@ -195,14 +201,20 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (!TileMap.Tiles[focalTileID].IsWalkable())
             {
-                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
+                lock (AStar2.locks[CurrentTileID][goalTileID])
+                {
+                    SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
+                }
             }
 
             if (TileMap.Tiles[CurrentTileID].TileType == TileType.Blocked)
             {
                 if (TileMap.Tiles[previousTileID].PathsInts[goalTileID].Count > 1)
                 {
-                    SetFocalPointAndVelocity(TileMap.Tiles[previousTileID].PathsInts[goalTileID][1]);//previousTile.Paths[goalTile.ID][1]);
+                    lock (AStar2.locks[CurrentTileID][goalTileID])
+                    {
+                        SetFocalPointAndVelocity(TileMap.Tiles[previousTileID].PathsInts[goalTileID][1]);//previousTile.Paths[goalTile.ID][1]);
+                    }
                 }
                 else
                 {
@@ -213,7 +225,10 @@ namespace UHSampleGame.CoreObjects.Units
                         {
                             if (goodNieghbors[i].PathsInts[goalTileID].Count > 0)
                             {
-                                SetFocalPointAndVelocity(goodNieghbors[i].PathsInts[goalTileID][1]);
+                                lock (AStar2.locks[CurrentTileID][goalTileID])
+                                {
+                                    SetFocalPointAndVelocity(goodNieghbors[i].PathsInts[goalTileID][1]);
+                                }
                                 break;
                             }
                         }
@@ -232,7 +247,10 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (CurrentTileID != previousTileID)
             {
-                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
+                lock (AStar2.locks[CurrentTileID][goalTileID])
+                {
+                    SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
+                }
             }
 
             UpdatePositionAndRotation();
@@ -312,7 +330,11 @@ namespace UHSampleGame.CoreObjects.Units
                 if (CurrentTileID == goalTileID)
                 {
                     //Register Hit
-                    PlayerCollection.AttackPlayer(PlayerToAttack);
+                    if (PlayerCollection.AttackPlayer(PlayerToAttack))
+                    {
+                        gameOver = true;
+                        return;
+                    }
                     Vector3 nv = new Vector3();
                     nv.X = unit.Position.X;
                     nv.Y = unit.Position.Y + 1;
@@ -352,15 +374,13 @@ namespace UHSampleGame.CoreObjects.Units
                 if ((diffX < 30 && diffZ < 30)
                     || !TileMap.GetTileFromPos(focalPoint).IsWalkable() || !isStuck)
                 {
-                    //Increase capacity???!?!?!?!?!?!? check for this... could cause GC!!!!
-                    stuckTiles = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
+                    List<Tile> stuckTiles = TileMap.GetWalkableNeighbors(TileMap.Tiles[CurrentTileID]);
                     stuckTiles.Add(TileMap.Tiles[CurrentTileID]);
 
                     if (stuckTiles.Count == 1 && !TileMap.Tiles[CurrentTileID].IsWalkable())
                     {
                         Health = 0;
                         OnDied();
-                        return true;
                         //throw new NotImplementedException("No walkable neighbors with blocked current Tile2... handle this!");
                     }
 

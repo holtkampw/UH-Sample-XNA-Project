@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using UHSampleGame.CoreObjects.Towers;
@@ -108,10 +107,10 @@ namespace UHSampleGame.TileSystem
             this.TileType = tileType;
         }
 
-        public override string ToString()
-        {
-            return this.ID.ToString() + " " + TileType.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    return this.ID.ToString() + " " + TileType.ToString();
+        //}
 
         public void SetBlockableObject(Tower gameObject)
         {
@@ -128,29 +127,16 @@ namespace UHSampleGame.TileSystem
             OnTowerExit(ref Tower);
             Tower = null;
             SetTileType(TileType.Walkable);
-            AStar2.Update = true;
         }
 
         public void UpdatePathTo(Tile baseTile)
         {
-            bool loop = true;
+            
             // List<Tile> newList = new List<Tile>();
             AStar2.InitAstar(this.ID, baseTile.ID);
             // List<Tile> tempPath = Paths[baseTile.ID];
             List<int> tempIntPath = UnSafePaths[baseTile.ID];
-            do
-            {
-                try
-                {
-                    AStar2.FindPath(ref tempIntPath);//new List<Tile>(AStar2.FindPath());
-                    loop = false;
-                }
-                catch
-                {
-                    int a = 0;
-                    loop = true;
-                }
-            } while (loop);
+            AStar2.FindPath(ref tempIntPath);//new List<Tile>(AStar2.FindPath());
             //Paths[baseTile.ID] = tempPath;
             
         }
@@ -282,5 +268,17 @@ namespace UHSampleGame.TileSystem
         //{
         //    return ID == ((Tile)obj).ID;
         //}
+
+        public void SyncPathFor(int t)
+        {
+            lock (AStar2.locks[this.ID][t])
+            {
+                PathsInts[t].Clear();
+                for (int i = 0; i < this.UnSafePaths[t].Count; i++)
+                {
+                    PathsInts[t].Add(UnSafePaths[t][i]);
+                }
+            }
+        }
     }
 }
