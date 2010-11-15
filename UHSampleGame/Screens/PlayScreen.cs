@@ -22,6 +22,7 @@ using UHSampleGame.PathFinding;
 
 using Microsoft.Xna.Framework.Media;
 using System.Threading;
+using UHSampleGame.PowerManagement;
 #endregion
 
 namespace UHSampleGame.Screens
@@ -82,6 +83,7 @@ namespace UHSampleGame.Screens
             BaseCollection.Initialize();
             PlayerCollection.Initialize();
             ProjectileManager.Initialize();
+            PowerManager.Initialize();
 
             backgroundSong = ScreenManager.Game.Content.Load<Song>("Sounds\\Backgrounds\\multiplayer"); 
             
@@ -171,6 +173,7 @@ namespace UHSampleGame.Screens
             PlayerCollection.Update(gameTime);
             //ProjectileManager.Update(gameTime);
             TileMap.Update(gameTime);
+            PowerManager.Update(gameTime);
             //DebugInfo.Update(gameTime);
             
         }

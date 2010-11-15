@@ -80,6 +80,8 @@ namespace UHSampleGame.CoreObjects.Towers
         static Vector2 hudUpgradeOffset = new Vector2(0, 10);
 
         static int upgradeAmount = 0;
+
+        static Random rand = new Random((int)DateTime.Now.Ticks);
         #endregion
 
         #region Initialize
@@ -508,5 +510,71 @@ namespace UHSampleGame.CoreObjects.Towers
             }
         }
         #endregion
+
+        public static void SetStrongTowersFor(int PlayerNum)
+        {
+            for (int i = 0; i < NumPlayers; i++)
+                for (int j = 0; j < towerTypes.Length; j++)
+                {
+                    updateCount = 0;
+                    for (int k = 0; k < MAX_TOWERS && updateCount < towerCount[i][j]; k++)
+                        if (towers[i][j][k].IsActive())
+                        {
+                            towers[i][j][k].attackStrength *= 2;
+                            updateCount++;
+                        }
+                }
+        }
+
+        public static void RemoveStrongTowersFor(int PlayerNum)
+        {  
+            for (int i = 0; i < NumPlayers; i++)
+                for (int j = 0; j < towerTypes.Length; j++)
+                {
+                    updateCount = 0;
+                    for (int k = 0; k < MAX_TOWERS && updateCount < towerCount[i][j]; k++)
+                        if (towers[i][j][k].IsActive())
+                        {
+                            towers[i][j][k].attackStrength /= 2;
+                            updateCount++;
+                        }
+                }
+        }
+
+        public static void UseBombasticOn(int attackPlayer, int amount)
+        {
+            int towerTypeToKill = -1;
+            for (int i = 0; i < amount; i++)
+            {
+                //get random type
+
+                for(int type = towerTypes.Length -1; type >= 0; type--)
+                {
+                    if(towerCount[attackPlayer][type] > 0)
+                    {
+                        towerTypeToKill = type;
+                    }
+                }
+
+                if(towerTypeToKill == -1)
+                    return;
+
+                //kill random tower (between 0 and active)
+                int towerNumToKill = rand.Next(0, towerCount[attackPlayer][towerTypeToKill]);
+                updateCount = 0;
+                for (int tower = 0; tower < MAX_TOWERS && updateCount < towerCount[attackPlayer][towerTypeToKill]; tower++)
+                {
+                    if (towers[attackPlayer][towerTypeToKill][tower].IsActive())
+                    {
+                        if (updateCount == towerNumToKill)
+                        {
+                            Tower t = towers[attackPlayer][towerTypeToKill][towerNumToKill];
+                            Destroy(ref t);
+                        }
+                        updateCount++;
+                    }
+                }
+            }
+        }
     }
 }

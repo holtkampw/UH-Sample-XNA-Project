@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using UHSampleGame.CoreObjects.Towers;
@@ -108,10 +107,10 @@ namespace UHSampleGame.TileSystem
             this.TileType = tileType;
         }
 
-        public override string ToString()
-        {
-            return this.ID.ToString() + " " + TileType.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    return this.ID.ToString() + " " + TileType.ToString();
+        //}
 
         public void SetBlockableObject(Tower gameObject)
         {

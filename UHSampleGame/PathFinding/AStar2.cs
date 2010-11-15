@@ -112,7 +112,7 @@ namespace UHSampleGame.PathFinding
                 index = TileMap.Tiles[id].tileNeighbors[i].ID;
                 if (index >= 0)
                 {
-                    lock (tileInformation)
+                    lock (tileInformationLock)
                     {
                         tileInformation[index].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[id].tileNeighbors[i]);
                     }
@@ -189,7 +189,7 @@ namespace UHSampleGame.PathFinding
 
                 //neighbors = TileMap.GetWalkableNeighbors(TileMap.Tiles[currentTile.ID]);
 
-                lock (tileInformation)
+                lock (tileInformationLock)
                 {
                     tileInformation[currentTile].neighbors = TileMap.GetWalkableNeighborsInts(TileMap.Tiles[currentTile]);
                 }
@@ -346,7 +346,7 @@ namespace UHSampleGame.PathFinding
                     readOnlyTileInformation[i].neighbors.Clear();
 
                     for (int j = 0; j < tileInformation[i].neighbors.Count; j++)
-                        readOnlyTileInformation[i].neighbors.Add(tileInformation[i].neighbors[j]);
+                        readOnlyTileInformation[i].neighbors.Add(tileInformation[i].neighbors[j]); //ERROR: out of range exception????
                 }
             }
 

@@ -66,7 +66,6 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="AssetManager\AssetHelper.cs" />
     <Compile Include="CameraManagement\CameraManager.cs" />
     <Compile Include="CoreObjects\AnimatedTileObject.cs" />
     <Compile Include="CoreObjects\Avatar.cs" />
@@ -93,6 +92,7 @@
     <Compile Include="Events\GameEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="InputManagement\InputManager.cs" />
     <Compile Include="CoreObjects\AnimatedModel.cs" />
     <Compile Include="LevelManagement\Level.cs">
@@ -108,6 +108,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Player\PlayerCollection.cs" />
+    <Compile Include="PowerManagement\PowerManager.cs" />
     <Compile Include="ProjectileManagement\ParticleEmitter.cs" />
     <Compile Include="ProjectileManagement\ParticleSettings.cs" />
     <Compile Include="ProjectileManagement\ParticleSystem.cs" />

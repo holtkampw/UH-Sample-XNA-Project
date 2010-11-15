@@ -53,7 +53,7 @@ namespace UHSampleGame.CoreObjects.Towers
         Matrix rotationMatrixZ;
         Matrix scaleRot;
 
-        int attackStrength = 20;
+        public int attackStrength = 20;
 
         public UnitType UnitTypeToBuild = UnitType.SpeedBoat;
         public TowerType Type;
@@ -104,11 +104,11 @@ namespace UHSampleGame.CoreObjects.Towers
 
         BaseTowerType BaseType;
         public int destroyCost;
-        public string destroyCostString;
+        //public string destroyCostString;
         public int upgradeCost;
-        public string upgradeCostString;
+        //public string upgradeCostString;
         public int repairCost;
-        public string repairCostString;
+        //public string repairCostString;
 
 
         int unitTypeSelected = 0;
@@ -379,54 +379,57 @@ namespace UHSampleGame.CoreObjects.Towers
 
         private void Attack(GameTime gameTime)
         {
-
-            if (currentTimeToAttack > timeToAttack)
+            if (!PlayerCollection.CheckEMPFor(this.PlayerNum))
             {
-
-                if (unitToAttack != null && unitToAttack.Health > 0)
+                if (currentTimeToAttack > timeToAttack)
                 {
-                    currentTimeToAttack = TimeSpan.Zero;
-                    ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
-                    moneyToGive = unitToAttack.MoneyToGive;
-                    bool kill = unitToAttack.TakeDamage(attackStrength);
 
-                    if (kill)
+                    if (unitToAttack != null && unitToAttack.Health > 0)
                     {
-                        PlayerCollection.EarnedMoneyForPlayer(PlayerNum, moneyToGive);
-                       
-                        killEffect.Play(0.4f, 1.0f, 0.0f);
-                    }
-                    if (Level < 4 && kill)
-                    {
-                        XP += currentXPToGive + (int)((Level / 4.0f) * currentXPToGive);
-                        if (XP >= 100 )
+                        currentTimeToAttack = TimeSpan.Zero;
+                        ProjectileManager.AddParticle(this.Position, unitToAttack.Position);
+                        moneyToGive = unitToAttack.MoneyToGive;
+                        bool kill = unitToAttack.TakeDamage(attackStrength);
+
+                        if (kill)
                         {
-                            XPUpgrade();
+                            PlayerCollection.EarnedMoneyForPlayer(PlayerNum, moneyToGive);
+
+                            killEffect.Play(0.4f, 1.0f, 0.0f);
                         }
+                        if (Level < 4 && kill)
+                        {
+                            XP += currentXPToGive + (int)((Level / 4.0f) * currentXPToGive);
+                            if (XP >= 100)
+                            {
+                                XPUpgrade();
+                            }
+                        }
+
+                    }
+                    else if (towersToAttack.Count > 0)
+                    {
+                        currentTimeToAttack = TimeSpan.Zero;
+                        ProjectileManager.AddParticle(this.Position, towersToAttack[0].Position);
+                        bool kill = towersToAttack[0].TakeDamage(attackStrength);
+                        //if (kill)
+                        // towersToAttack.Remove(towersToAttack[0]);
                     }
 
-                }
-                else if (towersToAttack.Count > 0)
-                {
-                    currentTimeToAttack = TimeSpan.Zero;
-                    ProjectileManager.AddParticle(this.Position, towersToAttack[0].Position);
-                    bool kill = towersToAttack[0].TakeDamage(attackStrength);
-                    //if (kill)
-                       // towersToAttack.Remove(towersToAttack[0]);
-                }
+                    if (towersToAttack.Count > 0 && towersToAttack[0].Health <= 0)
+                    {
+                        towersToAttack.RemoveAt(0);
+                    }
 
-                if (towersToAttack.Count > 0 && towersToAttack[0].Health <= 0)
-                {
-                    towersToAttack.RemoveAt(0);
+                    if (unitToAttack != null && unitToAttack.Health <= 0)
+                    {
+                        unitToAttack = null;
+                    }
+                    return;
                 }
-
-                if (unitToAttack != null && unitToAttack.Health <= 0)
-                {
-                    unitToAttack = null;
-                }
-                return;
+                currentTimeToAttack += gameTime.ElapsedGameTime;
             }
-            currentTimeToAttack += gameTime.ElapsedGameTime;
+            
         }
 
         public int Repair(int money)
@@ -448,7 +451,7 @@ namespace UHSampleGame.CoreObjects.Towers
             float perc = 1.0f - (Health / (float)HealthCapacity);
             int amount = (int)(perc * Cost);
             repairCost = amount;
-            repairCostString = "$ " + repairCost.ToString();
+            //repairCostString = "$ " + repairCost.ToString();
             return amount;
         }
 
@@ -473,7 +476,7 @@ namespace UHSampleGame.CoreObjects.Towers
         public int UpgradeCost()
         {
             upgradeCost = Cost + (int)((Level / 4.0f) * Cost);
-            upgradeCostString = "$ " + upgradeCost.ToString();
+            //upgradeCostString = "$ " + upgradeCost.ToString();
             return upgradeCost;
         }
 
@@ -497,7 +500,7 @@ namespace UHSampleGame.CoreObjects.Towers
         {
             float perc = (Health / (float)HealthCapacity);
             destroyCost = (int)(TotalInvestedCost * perc * .75f);
-            destroyCostString = "$ +" + destroyCost.ToString();
+            //destroyCostString = "$ +" + destroyCost.ToString();
             return destroyCost;
         }
 
@@ -685,14 +688,19 @@ namespace UHSampleGame.CoreObjects.Towers
             {
                 ScreenManager.SpriteBatch.Draw(upgradeIcon[(int)UpgradeAmounts[Level + 1].type],
                     upgradeIconOffset[PlayerNum], Color.White);
-                ScreenManager.SpriteBatch.DrawString(font, upgradeCostString,
-                    upgradeStringOffset[PlayerNum], Color.White);
+
+                SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, upgradeCost, upgradeStringOffset[PlayerNum], Color.White);
+                //ScreenManager.SpriteBatch.DrawString(font, upgradeCostString,
+                //    upgradeStringOffset[PlayerNum], Color.White);
             }
 
             ScreenManager.SpriteBatch.Draw(recycleIcon, recycleIconOffset[PlayerNum], Color.White);
-            ScreenManager.SpriteBatch.DrawString(font, destroyCostString, recycleStringOffset[PlayerNum], Color.White);
+            //ScreenManager.SpriteBatch.DrawString(font, destroyCostString, recycleStringOffset[PlayerNum], Color.White);
+            SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, repairCost, repairStringOffset[PlayerNum], Color.White);
             ScreenManager.SpriteBatch.Draw(repairIcon, repairIconOffset[PlayerNum], Color.White);
-            ScreenManager.SpriteBatch.DrawString(font, repairCostString, repairStringOffset[PlayerNum], Color.White);
+            
+            SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, repairCost, repairStringOffset[PlayerNum], Color.White);
+            //ScreenManager.SpriteBatch.DrawString(font, repairCostString, repairStringOffset[PlayerNum], Color.White);
 
             if (BaseType == BaseTowerType.Offense)
             {

@@ -175,8 +175,11 @@ namespace UHSampleGame.CoreObjects.Units
 
         public void Update(GameTime gameTime)
         {
-            UpdatePath();
-            UpdateTransforms();
+            if (!PlayerCollection.CheckFreezeEnemiesFor(this.PlayerNum))
+            {
+                UpdatePath();
+                UpdateTransforms();
+            }
         }
 
         public void Draw(GameTime gameTime)
