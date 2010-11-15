@@ -739,7 +739,7 @@ namespace UHSampleGame.Players
                         if (tower != null)
                             Money -= tower.Cost;
 
-                        ///MoneyString = Money.ToString();
+                        //MoneyString = Money.ToString();
                     }
                 }
 
