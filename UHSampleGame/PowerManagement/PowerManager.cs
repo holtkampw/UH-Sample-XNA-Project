@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using UHSampleGame.Players;
 using UHSampleGame.CoreObjects.Towers;
+using Microsoft.Xna.Framework.Graphics;
+using UHSampleGame.ScreenManagement;
 
 namespace UHSampleGame.PowerManagement
 {
@@ -29,6 +31,18 @@ namespace UHSampleGame.PowerManagement
         public bool active;
     }
 
+    public struct ActivatedPower
+    {
+        public PowerType type;
+        public int PlayerNum;
+
+        public ActivatedPower(PowerType type, int PlayerNum)
+        {
+            this.type = type;
+            this.PlayerNum = PlayerNum;
+        }
+    }
+
     public static class PowerManager
     {
         #region Class Variables
@@ -40,6 +54,26 @@ namespace UHSampleGame.PowerManagement
         public static List<int> actionPlayers = new List<int>(5);
         public static List<int> tempPlayers = new List<int>(5);
         static Random rand;
+
+        static List<ActivatedPower> activatedPowers;
+        static float timeElapsed;
+        static bool deactivatePowerDraw;
+        static bool deactivateNormal;
+        static float normalTimeElapsed = 5000;
+        static float minTimeElapsed = 2000;
+        private static bool useMinValues;
+        private static bool useNormalValues;
+        static Color backgroundColor = new Color(255, 255, 255, 255);
+        static Color titleColor = new Color(255, 255, 255, 255);
+        static Vector2 titlePosition = Vector2.Zero;
+        static float minBackgroundRemove = 15;
+        static float normalBackgroundRemove = 6;
+        static float minTitleRemove = 10;
+        static float normalTitleRemove = 4;
+        static float minTitleMove = 8;
+        static float normalTitleMove = 4;
+        static Texture2D[] backgroundTextures;
+        static Texture2D[] titleTextures;
         #endregion
 
         #region Intialization
@@ -79,14 +113,27 @@ namespace UHSampleGame.PowerManagement
 
 
             playerPowers = new PlayerPower[5][];
+            backgroundTextures = new Texture2D[5];
             for (int i = 1; i < 5; i++)
+            {
                 playerPowers[i] = new PlayerPower[MAX_ACTIVE_POWERS];
+                backgroundTextures[i] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\Overlays\\screen_background_0" + i);
+            }
+
+            titleTextures = new Texture2D[NumPowers];
+            titleTextures[0] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\Overlays\\freezeenemy");
+            titleTextures[1] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\Overlays\\rezoning");
+            titleTextures[2] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\Overlays\\strongtowers");
+            titleTextures[3] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\Overlays\\emp");
+            titleTextures[4] = ScreenManager.Game.Content.Load<Texture2D>("Powers\\Overlays\\bombastic");
 
             rand = new Random((int)DateTime.Now.Ticks);
+
+            activatedPowers = new List<ActivatedPower>();
         }
         #endregion
 
-        #region Update
+        #region Update/Draw
         public static void Update(GameTime gameTime)
         {
             
@@ -120,6 +167,76 @@ namespace UHSampleGame.PowerManagement
                 }
             }
         }
+
+        public static void Draw(GameTime gameTime)
+        {
+            if (activatedPowers.Count > 0)
+            {
+                timeElapsed += gameTime.ElapsedGameTime.Milliseconds;
+                if (activatedPowers.Count > 1)
+                {
+                    useMinValues = true;
+                    if (timeElapsed >= minTimeElapsed)
+                    {
+                        deactivatePowerDraw = true;
+                    }
+                }
+                else
+                {
+                    useNormalValues = true;
+                    if (timeElapsed >= normalTimeElapsed)
+                    {
+                        deactivatePowerDraw = true;
+                    }
+                }
+
+                if (deactivatePowerDraw)
+                {
+                    //Remove 
+                    activatedPowers.Remove(activatedPowers[0]);
+                    titleColor.A = 255;
+                    backgroundColor.A = 255;
+                    titlePosition.X = 0;
+                    timeElapsed = 0;
+                    deactivatePowerDraw = false;
+                    return;
+                }
+                else if (useMinValues)
+                {
+                    useMinValues = false;
+                    titlePosition.X += minTitleMove;
+                    if (backgroundColor.A - (byte)minBackgroundRemove > 0)
+                        backgroundColor.A -= (byte)minBackgroundRemove;
+                    else
+                        backgroundColor.A = 0;
+
+                    if (titleColor.A - (byte)minTitleRemove > 0)
+                        titleColor.A -= (byte)minTitleRemove;
+                    else
+                        titleColor.A = 0;
+                    
+                }
+                else if (useNormalValues)
+                {
+                    useNormalValues = false;
+                    titlePosition.X += normalTitleMove;
+                    if (backgroundColor.A - (byte)normalBackgroundRemove > 0)
+                        backgroundColor.A -= (byte)normalBackgroundRemove;
+                    else
+                        backgroundColor.A = 0;
+
+                    if (titleColor.A - (byte)normalTitleRemove > 0)
+                        titleColor.A -= (byte)normalTitleRemove;
+                    else
+                        titleColor.A = 0;
+                }
+
+                ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
+                ScreenManager.SpriteBatch.Draw(backgroundTextures[activatedPowers[0].PlayerNum], Vector2.Zero, backgroundColor);
+                ScreenManager.SpriteBatch.Draw(titleTextures[(int)activatedPowers[0].type], titlePosition, titleColor);
+                ScreenManager.SpriteBatch.End();
+            }
+        }
         #endregion
 
         public static void AddPower(PowerType type, int PlayerNum)
@@ -134,6 +251,8 @@ namespace UHSampleGame.PowerManagement
                         playerPowers[PlayerNum][i].active = true;
                         playerPowers[PlayerNum][i].Type = type;
                         playerPowers[PlayerNum][i].PlayerNum = PlayerNum;
+
+                        activatedPowers.Add(new ActivatedPower(type, PlayerNum));
 
                         switch (type)
                         {
@@ -162,10 +281,14 @@ namespace UHSampleGame.PowerManagement
                                 playerPowers[PlayerNum][i].active = false; //instance activation
                                 break;
                         }
+                        break;
                     }
                 }
             }
         }
+
+
+        #region Actions
 
         static void StrongTowers(int PlayerNum)
         {
@@ -326,5 +449,6 @@ namespace UHSampleGame.PowerManagement
                 }
             }
         }
+        #endregion
     }
 }

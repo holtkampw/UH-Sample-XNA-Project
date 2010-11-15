@@ -307,6 +307,15 @@ Content\Objects\Copter\Boxes\boxPurple_0.xnb
 Content\Objects\Copter\Boxes\boxRed_0.xnb
 Content\Scenario\scenarioFont.xnb
 Content\Scenario\objective_box.xnb
+Content\Powers\Overlays\bombastic.xnb
+Content\Powers\Overlays\emp.xnb
+Content\Powers\Overlays\freezeenemy.xnb
+Content\Powers\Overlays\rezoning.xnb
+Content\Powers\Overlays\screen_background_01.xnb
+Content\Powers\Overlays\screen_background_02.xnb
+Content\Powers\Overlays\screen_background_03.xnb
+Content\Powers\Overlays\screen_background_04.xnb
+Content\Powers\Overlays\strongtowers.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv
