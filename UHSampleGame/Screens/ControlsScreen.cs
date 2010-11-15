@@ -44,14 +44,14 @@ namespace UHSampleGame.Screens
 
         }
 
-        public override void HandleInput(InputManager input)
+        public override void HandleInput()
         {
-            if (input.CheckNewAction(InputAction.Selection))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.Selection))
             {
                 showFront = !showFront;
             }
 
-            if (input.CheckNewAction(InputAction.MenuCancel))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.MenuCancel))
             {
                 screenManager.RemoveScreen(this);
             }

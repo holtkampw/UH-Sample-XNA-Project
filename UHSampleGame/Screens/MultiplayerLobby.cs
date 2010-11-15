@@ -81,11 +81,11 @@ namespace UHSampleGame.Screens
         #endregion
 
         #region Input
-        public override void HandleInput(InputManager input)
+        public override void HandleInput()
         {
             for(int i = 1; i < 5; i++)
             {
-                if (input.CheckNewAction(InputAction.JoinGame, playerIndexes[i]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.JoinGame, playerIndexes[i]))
                 {
                     if (playerSetup[i].active)
                         playerSetup[i].active = false;
@@ -93,7 +93,7 @@ namespace UHSampleGame.Screens
                         playerSetup[i].active = true;
                 }
 
-                if (input.CheckNewAction(InputAction.TeamUp, playerIndexes[i]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.TeamUp, playerIndexes[i]))
                 {
                     if (playerSetup[i].teamNum - 1 >= 1)
                         playerSetup[i].teamNum--;
@@ -101,7 +101,7 @@ namespace UHSampleGame.Screens
                         playerSetup[i].teamNum = 4;
                 }
 
-                if (input.CheckNewAction(InputAction.TeamDown, playerIndexes[i]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.TeamDown, playerIndexes[i]))
                 {
                     if (playerSetup[i].teamNum + 1 <= 4)
                         playerSetup[i].teamNum++;
@@ -110,12 +110,12 @@ namespace UHSampleGame.Screens
                 }
             }
 
-            if (input.CheckNewAction(InputAction.BackToMainMenu))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.BackToMainMenu))
             {
                 ScreenManager.RemoveScreen(this.Name);
             }
 
-            if (input.CheckNewAction(InputAction.StartGame))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.StartGame))
             {
                 int numActivePlayers = 0;
                 for (int i = 1; i < playerSetup.Length; i++)

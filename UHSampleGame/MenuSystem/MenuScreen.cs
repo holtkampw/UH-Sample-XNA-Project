@@ -40,10 +40,10 @@ namespace UHSampleGame.MenuSystem
             
         }
 
-        public override void HandleInput(InputManager input)
+        public override void HandleInput()
         {
             // Move to the previous menu entry
-            if (input.CheckNewAction(InputAction.MenuUp))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.MenuUp))
             {
                 selectedEntry--;
 
@@ -52,7 +52,7 @@ namespace UHSampleGame.MenuSystem
             }
 
             // Move to the next menu entry
-            if (input.CheckNewAction(InputAction.MenuDown))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.MenuDown))
             {
                 selectedEntry++;
 
@@ -60,9 +60,9 @@ namespace UHSampleGame.MenuSystem
                     selectedEntry = 0;
             }
 
-            if (input.CheckNewAction(InputAction.MenuSelect))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.MenuSelect))
                 OnSelectEntry(selectedEntry);
-            else if (input.CheckNewAction(InputAction.MenuCancel))
+            else if (ScreenManager.InputManager.CheckNewAction(InputAction.MenuCancel))
                 OnCancel();
         }
 

@@ -152,11 +152,25 @@ namespace UHSampleGame.CoreObjects.Units
             //this.currentTile = baseTile;
             //this.goalTile = goalTile;
             this.Position = baseTile.Position;
-
+            int count = 0;
             //lock (AStar2.tileInformationLock)
             lock(AStar2.locks[CurrentTileID][goalTile.ID])
             {
-                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
+                while (count < 60)
+                {
+                    if (TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID].Count > 0)
+                    {
+                        SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
+                        break;
+                    }
+                    count++;
+
+                    if (count >= 60)
+                    {
+                        return;
+                    }
+                }
+
             }
             Status = UnitStatus.Deployed;
             UpdatePath();

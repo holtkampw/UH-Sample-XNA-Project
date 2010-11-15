@@ -84,7 +84,7 @@ namespace UHSampleGame.ScreenManagement
         /// Handles input logic
         /// </summary>
         /// <param name="input">The input manager for the game</param>
-        public abstract void HandleInput(InputManager input);
+        public abstract void HandleInput();
 
         /// <summary>
         /// Function that contains code to draw the current screen state
