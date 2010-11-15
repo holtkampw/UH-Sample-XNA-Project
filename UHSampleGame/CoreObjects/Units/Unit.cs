@@ -297,6 +297,7 @@ namespace UHSampleGame.CoreObjects.Units
             {
                 Health = 0;
                 OnDied();
+                return;
                 //FIX THIS...........................
             }
             previousTileID = CurrentTileID;
