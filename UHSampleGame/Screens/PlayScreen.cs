@@ -82,7 +82,7 @@ namespace UHSampleGame.Screens
             TowerCollection.Initialize(8);
             BaseCollection.Initialize();
             PlayerCollection.Initialize();
-            ProjectileManager.Initialize();
+            ProjectileManager.Initialize(); 
             PowerManager.Initialize();
 
             backgroundSong = ScreenManager.Game.Content.Load<Song>("Sounds\\Backgrounds\\multiplayer"); 
@@ -104,7 +104,7 @@ namespace UHSampleGame.Screens
 
             //Start Thread            
             TileMap.pathThread.Start();
-            ProjectileManager.particleThread.Start();
+            ProjectileManager.particleThread.Start(); 
 
             if (MediaPlayer.State == MediaState.Stopped)
             {
@@ -172,9 +172,9 @@ namespace UHSampleGame.Screens
             TowerCollection.Update(gameTime);
             PlayerCollection.Update(gameTime);
             //ProjectileManager.Update(gameTime);
-            TileMap.Update(gameTime);
+            //TileMap.Update(gameTime);
             PowerManager.Update(gameTime);
-            //DebugInfo.Update(gameTime);
+            DebugInfo.Update(gameTime);
             
         }
 
