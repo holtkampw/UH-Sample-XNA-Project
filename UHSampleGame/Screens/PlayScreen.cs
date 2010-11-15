@@ -187,7 +187,7 @@ namespace UHSampleGame.Screens
 
             if (isLoaded)
             {
-                PlayerCollection.HandleInput(input);
+                  PlayerCollection.HandleInput(input);
  //               p1.HandleInput(input);
  //               aI.HandleInput(input);
             }

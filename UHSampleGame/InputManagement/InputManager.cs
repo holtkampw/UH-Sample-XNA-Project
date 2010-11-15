@@ -34,7 +34,6 @@ namespace UHSampleGame.InputManagement
         Dictionary<PlayerIndex, GamePadState> currentGamePadStates;
         Dictionary<PlayerIndex, GamePadState> previousGamePadStates;
         Dictionary<InputAction, Keys> items;
-        Dictionary<InputAction, List<object>> actionDictionary;
         Dictionary<InputAction, List<Keys>> keyActionDictionary;
         Dictionary<InputAction, List<Buttons>> buttonActionDictionary;
 
@@ -51,7 +50,6 @@ namespace UHSampleGame.InputManagement
             currentGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
             previousGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
             items = new Dictionary<InputAction, Keys>();
-            actionDictionary = new Dictionary<InputAction, List<object>>();
 
             keyActionDictionary = new Dictionary<InputAction, List<Keys>>();
             buttonActionDictionary = new Dictionary<InputAction, List<Buttons>>();
@@ -76,16 +74,18 @@ namespace UHSampleGame.InputManagement
         /// </summary>
         public void Update()
         {
+#if !XBOX
             previousKeyboardState = currentKeyboardState;
             currentKeyboardState = Keyboard.GetState();
             previousMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
-
+#else
             for (int i = 0; i < playerIndexes.Length; i++)
             {
                 previousGamePadStates[playerIndexes[i]] = currentGamePadStates[playerIndexes[i]];
                 currentGamePadStates[playerIndexes[i]] = GamePad.GetState(playerIndexes[i]);
             }
+#endif
         }
         #endregion
 
@@ -151,7 +151,7 @@ namespace UHSampleGame.InputManagement
         /// <returns>Returns true if the action has just been triggered</returns>
         public bool CheckNewAction(InputAction action, PlayerIndex? playerIndex)
         {
-
+#if XBOX
             if (!playerIndex.HasValue)
             {
                 for (int i = 0; i < playerIndexes.Length; i++)
@@ -165,11 +165,11 @@ namespace UHSampleGame.InputManagement
                     if (IsNewButtonPressed(buttonActionDictionary[action][j], playerIndex.Value))
                         return true;
             }
-
+#else
            for(int i =0; i<keyActionDictionary[action].Count; i++)
                 if (IsNewKeyPressed(keyActionDictionary[action][i]))
                     return true;
-
+#endif          
             return false;
         }
 
@@ -191,7 +191,7 @@ namespace UHSampleGame.InputManagement
         /// <returns>Returns true if the action is triggered</returns>
         public bool CheckAction(InputAction action, PlayerIndex? playerIndex)
         {
-
+#if XBOX
             if (!playerIndex.HasValue)
             {
                 for (int i = 0; i < playerIndexes.Length; i++)
@@ -206,10 +206,11 @@ namespace UHSampleGame.InputManagement
                         return true;
             }
 
+#else
             for (int i = 0; i < keyActionDictionary[action].Count; i++)
                 if (IsKeyPressed(keyActionDictionary[action][i]))
                     return true;
-
+#endif
             return false;
         }
 
@@ -230,6 +231,7 @@ namespace UHSampleGame.InputManagement
 
         public bool CheckNewReleaseAction(InputAction action, PlayerIndex? playerIndex)
         {
+#if XBOX
             if (!playerIndex.HasValue)
             {
                 for (int i = 0; i < playerIndexes.Length; i++)
@@ -243,11 +245,11 @@ namespace UHSampleGame.InputManagement
                     if (IsNewButtonReleased(buttonActionDictionary[action][j], playerIndex.Value))
                         return true;
             }
-
+#else
             for (int i = 0; i < keyActionDictionary[action].Count; i++)
                 if (IsNewKeyReleased(keyActionDictionary[action][i]))
                     return true;
-
+#endif
             return false;
         }
 
