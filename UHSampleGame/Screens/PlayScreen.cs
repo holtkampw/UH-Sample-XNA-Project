@@ -23,10 +23,12 @@ using UHSampleGame.PathFinding;
 using Microsoft.Xna.Framework.Media;
 using System.Threading;
 using UHSampleGame.PowerManagement;
+using UHSampleGame.ScenarioManagement;
 #endregion
 
 namespace UHSampleGame.Screens
 {
+    public enum PlayerScreenType { Scenario, Multiplayer }
 
     public class PlayScreen : Screen
     {
@@ -51,14 +53,15 @@ namespace UHSampleGame.Screens
         Vector2 numTiles;
 
         PlayerSetup[] playerSetup;
-
+        PlayerScreenType gameType;
         #endregion
 
         #region Initialization
-        public PlayScreen(PlayerSetup[] playerSetup)
+        public PlayScreen(PlayerSetup[] playerSetup, PlayerScreenType gameType)
             : base("PlayScreen")
         {
             this.playerSetup = playerSetup;
+            this.gameType = gameType;
         }
 
         public override void LoadContent()
@@ -86,6 +89,11 @@ namespace UHSampleGame.Screens
             PlayerCollection.Initialize();
             ProjectileManager.Initialize(); 
             PowerManager.Initialize();
+
+            if (gameType == PlayerScreenType.Scenario)
+            {
+                ScenarioManager.Initialize();
+            }
 
             backgroundSong = ScreenManager.Game.Content.Load<Song>("Sounds\\Backgrounds\\multiplayer"); 
             
@@ -180,14 +188,19 @@ namespace UHSampleGame.Screens
             PowerManager.Update(gameTime);
             DebugInfo.Update(gameTime);
             
+            if (gameType == PlayerScreenType.Scenario)
+            {
+                ScenarioManager.Update(gameTime);
+            }
+            
         }
 
-        public override void HandleInput(InputManager input)
+        public override void HandleInput()
         {
 
             if (isLoaded)
             {
-                  PlayerCollection.HandleInput(input);
+                PlayerCollection.HandleInput();
  //               p1.HandleInput(input);
  //               aI.HandleInput(input);
             }
@@ -221,6 +234,10 @@ namespace UHSampleGame.Screens
 //                p1.Draw(gameTime);
 //                aI.Draw(gameTime);
 
+                if (gameType == PlayerScreenType.Scenario)
+                {
+                    ScenarioManager.Draw(gameTime);
+                }
 
                 ScreenManager.SpriteBatch.Begin();
                 DebugInfo.Draw();

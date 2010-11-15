@@ -73,7 +73,7 @@ namespace UHSampleGame.Screens
             
         }
 
-        public override void HandleInput(InputManagement.InputManager input)
+        public override void HandleInput()
         {
         }
 
@@ -91,7 +91,10 @@ namespace UHSampleGame.Screens
             // Perform the load operation.
             ScreenManager.RemoveScreen(this);
 
-            ScreenManager.ShowScreen(new PlayScreen(playerTypes));
+            if (levelType == LevelType.SingleOne)
+                ScreenManager.ShowScreen(new PlayScreen(playerTypes, PlayerScreenType.Scenario));
+            else
+                ScreenManager.ShowScreen(new PlayScreen(playerTypes, PlayerScreenType.Multiplayer));
             // Signal the background thread to exit, then wait for it to do so.
             if (backgroundThread != null)
             {

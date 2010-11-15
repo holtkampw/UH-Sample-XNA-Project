@@ -330,29 +330,29 @@ namespace UHSampleGame.CoreObjects
             view = cameraManager.ViewMatrix;
         }
 
-        public bool HandleInput(InputManager input, PlayerIndex index)
+        public bool HandleInput(PlayerIndex index)
         {
             avatarMoved = false;
            
-            if (input.CheckAction(InputAction.TileMoveUp, index))
+            if (ScreenManager.InputManager.CheckAction(InputAction.TileMoveUp, index))
             {
                 Velocity = Velocity + new Vector3(0, 0, -0.5f);
                 avatarMoved = true;
             }
 
-            if (input.CheckAction(InputAction.TileMoveDown, index))
+            if (ScreenManager.InputManager.CheckAction(InputAction.TileMoveDown, index))
             {
                 Velocity = Velocity + new Vector3(0, 0, 0.5f);
                 avatarMoved = true;
             }
 
-            if (input.CheckAction(InputAction.TileMoveLeft, index))
+            if (ScreenManager.InputManager.CheckAction(InputAction.TileMoveLeft, index))
             {
                 Velocity = Velocity + new Vector3(-0.5f, 0, 0);
                 avatarMoved = true;
             }
 
-            if (input.CheckAction(InputAction.TileMoveRight, index))
+            if (ScreenManager.InputManager.CheckAction(InputAction.TileMoveRight, index))
             {
                 Velocity = Velocity + new Vector3(0.5f, 0, 0);
                 avatarMoved = true;

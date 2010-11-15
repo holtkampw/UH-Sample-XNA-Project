@@ -149,12 +149,12 @@ namespace UHSampleGame.Players
             }
         }
 
-        public static void HandleInput(InputManager input)
+        public static void HandleInput()
         {
             for (int i = 1; i < Players.Length; i++)
             {
                 if (activePlayer[i])
-                    Players[i].HandleInput(input);
+                    Players[i].HandleInput();
             }
         }
 

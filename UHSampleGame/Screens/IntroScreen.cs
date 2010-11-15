@@ -20,9 +20,9 @@ namespace UHSampleGame.Screens
         {
         }
 
-        public override void HandleInput(InputManager input)
+        public override void HandleInput()
         {
-            if (input.CheckNewAction(InputAction.Selection))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.Selection))
             {
                 screenManager.ShowScreen(new MenuScreenTest());
             }

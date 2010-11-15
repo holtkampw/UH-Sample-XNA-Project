@@ -102,9 +102,9 @@ namespace UHSampleGame.Screens
             tickEffect = ScreenManager.Game.Content.Load<SoundEffect>("Sounds\\Effects\\explosion");
         }
 
-        public override void HandleInput(InputManager input)
+        public override void HandleInput()
         {
-            if (input.CheckNewAction(InputAction.MenuLeft))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.MenuLeft))
             {
                 if (selected - 1 < 0)
                     selected = 3;
@@ -115,7 +115,7 @@ namespace UHSampleGame.Screens
                 tickEffect.Play(0.15f, 1.0f, 0.0f);
             }
             
-            if (input.CheckNewAction(InputAction.MenuRight))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.MenuRight))
             {
                 if (selected + 1 > 3)
                     selected = 0;
@@ -126,7 +126,7 @@ namespace UHSampleGame.Screens
                 tickEffect.Play(0.15f, 1.0f, 0.0f);
             }
             
-            if (input.CheckNewAction(InputAction.Selection))
+            if (ScreenManager.InputManager.CheckNewAction(InputAction.Selection))
             {
                 items[selected].OnSelectEntry();
             }

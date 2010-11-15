@@ -138,7 +138,7 @@ namespace UHSampleGame.ScreenManagement
                 if(screens[i].Status != ScreenStatus.Disabled)
                     screens[i].Update(gameTime);
             //screens[screens.Count - 1].Update(gameTime);
-            screens[screens.Count - 1].HandleInput(InputManager);
+            screens[screens.Count - 1].HandleInput();
             //Yes this order is on purpose... if we add a screen in HandleInput then update the
             //inputManager is not updated... Perhaps move inputManager.Update into here as well?
         }

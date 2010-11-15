@@ -699,12 +699,12 @@ namespace UHSampleGame.Players
             
         }
 
-        public void HandleInput(InputManager input)
+        public void HandleInput()
         {
             //Human Player
             if (Type == PlayerType.Human)
             {
-                avatarMoved = avatar.HandleInput(input, playerIndexes[PlayerNum]);
+                avatarMoved = avatar.HandleInput(playerIndexes[PlayerNum]);
 
                 if (avatar.Position.X < TileMap.Left)
                 {
@@ -731,7 +731,7 @@ namespace UHSampleGame.Players
                     avatarMoved = true;
                 }
 
-                if (input.CheckNewAction(InputAction.TowerBuild, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.TowerBuild, playerIndexes[PlayerNum]))
                 {
                     if (!this.Rezone)
                     {
@@ -743,7 +743,7 @@ namespace UHSampleGame.Players
                     }
                 }
 
-                if (input.CheckNewAction(InputAction.TowerDestroy, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.TowerDestroy, playerIndexes[PlayerNum]))
                 {
                     if (!this.Rezone)
                     {
@@ -752,7 +752,7 @@ namespace UHSampleGame.Players
                     }
                 }
 
-                if (input.CheckNewAction(InputAction.TowerRepair, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.TowerRepair, playerIndexes[PlayerNum]))
                 {
                     if (!this.Rezone)
                     {
@@ -761,7 +761,7 @@ namespace UHSampleGame.Players
                     }
                 }
 
-                if (input.CheckNewAction(InputAction.TowerUpgrade, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.TowerUpgrade, playerIndexes[PlayerNum]))
                 {
                     if (!this.Rezone)
                     {
@@ -771,7 +771,7 @@ namespace UHSampleGame.Players
 
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuLeft, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.PlayerMenuLeft, playerIndexes[PlayerNum]))
                 {
                     if (((int)currentlySelectedPlayerStatus - 1) >= 0)
                         currentlySelectedPlayerStatus--;
@@ -801,7 +801,7 @@ namespace UHSampleGame.Players
                     
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuRight, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.PlayerMenuRight, playerIndexes[PlayerNum]))
                 {
                     if (((int)currentlySelectedPlayerStatus + 1) < playerMenuTabsEnumType.Length)
                         currentlySelectedPlayerStatus++;
@@ -831,7 +831,7 @@ namespace UHSampleGame.Players
                    
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuUp, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.PlayerMenuUp, playerIndexes[PlayerNum]))
                 {
                     if (towerInfoScreenActivated)
                     {
@@ -866,7 +866,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.PlayerMenuDown, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.PlayerMenuDown, playerIndexes[PlayerNum]))
                 {
                     if (towerInfoScreenActivated)
                     {
@@ -899,7 +899,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = false;
                 }
 
-                if (input.CheckAction(InputAction.UnitUp, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckAction(InputAction.UnitUp, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.Y < 1)
                         unitSelectionPosition.Y += 1;
@@ -907,7 +907,7 @@ namespace UHSampleGame.Players
                     unitScreenActivated = true;
                 }
 
-                if (input.CheckAction(InputAction.UnitLeft, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckAction(InputAction.UnitLeft, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.X > -1)
                         unitSelectionPosition.X -= 1;
@@ -915,14 +915,14 @@ namespace UHSampleGame.Players
                        
                 }
 
-                if (input.CheckAction(InputAction.UnitDown, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckAction(InputAction.UnitDown, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.Y > -1)
                         unitSelectionPosition.Y -= 1;
                     unitScreenActivated = true;
                 }
 
-                if (input.CheckAction(InputAction.UnitRight, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckAction(InputAction.UnitRight, playerIndexes[PlayerNum]))
                 {
                     if (unitSelectionPosition.X < 1)
                         unitSelectionPosition.X += 1;
@@ -944,7 +944,7 @@ namespace UHSampleGame.Players
                 }
 
 
-                if (input.CheckAction(InputAction.UnitBuild, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckAction(InputAction.UnitBuild, playerIndexes[PlayerNum]))
                 {
 
                     if (selectedUnit != queuedUnitType)
@@ -956,7 +956,7 @@ namespace UHSampleGame.Players
                         percentOfUnitsQueued = 0;
                     }
 
-                    if (queuedDeclineMode && input.CheckNewAction(InputAction.UnitBuild, playerIndexes[PlayerNum]))
+                    if (queuedDeclineMode && ScreenManager.InputManager.CheckNewAction(InputAction.UnitBuild, playerIndexes[PlayerNum]))
                     {
                         queuedUnits = 0;
                         queuedDeclineMode = false;
@@ -988,7 +988,7 @@ namespace UHSampleGame.Players
                     }
                 }
 
-                if (input.CheckNewReleaseAction(InputAction.UnitBuild, playerIndexes[PlayerNum]) || (percentOfUnitsQueued >= 100.0f))
+                if (ScreenManager.InputManager.CheckNewReleaseAction(InputAction.UnitBuild, playerIndexes[PlayerNum]) || (percentOfUnitsQueued >= 100.0f))
                 {
                     if (!queuedDeclineMode)
                     { 
@@ -1000,17 +1000,17 @@ namespace UHSampleGame.Players
                     }
                 }
 
-                if (input.CheckNewAction(InputAction.HUD, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.HUD, playerIndexes[PlayerNum]))
                 {
                     isHUDDisplayed = true;
                 }
                 
-                if(input.CheckNewReleaseAction(InputAction.HUD, playerIndexes[PlayerNum]))
+                if(ScreenManager.InputManager.CheckNewReleaseAction(InputAction.HUD, playerIndexes[PlayerNum]))
                 {
                     isHUDDisplayed = false;
                 }
 
-                if (input.CheckNewAction(InputAction.PickEnemyTarget, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.PickEnemyTarget, playerIndexes[PlayerNum]))
                 {
                     if (pickEnemyTargetPressed)
                     {
@@ -1023,7 +1023,7 @@ namespace UHSampleGame.Players
                     pickEnemyTargetPressed = true;
                 }
 
-                if (input.CheckAction(InputAction.TowerInformation, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckAction(InputAction.TowerInformation, playerIndexes[PlayerNum]))
                 {
                     towerInfoScreenActivated = true;
                     if (true)//avatarMoved || !towerInfoScreenActivated)
@@ -1040,17 +1040,17 @@ namespace UHSampleGame.Players
                     }
                 }
 
-                if (input.CheckNewReleaseAction(InputAction.TowerInformation, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewReleaseAction(InputAction.TowerInformation, playerIndexes[PlayerNum]))
                 {
                     towerInfoScreenActivated = false;
                 }
 
-                if (input.CheckNewAction(InputAction.Pause, playerIndexes[PlayerNum] ))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.Pause, playerIndexes[PlayerNum] ))
                 {
                     screenManager.ShowScreen(new PauseScreen());
                 }
 
-                if (input.CheckNewAction(InputAction.PowerActivate, playerIndexes[PlayerNum]))
+                if (ScreenManager.InputManager.CheckNewAction(InputAction.PowerActivate, playerIndexes[PlayerNum]))
                 {
                     PowerManager.AddPower((PowerType)powerSelected, PlayerNum);
                 }
