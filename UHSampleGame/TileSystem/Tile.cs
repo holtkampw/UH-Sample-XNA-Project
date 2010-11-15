@@ -118,10 +118,6 @@ namespace UHSampleGame.TileSystem
             Tower = gameObject;
             SetTileType(TileType.Blocked);
             OnTowerEnter(ref gameObject);
-            lock (AStar2.towerLock)
-            {
-                AStar2.towersBuilt.Add(gameObject);
-            }
         }
 
         public void RemoveBlockableObject()
@@ -132,10 +128,6 @@ namespace UHSampleGame.TileSystem
             OnTowerExit(ref Tower);
             Tower = null;
             SetTileType(TileType.Walkable);
-            lock (AStar2.towerLock)
-            {
-                AStar2.towersRemoved.Add(this.ID);
-            }
         }
 
         public void UpdatePathTo(Tile baseTile)
@@ -277,5 +269,17 @@ namespace UHSampleGame.TileSystem
         //{
         //    return ID == ((Tile)obj).ID;
         //}
+
+        public void SyncPathFor(int t)
+        {
+            lock (AStar2.locks[this.ID][t])
+            {
+                PathsInts[t].Clear();
+                for (int i = 0; i < this.UnSafePaths[t].Count; i++)
+                {
+                    PathsInts[t].Add(UnSafePaths[t][i]);
+                }
+            }
+        }
     }
 }

@@ -446,23 +446,6 @@ namespace UHSampleGame.TileSystem
 
         public static void UpdateTilePaths()
         {
-            //int index = -1;
-            ////find thread
-            //for (int i = 0; i < MAX_THREADS; i++)
-            //{
-            //    if (pathThread[i].ThreadState == ThreadState.Aborted || pathThread[i].ThreadState == ThreadState.Unstarted)
-            //    {
-            //        index = i;
-            //        break;
-            //    }
-            //}
-
-            //if (index != -1)
-            //{
-            //    //pathThread[index] = new Thread(threadedTilePaths);
-            //    pathThread[index].Start(index);
-            //}
-
             for (int j = 0; j < bases.Count; j++)
             {
                 for (int i = 0; i < tiles.Count; i++)
@@ -485,78 +468,25 @@ namespace UHSampleGame.TileSystem
             {
                 while (!pathThreadExit.WaitOne(1)) //thread goes on forever!
                 {
-                    if (AStar2.towersBuilt.Count > 0 || AStar2.towersRemoved.Count > 0)
+                    if (AStar2.UpdateNeeded)
                     {
-                        AStar2.Update = false; //only true if you create/destroy a tower
-                        AStar2.PrepareTowerList();
+                        AStar2.UpdateNeeded = false; //only true if you create/destroy a tower
 
-                        //If tower is removed, then date all paths except tiles with towers
-                        if(AStar2.safeTowersRemoved.Count > 0)
+                        for (int j = 0; j < bases.Count; j++)
                         {
-                            for (int j = 0; j < bases.Count; j++)
+                            for (int i = 0; i < tiles.Count; i++)
                             {
-                                for (int i = 0; i < tiles.Count; i++)
+                                if (tiles[i].IsWalkable())
                                 {
-                                    if (tiles[i].IsWalkable())
-                                        tiles[i].UpdatePathTo(bases[j].Tile);
+                                    tiles[i].UpdatePathTo(bases[j].Tile);
+                                    tiles[i].SyncPathFor(bases[j].Tile.ID);
                                 }
                             }
                         }
-                        else { //Else update only the tiles who have paths through the tile
-                            for (int t = 0; t < tiles.Count; t++)
-                            {
-                                if (tiles[t].IsWalkable())
-                                {
-                                    //check to see if valid
-                                    update = false;
-                                    for (int i = 0; i < AStar2.safeTowersBuilt.Count; i++)
-                                    {
-                                        for (int p = 0; p < tiles[t].PathsInts.Count; p++)
-                                        {
-                                            if (tiles[t].PathsInts[p].Contains(tiles[t].ID))
-                                            {
-                                                update = true;
-                                                break;
-                                            }
-                                        }
-
-                                        if (update)
-                                            break;
-                                    }
-
-                                    if (update)
-                                    {
-                                        for (int j = 0; j < bases.Count; j++)
-                                        {
-                                            tiles[t].UpdatePathTo(bases[j].Tile);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-
-                        //for (int j = 0; j < bases.Count; j++)
-                        //{
-                        //    for (int i = 0; i < tiles.Count; i++)
-                        //    {
-                        //        //lock (AStar2.tileInformationLock)
-                        //        //lock(AStar2.locks[i])
-                        //        //{
-                        //        if (tiles[i].IsWalkable())
-                        //            tiles[i].UpdatePathTo(bases[j].Tile);
-                        //        //}
-                        //    }
-                        //}
-                        //Synch
-                        AStar2.Synchronize();
                     }
                 }
             }
-            
-            //pathThread[(int)indexToKill].Join();
-            //pathThread[(int)indexToKill] = null;
-           // pathThread[(int)indexToKill].Abort();
+           
         }
 
         public static bool IsTilePathsValid()
@@ -630,16 +560,16 @@ namespace UHSampleGame.TileSystem
             {
                 Tile2.SetBlockableObject(tower);
                 //AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
-                ////AStar2.Update = true;
+                AStar2.UpdateNeeded = true;
                 ////UpdateTilePaths();
 
-                walkableNeighbors = GetWalkableNeighbors(Tile2);
+                //walkableNeighbors = GetWalkableNeighbors(Tile2);
 
                 //IDEA: WHAT ABOUT OFFSETTING THIS TO THE THREAD?
                 //Maintain a list of towers to update on the next update pass after walkableNeighbors is relevant?
-                for (int i = 0; i < walkableNeighbors.Count; i++)
+                for (int i = 0; i < Tile2.tileNeighbors.Count; i++)
                 {
-                    walkableNeighbors[i].RegisterTowerListenerForUnit(ref tower);
+                    Tile2.tileNeighbors[i].RegisterTowerListenerForUnit(ref tower);
                 }
                 for (int i = 0; i < Tile2.tileNeighbors.Count; i++)
                 {
@@ -647,6 +577,7 @@ namespace UHSampleGame.TileSystem
                 }
                 tower.tile = Tile2;
                 OnTowerCreated();
+                
                 return true;
             }
 
@@ -681,11 +612,11 @@ namespace UHSampleGame.TileSystem
 
             //UpdateTilePaths();
 
-            List<Tile> walkableNeighbors = GetWalkableNeighbors(tile);
+            //List<Tile> walkableNeighbors = GetWalkableNeighbors(tile);
 
-            for (int i = 0; i < walkableNeighbors.Count; i++)
+            for (int i = 0; i < tile.tileNeighbors.Count; i++)
             {
-                walkableNeighbors[i].RegisterTowerListenerForUnit(ref tower);
+                tile.tileNeighbors[i].RegisterTowerListenerForUnit(ref tower);
             }
 
             for (int i = 0; i < tile.tileNeighbors.Count; i++)
@@ -710,7 +641,8 @@ namespace UHSampleGame.TileSystem
             }
             Tile2.RemoveBlockableObject();
             
-            AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
+            //AStar2.UpdateWalkableNeighborsForTileID(Tile2.ID);
+            AStar2.UpdateNeeded = true;
             //UpdateTilePaths();
         }
 

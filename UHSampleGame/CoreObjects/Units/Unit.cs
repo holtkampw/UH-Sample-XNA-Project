@@ -154,10 +154,10 @@ namespace UHSampleGame.CoreObjects.Units
             this.Position = baseTile.Position;
 
             //lock (AStar2.tileInformationLock)
-            //lock(AStar2.locks[CurrentTileID])
-            //{
+            lock(AStar2.locks[CurrentTileID][goalTile.ID])
+            {
                 SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTile.ID][1]);//currentTile.Paths[goalTile.ID][1]);
-            //}
+            }
             Status = UnitStatus.Deployed;
             UpdatePath();
             UpdateTransforms();
@@ -194,14 +194,20 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (!TileMap.Tiles[focalTileID].IsWalkable())
             {
-                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
+                lock (AStar2.locks[CurrentTileID][goalTileID])
+                {
+                    SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
+                }
             }
 
             if (TileMap.Tiles[CurrentTileID].TileType == TileType.Blocked)
             {
                 if (TileMap.Tiles[previousTileID].PathsInts[goalTileID].Count > 1)
                 {
-                    SetFocalPointAndVelocity(TileMap.Tiles[previousTileID].PathsInts[goalTileID][1]);//previousTile.Paths[goalTile.ID][1]);
+                    lock (AStar2.locks[CurrentTileID][goalTileID])
+                    {
+                        SetFocalPointAndVelocity(TileMap.Tiles[previousTileID].PathsInts[goalTileID][1]);//previousTile.Paths[goalTile.ID][1]);
+                    }
                 }
                 else
                 {
@@ -212,7 +218,10 @@ namespace UHSampleGame.CoreObjects.Units
                         {
                             if (goodNieghbors[i].PathsInts[goalTileID].Count > 0)
                             {
-                                SetFocalPointAndVelocity(goodNieghbors[i].PathsInts[goalTileID][1]);
+                                lock (AStar2.locks[CurrentTileID][goalTileID])
+                                {
+                                    SetFocalPointAndVelocity(goodNieghbors[i].PathsInts[goalTileID][1]);
+                                }
                                 break;
                             }
                         }
@@ -231,7 +240,10 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (CurrentTileID != previousTileID)
             {
-                SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
+                lock (AStar2.locks[CurrentTileID][goalTileID])
+                {
+                    SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
+                }
             }
 
             UpdatePositionAndRotation();
