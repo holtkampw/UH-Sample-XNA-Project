@@ -81,6 +81,11 @@ namespace UHSampleGame.TileSystem
 
         static Dictionary<int, Tile> emptyExclude = new Dictionary<int,Tile>();
 
+        public static void Dispose()
+        {
+            //Working Here
+        }
+
         public static void InitializeTileMap(Vector3 position, Vector2 numTiles, Vector2 tileSize)
         {
             TileMap.position = position;
