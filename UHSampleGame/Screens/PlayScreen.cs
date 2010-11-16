@@ -43,6 +43,8 @@ namespace UHSampleGame.Screens
 
         Vector2 dimensions;
         Song backgroundSong;
+        VideoPlayer videoPlayer;
+        Video video;
         //Player p1;
         //Player aI;
 
@@ -123,6 +125,11 @@ namespace UHSampleGame.Screens
                 MediaPlayer.IsRepeating = true;
             }
 
+            videoPlayer = new VideoPlayer();
+            video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
+            if (videoPlayer.State != MediaState.Playing)
+                videoPlayer.Play(video);
+
             GC.Collect();//force garbage collection
             isLoaded = true;
 
@@ -164,14 +171,13 @@ namespace UHSampleGame.Screens
  
             if (!IsVisible)
             {
-                //videoPlayer.Stop();
+                videoPlayer.Stop();
                 return;
             }
 
             
 
-            //if (videoPlayer.State != MediaState.Playing)
-            //    videoPlayer.Play(video);
+            
 
             cameraManager.Update();
 
@@ -212,11 +218,11 @@ namespace UHSampleGame.Screens
                 ScreenManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
                 ScreenManager.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
-                //if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
-                //{
-                //    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
-                //        (int)dimensions.X, (int)dimensions.Y), Color.White);
-                //}
+                if (videoPlayer.State == MediaState.Playing || videoPlayer.State == MediaState.Stopped)
+                {
+                    ScreenManager.SpriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0,
+                        (int)dimensions.X, (int)dimensions.Y), Color.White);
+                }
 
                 ScreenManager.SpriteBatch.Draw(playerBackground, playerBackgroundLocation, playerBackgroundColor);
 
@@ -249,6 +255,7 @@ namespace UHSampleGame.Screens
         #region Unload
         public override void UnloadContent()
         {
+            videoPlayer.Dispose();
             if(MediaPlayer.State == MediaState.Playing)
                 MediaPlayer.Stop();
             TileMap.pathThreadExit.Set();
