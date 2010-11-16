@@ -170,7 +170,7 @@ namespace UHSampleGame.Players
         TimeSpan aIDeployScenarioTotal = TimeSpan.Zero;
         int queuedUnitType;
         int elapsedUnitDeployTime = 0;
-        int maxUnitDeployTime = 200;
+        int maxUnitDeployTime = 150;
         Texture2D unitMeterBaseTexture;
         Rectangle[] unitMeterBaseLocation;
 
@@ -322,7 +322,7 @@ namespace UHSampleGame.Players
                 defenseTowerInfo[1].type = TowerType.Electric;
 
                 defenseTowerInfo[2].name = "Cannon Tower";
-                defenseTowerInfo[2].price = "Price: $700";
+                defenseTowerInfo[2].price = "Price: $170";
                 defenseTowerInfo[2].description = "Shoots average speed\nwith average damage";
                 defenseTowerInfo[2].nameLocation = new Vector2[5];
                 defenseTowerInfo[2].descriptionLocation = new Vector2[5];
