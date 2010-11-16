@@ -128,7 +128,10 @@ namespace UHSampleGame.Screens
             videoPlayer = new VideoPlayer();
             video = ScreenManager.Game.Content.Load<Video>("Video\\oceanView");
             if (videoPlayer.State != MediaState.Playing)
+            {
                 videoPlayer.Play(video);
+                videoPlayer.IsLooped = true;
+            }
 
             GC.Collect();//force garbage collection
             isLoaded = true;
