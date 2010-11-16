@@ -9,9 +9,11 @@ using UHSampleGame.Events;
 using UHSampleGame.CoreObjects.Units;
 using UHSampleGame.CameraManagement;
 using UHSampleGame.ScreenManagement;
+using UHSampleGame.ScenarioManagement;
 
 using UHSampleGame.ProjectileManagment;
 using UHSampleGame.Players;
+using UHSampleGame.Screens;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 
@@ -414,6 +416,14 @@ namespace UHSampleGame.CoreObjects.Towers
                         currentTimeToAttack = TimeSpan.Zero;
                         ProjectileManager.AddParticle(this.Position, towersToAttack[0].Position);
                         bool kill = towersToAttack[0].TakeDamage(attackStrength);
+
+                        if (kill)
+                        {
+                            if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                            {
+                                ScenarioManager.RegisterAction(ScenarioItemType.DestroyEnemyTower);
+                            }
+                        }
                         //if (kill)
                         // towersToAttack.Remove(towersToAttack[0]);
                     }

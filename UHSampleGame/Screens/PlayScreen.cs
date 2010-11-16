@@ -228,7 +228,7 @@ namespace UHSampleGame.Screens
                 TowerCollection.Draw(gameTime);
                 ResetRenderStates();
                 PlayerCollection.Draw(gameTime);
-                PowerManager.Draw(gameTime);
+                
                 //ProjectileManager.Draw(gameTime);
 //                p1.Draw(gameTime);
 //                aI.Draw(gameTime);
@@ -236,7 +236,9 @@ namespace UHSampleGame.Screens
                 if (GameType == PlayerScreenType.Scenario)
                 {
                     ScenarioManager.Draw(gameTime);
-                }
+                } 
+            
+                PowerManager.Draw(gameTime);
 
                 //ScreenManager.SpriteBatch.Begin();
                 //DebugInfo.Draw();

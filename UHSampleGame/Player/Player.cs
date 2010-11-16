@@ -164,6 +164,8 @@ namespace UHSampleGame.Players
         int queuedUnitsToDeploy = 0;
         bool queuedDeclineMode = false;
 
+        TimeSpan aIDeployScenario = new TimeSpan(0, 0, 2);
+        TimeSpan aIDeployScenarioTotal = TimeSpan.Zero;
         int queuedUnitType;
         int elapsedUnitDeployTime = 0;
         int maxUnitDeployTime = 50;
@@ -1121,6 +1123,23 @@ namespace UHSampleGame.Players
                 }
 
                 avatarFollowingTile.Update(gameTime);
+            }
+            else
+            {
+                if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                {
+                    aIDeployScenarioTotal += gameTime.ElapsedGameTime;
+
+                    if (aIDeployScenarioTotal >= aIDeployScenario)
+                    {
+                        UnitCollection.Build(PlayerNum, TeamNum, UnitType.SpeedBoat);
+                        UnitCollection.Build(PlayerNum, TeamNum, UnitType.SpeedBoat);
+                        UnitCollection.Build(PlayerNum, TeamNum, UnitType.SpeedBoat);
+                        UnitCollection.Deploy(PlayerNum, TeamNum, TargetPlayerNum, UnitType.SpeedBoat);
+                        UnitCollection.Deploy(PlayerNum, TeamNum, TargetPlayerNum, UnitType.SpeedBoat);
+                        aIDeployScenarioTotal = TimeSpan.Zero;
+                    }
+                }
             }
 
             elapsedHighlightUpdateTime += gameTime.ElapsedGameTime.Milliseconds;
