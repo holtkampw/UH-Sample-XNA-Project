@@ -150,7 +150,9 @@ namespace UHSampleGame.Players
 
         //[playerNum][position]
         Vector2[][] unitIconLocation;
+        Vector2[][] unitNumberPosition;
         Texture2D[] unitIcons;
+        SpriteFont unitFont;
 
         //[playerNum][position]
         Rectangle[][] highlightUnitIconLocations;
@@ -378,6 +380,8 @@ namespace UHSampleGame.Players
                 offenseTowerInfo[1].type = TowerType.LargeUnit;
 
                 unitIconLocation = new Vector2[5][];
+                unitNumberPosition = new Vector2[5][];
+                unitFont = ScreenManager.Game.Content.Load<SpriteFont>("PlayerMenu\\towerPrice");
                 highlightUnitIconLocations = new Rectangle[5][];
                 unitIcons = new Texture2D[MAX_UNIT_TYPES];
                 Vector2 unitIconOffset = new Vector2(44.0f, 0.0f);
@@ -468,6 +472,7 @@ namespace UHSampleGame.Players
 
 
                     unitIconLocation[player] = new Vector2[MAX_UNIT_TYPES];
+                    unitNumberPosition[player] = new Vector2[MAX_UNIT_TYPES];
                     highlightUnitIconLocations[player] = new Rectangle[MAX_UNIT_TYPES];
                     Vector2 unitIconStartPosition = new Vector2(48, 36);
                     for (int unit = 0; unit < MAX_UNIT_TYPES; unit++)
@@ -478,6 +483,7 @@ namespace UHSampleGame.Players
                             unitIconStartPosition += unitIconOffset;
                         }
                         unitIconLocation[player][unit] = globalLocations[player] + unitIconStartPosition;
+                        unitNumberPosition[player][unit] = unitIconLocation[player][unit] + new Vector2(44, 4);
                         highlightUnitIconLocations[player][unit] = new Rectangle((int)(unitIconLocation[player][unit].X - 5.0f + (highlightIcon.Width / 2)),
                             (int)(unitIconLocation[player][unit].Y - 5.0f + (highlightIcon.Height / 2)),
                             highlightIcon.Width, highlightIcon.Height);
@@ -1399,6 +1405,9 @@ namespace UHSampleGame.Players
                     ScreenManager.SpriteBatch.Draw(unitInformation[i].icon,
                         unitIconLocation[PlayerNum][i], Color.White);
 
+                    ScreenManager.SpriteBatch.DrawInt32(unitFont, UnitCollection.UnitCountForPlayer(PlayerNum,
+                        unitInformation[i].type), unitNumberPosition[PlayerNum][i], Color.White);
+
                     if (selectedUnit == i)
                     {
                         ScreenManager.SpriteBatch.Draw(highlightIcon,
@@ -1421,8 +1430,6 @@ namespace UHSampleGame.Players
                     unitMeterOverlayDestination[PlayerNum].Height = (int)(
                         ((float) queuedUnits / (float)queuedUnitsToDeploy) * 
                         unitMeterOverlayMaxHeight[PlayerNum]);
-                    //((float)queuedUnits / (float)UnitCollection.MaxUnitsToDeployFor(PlayerNum, unitInformation[queuedUnitType].type)) *
-                    //unitMeterBaseLocation[PlayerNum].Height);
 
                    unitMeterOverlayDestination[PlayerNum].Y = (int)(unitMeterOverlayBaseY[PlayerNum] - unitMeterOverlayDestination[PlayerNum].Height);
                 }
@@ -1430,16 +1437,12 @@ namespace UHSampleGame.Players
                 {
                     unitMeterOverlayDestination[PlayerNum].Height = (int)((percentOfUnitsQueued / 100.0f) * 
                         unitMeterOverlayMaxHeight[PlayerNum]);
-                    // unitMeterBaseLocation[PlayerNum].Height);
                     unitMeterOverlayDestination[PlayerNum].Y = (int)(unitMeterOverlayBaseY[PlayerNum] - unitMeterOverlayDestination[PlayerNum].Height);
                 }
 
-                //unitMeterHightlightSource.Height = unitMeterOverlayDestination[PlayerNum].Height;
 
                 ScreenManager.SpriteBatch.Draw(unitMeterOverlayTexture[TeamNum], unitMeterOverlayDestination[PlayerNum],
                     unitMeterOverlaySource, Color.White);
-                //ScreenManager.SpriteBatch.Draw(unitMeterHighlightTexture, unitMeterOverlayDestination[PlayerNum],
-                //    unitMeterHightlightSource, new Color(255, 255, 255, 50));
 
             }
         }
