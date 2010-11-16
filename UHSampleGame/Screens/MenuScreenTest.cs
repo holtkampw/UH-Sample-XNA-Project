@@ -135,19 +135,8 @@ namespace UHSampleGame.Screens
         
         void one_Selected(object sender, EventArgs e)
         {
-            PlayerSetup[] playerSetup = new PlayerSetup[2];
-            playerSetup[0] = new PlayerSetup();
-            playerSetup[0].type = PlayerType.Human;
-            playerSetup[0].playerNum = 1; /////////////////////////////////////////////////////////////////////////SHOULD CHANGE TO ACTIVE PLAYER CONTROLLER?
-            playerSetup[0].teamNum = 1;
-            playerSetup[0].active = true;
-
-            playerSetup[1] = new PlayerSetup();
-            playerSetup[1].type = PlayerType.AI;
-            playerSetup[1].playerNum = 2;
-            playerSetup[1].teamNum = 2;
-            playerSetup[1].active = true;
-            screenManager.ShowScreen(new LoadScreen(LevelType.SingleOne, playerSetup));
+            
+            screenManager.ShowScreen(new SinglePlayerIntroMovie());
         }
 
         void two_Selected(object sender, EventArgs e)

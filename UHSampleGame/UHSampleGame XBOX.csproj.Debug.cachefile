@@ -187,6 +187,11 @@ Content\OverlayScreens\menuControllerBackground.xnb
 Content\OverlayScreens\menuControllers_FrontView.xnb
 Content\OverlayScreens\menuControllers_topFrontView.xnb
 Content\Particles\Star.xnb
+Content\Powers\icon_PBombastic.xnb
+Content\Powers\icon_PEMP.xnb
+Content\Powers\icon_PFrozen.xnb
+Content\Powers\icon_PStrong.xnb
+Content\Powers\icon_PZone.xnb
 Content\Model\box.xnb
 Content\Model\pyramids.xnb
 Content\AnimatedModel\dude.xnb
@@ -294,11 +299,6 @@ Content\Objects\Copter\Boxes\boxBlue_0.xnb
 Content\Objects\Copter\Boxes\boxGreen_0.xnb
 Content\Objects\Copter\Boxes\boxPurple_0.xnb
 Content\Objects\Copter\Boxes\boxRed_0.xnb
-Content\Powers\icon_PBombastic.xnb
-Content\Powers\icon_PEMP.xnb
-Content\Powers\icon_PFrozen.xnb
-Content\Powers\icon_PStrong.xnb
-Content\Powers\icon_PZone.xnb
 Content\Scenario\scenarioFont.xnb
 Content\Scenario\objective_box.xnb
 Content\Powers\Overlays\bombastic.xnb
@@ -316,7 +316,13 @@ Content\Objects\Units\speederBoat02_ORANGE.xnb
 Content\Objects\Units\speederBoat02_PINK.xnb
 Content\Objects\Units\speederBoat02_RED.xnb
 Content\Objects\Units\speederBoat02_YELLOW.xnb
+Content\SinglePlayerVids\scene0101.xnb
+Content\SinglePlayerVids\scene0102.xnb
+Content\OverlayScreens\trainingComplete.xnb
+Content\OverlayScreens\round3.xnb
 Content\Video\intro.wmv
 Content\Video\oceanView.wmv
 Content\Video\splash.wmv
 Content\Sounds\Backgrounds\multiplayer.wma
+Content\SinglePlayerVids\scene0101.wmv
+Content\SinglePlayerVids\scene0102.wmv

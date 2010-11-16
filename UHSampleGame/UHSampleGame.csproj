@@ -174,13 +174,17 @@
     <Compile Include="ScenarioManagement\ScenarioManager.cs" />
     <Compile Include="ScreenManagement\Screen.cs" />
     <Compile Include="ScreenManagement\ScreenManager.cs" />
+    <Compile Include="Screens\AfterTrainingVideoScreen.cs" />
     <Compile Include="Screens\ControlsScreen.cs" />
     <Compile Include="Screens\IntroScreen.cs" />
     <Compile Include="Screens\LoadScreen.cs" />
     <Compile Include="Screens\MenuScreenTest.cs" />
+    <Compile Include="Screens\MoreLevelsLater.cs" />
     <Compile Include="Screens\MultiplayerLobby.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\PlayScreen.cs" />
+    <Compile Include="Screens\SinglePlayerIntroMovie.cs" />
+    <Compile Include="Screens\TrainingOver.cs" />
     <Compile Include="Screens\WinScreen.cs" />
     <Compile Include="TileSystem\Tile.cs" />
     <Compile Include="TileSystem\TileMap.cs" />
