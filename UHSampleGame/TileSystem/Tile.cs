@@ -21,8 +21,7 @@ namespace UHSampleGame.TileSystem
         public List<Tile> tileNeighbors;
         //List<Unit> units;
         //List<bool> unitsInTile;
-        List<int> unitIndexes;
-        int unitsCount;
+        public List<int> unitIndexes = new List<int>(UnitCollection.TotalPossibleUnitCount());
         public List<List<Tile>> Paths;
         public List<List<int>> PathsInts;
         public List<List<int>> UnSafePaths;
@@ -62,8 +61,8 @@ namespace UHSampleGame.TileSystem
             this.UnSafePaths = new List<List<int>>();
             //this.units = new List<Unit>();
             //this.unitsInTile = new List<bool>();
-            this.unitIndexes = new List<int>();
-            this.unitsCount = 0;
+            //this.unitIndexes = new List<int>();
+            //this.unitsCount = 0;
             this.tileNeighbors = new List<Tile>();
 
             for (int i = 0/*Paths.Count*/; i < TileMap.TileCount; i++)
@@ -73,11 +72,11 @@ namespace UHSampleGame.TileSystem
                 UnSafePaths.Add(new List<int>());
             }
 
-            for (int i = 0; i < UnitCollection.TotalPossibleUnitCount(); i++)
+            /*for (int i = 0; i < UnitCollection.TotalPossibleUnitCount(); i++)
             {
                 //unitsInTile.Add(false);
                 unitIndexes.Add(0);
-            }
+            }*/
             SetTileType(tileType);
 
         }
@@ -178,32 +177,27 @@ namespace UHSampleGame.TileSystem
 
         public void AddUnit(ref Unit unit)
         {
-            //unitsInTile[unit.ID] = true;
-            if (unitsCount < 0)
-                return;
-            unitIndexes[unitsCount] = unit.ID;
-            unitsCount++;
             
-            // units.Add(unit);
-            //unit.Died += RemoveUnit;
+            //if (unitIndexes.Count <= 0)
+            //    return;
+            if(!unitIndexes.Contains(unit.ID))
+                unitIndexes.Add(unit.ID);
+            
             OnUnitEnter(ref unit);
         }
 
         public void RemoveUnit(ref Unit unit)
         {
-            if (unit.CurrentTileID != this.ID)
-                //!unitsInTile[unit.ID])
-                return;
-
-           // unitsInTile[unit.ID] = false;
-            for (int i = 0; i < unitsCount; i++)
+           /* if (unit.CurrentTileID != this.ID)
             {
-                if (unitIndexes[i] == unit.ID)
-                {
-                    unitIndexes[i] = unitIndexes[unitsCount - 1];      
-                }
-            }
-            unitsCount--;
+                unitIndexes.Remove(unit.ID);
+                return;
+            }*/
+             //   //!unitsInTile[unit.ID])
+              //  return;
+
+            unitIndexes.Remove(unit.ID);
+            //unitsCount--;
             //units.Remove(unit);
             //Set new unit to attack
             OnUnitExit(ref unit);
@@ -215,10 +209,11 @@ namespace UHSampleGame.TileSystem
             //}
             //else
               //  OnUnitEnter(null);
-            Unit u;
-            if (unitsCount > 0)
+           
+            /*Unit u;
+            if (unitIndexes.Count > 0)
             {
-                for (int i = 0; i < unitsCount; i++)
+                for (int i = 0; i < unitIndexes.Count; i++)
                 {
                     u = UnitCollection.GetUnitByID(unitIndexes[i]);
                     if (u.CurrentTileID == this.ID
@@ -232,8 +227,28 @@ namespace UHSampleGame.TileSystem
                 }
                 
 
-            }
+            }*/
 
+        }
+
+        public Unit GetUnitFromTile()
+        {
+            Unit u;
+            if (unitIndexes.Count > 0)
+            {
+                for (int i = 0; i < unitIndexes.Count; i++)
+                {
+                    u = UnitCollection.GetUnitByID(unitIndexes[i]);
+                    if (u.CurrentTileID == this.ID
+                        && u.IsDeployed())
+                    //unitsInTile[unitIndexes[i]])
+                    {
+
+                        return u;
+                    }
+                }
+            }
+            return null;
         }
 
         private void OnTowerEnter(ref Tower tower)
