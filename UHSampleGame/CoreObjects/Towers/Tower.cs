@@ -85,7 +85,7 @@ namespace UHSampleGame.CoreObjects.Towers
 
         int unitCreationAmount;
 
-        TimeSpan unitBuild = new TimeSpan(0, 0, 1);
+        TimeSpan unitBuild = new TimeSpan(0, 0, 3);
         TimeSpan currentTimeSpan = new TimeSpan();
         static int moneyToGive = 0;
 
@@ -159,16 +159,48 @@ namespace UHSampleGame.CoreObjects.Towers
             unitToAttack = null;
             towersToAttack = new List<Tower>();
 
-            timeToAttack = new TimeSpan(0, 0, 1);
+           // timeToAttack = new TimeSpan(0, 0, 1);
             currentTimeToAttack = new TimeSpan();
 
             //Depends on Type
-            HealthCapacity = 1000;
+            switch (Type)
+            {
+                case TowerType.Plasma:
+                    HealthCapacity = 500;
+                    Cost = 100;
+                    attackStrength = 15;
+                    timeToAttack = new TimeSpan(0,0,0,0, 500);
+                    break;
+                case TowerType.Electric:
+                    HealthCapacity = 800;
+                    Cost = 250;
+                    attackStrength = 80;
+                    timeToAttack = new TimeSpan(0,0,3);
+                    break;
+                case TowerType.Cannon:
+                    HealthCapacity = 700;
+                    Cost = 170;
+                    attackStrength = 30;
+                    timeToAttack = new TimeSpan(0,0,1);
+                    break;
+                case TowerType.SmallUnit:
+                    HealthCapacity = 600;
+                    Cost = 200;
+                    attackStrength = 20;
+                    unitBuild = new TimeSpan(0,0,2);
+                    break;
+                case TowerType.LargeUnit:
+                    HealthCapacity = 1000;
+                    Cost = 450;
+                    attackStrength = 20;
+                    unitBuild = new TimeSpan(0,0,2);
+                    break;
+            }
+
             Health = HealthCapacity;
             XP = 0;
-            Level = 0;
             Level = 1;
-            Cost = 100;
+            
             TotalInvestedCost = Cost;
 
             ID = currentID;
@@ -308,11 +340,42 @@ namespace UHSampleGame.CoreObjects.Towers
             Status = TowerStatus.Active;
             PlayerNum = playerNum;
             TeamNum = teamNum;
-            HealthCapacity = 1000;
+            switch (Type)
+            {
+                case TowerType.Plasma:
+                    HealthCapacity = 500;
+                    Cost = 100;
+                    attackStrength = 15;
+                    timeToAttack = new TimeSpan(0, 0, 0, 0, 500);
+                    break;
+                case TowerType.Electric:
+                    HealthCapacity = 800;
+                    Cost = 200;
+                    attackStrength = 60;
+                    timeToAttack = new TimeSpan(0, 0, 2);
+                    break;
+                case TowerType.Cannon:
+                    HealthCapacity = 700;
+                    Cost = 170;
+                    attackStrength = 35;
+                    timeToAttack = new TimeSpan(0, 0, 1);
+                    break;
+                case TowerType.SmallUnit:
+                    HealthCapacity = 600;
+                    Cost = 100;
+                    attackStrength = 20;
+                    unitBuild = new TimeSpan(0, 0, 3);
+                    break;
+                case TowerType.LargeUnit:
+                    HealthCapacity = 1000;
+                    Cost = 225;
+                    attackStrength = 20;
+                    unitBuild = new TimeSpan(0, 0, 3);
+                    break;
+            }
             Health = HealthCapacity;
             XP = 0;
             Level = 1;
-            Cost = 100;
             TotalInvestedCost = Cost;
             towersToAttack.Clear();
         }
@@ -522,9 +585,10 @@ namespace UHSampleGame.CoreObjects.Towers
             if (currentTimeSpan > unitBuild)
             {
                 if (Type == TowerType.SmallUnit)
-                    unitCreationAmount = 2;
+                    unitCreationAmount = 1;
                 else
-                    unitCreationAmount = 4;
+                    unitCreationAmount = 2;
+
                 for (int i = 0; i < unitCreationAmount; i++)
                     UnitCollection.Build(PlayerNum, TeamNum, UnitTypeToBuild);
 

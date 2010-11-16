@@ -170,7 +170,7 @@ namespace UHSampleGame.Players
         TimeSpan aIDeployScenarioTotal = TimeSpan.Zero;
         int queuedUnitType;
         int elapsedUnitDeployTime = 0;
-        int maxUnitDeployTime = 50;
+        int maxUnitDeployTime = 200;
         Texture2D unitMeterBaseTexture;
         Rectangle[] unitMeterBaseLocation;
 
@@ -306,7 +306,7 @@ namespace UHSampleGame.Players
                 defenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
                 defenseIcons[2] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\plasma360_tower");
                 defenseTowerInfo[0].name = "Plasma Tower";
-                defenseTowerInfo[0].price = "Price: $1000";
+                defenseTowerInfo[0].price = "Price: $100";
                 defenseTowerInfo[0].description = "Shoots quick, but weak\nblasts at the enemy";
                 defenseTowerInfo[0].nameLocation = new Vector2[5];
                 defenseTowerInfo[0].descriptionLocation = new Vector2[5];
@@ -314,16 +314,16 @@ namespace UHSampleGame.Players
                 defenseTowerInfo[0].type = TowerType.Plasma;
 
                 defenseTowerInfo[1].name = "Electric Tower";
-                defenseTowerInfo[1].price = "Price: $3000";
-                defenseTowerInfo[1].description = "Attacks enemies in\nall directions";
+                defenseTowerInfo[1].price = "Price: $250";
+                defenseTowerInfo[1].description = "Shoots slow, but strong\nblasts at the enemy";
                 defenseTowerInfo[1].nameLocation = new Vector2[5];
                 defenseTowerInfo[1].descriptionLocation = new Vector2[5];
                 defenseTowerInfo[1].priceLocation = new Vector2[5];
                 defenseTowerInfo[1].type = TowerType.Electric;
 
-                defenseTowerInfo[2].name = "Plasma360 Tower";
-                defenseTowerInfo[2].price = "Price: $6000";
-                defenseTowerInfo[2].description = "A plasma tower that\nshoots in multiple\ndirections at once.";
+                defenseTowerInfo[2].name = "Cannon Tower";
+                defenseTowerInfo[2].price = "Price: $700";
+                defenseTowerInfo[2].description = "Shoots average speed\nwith average damage";
                 defenseTowerInfo[2].nameLocation = new Vector2[5];
                 defenseTowerInfo[2].descriptionLocation = new Vector2[5];
 
@@ -343,7 +343,7 @@ namespace UHSampleGame.Players
                 offenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
 
                 offenseTowerInfo[0].name = "Small Training Area";
-                offenseTowerInfo[0].price = "Price: $3000";
+                offenseTowerInfo[0].price = "Price: $200";
                 offenseTowerInfo[0].description = "Trains units\nfor use";
                 offenseTowerInfo[0].nameLocation = new Vector2[5];
                 offenseTowerInfo[0].descriptionLocation = new Vector2[5];
@@ -351,7 +351,7 @@ namespace UHSampleGame.Players
                 offenseTowerInfo[0].type = TowerType.SmallUnit;
 
                 offenseTowerInfo[1].name = "Large Training Area";
-                offenseTowerInfo[1].price = "Price: $6000";
+                offenseTowerInfo[1].price = "Price: $450";
                 offenseTowerInfo[1].description = "Trains units\nfor use much\nmore quickly";
                 offenseTowerInfo[1].nameLocation = new Vector2[5];
                 offenseTowerInfo[1].descriptionLocation = new Vector2[5];
@@ -364,7 +364,7 @@ namespace UHSampleGame.Players
                 offenseIcons[1] = ScreenManager.Game.Content.Load<Texture2D>("PlayerMenu\\Icons\\electric_tower");
 
                 offenseTowerInfo[0].name = "Small Training Area";
-                offenseTowerInfo[0].price = "Price: $3000";
+                offenseTowerInfo[0].price = "Price: $200";
                 offenseTowerInfo[0].description = "Trains units\nfor use";
                 offenseTowerInfo[0].nameLocation = new Vector2[5];
                 offenseTowerInfo[0].descriptionLocation = new Vector2[5];
@@ -372,7 +372,7 @@ namespace UHSampleGame.Players
                 offenseTowerInfo[0].type = TowerType.SmallUnit;
 
                 offenseTowerInfo[1].name = "Large Training Area";
-                offenseTowerInfo[1].price = "Price: $6000";
+                offenseTowerInfo[1].price = "Price: $450";
                 offenseTowerInfo[1].description = "Trains units\nfor use much\nmore quickly";
                 offenseTowerInfo[1].nameLocation = new Vector2[5];
                 offenseTowerInfo[1].descriptionLocation = new Vector2[5];
@@ -1140,8 +1140,6 @@ namespace UHSampleGame.Players
                     {
                         UnitCollection.Build(PlayerNum, TeamNum, UnitType.SpeedBoat);
                         UnitCollection.Build(PlayerNum, TeamNum, UnitType.SpeedBoat);
-                        UnitCollection.Build(PlayerNum, TeamNum, UnitType.SpeedBoat);
-                        UnitCollection.Deploy(PlayerNum, TeamNum, TargetPlayerNum, UnitType.SpeedBoat);
                         UnitCollection.Deploy(PlayerNum, TeamNum, TargetPlayerNum, UnitType.SpeedBoat);
                         aIDeployScenarioTotal = TimeSpan.Zero;
                     }

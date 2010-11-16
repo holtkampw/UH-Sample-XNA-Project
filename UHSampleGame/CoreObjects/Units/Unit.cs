@@ -27,6 +27,7 @@ namespace UHSampleGame.CoreObjects.Units
         public int ID;
         public int MoneyToGive;
         public int HealthCapacity = 100;
+        float speed;
 
         int previousTileID;
         int goalTileID;
@@ -98,11 +99,13 @@ namespace UHSampleGame.CoreObjects.Units
                     Damage = 50;
                     XPToGive = 2;
                     MoneyToGive = 5;
+                    speed = 1.5f;
                     break;
                 case UnitType.SpeederBoat:
                     Damage = 100;
                     XPToGive = 3;
                     MoneyToGive = 10;
+                    speed = 1;
                     break;
                 default:
                     Damage = 10;
@@ -141,6 +144,29 @@ namespace UHSampleGame.CoreObjects.Units
         public void Activate()
         {
             Status = UnitStatus.Active;
+            Health = HealthCapacity;
+
+            switch (Type)
+            {
+                case UnitType.SpeedBoat:
+                    Damage = 50;
+                    XPToGive = 2;
+                    MoneyToGive = 5;
+                    speed = 1.5f;
+                    HealthCapacity = 100;
+                    break;
+                case UnitType.SpeederBoat:
+                    Damage = 100;
+                    XPToGive = 3;
+                    MoneyToGive = 10;
+                    speed = 1;
+                    HealthCapacity = 250;
+                    break;
+                default:
+                    Damage = 10;
+                    XPToGive = 1;
+                    break;
+            }
             Health = HealthCapacity;
         }
 
@@ -428,6 +454,7 @@ namespace UHSampleGame.CoreObjects.Units
             //normVel.Normalize();
 
             velocity.Normalize();
+            Vector3.Multiply(ref velocity, speed, out velocity);
 
         }
 

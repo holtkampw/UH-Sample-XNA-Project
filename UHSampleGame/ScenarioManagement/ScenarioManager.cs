@@ -103,8 +103,8 @@ namespace UHSampleGame.ScenarioManagement
 
             scenarioItems.Add(
                 new ScenarioItem(ScenarioItemType.BuildUnitTower, 3,
-                    "Now its time to start building your offense.  You can build a unit tower by moving to the second UI tab (using the DPad buttons).  " +
-                    "Again, building a tower is done by pressing the A button.  Build 3 Unit towers."
+                    "Now its time to start building your offense.  You can build an offensive tower by moving to the second UI tab (using the DPad buttons).  " +
+                    "Again, building a tower is done by pressing the A button.  Build 3 Small Training Areas."
                 ));
 
             scenarioItems.Add(
