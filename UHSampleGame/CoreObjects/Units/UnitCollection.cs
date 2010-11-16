@@ -397,6 +397,11 @@ namespace UHSampleGame.CoreObjects.Units
             return unitCountForPlayer[PlayerNum];
         }
 
+        public static int UnitCountForPlayer(int PlayerNum, UnitType unitType)
+        {
+            return unitsCount[PlayerNum][(int)unitType];
+        }
+
         //public static string UnitCountForPlayerString(int playerNum)
         //{
         //   // return unitCountForPlayerString[playerNum];
@@ -439,5 +444,7 @@ namespace UHSampleGame.CoreObjects.Units
                 }
             }
         }
+
+        
     }
 }
