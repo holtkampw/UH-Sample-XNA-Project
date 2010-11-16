@@ -186,7 +186,7 @@ namespace UHSampleGame.Screens
             //ProjectileManager.Update(gameTime);
             //TileMap.Update(gameTime);
             PowerManager.Update(gameTime);
-            DebugInfo.Update(gameTime);
+            //DebugInfo.Update(gameTime);
             
             if (gameType == PlayerScreenType.Scenario)
             {
@@ -238,9 +238,9 @@ namespace UHSampleGame.Screens
                     ScenarioManager.Draw(gameTime);
                 }
 
-                ScreenManager.SpriteBatch.Begin();
-                DebugInfo.Draw();
-                ScreenManager.SpriteBatch.End();
+                //ScreenManager.SpriteBatch.Begin();
+                //DebugInfo.Draw();
+                //ScreenManager.SpriteBatch.End();
         }
         #endregion
 
