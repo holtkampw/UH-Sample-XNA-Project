@@ -18,6 +18,7 @@ using UHSampleGame.Events;
 using UHSampleGame.ProjectileManagment;
 using UHSampleGame.Screens;
 using UHSampleGame.PowerManagement;
+using UHSampleGame.ScenarioManagement;
 
 namespace UHSampleGame.Players
 {
@@ -705,7 +706,11 @@ namespace UHSampleGame.Players
             if (Type == PlayerType.Human)
             {
                 avatarMoved = avatar.HandleInput(playerIndexes[PlayerNum]);
-
+                if (avatarMoved)
+                {
+                    if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                        ScenarioManager.RegisterAction(ScenarioItemType.AvatarMove);
+                }
                 if (avatar.Position.X < TileMap.Left)
                 {
                     avatar.Position = new Vector3(TileMap.Left, avatar.Position.Y, avatar.Position.Z);
@@ -739,6 +744,20 @@ namespace UHSampleGame.Players
                         if (tower != null)
                             Money -= tower.Cost;
 
+                        if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                            switch (lastBuiltTower)
+                            {
+                                case TowerType.Cannon:
+                                case TowerType.Electric:
+                                case TowerType.Plasma:
+                                    ScenarioManager.RegisterAction(ScenarioItemType.BuildDefenseTower);
+                                    break;
+                                case TowerType.SmallUnit:
+                                case TowerType.LargeUnit:
+                                    ScenarioManager.RegisterAction(ScenarioItemType.BuildUnitTower);
+                                    break;
+                            }
+                            
                         ///MoneyString = Money.ToString();
                     }
                 }
@@ -748,6 +767,9 @@ namespace UHSampleGame.Players
                     if (!this.Rezone)
                     {
                         Money += TowerCollection.Remove(PlayerNum, ref this.avatar.Position);
+
+                        if(PlayScreen.GameType == PlayerScreenType.Scenario)
+                            ScenarioManager.RegisterAction(ScenarioItemType.DestroyTower);
                         //MoneyString = Money.ToString();
                     }
                 }
@@ -757,6 +779,8 @@ namespace UHSampleGame.Players
                     if (!this.Rezone)
                     {
                         Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatar.Position);
+                        if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                            ScenarioManager.RegisterAction(ScenarioItemType.RepairTower);
                         //MoneyString = Money.ToString();
                     }
                 }
@@ -766,6 +790,8 @@ namespace UHSampleGame.Players
                     if (!this.Rezone)
                     {
                         Money -= TowerCollection.Upgrade(TeamNum, Money, ref this.avatar.Position);
+                        if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                            ScenarioManager.RegisterAction(ScenarioItemType.UpgradeTower);
                         //MoneyString = Money.ToString();
                     }
 
@@ -977,7 +1003,8 @@ namespace UHSampleGame.Players
                                 percentOfUnitsQueued = (float)queuedUnits / (float)queuedUnitsToDeploy;
                             }
                             queuedDeclineMode = false;
-
+                            if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                                ScenarioManager.RegisterAction(ScenarioItemType.Deploy);
                         }
 
                         if (!queuedDeclineMode)
@@ -1003,6 +1030,8 @@ namespace UHSampleGame.Players
                 if (ScreenManager.InputManager.CheckNewAction(InputAction.HUD, playerIndexes[PlayerNum]))
                 {
                     isHUDDisplayed = true;
+                    if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                        ScenarioManager.RegisterAction(ScenarioItemType.ShowHUD);
                 }
                 
                 if(ScreenManager.InputManager.CheckNewReleaseAction(InputAction.HUD, playerIndexes[PlayerNum]))
@@ -1053,6 +1082,8 @@ namespace UHSampleGame.Players
                 if (ScreenManager.InputManager.CheckNewAction(InputAction.PowerActivate, playerIndexes[PlayerNum]))
                 {
                     PowerManager.AddPower((PowerType)powerSelected, PlayerNum);
+                    if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                        ScenarioManager.RegisterAction(ScenarioItemType.Power);
                 }
             }
         }

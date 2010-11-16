@@ -53,7 +53,7 @@ namespace UHSampleGame.Screens
         Vector2 numTiles;
 
         PlayerSetup[] playerSetup;
-        PlayerScreenType gameType;
+        public static PlayerScreenType GameType;
         #endregion
 
         #region Initialization
@@ -61,7 +61,7 @@ namespace UHSampleGame.Screens
             : base("PlayScreen")
         {
             this.playerSetup = playerSetup;
-            this.gameType = gameType;
+            GameType = gameType;
         }
 
         public override void LoadContent()
@@ -90,7 +90,7 @@ namespace UHSampleGame.Screens
             ProjectileManager.Initialize(); 
             PowerManager.Initialize();
 
-            if (gameType == PlayerScreenType.Scenario)
+            if (GameType == PlayerScreenType.Scenario)
             {
                 ScenarioManager.Initialize();
             }
@@ -188,7 +188,7 @@ namespace UHSampleGame.Screens
             PowerManager.Update(gameTime);
             DebugInfo.Update(gameTime);
             
-            if (gameType == PlayerScreenType.Scenario)
+            if (GameType == PlayerScreenType.Scenario)
             {
                 ScenarioManager.Update(gameTime);
             }
@@ -233,7 +233,7 @@ namespace UHSampleGame.Screens
 //                p1.Draw(gameTime);
 //                aI.Draw(gameTime);
 
-                if (gameType == PlayerScreenType.Scenario)
+                if (GameType == PlayerScreenType.Scenario)
                 {
                     ScenarioManager.Draw(gameTime);
                 }

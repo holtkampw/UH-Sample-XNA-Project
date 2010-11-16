@@ -171,7 +171,6 @@ namespace UHSampleGame.CoreObjects.Towers
 
             ID = currentID;
             currentID++;
-
            
         }
 
