@@ -249,6 +249,8 @@ namespace UHSampleGame.Screens
         #region Unload
         public override void UnloadContent()
         {
+            if(MediaPlayer.State == MediaState.Playing)
+                MediaPlayer.Stop();
             TileMap.pathThreadExit.Set();
             TileMap.pathThread.Join();
             ProjectileManager.particleThreadExit.Set();

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Graphics;
 using UHSampleGame.ScreenManagement;
 using UHSampleGame.InputManagement;
+using UHSampleGame.Players;
 
 namespace UHSampleGame.Screens
 {
@@ -18,6 +19,8 @@ namespace UHSampleGame.Screens
         public IntroScreen()
             : base("IntroScreen")
         {
+            //Next Screen
+
         }
 
         public override void HandleInput()
@@ -62,7 +65,8 @@ namespace UHSampleGame.Screens
 
             if (videoPlayer.State == MediaState.Stopped)
             {
-                //Next Screen
+                
+                //screenManager.ShowScreen(new LoadScreen(LevelType.SingleOne, playerSetup));
                 screenManager.ShowScreen(new MenuScreenTest());
             }
 

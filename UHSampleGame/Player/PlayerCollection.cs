@@ -130,8 +130,16 @@ namespace UHSampleGame.Players
             if (numTeamsActive == 1)
             {
                 //Show Win Screen
-                screenManager.RemoveScreen("PlayScreen");
-                screenManager.ShowScreen(new WinScreen(winTeam));
+                if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                {
+                    screenManager.RemoveScreen("PlayScreen");
+                    screenManager.ShowScreen(new TrainingOver());
+                }
+                else
+                {
+                    screenManager.RemoveScreen("PlayScreen");
+                    screenManager.ShowScreen(new WinScreen(winTeam));
+                }
                 return true;
             }
             return false;
