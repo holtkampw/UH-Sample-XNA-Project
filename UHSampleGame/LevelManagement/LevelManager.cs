@@ -6,6 +6,7 @@ using System.Text;
 using UHSampleGame.TileSystem;
 using UHSampleGame.Players;
 using Microsoft.Xna.Framework;
+using UHSampleGame.Screens;
 
 namespace UHSampleGame.LevelManagement
 {
@@ -64,11 +65,29 @@ namespace UHSampleGame.LevelManagement
                     }
                     else
                     {
-                        map[y].Add(00000);
+                        if (PlayScreen.GameType == PlayerScreenType.Scenario)
+                        {
+                            if ((x == 20 && y == 15) || (x == 20 && y == 14) || (x == 20 && y == 13) ||
+                                (x == 20 && y == 12) || (x == 20 && y == 11) || (x == 20 && y == 10) ||
+                                (x == 15 && y == 10))
+                            {
+                                map[y].Add((20000)
+                                    + (activePlayers[1].playerNum * 1000)
+                                    + (activePlayers[1].teamNum * 100) + 10);
+                            }
+                            else
+                            {
+                                map[y].Add(00000);
+                            }
+                        }
+                        else
+                        {
+                            map[y].Add(00000);
+                        }
                     }
                 }
             }
-            
+
             levels.Add(new Level(0, map, activePlayers));
             levels[levels.Count - 1].Load();
         }
@@ -90,7 +109,7 @@ namespace UHSampleGame.LevelManagement
         public static void AddPlayer(Player player)
         {
             players.Add(player);
- 
+
         }
 
         public static void LoadLevel(int level)

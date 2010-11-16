@@ -68,7 +68,7 @@ namespace UHSampleGame.ScenarioManagement
             scenarioItems.Add(
                 new ScenarioItem(ScenarioItemType.DestroyEnemyTower, 1,
                     "Your towers can also attack enemy towers.  Move your avatar near an enemy tower.  If you build towers surrounding the enemy's tower, " +
-                    "then your towers will attack until the enemy until it is destroyed.  Destroy 1 enemy towers."
+                    "then your towers will attack until the enemy until it is destroyed.  Destroy 1 enemy tower."
                 ));
 
             scenarioItems.Add(
@@ -152,7 +152,10 @@ namespace UHSampleGame.ScenarioManagement
                         case ScenarioItemType.RepairTower:
                         case ScenarioItemType.UpgradeTower:
                         case ScenarioItemType.DestroyTower:
+                        case ScenarioItemType.DestroyEnemyTower:
                         case ScenarioItemType.AvatarMove:
+                        case ScenarioItemType.Power:
+                        case ScenarioItemType.Deploy:
                             scenarioItems[i].amountLeft--;
                             if (scenarioItems[i].amountLeft <= 0)
                             {
