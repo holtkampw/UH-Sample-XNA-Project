@@ -57,7 +57,7 @@ namespace UHSampleGame.CoreObjects.Towers
         static int drawCount;
 
         static Texture2D[] hudBackground;
-        static Rectangle hudBackgroundLocation = new Rectangle(0, 0, 40, 20);
+        static Rectangle hudBackgroundLocation = new Rectangle(0, 0, 40, 12);
         static Rectangle hudBackgroundSourceLocation = new Rectangle(0, 0, 1280, 394);
         static Vector2 hudBackgroundOffsetFromTower = new Vector2(-20, 8);
         static Color hudColor = new Color(255, 255, 255, 255);
@@ -69,15 +69,15 @@ namespace UHSampleGame.CoreObjects.Towers
 
         static Texture2D hudHealthBar;
         static Rectangle hudHealthSource = new Rectangle(0, 0, 904, 136);
-        static Rectangle hudHealthDestination = new Rectangle(0, 0, 40, 10);
-        static Rectangle hudHealthMaxDestination = new Rectangle(0, 0, 40, 10);
+        static Rectangle hudHealthDestination = new Rectangle(0, 0, 40, 6);
+        static Rectangle hudHealthMaxDestination = new Rectangle(0, 0, 40, 6);
         static Vector2 hudHealthOffset = new Vector2(0, 0);
 
         static Texture2D[] hudUpgradeBar;
         static Rectangle hudUpgradeSource = new Rectangle(0, 0, 904, 136);
-        static Rectangle hudUpgradeDestination = new Rectangle(0, 0, 40, 10);
-        static Rectangle hudUpgradeMaxDestination = new Rectangle(0, 0, 40, 10);
-        static Vector2 hudUpgradeOffset = new Vector2(0, 10);
+        static Rectangle hudUpgradeDestination = new Rectangle(0, 0, 40, 6);
+        static Rectangle hudUpgradeMaxDestination = new Rectangle(0, 0, 40, 6);
+        static Vector2 hudUpgradeOffset = new Vector2(0, 6);
 
         static int upgradeAmount = 0;
 
@@ -403,9 +403,7 @@ namespace UHSampleGame.CoreObjects.Towers
                                 ScreenManager.SpriteBatch.Draw(hudBackground[towers[p][j][k].Level],
                                     hudBackgroundLocation, hudBackgroundSourceLocation, hudColor);
 
-                                //draw level num
-                                ScreenManager.SpriteBatch.DrawString(levelFont, towers[p][j][k].LevelString,
-                                    levelLocation, hudColor);
+                                
 
                                 //draw health bar
                                 hudHealthDestination.X = (int)(hudBackgroundLocation.X + hudHealthOffset.X);
@@ -417,7 +415,7 @@ namespace UHSampleGame.CoreObjects.Towers
                                 //draw upgrade bar
                                 hudUpgradeDestination.X = (int)(hudBackgroundLocation.X + hudUpgradeOffset.X);
                                 hudUpgradeDestination.Y = (int)(hudBackgroundLocation.Y + hudUpgradeOffset.Y);
-                                hudUpgradeDestination.Width = (int)((towers[p][j][k].XP / 100) * hudUpgradeMaxDestination.Width);
+                                hudUpgradeDestination.Width = (int)((towers[p][j][k].XP / 100.0f) * hudUpgradeMaxDestination.Width);
                                 ScreenManager.SpriteBatch.Draw(hudUpgradeBar[towers[p][j][k].Level],
                                     hudUpgradeDestination, hudUpgradeSource, hudColor);
 

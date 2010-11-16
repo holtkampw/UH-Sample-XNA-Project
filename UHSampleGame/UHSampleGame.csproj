@@ -151,9 +151,11 @@
     <Compile Include="Player\Player.cs" />
     <Compile Include="Player\PlayerCollection.cs" />
     <Compile Include="PowerManagement\PowerManager.cs" />
+    <Compile Include="ProjectileManagement\Explosion.cs" />
     <Compile Include="ProjectileManagement\ParticleEmitter.cs" />
     <Compile Include="ProjectileManagement\ParticleSettings.cs" />
     <Compile Include="ProjectileManagement\ParticleSystem.cs" />
+    <Compile Include="ProjectileManagement\ParticleSystems\LaserParticles.cs" />
     <Compile Include="ProjectileManagement\ParticleSystems\P1Upgrade.cs" />
     <Compile Include="ProjectileManagement\ParticleSystems\P2Upgrade.cs" />
     <Compile Include="ProjectileManagement\ParticleSystems\P3Upgrade.cs" />

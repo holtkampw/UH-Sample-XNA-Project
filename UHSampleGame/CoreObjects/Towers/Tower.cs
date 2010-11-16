@@ -703,21 +703,15 @@ namespace UHSampleGame.CoreObjects.Towers
 
                 ScreenManager.SpriteBatch.DrawString(font, dollar, upgradeStringOffset[PlayerNum] - dollarOffset, Color.White);
                 SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, upgradeCost, upgradeStringOffset[PlayerNum], Color.White);
-                //ScreenManager.SpriteBatch.DrawString(font, upgradeCostString,
-                //    upgradeStringOffset[PlayerNum], Color.White);
             }
 
             ScreenManager.SpriteBatch.Draw(recycleIcon, recycleIconOffset[PlayerNum], Color.White);
             ScreenManager.SpriteBatch.DrawString(font, dollar, recycleStringOffset[PlayerNum] - dollarOffset, Color.White);
             SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, destroyCost, recycleStringOffset[PlayerNum], Color.White);
-            //ScreenManager.SpriteBatch.DrawString(font, destroyCostString, recycleStringOffset[PlayerNum], Color.White);
             ScreenManager.SpriteBatch.DrawString(font, dollar, repairStringOffset[PlayerNum] - dollarOffset, Color.White);
             SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, repairCost, repairStringOffset[PlayerNum], Color.White);
             ScreenManager.SpriteBatch.Draw(repairIcon, repairIconOffset[PlayerNum], Color.White);
             
-            //SpriteBatchExtensions.DrawInt32(ScreenManager.SpriteBatch, font, repairCost, repairStringOffset[PlayerNum], Color.White);
-            //ScreenManager.SpriteBatch.DrawString(font, repairCostString, repairStringOffset[PlayerNum], Color.White);
-
             if (BaseType == BaseTowerType.Offense)
             {
                 elapsedHighlightUpdateTime += gameTime.ElapsedGameTime.Milliseconds;
