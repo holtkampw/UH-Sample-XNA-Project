@@ -26,6 +26,7 @@ namespace UHSampleGame.CoreObjects.Units
         static int currentID = 0;
         public int ID;
         public int MoneyToGive;
+        public int HealthCapacity = 100;
 
         int previousTileID;
         int goalTileID;
@@ -139,7 +140,8 @@ namespace UHSampleGame.CoreObjects.Units
 
         public void Activate()
         {
-            Status = UnitStatus.Active; 
+            Status = UnitStatus.Active;
+            Health = HealthCapacity;
         }
 
         public void Deploy(Tile baseTile, Tile goalTile, int playerToAttack)
@@ -189,6 +191,10 @@ namespace UHSampleGame.CoreObjects.Units
 
         public bool Update(GameTime gameTime)
         {
+            if (Health <= 0)
+            {
+                OnDied();
+            }
             if (!PlayerCollection.CheckFreezeEnemiesFor(this.PlayerNum))
             {
                 UpdatePath();
