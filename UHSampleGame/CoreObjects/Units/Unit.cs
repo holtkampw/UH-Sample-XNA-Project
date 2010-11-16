@@ -99,13 +99,13 @@ namespace UHSampleGame.CoreObjects.Units
                     Damage = 50;
                     XPToGive = 2;
                     MoneyToGive = 5;
-                    speed = 1.5f;
+                    speed = 2.0f;
                     break;
                 case UnitType.SpeederBoat:
                     Damage = 100;
                     XPToGive = 3;
                     MoneyToGive = 10;
-                    speed = 1;
+                    speed = 1.0f;
                     break;
                 default:
                     Damage = 10;
