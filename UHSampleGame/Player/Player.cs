@@ -766,7 +766,7 @@ namespace UHSampleGame.Players
                 {
                     if (!this.Rezone)
                     {
-                        Money += TowerCollection.Remove(PlayerNum, ref this.avatar.Position);
+                        Money += TowerCollection.Remove(PlayerNum, ref this.avatarFollowingTile.Position);
 
                         if(PlayScreen.GameType == PlayerScreenType.Scenario)
                             ScenarioManager.RegisterAction(ScenarioItemType.DestroyTower);
@@ -778,7 +778,7 @@ namespace UHSampleGame.Players
                 {
                     if (!this.Rezone)
                     {
-                        Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatar.Position);
+                        Money -= TowerCollection.Repair(PlayerNum, Money, ref this.avatarFollowingTile.Position);
                         if (PlayScreen.GameType == PlayerScreenType.Scenario)
                             ScenarioManager.RegisterAction(ScenarioItemType.RepairTower);
                         //MoneyString = Money.ToString();
@@ -789,7 +789,7 @@ namespace UHSampleGame.Players
                 {
                     if (!this.Rezone)
                     {
-                        Money -= TowerCollection.Upgrade(TeamNum, Money, ref this.avatar.Position);
+                        Money -= TowerCollection.Upgrade(TeamNum, Money, ref this.avatarFollowingTile.Position);
                         if (PlayScreen.GameType == PlayerScreenType.Scenario)
                             ScenarioManager.RegisterAction(ScenarioItemType.UpgradeTower);
                         //MoneyString = Money.ToString();

@@ -329,6 +329,8 @@ namespace UHSampleGame.CoreObjects.Units
 
             if (amount == 0)
                 return;
+            if (instanceVertexBuffer != null)
+                instanceVertexBuffer.Dispose();
 
             instanceVertexBuffer = null;// If we have more instances than room in our vertex buffer, grow it to the neccessary size.
             if ((instanceVertexBuffer == null) ||

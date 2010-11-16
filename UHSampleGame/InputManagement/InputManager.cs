@@ -29,13 +29,17 @@ namespace UHSampleGame.InputManagement
         #region Class Variables
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
-        MouseState previousMouseState;
-        MouseState currentMouseState;
-        Dictionary<PlayerIndex, GamePadState> currentGamePadStates;
+       /* Dictionary<PlayerIndex, GamePadState> currentGamePadStates;
         Dictionary<PlayerIndex, GamePadState> previousGamePadStates;
-        Dictionary<InputAction, Keys> items;
         Dictionary<InputAction, List<Keys>> keyActionDictionary;
         Dictionary<InputAction, List<Buttons>> buttonActionDictionary;
+        */
+        List<GamePadState> currGamePadStates;
+        List<GamePadState> prevGamePadStates;
+        List<List<Keys>> keyActionList;
+        List<List<Buttons>> buttonActionList;
+
+        Enum[] inputActionsArray = EnumHelper.EnumToArray(new InputAction());
 
         PlayerIndex[] playerIndexes;
         #endregion
@@ -45,14 +49,11 @@ namespace UHSampleGame.InputManagement
         {
             previousKeyboardState = new KeyboardState();
             currentKeyboardState = new KeyboardState();
-            previousMouseState = new MouseState();
-            currentMouseState = new MouseState();
-            currentGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
-            previousGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
-            items = new Dictionary<InputAction, Keys>();
+            //currentGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
+            //previousGamePadStates = new Dictionary<PlayerIndex, GamePadState>();
 
-            keyActionDictionary = new Dictionary<InputAction, List<Keys>>();
-            buttonActionDictionary = new Dictionary<InputAction, List<Buttons>>();
+            //keyActionDictionary = new Dictionary<InputAction, List<Keys>>();
+            //buttonActionDictionary = new Dictionary<InputAction, List<Buttons>>();
 
             playerIndexes = new PlayerIndex[4];
             playerIndexes[0] = PlayerIndex.One;
@@ -60,10 +61,29 @@ namespace UHSampleGame.InputManagement
             playerIndexes[2] = PlayerIndex.Three;
             playerIndexes[3] = PlayerIndex.Four;
 
-            for (int i = 0; i < playerIndexes.Length; i++)
+            //for (int i = 0; i < playerIndexes.Length; i++)
+            //{
+            //    currentGamePadStates.Add(playerIndexes[i], new GamePadState());
+            //    previousGamePadStates.Add(playerIndexes[i], new GamePadState());
+            //}
+
+
+            //New AwesomeNess
+            currGamePadStates = new List<GamePadState>();
+            prevGamePadStates = new List<GamePadState>();
+            keyActionList = new List<List<Keys>>();
+            buttonActionList = new List<List<Buttons>>();
+
+            for (int i = 0; i < inputActionsArray.Length; i++)
             {
-                currentGamePadStates.Add(playerIndexes[i], new GamePadState());
-                previousGamePadStates.Add(playerIndexes[i], new GamePadState());
+                keyActionList.Add(new List<Keys>());
+                buttonActionList.Add(new List<Buttons>());
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                currGamePadStates.Add(new GamePadState());
+                prevGamePadStates.Add(new GamePadState());
             }
         }
         #endregion
@@ -74,16 +94,18 @@ namespace UHSampleGame.InputManagement
         /// </summary>
         public void Update()
         {
+            //GamePad.GetState(PlayerIndex.One).Buttons.
 #if !XBOX
             previousKeyboardState = currentKeyboardState;
             currentKeyboardState = Keyboard.GetState();
-            previousMouseState = currentMouseState;
-            currentMouseState = Mouse.GetState();
 #else
             for (int i = 0; i < playerIndexes.Length; i++)
             {
-                previousGamePadStates[playerIndexes[i]] = currentGamePadStates[playerIndexes[i]];
-                currentGamePadStates[playerIndexes[i]] = GamePad.GetState(playerIndexes[i]);
+                //previousGamePadStates[playerIndexes[i]] = currentGamePadStates[playerIndexes[i]];
+                //currentGamePadStates[playerIndexes[i]] = GamePad.GetState(playerIndexes[i]);
+
+                prevGamePadStates[i] = currGamePadStates[i];
+                currGamePadStates[i] = GamePad.GetState((PlayerIndex)i);
             }
 #endif
         }
@@ -98,16 +120,26 @@ namespace UHSampleGame.InputManagement
         public void AddInput(InputAction action, Keys key)
         {
 
-            if (keyActionDictionary.ContainsKey(action))
+            //if (keyActionDictionary.ContainsKey(action))
+            //{
+            //    if (!keyActionDictionary[action].Contains(key))
+            //        keyActionDictionary[action].Add(key);
+            //}
+            //else
+            //{
+            //    List<Keys> keysList = new List<Keys>();
+            //    keysList.Add(key);
+            //    keyActionDictionary.Add(action, keysList);
+            //}
+
+            if (keyActionList[(int)action].Count > 0)
             {
-                if (!keyActionDictionary[action].Contains(key))
-                    keyActionDictionary[action].Add(key);
+                if (!keyActionList[(int)action].Contains(key))
+                    keyActionList[(int)action].Add(key);
             }
             else
             {
-                List<Keys> keysList = new List<Keys>();
-                keysList.Add(key);
-                keyActionDictionary.Add(action, keysList);
+                keyActionList[(int)action].Add(key);
             }
 
         }
@@ -120,17 +152,28 @@ namespace UHSampleGame.InputManagement
         public void AddInput(InputAction action, Buttons button)
         {
 
-            if (buttonActionDictionary.ContainsKey(action))
+            //if (buttonActionDictionary.ContainsKey(action))
+            //{
+            //    if (!buttonActionDictionary[action].Contains(button))
+            //        buttonActionDictionary[action].Add(button);
+            //}
+            //else
+            //{
+            //    List<Buttons> buttonsList = new List<Buttons>();
+            //    buttonsList.Add(button);
+            //    buttonActionDictionary.Add(action, buttonsList);
+            //}
+
+            if (buttonActionList[(int)action].Count > 0)
             {
-                if (!buttonActionDictionary[action].Contains(button))
-                    buttonActionDictionary[action].Add(button);
+                if (!buttonActionList[(int)action].Contains(button))
+                    buttonActionList[(int)action].Add(button);
             }
             else
             {
-                List<Buttons> buttonsList = new List<Buttons>();
-                buttonsList.Add(button);
-                buttonActionDictionary.Add(action, buttonsList);
+                buttonActionList[(int)action].Add(button);
             }
+
         }
 
         /// <summary>
@@ -151,25 +194,46 @@ namespace UHSampleGame.InputManagement
         /// <returns>Returns true if the action has just been triggered</returns>
         public bool CheckNewAction(InputAction action, PlayerIndex? playerIndex)
         {
+//#if XBOX
+//            if (!playerIndex.HasValue)
+//            {
+//                for (int i = 0; i < playerIndexes.Length; i++)
+//                   for(int j = 0; j<buttonActionDictionary[action].Count; j++)
+//                        if (IsNewButtonPressed(buttonActionDictionary[action][j], playerIndexes[i]))
+//                            return true;
+//            }
+//            else
+//            {
+//                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+//                    if (IsNewButtonPressed(buttonActionDictionary[action][j], playerIndex.Value))
+//                        return true;
+//            }
+//#else
+//           for(int i =0; i<keyActionDictionary[action].Count; i++)
+//                if (IsNewKeyPressed(keyActionDictionary[action][i]))
+//                    return true;
+//#endif          
+//            return false;
+
 #if XBOX
             if (!playerIndex.HasValue)
             {
                 for (int i = 0; i < playerIndexes.Length; i++)
-                   for(int j = 0; j<buttonActionDictionary[action].Count; j++)
-                        if (IsNewButtonPressed(buttonActionDictionary[action][j], playerIndexes[i]))
+                    for (int j = 0; j < buttonActionList[(int)action].Count; j++)
+                        if (IsNewButtonPressed(buttonActionList[(int)action][j], playerIndexes[i]))
                             return true;
             }
             else
             {
-                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
-                    if (IsNewButtonPressed(buttonActionDictionary[action][j], playerIndex.Value))
+                for (int j = 0; j < buttonActionList[(int)action].Count; j++)
+                    if (IsNewButtonPressed(buttonActionList[(int)action][j], playerIndex.Value))
                         return true;
             }
 #else
-           for(int i =0; i<keyActionDictionary[action].Count; i++)
-                if (IsNewKeyPressed(keyActionDictionary[action][i]))
+           for(int i =0; i<keyActionList[(int)action].Count; i++)
+                if (IsNewKeyPressed(keyActionList[(int)action][i]))
                     return true;
-#endif          
+#endif
             return false;
         }
 
@@ -191,24 +255,46 @@ namespace UHSampleGame.InputManagement
         /// <returns>Returns true if the action is triggered</returns>
         public bool CheckAction(InputAction action, PlayerIndex? playerIndex)
         {
+//#if XBOX
+//            if (!playerIndex.HasValue)
+//            {
+//                for (int i = 0; i < playerIndexes.Length; i++)
+//                    for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+//                        if (IsButtonPressed(buttonActionDictionary[action][j], playerIndexes[i]))
+//                            return true;
+//            }
+//            else
+//            {
+//                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+//                    if (IsButtonPressed(buttonActionDictionary[action][j], playerIndex.Value))
+//                        return true;
+//            }
+
+//#else
+//            for (int i = 0; i < keyActionDictionary[action].Count; i++)
+//                if (IsKeyPressed(keyActionDictionary[action][i]))
+//                    return true;
+//#endif
+//            return false;
+
 #if XBOX
             if (!playerIndex.HasValue)
             {
                 for (int i = 0; i < playerIndexes.Length; i++)
-                    for (int j = 0; j < buttonActionDictionary[action].Count; j++)
-                        if (IsButtonPressed(buttonActionDictionary[action][j], playerIndexes[i]))
+                    for (int j = 0; j < buttonActionList[(int)action].Count; j++)
+                        if (IsButtonPressed(buttonActionList[(int)action][j], playerIndexes[i]))
                             return true;
             }
             else
             {
-                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
-                    if (IsButtonPressed(buttonActionDictionary[action][j], playerIndex.Value))
+                for (int j = 0; j < buttonActionList[(int)action].Count; j++)
+                    if (IsButtonPressed(buttonActionList[(int)action][j], playerIndex.Value))
                         return true;
             }
 
 #else
-            for (int i = 0; i < keyActionDictionary[action].Count; i++)
-                if (IsKeyPressed(keyActionDictionary[action][i]))
+            for (int i = 0; i < keyActionList[(int)action].Count; i++)
+                if (IsKeyPressed(keyActionList[(int)action][i]))
                     return true;
 #endif
             return false;
@@ -231,23 +317,43 @@ namespace UHSampleGame.InputManagement
 
         public bool CheckNewReleaseAction(InputAction action, PlayerIndex? playerIndex)
         {
+//#if XBOX
+//            if (!playerIndex.HasValue)
+//            {
+//                for (int i = 0; i < playerIndexes.Length; i++)
+//                    for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+//                        if (IsNewButtonReleased(buttonActionDictionary[action][j], playerIndexes[i]))
+//                            return true;
+//            }
+//            else
+//            {
+//                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
+//                    if (IsNewButtonReleased(buttonActionDictionary[action][j], playerIndex.Value))
+//                        return true;
+//            }
+//#else
+//            for (int i = 0; i < keyActionDictionary[action].Count; i++)
+//                if (IsNewKeyReleased(keyActionDictionary[action][i]))
+//                    return true;
+//#endif
+//            return false;
 #if XBOX
             if (!playerIndex.HasValue)
             {
                 for (int i = 0; i < playerIndexes.Length; i++)
-                    for (int j = 0; j < buttonActionDictionary[action].Count; j++)
-                        if (IsNewButtonReleased(buttonActionDictionary[action][j], playerIndexes[i]))
+                    for (int j = 0; j < buttonActionList[(int)action].Count; j++)
+                        if (IsNewButtonReleased(buttonActionList[(int)action][j], playerIndexes[i]))
                             return true;
             }
             else
             {
-                for (int j = 0; j < buttonActionDictionary[action].Count; j++)
-                    if (IsNewButtonReleased(buttonActionDictionary[action][j], playerIndex.Value))
+                for (int j = 0; j < buttonActionList[(int)action].Count; j++)
+                    if (IsNewButtonReleased(buttonActionList[(int)action][j], playerIndex.Value))
                         return true;
             }
 #else
-            for (int i = 0; i < keyActionDictionary[action].Count; i++)
-                if (IsNewKeyReleased(keyActionDictionary[action][i]))
+            for (int i = 0; i < keyActionList[(int)action].Count; i++)
+                if (IsNewKeyReleased(keyActionList[(int)action][i]))
                     return true;
 #endif
             return false;
@@ -267,22 +373,22 @@ namespace UHSampleGame.InputManagement
         #region ButtonHelpers
         private bool IsNewButtonPressed(Buttons button, PlayerIndex playerIndex)
         {
-            return IsButtonPressed(button, playerIndex) && previousGamePadStates[playerIndex].IsButtonUp(button);
+            return IsButtonPressed(button, playerIndex) && prevGamePadStates[(int)playerIndex].IsButtonUp(button);
         }
 
         private bool IsNewButtonReleased(Buttons button, PlayerIndex playerIndex)
         {
-            return IsButtonReleased(button, playerIndex) && previousGamePadStates[playerIndex].IsButtonDown(button);
+            return IsButtonReleased(button, playerIndex) && prevGamePadStates[(int)playerIndex].IsButtonDown(button);
         }
 
         private bool IsButtonPressed(Buttons button, PlayerIndex playerIndex)
         {
-            return currentGamePadStates[playerIndex].IsButtonDown(button);
+            return currGamePadStates[(int)playerIndex].IsButtonDown(button);
         }
 
         private bool IsButtonReleased(Buttons button, PlayerIndex playerIndex)
         {
-            return !IsButtonPressed(button, playerIndex) && previousGamePadStates[playerIndex].IsButtonDown(button);
+            return !IsButtonPressed(button, playerIndex) && prevGamePadStates[(int)playerIndex].IsButtonDown(button);
         }
         #endregion ButtonHelpers
 
