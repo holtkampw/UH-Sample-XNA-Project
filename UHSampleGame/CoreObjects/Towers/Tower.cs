@@ -409,6 +409,8 @@ namespace UHSampleGame.CoreObjects.Towers
         public void UnregisterAttackUnit(ref Unit unit)
         {
             if (unitToAttack != null && unitToAttack.ID == unit.ID)
+            Unit u;
+            if ((unitToAttack != null && unitToAttack.ID == unit.ID) || unitToAttack == null)
             {
                 unitToAttack = null;
 
@@ -420,6 +422,16 @@ namespace UHSampleGame.CoreObjects.Towers
                     {
                         unitToAttack = u;
                         break;
+                    }
+                }
+                for (int i = 0; i < this.tile.tileNeighbors.Count; i++)
+                {
+                    u = this.tile.tileNeighbors[i].GetUnitFromTile();
+                    if (u != null && u.TeamNum != TeamNum)
+                    {
+                        unitToAttack = u;
+                        currentXPToGive = unitToAttack.XPToGive;
+                        return;
                     }
                 }
             }
