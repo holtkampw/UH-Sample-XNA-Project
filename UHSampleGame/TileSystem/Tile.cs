@@ -215,24 +215,22 @@ namespace UHSampleGame.TileSystem
             //}
             //else
               //  OnUnitEnter(null);
-            Unit u;
-            if (unitsCount > 0)
-            {
-                for (int i = 0; i < unitsCount; i++)
-                {
-                    u = UnitCollection.GetUnitByID(unitIndexes[i]);
-                    if (u.CurrentTileID == this.ID
-                        && u.IsDeployed())
-                        //unitsInTile[unitIndexes[i]])
-                    {
-                        
-                        OnUnitEnter(ref u);
-                        break;
-                    }
-                }
-                
+            //Unit u;
+            //if (unitsCount > 0)
+            //{
+            //    for (int i = 0; i < unitsCount; i++)
+            //    {
+            //        u = UnitCollection.GetUnitByID(unitIndexes[i]);
+            //        if (u.CurrentTileID == this.ID
+            //            && u.IsDeployed())
+            //        //unitsInTile[unitIndexes[i]])
+            //        {
 
-            }
+            //            OnUnitEnter(ref u);
+            //            break;
+            //        }
+            //    }
+            //}
 
         }
 
@@ -279,6 +277,25 @@ namespace UHSampleGame.TileSystem
                     PathsInts[t].Add(UnSafePaths[t][i]);
                 }
             }
+        }
+
+        public Unit FindNewUnitToAttack()
+        {
+            Unit u = null;
+            if (unitsCount > 0)
+            {
+                for (int i = 0; i < unitsCount; i++)
+                {
+                    u = UnitCollection.GetUnitByID(unitIndexes[i]);
+                    if (u.CurrentTileID == this.ID
+                        && u.IsDeployed())
+                    //unitsInTile[unitIndexes[i]])
+                    {
+                        return u;
+                    }
+                }
+            }
+            return u;
         }
     }
 }

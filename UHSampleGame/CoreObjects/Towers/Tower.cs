@@ -411,6 +411,17 @@ namespace UHSampleGame.CoreObjects.Towers
             if (unitToAttack != null && unitToAttack.ID == unit.ID)
             {
                 unitToAttack = null;
+
+                Unit u;
+                for (int i = 0; i < this.tile.tileNeighbors.Count; i++)
+                {
+                    u = this.tile.tileNeighbors[i].FindNewUnitToAttack();
+                    if (u != null)
+                    {
+                        unitToAttack = u;
+                        break;
+                    }
+                }
             }
         }
 
@@ -461,8 +472,8 @@ namespace UHSampleGame.CoreObjects.Towers
                         if (kill)
                         {
                             PlayerCollection.EarnedMoneyForPlayer(PlayerNum, moneyToGive);
-
                             killEffect.Play(0.4f, 1.0f, 0.0f);
+
                         }
                         if (Level < 4 && kill)
                         {

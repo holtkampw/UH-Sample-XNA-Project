@@ -221,14 +221,16 @@ namespace UHSampleGame.CoreObjects.Units
             {
                 OnDied();
             }
+
             if (!PlayerCollection.CheckFreezeEnemiesFor(this.PlayerNum))
             {
                 UpdatePath();
                 UpdateTransforms();
-
-                if (gameOver)
-                    return true;
             }
+     
+
+            if (gameOver)
+                return true;
             return false;
         }
 
@@ -245,6 +247,7 @@ namespace UHSampleGame.CoreObjects.Units
             if (CheckIfStuck())
                 return;
 
+            
             if (!TileMap.Tiles[focalTileID].IsWalkable())
             {
                 lock (AStar2.locks[CurrentTileID][goalTileID])
@@ -298,7 +301,7 @@ namespace UHSampleGame.CoreObjects.Units
                     SetFocalPointAndVelocity(TileMap.Tiles[CurrentTileID].PathsInts[goalTileID][1]);//currentTile.Paths[goalTile.ID][1]);
                 }
             }
-
+            
             UpdatePositionAndRotation();
         }
 
